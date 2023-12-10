@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html>
+    <%- include('./partials/head.ejs') %>
+    <body>
+        <%- include('./partials/header.ejs') %>
+        <div class="school_nav">
+            <a href="school/admin">ADMIN</a>
+        </div>
+        <div class="school">
+            <form action="/school" method="post">
+                <Fieldset>
+                <legend>Fill in the form</legend>
+                <p><input type="text" placeholder="Enter Your Name" name="userName"/></p>
+                <p><input type="password" Placeholder="Enter Your ID" name="StudentId"/></p>
+                <p>
+                    <label>CLASS</label>:
+                    <select name="class">
+                        <option></option>
+                        <option  value="jss1">JSS1</option>
+                        <option  value="jss2">JSS2</option>
+                        <option  value="jss3">JSS3</option>
+                        <option  value="ss1">SS1</option>
+                        <option  value="ss2" >SS2</option>
+                        <option value="ss3">SS3</option>
+                    </select>
+                    <label>SCHOOL TERM</label>:
+                    <select name="tearm">
+                        <option></option>
+                        <option>FIRST TERM</option>
+                        <option>SECNOND TERM</option>
+                        <option>THRID TERM</option>
+                    </select>
+                </p>
+                <button>View Result</button>
+                </Fieldset>
+            </form>
+        </div>
+    </body>
+</html>

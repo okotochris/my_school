@@ -1,0 +1,309 @@
+*{
+  margin:0px;
+  padding:0px;
+  text-decoration:none; 
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  width:99%;
+  position:fixed;
+  overflow:hidden;
+  background-color: #003366;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  z-index:1;
+}
+.left-nav{
+  width:70%;
+  height:100vh;
+  background:white;
+  position:fixed;
+  z-index:2;
+  overflow:hedden;
+  display:none;
+}
+.logo img {
+  width: 120px;
+  height: auto;
+ 
+}
+.menu{
+  position:absolute;
+  height:28px;
+  width:35px;
+  top:52px;
+  overflow:hidden;
+  background:url("menu.png");
+
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  margin-right: 20px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+nav ul li a:hover {
+  color: #ccc;
+}
+
+main {
+  padding: 20px;
+}
+
+.hero-image {
+  width: 100%;
+  height: 400px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+ 
+  text-align: center;
+  justify-content: center;
+}
+
+.hero-text {
+  color: rgb(11, 14, 237);
+}
+
+.hero-text h1 {
+  font-size: 3em;
+  margin-bottom: 10px;
+}
+
+.hero-text p {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+}
+.search-input input{
+  border-width:0px;
+  height:30px;
+  width: 400px;
+}
+.search-input input:focus {
+  border-width: 0px;
+  outline:none;
+}
+.search-input{
+  border-radius:10px;
+  border-style:solid;
+  border-width: 2px;
+  border-color:orange;
+  width:420px;
+  margin:0px auto;
+}
+.hero-tex0t button {
+  background-color: #003366;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.hero-text button:hover {
+  background-color: #ccc;
+  color: #003366;
+}
+
+section {
+  margin-bottom: 40px;
+}
+
+section h2 {
+  margin-bottom: 20px;
+}
+
+section ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+section button {
+  background-color: #003366;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+section button:hover {
+  background-color: #ccc;
+  color: #003366;
+}
+
+footer{
+  padding:10px;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+ 
+}
+#contact, #contact, #about{
+  width:400px;
+}
+.form{
+  height:200px;
+  width:500px;
+  margin:20px auto;
+  background:rgb(144, 144, 230);
+  text-align:center;
+}
+.form button{
+  background:blue;
+  border:none;
+  margin:10px;
+}
+.form input, .form button, .form select{
+height: 30px;
+width:400px;
+margin:10px;
+}
+.room{
+  min-height:500px;
+  width:1000px;
+  background:rgb(142, 142, 228);
+  margin:auto auto;
+}
+.Rheader{
+  height:50px;
+  display:flex;
+  justify-content:space-between;
+  background:blue;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color:white;
+  font-weight: bold;
+}
+#leave{
+  height:40px;
+  width:120px;
+}
+.Rinfo{
+  height:400px;
+  width:200px;
+  display:flex;
+  flex-direction: column;
+  justify-content:space-around;
+  padding:5px 0px 0px 10px;
+  background:rgb(163, 163, 238);
+  color:black;
+}
+.Cinput{
+  background:blue;
+  height:50px;
+  padding-top:10px;
+}
+#button{
+  height:40px;
+  width:200px;
+}
+#text{
+  width:700px;
+  height:35px;
+  font-size:18px;
+  padding-left:5px;
+  margin-left:60px;
+}
+#display{
+  background:white;
+  height:400px;
+  width:770px;
+  overflow:hidden;
+  
+}
+#display:hover{
+  overflow-y:scroll;
+}
+.Ctext{
+  width:740px;
+  margin:5px 0px 5px 2px;
+  background:rgb(204, 204, 244);
+}
+#display > div > p:nth-child(1){
+  font-size:15px;
+  color:rgb(126, 126, 128);
+}
+/* School Styleing */
+.school{
+  height:auto;
+  width:500px;
+  margin: auto;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:blue;
+ }
+.school p input, .school button{
+  height:30px;
+  width:420px;
+  margin:7px;
+  padding:4px;
+  font-size:18px;
+}
+.school button, .upload_result button{
+  background:blue;
+  width:430px;
+  height:30px;
+  color:white;
+  border:none;
+}
+.school select{
+  padding:10px;
+  margin:2px;
+}
+.school button:hover{
+  color:black;
+  background:rgb(180, 180, 241);
+}
+.school_nav{
+  font-weight:bold;
+  position:relative;
+ 
+}
+.upload_result{
+  height:auto;
+  width:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:blue;
+}
+
+.upload_result fieldset, .upload_result legend{
+  margin:20px;
+}
+.upload_result p{
+  margin:2px;
+}
+.studentInfo input{
+  height:30px;
+  width:420px;
+  margin:5px;
+}
+.schoolInfo input{
+  width:430px;
+  height:30px;
+  font-size:18px;
+}

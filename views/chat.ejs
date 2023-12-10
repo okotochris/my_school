@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<%- include('./partials/head.ejs') %>
+
+<body>
+<%- include("./partials/header.ejs") %> 
+
+
+<div class="form">
+    <h2>Chat Room</h2>
+    <form action="./chatRoom">
+       <p><input type="text" placeholder="Enter username" name="input" /></p>
+        <select>
+            <option>Computer Sci</option>
+            <option>Computer Eng</option>
+            <option>Software Eng</option>
+            <option>Civil Eng</option>
+        </select>
+       <p><button>Join Room</button></p>
+    </form>
+</div>
+
+<script src="main.js"></script>
+</body>

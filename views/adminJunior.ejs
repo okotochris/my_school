@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Admin page | Junior</title>
+        <link rel="stylesheet" type="text/css" href="../style.css">
+    </head>
+    <body>
+        <%- include('./partials/header.ejs') %>
+        <div class="school_nav">
+            <a href="../school">CHECK RESULT</a>
+        </div>
+            <h2>UPLOAD RESULT FOR JUNIOR SECONDARY SCHOOL</h2>
+        <div class="upload_result"> 
+            <form action="adminJunior" method="post" onsubmit="return check();">
+                <fieldset>
+                    <legend>RESULT INFO:</legend>
+                    <p><input type="text" value="English Language" name="eng"/><input type="text" placeholder="1st Text" name="eng1st"/><input type="text" placeholder="2st Text" name="eng2nd"/><input type="text" placeholder="Exam" name="engexam"/><input type="text" placeholder="GRADE" name="engG"/></p>
+                    <p><input type="text" value="Mathematics" name="mth"/><input type="text" placeholder="1st Text" name="mth1st"/><input type="text" placeholder="2st Text" name="mth2nd"/><input type="text" placeholder="Exam" name="mthexam"/><input type="text" placeholder="GRADE" name="mthG"/></p>
+                    <p><input type="text" value="Basic Science" name="bsc"/><input type="text" placeholder="1st Text" name="bsc1st"/><input type="text" placeholder="2st Text" name="bsc2nd"/><input type="text" placeholder="Exam" name="bscexam"/><input type="text" placeholder="GRADE" name="bscG"/></p>
+                    <p><input type="text" value="Basic Technology" name="btc"/><input type="text" placeholder="1st Text" name="btc1st"/><input type="text" placeholder="2st Text" name="btc2nd"/><input type="text" placeholder="Exam" name="btcexam"/><input type="text" placeholder="GRADE" name="btcG"/></p>
+                    <p><input type="text" value="Home Economics" name="hec"/><input type="text" placeholder="1st Text" name="hec1st"/><input type="text" placeholder="2st Text" name="hec2nd"/><input type="text" placeholder="Exam" name="hecexam"/><input type="text" placeholder="GRADE" name="hecG"/></p>
+                    <p><input type="text" value="French" name="fre"/><input type="text" placeholder="1st Text" name="fre1st"/><input type="text" placeholder="2st Text" name="fre2nd"/><input type="text" placeholder="Exam" name="freexam"/><input type="text" placeholder="GRADE" name=freG"/></p>
+                    <p><input type="text" value="Agricultural Science" name="agr"/><input type="text" placeholder="1st Text" name="agr1st"/><input type="text" placeholder="2st Text" name="agr2nd"/><input type="text" placeholder="Exam" name="agrexam"/><input type="text" placeholder="GRADE" name="agrG"/></p>
+                    <p><input type="text" value="Computer Studies" name="csc"/><input type="text" placeholder="1st Text" name="csc1st"/><input type="text" placeholder="2st Text" name="csc2nd"/><input type="text" placeholder="Exam" name="cscexam"/><input type="text" placeholder="GRADE" name="cscG"/></p>
+                    <p><input type="text" value="CRKS/IRK" name="crs"/><input type="text" placeholder="1st Text" name="crs1st"/><input type="text" placeholder="2st Text" name="crs2nd"/><input type="text" placeholder="Exam" name="crsexam"/><input type="text" placeholder="GRADE" name="crsG"/></p>
+                    <p><input type="text" value="Physical & Health Education" name="ped"/><input type="text" placeholder="1st Text" name="ped1st"/><input type="text" placeholder="2st Text" name="ped2nd"/><input type="text" placeholder="Exam" name="pedexam"/><input type="text" placeholder="GRADE" name="pedG"/></p>
+                    <p><input type="text" value="Cultural and Creative Art" name="cra"/><input type="text" placeholder="1st Text" name="cra1st"/><input type="text" placeholder="2st Text" name="cra2nd"/><input type="text" placeholder="Exam" name="craexam"/><input type="text" placeholder="GRADE" name="craG"/></p>
+                    <p><input type="text" value="Hausa/Igbo/Yoruba" name="hiy"/><input type="text" placeholder="1st Text" name="hiy1st"/><input type="text" placeholder="2st Text" name="hiy2nd"/><input type="text" placeholder="Exam" name="hiyexam"/><input type="text" placeholder="GRADE" name="hiyg"/></p>
+                    <p><input type="text" value="Social Studies" name="std"/><input type="text" placeholder="1st Text" name="std1st"/><input type="text" placeholder="2st Text" name="std2nd"/><input type="text" placeholder="Exam" name="stdexam"/><input type="text" placeholder="GRADE" name="stdG"/></p>
+                    <p><input type="text" value="Civic Education" name="ced"/><input type="text" placeholder="1st Text" name="ced1st"/><input type="text" placeholder="2st Text" name="ced2nd"/><input type="text" placeholder="Exam" name="cedexam"/><input type="text" placeholder="GRADE" name="cedG"/></p>
+                    <p><input type="text" value="Business Studies" name="bst"/><input type="text" placeholder="1st Text" name="bst1st"/><input type="text" placeholder="2st Text" name="bst2nd"/><input type="text" placeholder="Exam" name="bstexam"/><input type="text" placeholder="GRADE" name="bstG"/></p>
+                </fieldset>
+                <fieldset class="studentInfo">
+                    <legend>STUDENT INFO:</legend>
+                    <p><input type="text" placeholder="Student Name" name="userName" required="required"/></p>
+                    <p><input type="text" Placeholder="Student ID" name="studentId" required="required"/></p>
+                    <p>
+                        <p id="respond" style="color:red"></p>
+                        <label>CLASS</label>:
+                        <select id = "Sclass" name="class">
+                            <option></option>
+                            <option value="JSS1">JSS1</option>
+                            <option value="JSS2">JSS2</option>
+                            <option value="JSS3">JSS3</option>
+                        </select>
+                        <label>SCHOOL TERM</label>:
+                        <select id="Sterm" name="term">
+                            <option></option>
+                            <option value="FIRST TERM">FIRST TERM</option>
+                            <option value="SECOND TERM">SECNOND TERM</option>
+                            <option value="THIRD TERM">THRID TERM</option>
+                        </select>
+                    </p>
+                </fieldset>
+                <fieldset class="schoolInfo">
+                    <legend>School Info:</legend>
+                    <p><input type="text" placeholder="School name" name="schoolName" required="required"/></p>
+                    <p><input type="text" Placeholder="Address" name="schoolAdd" required="required"/></p>
+                <button>Upload Result</button>
+                </fieldset>
+                <p id="upload" style="color:red;"></p>
+            </form>
+        </div>
+        <script src="../main.js"></script>
+    </body>
+</html>

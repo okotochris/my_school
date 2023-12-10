@@ -1,0 +1,20 @@
+{
+  "name": "js_project",
+  "version": "1.0.0",
+  "description": "Tutorial",
+  "main": "main.js",
+  "scripts": {
+    "test": "node"
+  },
+  "author": "Christian",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "moment": "^2.29.4",
+    "mongoose": "^7.5.1",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "socket.io": "^4.7.2"
+  }
+}
