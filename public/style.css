@@ -11,14 +11,14 @@ body {
 }
 
 header {
-  width:99%;
+  width:vw;
+  height:100px;
   background-color: #003366;
   color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
-  z-index:1;
+  color:white;
 }
 
 nav ul {
