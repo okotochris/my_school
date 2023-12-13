@@ -21,29 +21,7 @@ header {
   padding: 20px;
   z-index:1;
 }
-.left-nav{
-  width:70%;
-  height:100vh;
-  background:white;
-  position:fixed;
-  z-index:2;
-  overflow:hedden;
-  display:none;
-}
-.logo img {
-  width: 120px;
-  height: auto;
- 
-}
-.menu{
-  position:absolute;
-  height:28px;
-  width:35px;
-  top:52px;
-  overflow:hidden;
-  background:url("menu.png");
 
-}
 nav ul {
   list-style: none;
   display: flex;
