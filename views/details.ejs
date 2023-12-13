@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%- include('./partials/head.ejs')%>
+    </head>
+    <body>
+    <header>
+        <nav>
+          <ul>
+            <li><a href="./">Home</a></li>
+            <li><a href="./admin">Admin</a></li>
+            
+          </ul>
+        </nav>
+      </header>
+<!-- details.ejs -->
+
+<div class="t_container">
+  <div class="school_details">
+    <h1><%= blog.schoolName %></h1>
+    <h3><%= blog.schoolAdd %></h3>
+    <p>Tel:07068291163  Email: okoto.chris.oc@gmail.com</p>
+  </div>
+  <h3 style="border:solid 2px black; text-align:center;">STUDENT'S ACCADEMIC REPORT/SHEET</h3>
+  <br/>
+    <div class="top_info">
+      <div>
+        
+        <p>Full Name: <%= blog.userName %> </p>
+        <p>Class: <%= blog.class%></p>
+        <p>Student in class:..... </p>
+        <p>Sex:..... </p>
+      </div>
+        <div>
+          <p>Term: <%= blog.term %></p>
+          <p>School Opened:......</p>
+          <p>Time Present:...... </p>
+          <p>Position:...... </p>
+        </div>
+        <div>
+          <p>Population in class:.....</p>
+          <p>Next term begins: </p>
+          <p>Total days absent:..... </p>
+        </div>
+    </div>
+    <table>
+        <tr>
+          <th>Subject</th>
+          <th>1st Test [20%]</th>
+          <th>2nd Test [20%]</th>
+          <th>Exam [60%]</th>
+          <th>Total [100%]</th>
+          <th>Grade</th>
+      </tr>
+      <tr>
+        <td><%= blog.eng %></td>
+        <td><%= blog.eng1st %></td>
+        <td><%= blog.eng2nd %></td>
+        <td><%= blog.engexam %></td>
+        <td>70</td>
+        <td><%= blog.engG %></td>
+      </tr>
+      <tr>
+        <td><%= blog.mth %></td>
+        <td><%= blog.mth1st %></td>
+        <td><%= blog.mth2nd %></td>
+        <td><%= blog.mthexam %></td>
+        <td>70</td>
+        <td><%= blog.mthG %></td>
+      </tr>
+      <tr>
+        <td><%= blog.bsc %></td>
+        <td><%= blog.bsc1st %></td>
+        <td><%= blog.bsc2nd %></td>
+        <td><%= blog.bscexam %></td>
+        <td>70</td>
+        <td><%= blog.bscG %></td>
+      </tr>
+      <tr>
+        <td><%= blog.btc %></td>
+        <td><%= blog.btc1st %></td>
+        <td><%= blog.btc2nd %></td>
+        <td><%= blog.btcexam %></td>
+        <td>70</td>
+        <td><%= blog.btcG %></td>
+      </tr>
+      <tr>
+        <td><%= blog.hec %></td>
+        <td><%= blog.hec1st %></td>
+        <td><%= blog.hec2nd %></td>
+        <td><%= blog.hecexam %></td>
+        <td>70</td>
+        <td><%= blog.hecG %></td>
+      </tr>
+      <tr>
+        <td><%= blog.fre %></td>
+        <td><%= blog.fre1st %></td>
+        <td><%= blog.fre2nd %></td>
+        <td><%= blog.freexam %></td>
+        <td>70</td>
+        <td><%= blog.freG %></td>
+      </tr>
+      <tr>
+        <td><%= blog.agr %></td>
+        <td><%= blog.agr1st %></td>
+        <td><%= blog.agr2nd %></td>
+        <td><%= blog.agrexam %></td>
+        <td>70</td>
+        <td><%= blog.agrG %></td>
+      </tr>
+      <tr>
+        <td><%= blog.csc %></td>
+        <td><%= blog.csc1st %></td>
+        <td><%= blog.csc2nd %></td>
+        <td><%= blog.cscexam %></td>
+        <td>70</td>
+        <td><%= blog.cscG %></td>
+      </tr>
+      <tr>
+        <td><%= blog.crs %></td>
+        <td><%= blog.crs1st %></td>
+        <td><%= blog.crs2nd %></td>
+        <td><%= blog.crsexam %></td>
+        <td>70</td>
+        <td><%= blog.crsG %></td>
+      </tr>
+      <tr>
+        <td><%= blog.ped %></td>
+        <td><%= blog.ped1st %></td>
+        <td><%= blog.ped2nd %></td>
+        <td><%= blog.pedexam %></td>
+        <td>70</td>
+        <td><%= blog.pedG %></td>
+      </tr>
+      <tr>
+        <td><%= blog.cra %></td>
+        <td><%= blog.cra1st %></td>
+        <td><%= blog.cra2nd %></td>
+        <td><%= blog.craexam %></td>
+        <td>70</td>
+        <td><%= blog.craG %></td>
+      </tr>
+      <tr>
+        <td><%= blog.hiy %></td>
+        <td><%= blog.hiy1st %></td>
+        <td><%= blog.hiy2nd %></td>
+        <td><%= blog.hiyexam %></td>
+        <td>70</td>
+        <td><%= blog.hiyG %></td>
+      </tr>
+      <tr>
+        <td><%= blog.std %></td>
+        <td><%= blog.std1st %></td>
+        <td><%= blog.std2nd %></td>
+        <td><%= blog.stdexam %></td>
+        <td>70</td>
+        <td><%= blog.stdG %></td>
+      </tr>
+      <tr>
+        <td><%= blog.ced %></td>
+        <td><%= blog.ced1st %></td>
+        <td><%= blog.cedex2nd %></td>
+        <td><%= blog.cedexam %></td>
+        <td>70</td>
+        <td><%= blog.cedG %></td>
+      </tr>
+      <tr>
+        <td><%= blog.bst %></td>
+        <td><%= blog.bst1st %></td>
+        <td><%= blog.bst2nd %></td>
+        <td><%= blog.bstexam %></td>
+        <td>70</td>
+        <td><%= blog.bstG %></td>
+      </tr>
+    </table>
+    <div class="Sfooter">
+      <div>
+        <p>Class teacher name: </p>
+        <p>Remark by class head teacher:</p>
+        <p>Remark by principal:</p>
+      </div>
+      <div>
+        <h3>Score Rankd</h3>
+        <p>80 - 100 Distinction </p>
+        <p>65 - 79 Excellent </p>
+        <p>50 -  64 Credit </p>
+        <p>40 - 49 Pass </p>
+        <p>0  -  39 Fail</p>
+      </div>
+    </div>
+  </div>
+   
+
+
+
+</body>
+</html>

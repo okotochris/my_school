@@ -6,11 +6,16 @@
         <link rel="stylesheet" type="text/css" href="../style.css">
     </head>
     <body>
-        <%- include('./partials/header.ejs') %>
-        <div class="school_nav">
-            <a href="../school">CHECK RESULT</a>
-        </div>
-            <h2>UPLOAD RESULT FOR JUNIOR SECONDARY SCHOOL</h2>
+        <header>
+            <nav>
+              <ul>
+                <li><a href="./">Home</a></li>
+                <li><a href="./admin">Admin</a></li>
+                
+              </ul>
+            </nav>
+          </header>
+        <h2>FORM FOR JUNIOR SECONDARY SCHOOL</h2>
         <div class="upload_result"> 
             <form action="adminJunior" method="post" onsubmit="return check();">
                 <fieldset>
@@ -20,11 +25,11 @@
                     <p><input type="text" value="Basic Science" name="bsc"/><input type="text" placeholder="1st Text" name="bsc1st"/><input type="text" placeholder="2st Text" name="bsc2nd"/><input type="text" placeholder="Exam" name="bscexam"/><input type="text" placeholder="GRADE" name="bscG"/></p>
                     <p><input type="text" value="Basic Technology" name="btc"/><input type="text" placeholder="1st Text" name="btc1st"/><input type="text" placeholder="2st Text" name="btc2nd"/><input type="text" placeholder="Exam" name="btcexam"/><input type="text" placeholder="GRADE" name="btcG"/></p>
                     <p><input type="text" value="Home Economics" name="hec"/><input type="text" placeholder="1st Text" name="hec1st"/><input type="text" placeholder="2st Text" name="hec2nd"/><input type="text" placeholder="Exam" name="hecexam"/><input type="text" placeholder="GRADE" name="hecG"/></p>
-                    <p><input type="text" value="French" name="fre"/><input type="text" placeholder="1st Text" name="fre1st"/><input type="text" placeholder="2st Text" name="fre2nd"/><input type="text" placeholder="Exam" name="freexam"/><input type="text" placeholder="GRADE" name=freG"/></p>
+                    <p><input type="text" value="French" name="fre"/><input type="text" placeholder="1st Text" name="fre1st"/><input type="text" placeholder="2st Text" name="fre2nd"/><input type="text" placeholder="Exam" name="freexam"/><input type="text" placeholder="GRADE" name="freG"/></p>
                     <p><input type="text" value="Agricultural Science" name="agr"/><input type="text" placeholder="1st Text" name="agr1st"/><input type="text" placeholder="2st Text" name="agr2nd"/><input type="text" placeholder="Exam" name="agrexam"/><input type="text" placeholder="GRADE" name="agrG"/></p>
                     <p><input type="text" value="Computer Studies" name="csc"/><input type="text" placeholder="1st Text" name="csc1st"/><input type="text" placeholder="2st Text" name="csc2nd"/><input type="text" placeholder="Exam" name="cscexam"/><input type="text" placeholder="GRADE" name="cscG"/></p>
                     <p><input type="text" value="CRKS/IRK" name="crs"/><input type="text" placeholder="1st Text" name="crs1st"/><input type="text" placeholder="2st Text" name="crs2nd"/><input type="text" placeholder="Exam" name="crsexam"/><input type="text" placeholder="GRADE" name="crsG"/></p>
-                    <p><input type="text" value="Physical & Health Education" name="ped"/><input type="text" placeholder="1st Text" name="ped1st"/><input type="text" placeholder="2st Text" name="ped2nd"/><input type="text" placeholder="Exam" name="pedexam"/><input type="text" placeholder="GRADE" name="pedG"/></p>
+                    <p><input type="text" value="Physical & Health Edu" name="ped"/><input type="text" placeholder="1st Text" name="ped1st"/><input type="text" placeholder="2st Text" name="ped2nd"/><input type="text" placeholder="Exam" name="pedexam"/><input type="text" placeholder="GRADE" name="pedG"/></p>
                     <p><input type="text" value="Cultural and Creative Art" name="cra"/><input type="text" placeholder="1st Text" name="cra1st"/><input type="text" placeholder="2st Text" name="cra2nd"/><input type="text" placeholder="Exam" name="craexam"/><input type="text" placeholder="GRADE" name="craG"/></p>
                     <p><input type="text" value="Hausa/Igbo/Yoruba" name="hiy"/><input type="text" placeholder="1st Text" name="hiy1st"/><input type="text" placeholder="2st Text" name="hiy2nd"/><input type="text" placeholder="Exam" name="hiyexam"/><input type="text" placeholder="GRADE" name="hiyg"/></p>
                     <p><input type="text" value="Social Studies" name="std"/><input type="text" placeholder="1st Text" name="std1st"/><input type="text" placeholder="2st Text" name="std2nd"/><input type="text" placeholder="Exam" name="stdexam"/><input type="text" placeholder="GRADE" name="stdG"/></p>

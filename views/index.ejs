@@ -1,65 +1,46 @@
 <!DOCTYPE html>
+
 <html>
-  <%- include('./partials/head') %>
-<body>
-  <%- include('./partials/header') %>
-  
-
-  <main>
-   <%- include('./partials/section') %>
-   
-    <section id="programs">
-      <h2>Programs</h2>
-      <ul>
-        <li>Undergraduate Programs</li>
-          <ul>
-            <li>Business Administration</li>
-            <li>Computer Science</li>
-            <li>Engineering</li>
-          </ul>
-        <li>Graduate Programs</li>
-          <ul>
-            <li>MBA</li>
-            <li>MSc. Computer Science</li>
-            <li>MSc. Engineering</li>
-          </ul>
-        <li>PhD Programs</li>
-          <ul>
-            <li>PhD Business Administration</li>
-            <li>PhD Computer Science</li>
-            <li>PhD Engineering</li>
-          </ul>
-      </ul>
-      <button>See All Programs</button>
-    </section>
-    <section id="admissions">
-  <h2>Admissions</h2>
-  <p>Welcome to Uniben, one of the leading universities in the country. We are pleased that you are considering applying to our institution.</p>
-  <h3>Undergraduate Admissions</h3>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor, magna sit amet suscipit congue, ipsum urna suscipit augue, a convallis risus est a ante. Sed euismod, elit id mollis malesuada, velit velit tempor velit, vel viverra ipsum velit id magna.</p>
-  <button>Apply Now</button>
-  <h3>Graduate Admissions</h3>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor, magna sit amet suscipit congue, ipsum urna suscipit augue, a convallis risus est a ante. Sed euismod, elit id mollis malesuada, velit velit tempor velit, vel viverra ipsum velit id magna.</p>
-  <button>Apply Now</button>
-  <h3>PhD Admissions</h3>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor, magna sit amet suscipit congue, ipsum urna suscipit augue, a convallis risus est a ante. Sed euismod, elit id mollis malesuada, velit velit tempor velit, vel viverra ipsum velit id magna.</p>
-  <button>Apply Now</button>
-</section>
-
-<section id="news">
-  <h2>News</h2>
-  <ul>
-    <li>Uniben named one of the top universities in the country</li>
-    <li>Uniben professor wins prestigious research award</li>
-    <li>Uniben's business program ranked in the top 10 nationwide</li>
-  </ul>
-  <button>See all news</button>
-</section>
-<hr/>
-</main>
-<%- include('./partials/footer') %>
- 
-<script src="main.js"></script>
-</body>
+    <%- include('./partials/head.ejs') %>
+    <body>
+        <header>
+            <nav>
+              <ul>
+                <li><a href="./">Home</a></li>
+                <li><a href="./admin">Admin</a></li>
+                
+              </ul>
+            </nav>
+          </header>
+          <div style="height:83.5px;"></div>
+           <div class="school">
+            <form action="/details" method="post">
+                <Fieldset>
+                <legend>Fill in the form</legend>
+                <p><input type="text" placeholder="Enter Your Name" name="userName"/></p>
+                <p><input type="password" Placeholder="Enter Your ID" name="studentId"/></p>
+                <p>
+                    <label>CLASS</label>:
+                    <select name="class">
+                        <option></option>
+                        <option  value="JSS1">JSS1</option>
+                        <option  value="JSS2">JSS2</option>
+                        <option  value="JSS3">JSS3</option>
+                        <option  value="SS1">SS1</option>
+                        <option  value="SS2" >SS2</option>
+                        <option value="SS3">SS3</option>
+                    </select>
+                    <label>SCHOOL TERM</label>:
+                    <select name="term">
+                        <option></option>
+                        <option value="FIRST TERM">FIRST TERM</option>
+                        <option value="SECOND TERM">SECOND TERM</option>
+                        <option value="THIRD TERM">THIRD TERM</option>
+                    </select>
+                </p>
+                <button>View Result</button>
+                </Fieldset>
+            </form>
+        </div>
+    </body>
 </html>
-

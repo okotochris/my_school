@@ -6,46 +6,49 @@
         <link rel="stylesheet" type="text/css" href="../style.css">
     </head>
     <body>
-        <%- include('./partials/header.ejs') %>
-        <div class="school_nav">
-            <a href="../school">CHECK RESULT</a>
-        </div>
+        <header>
+            <nav>
+              <ul>
+                <li><a href="./">Home</a></li>
+              </ul>
+            </nav>
+        </header>
+          <h2>FORM FOR SENIOR SECONDARY SCHOOL</h2>
             <div class="upload_result"> 
             <form action="adminSenior" method="post" onsubmit="return check();">
                 <fieldset>
                     <legend>RESULT INFO:</legend>
-                    <p><input type="text" value="English Language" name="mth"/><input type="text" placeholder="1st Text" name="M1st"/><input type="text" placeholder="2st Text" name="M2nd"/><input type="text" placeholder="Exam" name="Mexam"/><input type="text" placeholder="GRADE" name="Mg"/></p>
-                    <p><input type="text" value="Mathematics" name="mth"/><input type="text" placeholder="1st Text" name="M1st"/><input type="text" placeholder="2st Text" name="M2nd"/><input type="text" placeholder="Exam" name="Mexam"/><input type="text" placeholder="GRADE" name="Mg"/></p>
-                    <p><input type="text" value="Biology" name="mth"/><input type="text" placeholder="1st Text" name="M1st"/><input type="text" placeholder="2st Text" name="M2nd"/><input type="text" placeholder="Exam" name="Mexam"/><input type="text" placeholder="GRADE" name="Mg"/></p>
-                    <p><input type="text" value="Further Mathematics" name="mth"/><input type="text" placeholder="1st Text" name="M1st"/><input type="text" placeholder="2st Text" name="M2nd"/><input type="text" placeholder="Exam" name="Mexam"/><input type="text" placeholder="GRADE" name="Mg"/></p>
-                    <p><input type="text" value="Economics" name="mth"/><input type="text" placeholder="1st Text" name="M1st"/><input type="text" placeholder="2st Text" name="M2nd"/><input type="text" placeholder="Exam" name="Mexam"/><input type="text" placeholder="GRADE" name="Mg"/></p>
-                    <p><input type="text" value="Literature" name="mth"/><input type="text" placeholder="1st Text" name="M1st"/><input type="text" placeholder="2st Text" name="M2nd"/><input type="text" placeholder="Exam" name="Mexam"/><input type="text" placeholder="GRADE" name="Mg"/></p>
-                    <p><input type="text" value="Computer Studies" name="mth"/><input type="text" placeholder="1st Text" name="M1st"/><input type="text" placeholder="2st Text" name="M2nd"/><input type="text" placeholder="Exam" name="Mexam"/><input type="text" placeholder="GRADE" name="Mg"/></p>
-                    <p><input type="text" value="Civics" name="mth"/><input type="text" placeholder="1st Text" name="M1st"/><input type="text" placeholder="2st Text" name="M2nd"/><input type="text" placeholder="Exam" name="Mexam"/><input type="text" placeholder="GRADE" name="Mg"/></p>
-                    <p><input type="text" value="Chemistry" name="mth"/><input type="text" placeholder="1st Text" name="M1st"/><input type="text" placeholder="2st Text" name="M2nd"/><input type="text" placeholder="Exam" name="Mexam"/><input type="text" placeholder="GRADE" name="Mg"/></p>
-                    <p><input type="text" value="Agriculture" name="mth"/><input type="text" placeholder="1st Text" name="M1st"/><input type="text" placeholder="2st Text" name="M2nd"/><input type="text" placeholder="Exam" name="Mexam"/><input type="text" placeholder="GRADE" name="Mg"/></p>
-                    <p><input type="text" value="Geography" name="mth"/><input type="text" placeholder="1st Text" name="M1st"/><input type="text" placeholder="2st Text" name="M2nd"/><input type="text" placeholder="Exam" name="Mexam"/><input type="text" placeholder="GRADE" name="Mg"/></p>
-                    <p><input type="text" value="Physics" name="mth"/><input type="text" placeholder="1st Text" name="M1st"/><input type="text" placeholder="2st Text" name="M2nd"/><input type="text" placeholder="Exam" name="Mexam"/><input type="text" placeholder="GRADE" name="Mg"/></p>
-                    <p><input type="text" value="Commerce" name="mth"/><input type="text" placeholder="1st Text" name="M1st"/><input type="text" placeholder="2st Text" name="M2nd"/><input type="text" placeholder="Exam" name="Mexam"/><input type="text" placeholder="GRADE" name="Mg"/></p>
-                    <p><input type="text" value="CRS/IRS" name="mth"/><input type="text" placeholder="1st Text" name="M1st"/><input type="text" placeholder="2st Text" name="M2nd"/><input type="text" placeholder="Exam" name="Mexam"/><input type="text" placeholder="GRADE" name="Mg"/></p>
-                    <p><input type="text" value="Accounts" name="mth"/><input type="text" placeholder="1st Text" name="M1st"/><input type="text" placeholder="2st Text" name="M2nd"/><input type="text" placeholder="Exam" name="Mexam"/><input type="text" placeholder="GRADE" name="Mg"/></p>
-                    <p><input type="text" value="Physics" name="mth"/><input type="text" placeholder="1st Text" name="M1st"/><input type="text" placeholder="2st Text" name="M2nd"/><input type="text" placeholder="Exam" name="Mexam"/><input type="text" placeholder="GRADE" name="Mg"/></p>
+                    <p><input type="text" value="English Language" name="eng"/><input type="text" placeholder="1st Text" name="eng1st"/><input type="text" placeholder="2st Text" name="eng2nd"/><input type="text" placeholder="Exam" name="engexam"/><input type="text" placeholder="GRADE" name="engG"/></p>
+                    <p><input type="text" value="Mathematics" name="mth"/><input type="text" placeholder="1st Text" name="mth1st"/><input type="text" placeholder="2st Text" name="mth2nd"/><input type="text" placeholder="Exam" name="mthexam"/><input type="text" placeholder="GRADE" name="mthG"/></p>
+                    <p><input type="text" value="Biology" name="bio"/><input type="text" placeholder="1st Text" name="bio1st"/><input type="text" placeholder="2st Text" name="bio2nd"/><input type="text" placeholder="Exam" name="bioexam"/><input type="text" placeholder="GRADE" name="bioG"/></p>
+                    <p><input type="text" value="Further Mathematics" name="fmt"/><input type="text" placeholder="1st Text" name="fmt1st"/><input type="text" placeholder="2st Text" name="fmt2nd"/><input type="text" placeholder="Exam" name="fmtexam"/><input type="text" placeholder="GRADE" name="fmtG"/></p>
+                    <p><input type="text" value="Economics" name="eco"/><input type="text" placeholder="1st Text" name="eco1st"/><input type="text" placeholder="2st Text" name="eco2nd"/><input type="text" placeholder="Exam" name="ecoexam"/><input type="text" placeholder="GRADE" name="ecoG"/></p>
+                    <p><input type="text" value="Literature" name="lit"/><input type="text" placeholder="1st Text" name="lit1st"/><input type="text" placeholder="2st Text" name="lit2nd"/><input type="text" placeholder="Exam" name="litexam"/><input type="text" placeholder="GRADE" name="litG"/></p>
+                    <p><input type="text" value="Computer Studies" name="cst"/><input type="text" placeholder="1st Text" name="cst1st"/><input type="text" placeholder="2st Text" name="cst2nd"/><input type="text" placeholder="Exam" name="cstexam"/><input type="text" placeholder="GRADE" name="cstG"/></p>
+                    <p><input type="text" value="Civics" name="civ"/><input type="text" placeholder="1st Text" name="civ1st"/><input type="text" placeholder="2st Text" name="civ2nd"/><input type="text" placeholder="Exam" name="civexam"/><input type="text" placeholder="GRADE" name="civG"/></p>
+                    <p><input type="text" value="Chemistry" name="che"/><input type="text" placeholder="1st Text" name="che1st"/><input type="text" placeholder="2st Text" name="che2nd"/><input type="text" placeholder="Exam" name="cheexam"/><input type="text" placeholder="GRADE" name="cheG"/></p>
+                    <p><input type="text" value="Agriculture" name="agr"/><input type="text" placeholder="1st Text" name="agr1st"/><input type="text" placeholder="2st Text" name="agr2nd"/><input type="text" placeholder="Exam" name="agrexam"/><input type="text" placeholder="GRADE" name="agrG"/></p>
+                    <p><input type="text" value="Geography" name="geo"/><input type="text" placeholder="1st Text" name="geo1st"/><input type="text" placeholder="2st Text" name="geo2nd"/><input type="text" placeholder="Exam" name="geoexam"/><input type="text" placeholder="GRADE" name="geoG"/></p>
+                    <p><input type="text" value="Physics" name="phy"/><input type="text" placeholder="1st Text" name="phy1st"/><input type="text" placeholder="2st Text" name="phy2nd"/><input type="text" placeholder="Exam" name="phyexam"/><input type="text" placeholder="GRADE" name="phyG"/></p>
+                    <p><input type="text" value="Commerce" name="com"/><input type="text" placeholder="1st Text" name="com1st"/><input type="text" placeholder="2st Text" name="com2nd"/><input type="text" placeholder="Exam" name="comexam"/><input type="text" placeholder="GRADE" name="comG"/></p>
+                    <p><input type="text" value="CRS/IRcheS" name="crs"/><input type="text" placeholder="1st Text" name="crs1st"/><input type="text" placeholder="2st Text" name="crs2nd"/><input type="text" placeholder="Exam" name="crsexam"/><input type="text" placeholder="GRADE" name="crsG"/></p>
+                    <p><input type="text" value="Accounts" name="acc"/><input type="text" placeholder="1st Text" name="acc1st"/><input type="text" placeholder="2st Text" name="acc2nd"/><input type="text" placeholder="Exam" name="accexam"/><input type="text" placeholder="GRADE" name="accG"/></p>
                 </fieldset>
                 <fieldset class="studentInfo">
                     <legend>STUDENT INFO:</legend>
-                    <p><input type="text" placeholder="Student Name" name="userName"/></p>
-                    <p><input type="password" Placeholder="Student ID" name="StudentId"/></p>
+                    <p><input type="text" placeholder="Student Name" name="userName" required="required"/></p>
+                    <p><input type="password" Placeholder="Student ID" name="studentId" required="required"/></p>
                     <p>
                         <p id="respond" style="color:red"></p>
                         <label>CLASS</label>:
-                        <select id="Sclass">
+                        <select name="class" id="Sclass">
                             <option></option>
                             <option>SS1</option>
                             <option>SS2</option>
                             <option>SS3</option>
                         </select id="Sterm">
                         <label>SCHOOL TERM</label>:
-                        <select>
+                        <select name="term">
                             <option></option>
                             <option>FIRST TERM</option>
                             <option>SECNOND TERM</option>
@@ -55,8 +58,8 @@
                 </fieldset>
                 <fieldset class="schoolInfo">
                     <legend>School Info:</legend>
-                    <p><input type="text" placeholder="School name" name="userName"/></p>
-                    <p><input type="text" Placeholder="Address" name="StudentId"/></p>
+                    <p><input type="text" placeholder="School name" name="schoolName"/></p>
+                    <p><input type="text" Placeholder="Address" name="schoolAdd"/></p>
                 <button>Upload Result</button>
                 </fieldset>
                 <p id="upload" style="color:red;"></p>
