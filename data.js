@@ -10,7 +10,7 @@ const blogschema = new Schema({
         type:String,
        
     },
-    eng2st:{
+    eng2nd:{
         type:String,
         
     },
@@ -113,7 +113,6 @@ const blogschema = new Schema({
     },
     freG:{
         type: String,
-    
     },
     agr:{
         type: String,
@@ -131,6 +130,7 @@ const blogschema = new Schema({
         type: String,
         
     },
+    agrG:{type: String},
     csc:{
         type: String,
        

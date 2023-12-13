@@ -2,8 +2,9 @@
   "name": "js_project",
   "version": "1.0.0",
   "description": "Tutorial",
-  "main": "main.js",
+  "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "node"
   },
   "author": "Christian",

@@ -12,7 +12,6 @@ body {
 
 header {
   width:99%;
-  position:fixed;
   overflow:hidden;
   background-color: #003366;
   color: white;
@@ -154,16 +153,6 @@ section button:hover {
   color: #003366;
 }
 
-footer{
-  padding:10px;
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:space-between;
- 
-}
-#contact, #contact, #about{
-  width:400px;
-}
 .form{
   height:200px;
   width:500px;
@@ -180,25 +169,6 @@ footer{
 height: 30px;
 width:400px;
 margin:10px;
-}
-.room{
-  min-height:500px;
-  width:1000px;
-  background:rgb(142, 142, 228);
-  margin:auto auto;
-}
-.Rheader{
-  height:50px;
-  display:flex;
-  justify-content:space-between;
-  background:blue;
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color:white;
-  font-weight: bold;
-}
-#leave{
-  height:40px;
-  width:120px;
 }
 .Rinfo{
   height:400px;
@@ -306,4 +276,31 @@ margin:10px;
   width:430px;
   height:30px;
   font-size:18px;
+}
+table{
+  margin-bottom:20px;
+}
+table, th, td{
+  border: solid 2px black;
+  border-collapse:collapse;
+  padding:5px;
+}
+.t_container{
+  width:700px;
+  margin:auto;
+}
+.top_info{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:20px;
+  padding:2px;
+  border:solid 2px black;
+}
+.school_details{
+  text-align:center;
+  margin-bottom:20px;
+}
+.Sfooter{
+  display:flex;
+  justify-content:space-between;
 }

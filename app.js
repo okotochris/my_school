@@ -1,15 +1,12 @@
 const express = require('express');
-const path= require('path');
-const http= require('http');
-const socketio= require('socket.io');
 const mongoose = require('mongoose')
 const Blog = require('./data')
+const Blogs = require('./datas')
 
 
 const app = express();
- const server= http.createServer(app);
+ 
 // middleware
-app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.static('Public'))
 app.use(express.urlencoded({extended:true}))
 
@@ -23,16 +20,10 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
     console.log(err)
 })
 
-//socket
-const io= socketio(server);
-
-//run wen client connect
-io.on('connection', socket=>{
-    console.log('new connection');
-})
+//setting port and connecting to server
 const PORT= 5555 || process.env.PORT;
-server.listen(PORT, (err)=>{
-    if (err) console.log(err);
+app.listen(PORT, (err)=>{
+ if (err) console.log(err);
     else console.log(`app listening in port ${PORT}`)
 });
 
@@ -45,39 +36,53 @@ app.set('view engine', 'ejs');
 app.get('/', (req, res)=>{
     res.render('index');
 })
-app.get('/chat', (req, res)=>{
-    res.render('chat');
+app.get('/admin', (req, res)=>{
+    res.render('admin')
 })
-app.get('/chatRoom', (req, res)=>{
-    res.render('chatRoom');
-})
-app.get('/school', (req, res)=>{
-    res.render('school')
-})
-app.get("/school/adminJunior", (req, res)=>{
-    res.render('adminJunior')    
-})
+app.post("/details", (req, res)=>{
+    
+    let clas = req.body.class;
+    let term = req.body.term;
+    let id = req.body.studentId;
+    let name = req.body.userName;
 
-app.get("/school/adminSenior", (req, res)=>{
-    res.render('adminSenior')
-})
-app.post("/school/adminSenior", (req, res) =>{
-    res.redirect('adminSenior')
-    console.log(req.body.mth)  
-})
-app.get("/school/details", (req, res)=>{
-     Blog.find({$and: [{ mth: 'Mathematics' }, { studentId:"123456" }  ]})
-    .then(result=>{res.send(result)})
+    Blog.findOne({ class: clas, term: term, studentId: id })
+    
+    .then(result=>{
+        if(result==null){
+            res.render('error', {name:name})
+        }
+        else {
+            console.log(result)
+            //const blog = result[0].toObject();
+            res.render('details', {blog:result})
+        }
+    })
     .catch(err=> {res.send(err)})
 })
-app.post("/school/adminJunior", (req, res)=>{
-    res.redirect('adminJunior')
+app.post("/adminJunior", (req, res)=>{
+    res.render('adminJunior')
     const blog= new Blog(req.body)
     blog.save()
     .then(result=>{console.log(result)})
     .catch(err=>{console.log(err)})
 })
-app.post("/school", (req, res)=>{
-    res.redirect("school")
-    console.log(req.body)
+app.post("/adminSenior", (req, res) =>{
+    const blog = new Blogs(req.body);
+    blog.save()
+    .then(result=>console.log(result))
+    .catch(err=>console.log(err))
+    res.redirect('adminSenior')
+})
+app.post('/upload', (req, res)=>{
+    let x = req.body.Sclass
+    if(x=="senior"){
+        res.render('adminSenior');
+    }
+    else if(x == "junior"){
+        res.render('adminJunior');
+    }
+    else{
+        console.log('wrong')
+    }
 })
