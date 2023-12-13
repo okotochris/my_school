@@ -40,7 +40,7 @@ app.get('/admin', (req, res)=>{
     res.render('admin')
 })
 app.post("/details", (req, res)=>{
-    
+
     let clas = req.body.class;
     let term = req.body.term;
     let id = req.body.studentId;
@@ -64,13 +64,13 @@ app.post("/adminJunior", (req, res)=>{
     res.render('adminJunior')
     const blog= new Blog(req.body)
     blog.save()
-    .then(result=>{console.log(result)})
+    .then(result=>{console.log('uploaded')})
     .catch(err=>{console.log(err)})
 })
 app.post("/adminSenior", (req, res) =>{
     const blog = new Blogs(req.body);
     blog.save()
-    .then(result=>console.log(result))
+    .then(result=>console.log('uploaded'))
     .catch(err=>console.log(err))
     res.redirect('adminSenior')
 })
