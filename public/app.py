@@ -1,8 +1,6 @@
-file= ["joy", "kate", "favour", "happy", "christian", "lovely"]
-file2=[]
-for x in file:
-    if "a" in x:
-        file2.append(x)
-
-print(file2)
-    
+while True:
+    try:
+        x = int(input("Please enter a number: "))
+        break
+    except ValueError:
+        print("Oops!  That was no valid number.  Try again...")

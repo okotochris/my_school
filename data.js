@@ -183,6 +183,10 @@ const blogschema = new Schema({
         type: String,
         
     },
+    pedexam:{
+        type: String,
+        
+    },
     pedG:{
         type: String,
        
@@ -224,7 +228,6 @@ const blogschema = new Schema({
     },
     hiyG:{
         type: String,
-       
     },
     std:{
         type: String,

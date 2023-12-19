@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose')
 const Blog = require('./data')
-const Blogs = require('./datas')
+const SBlog = require('./datas')
 
 
 const app = express();
@@ -39,27 +39,8 @@ app.get('/', (req, res)=>{
 app.get('/admin', (req, res)=>{
     res.render('admin')
 })
-app.post("/details", (req, res)=>{
 
-    let clas = req.body.class;
-    let term = req.body.term;
-    let id = req.body.studentId;
-    let name = req.body.userName;
 
-    Blog.findOne({ class: clas, term: term, studentId: id })
-    
-    .then(result=>{
-        if(result==null){
-            res.render('error', {name:name})
-        }
-        else {
-            console.log(result)
-            //const blog = result[0].toObject();
-            res.render('details', {blog:result})
-        }
-    })
-    .catch(err=> {res.send(err)})
-})
 app.post("/adminJunior", (req, res)=>{
     res.render('adminJunior')
     const blog= new Blog(req.body)
@@ -68,11 +49,11 @@ app.post("/adminJunior", (req, res)=>{
     .catch(err=>{console.log(err)})
 })
 app.post("/adminSenior", (req, res) =>{
-    const blog = new Blogs(req.body);
-    blog.save()
+    const Sblog = new SBlog(req.body);
+    Sblog.save()
     .then(result=>console.log('uploaded'))
     .catch(err=>console.log(err))
-    res.redirect('adminSenior')
+    res.render('adminSenior')
 })
 app.post('/upload', (req, res)=>{
     let x = req.body.Sclass
@@ -83,6 +64,46 @@ app.post('/upload', (req, res)=>{
         res.render('adminJunior');
     }
     else{
+        let title = "wong detais"
         console.log('wrong')
+        res.render('admin', {title:title})
+    }
+})
+
+app.post("/details", (req, res)=>{
+
+    let clas = req.body.class;
+    let term = req.body.term;
+    let id = req.body.studentId;
+    let name = req.body.userName;
+
+    if(clas == "JSS1" || clas== "JSS2" || clas== "JSS3"){
+    Blog.findOne({ class: clas, term: term, studentId: id })
+    
+    .then(result=>{
+        if(result==null){
+            res.render('error', {name:name})
+        }
+        else {
+            //const blog = result[0].toObject();
+            res.render('details', {blog:result})
+        }
+    })
+    .catch(err=> {res.send(err)})
+}
+    else{
+        SBlog.findOne({ class: clas, term: term, studentId: id })
+    
+        .then(result=>{
+            if(result==null){
+                res.render('error', {name:name})
+            }
+            else {
+                //const blog = result[0].toObject();
+                res.render('detail', {blog:result})
+                console.log(result)
+            }
+        })
+        .catch(err=> {console.log(err)})
     }
 })

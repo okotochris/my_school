@@ -54,6 +54,21 @@ const blogschema = new Schema({
     bioG:{
         type: String, 
     },
+    gov:{
+        type: String,  
+    },
+    gov1st:{
+        type: String,  
+    },
+    gov2nd:{
+        type: String,  
+    },
+    govexam:{
+        type: String,  
+    },
+    govG:{
+        type: String,  
+    },
     fmt:{
         type: String, 
     },
@@ -173,6 +188,9 @@ const blogschema = new Schema({
     agr2nd:{
         type: String,
         
+    },
+    agrexam:{
+        type: String,
     },
     agrG:{
         type: String,
@@ -296,5 +314,5 @@ const blogschema = new Schema({
     },
 
 }, {timestamps:true })
-const Blogs = mongoose.model('Blogs', blogschema)
+const Blogs = mongoose.model('Sblog', blogschema)
 module.exports = Blogs;

@@ -11,7 +11,7 @@ body {
 }
 
 header {
-  width:vw;
+  width:99%;
   height:100px;
   background-color: #003366;
   color: white;
@@ -56,10 +56,10 @@ nav ul li a:hover {
   color:blue;
 
  }
- @media only screen and (max-width: 600px){
+ @media only screen and (max-width: 400px){
  .school{
   position:relative;
-  width:100%;
+  width:90%;
   overflow:hedden;
  }
 
@@ -156,4 +156,50 @@ table, th, td{
 .Sfooter{
   display:flex;
   justify-content:space-between;
+}
+/*FOOTER */
+footer{
+  padding:10px;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  background:blue;
+  color:white;
+  font-family:arial;
+  line-height:1.5em
+}
+#contact, #copy, #about{
+  width:400px;
+  margin:20px 0px;;
+
+}
+@media only screen and (max-width: 800px){
+  #contact, #copy, #about{
+    width:100%;
+    justify-content:space-around;
+  
+  }
+}
+#contact h2, #copy h2, #about h2{
+ color:rgb(144, 246, 19);
+ margin:10px 0px;
+ font-family:'Arial, sans-serif';
+}
+#contact input{
+  height:30px;
+  width:400px;
+  font-size:20px;
+  margin:2px 0px;
+}
+#contact button{
+  background:rgb(2, 2, 39);
+  color:white;
+  height:30px;
+  width:400px;
+  font-size:16px;
+}
+#contact textarea{
+  height:70px;
+  width:400px;
+  font-size:20px;
 }
