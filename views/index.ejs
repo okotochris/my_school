@@ -15,11 +15,8 @@
           </header>
           <div style="height:83.5px; width:400px; margin:auto;"><h2>CHECK YOUR RESULT HERE</h2></div>
           
-           <div class="school">
-            
+           <div class="add_form">
             <form action="/details" method="post" onsubmit="return check()">
-                <Fieldset>
-                <legend>Fill in the form</legend>
                 <p><input type="text" placeholder="Enter Your Name" name="userName"/ required></p>
                 <p><input type="password" Placeholder="Enter Your ID" name="studentId" required/></p>
                 <p>
@@ -33,7 +30,7 @@
                         <option  value="SS2" >SS2</option>
                         <option value="SS3">SS3</option>
                     </select>
-                    <label>SCHOOL TERM</label>:
+                    <label>TERM</label>:
                     <select id="Sterm" name="term">
                         <option></option>
                         <option value="FIRST TERM">FIRST TERM</option>
@@ -42,7 +39,7 @@
                     </select>
                 </p>
                 <button>View Result</button>
-                </Fieldset>
+              
             </form>
        
         </div>
