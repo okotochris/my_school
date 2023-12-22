@@ -21,7 +21,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
 })
 
 //setting port and connecting to server
-const PORT = process.env.PORT || 5555;
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, (err) => {
   if (err) {
