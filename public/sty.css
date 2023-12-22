@@ -1,0 +1,316 @@
+*{
+    margin:0px;
+    padding:0px;
+    text-decoration:none; 
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  header {
+    width:99%;
+    height:100px;
+    background-color: #1121d4;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color:white;
+    font-size:20px;
+  }
+  
+  nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+  
+  nav ul li {
+    margin-right: 20px;
+  }
+  
+  nav ul li a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  nav ul li a:hover {
+    color: #ccc;
+  }
+  
+  
+  
+  
+  /* School Styleing */
+  .school{
+    position:relative;
+    height:auto;
+    width:400px;
+    margin: auto;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:blue;
+  
+   }
+   @media only screen and (max-width: 400px){
+   .school{
+    position:relative;
+    width:90%;
+    overflow:hedden;
+   }
+  
+  .school button, .upload_result button{
+    background:blue;
+    width:90%;
+    height:30px;
+    color:white;
+    border:none;
+  }
+  .school p input, .school button{
+    height:30px;
+    width:90%;
+    margin:7px;
+    padding:4px;
+    font-size:18px;
+  }
+   }
+  .school p input, .school button{
+    height:30px;
+    width:420px;
+    margin:7px;
+    padding:4px;
+    font-size:18px;
+  }
+  .school button, .upload_result button{
+    background:blue;
+    width:430px;
+    height:30px;
+    color:white;
+    border:none;
+  }
+  .school select{
+    padding:10px;
+    margin:2px;
+  }
+  .school button:hover{
+    color:black;
+    background:rgb(180, 180, 241);
+  }
+  .school_nav{
+    font-weight:bold;
+    position:relative;
+   
+  }
+  .upload_result{
+    height:auto;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:blue;
+  }
+  
+  .upload_result fieldset, .upload_result legend{
+    margin:20px;
+  }
+  .upload_result p{
+    margin:2px;
+  }
+  .studentInfo input{
+    height:30px;
+    width:420px;
+    margin:5px;
+  }
+  .schoolInfo input{
+    width:430px;
+    height:30px;
+    font-size:18px;
+  }
+  table{
+    margin-bottom:20px;
+  }
+  table, th, td{
+    border: solid 2px black;
+    border-collapse:collapse;
+    padding:5px;
+  }
+  .t_container{
+    width:700px;
+    margin:auto;
+  }
+  .top_info{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:20px;
+    padding:2px;
+    border:solid 2px black;
+  }
+  
+  
+  /*FOOTER */
+  footer{
+    padding:10px;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    background:blue;
+    color:white;
+    font-family:arial;
+    line-height:1.5em
+  }
+  #contact, #copy, #about{
+    width:400px;
+    margin:20px 0px;;
+  
+  }
+  @media only screen and (max-width: 800px){
+    footer{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+    }
+    #contact, #copy, #about{
+      width:100%;
+      justify-content:space-around;
+    
+    }
+    #contact input{
+      height:30px;
+      width:auto;
+      font-size:20px;
+      margin:2px 0px;
+    }
+  }
+  #contact h2, #copy h2, #about h2{
+   color:rgb(144, 246, 19);
+   margin:10px 0px;
+   font-family:'Arial, sans-serif';
+  }
+  #contact input{
+    height:30px;
+    width:400px;
+    font-size:20px;
+    margin:2px 0px;
+  }
+  #contact button{
+    background:rgb(2, 2, 39);
+    color:white;
+    height:30px;
+    width:400px;
+    font-size:16px;
+  }
+  #contact textarea{
+    height:70px;
+    width:400px;
+    font-size:20px;
+  }
+  /* report card styling */
+  .t_container{
+    border:solid 1px black;
+    width:740px;
+    position:relative;
+    background:black;
+  }
+  @media only screen and (max-width="800px"){
+    .t_container{
+      width:100%;
+    }
+  }
+  .style{
+    background:white;
+    border:solid 1px black;
+    border-radius:20px;
+    border: solid 1px black;
+    padding:5px;
+  }
+  .school_details{
+    text-align:center;
+    margin-bottom:10px;
+   
+  }
+  
+  .school_details h1{
+    color:#003399;
+    font-size:50px;
+    font-family:'Futura Md BT';
+  }
+  .school_details p{
+      font-size:16.5px;
+      font-family:arial;
+      font-weight:bold;
+    }
+    .reportSheet{
+      height:50px;
+      width:540px;
+      background:white;
+      display:flex;
+      display:flex;
+      justify-content:center;
+      border:solid 2px black;
+      justify-content:center;
+      align-items:center;
+      border-radius:10px;
+      margin: 0px auto;
+    }
+    .reportSheet div{
+      height:45px;
+      width:500px;
+      background:black;
+      color:white;
+      text-align:center;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      border-radius:10px;
+    }
+    .table_design{
+      display:flex;
+      flex-wrap:nowrap;
+      width:100%;
+      justify-content:space-between;
+    }
+    .table{
+      width:66%;
+    }
+    .class_info{
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      height:555px;
+      width:33%;
+      
+    }
+    .class_info div{
+      border-bottom: solid 1px black;
+    }
+    .class_info{
+      font-size:14px;
+    }
+    .class_info h3{
+      color:red;
+    }
+    .grade{
+      font-size:14px;
+    }
+    .Sfooter div{
+      display:flex;
+      justify-content:space-around;
+      border:solid 2px blue;
+      height:50px;
+      margin-bottom:10px;
+      }
+      .download-link {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #3498db;
+        color: #fff;
+        text-decoration: none;
+        cursor: pointer;
+        margin:20px auto;
+      }
