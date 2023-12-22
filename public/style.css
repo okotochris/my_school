@@ -13,12 +13,13 @@ body {
 header {
   width:99%;
   height:100px;
-  background-color: #003366;
+  background-color: #1121d4;
   color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
   color:white;
+  font-size:20px;
 }
 
 nav ul {
@@ -48,7 +49,7 @@ nav ul li a:hover {
 .school{
   position:relative;
   height:auto;
-  width:500px;
+  width:400px;
   margin: auto;
   display:flex;
   justify-content:center;
@@ -149,14 +150,8 @@ table, th, td{
   padding:2px;
   border:solid 2px black;
 }
-.school_details{
-  text-align:center;
-  margin-bottom:20px;
-}
-.Sfooter{
-  display:flex;
-  justify-content:space-between;
-}
+
+
 /*FOOTER */
 footer{
   padding:10px;
@@ -174,10 +169,22 @@ footer{
 
 }
 @media only screen and (max-width: 800px){
+  footer{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+  }
   #contact, #copy, #about{
     width:100%;
     justify-content:space-around;
   
+  }
+  #contact input{
+    height:30px;
+    width:auto;
+    font-size:20px;
+    margin:2px 0px;
   }
 }
 #contact h2, #copy h2, #about h2{
@@ -203,3 +210,107 @@ footer{
   width:400px;
   font-size:20px;
 }
+/* report card styling */
+.t_container{
+  border:solid 1px black;
+  width:740px;
+  position:relative;
+  background:black;
+}
+@media only screen and (max-width="800px"){
+  .t_container{
+    width:100%;
+  }
+}
+.style{
+  background:white;
+  border:solid 1px black;
+  border-radius:20px;
+  border: solid 1px black;
+  padding:5px;
+}
+.school_details{
+  text-align:center;
+  margin-bottom:10px;
+ 
+}
+
+.school_details h1{
+  color:#003399;
+  font-size:50px;
+  font-family:'Futura Md BT';
+}
+.school_details p{
+    font-size:16.5px;
+    font-family:arial;
+    font-weight:bold;
+  }
+  .reportSheet{
+    height:50px;
+    width:540px;
+    background:white;
+    display:flex;
+    display:flex;
+    justify-content:center;
+    border:solid 2px black;
+    justify-content:center;
+    align-items:center;
+    border-radius:10px;
+    margin: 0px auto;
+  }
+  .reportSheet div{
+    height:45px;
+    width:500px;
+    background:black;
+    color:white;
+    text-align:center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:10px;
+  }
+  .table_design{
+    display:flex;
+    flex-wrap:nowrap;
+    width:100%;
+    justify-content:space-between;
+  }
+  .table{
+    width:66%;
+  }
+  .class_info{
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    height:555px;
+    width:33%;
+    
+  }
+  .class_info div{
+    border-bottom: solid 1px black;
+  }
+  .class_info{
+    font-size:14px;
+  }
+  .class_info h3{
+    color:red;
+  }
+  .grade{
+    font-size:14px;
+  }
+  .Sfooter div{
+    display:flex;
+    justify-content:space-around;
+    border:solid 2px blue;
+    height:50px;
+    margin-bottom:10px;
+    }
+    .download-link {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #3498db;
+      color: #fff;
+      text-decoration: none;
+      cursor: pointer;
+      margin:20px auto;
+    }

@@ -66,7 +66,7 @@ app.post('/upload', (req, res)=>{
     else{
         let title = "wong detais"
         console.log('wrong')
-        res.render('admin', {title:title})
+        res.render('admin')
     }
 })
 
@@ -101,7 +101,7 @@ app.post("/details", (req, res)=>{
             else {
                 //const blog = result[0].toObject();
                 res.render('detail', {blog:result})
-                console.log(result)
+                console.log("data sent to frontend")
             }
         })
         .catch(err=> {console.log(err)})
