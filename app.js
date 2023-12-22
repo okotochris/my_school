@@ -21,10 +21,14 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
 })
 
 //setting port and connecting to server
-const PORT= 5555 || process.env.PORT;
-app.listen(PORT, (err)=>{
- if (err) console.log(err);
-    else console.log(`app listening in port ${PORT}`)
+const PORT = process.env.PORT || 5555;
+
+app.listen(PORT, (err) => {
+  if (err) {
+    console.error(`Error starting the server: ${err.message}`);
+  } else {
+    console.log(`App is listening on port ${PORT}`);
+  }
 });
 
 //setting view engine
