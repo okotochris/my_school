@@ -12,16 +12,18 @@
               </ul>
             </nav>
           </header>
-          <div style="height:83.5px;"></div>
+          <div style="height:83.5px; width:400px; margin:auto;"><h2>CHECK YOUR RESULT HERE</h2></div>
+          
            <div class="school">
-            <form action="/details" method="post">
+            
+            <form action="/details" method="post" onsubmit="return check()">
                 <Fieldset>
                 <legend>Fill in the form</legend>
-                <p><input type="text" placeholder="Enter Your Name" name="userName"/></p>
-                <p><input type="password" Placeholder="Enter Your ID" name="studentId"/></p>
+                <p><input type="text" placeholder="Enter Your Name" name="userName"/ required></p>
+                <p><input type="password" Placeholder="Enter Your ID" name="studentId" required/></p>
                 <p>
                     <label>CLASS</label>:
-                    <select name="class">
+                    <select id = "Sclass" name="class">
                         <option></option>
                         <option  value="JSS1">JSS1</option>
                         <option  value="JSS2">JSS2</option>
@@ -31,7 +33,7 @@
                         <option value="SS3">SS3</option>
                     </select>
                     <label>SCHOOL TERM</label>:
-                    <select name="term">
+                    <select id="Sterm" name="term">
                         <option></option>
                         <option value="FIRST TERM">FIRST TERM</option>
                         <option value="SECOND TERM">SECOND TERM</option>
@@ -41,8 +43,12 @@
                 <button>View Result</button>
                 </Fieldset>
             </form>
+       
         </div>
+        <p id="respond" style="color:red; width:300px; margin:auto;"></p>
         <div style="height:83.5px;"></div>
+        
         <%- include('./partials/footer.ejs') %>
+        <script src="main.js"></script>
     </body>
 </html>

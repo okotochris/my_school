@@ -13,13 +13,12 @@
           </header>
         <div style="height:83.5px;"></div>
         <div class="school">
-            <form action="upload" method="post">
+            <form action="upload" method="post" onsubmit="return check()">
                 <fieldset>
-                    <legend>Fill in the form</legend>
-                    <p><label for="user">Username</label> <input type="text" id="user" name="user"/></p>
-                    <p><label for="id">Password</label><input type="text" id="password" name="password"/></p>
+                    <p><input type="email" id="user" name="user"  placeholder="Enter your email" required/></p>
+                    <p><input type="text" id="password" name="password" placeholder="Password" required/></p>
                     <label>Class</label>
-                    <select name="Sclass">
+                    <select name="Sclass" id="Sclass">
                             <option></option>
                             <option value="senior">Senior School</option>
                             <option value="junior">Junior School</option>
@@ -28,7 +27,15 @@
                 </fieldset>
             </form>
         </div>
-    
+        <div style="color:rgb(106, 65, 229); width:500px; margin:auto; text-align:center;">
+          <p id="respond" style="color:red;"></p>
+
+          <li>note only authorize user</li>
+          <li>make sure to make your payment befor uploading </li>
+          <li>for any request or complain contant us </li>
+          <p>contact us on 0706 829 1163</p>
+        </div>
+      
     </body>
    <script src="main.js"></script>
 
