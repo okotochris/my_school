@@ -7,7 +7,14 @@ const SBlog = require('./datas')
 const app = express();
  
 // middleware
-app.use(express.static('Public'))
+app.use(express.static('public', { 
+    setHeaders: (res, path, stat) => {
+      if (path.endsWith('.css')) {
+        res.setHeader('Content-Type', 'text/css');
+      }
+    },
+  }));
+  
 app.use(express.urlencoded({extended:true}))
 
 //connecting to dateabase
