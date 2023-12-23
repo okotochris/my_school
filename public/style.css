@@ -68,6 +68,9 @@ nav ul li a:hover {
   align-items:center;
   color:blue;
 }
+.upload_result input, .upload_result select{
+  height:25px;
+}
 .school{
   position:relative;
   height:auto;
@@ -120,7 +123,7 @@ nav ul li a:hover {
   border:none; 
  }
 .upload_result fieldset, .upload_result legend{
-  margin:20px;
+  margin-top:20px;
 }
 .upload_result p{
   margin:2px;
