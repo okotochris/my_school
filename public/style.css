@@ -171,6 +171,7 @@ footer{
   margin:20px 0px;;
 
 }
+
 @media only screen and (max-width: 800px){
   footer{
     display:flex;
@@ -197,21 +198,24 @@ footer{
 }
 #contact input{
   height:30px;
-  width:400px;
+  width:90%;
   font-size:20px;
   margin:2px 0px;
+  background:white;
 }
 #contact button{
   background:rgb(2, 2, 39);
   color:white;
   height:30px;
-  width:400px;
+  
   font-size:16px;
+  width:90%;
 }
 #contact textarea{
   height:70px;
-  width:400px;
+  width:90%;;
   font-size:20px;
+  background:white
 }
 /* report card styling */
 .t_container{
