@@ -101,8 +101,12 @@ nav ul li a:hover {
   margin-top:8px;
   font-size:20px;
  }
- input{
-  background:white;
+ input, select, textarea{
+  background:rgb(218, 218, 219);
+  border:none;
+  box-shadow: 1px 2px 2px;
+  border-radius:7px;
+  padding:4px;
  }
  button{
   background:blue;
@@ -151,7 +155,7 @@ footer{
   display:flex;
   flex-wrap:wrap;
   justify-content:space-between;
-  background:blue;
+  background:rgb(62, 62, 91);
   color:white;
   font-family:arial;
   line-height:1.5em
@@ -175,7 +179,7 @@ footer{
   }
   #contact input{
     height:30px;
-    width:auto;
+    width:95%;
     font-size:20px;
     margin:2px 0px;
   }
