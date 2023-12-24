@@ -69,7 +69,12 @@ nav ul li a:hover {
   color:blue;
 }
 .upload_result input, .upload_result select{
-  height:25px;
+  height:55px;
+}
+@media only screen and (min-width:800px){
+  .upload_result input, .upload_result select{
+    height:30px;
+  }
 }
 .school{
   position:relative;
@@ -90,13 +95,14 @@ nav ul li a:hover {
   height:300px;
   position:relative;
   padding:9px;
-  border:solid 1px black;
+
   font-size:22px;
   color:blue;
  }
- @media only screen and (min-width: 500px){
+ @media only screen and (min-width: 800px){
   .add_form{
-    width:400px;
+    width:450px;
+    border:solid 1px black;
   }
  }
 .add_form select, .add_form input{
