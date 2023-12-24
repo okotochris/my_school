@@ -308,10 +308,16 @@ const blogschema = new Schema({
         type: String,
         required: true
     },
+    Treport:{
+        type:String
+    },
+    section:{
+        type:String
+    },
     schoolAdd:{
         type: String,
         required: true
-    },
+    }
 
 }, {timestamps:true })
 const Blogs = mongoose.model('Sblog', blogschema)

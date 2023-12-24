@@ -19,7 +19,11 @@ let blogSchema = new Schema({
     },
     number:{
         type:String
-    }
+    },
+    date:{
+        type:String
+    },
+   
 }, {timestamps: true})
 
 const Blog = mongoose.model("Bloga", blogSchema)

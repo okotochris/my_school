@@ -302,6 +302,12 @@ const blogschema = new Schema({
         type: String,
         required: true
     },
+    Treport:{
+        String
+    },
+    section:{
+        type:String
+    },
     schoolAdd:{
         type: String,
         required: true
