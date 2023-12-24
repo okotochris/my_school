@@ -92,7 +92,7 @@ nav ul li a:hover {
   width:95%;
   margin: auto ;
   text-align:center;
-  height:300px;
+  height:auto;
   position:relative;
   padding:9px;
 
@@ -103,6 +103,7 @@ nav ul li a:hover {
   .add_form{
     width:450px;
     border:solid 1px black;
+    
   }
  }
 .add_form select, .add_form input{
