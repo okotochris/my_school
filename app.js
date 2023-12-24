@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose')
 const Blog = require('./data')
 const SBlog = require('./datas')
+const ABlog = require('./admin.js')
 
 
 const app = express();
@@ -51,7 +52,21 @@ app.get('/admin', (req, res)=>{
     res.render('admin')
 })
 
-
+app.get("/admin_form", (req, res)=>{
+    res.render("admin_form")
+})
+app.post('/admin_form', (req, res)=>{
+    const Ablog= new ABlog(req.body)
+    Ablog.save()
+    .then(result=>{
+        console.log(result)
+    })
+    .catch(err=>{       
+        console.log(err)
+})
+    res.render('admin')
+    console.log("posted")
+})
 app.post("/adminJunior", (req, res)=>{
     res.render('adminJunior')
     const blog= new Blog(req.body)
@@ -68,17 +83,33 @@ app.post("/adminSenior", (req, res) =>{
 })
 app.post('/upload', (req, res)=>{
     let x = req.body.Sclass
-    if(x=="senior"){
-        res.render('adminSenior');
-    }
-    else if(x == "junior"){
-        res.render('adminJunior');
-    }
-    else{
-        let title = "wong detais"
-        console.log('wrong')
-        res.render('admin')
-    }
+    const user = req.body.user;
+    const password = req.body.password;
+
+        ABlog.findOne({email: user, password: password})
+        .then(result=>{
+           
+            if(result == null){
+               res.render('wrong_user')
+            }
+            else{
+                if(x=="senior"){
+                    res.render('adminSenior');
+                }
+                else if(x == "junior"){
+                    res.render('adminJunior');
+                }
+                else{
+                    let title = "wong detais"
+                    console.log('wrong')
+                    res.render('admin')
+                }
+            }
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+       
 })
 
 app.post("/details", (req, res)=>{
