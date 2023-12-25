@@ -51,6 +51,9 @@ app.get('/', (req, res)=>{
 app.get('/admin', (req, res)=>{
     res.render('admin')
 })
+app.get('/primary', (req, res)=>{
+    req.render('primary')
+})
 
 app.get("/admin_form", (req, res)=>{
     res.render("admin_form")
@@ -100,9 +103,8 @@ app.post('/upload', (req, res)=>{
                     res.render('adminJunior');
                 }
                 else{
-                    let title = "wong detais"
-                    console.log('wrong')
-                    res.render('admin')
+                    
+                    res.render('primary')
                 }
             }
         })
