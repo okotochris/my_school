@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const Blog = require('./data')
 const SBlog = require('./datas')
 const ABlog = require('./admin.js')
+const PBlog = require('./primary.js')
 
 
 const app = express();

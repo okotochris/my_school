@@ -303,7 +303,7 @@ const blogschema = new Schema({
         required: true
     },
     Treport:{
-        String
+        type: String
     },
     section:{
         type:String
