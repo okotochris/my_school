@@ -257,16 +257,16 @@ footer{
 
 .school_details h1{
   color:#003399;
-  font-size:3.0833vw;
+  font-size:37px;
   font-family:'Futura Md BT';
 }
 .school_details p{
-    font-size:1.253em;
+    font-size:20px;
     font-family:arial;
     font-weight:bold;
   }
   .school_details span{
-    font-size:1em;
+    font-size:16px;
     margin:5px;
 
   }
@@ -303,7 +303,7 @@ footer{
   }
   .table{
     width:66%;
-    font-size:0.875em;
+    font-size:14px;
     height:auto;
     border:solid 1px blue;
   }
