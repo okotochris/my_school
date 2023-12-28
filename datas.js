@@ -340,6 +340,9 @@ const blogschema = new Schema({
         type: String,
         required: true
     },
+    Treport:{
+        type: String
+    },
     term:{
         type: String,
         required: true

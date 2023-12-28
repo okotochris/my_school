@@ -141,6 +141,7 @@ app.post("/details", (req, res) => {
                 else {
                     //const blog = result[0].toObject();
                     res.render('details', { blog: result })
+                    console.log(result)
                 }
             })
             .catch(err => { res.send(err) })
