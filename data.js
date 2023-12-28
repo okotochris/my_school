@@ -22,6 +22,10 @@ const blogschema = new Schema({
         type:String,
         
     },
+    engscore:{
+        type:String,
+        
+    },
     mth:{
         type: String,
         
@@ -35,6 +39,10 @@ const blogschema = new Schema({
         
     },
     mthexam:{
+        type: String,
+       
+    },
+    mthscore:{
         type: String,
        
     },
@@ -58,6 +66,10 @@ const blogschema = new Schema({
         type: String,
         
     },
+    bscscore:{
+        type: String,
+        
+    },
     bscG:{
         type: String,
         
@@ -74,6 +86,9 @@ const blogschema = new Schema({
     btcexam:{
         type: String,
     },
+    btcscore:{
+        type: String,
+    },
     btcG:{
         type: String,
         
@@ -88,6 +103,10 @@ const blogschema = new Schema({
         type: String,
     },
     hecexam:{
+        type: String,
+   
+    },
+    hecscore:{
         type: String,
    
     },
@@ -109,7 +128,9 @@ const blogschema = new Schema({
     },
     freexam:{
         type: String,
- 
+    },
+    frescore:{
+        type: String,
     },
     freG:{
         type: String,
@@ -128,7 +149,9 @@ const blogschema = new Schema({
     },
     agrexam:{
         type: String,
-        
+    },
+    agrscore:{
+        type: String,
     },
     agrG:{type: String},
     csc:{
@@ -145,7 +168,9 @@ const blogschema = new Schema({
     },
     cscexam:{
         type: String,
-      
+    },
+    cscscore:{
+        type: String,
     },
     cscG:{
         type: String,
@@ -165,7 +190,9 @@ const blogschema = new Schema({
     },
     crsexam:{
         type: String,
-        
+    },
+    crsscore:{
+        type: String,
     },
     crsG:{
         type: String,
@@ -185,7 +212,9 @@ const blogschema = new Schema({
     },
     pedexam:{
         type: String,
-        
+    },
+    pedscore:{
+        type: String,
     },
     pedG:{
         type: String,
@@ -205,7 +234,10 @@ const blogschema = new Schema({
     },
     craexam:{
         type: String,
-        
+    },
+
+    crascore:{
+        type: String,
     },
     craG:{
         type: String,
@@ -224,7 +256,9 @@ const blogschema = new Schema({
     },
     hiyexam:{
         type: String,
-       
+    },
+    hiyscore:{
+        type: String,
     },
     hiyG:{
         type: String,
@@ -243,7 +277,9 @@ const blogschema = new Schema({
     },
     stdexam:{
         type: String,
-        
+    },
+    stdscore:{
+        type: String,
     },
     stdG:{
         type: String,
@@ -264,6 +300,9 @@ const blogschema = new Schema({
     cedexam:{
         type: String,
     },
+    cedscore:{
+        type: String,
+    },
     cedG:{
         type: String,
     },
@@ -277,6 +316,9 @@ const blogschema = new Schema({
         type: String,
     },
     bstexam:{
+        type: String,
+    },
+    bstscore:{
         type: String,
     },
     bstG:{

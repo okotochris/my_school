@@ -16,6 +16,9 @@ const blogschema = new Schema({
     engexam:{
         type: String,
     },
+    engscore:{
+        type: String,
+    },
     engG:{
         type: String,
     },
@@ -33,7 +36,9 @@ const blogschema = new Schema({
     },
     mthexam:{
         type: String,
-       
+    },
+    mthscore:{
+        type: String,
     },
     mthG:{
         type: String,
@@ -51,6 +56,9 @@ const blogschema = new Schema({
     bioexam:{
         type: String,  
     },
+    bioscore:{
+        type: String,  
+    },
     bioG:{
         type: String, 
     },
@@ -64,6 +72,9 @@ const blogschema = new Schema({
         type: String,  
     },
     govexam:{
+        type: String,  
+    },
+    govscore:{
         type: String,  
     },
     govG:{
@@ -81,6 +92,9 @@ const blogschema = new Schema({
     fmtexam:{
         type: String,
     },
+    fmtscore:{
+        type: String,
+    },
     fmtG:{
         type: String,
         
@@ -95,6 +109,9 @@ const blogschema = new Schema({
         type: String,
     },
     ecoexam:{
+        type: String,
+    },
+    ecoscore:{
         type: String,
     },
     ecoG:{
@@ -114,7 +131,9 @@ const blogschema = new Schema({
     },
     litexam:{
         type: String,
- 
+    },
+    litscore:{
+        type: String,
     },
     litG:{
         type: String,
@@ -134,7 +153,9 @@ const blogschema = new Schema({
     },
     cstexam:{
         type: String,
-        
+    },
+    csscore:{
+        type: String,
     },
     cstG:{
         type: String,
@@ -151,7 +172,9 @@ const blogschema = new Schema({
     },
     civexam:{
         type: String,
-      
+    },
+    civscore:{
+        type: String,
     },
     civG:{
         type: String,
@@ -171,7 +194,9 @@ const blogschema = new Schema({
     },
     cheexam:{
         type: String,
-        
+    },
+    chescore:{
+        type: String,
     },
     cheG:{
         type: String,
@@ -192,6 +217,9 @@ const blogschema = new Schema({
     agrexam:{
         type: String,
     },
+    agrscore:{
+        type: String,
+    },
     agrG:{
         type: String,
        
@@ -210,7 +238,9 @@ const blogschema = new Schema({
     },
     geoexam:{
         type: String,
-        
+    },
+    geoscore:{
+        type: String,
     },
     geoG:{
         type: String,
@@ -229,7 +259,9 @@ const blogschema = new Schema({
     },
     phyexam:{
         type: String,
-       
+    },
+    physcore:{
+        type: String,
     },
     phyG:{
         type: String,
@@ -249,7 +281,9 @@ const blogschema = new Schema({
     },
     comexam:{
         type: String,
-        
+    },
+    comscore:{
+        type: String,
     },
     comG:{
         type: String,
@@ -270,6 +304,9 @@ const blogschema = new Schema({
     crsexam:{
         type: String,
     },
+    crsscore:{
+        type: String,
+    },
     crsG:{
         type: String,
     },
@@ -283,6 +320,9 @@ const blogschema = new Schema({
         type: String,
     },
     accexam:{
+        type: String,
+    },
+    accscore:{
         type: String,
     },
     accG:{

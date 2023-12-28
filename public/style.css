@@ -235,10 +235,14 @@ footer{
   position:relative;
   background:black;
 }
-@media only screen and (max-width="800px"){
+@media only screen and (max-width:600px){
   .t_container{
-    width:100%;
+    width:98%;
   }
+  .style{
+    width:95%
+  }
+  
 }
 .style{
   background:white;
@@ -247,6 +251,7 @@ footer{
   border: solid 1px black;
   padding:5px;
 }
+
 .school_details{
   text-align:center;
   margin-bottom:10px;
@@ -255,17 +260,22 @@ footer{
 
 .school_details h1{
   color:#003399;
-  font-size:50px;
+  font-size:37px;
   font-family:'Futura Md BT';
 }
 .school_details p{
-    font-size:16.5px;
+    font-size:20px;
     font-family:arial;
     font-weight:bold;
   }
+  .school_details span{
+    font-size:16px;
+    margin:5px;
+
+  }
   .reportSheet{
-    height:50px;
-    width:540px;
+    height:40px;
+    width:450px;
     background:white;
     display:flex;
     display:flex;
@@ -275,10 +285,11 @@ footer{
     align-items:center;
     border-radius:10px;
     margin: 0px auto;
+
   }
   .reportSheet div{
-    height:45px;
-    width:500px;
+    height:35px;
+    width:400px;
     background:black;
     color:white;
     text-align:center;
@@ -295,12 +306,14 @@ footer{
   }
   .table{
     width:66%;
+    font-size:14px;
+    height:auto;
+    border:solid 1px blue;
   }
   .class_info{
     display:flex;
     flex-direction:column;
     justify-content:space-between;
-    height:555px;
     width:33%;
     
   }
@@ -308,7 +321,7 @@ footer{
     border-bottom: solid 1px black;
   }
   .class_info{
-    font-size:14px;
+    font-size:12px;
   }
   .class_info h3{
     color:red;
@@ -331,4 +344,9 @@ footer{
       text-decoration: none;
       cursor: pointer;
       margin:20px auto;
+    }
+    @media print{
+      header, .download{
+        display:none;
+      }
     }
