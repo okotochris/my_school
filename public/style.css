@@ -236,9 +236,7 @@ footer{
   background:black;
 }
 @media only screen and (max-width:600px){
-  header{
-    display:none;
-  }
+
   
 }
 .style{
