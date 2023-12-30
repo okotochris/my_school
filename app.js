@@ -162,6 +162,19 @@ app.post("/details", (req, res) => {
             .catch(err => { console.log(err) })
     }
     else {
-        res.send("still in processing")
+        PBlog.findOne({ class: clas, term: term, studentId: id })
+       
+            .then(result => {
+                console.log(clas)
+                if (result == null) {
+                    res.render('error', { name: name })
+                }
+                else {
+                    //const blog = result[0].toObject();
+                    res.render('primary_file', { blog: result })
+                    console.log("data sent to frontend")
+                }
+            })
+            .catch(err => { console.log(err) })
     }
 })

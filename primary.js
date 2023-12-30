@@ -87,7 +87,7 @@ blogSchema = new Schema({
     pvsexam:{
         type:String
     },
-    pvscore:{
+    pvsscore:{
         type:String
     },
     pvsG:{
@@ -258,7 +258,7 @@ blogSchema = new Schema({
         required: true
     },
     Treport:{
-        String
+        type: String
     },
     section:{
         type:String
