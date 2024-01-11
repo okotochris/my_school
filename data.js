@@ -347,6 +347,15 @@ const blogschema = new Schema({
     Treport:{
         type: String
     },
+    average:{
+        type:String
+    },
+    No_subj:{
+        type:String
+    },
+    score_obtainable:{
+        type:String
+    },
     section:{
         type:String
     },

@@ -347,6 +347,15 @@ const blogschema = new Schema({
         type: String,
         required: true
     },
+    average:{
+        type:String
+    },
+    No_subj:{
+        type:String
+    },
+    score_obtainable:{
+        type:String
+    },
     schoolName:{
         type: String,
         required: true
