@@ -29,6 +29,14 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
         console.log(err)
     })
 
+// Redirect all requests to www.myschoolresult.com
+app.use((req, res, next) => {
+    if (req.headers.host === 'myschoolresult.com') {
+      return res.redirect(301, 'http://www.myschoolresult.com' + req.url);
+    }
+    return next();
+  });
+
 //setting port and connecting to server
 const PORT = process.env.PORT || 3000;
 
