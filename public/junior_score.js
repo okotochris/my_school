@@ -14,6 +14,11 @@ let crascore = document.getElementById('crascore')
 let stdscore = document.getElementById('stdscore')
 let bstscore = document.getElementById('bstscore')
 let cedscore = document.getElementById('cedscore')
+let hiyscore = document.getElementById('hiyscore')
+let term = document.getElementById('Sterm')
+let cal = document.getElementById('Calc')
+let sclass = document.getElementById('Sclass')
+let report = document.getElementById("Treport")
 
 
 
@@ -215,15 +220,19 @@ let No_subj = document.getElementById('No_subj')
 let score_obtainable = document.getElementById('score_obtainable')
 let score_obtain = document.getElementById('score_obtain')
 
-average.onclick= function(){
+cal.onclick= function(){
+    event.preventDefault();
     let course = 0;
-    let total = Number(bscscore.value) + Number(agrscore.value)  + Number(bstscore.value) + Number(mthscore.value)  + Number(frescore.value) + Number(btcscore.value) + Number(engscore.value) + Number(cscscore.value) + Number(hecscore.value) + Number(crascore.value) + Number(pedscore.value) + Number(stdscore.value)  + Number(cedscore.value) + Number(crsscore.value);
+    let total = Number(bscscore.value) + Number(agrscore.value) + Number(hiyscore.value)  + Number(bstscore.value) + Number(mthscore.value)  + Number(frescore.value) + Number(btcscore.value) + Number(engscore.value) + Number(cscscore.value) + Number(hecscore.value) + Number(crascore.value) + Number(pedscore.value) + Number(stdscore.value)  + Number(cedscore.value) + Number(crsscore.value);
     console.log(total)
-    if(average.value == ""){
+    
         if(bscscore.value != ""){
             course++;
         }
         if(btcscore.value != ""){
+            course++;
+        }
+        if(hiyscore.value != ""){
             course++;
         }
         if(frescore.value != ""){
@@ -265,10 +274,36 @@ average.onclick= function(){
             course++;
         }
         
-    }
+    
     No_subj.value = course;
-    average.value = (total/course).toFixed(2)
+    let aver = (total/course).toFixed(2)
+    if( aver != 'NaN' ){ 
+    average.value = aver
+    console.log(aver)
+    }
     score_obtainable.value = (course*100)
     score_obtain.value = total;
+    let performance = total/course
+
+    if(performance >= 80){
+       report.value = "Exellent Performance Keep It Up"
+    }
+    else if(performance >= 70 && performance < 80 ){
+        report.value = "Very Good Perfomance Keep It Up"
+    }
+    else if(performance >= 50 && performance < 70 ){
+        report.value = " Good Perfomance"
+    }
+    else{
+        report.value = "Poor Perfomance Try Harder Next Term"
+    }
+
+    if(term.value == 'THIRD TERM' && sclass.value == "JSS1" && performance >= 50){
+        report.value +=" " + "Promoted to JSS2"
+    }
+    else if(term.value == 'THIRD TERM' && sclass.value == "JSS2"  && performance >= 50){
+        report.value += " " + "Promoted to JSS3"
+    }
+    
     
 }

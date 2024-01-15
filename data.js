@@ -356,6 +356,9 @@ const blogschema = new Schema({
     score_obtainable:{
         type:String
     },
+    score_obtain:{
+        type:String
+    },
     section:{
         type:String
     },

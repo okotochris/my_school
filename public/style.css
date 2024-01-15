@@ -321,12 +321,32 @@ footer{
   .grade{
     font-size:14px;
   }
-  .Sfooter div{
+  /* styling the average score of student performace in the footer*/
+  .score_container{
     display:flex;
     justify-content:space-around;
-    border:solid 2px blue;
+    align-items:center;
+  }
+  .score_container div{
+    display:flex;
+    justify-content:center;
+    align-items:center;
     height:50px;
     margin-bottom:10px;
+    }
+    .student_score h5{
+      color:blue;
+    }
+    .student_score div{
+      display:flex;
+      border: 2px solid black;
+      padding:1px;
+      border-radius:10px;
+      margin:2px;
+      flex-direction:column;
+      justify-content:center;
+      text-align:center;
+
     }
     .download-link {
       display: inline-block;

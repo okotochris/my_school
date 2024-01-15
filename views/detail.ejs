@@ -45,30 +45,19 @@
       <br />
       <div class="top_info">
         <div>
-
-          <p>Name: <b>
-              <%= blog.userName.toUpperCase() %>
-            </b> </p>
-          <p>Class: <%= blog.class%>
-          </p>
-          <p>Term: <%= blog.term %>
-          </p>
-          <p>Next term begins: </p>
+          <p>Name: <b><%= blog.userName.toUpperCase() %></b> </p>
+          <p>Class: <%= blog.class%></p>
+          <p>Term: <%= blog.term %></p>
         </div>
         <div>
-
-          <p>School Opened:......</p>
           <p>Time Present:...... </p>
           <p>Total days absent:..... </p>
           <p>Student in class:..... </p>
-
         </div>
         <div>
-          <p>Score Uptainable:.....</p>
-          <p>Score Uptained</p>
-          <p>Averag Score:....</p>
-          <p>GPA:..... </p>
-
+          <p>GPA:.....</p>
+          <p>School Opened:......</p>
+          <p>Next term begins: </p>
         </div>
       </div>
       <div class="table_design">
@@ -350,7 +339,7 @@
                   <%= blog.acc1st %>
                 </td>
                 <td>
-                  <%= blog.accex2nd %>
+                  <%= blog.acc2nd %>
                 </td>
                 <td>
                   <%= blog.accexam %>
@@ -490,27 +479,31 @@
             <h3>SCORE RANGE</h3>
             <P> 80 - 100--A+ Distinction </P>
             <P> 70 - 79---A Excellent </P>
-            <P> 60 - 69---B  Credit </P>
-            <P> 50 - 59---C Pass </P>
+            <P> 60 - 69---B Very Good </P>
+            <P> 50 - 59---C Credit </P>
+            <p> 40 - 49---D Pass</p>
             <P> 0 -  39----F Fail</P>
           </div>
           <div>
-            <h3 style="font-size:16px;">CLASS TEACHER'S NAME</h3>
-            <p>......................................................</p>
+           <!---- <h3 style="font-size:16px;">CLASS TEACHER'S NAME</h3> 
+            <p>......................................................</p> -->
           </div>
         </div>
       </div>
-      <div class="Sfooter">
-        <div>
-          <h3>Subject Offer</h3>
-          <h3>Subject Offer</h3>
-          <h3>Subject Offer</h3>
+
+       
+      <h3>STUDENT PERFORMANCE ANALYSIS</h3>
+      <div class="score_container" style="border:1px solid blue; height:80px;">
+        <div class="student_score">
+          <div><h5>SUBJECT OFFERED</h5><h4><%= blog.No_subj %></h4></div>
+          <div><h5>SCORE OBTAINABLE</h5><h4><%= blog.score_obtainable %></h4></div>
+          <div><h5>SCORE OBTAIN</h5><h4><%= blog.score_obtain %></h4></div>
+          <div><h5>AVERAGE SCORE</h5><h4><%= blog.average %></h4></div>
         </div>
 
       </div>
       <div>
-        <h3>Class Teacher’s Remark : <%= blog.Treport %>
-        </h3>
+        <h4>Class Teacher’s Remark : <%= blog.Treport %></h>
         <h3>Class Head Teacher’s Remark :.................................... </h3>
       </div>
     </div>
@@ -519,39 +512,7 @@
   <button class="download" onclick="downloadResult()">Download Result</button>
   <!-- JavaScript function to handle the download -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-  <script>
-    async function downloadResult() {
-      // Get the HTML content of the result container
-      var resultContainer = document.getElementById('resultContainer');
-      var resultContent = resultContainer.outerHTML; // Include outer HTML to capture styles
-
-      // Fetch and include external stylesheets
-      var stylesheets = document.querySelectorAll('link[rel="stylesheet"]');
-      var stylesPromises = Array.from(stylesheets).map(async stylesheet => {
-        var response = await fetch(stylesheet.href);
-        var cssText = await response.text();
-        resultContent += '<style>' + cssText + '</style>';
-      });
-
-      // Wait for all stylesheet fetches to complete
-      await Promise.all(stylesPromises);
-
-      // Create a Blob from the HTML content
-      var blob = new Blob([resultContent], { type: 'text/html' });
-
-      // Create a download link
-      var a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = 'result.html';
-
-      // Append the link to the DOM and trigger a click event
-      document.body.appendChild(a);
-      a.click();
-
-      // Remove the link from the DOM
-      document.body.removeChild(a);
-    }
-  </script>
+  <script src="download.js"></script>
 </body>
 
 </html>

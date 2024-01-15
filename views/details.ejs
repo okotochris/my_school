@@ -45,30 +45,19 @@
       <br />
       <div class="top_info">
         <div>
-
-          <p>Name: <b>
-              <%= blog.userName.toUpperCase() %>
-            </b> </p>
-          <p>Class: <%= blog.class%>
-          </p>
-          <p>Term: <%= blog.term %>
-          </p>
-          <p>Next term begins: </p>
+          <p>Name: <b><%= blog.userName.toUpperCase() %></b> </p>
+          <p>Class: <%= blog.class%></p>
+          <p>Term: <%= blog.term %></p>
         </div>
         <div>
-
-          <p>School Opened:......</p>
           <p>Time Present:...... </p>
           <p>Total days absent:..... </p>
           <p>Student in class:..... </p>
-
         </div>
         <div>
-          <p>Score Uptainable:.....</p>
-          <p>Score Uptained</p>
-          <p>Averag Score:....</p>
-          <p>GPA:..... </p>
-
+          <p>GPA:.....</p>
+          <p>School Opened:......</p>
+          <p>Next term begins: </p>
         </div>
       </div>
       <div class="table_design">
@@ -481,37 +470,40 @@
             <P> 1....No level observed </P>
           </div>
           <div class="grade">
-            <h3>SCORE RANGE</h3>
             <P> 80 - 100--A+ Distinction </P>
             <P> 70 - 79---A Excellent </P>
-            <P> 60 - 69---B  Credit </P>
-            <P> 50 - 59---C Pass </P>
+            <P> 60 - 69---B Very Good </P>
+            <P> 50 - 59---C Credit </P>
+            <p> 40 - 49---D Pass</p>
             <P> 0 -  39----F Fail</P>
           </div>
           <div>
-            <h3 style="font-size:16px;">CLASS TEACHER'S NAME</h3>
-            <p>......................................................</p>
+           <!---- <h3 style="font-size:16px;">CLASS TEACHER'S NAME</h3> 
+            <p>......................................................</p> -->
           </div>
         </div>
       </div>
-      <div class="Sfooter">
-        <div>
-          <h3>Subject Offer</h3>
-          <h3>Subject Offer</h3>
-          <h3>Subject Offer</h3>
+
+      <h3>STUDENT PERFORMANCE ANALYSIS</h3>
+      <div class="score_container" style="border:1px solid blue">
+        <div class="student_score">
+          <div><h5>SUBJECT OFFERED</h5><h4><%= blog.No_subj %></h4></div>
+          <div><h5>SCORE OBTAINABLE</h5><h4><%= blog.score_obtainable %></h4></div>
+          <div><h5>SCORE OBTAIN</h5><h4><%= blog.score_obtain %></h4></div>
+          <div><h5>AVERAGE SCORE</h5><h4><%= blog.average %></h4></div>
         </div>
 
       </div>
       <div>
-        <h3>Class Teacher’s Remark : <%= blog.Treport %>
-        </h3>
-        <h3>Class Head Teacher’s Remark :.................................... </h3>
+        <h4>Class Teacher’s Remark : <%= blog.Treport %></h4>
+        
+        <h4>Class Head Teacher’s Remark :.................................... </h4>
       </div>
     </div>
   </div>
 
   <button class="download" onclick="downloadResult()">Download Result</button>
-  <script src="download"></script>
+  <script src="download.js"></script>
 </body>
 
 </html>
