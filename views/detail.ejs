@@ -493,7 +493,7 @@
 
        
       <h3>STUDENT PERFORMANCE ANALYSIS</h3>
-      <div class="score_container" style="border:1px solid blue; height:80px;">
+      <div class="score_container">
         <div class="student_score">
           <div><h5>SUBJECT OFFERED</h5><h4><%= blog.No_subj %></h4></div>
           <div><h5>SCORE OBTAINABLE</h5><h4><%= blog.score_obtainable %></h4></div>
@@ -502,8 +502,8 @@
         </div>
 
       </div>
-      <div>
-        <h4>Class Teacher’s Remark : <%= blog.Treport %></h>
+      <div class="teacherReport">
+        <h4>Class Teacher’s Remark : <span style="color:red;"><%= blog.Treport %> </span></h4>
         <h3>Class Head Teacher’s Remark :.................................... </h3>
       </div>
     </div>

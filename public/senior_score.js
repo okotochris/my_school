@@ -24,6 +24,8 @@ let report = document.getElementById("Treport")
 
 
 
+
+
 //ENGLISH
 //ACCOUNTING 
 engscore.onmouseover = function(){
@@ -219,6 +221,11 @@ let score_obtain = document.getElementById('score_obtain')
 
 cal.onclick= function(){
     event.preventDefault()
+    // converting name to upper case before uploading 
+    let userNameElement = document.getElementById('userName')
+    let userName = userNameElement.value.toUpperCase()
+    userNameElement.value = userName;
+
     let course = 0;
     let total = Number(govscore.value) + Number(bioscore.value) + Number(mthscore.value)+ Number(engscore.value) + Number(fmtscore.value) + Number(ecoscore.value) + Number(litscore.value) + Number(cstscore.value) + Number(civscore.value) + Number(chescore.value) + Number(agrscore.value) + Number(geoscore.value) + Number(physcore.value) + Number(comscore.value) + Number(crsscore.value) + Number(accscore.value)
         if(govscore.value != ""){

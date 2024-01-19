@@ -475,6 +475,7 @@
             <P> 60 - 69---B Very Good </P>
             <P> 50 - 59---C Credit </P>
             <p> 40 - 49---D Pass</p>
+            
             <P> 0 -  39----F Fail</P>
           </div>
           <div>
@@ -485,7 +486,7 @@
       </div>
 
       <h3>STUDENT PERFORMANCE ANALYSIS</h3>
-      <div class="score_container" style="border:1px solid blue">
+      <div class="score_container">
         <div class="student_score">
           <div><h5>SUBJECT OFFERED</h5><h4><%= blog.No_subj %></h4></div>
           <div><h5>SCORE OBTAINABLE</h5><h4><%= blog.score_obtainable %></h4></div>
@@ -495,7 +496,7 @@
 
       </div>
       <div>
-        <h4>Class Teacher’s Remark : <%= blog.Treport %></h4>
+        <h4>Class Teacher’s Remark : <span style="color:red;"><%= blog.Treport %> </span></h4>
         
         <h4>Class Head Teacher’s Remark :.................................... </h4>
       </div>

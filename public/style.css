@@ -326,17 +326,21 @@ footer{
     display:flex;
     justify-content:space-around;
     align-items:center;
+    text-align: center;
+    border:3px solid blue;
+    width:98%;
+    height:70px;
   }
   .score_container div{
     display:flex;
     justify-content:center;
     align-items:center;
     height:50px;
-    margin-bottom:10px;
     }
     .student_score h5{
       color:blue;
     }
+    
     .student_score div{
       display:flex;
       border: 2px solid black;
@@ -361,4 +365,10 @@ footer{
       header, .download{
         display:none;
       }
+    }
+    .teacherReport h3{
+      margin:8px 0px;
+    }
+    .teacherReport span{
+      color:red;
     }

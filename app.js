@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose')
+const multer = require('multer')
 const Blog = require('./data')
 const SBlog = require('./datas')
 const ABlog = require('./admin.js')
@@ -9,6 +10,7 @@ const PBlog = require('./primary.js')
 const app = express();
 
 // middleware
+app.use(express.static('image'))
 app.use(express.static('public', {
     setHeaders: (res, path, stat) => {
         if (path.endsWith('.css')) {
@@ -30,7 +32,19 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
     })
 
 
-    
+  // configuring multer
+  const fileEngineStorage = multer.diskStorage({
+    destination:((req, file, cb)=>{
+        cb(null, 'image')
+    }),
+    filename:((req, file, cb)=>{
+        cb(null, Date.now() + "--" + file.orignialname)
+    })
+  }) 
+  
+  const upload = ({storage: fileEngineStorage})
+
+
 //setting port and connecting to server
 const PORT = process.env.PORT || 3000;
 
@@ -57,6 +71,7 @@ app.get('/admin', (req, res) => {
 app.get('/primary', (req, res) => {
     res.render('primary')
 })
+//saving primary data to databse 
 app.post('/primary', (req, res) => {
     const Blog = new PBlog(req.body);
     Blog.save()
@@ -67,9 +82,11 @@ app.post('/primary', (req, res) => {
             console.log(err)
         })
 })
+
 app.get("/admin_form", (req, res) => {
     res.render("admin_form")
 })
+//saving admin login
 app.post('/admin_form', (req, res) => {
     const Ablog = new ABlog(req.body)
     Ablog.save()
@@ -82,6 +99,7 @@ app.post('/admin_form', (req, res) => {
     res.render('admin')
     console.log("posted")
 })
+//saving junior data
 app.post("/adminJunior", (req, res) => {
     res.render('adminJunior')
     const blog = new Blog(req.body)
@@ -89,6 +107,7 @@ app.post("/adminJunior", (req, res) => {
         .then(result => { console.log('uploaded') })
         .catch(err => { console.log(err) })
 })
+//saving senior data
 app.post("/adminSenior", (req, res) => {
     const Sblog = new SBlog(req.body);
     Sblog.save()
@@ -96,6 +115,7 @@ app.post("/adminSenior", (req, res) => {
         .catch(err => console.log(err))
     res.render('adminSenior')
 })
+//search API RESULT
 app.post('/upload', (req, res) => {
     let x = req.body.Sclass
     const user = req.body.user;
@@ -167,7 +187,7 @@ app.post("/details", (req, res) => {
         PBlog.findOne({ class: clas, term: term, studentId: id })
        
             .then(result => {
-                console.log(clas)
+                console.log(`${clas} ${term} ${id}`)
                 if (result == null) {
                     res.render('error', { name: name })
                 }

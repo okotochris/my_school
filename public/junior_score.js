@@ -23,6 +23,7 @@ let report = document.getElementById("Treport")
 
 
 
+
 //ENGLISH
 engscore.onmouseover = function(){
     let x = Number(document.getElementById('eng2nd').value)
@@ -222,10 +223,18 @@ let score_obtain = document.getElementById('score_obtain')
 
 cal.onclick= function(){
     event.preventDefault();
+
+    // converting name to upper case before uploading 
+       let userNameElement = document.getElementById('userName')
+       let userName = userNameElement.value.toUpperCase()
+       userNameElement.value = userName;
+
+    //calculating for the total student perfomance 
     let course = 0;
     let total = Number(bscscore.value) + Number(agrscore.value) + Number(hiyscore.value)  + Number(bstscore.value) + Number(mthscore.value)  + Number(frescore.value) + Number(btcscore.value) + Number(engscore.value) + Number(cscscore.value) + Number(hecscore.value) + Number(crascore.value) + Number(pedscore.value) + Number(stdscore.value)  + Number(cedscore.value) + Number(crsscore.value);
     console.log(total)
     
+    //checking the number of courses offered 011111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
         if(bscscore.value != ""){
             course++;
         }
