@@ -232,7 +232,6 @@ cal.onclick= function(){
     //calculating for the total student perfomance 
     let course = 0;
     let total = Number(bscscore.value) + Number(agrscore.value) + Number(hiyscore.value)  + Number(bstscore.value) + Number(mthscore.value)  + Number(frescore.value) + Number(btcscore.value) + Number(engscore.value) + Number(cscscore.value) + Number(hecscore.value) + Number(crascore.value) + Number(pedscore.value) + Number(stdscore.value)  + Number(cedscore.value) + Number(crsscore.value);
-    console.log(total)
     
     //checking the number of courses offered 011111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
         if(bscscore.value != ""){
