@@ -135,21 +135,8 @@ nav ul li a:hover {
   box-shadow: 0px 6px 30px 5px rgba(0, 0, 0, 0.12);
   
 }
- @media only screen and (min-width: 800px){
-  
-  
- }
-.add_form select, .add_form input{
-  width:90%;
-  height:45px;
-  margin-top:8px;
-  font-size:20px;
-  box-shadow: 1px 2px 2px;
-  border-radius:20px;
-  margin-bottom:4px;
-  border:none;
-  
- }
+
+
  button{
   background:blue;
   width:90%;
@@ -161,6 +148,22 @@ nav ul li a:hover {
   border-radius:25px;
   margin-bottom:4px;
   border:none; 
+ }
+
+ .add_form input, .add_form select{
+  width:90%;
+  height:45px;
+  margin-top:8px;
+  font-size:20px;
+  box-shadow: 1px 2px 2px;
+  border-radius:20px;
+  margin-bottom:4px;
+  border:none;
+  padding:3px 10px;
+ }
+ .add_form select, .add_form button{
+  width:99%;
+  
  }
 .upload_result fieldset, .upload_result legend{
   margin-top:20px;
@@ -223,7 +226,7 @@ table, th, td{
   
 }
 
-@media only screen and (max-width: 700px){
+@media only screen and (max-width: 850px){
   .footer{
     display:flex;
     justify-content:center;
@@ -236,13 +239,12 @@ table, th, td{
     display:flex;
     justify-content:center;
     align-items:center;
-  
   }
   #contact{
     text-align:center;
   }
   #contact input, #contact textarea{
-    width: 80%;
+    width: 90%;
     height: 19px;
     font-size:20px;
     margin:2px 0px;
@@ -251,7 +253,7 @@ table, th, td{
   }
   #contact textarea{
     height:70px;
-    width:80%;
+    width:90%;
     font-size:20px;
     background:white;
     border-radius: 20px;
@@ -276,7 +278,7 @@ table, th, td{
   padding: 5px 10px;
 }
 #contact input, #contact textarea{
-  width: 247px;
+  width: 260px;
   padding: 8px 16px;
   height: 19px;
   font-size:20px;

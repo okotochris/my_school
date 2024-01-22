@@ -2,16 +2,7 @@
 <html>
     <%- include('./partials/head.ejs') %>
     <body>
-        <header>
-            <nav>
-              <ul>
-                <li><a href="./">Home</a></li>
-                <li><a href="./admin">Admin</a></li>
-                
-              </ul>
-            </nav>
-          </header>
-        <div style="height:83.5px;"></div>
+        <%- include('./partials/header.ejs') %>
         <div class="add_form">
             <form action="upload" method="post" onsubmit="return check()">
                     <p><input type="email" id="user" name="user"  placeholder="Enter your email" required/></p>
@@ -26,14 +17,7 @@
                 
             </form>
         </div>
-        <div style="color:rgb(106, 65, 229); width:98%; margin:auto; text-align:center;">
-          <p id="respond" style="color:red;"></p>
-
-          <li>note only authorize user</li>
-          <li>make sure to make your payment befor uploading </li>
-          <li>for any request or complain contant us </li>
-          <p>contact us on 0706 829 1163</p>
-        </div>
+        
       
     </body>
    <script src="main.js"></script>
