@@ -4,54 +4,46 @@
     
     <%- include('./partials/head.ejs') %>
     <body>
-        <header>
-            <nav>
-              <ul>
-                <li><a href="./">Home</a></li>
-                <li><a href="./admin">Admin</a></li>
+        <div style="background:url('background.jpg'); background-size: cover;">
+                    <img src="myschoolresult.png" type="image/png" class="logo"/>
+                        <div class="welcome">Welcome to My School Result Checker</div>
+                        <div class="add_form">
+                            <div class="check_result">Check Result</div>
+                            <form action="/details" method="post" onsubmit="return check()">
+                            <p><input type="text" placeholder="Enter Your Name" name="userName"/ required></p>
+                            <p><input type="password" Placeholder="Enter Your ID" name="studentId" required/></p>
+                            <p>
+                                <select id = "Sclass" name="class">
+                                    <option value=""> SELECT CLASS</option>
+                                    <option  value="SS1">SS1</option>
+                                    <option  value="SS2" >SS2</option>
+                                    <option value="SS3">SS3</option>
+                                    <option  value="JSS1">JSS1</option>
+                                    <option  value="JSS2">JSS2</option>
+                                    <option  value="JSS3">JSS3</option>
+                                    <option  value="PRI1">PRI1</option>
+                                    <option  value="PRI2">PRI2</option>
+                                    <option  value="PRI3">PRI3</option>
+                                    <option  value="PRI4">PRI4</option>
+                                    <option  value="PRI5">PRI5</option>
+                                    <option  value="PRI6">PRI6</option>
+                                </select>
+                            
+                                <select id="Sterm" name="term">
+                                    <option value="">SELECT TERM</option>
+                                    <option value="FIRST TERM">FIRST TERM</option>
+                                    <option value="SECOND TERM">SECOND TERM</option>
+                                    <option value="THIRD TERM">THIRD TERM</option>
+                                </select>
+                            </p>
+                            <button>View Result</button>
+                        
+                        </form>
                 
-              </ul>
-            </nav>
-          </header>
-          <div style="height:83.5px; width:350px; margin:auto;"><h3>CHECK YOUR RESULT HERE</h3></div>
-          
-           <div class="add_form">
-            <form action="/details" method="post" onsubmit="return check()">
-                <p><input type="text" placeholder="Enter Your Name" name="userName"/ required></p>
-                <p><input type="password" Placeholder="Enter Your ID" name="studentId" required/></p>
-                <p>
-                   
-                    <select id = "Sclass" name="class">
-                        <option value=""> SELECT CLASS</option>
-                        <option  value="SS1">SS1</option>
-                        <option  value="SS2" >SS2</option>
-                        <option value="SS3">SS3</option>
-                        <option  value="JSS1">JSS1</option>
-                        <option  value="JSS2">JSS2</option>
-                        <option  value="JSS3">JSS3</option>
-                        <option  value="PRI1">PRI1</option>
-                        <option  value="PRI2">PRI2</option>
-                        <option  value="PRI3">PRI3</option>
-                        <option  value="PRI4">PRI4</option>
-                        <option  value="PRI5">PRI5</option>
-                        <option  value="PRI6">PRI6</option>
-                    </select>
-                   
-                    <select id="Sterm" name="term">
-                        <option value="">SELECT TERM</option>
-                        <option value="FIRST TERM">FIRST TERM</option>
-                        <option value="SECOND TERM">SECOND TERM</option>
-                        <option value="THIRD TERM">THIRD TERM</option>
-                    </select>
-                </p>
-                <button>View Result</button>
-              
-            </form>
-       
+                    </div>
+                    <p id="respond" style="color:red; width:300px; margin:auto;"></p>
+                    <div style="height:83.5px;"></div>
         </div>
-        <p id="respond" style="color:red; width:300px; margin:auto;"></p>
-        <div style="height:83.5px;"></div>
-        
         <%- include('./partials/footer.ejs') %>
         <script src="main.js"></script>
     </body>
