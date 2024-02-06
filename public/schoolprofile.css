@@ -1,0 +1,196 @@
+.container{
+   
+    display:flex;
+    justify-content:space-around;
+    /*font-family:poppins;*/
+    flex-wrap:wrap;
+}
+
+.top_line{
+    background:#179D95;
+    height:30px;
+    width:99%;
+}
+.header{
+    width: 99%;
+    height: 88px;
+    background:white;
+    box-shadow: 0px 12px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content:space-around;
+    align-items:center;
+    
+}
+
+.school_logo{
+    width:110px;
+    height:auto;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+}
+.school_logo img{
+    Width:50px;
+    Height:50px;
+    Top:42px;
+    Left:120px;
+}
+.school_link{
+    width:400px;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+}
+.school_link a{
+    /*Font-family:poppins; */
+    font-Weight:400;
+    font-size: 16px;
+    Line-height:27px;
+    color:#179D95;
+    cursor:pointer;
+}
+.school_link2 img{
+    Width:30.64px;
+    Height:30.63px;
+}
+
+.section1{
+    width:48%
+}
+.school_slonga{
+    Width:100%;
+    Height:auto;
+    text-align:justify;
+    font-Weight:400;    
+    font-Size:22px;
+    Line-height:33px;
+}
+.section1 h2{
+    margin-top:20px;
+    color:#179D95;
+}
+.section2{
+    width:40%;
+    margin-top:60px;
+    display:flex;
+    justify-content:space-between;
+    
+}
+.school_name{
+    background:#179D95;
+    Width:100%;
+    Height:304px;
+    font-size:60px;
+    font-Weight: 700;
+    Line-height:70px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-top-left-radius:20px;
+    border-top-right-radius:50px;
+    border-bottom-left-radius:90px;
+    border-bottom-right-radius:90px;
+}
+body > div.container > section > div > p{
+    margin-top:20px;
+}
+.section2 img{
+    Width:180px;
+    Height:200px;
+    Top:192px;
+    Left:786px;
+    border-Radius:20px;
+    Border: 2px solid black;
+    margin-bottom:60px;
+    box-shadow:7px 7px 7px;
+}
+.image_display{
+    margin-top:60px;
+}
+/*SMALL SCREEN DESIGN */
+@media only screen and (max-width:1000px){
+    .container{
+        display:flex;
+        flex-direction:center;
+        justify-content:space-around;
+    }
+    .section1, .section2{
+        width:95%;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+    }
+    .school_name, .school_slonga{
+        width:100%;
+    }
+}
+
+/* NEWS FIELD */
+.school_news{
+    margin:20px auto;
+    position:relative;
+    width:95%;
+    display:flex;
+    flex-direction:column;
+}
+.school_news_container{
+    justify-content:space-around;
+    margin-bottom:15px;
+    box-shadow: 0px 12px 12px rgba(0, 0, 0, 0.1);
+}
+
+
+.news_content{
+    font-size: 22px;
+    font-weight:400;
+    line-height:33px;
+    padding:10px;
+}
+.news_image{
+    height:200px;
+    width:300px;
+    border: 2px solid black;
+    float:left;
+    margin-right:10px;
+}
+/*FOOTER*/
+.school_footer{
+    margin-top:20px;
+    position:relative;
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    background:#179D95;
+    
+}
+.school_footer div{
+    display:flex;
+    justify-content:space-around;
+    flex-wrap:wrap;
+}
+.footer-image, .footer_about{
+    width:40%;;
+    height:40%;
+}
+@media only screen and (max-width:1000px){
+    .footer-image, .footer_about{
+        width:90%;;
+        height:90%;
+    }
+
+}
+.footer-image{
+    height:400px;
+    width:500px;
+    border: 2px solid black;
+    border-radius:20px;
+}
+.footer_about{
+    font-size: 22px;
+    font-weight:400;
+    line-height:33px;
+    color:white;
+    text-align:justify;
+}
