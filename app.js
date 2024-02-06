@@ -71,6 +71,9 @@ app.get('/admin', (req, res) => {
 app.get('/primary', (req, res) => {
     res.render('primary')
 })
+app.get('/myschool', (req, res)=>{
+    res.render('myschool')
+})
 //saving primary data to databse 
 app.post('/primary', (req, res) => {
     const Blog = new PBlog(req.body);
