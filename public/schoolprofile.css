@@ -80,7 +80,7 @@
     background:#179D95;
     Width:100%;
     Height:304px;
-    font-size:60px;
+    font-size:50px;
     font-Weight: 700;
     Line-height:70px;
     display:flex;
@@ -120,6 +120,7 @@ body > div.container > section > div > p{
         flex-direction:column;
         justify-content:center;
         align-items:center;
+        font-size: 18px;
     }
     .school_name, .school_slonga{
         width:100%;
@@ -178,6 +179,7 @@ body > div.container > section > div > p{
     .footer-image, .footer_about{
         width:90%;;
         height:90%;
+        font-size: 18px;
     }
 
 }
