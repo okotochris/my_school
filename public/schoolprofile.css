@@ -124,6 +124,7 @@ body > div.container > section > div > p{
     }
     .school_name, .school_slonga{
         width:100%;
+        text-align:left;
     }
 }
 
@@ -179,7 +180,17 @@ body > div.container > section > div > p{
     .footer-image, .footer_about{
         width:90%;;
         height:90%;
-        font-size: 18px;
+        
+    }
+    .footer_about p{
+        font-size:18px;
+        text-align:left;
+    }
+    .footer-image{
+        height:400px;
+        width:100%;
+        border: 2px solid black;
+        border-radius:20px;
     }
 
 }
