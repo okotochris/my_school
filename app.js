@@ -74,6 +74,9 @@ app.get('/primary', (req, res) => {
 app.get('/myschool', (req, res)=>{
     res.render('myschool')
 })
+app.get("/admin_form", (req, res) => {
+    res.render("admin_form")
+})
 //saving primary data to databse 
 app.post('/primary', (req, res) => {
     const Blog = new PBlog(req.body);
@@ -86,9 +89,7 @@ app.post('/primary', (req, res) => {
         })
 })
 
-app.get("/admin_form", (req, res) => {
-    res.render("admin_form")
-})
+
 //saving admin login
 app.post('/admin_form', (req, res) => {
     const Ablog = new ABlog(req.body)
@@ -149,6 +150,7 @@ app.post('/upload', (req, res) => {
 
 })
 
+//posting student result
 app.post("/details", (req, res) => {
 
     let clas = req.body.class;
@@ -156,6 +158,7 @@ app.post("/details", (req, res) => {
     let id = req.body.studentId;
     let name = req.body.userName;
 
+    //checking if the search is for junior scondary school
     if (clas == "JSS1" || clas == "JSS2" || clas == "JSS3") {
         Blog.findOne({ class: clas, term: term, studentId: id })
 
@@ -171,6 +174,7 @@ app.post("/details", (req, res) => {
             })
             .catch(err => { res.send(err) })
     }
+    //checking if the result is senior secondary school
     else if (clas == "SS1" || clas == "SS2" || clas == "SS3") {
         SBlog.findOne({ class: clas, term: term, studentId: id })
 
@@ -179,7 +183,7 @@ app.post("/details", (req, res) => {
                     res.render('error', { name: name })
                 }
                 else {
-                    //const blog = result[0].toObject();
+                   
                     res.render('detail', { blog: result })
                     console.log("data sent to frontend")
                 }
@@ -201,5 +205,25 @@ app.post("/details", (req, res) => {
                 }
             })
             .catch(err => { console.log(err) })
+    }
+})
+
+//searching for student id
+
+app.get('/userInfo', async (req, res)=>{
+    try{
+        let userName = req.query.userName
+        const userInfo = await Blog.findOne({userName})
+        if(userInfo){
+            res.json(userInfo)
+        }
+       
+        else{
+            res.json(`${userName} not found generate new id`)
+        }
+    }
+    catch (err){
+        console.log(err)
+        res.json('unable to retrieve data')
     }
 })

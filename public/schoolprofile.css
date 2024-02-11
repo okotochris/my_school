@@ -135,17 +135,20 @@ body > div.container > section > div > p{
         justify-content:space-around;
     }
     .section1, .section2{
-        width:99%;
+        width:95%;
         display:flex;
         flex-direction:column;
         justify-content:center;
         align-items:center;
-        font-size: 18px;
+        font-size: 14px;
     }
     
     .school_name, .school_slonga{
         width:100%;
         text-align:left;
+    }
+    .school_slonga{
+        font-size:15px;
     }
     .section2 img{
         Width:160px;
@@ -166,6 +169,9 @@ body > div.container > section > div > p{
     width:95%;
     display:flex;
     flex-direction:column;
+}
+.school_news h4{
+    color:#179D95;
 }
 .school_news_container{
     justify-content:space-around;
@@ -233,7 +239,9 @@ body > div.container > section > div > p{
         height:200px;
         width:100%;
     }
-
+    .news_content{
+        font-size: 14px;
+    }
 }
 
 .footer_about{
