@@ -170,7 +170,7 @@ body > div.container > section > div > p{
     display:flex;
     flex-direction:column;
 }
-.school_news h4{
+.school_news h{
     color:#179D95;
 }
 .school_news_container{
@@ -226,11 +226,11 @@ body > div.container > section > div > p{
         
     }
     .footer_about p{
-        font-size:16px;
+        font-size:18px;
        
     }
     .footer-image{
-       
+       text-align:left;
         border: 2px solid black;
         border-radius:20px;
         overflow:hidden;
@@ -240,7 +240,7 @@ body > div.container > section > div > p{
         width:100%;
     }
     .news_content{
-        font-size: 14px;
+        font-size: 18px;
     }
 }
 
@@ -249,5 +249,4 @@ body > div.container > section > div > p{
     font-weight:400;
     line-height:33px;
     color:white;
-    text-align:justify;
 }
