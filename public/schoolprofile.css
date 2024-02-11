@@ -140,7 +140,6 @@ body > div.container > section > div > p{
         flex-direction:column;
         justify-content:center;
         align-items:center;
-        font-size: 14px;
     }
     
     .school_name, .school_slonga{
@@ -148,7 +147,7 @@ body > div.container > section > div > p{
         text-align:left;
     }
     .school_slonga{
-        font-size:15px;
+        font-size:18px;
     }
     .section2 img{
         Width:160px;
@@ -170,7 +169,7 @@ body > div.container > section > div > p{
     display:flex;
     flex-direction:column;
 }
-.school_news h{
+.school_news h3{
     color:#179D95;
 }
 .school_news_container{
@@ -241,6 +240,13 @@ body > div.container > section > div > p{
     }
     .news_content{
         font-size: 18px;
+    }
+    .news_image{
+        height:220px;
+        width:98%;
+        border: 2px solid black;
+        float:left;
+        margin-right:10px;
     }
 }
 
