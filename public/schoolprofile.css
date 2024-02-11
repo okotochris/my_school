@@ -123,11 +123,14 @@ body > div.container > section > div > p{
     .droup_down_manu{
         display:flex;
         flex-direction:column;
-        width:100%;
+        width:98%;
         height:300px;
-        background:blue;
         justify-content:space-around;
-        font-size:24px;
+        font-size:16px;
+        padding:10px;
+    }
+    .droup_down_manu p{
+        margin-top:9px; 
     }
     .container{
         display:flex;
