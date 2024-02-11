@@ -76,6 +76,7 @@
     justify-content:space-between;
     
 }
+/*SCHOOL NAME DISPLAY */
 .school_name{
     background:#179D95;
     Width:100%;
@@ -86,10 +87,8 @@
     display:flex;
     justify-content:center;
     align-items:center;
-    border-top-left-radius:20px;
-    border-top-right-radius:50px;
-    border-bottom-left-radius:90px;
-    border-bottom-right-radius:90px;
+    text-align:center;
+  
 }
 body > div.container > section > div > p{
     margin-top:20px;
@@ -99,7 +98,7 @@ body > div.container > section > div > p{
     Height:200px;
     Top:192px;
     Left:786px;
-    border-Radius:20px;
+    border-Radius:10px;
     Border: 2px solid black;
     margin-bottom:60px;
     box-shadow:7px 7px 7px;
@@ -136,13 +135,14 @@ body > div.container > section > div > p{
         justify-content:space-around;
     }
     .section1, .section2{
-        width:95%;
+        width:99%;
         display:flex;
         flex-direction:column;
         justify-content:center;
         align-items:center;
         font-size: 18px;
     }
+    
     .school_name, .school_slonga{
         width:100%;
         text-align:left;
@@ -152,6 +152,11 @@ body > div.container > section > div > p{
         Height:100px;
         margin:0px;
     }
+    .image_display{
+        margin-top:10px;
+    }
+    
+   
 }
 
 /* NEWS FIELD */
