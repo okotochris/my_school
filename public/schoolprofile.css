@@ -1,3 +1,4 @@
+
 .container{
    
     display:flex;
@@ -110,6 +111,8 @@ body > div.container > section > div > p{
 /*DROP DOWN MENU*/
 .droup_down_manu{
     display:none;
+   
+    
     
 }
 /*SMALL SCREEN DESIGN */
@@ -120,10 +123,26 @@ body > div.container > section > div > p{
        justify-content:space-between;
     }
      /*DROPDOWN MANU*/
-    .droup_down_manu{
+     #menu{
+        height:35px;
+        width:40px;
+        background:#179D95;;
+        position:absolute;
+        right:10px;
+        top:59;
         display:flex;
+        justify-content:space-around;
+        align-items:center;
         flex-direction:column;
-        width:98%;
+     }
+     #menu div{
+        height:5px;
+        width:35px;
+        background:white;
+       
+     }
+    .droup_down_manu{
+        flex-direction:column;
         height:300px;
         justify-content:space-around;
         font-size:16px;
@@ -146,7 +165,7 @@ body > div.container > section > div > p{
     }
     
     .school_name, .school_slonga{
-        width:100%;
+        width:98%;
         text-align:left;
     }
     .school_slonga{
@@ -215,6 +234,12 @@ body > div.container > section > div > p{
     width:40%;;
     height:40%;
 }
+.footer_about{
+    font-size: 22px;
+    font-weight:400;
+    line-height:33px;
+    color:white;
+}
 .footer-image img{
     height:350px;
     width:100%;
@@ -225,10 +250,13 @@ body > div.container > section > div > p{
     .footer-image, .footer_about{
         width:90%;;
         height:auto;
+        text-align:justify;
+       
         
     }
     .footer_about p{
         font-size:18px;
+   
        
     }
     .footer-image{
@@ -246,16 +274,11 @@ body > div.container > section > div > p{
     }
     .news_image{
         height:220px;
-        width:98%;
+        width:90%;
         border: 2px solid black;
         float:left;
         margin-right:10px;
     }
 }
 
-.footer_about{
-    font-size: 22px;
-    font-weight:400;
-    line-height:33px;
-    color:white;
-}
+
