@@ -157,7 +157,7 @@ body > div.container > section > div > p{
         justify-content:space-around;
     }
     .section1, .section2{
-        width:95%;
+        width:98%;
         display:flex;
         flex-direction:column;
         justify-content:center;
@@ -187,7 +187,7 @@ body > div.container > section > div > p{
 .school_news{
     margin:20px auto;
     position:relative;
-    width:95%;
+    width:98%;
     display:flex;
     flex-direction:column;
 }
@@ -274,7 +274,7 @@ body > div.container > section > div > p{
     }
     .news_image{
         height:220px;
-        width:90%;
+        width:98%;
         border: 2px solid black;
         float:left;
         margin-right:10px;
