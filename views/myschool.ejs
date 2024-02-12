@@ -7,9 +7,13 @@
         <div class="top_line">
 
         </div>
+        
         <div class="header">
+           
             <span>
+                
                 <span class="school_logo">
+                    
                     <img src="school_logo.png" type="image/png"/>
                     <span>
                         WHS
@@ -31,6 +35,11 @@
                
         </div>
      <!--DROP DOWN MANU-->
+     <div id="menu">
+        <div></div>
+        <div></div>
+        <div></div>
+     </div>
      <span class="droup_down_manu">
         <p>Quick Links</p>
         <hr/>
@@ -42,10 +51,7 @@
         <hr/>
         <a href="/">CHECK RESULT</a>
         <hr/>
-        <div class="school_link2">
-            <a><img src='whatsapp.png' type="image/png"/></a>
-        
-        </div>
+       
     </span>
 
     <div class="container">
@@ -130,5 +136,26 @@
         </div>
         <p style="color:white; text-align:center; margin-top:50px;">website built by Cristal tech || &copy; My School Simplify all right reserved </p>
    </footer>
+   <script>
+     let menu = document.getElementById('menu')
+     let droup_down = document.querySelector('.droup_down_manu')
+     console.log('hello')
+        
+      
+        droup_down.style.display = 'none'
+        menu.onclick =()=>{
+            if( droup_down.style.display == 'none'){
+                droup_down.style.display='flex';
+               
+            } 
+            else{
+                droup_down.style.display = 'none'
+                console.log( droup_down.style.display)
+               
+            }
+     }
+     
+   </script>
 </body>
+
 </html>
