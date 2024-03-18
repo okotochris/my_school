@@ -5,6 +5,8 @@ const Blog = require('./data')
 const SBlog = require('./datas')
 const ABlog = require('./admin.js')
 const PBlog = require('./primary.js')
+const bodyParser = require('body-parser');
+
 
 
 const app = express();
@@ -20,6 +22,7 @@ app.use(express.static('public', {
 }));
 
 app.use(express.urlencoded({ extended: true }))
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //connecting to dateabase
 const dbURI = 'mongodb+srv://data:L6EwGXzqyzLHNFxn@school.vvirl2y.mongodb.net/school?retryWrites=true&w=majority'
@@ -219,11 +222,22 @@ app.get('/userInfo', async (req, res)=>{
         }
        
         else{
-            res.json(`${userName} not found generate new id`)
+            res.json({message: `${userName} is not regiser yet`})
         }
     }
     catch (err){
         console.log(err)
         res.json('unable to retrieve data')
     }
+})
+
+// post request from school updating news field 
+app.post("/myschool", (req, res)=>{
+    console.log(req.body)
+    res.redirect('index')
+    console.log('checking')
+
+})
+app.use((req, res)=>{
+    res.status(404).render('page_not_found')
 })

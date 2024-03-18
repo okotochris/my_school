@@ -79,7 +79,7 @@
 }
 /*SCHOOL NAME DISPLAY */
 .school_name{
-    background:url('IMAGE/image1.jfif');
+    background:url('../IMAGE/image1.jfif');
     Width:100%;
     Height:304px;
     font-size:50px;
@@ -103,14 +103,13 @@
 body > div.container > section > div > p{
     margin-top:20px;
 }
-.section2 img{
-    Width:200px;
+.section2 div img{
+    Width:220px;
     Height:200px;
     Top:192px;
     Left:786px;
-    border-Radius:10px;
-    Border: 2px solid black;
-    margin-bottom:60px;
+    border-top-left-Radius:20px;
+    margin-bottom:50px;
     box-shadow:7px 7px 7px;
 }
 .image_display{
@@ -121,9 +120,31 @@ body > div.container > section > div > p{
 .droup_down_manu{
     display:none;
    
-    
-    
 }
+.uploadform{
+    border:solid 2px black; 
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    width:340px;
+    margin:0px auto;
+    margin-bottom:10px;
+    display:none;
+}
+.uploadform input{
+    width:99%;
+    height:50px;
+    padding:5px;
+    margin:2px;
+    font-size:14px;
+}
+.uploadform textarea{
+    width:335px;
+    height:200px;
+    font-size:20px;
+}
+
 /*SMALL SCREEN DESIGN */
 @media only screen and (max-width:1000px){
     /*REMOVING HEADER IN SMALL SCREEN */
@@ -162,15 +183,19 @@ body > div.container > section > div > p{
     }
     .container{
         display:flex;
+        flex-direction:column;
         flex-direction:center;
-        justify-content:space-around;
+        justify-content:space-between;
+        align-items:center;
     }
     .section1, .section2{
-        width:98%;
+        height:auto;
+        width:96%;
         display:flex;
         flex-direction:column;
-        justify-content:center;
+        justify-content:space-between;
         align-items:center;
+       
     }
     
     .school_name, .school_slonga{
@@ -180,17 +205,21 @@ body > div.container > section > div > p{
     .school_slonga{
         font-size:18px;
     }
-    .section2 img{
-        Width:160px;
-        Height:100px;
-        margin:0px;
+    .section2 div img{
+        height:35%;
+        width:46%;
+        margin:0px 4px;
     }
+     
     .image_display{
         margin-top:10px;
     }
     .school_name div{
         font-size:35px;
         text-align:center;
+        line-height:45px;
+     
+      
     }
    
 }
@@ -202,6 +231,9 @@ body > div.container > section > div > p{
     width:98%;
     display:flex;
     flex-direction:column;
+    border-top:solid 1px #179D95;
+    margin-top:30px;
+    box-shadow: 0px -12px 12px rgba(0, 0, 0, 0.1);
 }
 .school_news h3{
     color:#179D95;
@@ -260,11 +292,9 @@ body > div.container > section > div > p{
 }
 @media only screen and (max-width:1000px){
     .footer-image, .footer_about{
-        width:90%;;
+        width:90%;
         height:auto;
-        text-align:justify;
-       
-        
+             
     }
     .footer_about p{
         font-size:18px;
@@ -278,19 +308,85 @@ body > div.container > section > div > p{
         overflow:hidden;
     }
     .footer-image img{
-        height:200px;
+        height:100%;
         width:100%;
     }
     .news_content{
         font-size: 18px;
     }
     .news_image{
-        height:220px;
+        height:50%;
         width:98%;
+        display:block;
         border: 2px solid black;
-        float:left;
+        float:none;
         margin-right:10px;
     }
+    @media only screen and (max-width:450px){
+       
+    }
+}
+.contact{
+    flex-direction:column; 
+    margin:10px 0px;
+}
+.contact p{
+    display:flex;
+    align-items:center;
+    margin:10px;
+    font-size:1.2em
+}
+.contact img{
+    padding-left:5px;
+    height:30px;
+    width:30px;
 }
 
-
+label img{
+    height:30px;
+    width:30px;
+   
+}
+.upload-fieldImage{
+    position:absolute;
+    right:100px;
+}
+.upload-field{
+    display:none;
+}
+.galary button{
+    width:auto;
+    height:50px;
+    background:transparent;
+    border: solid 2px black;
+    color:black;
+    padding:10px;
+    position:absolute;
+    right:160px;
+    font-family:bodoni;
+    }
+.galary button:hover{
+    background:#179D95;
+}
+.space{
+    height:100px;
+}
+.news_header{
+    margin:10px auto;
+}
+.upload{
+    width:150px; 
+    background:#179D95;
+}
+.news_title{
+    color:white;
+    background:purple;
+    height:70px;
+    width:130px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+    left:4;
+    font-family:roboto;
+}

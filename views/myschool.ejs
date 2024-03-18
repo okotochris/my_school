@@ -35,11 +35,11 @@
                
         </div>
      <!--DROP DOWN MANU-->
-     <div id="menu">
-        <div></div>
-        <div></div>
-        <div></div>
-     </div>
+        <div id="menu">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
      <span class="droup_down_manu">
         <p>Quick Links</p>
         <hr/>
@@ -56,7 +56,9 @@
 
     <div class="container">
         <section class="section1">
-            <h2>Welcome...!</h2>
+            <h2>Welcome to...!</h2>
+        
+
             <div class="school_name">
                 <div>
                     <p>
@@ -65,6 +67,15 @@
                 </div>
                 
             </div>
+              <!--uploading profile image-->
+              <label class="profileImage" for="profileImage"><img src="./image/more_image.png" alt="upload image"/></label>
+              <div class="gallary">
+                  <div class="upload-field">
+                      <form action="" method="post">
+                          <input type="file" id="profileImage" name="profileImage" /> 
+                      </form>
+                  </div>
+              </div>
             <div class="school_slonga">
                 <p>
                     Wisdom High International School is a beacon of educational excellence, 
@@ -77,6 +88,7 @@
                      enhance academic and extracurricular pursuits. 
                     
                 </p>
+                
             </div>
         </section>
         <section class="section2">
@@ -88,35 +100,62 @@
                     <img src="IMAGE/OIP.jfif" type="image/png" />
                     <img src="IMAGE/school lab.jpg" type="image/png" />
                 </div>
+
+                <!--Updating gallary-->
+                <div class="gallary">
+                    <div class="upload-field">
+                        <form action="" method="post">
+                            <input type="file" id="moreImage" name="moreImage" /> 
+                        </form>
+                    </div>
+                </div>
         </section>
-       
+        
     </div>
+    <!--gallary image upload icon-->
+    <label for="moreImage"><img src="./image/more_image.png" class="upload-fieldImage" alt="upload image"/></label>
+    <div class="galary"><button>View Gallary</button></div>
+    <div class="space"></div>
+    
     <div class="school_news">
-        <div style="margin:10px 0px;" id="news"><h2>NEWS </h2></div>
+        <div class="news_header"id="news"><h2> <button class="upload">Upload News</button> </h2></div>
+        <div class="uploadform">
+            <form action="myschool" method="post">
+                <p><input type="text" placeholder="Title" required name="title"/></p>
+                <p><textarea placeholder="content" name="content"></textarea></p>
+                <p><input type="file" id="image" name="image"> </p>
+                <p><button>Upload</button></p>
+            </form>
+        </div>
+        
         <div class="school_news_container">
-                <img src="IMAGE/addmission2.jfif" type="image/png" class="news_image"/>
+            <div class="news_title"><p>Shool Update</p></div>
+            
                 <div class="news_content">
-                    <h3>ADMISSION</h3>
+                    <img src="IMAGE/addmission2.jfif" type="image/png" class="news_image"/>
+                    <h3>ADMISSION 2022/2023</h3>
                     <p>
                         Admissions are now open for the upcoming academic year, offering a 
                         chance for eager learners to join the community. Aspiring students can 
                         find detailed admission procedures, requirements, and important dates by 
                         contacting the admissions office directly. Admissions are open for the 
                         following classes:
+                       <P><b>SS1 SS2 SS3</b></p>
                     </p>
                 </div>
         </div>
         <div class="school_news_container">
-            <img src="IMAGE/addmission.jfif" type="image/jfif" class="news_image"/>
             <div class="news_content">
-                <h3>ADMISSION</h3>
+                <img src="IMAGE/addmission.jfif" type="image/jfif" class="news_image"/>
+                <h3>NEATNESS AND PUNCTUALITY</h3>
                 <p>
-                    Admissions are now open for the upcoming academic year, offering a 
-                    chance for eager learners to join the community. Aspiring students can 
-                    find detailed admission procedures, requirements, and important dates by 
-                    contacting the admissions office directly. Admissions are open for the 
-                    following classes:
+                    Neatness and punctuality are crucial values, and our school maintains a strict policy against 
+                    tardiness. We prioritize being tidy and arriving promptly to class. Our institution does not 
+                    tolerate late arrivals, as it disrupts the learning environment and sets a negative precedent. 
+                    Therefore, it is imperative for all students to adhere to the standards of cleanliness and 
+                    punctuality, ensuring a conducive atmosphere for academic growth.
                 </p>
+               
             </div>
     </div>
     </div>
@@ -129,12 +168,19 @@
             <div class="footer_about">
                 <p>
                     Wisdom High International School is a beacon of educational excellence, 
-                    fostering a global perspective in its students. With a commitment to holistic 
+                    fostering a global perspective in its students.<br/> With a commitment to holistic 
                     development, the school provides a dynamic learning environment, integrating 
-                    innovation and tradition. Dedicated educators employ modern teaching methodologies, 
+                    innovation and tradition. <br/>Dedicated educators employ modern teaching methodologies, 
                     nurturing students to become well-rounded individuals. State-of-the-art facilities
                      and a diverse curriculum enhance academic and extracurricular pursuits.
                 </p>
+                
+            </div>
+            <div class="contact">
+               
+                <p><img src="IMAGE/location.png" type="image/png"/>Address: No14, Aburimen Street Off Obazee Road, Benin City, Edo State</p>
+                <p><img src="IMAGE/call.png" type="image/png" alt="call"/> 07068291163</p>
+                <P></P>
             </div>
         </div>
         <p style="color:white; text-align:center; margin-top:50px;">website built by Cristal tech || &copy; My School Simplify all right reserved </p>
@@ -153,11 +199,24 @@
             } 
             else{
                 droup_down.style.display = 'none'
-                console.log( droup_down.style.display)
                
             }
      }
-     
+     let uploadform = document.querySelector('.uploadform')
+     let upload = document.querySelector('.upload')
+     let x = 1;
+     upload.onclick=()=>{
+        if(x == 1){
+            uploadform.style.display = "block"
+            upload.innerText = "Close Form"
+            x = 2
+        }
+        else{
+            uploadform.style.display = "none"
+            upload.innerText = "Upload News"
+            x = 1
+        }
+    }
    </script>
 </body>
 
