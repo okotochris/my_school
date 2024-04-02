@@ -20,11 +20,11 @@
 
         <section id="contact">
           <h2>Contact Us</h2>
-          <form>
+          <form method="post" action="/contact">
               <input type="text" id="userName" name="name"  placeholder="Name" required/><br/>
               <input type="text" id="school" name="school"  placeholder="School" required/><br/>
-              <input type="text" id="address" name="address"  placeholder="address" required/><br/>
-              <input type="number" id="number" name="nmber"  placeholder="Phone number" required/><br/>
+              <input type="email" id="email" name="email"  placeholder="email" required/><br/>
+              <input type="number" id="number" name="number"  placeholder="Phone number" required/><br/>
               <textarea id="message" name="message"  placeholder="Enter your message" ></textarea><br/>
               <button>Submit</button><br/>
           </form>

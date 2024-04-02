@@ -6,6 +6,7 @@ const SBlog = require('./datas')
 const ABlog = require('./admin.js')
 const PBlog = require('./primary.js')
 const bodyParser = require('body-parser');
+const nodemailer = require('nodemailer')
 
 
 
@@ -60,8 +61,10 @@ app.listen(PORT, (err) => {
 });
 
 //setting view engine
-
 app.set('view engine', 'ejs');
+
+
+
 
 
 //defining our route
@@ -98,7 +101,7 @@ app.post('/admin_form', (req, res) => {
     const Ablog = new ABlog(req.body)
     Ablog.save()
         .then(result => {
-            console.log(result)
+            console.log(sent)
         })
         .catch(err => {
             console.log(err)
@@ -172,7 +175,6 @@ app.post("/details", (req, res) => {
                 else {
                     //const blog = result[0].toObject();
                     res.render('details', { blog: result })
-                    console.log(result)
                 }
             })
             .catch(err => { res.send(err) })
@@ -197,7 +199,6 @@ app.post("/details", (req, res) => {
         PBlog.findOne({ class: clas, term: term, studentId: id })
        
             .then(result => {
-                console.log(`${clas} ${term} ${id}`)
                 if (result == null) {
                     res.render('error', { name: name })
                 }
@@ -235,9 +236,40 @@ app.get('/userInfo', async (req, res)=>{
 app.post("/myschool", (req, res)=>{
     console.log(req.body)
     res.redirect('index')
-    console.log('checking')
+})
+
+// configuring nodemailer
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth:{
+        user:"okotoazachristain@gmail.com",
+        pass: "bsnk bhyp bebw hwbt"
+    }
 
 })
+//contact us form API
+app.post('/contact', (req, res) => {
+    const { name, school, email, number, message } = req.body;
+    const mailOptions = {
+        from: email,
+        to: 'okotoazachristain@gmail.com',
+        subject: 'MY SCHOOL RESULT HELP',
+        text: `from \n Name: ${name} \n School: ${school} \n Number: ${number}  \n ${message}`,
+        phone_number: number
+    };
+
+    transporter.sendMail(mailOptions, (err, info) => {
+        if (err) {
+            console.log(err);
+            // Handle error, maybe send an error response to the client
+        } else {
+            console.log('Mail sent');
+            // Redirect the client to the index page after sending the email
+            res.status(200).redirect('/');
+        }
+    });
+});
+
 app.use((req, res)=>{
     res.status(404).render('page_not_found')
 })
