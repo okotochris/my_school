@@ -254,7 +254,7 @@ app.post('/contact', (req, res) => {
         from: email,
         to: 'okotoazachristain@gmail.com',
         subject: 'MY SCHOOL RESULT HELP',
-        text: `from \n Name: ${name} \n School: ${school} \n Number: ${number}  \n ${message}`,
+        text: `from\n Email: ${email} \n Name: ${name} \n School: ${school} \n Number: ${number}  \n ${message}`,
         phone_number: number
     };
 
