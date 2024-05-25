@@ -1,11 +1,37 @@
+
 * {
   margin: 0;
   padding: 0;
   text-decoration: none;
 }
+/* Base styles */
+/* Base styles */
+.t_container {
+  width: 700px; /* Set a maximum width for laptop view */
+  margin: auto;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.t_container {
+  border: solid 1px black;
+  position: relative;
+  background: black;
+  box-sizing: border-box; /* Ensure padding does not increase element width */
+}
+
+/* Additional styles for phone view */
+@media only screen and (max-width: 1000px) { /* Adjust the breakpoint as needed */
+  .t_container {
+    width: 98%; /* Make it full width on phones */
+  }
+}
+
 
 table {
   margin-bottom: 20px;
+}
+body{
+  width:100%
 }
 table, th, td {
   border: solid 1px black;
@@ -13,20 +39,6 @@ table, th, td {
   padding: 5px;
 }
 
-/* Base styles */
-.t_container {
-  max-width: 700px; /* Set a maximum width for laptop view */
-  margin: auto;
-  padding: 10px;
-  box-sizing: border-box;
-}
-
-/* Additional styles for phone view */
-@media (max-width: 767px) { /* Adjust the breakpoint as needed */
-  .t_container {
-    width: 100%; /* Make it full width on phones */
-  }
-}
 
 
 .top_info {
@@ -38,15 +50,6 @@ table, th, td {
   border: solid 2px black;
   flex-wrap: nowrap; /* Prevent wrapping */
   white-space: nowrap; /* Prevent text from wrapping */
-}
-
-
-.t_container {
-  border: solid 1px black;
-  width: 100%; /* Set to 100% width to avoid overflow */
-  position: relative;
-  background: black;
-  box-sizing: border-box; /* Ensure padding does not increase element width */
 }
 
 .style {

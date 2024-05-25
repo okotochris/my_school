@@ -1,463 +1,448 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
- 
-
- <link rel="stylesheet" type="text/css" href="style/result_download.css" /> 
-
+  <link rel="stylesheet" type="text/css" href="style/result_download.css" /> 
 </head>
 
 <body>
- 
-  </script>
-
-  <header>
-    <nav>
-      <ul>
-        <li><a href="./">Home</a></li>
-        <li><a href="./admin">Admin</a></li>
-
-      </ul>
-    </nav>
-  </header>
   <!-- details.ejs -->
   <div style="height:20px;"></div>
   <div class="t_container" id="resultContainer">
-    <div class="style">
-      <div class="school_details">
-        <h1>
-          <%= blog.schoolName.toUpperCase()%>
-        </h1>
-        <p>
-          <%= blog.schoolAdd.toUpperCase() %>
-        </p>
-        <p style="color:red">JUNIOR SECONDARY SCHOOL</p>
-        <p>
-          <spad>Tel:07068291163 </spad><span>Email: okoto.chris.oc@gmail.com</span>
-        </p>
-      </div>
-      <div class="reportSheet">
-        <div>
-          <h3>STUDENT'S ACADEMIC REPORT/SHEET</h3>
+      <div class="style">
+        <div class="school_details">
+          <h1>
+            <%= blog.schoolName.toUpperCase()%>
+          </h1>
+          <p>
+            <%= blog.schoolAdd.toUpperCase() %>
+          </p>
+          <p style="color:red">JUNIOR SECONDARY SCHOOL</p>
+          <p>
+            <spad>Tel:07068291163 </spad><span>Email: okoto.chris.oc@gmail.com</span>
+          </p>
         </div>
-      </div>
-
-      <br />
-      <div class="top_info">
-        <div>
-          <p>Name: <b><%= blog.userName.toUpperCase() %></b> </p>
-          <p>Class: <%= blog.class%></p>
-          <p>Term: <%= blog.term %></p>
-        </div>
-        <div>
-          <p>Time Present:...... </p>
-          <p>Total days absent:..... </p>
-          <p>Student in class:..... </p>
-        </div>
-        <div>
-          <p>GPA:.....</p>
-          <p>School Opened:......</p>
-          <p>Next term begins: </p>
-        </div>
-      </div>
-      <div class="table_design">
-        <div class="table">
-          <table>
-            <tr>
-              <th>Subject</th>
-              <th>1st Test [20%]</th>
-              <th>2nd Test [20%]</th>
-              <th>Exam [60%]</th>
-              <th>Total [100%]</th>
-              <th>Grade.....</th>
-            </tr>
-            <tr>
-              <td>
-                <%= blog.eng %>
-              </td>
-              <td>
-                <%= blog.eng1st %>
-              </td>
-              <td>
-                <%= blog.eng2nd %>
-              </td>
-              <td>
-                <%= blog.engexam %>
-              </td>
-              <td>
-                <%= blog.engscore %>
-              </td>
-              <td>
-                <%= blog.engG %>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <%= blog.mth %>
-              </td>
-              <td>
-                <%= blog.mth1st %>
-              </td>
-              <td>
-                <%= blog.mth2nd %>
-              </td>
-              <td>
-                <%= blog.mthexam %>
-              </td>
-              <td>
-                <%= blog.mthscore %>
-              </td>
-              <td>
-                <%= blog.mthG %>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <%= blog.rnv %>
-              </td>
-              <td>
-                <%= blog.rnv1st %>
-              </td>
-              <td>
-                <%= blog.rnv2nd %>
-              </td>
-              <td>
-                <%= blog.rnvexam %>
-              </td>
-              <td>
-                <%= blog.rnvscore %>
-              </td>
-              <td>
-                <%= blog.rnvG %>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <%= blog.bst %>
-              </td>
-              <td>
-                <%= blog.bst1st %>
-              </td>
-              <td>
-                <%= blog.bst2nd %>
-              </td>
-              <td>
-                <%= blog.bstexam %>
-              </td>
-              <td>
-                <%= blog.bstscore %>
-              </td>
-              <td>
-                <%= blog.bstG %>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <%= blog.pvs %>
-              </td>
-              <td>
-                <%= blog.pvs1st %>
-              </td>
-              <td>
-                <%= blog.pvs2nd %>
-              </td>
-              <td>
-                <%= blog.pvsexam %>
-              </td>
-              <td>
-                <%= blog.pvsscore %>
-              </td>
-              <td>
-                <%= blog.pvsG %>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <%= blog.qur %>
-              </td>
-              <td>
-                <%= blog.qur1st %>
-              </td>
-              <td>
-                <%= blog.qur2nd %>
-              </td>
-              <td>
-                <%= blog.qurexam %>
-              </td>
-              <td>
-                <%= blog.qurscore %>
-              </td>
-              <td>
-                <%= blog.qurG %>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <%= blog.ver %>
-              </td>
-              <td>
-                <%= blog.ver1st %>
-              </td>
-              <td>
-                <%= blog.ver2nd %>
-              </td>
-              <td>
-                <%= blog.verexam %>
-              </td>
-              <td>
-                <%= blog.verscore %>
-              </td>
-              <td>
-                <%= blog.verG %>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <%= blog.vst %>
-              </td>
-              <td>
-                <%= blog.vst1st %>
-              </td>
-              <td>
-                <%= blog.vst2nd %>
-              </td>
-              <td>
-                <%= blog.vstexam %>
-              </td>
-              <td>
-                <%= blog.vstscore %>
-              </td>
-              <td>
-                <%= blog.vstG %>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <%= blog.cra %>
-              </td>
-              <td>
-                <%= blog.cra1st %>
-              </td>
-              <td>
-                <%= blog.cra2nd %>
-              </td>
-              <td>
-                <%= blog.craexam %>
-              </td>
-              <td>
-                <%= blog.crascore %>
-              </td>
-              <td>
-                <%= blog.craG %>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <%= blog.spe %>
-              </td>
-              <td>
-                <%= blog.spe1st %>
-              </td>
-              <td>
-                <%= blog.spe2nd %>
-              </td>
-              <td>
-                <%= blog.speexam %>
-              </td>
-              <td><%= blog.spescore %>
-              </td>
-              <td>
-                <%= blog.speG %>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <%= blog.hwr %>
-              </td>
-              <td>
-                <%= blog.hwr1st %>
-              </td>
-              <td>
-                <%= blog.hwr2nd %>
-              </td>
-              <td>
-                <%= blog.hwrexam %>
-              </td>
-              <td><%= blog.hwrscore %>
-              </td>
-              <td>
-                <%= blog.hwrG %>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <%= blog.mus %>
-              </td>
-              <td>
-                <%= blog.mus1st %>
-              </td>
-              <td>
-                <%= blog.mus2nd %>
-              </td>
-              <td>
-                <%= blog.musexam %>
-              </td>
-              <td><%= blog.musscore %>
-              </td>
-              <td>
-                <%= blog.musG %>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <%= blog. red %>
-              </td>
-              <td>
-                <%= blog. red1st %>
-              </td>
-              <td>
-                <%= blog. red2nd %>
-              </td>
-              <td>
-                <%= blog. redexam %>
-              </td>
-              <td><%= blog. redscore %>
-              </td>
-              <td>
-                <%= blog. redG %>
-              </td>
-            </tr>
-          </table>
-        </div>
-        <div class="class_info">
+        <div class="reportSheet">
           <div>
-            <table style="font-size:12px; margin:0px;">
+            <h3>STUDENT'S ACADEMIC REPORT/SHEET</h3>
+          </div>
+        </div>
+
+        <br />
+        <div class="top_info">
+          <div>
+            <p>Name: <b><%= blog.userName.toUpperCase() %></b> </p>
+            <p>Class: <%= blog.class%></p>
+            <p>Term: <%= blog.term %></p>
+          </div>
+          <div>
+            <p>Time Present:...... </p>
+            <p>Total days absent:..... </p>
+            <p>Student in class:..... </p>
+          </div>
+          <div>
+            <p>GPA:.....</p>
+            <p>School Opened:......</p>
+            <p>Next term begins: </p>
+          </div>
+        </div>
+        <div class="table_design">
+          <div class="table">
+            <table>
               <tr>
-                <th>
-                  <h3>Skill & Behavior</h3>
-                </th>
-                <th>5</th>
-                <th>4</th>
-                <th>3</th>
-                <th>2</th>
-                <th>1</th>
+                <th>Subject</th>
+                <th>1st Test [20%]</th>
+                <th>2nd Test [20%]</th>
+                <th>Exam [60%]</th>
+                <th>Total [100%]</th>
+                <th>Grade.....</th>
               </tr>
               <tr>
-                <td>1. Attendance</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>
+                  <%= blog.eng %>
+                </td>
+                <td>
+                  <%= blog.eng1st %>
+                </td>
+                <td>
+                  <%= blog.eng2nd %>
+                </td>
+                <td>
+                  <%= blog.engexam %>
+                </td>
+                <td>
+                  <%= blog.engscore %>
+                </td>
+                <td>
+                  <%= blog.engG %>
+                </td>
               </tr>
               <tr>
-                <td>2. Attentiveness</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>
+                  <%= blog.mth %>
+                </td>
+                <td>
+                  <%= blog.mth1st %>
+                </td>
+                <td>
+                  <%= blog.mth2nd %>
+                </td>
+                <td>
+                  <%= blog.mthexam %>
+                </td>
+                <td>
+                  <%= blog.mthscore %>
+                </td>
+                <td>
+                  <%= blog.mthG %>
+                </td>
               </tr>
               <tr>
-                <td>3. Honesty</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>
+                  <%= blog.rnv %>
+                </td>
+                <td>
+                  <%= blog.rnv1st %>
+                </td>
+                <td>
+                  <%= blog.rnv2nd %>
+                </td>
+                <td>
+                  <%= blog.rnvexam %>
+                </td>
+                <td>
+                  <%= blog.rnvscore %>
+                </td>
+                <td>
+                  <%= blog.rnvG %>
+                </td>
               </tr>
               <tr>
-                <td>4. Initiative</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>
+                  <%= blog.bst %>
+                </td>
+                <td>
+                  <%= blog.bst1st %>
+                </td>
+                <td>
+                  <%= blog.bst2nd %>
+                </td>
+                <td>
+                  <%= blog.bstexam %>
+                </td>
+                <td>
+                  <%= blog.bstscore %>
+                </td>
+                <td>
+                  <%= blog.bstG %>
+                </td>
               </tr>
               <tr>
-                <td>5. Neatness</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>
+                  <%= blog.pvs %>
+                </td>
+                <td>
+                  <%= blog.pvs1st %>
+                </td>
+                <td>
+                  <%= blog.pvs2nd %>
+                </td>
+                <td>
+                  <%= blog.pvsexam %>
+                </td>
+                <td>
+                  <%= blog.pvsscore %>
+                </td>
+                <td>
+                  <%= blog.pvsG %>
+                </td>
               </tr>
               <tr>
-                <td>6. Organization ability</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <tb></tb>
+                <td>
+                  <%= blog.qur %>
+                </td>
+                <td>
+                  <%= blog.qur1st %>
+                </td>
+                <td>
+                  <%= blog.qur2nd %>
+                </td>
+                <td>
+                  <%= blog.qurexam %>
+                </td>
+                <td>
+                  <%= blog.qurscore %>
+                </td>
+                <td>
+                  <%= blog.qurG %>
+                </td>
               </tr>
               <tr>
-                <td>7. Perseverance</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>
+                  <%= blog.ver %>
+                </td>
+                <td>
+                  <%= blog.ver1st %>
+                </td>
+                <td>
+                  <%= blog.ver2nd %>
+                </td>
+                <td>
+                  <%= blog.verexam %>
+                </td>
+                <td>
+                  <%= blog.verscore %>
+                </td>
+                <td>
+                  <%= blog.verG %>
+                </td>
               </tr>
               <tr>
-                <td>8. Punctuality </td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>
+                  <%= blog.vst %>
+                </td>
+                <td>
+                  <%= blog.vst1st %>
+                </td>
+                <td>
+                  <%= blog.vst2nd %>
+                </td>
+                <td>
+                  <%= blog.vstexam %>
+                </td>
+                <td>
+                  <%= blog.vstscore %>
+                </td>
+                <td>
+                  <%= blog.vstG %>
+                </td>
               </tr>
               <tr>
-                <td>9. Spirit of Cooperation</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>
+                  <%= blog.cra %>
+                </td>
+                <td>
+                  <%= blog.cra1st %>
+                </td>
+                <td>
+                  <%= blog.cra2nd %>
+                </td>
+                <td>
+                  <%= blog.craexam %>
+                </td>
+                <td>
+                  <%= blog.crascore %>
+                </td>
+                <td>
+                  <%= blog.craG %>
+                </td>
               </tr>
               <tr>
-                <td>10. Self control</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>
+                  <%= blog.spe %>
+                </td>
+                <td>
+                  <%= blog.spe1st %>
+                </td>
+                <td>
+                  <%= blog.spe2nd %>
+                </td>
+                <td>
+                  <%= blog.speexam %>
+                </td>
+                <td><%= blog.spescore %>
+                </td>
+                <td>
+                  <%= blog.speG %>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <%= blog.hwr %>
+                </td>
+                <td>
+                  <%= blog.hwr1st %>
+                </td>
+                <td>
+                  <%= blog.hwr2nd %>
+                </td>
+                <td>
+                  <%= blog.hwrexam %>
+                </td>
+                <td><%= blog.hwrscore %>
+                </td>
+                <td>
+                  <%= blog.hwrG %>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <%= blog.mus %>
+                </td>
+                <td>
+                  <%= blog.mus1st %>
+                </td>
+                <td>
+                  <%= blog.mus2nd %>
+                </td>
+                <td>
+                  <%= blog.musexam %>
+                </td>
+                <td><%= blog.musscore %>
+                </td>
+                <td>
+                  <%= blog.musG %>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <%= blog. red %>
+                </td>
+                <td>
+                  <%= blog. red1st %>
+                </td>
+                <td>
+                  <%= blog. red2nd %>
+                </td>
+                <td>
+                  <%= blog. redexam %>
+                </td>
+                <td><%= blog. redscore %>
+                </td>
+                <td>
+                  <%= blog. redG %>
+                </td>
               </tr>
             </table>
           </div>
-          <div>
-            <h3>KEYS TO SKILL & BEHAVIOR </h3>
-            <P> 5....Excellent degree of observation </P>
-            <P> 4....High level fo observation </P>
-            <P> 3....Acceptable level of observation </P>
-            <P> 2....Minimal level Observed </P>
-            <P> 1....No level observed </P>
-          </div>
-          <div class="grade">
-            <P> 80 - 100--A+ Distinction </P>
-            <P> 70 - 79---A Excellent </P>
-            <P> 60 - 69---B Very Good </P>
-            <P> 50 - 59---C Credit </P>
-            <p> 40 - 49---D Pass</p>
-            
-            <P> 0 -  39----F Fail</P>
-          </div>
-          <div>
-           <!---- <h3 style="font-size:16px;">CLASS TEACHER'S NAME</h3> 
-            <p>......................................................</p> -->
+          <div class="class_info">
+            <div>
+              <table style="font-size:12px; margin:0px;">
+                <tr>
+                  <th>
+                    <h3>Skill & Behavior</h3>
+                  </th>
+                  <th>5</th>
+                  <th>4</th>
+                  <th>3</th>
+                  <th>2</th>
+                  <th>1</th>
+                </tr>
+                <tr>
+                  <td>1. Attendance</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>2. Attentiveness</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>3. Honesty</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>4. Initiative</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>5. Neatness</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>6. Organization ability</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <tb></tb>
+                </tr>
+                <tr>
+                  <td>7. Perseverance</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>8. Punctuality </td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>9. Spirit of Cooperation</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>10. Self control</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </table>
+            </div>
+            <div>
+              <h3>KEYS TO SKILL & BEHAVIOR </h3>
+              <P> 5....Excellent degree of observation </P>
+              <P> 4....High level fo observation </P>
+              <P> 3....Acceptable level of observation </P>
+              <P> 2....Minimal level Observed </P>
+              <P> 1....No level observed </P>
+            </div>
+            <div class="grade">
+              <P> 80 - 100--A+ Distinction </P>
+              <P> 70 - 79---A Excellent </P>
+              <P> 60 - 69---B Very Good </P>
+              <P> 50 - 59---C Credit </P>
+              <p> 40 - 49---D Pass</p>
+              
+              <P> 0 -  39----F Fail</P>
+            </div>
+            <div>
+            <!---- <h3 style="font-size:16px;">CLASS TEACHER'S NAME</h3> 
+              <p>......................................................</p> -->
+            </div>
           </div>
         </div>
-      </div>
 
-      <h3>STUDENT PERFORMANCE ANALYSIS</h3>
-      <div class="score_container">
-        <div class="student_score">
-          <div><h5>SUBJECT OFFERED</h5><h4><%= blog.No_subj %></h4></div>
-          <div><h5>SCORE OBTAINABLE</h5><h4><%= blog.score_obtainable %></h4></div>
-          <div><h5>SCORE OBTAIN</h5><h4><%= blog.score_obtain %></h4></div>
-          <div><h5>AVERAGE SCORE</h5><h4><%= blog.average %></h4></div>
+        <h3>STUDENT PERFORMANCE ANALYSIS</h3>
+        <div class="score_container">
+          <div class="student_score">
+            <div><h5>SUBJECT OFFERED</h5><h4><%= blog.No_subj %></h4></div>
+            <div><h5>SCORE OBTAINABLE</h5><h4><%= blog.score_obtainable %></h4></div>
+            <div><h5>SCORE OBTAIN</h5><h4><%= blog.score_obtain %></h4></div>
+            <div><h5>AVERAGE SCORE</h5><h4><%= blog.average %></h4></div>
+          </div>
+
         </div>
-
-      </div>
       <div>
         <h4>Class Teacher’s Remark : <span style="color:red;"><%= blog.Treport %> </span></h4>
         
