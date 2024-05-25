@@ -7,7 +7,7 @@
 /* Base styles */
 /* Base styles */
 .t_container {
-  width: 800px; /* Set a maximum width for laptop view */
+  width: 700px; /* Set a maximum width for laptop view */
   margin: auto;
   padding: 10px;
   box-sizing: border-box;
@@ -194,14 +194,24 @@ table, th, td {
   color: red;
 }
 
-button {
+.button {
   width: 60%;
   background: blue;
-  height: 30px;
+  height: 40px;
   color: white;
   font-size: 20px;
   border: 0;
   margin: 20px auto;
+  display:flex;
+  justify-content:center;
+}
+button{
+  background:black;
+  color:white;
+  font-size:20px;
+}
+button:hover{
+  color:grey;
 }
 .school_report{
   display:flex;

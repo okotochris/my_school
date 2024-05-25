@@ -2,8 +2,7 @@
 <html>
 
 <head>
-  <%- include('./partials/head.ejs')%>
-  <link rel="stylesheet" type="text/css" href="/style2.css">
+  <link rel="stylesheet" type="text/css" href="style/result_download.css" /> 
 </head>
 
 <body>
@@ -502,18 +501,17 @@
         </div>
 
       </div>
-      <div class="teacherReport">
-        <h4>Class Teacher’s Remark : <span style="color:red;"><%= blog.Treport %> </span></h4>
-        <h3>Class Head Teacher’s Remark :.................................... </h3>
+       <div class="school_report">
+        <p>Class Teacher’s Remark : <span style="color:red;"><%= blog.Treport %></span></p>
+        <hr/>
+        <p>Head Teacher’s Remark .................... </p>
       </div>
     </div>
   </div>
 
-  <button class="download" onclick="downloadResult()">Download Result</button>
+  <div class="button"><button class="download" onclick="downloadResult()">Download Result</button></div>
   <!-- JavaScript function to handle the download -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
-
   <script src="download.js"></script>
 </body>
 
