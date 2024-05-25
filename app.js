@@ -174,7 +174,7 @@ app.post("/details", (req, res) => {
                 }
                 else {
                     //const blog = result[0].toObject();
-                    res.render('details', { blog: result })
+                    res.render('junior-result', { blog: result })
                 }
             })
             .catch(err => { res.send(err) })
@@ -189,7 +189,7 @@ app.post("/details", (req, res) => {
                 }
                 else {
                    
-                    res.render('detail', { blog: result })
+                    res.render('senior-result', { blog: result })
                     console.log("data sent to frontend")
                 }
             })
@@ -204,7 +204,7 @@ app.post("/details", (req, res) => {
                 }
                 else {
                     //const blog = result[0].toObject();
-                    res.render('primary_file', { blog: result })
+                    res.render('primary-result', { blog: result })
                     console.log("data sent to frontend")
                 }
             })
@@ -255,7 +255,8 @@ app.post('/contact', (req, res) => {
         to: 'okotoazachristain@gmail.com',
         subject: 'MY SCHOOL RESULT HELP',
         text: `from\n Email: ${email} \n Name: ${name} \n School: ${school} \n Number: ${number}  \n ${message}`,
-        phone_number: number
+        phone_number: numberrs
+        
     };
 
     transporter.sendMail(mailOptions, (err, info) => {
