@@ -8,9 +8,9 @@ let upload = document.getElementById('uplaod')
 function check(){
     if(Sclass.value=="" || Sterm.value==""){
         respond.innerText= "Student class or Term can not be empty"
-	let audio = document.createElement('audio');
-	audio.src = "../sound.wav" 
-	audio.type = "audio/wav"
+	    let audio = document.createElement('audio');
+	    audio.src = "../sound.wav" 
+	    audio.type = "audio/wav"
         audio.play()
        // userName.value = userName.value.toUppercase();
         return false

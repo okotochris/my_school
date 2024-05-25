@@ -3,7 +3,7 @@
 <html>
     <head>
         <title>Admin page | Junior</title>
-        <link rel="stylesheet" type="text/css" href="../style.css">
+        <link rel="stylesheet" type="text/css" href="style/style.css">
     </head>
     <body>
         <header>
@@ -38,8 +38,9 @@
                 </fieldset>
                 <fieldset class="studentInfo">
                     <legend>STUDENT INFO:</legend>
-                    <p><input type="text" placeholder="Student Name" name="userName" id="userName" required="required"/><input type="text" placeholder="average score" id="average" name="average"/></p>
-                    <p><input type="text" Placeholder="Student ID" name="studentId" id="studentId" required="required"/><button style="width:100px; font-size:14px;" id="GenerateId" >Generate ID</button><button style="width:100px; font-size:14px;" onclick="student()" >Get ID</button><input type="text" placeholder="No. subj offfer" id="No_subj" name="No_subj" /></p>
+                    <p><input type="text" placeholder="Last Name  First Name Middle Name" name="userName" id="userName" required="required"/><input type="text" placeholder="average score" id="average" name="average"/></p>
+                    <p><input type="text" Placeholder="Student ID" name="studentId" id="studentId" required="required"/><button style="width:100px; font-size:14px;" id="GenerateId" >Generate ID</button><button style="width:100px; font-size:14px;" onclick="student()" >Get ID</button></p>
+                    <input type="text" placeholder="No. subj offfer" id="No_subj" name="No_subj" />
                     <p><input type="text" placeholder="score obtainable" id="score_obtainable" name="score_obtainable"/> <input type="text" id="score_obtain" placeholder="total score obtain" name="score_obtain" /></p>
                     <p><input type="text" placeholder="Class teacher report" name="Treport" id="Treport"> <button style="width:100px; font-size:14px;" id="Calc">comput Score</button> </p>
                     <p>
@@ -76,10 +77,10 @@
                 <p id="upload" style="color:red;"></p>
             </form>
         </div>
-        <script src="main.js"></script>
+        <script src="Java Script/main.js"></script>
         <script src="../junior_score.js"></script>
         <script src="../studentId.js"></script>
-        <script src="fetch.js"></script>
+        <script src="Java Script/fetch.js"></script>
 
     </body>
 </html>

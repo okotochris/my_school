@@ -12,13 +12,18 @@ const student = async (e) => {
 
 //asigning value from database to corresponding input field 
     if(userData){
-       studentId.value = userData.studentId
-       schoolName.value = userData.schoolName.toUpperCase()
-       schoolAdd.value = userData.schoolAdd.toUpperCase()
-        }
-        else if(userData.message){
+        console.log(userData)
+        if(userData.message){
             studentId.value = userData.message;
+            console.log('student is not regester')
         }
+        else{
+            studentId.value = userData.studentId
+            schoolName.value = userData.schoolName.toUpperCase()
+            schoolAdd.value = userData.schoolAdd.toUpperCase()
+        }
+    }
+           
     } catch (err) {
         console.error(`${err} Unable to retrieve data`);
     }
