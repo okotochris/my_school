@@ -32,10 +32,14 @@ table, th, td {
 .top_info {
   display: flex;
   justify-content: space-between;
+  align-items: center; /* Center items vertically */
   margin-bottom: 20px;
   padding: 2px;
   border: solid 2px black;
+  flex-wrap: nowrap; /* Prevent wrapping */
+  white-space: nowrap; /* Prevent text from wrapping */
 }
+
 
 .t_container {
   border: solid 1px black;
