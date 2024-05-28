@@ -14,6 +14,9 @@ const blogschema = new Schema({
         type:String,
         
     },
+    engca:{
+        type:String
+    },
     engexam:{
         type:String,
        
@@ -37,6 +40,9 @@ const blogschema = new Schema({
     mth2nd:{
         type: String,
         
+    },
+    mthca:{
+        type:String
     },
     mthexam:{
         type: String,
@@ -62,6 +68,9 @@ const blogschema = new Schema({
         type: String,
        
     },
+    bscca:{
+        type:String
+    },
     bscexam:{
         type: String,
         
@@ -83,6 +92,9 @@ const blogschema = new Schema({
     btc2nd:{
         type: String 
     },
+    btcca:{
+        type:String
+    },
     btcexam:{
         type: String,
     },
@@ -90,8 +102,7 @@ const blogschema = new Schema({
         type: String,
     },
     btcG:{
-        type: String,
-        
+        type: String,   
     },
     hec:{
         type: String, 
@@ -101,6 +112,9 @@ const blogschema = new Schema({
       },
     hec2nd:{
         type: String,
+    },
+    hecca:{
+        type:String
     },
     hecexam:{
         type: String,
@@ -126,6 +140,9 @@ const blogschema = new Schema({
         type: String,
      
     },
+    freca:{
+        type:String
+    },
     freexam:{
         type: String,
     },
@@ -147,6 +164,9 @@ const blogschema = new Schema({
         type: String,
         
     },
+    agrca:{
+        type:String
+    },
     agrexam:{
         type: String,
     },
@@ -164,7 +184,9 @@ const blogschema = new Schema({
     },
     csc2nd:{
         type: String,
-       
+    },
+    cscca:{
+        type:String
     },
     cscexam:{
         type: String,
@@ -174,11 +196,9 @@ const blogschema = new Schema({
     },
     cscG:{
         type: String,
-       
     },
     crs:{
         type: String,
-       
     },
     crs1st:{
         type: String,
@@ -187,6 +207,9 @@ const blogschema = new Schema({
     crs2nd:{
         type: String,
        
+    },
+    crsca:{
+        type:String
     },
     crsexam:{
         type: String,
@@ -210,6 +233,9 @@ const blogschema = new Schema({
         type: String,
         
     },
+    pedca:{
+        type:String
+    },
     pedexam:{
         type: String,
     },
@@ -231,6 +257,9 @@ const blogschema = new Schema({
     cra2nd:{
         type: String,
         
+    },
+    craca:{
+        type:String
     },
     craexam:{
         type: String,
@@ -254,6 +283,9 @@ const blogschema = new Schema({
         type: String,
         
     },
+    hiyca:{
+        type:String
+    },
     hiyexam:{
         type: String,
     },
@@ -275,6 +307,9 @@ const blogschema = new Schema({
         type: String,
        
     },
+    stdca:{
+        type:String
+    },
     stdexam:{
         type: String,
     },
@@ -291,11 +326,12 @@ const blogschema = new Schema({
     },
     ced1st:{
         type: String,
-       
     },
     ced2nd:{
         type: String,
-        
+    },
+    cedca:{
+        type:String
     },
     cedexam:{
         type: String,
@@ -314,6 +350,9 @@ const blogschema = new Schema({
     },
     bst2nd:{
         type: String,
+    },
+    bstca:{
+        type:String
     },
     bstexam:{
         type: String,

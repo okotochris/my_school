@@ -23,140 +23,154 @@ let term = document.getElementById('Sterm')
 engscore.onmouseover = function(){
     let x = Number(document.getElementById('eng2nd').value)
     let x2 = Number(document.getElementById('eng1st').value)
+    let ca = Number(document.getElementById('engca').value)
     let x3 = Number(document.getElementById('engexam').value)
     let grade = document.getElementById('engG')
     let score = engscore;
-    comput(x, x2, x3, score, grade)
+    comput(x, x2,ca, x3, score, grade)
 }
 //creative are
 rnvscore.onmouseover = function(){
     let x = Number(document.getElementById('rnv2nd').value)
     let x2 = Number(document.getElementById('rnv1st').value)
+    let ca = Number(document.getElementById('rnvca').value)
     let x3 = Number(document.getElementById('rnvexam').value)
     let grade = document.getElementById('rnvG')
     let score = rnvscore;
-    comput(x, x2, x3, score, grade)
+    comput(x, x2, ca, x3, score, grade)
 }
 
 // MATHES
 mthscore.onmouseover = function(){
     let x = Number(document.getElementById('mth2nd').value)
     let x2 = Number(document.getElementById('mth1st').value)
+    let ca = Number(document.getElementById('mthca').value)
     let x3 = Number(document.getElementById('mthexam').value)
     let grade = document.getElementById('mthG')
     let score = mthscore;
-    comput(x, x2, x3, score, grade)   
+    comput(x, x2, ca, x3, score, grade)   
 }
 
 //QUALITATIVE REASONING 
 qurscore.onmouseover = function(){
     let x = Number(document.getElementById('qur2nd').value)
     let x2 = Number(document.getElementById('qur1st').value)
+    let ca = Number(document.getElementById('qurca').value)
     let x3 = Number(document.getElementById('qurexam').value)
     let grade = document.getElementById('qurG')
     let score = qurscore;
-    comput(x, x2, x3, score, grade)
+    comput(x, x2, ca, x3, score, grade)
 }
 
 //BASIC SCINECE TECHONOLOGY 
 bstscore.onmouseover = function(){
     let x = Number(document.getElementById('bst2nd').value)
     let x2 = Number(document.getElementById('bst1st').value)
+    let ca = Number(document.getElementById('bstca').value)
     let x3 = Number(document.getElementById('bstexam').value)
     let grade = document.getElementById('bstG')
     let score = bstscore;
-    comput(x, x2, x3, score, grade)
+    comput(x, x2, ca, x3, score, grade)
 }
 
 // PRE VOLCATIONAL STUDY
 pvsscore.onmouseover = function(){
     let x = Number(document.getElementById('pvs2nd').value)
     let x2 = Number(document.getElementById('pvs1st').value)
+    let ca = Number(document.getElementById('pvsca').value)
     let x3 = Number(document.getElementById('pvsexam').value)
     let grade = document.getElementById('pvsG')
     let score = pvsscore;
-    comput(x, x2, x3, score, grade)
+    comput(x, x2, ca, x3, score, grade)
 }
 
 //VOLCATIONAL STUDY
 vstscore.onmouseover = function(){
     let x = Number(document.getElementById('vst2nd').value)
     let x2 = Number(document.getElementById('vst1st').value)
+    let ca = Number(document.getElementById('vstca').value)
     let x3 = Number(document.getElementById('vstexam').value)
     let grade = document.getElementById('vstG')
     let score = vstscore;
-    comput(x, x2, x3, score, grade)
+    comput(x, x2, ca, x3, score, grade)
 }
 
 // VERBAL REASONING
 verscore.onmouseover = function(){
     let x = Number(document.getElementById('ver2nd').value)
     let x2 = Number(document.getElementById('ver1st').value)
+    let ca = Number(document.getElementById('verca').value)
     let x3 = Number(document.getElementById('verexam').value)
     let grade = document.getElementById('verG')
     let score = verscore;
-    comput(x, x2, x3, score, grade)
+    comput(x, x2, ca, x3, score, grade)
 }
 
 // ART
 crascore.onmouseover = function(){
     let x3 = Number(document.getElementById('craexam').value)
     let x = Number(document.getElementById('cra2nd').value)
+    let ca = Number(document.getElementById('craca').value)
     let x2 = Number(document.getElementById('cra1st').value)
     let grade = document.getElementById('craG')
     let score = crascore;
-    comput(x, x2, x3, score, grade)
+    comput(x, x2, ca, x3, score, grade)
 }
 
 // SPELLING 
 spescore.onmouseover = function(){
     let x = Number(document.getElementById('spe2nd').value)
     let x3 = Number(document.getElementById('speexam').value)
+    let ca = Number(document.getElementById('speca').value)
     let x2 = Number(document.getElementById('spe1st').value)
     let grade = document.getElementById('speG')
     let score = spescore;
-    comput(x, x2, x3, score, grade)
+    comput(x, x2, ca, x3, score, grade)
 }
 
 // HAND WRITTING
 hwrscore.onmouseover = function(){
     let x = Number(document.getElementById('hwr2nd').value)
     let x2 = Number(document.getElementById('hwr1st').value)
+    let ca = Number(document.getElementById('hwrca').value)
     let x3 = Number(document.getElementById('hwrexam').value)
     let grade = document.getElementById('hwrG')
     let score = hwrscore;
-    comput(x, x2, x3, score, grade)
+    comput(x, x2, ca, x3, score, grade)
 }
 // MUSIC
 musscore.onmouseover = function(){
     let x = Number(document.getElementById('mus2nd').value)
     let x2 = Number(document.getElementById('mus1st').value)
+    let ca = Number(document.getElementById('musca').value)
     let x3 = Number(document.getElementById('musexam').value)
     let grade = document.getElementById('musG')
     let score = musscore;
-    comput(x, x2, x3, score, grade)
+    comput(x, x2, ca, x3, score, grade)
 }
 
 // CULTURE AND CREATIVE ACT 
 redscore.onmouseover = function(){
     let x = Number(document.getElementById('red2nd').value)
     let x2 = Number(document.getElementById('red1st').value)
+    let ca = Number(document.getElementById('redca').value)
     let x3 = Number(document.getElementById('redexam').value)
     let grade = document.getElementById('redG')
     let score = redscore;
-    comput(x, x2, x3, score, grade)
+    comput(x, x2, ca, x3, score, grade)
 }
 // 
 
 
 // CACULATING THE GRADE POINT
-function comput(x, x2, x3, score, grade){
-    if(x > 0 || x2 > 0 || x3 > 0){  
-        score.value = x + x2 + x3
+function comput(x, x2, ca, x3, score, grade){
+    if(x > 0 || x2 > 0 || x3 > 0 || ca > 0){  
+        score.value = x + x2 + x3 + ca;
     }
     else{
         score.value = ""
     }
+    //checking the grade of student 
     let x4 = Number(score.value)
     if(x4 > 79){
         grade.value = "A+"
@@ -196,11 +210,11 @@ cal.onclick= function(){
     let userName = userNameElement.value.toUpperCase()
     userNameElement.value = userName;
    
-   //calculating the total number of score
+   //calculating the total student perfomance
+    let course = 0;
     let total = Number(rnvscore.value)   + Number(bstscore.value) + Number(vstscore.value) + Number(mthscore.value)  + Number(qurscore.value) + Number(pvsscore.value) + Number(verscore.value) + Number(engscore.value) + Number(crascore.value) + Number(hwrscore.value) + Number(spescore.value) + Number(musscore.value)  + Number(redscore.value);
    
    // calculating the number of score offered 
-    let course = 0;
         if(rnvscore.value != ""){
             course++;
         }
@@ -245,9 +259,8 @@ cal.onclick= function(){
             course++;
         }
         
-    
     No_subj.value = course;
-    let aver = (total/course).toFixed(2)
+    let aver = (total/course).toFixed(2);
     if( aver != 'NaN' ){ 
     average.value = aver
     console.log(aver)

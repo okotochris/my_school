@@ -1,4 +1,4 @@
-studentId =document.getElementById('studentId')
+ studentId =document.getElementById('studentId')
 let schoolName = document.getElementById('schoolName')
 let schoolAdd = document.getElementById('schoolAdd')
 

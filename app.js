@@ -213,15 +213,21 @@ app.post("/details", (req, res) => {
 })
 
 //searching for student id
-
 app.get('/userInfo', async (req, res)=>{
     try{
         let userName = req.query.userName
-        const userInfo = await Blog.findOne({userName})
-        if(userInfo){
+        let userInfo = await Blog.findOne({userName})
+        //searching for SSS data base if result not found in JSS
+        if(!userInfo){
+            userInfo = await SBlog.findOne({userName})
+        }
+        if(!userInfo){
+            userInfo = await PBlog.findOne({userName})
+        }
+       if(userInfo){
             res.json(userInfo)
         }
-       
+        
         else{
             res.json({message: `${userName} is not regiser yet`})
         }
@@ -255,7 +261,7 @@ app.post('/contact', (req, res) => {
         to: 'okotoazachristain@gmail.com',
         subject: 'MY SCHOOL RESULT HELP',
         text: `from\n Email: ${email} \n Name: ${name} \n School: ${school} \n Number: ${number}  \n ${message}`,
-        phone_number: numberrs
+        phone_number: number
         
     };
 
