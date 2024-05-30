@@ -22,6 +22,7 @@ app.use(express.static('public', {
     },
 }));
 
+//midle 
 app.use(express.urlencoded({ extended: true }))
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -65,8 +66,6 @@ app.set('view engine', 'ejs');
 
 
 
-
-
 //defining our route
 app.get('/', (req, res) => {
     res.render('index');
@@ -101,7 +100,7 @@ app.post('/admin_form', (req, res) => {
     const Ablog = new ABlog(req.body)
     Ablog.save()
         .then(result => {
-            console.log(sent)
+            console.log('sent')
         })
         .catch(err => {
             console.log(err)
@@ -109,6 +108,8 @@ app.post('/admin_form', (req, res) => {
     res.render('admin')
     console.log("posted")
 })
+
+
 //saving junior data
 app.post("/adminJunior", (req, res) => {
     res.render('adminJunior')
@@ -276,6 +277,11 @@ app.post('/contact', (req, res) => {
         }
     });
 });
+
+//STUDENT ID FORM
+app.get('/studentid', (req, res)=>{
+    res.render('studentid')
+})
 
 app.use((req, res)=>{
     res.status(404).render('page_not_found')

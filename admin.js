@@ -8,6 +8,12 @@ let blogSchema = new Schema({
     email:{
         type:String
     },
+    school:{
+        type:String
+    },
+    address:{
+        type:String
+    },
     gender:{
         type:String
     },

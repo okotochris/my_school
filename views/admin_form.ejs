@@ -7,14 +7,16 @@
         <div class="add_form">
             <form action="/admin_form" method="post" >
                 <p><input type="text" placeholder="Enter your full name" name="user_name" required/></p>
-                <p> <input type="email" placeholder="Enter your emaail" name="email" required /></p>
+                <p><input type="text" id="school" name="school"  placeholder="School Name" required/></p>
+                <p><input type="text" id="address" name="addres"  placeholder="School Addres" required/></p>
+                <p> <input type="email" placeholder="Enter your email" name="email" required /></p>
                 <p><input type="number" placeholder="Enter your phone number" name="number" required /></p>
                 <select name ="gender" required>
                     <option value="">Select Gender</option>
                     <option value="Female">Female</option>
                     <option value="Male">Male</option>
                 </select>
-                <p><input type="date" required name="date"/></p>
+                <p><input type="date" required name="date" placeholder="D.O.B"/></p>
                 <p><input type="password" placeholder="Password" name="password" required /></p>
                 <button>Register a new account</button>
             </form>
