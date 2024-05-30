@@ -46,9 +46,9 @@
         <hr/>
         <a href="/myschool">HOME</a>
         <hr/>
-        <a href="#school_about">ABOUT</a>
+        <a class="link" href="#school_about">ABOUT</a>
         <hr/>
-        <a href="#news">NEWS</a>
+        <a class="link" href="#news">NEWS</a>
         <hr/>
         <a href="/">CHECK RESULT</a>
         <hr/>
@@ -100,12 +100,12 @@
         </section>
         <section class="section2">
                 <div>
-                    <img src="IMAGE/image2.jpg" type="image/png" />
-                    <img src="IMAGE/see.jfif" type="image/png" />
+                    <img  src="IMAGE/image2.jpg" type="image/png" />
+                    <img  src="IMAGE/see.jfif" type="image/png" />
                 </div>
                 <div class="image_display">
-                    <img src="IMAGE/OIP.jfif" type="image/png" />
-                    <img src="IMAGE/school lab.jpg" type="image/png" />
+                    <img  src="IMAGE/OIP.jfif" type="image/png" />
+                    <img  src="IMAGE/school lab.jpg" type="image/png" />
                 </div>
 
                 <!--Updating gallary-->
@@ -195,13 +195,20 @@
    <script>
      let menu = document.getElementById('menu')
      let droup_down = document.querySelector('.droup_down_manu')
-     console.log('hello')
+     
         
       
         droup_down.style.display = 'none'
         menu.onclick =()=>{
             if( droup_down.style.display == 'none'){
                 droup_down.style.display='flex';
+                let offDisplay = document.querySelectorAll('.link')
+                offDisplay.forEach(link=>{
+                    link.onclick = ()=>{
+                        droup_down.style.display = 'none'
+                    }
+
+                })
                
             } 
             else{
@@ -224,6 +231,40 @@
             x = 1
         }
     }
+    
+    //Galary Full Screen View 
+    let imageGalary = document.querySelectorAll('.section2 img')
+    imageGalary.forEach(image=>{
+        image.onclick =()=>{
+            let div = document.createElement('div')
+            div.classList.add('fullscreen');
+            div.style.backgroundImage = `url(${image.src})`;
+            document.body.appendChild(div)
+           
+
+            //closing full screen;
+            div.onclick = ()=>{
+                document.body.removeChild(div)
+            }
+        }
+        
+    })
+
+    //NEWS IMAGE FULL SCREEN VIEW 
+    let newsImage = document.querySelectorAll('.news_content img')
+    newsImage.forEach(image =>{
+        image.onclick = ()=>{
+            let div = document.createElement('div')
+            div.classList.add('fullscreen');
+            div.style.backgroundImage = `url(${image.src})`;
+            document.body.appendChild(div)
+
+            //closing fullscreen
+            div.onclick = ()=>{
+                document.body.removeChild(div)
+            }
+        }
+    })
    </script>
 </body>
 
