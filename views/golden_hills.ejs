@@ -1,15 +1,16 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
-	<head>
-		<meta charset="utf-8"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>GOLDEN HILLS</title>
-		<link rel="stylesheet" type="text/css" href="style/golden-hills.css"/>
-	</head>
-	
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GOLDEN HILLS</title>
+    <link rel="stylesheet" type="text/css" href="style/golden-hills.css"/>
+    <link rel="stylesheet" type="text/css" href="style/download_button.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+</head>
 	<body>
-		<div class="container">
+		<div id="resultContainer">
 			<div class="school">
 				<div class="logo"></div>
 				<div class="school-info">
@@ -26,7 +27,7 @@
 			</div>	
 			<div class="sudent-info">
 				<div>BASIC 5, 1ST TERM RESULT 2023/2024 ACADEMIC SESSION</div>
-				<p>NAME OF PUPIL PREDENT: <u><span>IYOBOSA IROWA</span></u> SEX: <span><u>FEMALE</u></span> D.O.B: <span><u>18TH SEPT. 2024</u></span></p>
+				<p>NAME OF PUPIL : <u><span>OKOTOAZA CHRISTIAN EGHOSE</span></u> SEX: <span><u>FEMALE</u></span> D.O.B: <span><u>18TH SEPT. 2024</u></span></p>
 				<P>TOTAL MARKS SCORE: <span><u> 1200</u></span> OUT OF: <span><u>87</u></span> AVERAGE: <span><u>85</u></span> CLASS: <span><u>BASIC 5</u></span></P>
 				<P>ADMISSSION NO.: <span><u>77</u></span> NO. OF TIMES PRESENT: <span><u>95</u></span> NO OF TIMES ABSET: <span><u>3</u></span></P>
 			</div>
@@ -36,23 +37,24 @@
 					<div>ACADEMIC PROGRESS REPORT SUMMARIES AND TEST (COGNITIVE DOMAIN)</div>
 					<table>
 						<tr>
-							<th width="200">SUBJECT</th>
-							<th>1st test 10%</th>
-							<th>2nd test 10%</th>
-							<th>project 10%</th>
-							<th>Exam 70%</th>
-							<th>Total 100%</th>
-							<th>Grades</th>
-							<th width="100">REMARKS</th>
+							<th  width="200">SUBJECT</th>
+							<th class="th1">1st test 10%</th>
+							<th class="th1">2nd test 10%</th>
+							<th class="th1">project 10%</th>
+							<th class="th1">Exam 70%</th>
+							<th class="th1">Total 100%</th>
+							<th class="th1" width="30">Grades</th>
+							<th width="60">REMARKS</th>
 						</tr>
+						
 						<tr>
+							<td>CHRISTIAN RELIGIOUS STUDIES</td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td></td>
-							<td></td>
-							<td></td>
+							<td>A+</td>
 							<td>Very Good</td>
 						</tr>
 						<tr>
@@ -65,46 +67,7 @@
 							<td></td>
 							<td></td>
 						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
+						
 						<tr>
 							<td></td>
 							<td></td>
@@ -519,6 +482,24 @@
 				</div>
 			</div>
 		</div>
+		<div id="captureWrapper">
+			<div id="resultContainer">
+				<!-- Your content here -->
+			</div>
+		</div>
+		
+		<div class="button"><button class="download" onclick="downloadResult()">Download PDF</button></div>
+		<div class="button"><button class="download" onclick="downloadResultAsJPG()">Download JPEG</button></div>
+
+		<!-- JPEG-->
+		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.0.0-rc.5/html2canvas.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.3.2/dist/html2canvas.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+
+  		
+  		<script src="download.js"></script>
+		<script src="Java Script/dwonloadJPEG.js"></script>
 	</body>
 
 </html>

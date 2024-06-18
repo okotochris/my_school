@@ -82,6 +82,9 @@ app.get('/myschool', (req, res)=>{
 app.get("/admin_form", (req, res) => {
     res.render("admin_form")
 })
+app.get("/golden_hills", (req, res)=>{
+    res.render('golden_hills')
+})
 //saving primary data to databse 
 app.post('/primary', (req, res) => {
     const Blog = new PBlog(req.body);
@@ -239,6 +242,10 @@ app.get('/userInfo', async (req, res)=>{
     }
 })
 
+//passport upload
+app.get('/passport-upload', (req, res)=>{
+    res.render('passport-upload')
+})
 // post request from school updating news field 
 app.post("/myschool", (req, res)=>{
     console.log(req.body)

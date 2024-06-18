@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="em">
+    <%- include('./partials/head.ejs') %>
+    <body>
+        <%- include('./partials/header.ejs') %>
+        <div class="add_form">
+            <form action="upload" method="post" onsubmit="return check()">
+                    <p><input type="text" id="userName" name="userName"  placeholder="Last First Middle  Name " required/></p>
+                    <p><input type="text" id="studentId" name="studentId" placeholder="studentId" required/></p>
+                    <p><input type="text" name="addmissionNo" id="addmissionNo" placeholder="Addmission Number"/> </p>
+                    <p><input type="date" name="dob" id="dob" placeholder="date of birth" /></p>
+                    <div class="gender">
+                        <p><label for="male">Male</label><input type="radio" value="Male" name="gender" id="male"/></p>
+                        <p><label for="female">Female</label><input type="radio" value="Female" name="gender" id="female" /></p>
+                    </div>
+                    <p><input type="file" name="passport" id="passport" /></p>
+                    <button>Upload Passport</button>
+                
+            </form>
+        </div>
+        
+      
+    </body>
+   <script src="main.js"></script>
+
+
+
+
+</html>

@@ -3,6 +3,7 @@
 
 <head>
   <link rel="stylesheet" type="text/css" href="style/result_download.css" /> 
+  <link rel="stylesheet" type="text/css" href="style/download_button.css"/>
 </head>
 
 <body>
@@ -450,12 +451,19 @@
       </div>
     </div>
   </div>
+  <div id="captureWrapper">
+    <div id="resultContainer">
+        <!-- Your content here -->
+    </div>
+</div>
 
   <div class="button"><button class="download" onclick="downloadResult()">Download Result</button></div>
+  <div class="button"><button class="download" onclick="downloadResultAsJPG()">Download JPEG</button></div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
   <!-- Your custom JavaScript code -->
   <script src="download.js"></script>
+  <script src="Java Script/dwonloadJPEG.js"></script>
 </body>
 
 </html>

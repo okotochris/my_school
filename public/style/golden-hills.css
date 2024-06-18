@@ -2,10 +2,23 @@
     margin:0px;
     padding:0px;
 }
-.container{
-    width:1000px;
-    margin: auto auto;  
-}
+
+#resultContainer {
+    width: 730px; /* Set a maximum width for laptop view */
+    margin: auto;
+    padding: 10px;
+    box-sizing: border-box;
+    background:white;
+   
+    position: relative;
+    
+    box-sizing: border-box; /* Ensure padding does not increase element width */
+    
+  }
+  .t_container {
+    
+  }
+  
 .school{
     width:100%;
     height:auto;
@@ -17,23 +30,27 @@
     margin:0px auto;
     overflow:hidden;
 }
-.logo, .passport{
-    height:150px;
-    width:190px;
-    
+.passport{
+    height:120px;
+    width:100px;
     border:solid 1px black
 }
+.logo{
+    width:100px;
+    height:100px;
+    border:solid 1px black
+} 
 .school-name{
     text-align:center;
 }
 .school-name h1{
-    font-size:4.5em;
+    font-size:4em;
     font-family:Futura Bk BT;
     font-weight:bolder;
     color:rgb(224, 206, 100);
 }
 .school-name h3{
-    font-size:1.9em;
+    font-size:1.4em;
     color:red;
 }
 .school-info{
@@ -52,23 +69,22 @@
 }
 
 .address{
-    width:50%;
+    width:65%;
     font-weight:bold;
 }
 .contact{
-    width:20%;
+    width:30%;
     text-align:right;
     font-weight:bold;
 }
 .sudent-info{
     width:100%;
     margin:0px auto;
-    font-size:1.4em;
-    text-align:justify;
-    
+    font-size:1em;
+    text-align:justify;    
 }
 .sudent-info div{
-    font-size:23px;
+    font-size:20px;
     font-weight:bold;
     margin:15px auto;
     width:80%;
@@ -85,32 +101,40 @@
     justify-content:space-between;
 }
 .score div{
-    font-size:16px;
+    font-size:11px;
     border:solid 2px black;
     padding:3px 0px;
     margin-top:10px;
     font-weight:bold;
 }
 .score table td{
-    height:35px;
+    height:25px;
 }
+.th1 {
+    writing-mode: vertical-rl; /* Vertical writing mode */
+    text-align: center; /* Centers content horizontally */
+    white-space: wrap; /* Prevents wrapping */
+    transform: rotate(180deg); /* Rotates text 180 degrees (not 90) clockwise */
+    height: 50px;
+}
+
 .score{
-    width:660px;
+    width:62%;
 }
 .analysis{
-    width:330px;
+    width:37%;
     display:flex;
     flex-direction:column;
     flex-wrap:nowrap;
     overflow:hidden;
-    font-size:14px;   
+    font-size:14px;  
 }
 .analysis-div1{
     height:23px;
     margin-top:10px;
-    border:solid 1px black;
+    border:solid 1.5px black;
     font-weight:bold;
-    font-size:13px;
+    font-size:10px;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -119,14 +143,14 @@ table, td, th{
     border:1px solid black;
     margin:0px;
     border-collapse: collapse;
-    font-size:16px;
+    font-size:12px;
 }
 td{
     height:25px;
 }
 .grade{
     display:flex;
-    width:330px;
+    width:100%;
 }
 .grade div{
     width:60%;
@@ -134,37 +158,36 @@ td{
     display:flex;
     align-items:center;
     flex-direction:column;
-    font-size:12px;
-    text-align:left;
+    font-size:9px;
     font-weight:bold;
-    margin-bottom:15px;
+    margin-bottom:5px;
     
 }
 .grade ol{
     margin-left:10px;
 }
 .grade li{
-    padding:2px 2px;
+    padding:1px 2px;
     
 }
-.personality table td, .rating td{
-    font-size:13px;
-    font-weight:bold;
+.pesonality table td, .rating table td{
+    font-size:12px;
+    height:10px;
 } 
 .rating{
-    margin:15px 0px;
+    margin:5px 0px;
    
 }
 .comment{
     width:350px;
 }
 .comment p{
-    font-size:15px;
+    font-size:12px;
     font-weight:bold;
-    padding:3px 0px;
+    padding:1px 0px;
 }
 span{
-    padding:0px 5px;
+    padding:0px 3px;
     font-weight:bold;
 }
 @media only screen and (max-width:1000px){
