@@ -7,6 +7,9 @@ const ABlog = require('./admin.js')
 const PBlog = require('./primary.js')
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer')
+const passport = require('./goldenPassport.js')
+const fs = require('fs');
+const path = require('path');
 
 
 
@@ -21,6 +24,14 @@ app.use(express.static('public', {
         }
     },
 }));
+
+// Directory to store uploaded files
+const uploadDir = path.join(__dirname, 'uploads');
+
+// Check if directory exists and create it if it doesn't
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
+}
 
 //midle 
 app.use(express.urlencoded({ extended: true }))
@@ -39,15 +50,15 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
 
   // configuring multer
   const fileEngineStorage = multer.diskStorage({
-    destination:((req, file, cb)=>{
-        cb(null, 'image')
-    }),
-    filename:((req, file, cb)=>{
-        cb(null, Date.now() + "--" + file.orignialname)
-    })
-  }) 
-  
-  const upload = ({storage: fileEngineStorage})
+    destination: (req, file, cb) => {
+        cb(null, 'uploads/'); // Ensure the directory 'uploads/' exists
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + "--" + file.originalname);
+    }
+});
+
+const upload = multer({ storage: fileEngineStorage });
 
 
 //setting port and connecting to server
@@ -246,6 +257,21 @@ app.get('/userInfo', async (req, res)=>{
 app.get('/passport-upload', (req, res)=>{
     res.render('passport-upload')
 })
+
+app.post('/passport', upload.single('passport'), (req, res) => {
+    console.log("recieved")
+    const passports = new passport(req.body);
+    passports.save()
+    .then(result=>{
+        console.log(result)
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+    res.redirect('passport-upload')
+})
+
+
 // post request from school updating news field 
 app.post("/myschool", (req, res)=>{
     console.log(req.body)
