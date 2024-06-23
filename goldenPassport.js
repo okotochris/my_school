@@ -2,29 +2,26 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const blogschema = new Schema({
-    userName:{
+    userName: {
         type: String,
         required: true
     },
-    studentId:{
+    studentId: {
         type: String,
         required: true
     },
-    
-    addmissionNo:{
+    addmissionNo: {
+        type: String
+    },
+    dob: {
         type: String,
         required: true
     },
-    dob:{
-        type:String,
-        required:true
-    },
-    passport:{
+    passport: {
         type: String,
-        required: true,
+        required: true
     }
-    
-}, {timestamps:true})
+}, { timestamps: true });
 
-const passport = mongoose.model('passport', blogschema)
-module.exports = passport;
+const Studentpassport = mongoose.model('Studentpassport', blogschema);
+module.exports = Studentpassport;

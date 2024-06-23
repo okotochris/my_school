@@ -7,7 +7,7 @@ const ABlog = require('./admin.js')
 const PBlog = require('./primary.js')
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer')
-const passport = require('./goldenPassport.js')
+const Studentpassport = require('./goldenPassport.js')
 const fs = require('fs');
 const path = require('path');
 
@@ -35,7 +35,6 @@ if (!fs.existsSync(uploadDir)) {
 
 //midle 
 app.use(express.urlencoded({ extended: true }))
-app.use(bodyParser.urlencoded({ extended: true }));
 
 //connecting to dateabase
 const dbURI = 'mongodb+srv://data:L6EwGXzqyzLHNFxn@school.vvirl2y.mongodb.net/school?retryWrites=true&w=majority'
@@ -259,18 +258,27 @@ app.get('/passport-upload', (req, res)=>{
 })
 
 app.post('/passport', upload.single('passport'), (req, res) => {
-    console.log("recieved")
-    const passports = new passport(req.body);
-    passports.save()
-    .then(result=>{
-        console.log(result)
-    })
-    .catch(err=>{
-        console.log(err)
-    })
-    res.redirect('passport-upload')
-})
+    console.log("Received form submission");
 
+    // Create a new instance of the Mongoose model
+    const newPassport = new Studentpassport({
+        userName: req.body.userName,
+        studentId: req.body.studentId,
+        addmissionNo: req.body.addmissionNo,
+        dob: req.body.dob,
+        passport: req.file ? req.file.filename : null  // Save filename or null if no file uploaded
+    });
+
+    newPassport.save()
+        .then(result => {
+            console.log(result);
+            res.redirect('/passport-upload');
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).send('Internal Server Error');
+        });
+});
 
 // post request from school updating news field 
 app.post("/myschool", (req, res)=>{
