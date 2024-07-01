@@ -226,7 +226,52 @@ app.post("/details", (req, res) => {
     }
 })
 
-//searching for student id
+//searching student ID base on student name
+app.get('/getstudentid', async (req, res) => {
+    try {
+        let student_name = req.query.student_name;
+        let Sclass = req.query.Sclass;
+        let section = req.query.section;
+
+        let studentId = await Studentpassport.find({ userName: student_name });
+
+        if (studentId) {
+            res.json(studentId);
+        } else {
+            res.status(404).json({ message: 'Student not found' });
+        }
+    } catch (err) {
+        console.error('Server error:', err);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+//getting student id by classname
+app.get('/getclassid', async(req, res)=>{
+    let studentClass = req.query.class;
+   try{
+    let studentId = await Studentpassport.find({class: studentClass });
+    res.json(studentId)
+
+   }
+   catch(err){
+    console.log(err)
+   }
+})
+
+// GETTING STUDENT ID BASE ON SECTION JUNIOR SECONDARY OR BASIC
+app.get('/getsectionid', async(req, res)=>{
+    let studentClass = req.query.class;
+   try{
+    let studentId = await Studentpassport.find({class: { $regex: studentClass, $options: 'i' }});
+    res.json(studentId)
+     }
+   catch(err){
+    console.log(err)
+   }
+})
+
+//searching for student id to upload result 
 app.get('/userInfo', async (req, res)=>{
     try{
         let userName = req.query.userName
@@ -257,15 +302,16 @@ app.get('/passport-upload', (req, res)=>{
     res.render('passport-upload')
 })
 
+// saving student passport 
 app.post('/passport', upload.single('passport'), (req, res) => {
-    console.log("Received form submission");
-
+ 
     // Create a new instance of the Mongoose model
     const newPassport = new Studentpassport({
         userName: req.body.userName,
         studentId: req.body.studentId,
         addmissionNo: req.body.addmissionNo,
         dob: req.body.dob,
+        class:req.body.class,
         passport: req.file ? req.file.filename : null  // Save filename or null if no file uploaded
     });
 
@@ -279,6 +325,7 @@ app.post('/passport', upload.single('passport'), (req, res) => {
             res.status(500).send('Internal Server Error');
         });
 });
+
 
 // post request from school updating news field 
 app.post("/myschool", (req, res)=>{

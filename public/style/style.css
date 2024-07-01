@@ -93,7 +93,7 @@ body {
   width: 331px;
   margin-bottom:20px;
   padding: 10px 0px;
-  min-height:400px;
+
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -235,8 +235,4 @@ body {
 }
 #contact textarea{
   height:70px;
-}
-/* report card styling */
-.gender p label{
-
 }

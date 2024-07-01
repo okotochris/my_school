@@ -1,35 +1,137 @@
 <!DOCTYPE html>
 <html>
     <%- include('./partials/head.ejs') %>
+    <style>
+       .table{
+            width:70%;
+            
+            color:white;
+            margin:10px auto;
+            padding:10px;
+            display:flex;
+            justify-content:center;
+            font-family:leelawadee;
+            text-align:left;
+       }
+       table th, table tr, table td{
+            border: solid 1px black;
+            background:rgb(18, 18, 237);
+            height:50px;
+            text-align:center;
+            font-weight:bold;
+       }
+       table th{
+            color:black;
+            
+       }
+       table{
+        border-collapse:collapse;
+        display:none;
+       }
+       @media only screen and (max-width:800px){
+            .table{
+                width:95%;
+            }
+       }
+       #loadingIndicator {
+            display: none; /* Initially hidden */
+            text-align: center;
+            margin-top: 10px; /* Adjust as needed */
+            font-style: italic;
+            color: #888;
+        }
+      
+        #student-name, #student-class, #student-division{
+            display:none;
+        }
+        .container{
+            width:98%;
+            margin:0px auto;
+        }
+       
+    </style>
     <body>
         <%- include('./partials/header.ejs') %>
-        <div class="add_form">
-            <form action="studentId" method="post">
+
+        
+        
+        <div class="container">
+            <!-- GET STUDENT ID VIA STUDENT NAME-->
+            <button class="student-name">GET STUDENT ID VIA NAME</button>
+        <div class="add_form" id="student-name">
+            <form>
                     <p><input type="text" id="student_name" name="student_name"  placeholder="Last name, Fisrt name, Middle name" required/></p>
-                    <p><input type="text" id="password" name="password" placeholder="Password" required/></p>
-                    <select name="Sclass" id="Sclass">
-                            <option value=""> STUDENT CLASS</option>
-                            <option value="senior">Senior School</option>
-                            <option value="junior">Junior School</option>
-                            <option value="primary">Primary School</option>
-                            <option value="nusery">Nusery School</option>
-                    </select>
-                    <select name="section" required>
-                        <option value="">SCHOOL SECTION</option>
-                        <option value="2015-2016">2015-2016</option>
-                        <option value="2015-2016">2015-2016</option>
-                        <option value="2015-2016">2015-2016</option>
-                        <option value="2015-2016">2015-2016</option>
-                        <option value="2015-2016">2015-2016</option>
-                    </select>
-                    <button>Get ID</button>
+                    <button id="getId">Get ID</button>
                 
             </form>
         </div>
+        <!-- GET STUDENT ID VIA CLASS-->
+        <button  class="student-class">GET STUDENT ID VIA CLASS</button>
+        <div class="add_form" id="student-class">
+            <form>
+                    <p>
+                        <select id="class">
+                            <option value="">Selet Class</option>
+                            <option value="SS3">SS3</option>
+                            <option value="SS2">SS2</option>
+                            <option value="SS1">SS1</option>
+                            <option value="JSS3">JSS3</option>
+                            <option value="JSS2">JSS2</option>
+                            <option value="JSS1">JSS1</option>
+                            <option value="BASIC 6">BASIC 6</option>
+                            <option value="BASIC 5">BASIC 5</option>
+                            <option value="BASIC 4">BASIC 4</option>
+                            <option value="BASIC 3">BASIC 3</option>
+                            <option value="BASIC 2">BASIC 2</option>
+                            <option value="BASIC 1">BASIC </option>
+                            <option value="NURSERY 3">NURSERY 3</option>
+                            <option value="NURSERY 2">NURSERY 2</option>
+                            <option value="NURSERY 1">NURSERY 1</option>
+                        </select>
+                    </p>
+                    <button id="classId">Get ID</button>
+                
+            </form>
+        </div>
+
+        <!-- GET STUDENT ID VIA DIVISION-->
+        <button class="division">GET STUDENT ID VIA DIVISON</button> 
         
-      
+        <div class="add_form" id="student-division">
+            <form>
+                
+                <select name="Sclass" id="Sclass">
+                        <option value=""> STUDENT DISION</option>
+                        <option value="SS">Senior School</option>
+                        <option value="JSS">Junior School</option>
+                        <option value="BASIC">Basic School</option>
+                        <option value="NURSERY">Nusery School</option>
+                </select>
+               
+                <button id="studentSection">Get ID</button>
+            </form>
+        </div>
+        </div>
+        
+        <div id="loadingIndicator" style="display: none;">
+            Loading fetching student ID... <!-- You can replace this with your spinner or loading animation -->
+        </div>
+
+        <div class="table">
+            <table id="table">
+                <tr>
+                    <th width="400px">NAME</th>
+                    <th width="100px">CLASS</th>
+                    <th width="250px">ID</th>
+
+                </tr>
+                
+
+            </table>
+        </div>
+        <script src="Java Script/student-id-school.js"></script>
     </body>
-   <script src="main.js"></script>
+   
 
 
 

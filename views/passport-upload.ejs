@@ -10,7 +10,7 @@
                 
                 <!-- Student ID Field -->
                 <p><input type="text" id="studentId" name="studentId" placeholder="Student ID" required /></p>
-                
+                <p><button id="GenerateId">Generate ID</button></p>
                 <!-- Admission Number Field -->
                 <p><input type="text" name="addmissionNo" id="addmissionNo" placeholder="Admission Number" /></p>
                 
@@ -18,10 +18,31 @@
                 <p><input type="date" name="dob" id="dob" placeholder="Date of Birth" /></p>
                 
                 <!-- Gender Selection -->
+                
+                                 <p>
+                                    <select name="class">
+                                        <option value="">Selet Class</option>
+                                        <option value="SS3">SS3</option>
+                                        <option value="SS2">SS2</option>
+                                        <option value="SS1">SS1</option>
+                                        <option value="JSS3">JSS3</option>
+                                        <option value="JSS2">JSS2</option>
+                                        <option value="JSS1">JSS1</option>
+                                        <option value="BASIC 6">BASIC 6</option>
+                                        <option value="BASIC 5">BASIC 5</option>
+                                        <option value="BASIC 4">BASIC 4</option>
+                                        <option value="BASIC 3">BASIC 3</option>
+                                        <option value="BASIC 2">BASIC 2</option>
+                                        <option value="BASIC 1">BASIC 1</option>
+                                        <option value="NURSERY 3">NURSERY 3</option>
+                                        <option value="NURSERY 2">NURSERY 2</option>
+                                        <option value="NURSERY 1">NURSERY 1</option>
+                                    </select>
+                                </p>
                 <div class="gender">
                     <p>
                         <label for="male">MALE</label>
-                        <input type="radio" value="MALE" name="gender" id="male" />
+                         <input type="radio" value="MALE" name="gender" id="male" />
                     </p>
                     <p>
                         <label for="female">FEMALE</label>
@@ -38,7 +59,8 @@
         </div> 
       
     </body>
-   <script src="main.js"></script>
+   <script src="studentId.js"></script>
+   
 
 
 

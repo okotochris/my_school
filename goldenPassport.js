@@ -15,11 +15,13 @@ const blogschema = new Schema({
     },
     dob: {
         type: String,
+    },
+    class:{
+        type: String,
         required: true
     },
     passport: {
         type: String,
-        required: true
     }
 }, { timestamps: true });
 
