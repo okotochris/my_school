@@ -11,7 +11,7 @@ getId.onclick = async (e) => {
     loadingIndicator.style.display = 'block';
    
     try {
-        let response = await fetch(`http://localhost:3000/getstudentid?student_name=${encodeURIComponent(student_name)}`);
+        let response = await fetch(`https://www.myschoolresult.com/getstudentid?student_name=${encodeURIComponent(student_name)}`);
         if (!response.ok) {
             let div = document.createElement('div')
             let container = document.querySelector('.table')
@@ -59,7 +59,7 @@ let classId = document.getElementById('classId')
         let studnetClass = document.getElementById('class').value;
         try{
            console.log(studnetClass)
-            let response = await fetch(`http://localhost:3000/getclassid?class=${studnetClass}`)
+            let response = await fetch(`https://www.myschoolresult.com/getclassid?class=${studnetClass}`)
             if (!response.ok) {
                 let div = document.createElement('div')
                 let container = document.querySelector('.table')
