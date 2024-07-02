@@ -103,7 +103,7 @@ studentSection.onclick = async (e)=>{
    try{
         let Sclass = document.getElementById('Sclass').value;
         console.log(Sclass)
-        let response = await fetch(`http://localhost:3000/getsectionid?class=${Sclass}`)
+        let response = await fetch(`https://www.myschoolresult.com/getsectionid?class=${Sclass}`)
         if (!response.ok) {
             let div = document.createElement('div')
             let container = document.querySelector('.table')
