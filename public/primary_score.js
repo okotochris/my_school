@@ -175,7 +175,7 @@ function comput(x, x2, ca, x3, score, grade){
     if(x4 > 79){
         grade.value = "A+"
     }
-    else if (x4 > 69){
+    else if (x4 > 69 && x4 < 80){
         grade.value = "A"
     }
     else if(x4 > 59 && x4 < 70){
@@ -270,10 +270,10 @@ cal.onclick= function(){
     let performance = total/course
 
     if(performance >= 80){
-       report.value = "Exellent Performance Keep It Up"
+       report.value = "Exellent Performance"
     }
     else if(performance >= 70 && performance < 80 ){
-        report.value = "Very Good Perfomance Keep It Up"
+        report.value = "Very Good Perfomance"
     }
     else if(performance >= 50 && performance < 70 ){
         report.value = " Good Perfomance"
