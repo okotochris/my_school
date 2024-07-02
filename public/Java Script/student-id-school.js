@@ -11,7 +11,7 @@ getId.onclick = async (e) => {
     loadingIndicator.style.display = 'block';
    
     try {
-        let response = await fetch(`https://www.myschoolresult.com/getstudentid?student_name=${encodeURIComponent(student_name)}`);
+        let response = await fetch(`https://www.myschoolresult.com/getstudentid?student_name=${student_name}`);
         if (!response.ok) {
             let div = document.createElement('div')
             let container = document.querySelector('.table')
