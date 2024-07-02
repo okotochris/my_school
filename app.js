@@ -10,6 +10,7 @@ const nodemailer = require('nodemailer')
 const Studentpassport = require('./goldenPassport.js')
 const fs = require('fs');
 const path = require('path');
+const cors = require('cors');
 
 
 
@@ -73,6 +74,14 @@ app.listen(PORT, (err) => {
 
 //setting view engine
 app.set('view engine', 'ejs');
+
+// Allow requests from https://www.myschoolresult.com
+const corsOptions = {
+    origin: 'https://www.myschoolresult.com',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
+app.use(cors(corsOptions));
 
 
 
