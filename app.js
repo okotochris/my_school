@@ -239,10 +239,8 @@ app.post("/details", (req, res) => {
 app.get('/getstudentid', async (req, res) => {
     try {
         let student_name = req.query.student_name;
-        let Sclass = req.query.Sclass;
-        let section = req.query.section;
 
-        let studentId = await Studentpassport.find({ userName: student_name });
+        let studentId = await Studentpassport.find({ userName:{ $regex: student_name, $options: 'i' } });
 
         if (studentId) {
             res.json(studentId);
