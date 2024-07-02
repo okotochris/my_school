@@ -64,7 +64,7 @@ let classId = document.getElementById('classId')
             if (!response.ok) {
                 let div = document.createElement('div')
                 let container = document.querySelector('.table')
-                div.innerHTML = `ID has not been set for ${student_name}`
+                div.innerHTML = `ID has not been set for ${studnetClass}`
                 container.appendChild(div)
                 loadingIndicator.style.display = 'none';    
             }
@@ -108,7 +108,7 @@ studentSection.onclick = async (e)=>{
         if (!response.ok) {
             let div = document.createElement('div')
             let container = document.querySelector('.table')
-            div.innerHTML = `ID has not been set for ${student_name}`
+            div.innerHTML = `ID has not been set for ${Sclass}`
             container.appendChild(div)
             loadingIndicator.style.display = 'none';    
         }
