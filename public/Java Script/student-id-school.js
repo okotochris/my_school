@@ -12,7 +12,7 @@ getId.onclick = async (e) => {
    
     try {
         console.log(student_name)
-        let response = await fetch(`https://www.myschoolresult.com/getstudentid?student_name=${student_name}`);
+        let response = await fetch(`http://localhost:3000/getstudentid?student_name=${student_name}`);
         if (!response.ok) {
             let div = document.createElement('div')
             let container = document.querySelector('.table')
