@@ -3,7 +3,6 @@ let table = document.getElementById('table')
 let loadingIndicator = document.getElementById('loadingIndicator');
 let Sclass = document.getElementById('Sclass')
 let section = document.getElementById('section')
-
 // GETTING STUDENT ID BASE ON NAME 
 getId.onclick = async (e) => {
     e.preventDefault();
@@ -12,7 +11,7 @@ getId.onclick = async (e) => {
    
     try {
         console.log(student_name)
-        let response = await fetch(`http://localhost:3000/getstudentid?student_name=${student_name}`);
+        let response = await fetch(`/getstudentid?student_name=${student_name}`);
         if (!response.ok) {
             let div = document.createElement('div')
             let container = document.querySelector('.table')
@@ -164,3 +163,5 @@ division.onclick=()=>{
     studentClassForm.style.display = 'none'
     studentDivisionForm.style.display = 'block'
 }
+
+// UPDATING STUDENT NAME

@@ -266,43 +266,36 @@ app.get('/getclassid', async(req, res)=>{
    }
 })
 
-// GETTING STUDENT ID BASE ON SECTION JUNIOR SECONDARY OR BASIC
-app.get('/getsectionid', async(req, res)=>{
-    let studentClass = req.query.class;
-   try{
-    let studentId = await Studentpassport.find({class: { $regex: studentClass, $options: 'i' }});
-    res.json(studentId)
-     }
-   catch(err){
-    console.log(err)
-   }
-})
+//CORRECTING WRONG ENTRY NAME
+app.patch('/update-student-name', async (req, res) => {
+    const { currentName, newName } = req.query; // Capture currentName and newName from query parameters
+    console.log('Current Name:', currentName);
+    console.log('New Name:', newName);
 
-//searching for student id to upload result 
-app.get('/userInfo', async (req, res)=>{
-    try{
-        let userName = req.query.userName
-        let userInfo = await Blog.findOne({userName})
-        //searching for SSS data base if result not found in JSS
-        if(!userInfo){
-            userInfo = await SBlog.findOne({userName})
+    try {
+        const regex = new RegExp(`^${currentName}$`, 'i'); // Ensure exact case-insensitive match
+        console.log('Regex:', regex);
+
+        const updatedStudent = await Studentpassport.findOneAndUpdate(
+            { userName: { $regex: regex } }, // Case-insensitive search
+            { userName: newName },
+            { new: true } // Return the updated document
+        );
+
+        if (updatedStudent) {
+            console.log('Updated Student:', updatedStudent);
+            res.status(200).json(updatedStudent);
+        } else {
+            console.log('Student not found');
+            res.status(404).json({ message: 'Student not found' });
         }
-        if(!userInfo){
-            userInfo = await PBlog.findOne({userName})
-        }
-       if(userInfo){
-            res.json(userInfo)
-        }
-        
-        else{
-            res.json({message: `${userName} is not regiser yet`})
-        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: err.message });
     }
-    catch (err){
-        console.log(err)
-        res.json('unable to retrieve data')
-    }
-})
+});
+
+
 
 //passport upload
 app.get('/passport-upload', (req, res)=>{
