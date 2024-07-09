@@ -16,7 +16,7 @@
         </header>
           <h2>FORM FOR PRIMARY SCHOOL</h2>
             <div class="upload_result"> 
-            <form action="primary" method="post" onsubmit="return check();">
+            <form action="nursery" method="post" onsubmit="return check();">
                 <fieldset>
                     <legend>RESULT INFO:</legend>
                     <p><input type="text" value="English Language" name="eng" id="eng"/><input type="text" placeholder="1st Text" name="eng1st" id="eng1st"/><input type="text" placeholder="2st Text" name="eng2nd" id="eng2nd"/><input type="text" id="engca" name="engca" placeholder="continuous accessment"/ ><input type="text" placeholder="Exam" name="engexam" id="engexam"/><input type="text" placeholder="TOTAL SCORE" name="engscore" id="engscore"/><input type="text" placeholder="GRADE" name="engG" id="engG"/><input type="text" name="engRemark" id="engRemark"placeholder="Remark"/></p>
@@ -28,11 +28,7 @@
                     <p><input type="text" value="Verbal Aptitude" name="ver" id="ver"/><input type="text" placeholder="1st Text" name="ver1st" id="ver1st"/><input type="text" placeholder="2st Text" name="ver2nd" id="ver2nd"/><input type="text" id="verca" name="verca" placeholder="continuous accessment"/ ><input type="text" placeholder="Exam" name="verexam" id="verexam"/><input type="text" placeholder="TOTAL SCORE" name="verscore" id="verscore"/><input type="text" placeholder="GRADE" name="verG" id="verG"/><input type="text" name="verRemark" id="verRemark"placeholder="Remark"/></p>
                     <p><input type="text" value="Numerical Aptitude" name="vst" id="vst"/><input type="text" placeholder="1st Text" name="vst1st" id="vst1st"/><input type="text" placeholder="2st Text" name="vst2nd" id="vst2nd"/><input type="text" id="vstca" name="vstca" placeholder="continuous accessment"/ ><input type="text" placeholder="Exam" name="vstexam" id="vstexam"/><input type="text" placeholder="TOTAL SCORE" name="vstscore" id="vstscore"/><input type="text" placeholder="GRADE" name="vstG" id="vstG"/><input type="text" name="vstRemark" id="vstRemark"placeholder="Remark"/></p>
                     <p><input type="text" value="Culture & Creative Art" name="cra" id="cra"/><input type="text" placeholder="1st Text" name="cra1st" id="cra1st"/><input type="text" placeholder="2st Text" name="cra2nd" id="cra2nd"/><input type="text" id="craca" name="craca" placeholder="continuous accessment"/ ><input type="text" placeholder="Exam" name="craexam" id="craexam"/><input type="text" placeholder="TOTAL SCORE" name="crascore" id="crascore"/><input type="text" placeholder="GRADE" name="craG" id="craG"/><input type="text" name="craRemark" id="craRemark"placeholder="Remark"/></p>
-                    <p><input type="text" value="National Value" name="spe" id="spe"/><input type="text" placeholder="1st Text" name="spe1st" id="spe1st"/><input type="text" placeholder="2st Text" name="spe2nd" id="spe2nd"/><input type="text" id="speca" name="speca" placeholder="continuous accessment"/ ><input type="text" placeholder="Exam" name="speexam" id="speexam"/><input type="text" placeholder="TOTAL SCORE" name="spescore" id="spescore"/><input type="text" placeholder="GRADE" name="speG" id="speG"/><input type="text" name="speRemark" id="speRemark"placeholder="Remark"/></p>
-                    <p><input type="text" value="Hand Writing" name="hwr" id="hwr"/><input type="text" placeholder="1st Text" name="hwr1st" id="hwr1st"/><input type="text" placeholder="2st Text" name="hwr2nd" id="hwr2nd"/><input type="text" id="hwrca" name="hwrca" placeholder="continuous accessment"/ ><input type="text" placeholder="Exam" name="hwrexam" id="hwrexam"/><input type="text" placeholder="TOTAL SCORE" name="hwrscore" id="hwrscore"/><input type="text" placeholder="GRADE" name="hwrG" id="hwrG"/><input type="text" name="hwrRemark" id="hwrRemark"placeholder="Remark"/></p>
-                    <p><input type="text" value="History" name="hst" id="hst"/><input type="text" placeholder="1st Text" name="hst1st" id="hst1st"/><input type="text" placeholder="2st Text" name="hst2nd" id="hst2nd"/><input type="text" id="hstca" name="hstca" placeholder="continuous accessment"/ ><input type="text" placeholder="Exam" name="hstexam" id="hstexam"/><input type="text" placeholder="TOTAL SCORE" name="hstscore" id="hstscore"/><input type="text" placeholder="GRADE" name="hstG" id="hstG"/><input type="text" name="hstRemark" id="hstRemark"placeholder="Remark"/></p>
-                    <p><input type="text" value="Phonics(Speech Sci.)" name="mus" id="mus"/><input type="text" placeholder="1st Text" name="mus1st" id="mus1st"/><input type="text" placeholder="2st Text" name="mus2nd" id="mus2nd"/><input type="text" id="musca" name="musca" placeholder="continuous accessment"/ ><input type="text" placeholder="Exam" name="musexam" id="musexam"/><input type="text" placeholder="TOTAL SCORE" name="musscore" id="musscore"/><input type="text" placeholder="GRADE" name="musG" id="musG"/><input type="text" name="musRemark" id="musRemark"placeholder="Remark"/></p>
-                    <p><input type="text" value="French Language" name="red" id="red"/><input type="text" placeholder="1st Text" name="red1st" id="red1st"/><input type="text" placeholder="2st Text" name="red2nd" id="red2nd"/><input type="text" id="redca" name="redca" placeholder="continuous accessment"/ ><input type="text" placeholder="Exam" name="redexam" id="redexam"/><input type="text" placeholder="TOTAL SCORE" name="redscore" id="redscore"/><input type="text" placeholder="GRADE" name="redG" id="redG"/><input type="text" name="redRemark" id="redRemark"placeholder="Remark"/></p>
+                   
                    
                 </fieldset>
                 <fieldset class="studentInfo">
@@ -47,12 +43,10 @@
                         <label>CLASS</label>:
                         <select name="class" id="Sclass">
                             <option></option>
-                            <option>BASIC 1</option>
-                            <option>BASIC 2</option>
-                            <option>BASIC 3</option>
-                            <option>BASIC 4</option>
-                            <option>BASIC 5</option>
-                            <option>BASIC 6</option>
+                            <option>PRE-NURSERY</option>
+                            <option>NURSERY 1</option>
+                            <option>NURSERY 2</option>
+                            <option>NURSERY 3</option>
                         </select>
                         <label>SCHOOL TERM</label>:
                         <select name="term" id="Sterm">
@@ -80,7 +74,7 @@
             </form>
         </div>
         <script src="Java Script/main.js"></script>
-        <script src="primary_score.js"></script>
+        <script src="nursery_score.js"></script>
         <script src="../studentId.js"></script>
         <script src="Java Script/fetch.js"></script>
     </body>

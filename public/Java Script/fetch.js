@@ -7,7 +7,7 @@ const student = async (e) => {
     event.preventDefault();
     let userName= document.getElementById('userName').value;
     try {
-        const userInfo = await fetch(`/userInfo?userName=${userName}`);
+        const userInfo = await fetch(`/getstudentid?student_name=${userName}`);
         const userData = await userInfo.json();
 
 //asigning value from database to corresponding input field 
@@ -18,9 +18,8 @@ const student = async (e) => {
             console.log('student is not regester')
         }
         else{
-            studentId.value = userData.studentId
-            schoolName.value = userData.schoolName.toUpperCase()
-            schoolAdd.value = userData.schoolAdd.toUpperCase()
+            studentId.value = userData[0].studentId
+            schoolName.value = userData[0].schoolName.toUpperCase()
         }
     }
            

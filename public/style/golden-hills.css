@@ -18,7 +18,7 @@
   .t_container {
     
   }
-  
+ 
 .school{
     width:100%;
     height:auto;
@@ -30,15 +30,13 @@
     margin:0px auto;
     overflow:hidden;
 }
-.passport{
-    height:120px;
-    width:100px;
-    border:solid 1px black
-}
+
 .logo{
-    width:100px;
-    height:100px;
-    border:solid 1px black
+    width:120px;
+    height:120px;
+    background:url('/golden hill.png');
+    background-repeat: no-repeat;
+    background-size:contain;
 } 
 .school-name{
     text-align:center;
@@ -80,8 +78,9 @@
 .sudent-info{
     width:100%;
     margin:0px auto;
-    font-size:1em;
-    text-align:justify;    
+    font-size:1.1em;
+    text-align:justify;  
+    text-align:center;  
 }
 @media only screen and(max-width:1000px){
     .student-info{

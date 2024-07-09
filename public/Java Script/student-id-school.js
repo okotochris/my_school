@@ -10,7 +10,6 @@ getId.onclick = async (e) => {
     loadingIndicator.style.display = 'block';
    
     try {
-        console.log(student_name)
         let response = await fetch(`/getstudentid?student_name=${student_name}`);
         if (!response.ok) {
             let div = document.createElement('div')
@@ -23,7 +22,6 @@ getId.onclick = async (e) => {
         }
         else{
             let datas = await response.json();
-            console.log(datas);
             datas.forEach(data=>{
                  
             let tr = document.createElement('tr')
@@ -58,8 +56,7 @@ let classId = document.getElementById('classId')
 
         let studnetClass = document.getElementById('class').value;
         try{
-           console.log(studnetClass)
-            let response = await fetch(`https://www.myschoolresult.com/getclassid?class=${studnetClass}`)
+            let response = await fetch(`/getclassid?class=${studnetClass}`)
             if (!response.ok) {
                 let div = document.createElement('div')
                 let container = document.querySelector('.table')
@@ -69,7 +66,6 @@ let classId = document.getElementById('classId')
             }
             else{
                 let datas = await response.json();
-                console.log(datas);
                 datas.forEach(data=>{
                      
                 let tr = document.createElement('tr')
@@ -88,7 +84,6 @@ let classId = document.getElementById('classId')
                 loadingIndicator.style.display = 'none';
                 table.style.display = 'block'
             }
-            console.log(response)
         }
         catch(err){
             console.log(err)
@@ -102,8 +97,7 @@ studentSection.onclick = async (e)=>{
     loadingIndicator.style.display = 'block';
    try{
         let Sclass = document.getElementById('Sclass').value;
-        console.log(Sclass)
-        let response = await fetch(`https://www.myschoolresult.com/getsectionid?class=${Sclass}`)
+        let response = await fetch(`/getsectionid?class=${Sclass}`)
         if (!response.ok) {
             let div = document.createElement('div')
             let container = document.querySelector('.table')
@@ -113,7 +107,6 @@ studentSection.onclick = async (e)=>{
         }
         else{
             let datas = await response.json();
-            console.log(datas);
             datas.forEach(data=>{
                  
             let tr = document.createElement('tr')

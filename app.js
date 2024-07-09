@@ -5,6 +5,7 @@ const Blog = require('./data')
 const SBlog = require('./datas')
 const ABlog = require('./admin.js')
 const PBlog = require('./primary.js')
+const nuseryBlog = require('./nursery.js')
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer')
 const Studentpassport = require('./goldenPassport.js')
@@ -18,6 +19,7 @@ const app = express();
 
 // middleware
 app.use(express.static('image'))
+app.use(express.static('uploads'))
 app.use(express.static('public', {
     setHeaders: (res, path, stat) => {
         if (path.endsWith('.css')) {
@@ -92,30 +94,50 @@ app.get('/', (req, res) => {
 app.get('/admin', (req, res) => {
     res.render('admin')
 })
-app.get('/primary', (req, res) => {
-    res.render('primary')
-})
+
 app.get('/myschool', (req, res)=>{
     res.render('myschool')
 })
 app.get("/admin_form", (req, res) => {
     res.render("admin_form")
 })
-app.get("/golden_hills", (req, res)=>{
-    res.render('golden_hills')
+app.get("/golden_hills", async (req, res)=>{
+    try{
+        let data = await Studentpassport.findOne({studentId:'BRS2624ZXB'})
+        if(data != null){
+           res.render('golden_hills', {result:data})
+        }
+        else{
+            console.log(`No data found for ${joy}`)
+        }
+    }
+    catch(err){
+        console.log(err)
+    }
 })
 //saving primary data to databse 
 app.post('/primary', (req, res) => {
     const Blog = new PBlog(req.body);
     Blog.save()
         .then((result) => {
-            res.redirect('primary')
+            res.render('primary')
         })
         .catch((err) => {
             console.log(err)
         })
 })
 
+//saving nursery database
+app.post('/nursery', (req, res) => {
+    const Blog = new nuseryBlog(req.body);
+    Blog.save()
+        .then((result) => {
+            res.render('nursery')
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+})
 
 //saving admin login
 app.post('/admin_form', (req, res) => {
@@ -130,7 +152,6 @@ app.post('/admin_form', (req, res) => {
     res.render('admin')
     console.log("posted")
 })
-
 
 //saving junior data
 app.post("/adminJunior", (req, res) => {
@@ -167,9 +188,12 @@ app.post('/upload', (req, res) => {
                 else if (x == "junior") {
                     res.render('adminJunior');
                 }
+                else if (x == "primary") {
+                    res.render('primary');
+                }
                 else {
 
-                    res.render('primary')
+                    res.render('nursery')
                 }
             }
         })
@@ -179,6 +203,25 @@ app.post('/upload', (req, res) => {
 
 })
 
+//NEW EDITION STUDENT RESULT 
+app.post('/result', async (req, res)=>{
+    let clas = req.body.class;
+    let term = req.body.term;
+    let id = req.body.studentId;
+    let name = req.body.userName;
+    try{
+        let data = await Studentpassport.findOne({studentId:id})
+        if(data != null){
+           res.render('golden_hills', {result:data})
+        }
+        else{
+            console.log(`No data found for ${name}`)
+        }
+    }
+    catch(err){
+        console.log(err)
+    }
+})
 //posting student result
 app.post("/details", (req, res) => {
 
@@ -266,6 +309,18 @@ app.get('/getclassid', async(req, res)=>{
    }
 })
 
+//getting student id by classname
+app.get('/getsectionid', async(req, res)=>{
+    let studentClass = req.query.class;
+   try{
+    let studentId = await Studentpassport.find({ class:{ $regex: studentClass, $options: 'i' } });
+    res.json(studentId)
+   }
+   catch(err){
+    console.log(err)
+   }
+})
+
 //CORRECTING WRONG ENTRY NAME
 app.patch('/update-student-name', async (req, res) => {
     const { currentName, newName } = req.query; // Capture currentName and newName from query parameters
@@ -296,13 +351,12 @@ app.patch('/update-student-name', async (req, res) => {
 });
 
 
-
-//passport upload
+//generating student id and passport upload
 app.get('/passport-upload', (req, res)=>{
     res.render('passport-upload')
 })
 
-// saving student passport 
+// saving student ID and passport 
 app.post('/passport', upload.single('passport'), (req, res) => {
  
     // Create a new instance of the Mongoose model
@@ -325,7 +379,6 @@ app.post('/passport', upload.single('passport'), (req, res) => {
             res.status(500).send('Internal Server Error');
         });
 });
-
 
 // post request from school updating news field 
 app.post("/myschool", (req, res)=>{

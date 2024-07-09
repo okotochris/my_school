@@ -9,11 +9,7 @@ let pvsscore = document.getElementById('pvsscore')
 let verscore = document.getElementById('verscore')
 let vstscore = document.getElementById('vstscore')
 let crascore = document.getElementById('crascore')
-let spescore = document.getElementById('spescore')
-let hwrscore = document.getElementById('hwrscore')
-let musscore = document.getElementById('musscore')
-let redscore = document.getElementById('redscore')
-let hstscore = document.getElementById('hstscore')
+
 let userNam = document.getElementById('userName')
 let cal = document.getElementById('Calc')
 let report = document.getElementById('Treport')
@@ -116,17 +112,6 @@ verscore.onmouseover = function(){
     comput(x, x2, ca, x3, score, grade, Remark)
 }
 
-//HISTORY 
-hstscore.onmouseover = function(){
-    let x = Number(document.getElementById('hst2nd').value)
-    let x2 = Number(document.getElementById('hst1st').value)
-    let ca = Number(document.getElementById('hstca').value)
-    let x3 = Number(document.getElementById('hstexam').value)
-    let grade = document.getElementById('hstG')
-    let Remark = document.getElementById('hstRemark')
-    let score = hstscore;
-    comput(x, x2, ca, x3, score, grade, Remark)
-}
 // ART
 crascore.onmouseover = function(){
     let x3 = Number(document.getElementById('craexam').value)
@@ -138,54 +123,6 @@ crascore.onmouseover = function(){
     let score = crascore;
     comput(x, x2, ca, x3, score, grade, Remark)
 }
-
-// SPELLING 
-spescore.onmouseover = function(){
-    let x = Number(document.getElementById('spe2nd').value)
-    let x3 = Number(document.getElementById('speexam').value)
-    let ca = Number(document.getElementById('speca').value)
-    let x2 = Number(document.getElementById('spe1st').value)
-    let grade = document.getElementById('speG')
-    let Remark = document.getElementById('speRemark')
-    let score = spescore;
-    comput(x, x2, ca, x3, score, grade, Remark)
-}
-
-// HAND WRITTING
-hwrscore.onmouseover = function(){
-    let x = Number(document.getElementById('hwr2nd').value)
-    let x2 = Number(document.getElementById('hwr1st').value)
-    let ca = Number(document.getElementById('hwrca').value)
-    let x3 = Number(document.getElementById('hwrexam').value)
-    let grade = document.getElementById('hwrG')
-    let Remark = document.getElementById('hwrRemark')
-    let score = hwrscore;
-    comput(x, x2, ca, x3, score, grade, Remark)
-}
-// MUSIC
-musscore.onmouseover = function(){
-    let x = Number(document.getElementById('mus2nd').value)
-    let x2 = Number(document.getElementById('mus1st').value)
-    let ca = Number(document.getElementById('musca').value)
-    let x3 = Number(document.getElementById('musexam').value)
-    let grade = document.getElementById('musG')
-    let Remark = document.getElementById('musRemark')
-    let score = musscore;
-    comput(x, x2, ca, x3, score, grade, Remark)
-}
-
-// CULTURE AND CREATIVE ACT 
-redscore.onmouseover = function(){
-    let x = Number(document.getElementById('red2nd').value)
-    let x2 = Number(document.getElementById('red1st').value)
-    let ca = Number(document.getElementById('redca').value)
-    let x3 = Number(document.getElementById('redexam').value)
-    let grade = document.getElementById('redG')
-    let Remark = document.getElementById('redRemark')
-    let score = redscore;
-    comput(x, x2, ca, x3, score, grade, Remark)
-}
-// 
 
 
 // CACULATING THE GRADE POINT
@@ -244,7 +181,7 @@ cal.onclick= function(){
    
    //calculating the total student perfomance
     let course = 0;
-    let total = Number(rnvscore.value) +Number(hstscore.value)  + Number(bstscore.value) + Number(vstscore.value) + Number(mthscore.value)  + Number(qurscore.value) + Number(pvsscore.value) + Number(verscore.value) + Number(engscore.value) + Number(crascore.value) + Number(hwrscore.value) + Number(spescore.value) + Number(musscore.value)  + Number(redscore.value);
+    let total = Number(rnvscore.value) + Number(bstscore.value) + Number(vstscore.value) + Number(mthscore.value)  + Number(qurscore.value) + Number(pvsscore.value) + Number(verscore.value) + Number(engscore.value) + Number(crascore.value);
    
    // calculating the number of score offered 
         if(rnvscore.value != ""){
@@ -266,9 +203,6 @@ cal.onclick= function(){
         if(qurscore.value != ""){
             course++;
         }
-        if(hstscore.value != ""){
-            course++;
-        }
         if(verscore.value != ""){
             course++;
         }
@@ -280,19 +214,9 @@ cal.onclick= function(){
             course++;
         }
         
-        if(spescore.value != ""){
-            course++;
-        }
-        if(hwrscore.value != ""){
-            course++;
-        }
-             
-        if(musscore.value != ""){
-            course++;
-        }
-        if(redscore.value != ""){
-            course++;
-        }
+        
+         
+    
         
     No_subj.value = course;
     let aver = (total/course).toFixed(2);

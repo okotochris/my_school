@@ -15,13 +15,13 @@ blogSchema = new Schema({
     mthG:{
         type: String
     },
-    mthRemark:{
-        type: String
-    },
     mthexam:{
         type:String
     },
     mthscore:{
+        type:String
+    },
+    mthRemark:{
         type:String
     },
     eng:{
@@ -192,90 +192,6 @@ blogSchema = new Schema({
     craRemark:{
         type:String
     },
-    spe:{
-        type:String
-    },
-    spe1st:{
-        type:String
-    },
-    spe2nd:{
-        type:String
-    }, 
-    speexam:{
-        type:String
-    },
-    spescore:{
-        type:String
-    },
-    speG:{
-        type:String
-    },
-    speRemark:{
-        type:String
-    },
-    hwr:{
-        type:String
-    },
-    hwr1st:{
-        type:String
-    },
-    hwr2nd:{
-        type:String
-    }, 
-    hwrexam:{
-        type:String
-    },
-    hwrscore:{
-        type:String
-    },
-    hwrG:{
-        type:String
-    },
-    hwrRemark:{
-        type:String
-    },
-    mus:{
-        type:String
-    },
-    mus1st:{
-        type:String
-    },
-    mus2nd:{
-        type:String
-    }, 
-    musexam:{
-        type:String
-    },
-    musscore:{
-        type:String
-    },
-    musG:{
-        type:String
-    },
-    musRemark:{
-        type:String
-    },
-    red:{
-        type:String
-    },
-    red1st:{
-        type:String
-    },
-    red2nd:{
-        type:String
-    }, 
-    redexam:{
-        type:String
-    },
-    redscore:{
-        type:String
-    },
-    redG:{
-        type:String
-    },
-    redRemark:{
-        type:String
-    },
     userName:{
         type: String,
         required: true
@@ -319,6 +235,6 @@ blogSchema = new Schema({
         required: true
     },
 }, {timestamp: true})
-const Blog = mongoose.model('Blogp', blogSchema)
+const Blog = mongoose.model('Blogn', blogSchema)
 
 module.exports = Blog

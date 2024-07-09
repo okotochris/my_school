@@ -8,6 +8,18 @@
     <link rel="stylesheet" type="text/css" href="style/golden-hills.css"/>
     <link rel="stylesheet" type="text/css" href="style/download_button.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+	<style>
+		.passport{
+			height:120px;
+			width:100px;
+			border:solid 1px black;
+			background: url('/<%= result.passport %>');
+			background-repeat: no-repeat;
+			background-size:cover;
+			background-position: center;
+    
+		}		
+	</style>
 </head>
 	<body>
 		<div id="resultContainer">
@@ -27,9 +39,9 @@
 			</div>	
 			<div class="sudent-info">
 				<div>BASIC 5, 1ST TERM RESULT 2023/2024 ACADEMIC SESSION</div>
-				<p>NAME OF PUPIL : <u><span>OKOTOAZA CHRISTIAN EGHOSE</span></u> SEX: <span><u>FEMALE</u></span> D.O.B: <span><u>18TH SEPT. 2024</u></span></p>
+				<p>NAME OF PUPIL : <u><span><%= result.userName.toUpperCase() %></span></u> <!--SEX: <span><u>FEMALE</u></span> --> D.O.B: <span><u><%= result.dob %></u></span></p>
 				<P>TOTAL MARKS SCORE: <span><u> 1200</u></span> OUT OF: <span><u>87</u></span> AVERAGE: <span><u>85</u></span> CLASS: <span><u>BASIC 5</u></span></P>
-				<P>ADMISSSION NO.: <span><u>77</u></span> NO. OF TIMES PRESENT: <span><u>95</u></span> NO OF TIMES ABSET: <span><u>3</u></span></P>
+				<P>ADMISSSION NO.: <span><u><%= result.addmissionNo.toUpperCase() %></u></span> NO. OF TIMES PRESENT: <span><u>95</u></span> NO OF TIMES ABSET: <span><u>3</u></span></P>
 			</div>
 			
 			<div class="result">

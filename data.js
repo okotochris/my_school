@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 const blogschema = new Schema({
     eng: {
         type:String,
-       
     },
     eng1st:{
         type:String,
@@ -22,6 +21,10 @@ const blogschema = new Schema({
        
     },
     engG:{
+        type:String,
+        
+    },
+    engRemark:{
         type:String,
         
     },
@@ -56,6 +59,10 @@ const blogschema = new Schema({
         type: String,
        
     },
+    mthRemark:{
+        type: String,
+       
+    },
     bsc:{
         type: String,
         
@@ -83,6 +90,10 @@ const blogschema = new Schema({
         type: String,
         
     },
+    bscRemark:{
+        type: String,
+        
+    },
     btc:{
         type: String, 
     },
@@ -102,6 +113,9 @@ const blogschema = new Schema({
         type: String,
     },
     btcG:{
+        type: String,   
+    },
+    btcRemark:{
         type: String,   
     },
     hec:{
@@ -125,6 +139,10 @@ const blogschema = new Schema({
    
     },
     hecG:{
+        type: String,
+
+    },
+    hecRemark:{
         type: String,
 
     },
@@ -152,6 +170,9 @@ const blogschema = new Schema({
     freG:{
         type: String,
     },
+    freRemark:{
+        type: String,
+    },
     agr:{
         type: String,
      
@@ -174,6 +195,7 @@ const blogschema = new Schema({
         type: String,
     },
     agrG:{type: String},
+    agrRemark:{type: String},
     csc:{
         type: String,
        
@@ -195,6 +217,9 @@ const blogschema = new Schema({
         type: String,
     },
     cscG:{
+        type: String,
+    },
+    cscRemark:{
         type: String,
     },
     crs:{
@@ -221,6 +246,10 @@ const blogschema = new Schema({
         type: String,
        
     },
+    crsRemark:{
+        type: String,
+       
+    },
     ped:{
         type: String,
        
@@ -243,6 +272,10 @@ const blogschema = new Schema({
         type: String,
     },
     pedG:{
+        type: String,
+       
+    },
+    pedRemark:{
         type: String,
        
     },
@@ -272,6 +305,10 @@ const blogschema = new Schema({
         type: String,
        
     },
+    craRemark:{
+        type: String,
+       
+    },
     hiy:{
         type: String,
     },
@@ -293,6 +330,9 @@ const blogschema = new Schema({
         type: String,
     },
     hiyG:{
+        type: String,
+    },
+    hiyRemark:{
         type: String,
     },
     std:{
@@ -317,8 +357,10 @@ const blogschema = new Schema({
         type: String,
     },
     stdG:{
-        type: String,
-        
+        type: String,   
+    },
+    stdRemark:{
+        type: String,  
     },
     ced:{
         type: String,
@@ -342,6 +384,9 @@ const blogschema = new Schema({
     cedG:{
         type: String,
     },
+    cedRemark:{
+        type: String,
+    },
     bst:{
         type: String,
     },
@@ -361,6 +406,9 @@ const blogschema = new Schema({
         type: String,
     },
     bstG:{
+        type: String,
+    },
+    bstRemark:{
         type: String,
     },
     userName:{

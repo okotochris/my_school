@@ -31,19 +31,11 @@ engscore.onmouseover = function(){
     let x3 = Number(document.getElementById('engexam').value)
     let ca = Number(document.getElementById('engca').value)
     let grade = document.getElementById('engG')
+    let remark = document.getElementById('engRemark')
     let score = engscore;
-    comput(x, x2, x3, ca, score, grade)
+    comput(x, x2, x3, ca, score, grade, remark)
 }
-//creative art
-crascore.onmouseover = function(){
-    let x = Number(document.getElementById('cra2nd').value)
-    let x2 = Number(document.getElementById('cra1st').value)
-    let x3 = Number(document.getElementById('craexam').value)
-    let ca = Number(document.getElementById('craca').value)
-    let grade = document.getElementById('craG')
-    let score = crascore;
-    comput(x, x2, x3, ca, score, grade)
-}
+
 
 // MATHES
 mthscore.onmouseover = function(){
@@ -52,8 +44,9 @@ mthscore.onmouseover = function(){
     let x3 = Number(document.getElementById('mthexam').value)
     let ca = Number(document.getElementById('mthca').value)
     let grade = document.getElementById('mthG')
+    let remark = document.getElementById('mthRemark')
     let score = mthscore;
-    comput(x, x2, x3, ca, score, grade)   
+    comput(x, x2, x3, ca, score, grade, remark)   
 }
 
 //AGRICUTURAL STUDY
@@ -63,8 +56,9 @@ agrscore.onmouseover = function(){
     let x3 = Number(document.getElementById('agrexam').value)
     let ca = Number(document.getElementById('agrca').value)
     let grade = document.getElementById('agrG')
+    let remark = document.getElementById('agrRemark')
     let score = agrscore;
-    comput(x, x2, x3, ca, score, grade)
+    comput(x, x2, x3, ca, score, grade, remark)
 }
 
 // CRS
@@ -74,8 +68,9 @@ crsscore.onmouseover = function(){
     let x3 = Number(document.getElementById('crsexam').value)
     let ca = Number(document.getElementById('crsca').value)
     let grade = document.getElementById('crsG')
+    let remark = document.getElementById('crsRemark')
     let score = crsscore;
-    comput(x, x2, x3, ca, score, grade)
+    comput(x, x2, x3, ca, score, grade, remark)
 }
 
 // basic science
@@ -85,8 +80,9 @@ bscscore.onmouseover = function(){
     let x3 = Number(document.getElementById('bscexam').value)
     let ca = Number(document.getElementById('bscca').value)
     let grade = document.getElementById('bscG')
+    let remark = document.getElementById('bscRemark')
     let score = bscscore;
-    comput(x, x2, x3, ca, score, grade)
+    comput(x, x2, x3, ca, score, grade, remark)
 }
 
 // basic science
@@ -96,8 +92,9 @@ btcscore.onmouseover = function(){
     let x3 = Number(document.getElementById('btcexam').value)
     let ca = Number(document.getElementById('btcca').value)
     let grade = document.getElementById('btcG')
+    let remark = document.getElementById('btcRemark')
     let score = btcscore;
-    comput(x, x2, x3, ca, score, grade)
+    comput(x, x2, x3, ca, score, grade, remark)
 }
 
 // HOME ECONOMIC 
@@ -107,8 +104,9 @@ hecscore.onmouseover = function(){
     let x2 = Number(document.getElementById('hec1st').value)
     let ca = Number(document.getElementById('hecca').value)
     let grade = document.getElementById('hecG')
+    let remark = document.getElementById('hecRemark')
     let score = hecscore;
-    comput(x, x2, x3, ca, score, grade)
+    comput(x, x2, x3, ca, score, grade, remark)
 }
 
 // FRENCH 
@@ -118,8 +116,9 @@ frescore.onmouseover = function(){
     let x2 = Number(document.getElementById('fre1st').value)
     let ca = Number(document.getElementById('freca').value)
     let grade = document.getElementById('freG')
+    let remark = document.getElementById('freRemark')
     let score = frescore;
-    comput(x, x2, x3, ca, score, grade)
+    comput(x, x2, x3, ca, score, grade, remark)
 }
 
 // COMPUTER STUDY
@@ -129,8 +128,9 @@ cscscore.onmouseover = function(){
     let x3 = Number(document.getElementById('cscexam').value)
     let ca = Number(document.getElementById('cscca').value)
     let grade = document.getElementById('cscG')
+    let remark = document.getElementById('cscRemark')
     let score = cscscore;
-    comput(x, x2, x3, ca, score, grade)
+    comput(x, x2, x3, ca, score, grade, remark)
 }
 // PHYSICAL HEALTH EDUCATION
 pedscore.onmouseover = function(){
@@ -139,8 +139,9 @@ pedscore.onmouseover = function(){
     let x3 = Number(document.getElementById('pedexam').value)
     let ca = Number(document.getElementById('pedca').value)
     let grade = document.getElementById('pedG')
+    let remark = document.getElementById('pedRemark')
     let score = pedscore;
-    comput(x, x2, x3, ca, score, grade)
+    comput(x, x2, x3, ca, score, grade, remark)
 }
 
 // CULTURE AND CREATIVE ACT 
@@ -150,8 +151,9 @@ crascore.onmouseover = function(){
     let x3 = Number(document.getElementById('craexam').value)
     let ca = Number(document.getElementById('craca').value)
     let grade = document.getElementById('craG')
+    let remark = document.getElementById('craRemark')
     let score = crascore;
-    comput(x, x2, x3, ca, score, grade)
+    comput(x, x2, x3, ca, score, grade, remark)
 }
 // hausa igbo yoroba
 hiyscore.onmouseover = function(){
@@ -160,8 +162,9 @@ hiyscore.onmouseover = function(){
     let x3 = Number(document.getElementById('hiyexam').value)
     let ca = Number(document.getElementById('hiyca').value)
     let grade = document.getElementById('hiyG')
+    let remark = document.getElementById('hiyRemark')
     let score = hiyscore;
-    comput(x, x2, x3, ca, score, grade)
+    comput(x, x2, x3, ca, score, grade, remark)
 }
 
 // SOCIAL STUDY
@@ -171,8 +174,9 @@ stdscore.onmouseover = function(){
     let x3 = Number(document.getElementById('stdexam').value)
     let ca = Number(document.getElementById('stdca').value)
     let grade = document.getElementById('stdG')
+    let remark = document.getElementById('stdRemark')
     let score = stdscore;
-    comput(x, x2, x3, ca, score, grade)
+    comput(x, x2, x3, ca, score, grade, remark)
 }
 
 // CIVIC EDUCATION
@@ -182,8 +186,9 @@ cedscore.onmouseover = function(){
     let x3 = Number(document.getElementById('cedexam').value)
     let ca = Number(document.getElementById('cedca').value)
     let grade = document.getElementById('cedG')
+    let remark = document.getElementById('cedRemark')
     let score = cedscore;
-    comput(x, x2, x3, ca, score, grade)
+    comput(x, x2, x3, ca, score, grade, remark)
 }
 
 // BUSINESS STUDY
@@ -193,13 +198,14 @@ bstscore.onmouseover = function(){
     let x3 = Number(document.getElementById('bstexam').value)
     let ca = Number(document.getElementById('bstca').value)
     let grade = document.getElementById('bstG')
+    let remark = document.getElementById('bstRemark')
     let score = bstscore;
-    comput(x, x2, x3, ca, score, grade)
+    comput(x, x2, x3, ca, score, grade, remark)
 }
 
 
 // CACULATING THE GRADE POINT
-function comput(x, x2, x3, ca, score, grade){
+function comput(x, x2, x3, ca, score, grade, remark){
     if(x > 0 || x2 > 0 || x3 > 0){  
         score.value = x + x2 + x3 + ca
     }
@@ -210,21 +216,27 @@ function comput(x, x2, x3, ca, score, grade){
     let x4 = Number(score.value)
     if(x4 > 79){
         grade.value = "A+"
+        remark.value = "Excellent"
     }
     else if (x4 > 69){
         grade.value = "A"
+        remark.value = "Very Good"
     }
     else if(x4 > 59 && x4 < 70){
         grade.value = "B" 
+        remark.value = "Credit"
     }
     else if(x4 > 49 && x4 < 60){
         grade.value = "C"
+        remark.value = "Merit"
     }
     else if(x4 > 39 && x4 < 50){
         grade.value = "D"
+        remark.value = "Pass"
     }
     else if(x4 > 0 && x4 < 40){
         grade.value = "F"
+        remark.value = "Fail"
     }
     else{
         grade.value = ""

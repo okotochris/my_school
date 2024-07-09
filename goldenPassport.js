@@ -22,6 +22,9 @@ const blogschema = new Schema({
     },
     passport: {
         type: String,
+    },
+    gender:{
+        type:String
     }
 }, { timestamps: true });
 

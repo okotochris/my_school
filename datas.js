@@ -13,6 +13,10 @@ const blogschema = new Schema({
         type: String,
         
     },
+    engcca:{
+        type: String,
+        
+    },
     engexam:{
         type: String,
     },
@@ -20,6 +24,9 @@ const blogschema = new Schema({
         type: String,
     },
     engG:{
+        type: String,
+    },
+    engRemark:{
         type: String,
     },
     mth:{
@@ -33,6 +40,12 @@ const blogschema = new Schema({
     mth2nd:{
         type: String,
         
+    },
+    mthRemark:{
+        type: String,
+    },
+    mthcca:{
+        type: String,
     },
     mthexam:{
         type: String,
@@ -62,6 +75,12 @@ const blogschema = new Schema({
     bioG:{
         type: String, 
     },
+    bioRemark:{
+        type: String,
+    },
+    biocca:{
+        type: String,
+    },
     gov:{
         type: String,  
     },
@@ -80,6 +99,12 @@ const blogschema = new Schema({
     govG:{
         type: String,  
     },
+    govRemark:{
+        type: String,
+    },
+    govcca:{
+        type: String,
+    },
     fmt:{
         type: String, 
     },
@@ -96,8 +121,13 @@ const blogschema = new Schema({
         type: String,
     },
     fmtG:{
+        type: String,  
+    },
+    fmtRemark:{
         type: String,
-        
+    },
+    fmtcca:{
+        type: String,
     },
     eco:{
         type: String, 
@@ -115,6 +145,12 @@ const blogschema = new Schema({
         type: String,
     },
     ecoG:{
+        type: String,
+    },
+    ecoRemark:{
+        type: String,
+    },
+    ecocca:{
         type: String,
     },
     lit:{
@@ -139,6 +175,12 @@ const blogschema = new Schema({
         type: String,
     
     },
+    litRemark:{
+        type: String,
+    },
+    litcca:{
+        type: String,
+    },
     cst:{
         type: String,
      
@@ -161,6 +203,12 @@ const blogschema = new Schema({
         type: String,
        
     },
+    cstRemark:{
+        type: String,
+    },
+    cstcca:{
+        type: String,
+    },
     civ:{type:String},
     civ1st:{
         type: String,
@@ -179,6 +227,12 @@ const blogschema = new Schema({
     civG:{
         type: String,
        
+    },
+    civRemark:{
+        type: String,
+    },
+    civcca:{
+        type: String,
     },
     che:{
         type: String,
@@ -202,6 +256,12 @@ const blogschema = new Schema({
         type: String,
        
     },
+    cheRemark:{
+        type: String,
+    },
+    checca:{
+        type: String,
+    },
     agr:{
         type: String,
        
@@ -223,6 +283,12 @@ const blogschema = new Schema({
     agrG:{
         type: String,
        
+    },
+    agrRemark:{
+        type: String,
+    },
+    agrcca:{
+        type: String,
     },
     geo:{
         type: String,
@@ -246,6 +312,12 @@ const blogschema = new Schema({
         type: String,
        
     },
+    geoRemark:{
+        type: String,
+    },
+    geocca:{
+        type: String,
+    },
     phy:{
         type: String,
     },
@@ -266,6 +338,12 @@ const blogschema = new Schema({
     phyG:{
         type: String,
        
+    },
+    phyRemark:{
+        type: String,
+    },
+    phycca:{
+        type: String,
     },
     com:{
         type: String,
@@ -289,6 +367,12 @@ const blogschema = new Schema({
         type: String,
         
     },
+    comRemark:{
+        type: String,
+    },
+    comcca:{
+        type: String,
+    },
     crs:{
         type: String,
        
@@ -310,6 +394,12 @@ const blogschema = new Schema({
     crsG:{
         type: String,
     },
+    crsRemark:{
+        type: String,
+    },
+    crscca:{
+        type: String,
+    },
     acc:{
         type: String,
     },
@@ -326,6 +416,12 @@ const blogschema = new Schema({
         type: String,
     },
     accG:{
+        type: String,
+    },
+    accRemark:{
+        type: String,
+    },
+    acccca:{
         type: String,
     },
     userName:{
