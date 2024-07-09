@@ -22,8 +22,8 @@ async function downloadResultAsJPG() {
         // Ensure the container is fully visible and in the viewport
         window.scrollTo(0, 0);
 
-        // Use dom-to-image to capture the content
-        var blob = await domtoimage.toBlob(tempContainer);
+        // Use dom-to-image to capture the content with highest quality
+        var blob = await domtoimage.toBlob(tempContainer, { quality: 1 }); // Set quality to highest (1)
         var url = URL.createObjectURL(blob);
 
         // Create a link element to download the image

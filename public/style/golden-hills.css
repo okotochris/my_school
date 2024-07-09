@@ -67,7 +67,7 @@
 }
 
 .address{
-    width:67%;
+    width:69%;
     font-weight:bold;
 }
 .contact{
@@ -158,12 +158,12 @@ td{
     width:100%;
 }
 .grade div{
-    width:60%;
+   
     border: solid 1px black;
     display:flex;
     align-items:center;
     flex-direction:column;
-    font-size:9px;
+    font-size:10px;
     font-weight:bold;
     margin-bottom:5px;
     
