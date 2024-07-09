@@ -7,6 +7,14 @@
     margin: 20px auto;
     display:flex;
     justify-content:center;
-    width:100vw;
+    
   }
-  
+ 
+  @media only screen and (max-width:800px){
+    button{
+      width:50%;
+    }
+    .button{
+      width:170vw;
+    }
+  }
