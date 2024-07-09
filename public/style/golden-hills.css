@@ -92,7 +92,7 @@
     font-size:20px;
     font-weight:bold;
     margin:15px auto;
-    width:80%;
+    width:95%;
 }
 .sudent-info p{
     margin:7px 0px;
@@ -189,7 +189,7 @@ td{
 .comment p{
     font-size:12px;
     font-weight:bold;
-    padding:1px 0px;
+    padding:0.5px 0px;
 }
 span{
     padding:0px 3px;
