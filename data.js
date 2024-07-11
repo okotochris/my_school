@@ -453,6 +453,12 @@ const blogschema = new Schema({
         type: String,
         required: true
     },
+    absent:{
+        type:String
+    },
+    present:{
+        type:String
+    },
 
 }, {timestamps:true })
 const Blog = mongoose.model('Blog', blogschema)

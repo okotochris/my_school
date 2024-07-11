@@ -468,7 +468,13 @@ const blogschema = new Schema({
     schoolAdd:{
         type: String,
         required: true
-    }
+    },
+    absent:{
+        type:String
+    },
+    present:{
+        type:String
+    },
 
 }, {timestamps:true })
 const Blogs = mongoose.model('Sblog', blogschema)

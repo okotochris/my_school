@@ -11,7 +11,7 @@ let frescore = document.getElementById('frescore')
 let cscscore = document.getElementById('cscscore')
 let pedscore = document.getElementById('pedscore')
 let crascore = document.getElementById('crascore')
-let stdscore = document.getElementById('stdscore')
+
 let bstscore = document.getElementById('bstscore')
 let cedscore = document.getElementById('cedscore')
 let hiyscore = document.getElementById('hiyscore')
@@ -167,17 +167,7 @@ hiyscore.onmouseover = function(){
     comput(x, x2, x3, ca, score, grade, remark)
 }
 
-// SOCIAL STUDY
-stdscore.onmouseover = function(){
-    let x = Number(document.getElementById('std2nd').value)
-    let x2 = Number(document.getElementById('std1st').value)
-    let x3 = Number(document.getElementById('stdexam').value)
-    let ca = Number(document.getElementById('stdca').value)
-    let grade = document.getElementById('stdG')
-    let remark = document.getElementById('stdRemark')
-    let score = stdscore;
-    comput(x, x2, x3, ca, score, grade, remark)
-}
+
 
 // CIVIC EDUCATION
 cedscore.onmouseover = function(){
@@ -260,7 +250,7 @@ cal.onclick= function(){
 
     //calculating for the total student perfomance 
     let course = 0;
-    let total = Number(bscscore.value) + Number(agrscore.value) + Number(hiyscore.value)  + Number(bstscore.value) + Number(mthscore.value)  + Number(frescore.value) + Number(btcscore.value) + Number(engscore.value) + Number(cscscore.value) + Number(hecscore.value) + Number(crascore.value) + Number(pedscore.value) + Number(stdscore.value)  + Number(cedscore.value) + Number(crsscore.value);
+    let total = Number(bscscore.value) + Number(agrscore.value) + Number(hiyscore.value)  + Number(bstscore.value) + Number(mthscore.value)  + Number(frescore.value) + Number(btcscore.value) + Number(engscore.value) + Number(cscscore.value) + Number(hecscore.value) + Number(crascore.value) + Number(pedscore.value)  + Number(cedscore.value) + Number(crsscore.value);
     
     //checking the number of courses offered 
         if(bscscore.value != ""){
@@ -293,9 +283,7 @@ cal.onclick= function(){
         if(pedscore.value != ""){
             course++;
         }
-        if(stdscore.value != ""){
-            course++;
-        }
+        
         
         if(agrscore.value != ""){
             course++;

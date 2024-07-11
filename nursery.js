@@ -12,6 +12,9 @@ blogSchema = new Schema({
     mth2nd:{
         type:String
     }, 
+    mthca:{
+        type:String
+    }, 
     mthG:{
         type: String
     },
@@ -31,6 +34,9 @@ blogSchema = new Schema({
         type:String
     },
     eng2nd:{
+        type:String
+    },
+    engca:{
         type:String
     }, 
     engexam:{
@@ -54,6 +60,9 @@ blogSchema = new Schema({
     rnv2nd:{
         type:String
     }, 
+    rnvca:{
+        type:String
+    }, 
     rnvexam:{
         type:String
     },
@@ -73,6 +82,9 @@ blogSchema = new Schema({
         type:String
     },
     bst2nd:{
+        type:String
+    }, 
+    bstca:{
         type:String
     }, 
     bstexam:{
@@ -95,6 +107,9 @@ blogSchema = new Schema({
     },
     pvs2nd:{
         type:String
+    },
+    pvsca:{
+        type:String
     }, 
     pvsexam:{
         type:String
@@ -115,6 +130,9 @@ blogSchema = new Schema({
         type:String
     },
     qur2nd:{
+        type:String
+    },
+    qurca:{
         type:String
     }, 
     qurexam:{
@@ -137,6 +155,9 @@ blogSchema = new Schema({
     },
     ver2nd:{
         type:String
+    },
+    verca:{
+        type:String
     }, 
     verexam:{
         type:String
@@ -157,6 +178,9 @@ blogSchema = new Schema({
         type:String
     },
     vst2nd:{
+        type:String
+    },
+    vstca:{
         type:String
     }, 
     vstexam:{
@@ -179,6 +203,9 @@ blogSchema = new Schema({
     },
     cra2nd:{
         type:String
+    },
+    craca:{
+        type:String
     }, 
     craexam:{
         type:String
@@ -199,6 +226,12 @@ blogSchema = new Schema({
     studentId:{
         type: String,
         required: true
+    },
+    absent:{
+        type:String
+    },
+    present:{
+        type:String
     },
     class:{
         type: String,
@@ -234,7 +267,7 @@ blogSchema = new Schema({
         type: String,
         required: true
     },
-}, {timestamp: true})
+}, {timestamps: true})
 const Blog = mongoose.model('Blogn', blogSchema)
 
 module.exports = Blog

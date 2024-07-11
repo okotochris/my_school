@@ -38,10 +38,10 @@
 				<div class="passport"></div>
 			</div>	
 			<div class="sudent-info">
-				<div>BASIC 5, 1ST TERM RESULT 2023/2024 ACADEMIC SESSION</div>
+				<div><%= details.class %>, 1ST TERM RESULT <%= details.section %> ACADEMIC SESSION</div>
 				<p>NAME OF PUPIL : <u><span><%= result.userName.toUpperCase() %></span></u> <!--SEX: <span><u>FEMALE</u></span> --> D.O.B: <span><u><%= result.dob %></u></span></p>
-				<P>TOTAL MARKS SCORE: <span><u> 1200</u></span> OUT OF: <span><u>87</u></span> AVERAGE: <span><u>85</u></span> CLASS: <span><u>BASIC 5</u></span></P>
-				<P>ADMISSSION NO.: <span><u><%= result.addmissionNo.toUpperCase() %></u></span> NO. OF TIMES PRESENT: <span><u>95</u></span> NO OF TIMES ABSET: <span><u>3</u></span></P>
+				<P>TOTAL MARKS SCORE: <span><u> <%= details.score_obtain %></u></span> OUT OF: <span><u><%= details.score_obtainable %></u></span> AVERAGE: <span><u><%= details.average %></u></span> CLASS: <span><u><%= details.class.toUpperCase() %></u></span></P>
+				<P>ADMISSSION NO.: <span><u><%= result.addmissionNo.toUpperCase() %></u></span> NO. OF TIMES PRESENT: <span><u><%= details.present %></u></span> NO OF TIMES ABSET: <span><u><%= details.absent %></u></span></P>
 			</div>
 			
 			<div class="result">
@@ -60,6 +60,103 @@
 						</tr>
 						
 						<tr>
+							<td><%= details.eng.toUpperCase() %></td>
+							<td><%= details.eng1st %></td>
+							<td><%= details.eng2nd %></td>
+							<td><%= details.engca %></td>
+							<td><%= details.engexam %></td>
+							<td><%= details.engscore %></td>
+							<td><%= details.engG %></td>
+							<td><%= details.engRemark %></td>
+						</tr>
+						<tr>
+							<td><%= details.mth.toUpperCase() %></td>
+							<td><%= details.mth1st %></td>
+							<td><%= details.mth2nd %></td>
+							<td><%= details.mthca %></td>
+							<td><%= details.mthexam %></td>
+							<td><%= details.mthscore %></td>
+							<td><%= details.mthG %></td>
+							<td><%= details.mthRemark %></td>
+						</tr>
+						
+						<tr>
+							<td><%= details.bst.toUpperCase() %></td>
+							<td><%= details.bst1st %></td>
+							<td><%= details.bst2nd %></td>
+							<td><%= details.bstca %></td>
+							<td><%= details.bstexam %></td>
+							<td><%= details.bstscore %></td>
+							<td><%= details.bstG %></td>
+							<td><%= details.bstRemark %></td>
+						</tr>
+						<tr>
+							<td><%= details.rnv.toUpperCase() %></td>
+							<td><%= details.rnv1st %></td>
+							<td><%= details.rnv2nd %></td>
+							<td><%= details.rnvca %></td>
+							<td><%= details.rnvexam %></td>
+							<td><%= details.rnvscore %></td>
+							<td><%= details.rnvG %></td>
+							<td><%= details.rnvRemark %></td>
+						</tr>
+						
+						<tr>
+							<td><%= details.cra.toUpperCase() %></td>
+							<td><%= details.cra1st %></td>
+							<td><%= details.cra2nd %></td>
+							<td><%= details.craca %></td>
+							<td><%= details.craexam %></td>
+							<td><%= details.crascore %></td>
+							<td><%= details.craG %></td>
+							<td><%= details.craRemark %></td>
+						</tr>
+						
+						
+						<tr>
+							<td><%= details.pvs.toUpperCase() %></td>
+							<td><%= details.pvs1st %></td>
+							<td><%= details.pvs2nd %></td>
+							<td><%= details.pvsca %></td>
+							<td><%= details.pvsexam %></td>
+							<td><%= details.pvsscore %></td>
+							<td><%= details.pvsG %></td>
+							<td><%= details.pvsRemark %></td>
+						</tr>
+						<tr>
+							<td><%= details.vst.toUpperCase() %></td>
+							<td><%= details.vst1st %></td>
+							<td><%= details.vst2nd %></td>
+							<td><%= details.vstca %></td>
+							<td><%= details.vstexam %></td>
+							<td><%= details.vstscore %></td>
+							<td><%= details.vstG %></td>
+							<td><%= details.vstRemark %></td>
+						</tr>
+						<tr>
+							<td><%= details.ver.toUpperCase() %></td>
+							<td><%= details.ver1st %></td>
+							<td><%= details.ver2nd %></td>
+							<td><%= details.verca %></td>
+							<td><%= details.verexam %></td>
+							<td><%= details.verscore %></td>
+							<td><%= details.verG %></td>
+							<td><%= details.verRemark %></td>
+						</tr>
+						
+						
+						
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
 							<td></td>
 							<td></td>
 							<td></td>
@@ -130,7 +227,7 @@
 							<td></td>
 							<td></td>
 						</tr>
-						<tr>
+                        <tr>
 							<td></td>
 							<td></td>
 							<td></td>
@@ -140,7 +237,7 @@
 							<td></td>
 							<td></td>
 						</tr>
-						<tr>
+                        <tr>
 							<td></td>
 							<td></td>
 							<td></td>
@@ -150,7 +247,7 @@
 							<td></td>
 							<td></td>
 						</tr>
-						<tr>
+                        <tr>
 							<td></td>
 							<td></td>
 							<td></td>
@@ -160,7 +257,7 @@
 							<td></td>
 							<td></td>
 						</tr>
-						<tr>
+                        <tr>
 							<td></td>
 							<td></td>
 							<td></td>
@@ -170,7 +267,7 @@
 							<td></td>
 							<td></td>
 						</tr>
-						<tr>
+                        <tr>
 							<td></td>
 							<td></td>
 							<td></td>
@@ -180,97 +277,7 @@
 							<td></td>
 							<td></td>
 						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
+                        <tr>
 							<td></td>
 							<td></td>
 							<td></td>

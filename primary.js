@@ -12,6 +12,9 @@ blogSchema = new Schema({
     mth2nd:{
         type:String
     }, 
+    mthca:{
+        type:String
+    }, 
     mthG:{
         type: String
     },
@@ -32,7 +35,10 @@ blogSchema = new Schema({
     },
     eng2nd:{
         type:String
-    }, 
+    },
+    engca:{
+        type:String
+    },  
     engexam:{
         type:String
     },
@@ -52,6 +58,9 @@ blogSchema = new Schema({
         type:String
     },
     rnv2nd:{
+        type:String
+    }, 
+    rnvca:{
         type:String
     }, 
     rnvexam:{
@@ -75,6 +84,9 @@ blogSchema = new Schema({
     bst2nd:{
         type:String
     }, 
+    bstca:{
+        type:String
+    }, 
     bstexam:{
         type:String
     },
@@ -94,6 +106,9 @@ blogSchema = new Schema({
         type:String
     },
     pvs2nd:{
+        type:String
+    },
+    pvsca:{
         type:String
     }, 
     pvsexam:{
@@ -116,7 +131,10 @@ blogSchema = new Schema({
     },
     qur2nd:{
         type:String
-    }, 
+    },
+    qurca:{
+        type:String
+    },  
     qurexam:{
         type:String
     },
@@ -137,7 +155,10 @@ blogSchema = new Schema({
     },
     ver2nd:{
         type:String
-    }, 
+    },
+    verca:{
+        type:String
+    },  
     verexam:{
         type:String
     },
@@ -157,6 +178,9 @@ blogSchema = new Schema({
         type:String
     },
     vst2nd:{
+        type:String
+    }, 
+    vstca:{
         type:String
     }, 
     vstexam:{
@@ -180,6 +204,9 @@ blogSchema = new Schema({
     cra2nd:{
         type:String
     }, 
+    craca:{
+        type:String
+    }, 
     craexam:{
         type:String
     },
@@ -199,6 +226,9 @@ blogSchema = new Schema({
         type:String
     },
     spe2nd:{
+        type:String
+    }, 
+    speca:{
         type:String
     }, 
     speexam:{
@@ -222,6 +252,9 @@ blogSchema = new Schema({
     hwr2nd:{
         type:String
     }, 
+    hwrca:{
+        type:String
+    }, 
     hwrexam:{
         type:String
     },
@@ -234,6 +267,54 @@ blogSchema = new Schema({
     hwrRemark:{
         type:String
     },
+    hst:{
+        type:String
+    },
+    hst1st:{
+        type:String
+    },
+    hst2nd:{
+        type:String
+    },
+    hstca:{
+        type:String
+    },  
+    hstexam:{
+        type:String
+    },
+    hstscore:{
+        type:String
+    },
+    hstG:{
+        type:String
+    },
+    hstRemark:{
+        type:String
+    },
+    pvd:{
+        type:String
+    },
+    pvd1st:{
+        type:String
+    },
+    pvd2nd:{
+        type:String
+    },
+    pvdca:{
+        type:String
+    }, 
+    pvdexam:{
+        type:String
+    },
+    pvdscore:{
+        type:String
+    },
+    pvdG:{
+        type:String
+    },
+    pvdRemark:{
+        type:String
+    },
     mus:{
         type:String
     },
@@ -243,6 +324,9 @@ blogSchema = new Schema({
     mus2nd:{
         type:String
     }, 
+    musca:{
+        type:String
+    },
     musexam:{
         type:String
     },
@@ -263,7 +347,10 @@ blogSchema = new Schema({
     },
     red2nd:{
         type:String
-    }, 
+    },
+    redca:{
+        type:String
+    },  
     redexam:{
         type:String
     },
@@ -273,6 +360,7 @@ blogSchema = new Schema({
     redG:{
         type:String
     },
+   
     redRemark:{
         type:String
     },
@@ -291,6 +379,12 @@ blogSchema = new Schema({
     term:{
         type: String,
         required: true
+    },
+    absent:{
+        type:String
+    },
+    present:{
+        type:String
     },
     schoolName:{
         type: String,
@@ -318,7 +412,7 @@ blogSchema = new Schema({
         type: String,
         required: true
     },
-}, {timestamp: true})
+}, {timestamps: true})
 const Blog = mongoose.model('Blogp', blogSchema)
 
 module.exports = Blog

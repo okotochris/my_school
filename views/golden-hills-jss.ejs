@@ -38,10 +38,10 @@
 				<div class="passport"></div>
 			</div>	
 			<div class="sudent-info">
-				<div>BASIC 5, 1ST TERM RESULT 2023/2024 ACADEMIC SESSION</div>
+				<div><%= details.class %>, 1ST TERM RESULT <%= details.section %> ACADEMIC SESSION</div>
 				<p>NAME OF PUPIL : <u><span><%= result.userName.toUpperCase() %></span></u> <!--SEX: <span><u>FEMALE</u></span> --> D.O.B: <span><u><%= result.dob %></u></span></p>
-				<P>TOTAL MARKS SCORE: <span><u> 1200</u></span> OUT OF: <span><u>87</u></span> AVERAGE: <span><u>85</u></span> CLASS: <span><u>BASIC 5</u></span></P>
-				<P>ADMISSSION NO.: <span><u><%= result.addmissionNo.toUpperCase() %></u></span> NO. OF TIMES PRESENT: <span><u>95</u></span> NO OF TIMES ABSET: <span><u>3</u></span></P>
+				<P>TOTAL MARKS SCORE: <span><u> <%= details.score_obtain %></u></span> OUT OF: <span><u><%= details.score_obtainable %></u></span> AVERAGE: <span><u><%= details.average %></u></span> CLASS: <span><u><%= details.class.toUpperCase() %></u></span></P>
+				<P>ADMISSSION NO.: <span><u><%= result.addmissionNo.toUpperCase() %></u></span> NO. OF TIMES PRESENT: <span><u><%= details.present %></u></span> NO OF TIMES ABSET: <span><u><%= details.absent %></u></span></P>
 			</div>
 			
 			<div class="result">
@@ -60,35 +60,129 @@
 						</tr>
 						
 						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
+							<td><%= details.eng.toUpperCase() %></td>
+							<td><%= details.eng1st %></td>
+							<td><%= details.eng2nd %></td>
+							<td><%= details.engca %></td>
+							<td><%= details.engexam %></td>
+							<td><%= details.engscore %></td>
+							<td><%= details.engG %></td>
+							<td><%= details.engRemark %></td>
 						</tr>
 						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
+							<td><%= details.mth.toUpperCase() %></td>
+							<td><%= details.mth1st %></td>
+							<td><%= details.mth2nd %></td>
+							<td><%= details.mthca %></td>
+							<td><%= details.mthexam %></td>
+							<td><%= details.mthscore %></td>
+							<td><%= details.mthG %></td>
+							<td><%= details.mthRemark %></td>
 						</tr>
 						
 						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
+							<td><%= details.bst.toUpperCase() %></td>
+							<td><%= details.bst1st %></td>
+							<td><%= details.bst2nd %></td>
+							<td><%= details.bstca %></td>
+							<td><%= details.bstexam %></td>
+							<td><%= details.bstscore %></td>
+							<td><%= details.bstG %></td>
+							<td><%= details.bstRemark %></td>
+						</tr>
+						
+						
+						<tr>
+							<td><%= details.cra.toUpperCase() %></td>
+							<td><%= details.cra1st %></td>
+							<td><%= details.cra2nd %></td>
+							<td><%= details.craca %></td>
+							<td><%= details.craexam %></td>
+							<td><%= details.crascore %></td>
+							<td><%= details.craG %></td>
+							<td><%= details.craRemark %></td>
+						</tr>
+						
+						<tr>
+							<td><%= details.bsc.toUpperCase() %></td>
+							<td><%= details.bsc1st %></td>
+							<td><%= details.bsc2nd %></td>
+							<td><%= details.bscca %></td>
+							<td><%= details.bscexam %></td>
+							<td><%= details.bscscore %></td>
+							<td><%= details.bscG %></td>
+							<td><%= details.bscRemark %></td>
+						</tr>
+                        <tr>
+							<td><%= details.btc.toUpperCase() %></td>
+							<td><%= details.btc1st %></td>
+							<td><%= details.btc2nd %></td>
+							<td><%= details.btcca %></td>
+							<td><%= details.btcexam %></td>
+							<td><%= details.btcscore %></td>
+							<td><%= details.btcG %></td>
+							<td><%= details.btcRemark %></td>
+						</tr>
+                        <tr>
+							<td><%= details.agr.toUpperCase() %></td>
+							<td><%= details.agr1st %></td>
+							<td><%= details.agr2nd %></td>
+							<td><%= details.agrca %></td>
+							<td><%= details.agrexam %></td>
+							<td><%= details.agrscore %></td>
+							<td><%= details.agrG %></td>
+							<td><%= details.agrRemark %></td>
+						</tr>
+                        <tr>
+							<td><%= details.csc.toUpperCase() %></td>
+							<td><%= details.csc1st %></td>
+							<td><%= details.csc2nd %></td>
+							<td><%= details.cscca %></td>
+							<td><%= details.cscexam %></td>
+							<td><%= details.cscscore %></td>
+							<td><%= details.cscG %></td>
+							<td><%= details.cscRemark %></td>
+						</tr>
+                        <tr>
+							<td><%= details.crs.toUpperCase() %></td>
+							<td><%= details.crs1st %></td>
+							<td><%= details.crs2nd %></td>
+							<td><%= details.crsca %></td>
+							<td><%= details.crsexam %></td>
+							<td><%= details.crsscore %></td>
+							<td><%= details.crsG %></td>
+							<td><%= details.crsRemark %></td>
+						</tr>
+						<tr>
+							<td><%= details.ped.toUpperCase() %></td>
+							<td><%= details.ped1st %></td>
+							<td><%= details.ped2nd %></td>
+							<td><%= details.pedca %></td>
+							<td><%= details.pedexam %></td>
+							<td><%= details.pedscore %></td>
+							<td><%= details.pedG %></td>
+							<td><%= details.pedRemark %></td>
+						</tr>
+						<tr>
+							<td><%= details.hiy.toUpperCase() %></td>
+							<td><%= details.hiy1st %></td>
+							<td><%= details.hiy2nd %></td>
+							<td><%= details.hiyca %></td>
+							<td><%= details.hiyexam %></td>
+							<td><%= details.hiyscore %></td>
+							<td><%= details.hiyG %></td>
+							<td><%= details.hiyRemark %></td>
+						</tr>
+						
+						<tr>
+							<td><%= details.fre.toUpperCase() %></td>
+							<td><%= details.fre1st %></td>
+							<td><%= details.fre2nd %></td>
+							<td><%= details.freca %></td>
+							<td><%= details.freexam %></td>
+							<td><%= details.frescore %></td>
+							<td><%= details.freG %></td>
+							<td><%= details.freRemark %></td>
 						</tr>
 						<tr>
 							<td></td>
@@ -130,7 +224,7 @@
 							<td></td>
 							<td></td>
 						</tr>
-						<tr>
+                        <tr>
 							<td></td>
 							<td></td>
 							<td></td>
@@ -140,7 +234,7 @@
 							<td></td>
 							<td></td>
 						</tr>
-						<tr>
+                        <tr>
 							<td></td>
 							<td></td>
 							<td></td>
@@ -150,7 +244,7 @@
 							<td></td>
 							<td></td>
 						</tr>
-						<tr>
+                        <tr>
 							<td></td>
 							<td></td>
 							<td></td>
@@ -160,7 +254,7 @@
 							<td></td>
 							<td></td>
 						</tr>
-						<tr>
+                        <tr>
 							<td></td>
 							<td></td>
 							<td></td>
@@ -170,7 +264,7 @@
 							<td></td>
 							<td></td>
 						</tr>
-						<tr>
+                        <tr>
 							<td></td>
 							<td></td>
 							<td></td>
@@ -180,97 +274,7 @@
 							<td></td>
 							<td></td>
 						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
+                        <tr>
 							<td></td>
 							<td></td>
 							<td></td>

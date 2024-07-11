@@ -14,6 +14,7 @@ let hwrscore = document.getElementById('hwrscore')
 let musscore = document.getElementById('musscore')
 let redscore = document.getElementById('redscore')
 let hstscore = document.getElementById('hstscore')
+let pvdscore = document.getElementById('pvdscore')
 let userNam = document.getElementById('userName')
 let cal = document.getElementById('Calc')
 let report = document.getElementById('Treport')
@@ -65,6 +66,18 @@ qurscore.onmouseover = function(){
     let grade = document.getElementById('qurG')
     let Remark = document.getElementById('qurRemark')
     let score = qurscore;
+    comput(x, x2, ca, x3, score, grade, Remark)
+}
+
+// PRE VOCATIONAL STDY
+pvdscore.onmouseover = function(){
+    let x = Number(document.getElementById('pvd2nd').value)
+    let x2 = Number(document.getElementById('pvd1st').value)
+    let ca = Number(document.getElementById('pvdca').value)
+    let x3 = Number(document.getElementById('pvdexam').value)
+    let grade = document.getElementById('pvdG')
+    let Remark = document.getElementById('pvdRemark')
+    let score = pvdscore;
     comput(x, x2, ca, x3, score, grade, Remark)
 }
 
@@ -244,7 +257,7 @@ cal.onclick= function(){
    
    //calculating the total student perfomance
     let course = 0;
-    let total = Number(rnvscore.value) +Number(hstscore.value)  + Number(bstscore.value) + Number(vstscore.value) + Number(mthscore.value)  + Number(qurscore.value) + Number(pvsscore.value) + Number(verscore.value) + Number(engscore.value) + Number(crascore.value) + Number(hwrscore.value) + Number(spescore.value) + Number(musscore.value)  + Number(redscore.value);
+    let total = Number(rnvscore.value) +Number(hstscore.value)  + Number(bstscore.value) + Number(vstscore.value) + Number(mthscore.value)  + Number(qurscore.value) + Number(pvsscore.value) + Number(verscore.value) + Number(engscore.value) + Number(crascore.value) + Number(hwrscore.value) + Number(spescore.value) + Number(pvdscore.value) + Number(musscore.value)  + Number(redscore.value);
    
    // calculating the number of score offered 
         if(rnvscore.value != ""){
@@ -291,6 +304,9 @@ cal.onclick= function(){
             course++;
         }
         if(redscore.value != ""){
+            course++;
+        }
+        if(pvdscore.value != ""){
             course++;
         }
         

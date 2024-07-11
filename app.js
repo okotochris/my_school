@@ -101,6 +101,7 @@ app.get('/myschool', (req, res)=>{
 app.get("/admin_form", (req, res) => {
     res.render("admin_form")
 })
+/*
 app.get("/golden_hills", async (req, res)=>{
     try{
         let data = await Studentpassport.findOne({studentId:'BRS2624ZXB'})
@@ -115,6 +116,7 @@ app.get("/golden_hills", async (req, res)=>{
         console.log(err)
     }
 })
+*/
 //saving primary data to databse 
 app.post('/primary', (req, res) => {
     const Blog = new PBlog(req.body);
@@ -150,7 +152,6 @@ app.post('/admin_form', (req, res) => {
             console.log(err)
         })
     res.render('admin')
-    console.log("posted")
 })
 
 //saving junior data
@@ -211,13 +212,67 @@ app.post('/result', async (req, res)=>{
     let name = req.body.userName;
     try{
         let data = await Studentpassport.findOne({studentId:id})
-        if(data != null){
-           res.render('golden_hills', {result:data})
+            
+            let studentClass = clas.split(' ')
+            if(studentClass[0] === "BASIC"){
+                let details = await PBlog.findOne({studentId:id, class:clas, term: term})
+                if(details != null){
+                    let schoolName = details.schoolName.toLowerCase()
+                    let resultTemplate = schoolName.split(' ')
+                    resultTemplate = resultTemplate.join('-')
+                    resultTemplate = `${resultTemplate}-basic`
+
+                res.render(resultTemplate, {result:data, details})
+                }
+                else{
+                    res.render('error', { name: name })
+                }
+            }
+                else if(studentClass[0] === "JSS"){
+                    let details = await Blog.findOne({studentId:id, class:clas, term: term})
+                    if(details != null){
+                    let schoolName = details.schoolName.toLowerCase()
+                    let resultTemplate = schoolName.split(' ')
+                    resultTemplate = resultTemplate.join('-')
+                    resultTemplate = `${resultTemplate}-jss`
+
+                    res.render(resultTemplate, {result:data, details})
+                    }
+                    else{
+                        res.render('error', { name: name })
+                    }
+                }
+                else if(studentClass[0] === "SS"){
+                    let details = await SBlog.findOne({studentId:id, class:clas, term: term})
+                    if(details != null){
+                        let schoolName = details.schoolName.toLowerCase()
+                        let resultTemplate = schoolName.split(' ')
+                        resultTemplate = resultTemplate.join('-')
+                        resultTemplate = `${resultTemplate}-ss`
+
+                        res.render(resultTemplate, {result:data, details})
+                    }
+                    else{
+                        res.render('error', { name: name })
+                    }
+                }
+                else if(studentClass[0] === "NURSERY" || studentClass[1] ==="NURSERY"){
+                    let details = await nuseryBlog.findOne({studentId:id, class:clas, term: term})
+                    
+                    if(details != null){
+                        let schoolName = details.schoolName.toLowerCase()
+                        let resultTemplate = schoolName.split(' ')
+                        resultTemplate = resultTemplate.join('-')
+                        resultTemplate = `${resultTemplate}-nursery`
+                        res.render(resultTemplate, {result:data, details})
+                    }
+                    else{
+                        res.render('error', { name: name })
+                    }
+                }
+                
         }
-        else{
-            console.log(`No data found for ${name}`)
-        }
-    }
+    
     catch(err){
         console.log(err)
     }
@@ -256,7 +311,7 @@ app.post("/details", (req, res) => {
                 else {
                    
                     res.render('senior-result', { blog: result })
-                    console.log("data sent to frontend")
+                   
                 }
             })
             .catch(err => { console.log(err) })
@@ -271,7 +326,7 @@ app.post("/details", (req, res) => {
                 else {
                     //const blog = result[0].toObject();
                     res.render('primary-result', { blog: result })
-                    console.log("data sent to frontend")
+                   
                 }
             })
             .catch(err => { console.log(err) })
@@ -324,12 +379,10 @@ app.get('/getsectionid', async(req, res)=>{
 //CORRECTING WRONG ENTRY NAME
 app.patch('/update-student-name', async (req, res) => {
     const { currentName, newName } = req.query; // Capture currentName and newName from query parameters
-    console.log('Current Name:', currentName);
-    console.log('New Name:', newName);
+    
 
     try {
-        const regex = new RegExp(`^${currentName}$`, 'i'); // Ensure exact case-insensitive match
-        console.log('Regex:', regex);
+        const regex = new RegExp(`^${currentName}$`, 'i'); // Ensure exact case-insensitive matc
 
         const updatedStudent = await Studentpassport.findOneAndUpdate(
             { userName: { $regex: regex } }, // Case-insensitive search
