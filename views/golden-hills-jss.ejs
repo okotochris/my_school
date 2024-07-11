@@ -38,7 +38,7 @@
 				<div class="passport"></div>
 			</div>	
 			<div class="sudent-info">
-				<div><%= details.class %>, 1ST TERM RESULT <%= details.section %> ACADEMIC SESSION</div>
+				<div><%= details.class %>, <%= details.term %> RESULT <%= details.section %> ACADEMIC SESSION</div>
 				<p>NAME OF PUPIL : <u><span><%= result.userName.toUpperCase() %></span></u> <!--SEX: <span><u>FEMALE</u></span> --> D.O.B: <span><u><%= result.dob %></u></span></p>
 				<P>TOTAL MARKS SCORE: <span><u> <%= details.score_obtain %></u></span> OUT OF: <span><u><%= details.score_obtainable %></u></span> AVERAGE: <span><u><%= details.average %></u></span> CLASS: <span><u><%= details.class.toUpperCase() %></u></span></P>
 				<P>ADMISSSION NO.: <span><u><%= result.addmissionNo.toUpperCase() %></u></span> NO. OF TIMES PRESENT: <span><u><%= details.present %></u></span> NO OF TIMES ABSET: <span><u><%= details.absent %></u></span></P>
