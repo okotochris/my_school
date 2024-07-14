@@ -89,10 +89,10 @@
     }
 }
 .sudent-info div{
-    font-size:20px;
+    font-size:18px;
     font-weight:bold;
     margin:15px auto;
-    width:95%;
+    width:100%;
 }
 .sudent-info p{
     margin:7px 0px;
@@ -114,6 +114,11 @@
 }
 .score table td{
     height:25px;
+    justify-content:center;
+    align-items:center;
+}
+.score td:not(:first-child) {
+    text-align:center;
 }
 .th1 {
     writing-mode: vertical-rl; /* Vertical writing mode */
@@ -123,6 +128,7 @@
     height: 50px;
 }
 
+    
 .score{
     width:62%;
 }
