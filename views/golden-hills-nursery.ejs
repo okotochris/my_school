@@ -37,8 +37,20 @@
 				</div>
 				<div class="passport"></div>
 			</div>	
+			
+			<!-- USING EJS TO SET THE CLASS LOGO -->
+				<% let roomName; %>
+				<% if (details.class == 'PRE NURSERY') { %>
+					<% roomName = 'SILVER'; %>
+				<% } else if (details.class == 'NURSERY 1') { %>
+					<% roomName = 'SAPPHIRE'; %>
+				<% } else if (details.class == 'NURSERY 2') { %>
+					<% roomName = 'HIGH FLYER'; %>
+				<% } else if (details.class == 'NURSERY 3') { %>
+					<% roomName = 'DIAMOND'; %>
+				<% } %>
 			<div class="sudent-info">
-				<div><%= details.class %>, <%= details.term %> RESULT <%= details.section %> ACADEMIC SESSION</div>
+				<div><%= details.class %> <%=roomName %>, <%= details.term %> RESULT <%= details.section %> ACADEMIC SESSION</div>
 				<p>NAME OF PUPIL : <u><span><%= result.userName.toUpperCase() %></span></u> <!--SEX: <span><u>FEMALE</u></span> --> D.O.B: <span><u><%= result.dob %></u></span></p>
 				<P>TOTAL MARKS SCORE: <span><u> <%= details.score_obtain %></u></span> OUT OF: <span><u><%= details.score_obtainable %></u></span> AVERAGE: <span><u><%= details.average %></u></span> CLASS: <span><u><%= details.class.toUpperCase() %></u></span></P>
 				<P>ADMISSSION NO.: <span><u><%= result.addmissionNo.toUpperCase() %></u></span> NO. OF TIMES PRESENT: <span><u><%= details.present %></u></span> NO OF TIMES ABSET: <span><u><%= details.absent %></u></span></P>
@@ -49,14 +61,14 @@
 					<div>ACADEMIC PROGRESS REPORT SUMMARIES AND TEST (COGNITIVE DOMAIN)</div>
 					<table style="font-family: arial; font-weight:bold;">
 						<tr>
-							<th  width="200">SUBJECT</th>
+							<th class="th" width="200">SUBJECT</th>
 							<th class="th1">1st test 10%</th>
 							<th class="th1">2nd test 10%</th>
 							<th class="th1">project 10%</th>
 							<th class="th1">Exam 70%</th>
 							<th class="th1">Total 100%</th>
 							<th class="th1" width="30">Grades</th>
-							<th width="60">REMARKS</th>
+							<th width="65">REMARKS</th>
 						</tr>
 						
 						<tr>
@@ -133,19 +145,7 @@
 							<td><%= details.vstG %></td>
 							<td><%= details.vstRemark %></td>
 						</tr>
-						<tr>
-							<td><%= details.ver.toUpperCase() %></td>
-							<td><%= details.ver1st %></td>
-							<td><%= details.ver2nd %></td>
-							<td><%= details.verca %></td>
-							<td><%= details.verexam %></td>
-							<td><%= details.verscore %></td>
-							<td><%= details.verG %></td>
-							<td><%= details.verRemark %></td>
-						</tr>
-						
-						
-						
+										
 						<tr>
 							<td><%= details.qur.toUpperCase() %></td>
 							<td><%= details.qur1st %></td>
@@ -157,6 +157,17 @@
 							<td><%= details.qurRemark %></td>
 						</tr>
 		
+						<tr>
+							<td><%= details.ver.toUpperCase() %></td>
+							<td><%= details.ver1st %></td>
+							<td><%= details.ver2nd %></td>
+							<td><%= details.verca %></td>
+							<td><%= details.verexam %></td>
+							<td><%= details.verscore %></td>
+							<td><%= details.verG %></td>
+							<td><%= details.verRemark %></td>
+						</tr>
+
 						<tr>
 							<td></td>
 							<td></td>

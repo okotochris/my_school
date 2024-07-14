@@ -37,8 +37,19 @@
 				</div>
 				<div class="passport"></div>
 			</div>	
+			<!-- USING EJS TO SET THE CLASS LOGO -->
+			<% let roomName; %>
+			<% if (details.class == 'BASIC 1' || details.class == 'BASIC 2') { %>
+				<% roomName = 'GOLD'; %>
+			<% } else if (details.class == 'BASIC 3') { %>
+				<% roomName = 'EMPEROR'; %>
+			<% } else if (details.class == 'BASIC 4') { %>
+				<% roomName = 'EMERALD'; %>
+			<% } else if (details.class == 'BASIC 5') { %>
+				<% roomName = 'SHINNING CRYSTAL'; %>
+			<% } %>
 			<div class="sudent-info">
-				<div><%= details.class %>, <%= details.term %> RESULT <%= details.section %> ACADEMIC SESSION</div>
+				<div><%= details.class %> <%= roomName %>, <%= details.term %> RESULT <%= details.section %> ACADEMIC SESSION</div>
 				<p>NAME OF PUPIL : <u><span><%= result.userName.toUpperCase() %></span></u> <!--SEX: <span><u>FEMALE</u></span> --> D.O.B: <span><u><%= result.dob %></u></span></p>
 				<P>TOTAL MARKS SCORE: <span><u> <%= details.score_obtain %></u></span> OUT OF: <span><u><%= details.score_obtainable %></u></span> AVERAGE: <span><u><%= details.average %></u></span> CLASS: <span><u><%= details.class.toUpperCase() %></u></span></P>
 				<P>ADMISSSION NO.: <span><u><%= result.addmissionNo.toUpperCase() %></u></span> NO. OF TIMES PRESENT: <span><u><%= details.present %></u></span> NO OF TIMES ABSET: <span><u><%= details.absent %></u></span></P>
@@ -56,7 +67,7 @@
 							<th class="th1">Exam 70%</th>
 							<th class="th1">Total 100%</th>
 							<th class="th1" width="30">Grades</th>
-							<th width="60">REMARKS</th>
+							<th width="65">REMARKS</th>
 						</tr>
 						
 						<tr>
