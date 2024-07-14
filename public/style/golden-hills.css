@@ -82,16 +82,7 @@
     text-align:justify;  
     text-align:center;  
 }
-@media only screen and(max-width:1000px){
-    .student-info{
-        font-size:0.9em;
 
-    }
-    .sudent-info div{
-        font-size:16px;
-        
-    }
-}
 .sudent-info div{
     font-size:18px;
     font-weight:bold;
@@ -100,6 +91,16 @@
 }
 .sudent-info p{
     margin:7px 0px;
+}
+@media only screen and(max-width:1000px){
+    .student-info{
+        font-size:0.8em;
+
+    }
+    .sudent-info div{
+        font-size:16px;
+        
+    }
 }
 .result{
     width:100%;
@@ -199,7 +200,7 @@ td{
 .comment p{
     font-size:12px;
     font-weight:bold;
-    padding:1px 0px;
+    padding:1.5px 0px;
 }
 span{
     padding:0px 3px;
