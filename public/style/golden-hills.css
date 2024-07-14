@@ -84,8 +84,12 @@
 }
 @media only screen and(max-width:1000px){
     .student-info{
-        font-size:0.7em;
+        font-size:0.9em;
 
+    }
+    .sudent-info div{
+        font-size:16px;
+        
     }
 }
 .sudent-info div{
@@ -190,12 +194,12 @@ td{
    
 }
 .comment{
-    width:350px;
+    width:280px;
 }
 .comment p{
     font-size:12px;
     font-weight:bold;
-    padding:0.5px 0px;
+    padding:1px 0px;
 }
 span{
     padding:0px 3px;
