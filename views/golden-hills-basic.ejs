@@ -47,6 +47,8 @@
 				<% roomName = 'EMERALD'; %>
 			<% } else if (details.class == 'BASIC 5') { %>
 				<% roomName = 'SHINNING CRYSTAL'; %>
+			<% }else if (details.class == 'BASIC 6') { %>
+				<% roomName = 'PACE SETTERS'; %>
 			<% } %>
 			<div class="sudent-info">
 				<div><%= details.class %> <%= roomName %>, <%= details.term %> RESULT <%= details.section %> ACADEMIC SESSION</div>
@@ -141,16 +143,7 @@
 							<td><%= details.hwrG %></td>
 							<td><%= details.hwrRemark %></td>
 						</tr>
-						<tr>
-							<td><%= details.hst.toUpperCase() %></td>
-							<td><%= details.hst1st %></td>
-							<td><%= details.hst2nd %></td>
-							<td><%= details.hstca %></td>
-							<td><%= details.hstexam %></td>
-							<td><%= details.hstscore %></td>
-							<td><%= details.hstG %></td>
-							<td><%= details.hstRemark %></td>
-						</tr>
+						
 						<tr>
 							<td><%= details.pvs.toUpperCase() %></td>
 							<td><%= details.pvs1st %></td>
@@ -210,6 +203,16 @@
 							<td><%= details.redscore %></td>
 							<td><%= details.redG %></td>
 							<td><%= details.redRemark %></td>
+						</tr>
+						<tr>
+							<td><%= details.hst.toUpperCase() %></td>
+							<td><%= details.hst1st %></td>
+							<td><%= details.hst2nd %></td>
+							<td><%= details.hstca %></td>
+							<td><%= details.hstexam %></td>
+							<td><%= details.hstscore %></td>
+							<td><%= details.hstG %></td>
+							<td><%= details.hstRemark %></td>
 						</tr>
 						<tr>
 							<td></td>
