@@ -459,6 +459,15 @@ const blogschema = new Schema({
     present:{
         type:String
     },
+    tReport:{
+        type:String
+    },
+    promote:{
+        type:String
+    },
+    fees:{
+        type:String
+    },
 
 }, {timestamps:true })
 const Blog = mongoose.model('Blog', blogschema)

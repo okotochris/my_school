@@ -267,6 +267,15 @@ blogSchema = new Schema({
         type: String,
         required: true
     },
+    tReport:{
+        type:String
+    },
+    promote:{
+        type:String
+    },
+    fees:{
+        type:String
+    },
 }, {timestamps: true})
 const Blog = mongoose.model('Blogn', blogSchema)
 

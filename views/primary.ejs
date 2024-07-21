@@ -35,17 +35,18 @@
                     <p><input type="text" value="French Language" name="red" id="red"/><input type="text" placeholder="1st Text" name="red1st" id="red1st"/><input type="text" placeholder="2st Text" name="red2nd" id="red2nd"/><input type="text" id="redca" name="redca" placeholder="continuous accessment"/ ><input type="text" placeholder="Exam" name="redexam" id="redexam"/><input type="text" placeholder="TOTAL SCORE" name="redscore" id="redscore"/><input type="text" placeholder="GRADE" name="redG" id="redG"/><input type="text" name="redRemark" id="redRemark"placeholder="Remark"/></p>
                     <p><input type="text" value="History" name="hst" id="hst"/><input type="text" placeholder="1st Text" name="hst1st" id="hst1st"/><input type="text" placeholder="2st Text" name="hst2nd" id="hst2nd"/><input type="text" id="hstca" name="hstca" placeholder="continuous accessment"/ ><input type="text" placeholder="Exam" name="hstexam" id="hstexam"/><input type="text" placeholder="TOTAL SCORE" name="hstscore" id="hstscore"/><input type="text" placeholder="GRADE" name="hstG" id="hstG"/><input type="text" name="hstRemark" id="hstRemark"placeholder="Remark"/></p>
                 </fieldset>
+
                 <fieldset class="studentInfo">
                     <legend>STUDENT INFO:</legend>
-                    <p><input type="text" placeholder="Last Name  First Name Middle Name" name="userName" id="userName" required="required"/><input type="text" placeholder="average score" id="average" name="average" required/></p>
-                    <p><input type="text" Placeholder="Student ID" name="studentId" id="studentId" required="required"/><button style="width:100px; font-size:14px;" id="GenerateId" >Generate ID</button><button style="width:100px; font-size:14px;" onclick="student()" >Get ID</button></p>
+                    <p><input type="text" placeholder="First Name Middle Name Last Name" name="userName" id="userName" required="required" /><input type="text" Placeholder="Student ID" name="studentId" id="studentId" required="required"/></p>
+                    <p><button style="width:100px; font-size:14px;" id="GenerateId" >Generate ID</button><button style="width:100px; font-size:14px;" onclick="student()" >Get ID</button></p>
+                    <input type="text" placeholder="No. subj offfer" id="No_subj" name="No_subj" /><input type="text" placeholder="average score" id="average" name="average" required/>
                     <p><input type="text" placeholder="score obtainable" id="score_obtainable" name="score_obtainable"/> <input type="text" id="score_obtain" placeholder="total score obtain" name="score_obtain" /></p>
-                    <input type="text" placeholder="No. subj offfer" id="No_subj" name="No_subj" />
-                    <p><input type="text" placeholder="Class teacher report" name="Treport" id="Treport"> <button style="width:100px;" id="Calc">comput</button></p>
+                    <button style="width:300px; font-size:14px;" id="Calc">compute student Scores</button> </p>
                     <p>
                         <p id="respond" style="color:red"></p>
                         <label>CLASS</label>:
-                        <select name="class" id="Sclass">
+                         <select name="class" id="Sclass">
                             <option></option>
                             <option value="BASIC 1">BASIC 1</option>
                             <option value="BASIC 2">BASIC 2</option>
@@ -55,26 +56,32 @@
                             <option value="BASIC 6">BASIC 6</option>
                         </select>
                         <label>SCHOOL TERM</label>:
-                        <select name="term" id="Sterm">
+                        <select id="Sterm" name="term">
                             <option></option>
-                            <option>FIRST TERM</option>
-                            <option>SECNOND TERM</option>
-                            <option>THIRD TERM</option>
+                            <option value="FIRST TERM">FIRST TERM</option>
+                            <option value="SECOND TERM">SECNOND TERM</option>
+                            <option value="THIRD TERM">THRID TERM</option>
                         </select>
                     </p>
-                    <p><input type="text" placeholder="time present" name="present" style="width:100px"/><input type="text" placeholder="time absent" width="100px" name="absent"  style="width:100px"/></p>
+                    
                 </fieldset>
-                <fieldset class="schoolInfo">
-                    <legend>School Info:</legend>
-                    <p><input type="text" placeholder="School name" value="GOLDEN HILLS" name="schoolName"  id="schoolName" required/></p>
-                    <p><input type="text" Placeholder="Address" name="schoolAdd" id="schoolAdd" required/></p>
-                    <select name="section" required>
+                <fieldset>
+                    <legend>OHTER INFOMATION </legend>
+                    <p>                    
+                        <select name="section" required>
                         <option value="">Academic Section</option>
                         <option value="2023 - 2024">2023 - 2024</option>
                         <option value="2024 - 2025">2024 - 2025</option>
                         <option value="2025 - 2026">2025 - 2026</option>
                         <option value="2026 - 2027">2026 - 2027</option>
                     </select>
+                    <input type="text" placeholder="times present" name="present" /><input type="text" placeholder="times absent" name="absent" /><input type="text" placeholder="Class Teacher Report" id="tReport" name="tReport" style="width:200px;"/><input type="text" placeholder="Head Teacher Report" name="Treport" id="Treport" style="width:200px"/><input type="text" placeholder="Promoted to" name="promote" /><input type="text" placeholder="outstanding fees" name="fees"/></p>
+                </fieldset>
+                <fieldset class="schoolInfo">
+                    <legend>School Info:</legend>
+                    <p><input type="text" placeholder="School name" value="GOLDEN HILLS" name="schoolName"  id="schoolName" required/></p>
+                    <p><input type="text" Placeholder="Address" name="schoolAdd" id="schoolAdd" required/></p>
+                    
                 <button>Upload Result</button>
                 </fieldset>
                 <p id="upload" style="color:red;"></p>

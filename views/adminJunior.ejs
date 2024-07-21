@@ -34,20 +34,17 @@
                     <p><input type="text" value="Cultural and Creative Art" name="cra" id="cra"/><input type="text" placeholder="1st Text" name="cra1st" id="cra1st" /><input type="text" placeholder="2st Text" name="cra2nd" id="cra2nd"/><input type="text" placeholder="continuous accessment" id="craca" name="craca"/><input type="text" placeholder="Exam" name="craexam" id="craexam"/><input type="text" placeholder="TOTAL SCORE" name="crascore" id="crascore"/><input type="text" placeholder="GRADE" name="craG" id="craG"/><input type="text" placeholder="Remark" name="craRemark" id="craRemark"/></p>
                     <p><input type="text" value="Prevocational Studies" name="csc" id="csc"/><input type="text" placeholder="1st Text" name="csc1st" id="csc1st"/><input type="text" placeholder="2st Text" name="csc2nd" id="csc2nd"/><input type="text" placeholder="continuous accessment" id="cscca" name="cscca"/><input type="text" placeholder="Exam" name="cscexam" id="cscexam"/><input type="text" placeholder="TOTAL SCORE" name="cscscore" id="cscscore"/><input type="text" placeholder="GRADE" name="cscG" id="cscG"/><input type="text" placeholder="Remark" name="cscRemark" id="cscRemark"/></p>
 
-
-
-
                     <p><input type="text" value="Home Economics" name="hec" id="hec"/><input type="text" placeholder="1st Text" name="hec1st" id="hec1st"/><input type="text" placeholder="2st Text" name="hec2nd" id="hec2nd"/><input type="text" placeholder="continuous accessment" id="hecca" name="hecca"/><input type="text" placeholder="Exam" name="hecexam" id="hecexam"/><input type="text" placeholder="TOTAL SCORE" name="hecscore" id="hecscore"/><input type="text" placeholder="GRADE" name="hecG" id="hecG"/><input type="text" placeholder="Remark" name="hecRemark" id="hecRemark"/></p>
                     <p><input type="text" value="Civic Education" name="ced" id="ced"/><input type="text" placeholder="1st Text" name="ced1st" id="ced1st"/><input type="text" placeholder="2st Text" name="ced2nd" id="ced2nd"/><input type="text" placeholder="continuous accessment" id="cedca" name="cedca"/><input type="text" placeholder="Exam" name="cedexam" id="cedexam"/><input type="text" placeholder="TOTAL SCORE" name="cedscore" id="cedscore"/><input type="text" placeholder="GRADE" name="cedG" id="cedG"/><input type="text" placeholder="Remark" name="cedRemark" id="cedRemark"/></p>
                     
                 </fieldset>
                 <fieldset class="studentInfo">
                     <legend>STUDENT INFO:</legend>
-                    <p><input type="text" placeholder="Last Name  First Name Middle Name" name="userName" id="userName" required="required"/><input type="text" placeholder="average score" id="average" name="average" required/></p>
-                    <p><input type="text" Placeholder="Student ID" name="studentId" id="studentId" required="required"/><button style="width:100px; font-size:14px;" id="GenerateId" >Generate ID</button><button style="width:100px; font-size:14px;" onclick="student()" >Get ID</button></p>
-                    <input type="text" placeholder="No. subj offfer" id="No_subj" name="No_subj" />
+                    <p><input type="text" placeholder="First Name Middle Name Last Name" name="userName" id="userName" required="required" /><input type="text" Placeholder="Student ID" name="studentId" id="studentId" required="required"/></p>
+                    <p><button style="width:100px; font-size:14px;" id="GenerateId" >Generate ID</button><button style="width:100px; font-size:14px;" onclick="student()" >Get ID</button></p>
+                    <input type="text" placeholder="No. subj offfer" id="No_subj" name="No_subj" /><input type="text" placeholder="average score" id="average" name="average" required/>
                     <p><input type="text" placeholder="score obtainable" id="score_obtainable" name="score_obtainable"/> <input type="text" id="score_obtain" placeholder="total score obtain" name="score_obtain" /></p>
-                    <p><input type="text" placeholder="Class teacher report" name="Treport" id="Treport"> <button style="width:100px; font-size:14px;" id="Calc">comput Score</button> </p>
+                    <button style="width:300px; font-size:14px;" id="Calc">compute student Scores</button> </p>
                     <p>
                         <p id="respond" style="color:red"></p>
                         <label>CLASS</label>:
@@ -65,21 +62,28 @@
                             <option value="THIRD TERM">THRID TERM</option>
                         </select>
                     </p>
-                    <p><input type="text" placeholder="time present" name="present" style="width:100px"/><input type="text" placeholder="time absent" width="100px" name="absent"  style="width:100px"/></p>
+                    
                 </fieldset>
-                <fieldset class="schoolInfo">
-                    <legend>School Info:</legend>
-                    <p><input type="text" placeholder="School name" name="schoolName" value="GOLDEN HILLS" id="schoolName" required="required"/></p>
-                    <p><input type="text" Placeholder="Address" name="schoolAdd" id="schoolAdd" required="required"/></p>
-                    <select name="section" required>
+                <fieldset>
+                    <legend>OHTER INFOMATION </legend>
+                    <p>                    
+                        <select name="section" required>
                         <option value="">Academic Section</option>
                         <option value="2023 - 2024">2023 - 2024</option>
                         <option value="2024 - 2025">2024 - 2025</option>
                         <option value="2025 - 2026">2025 - 2026</option>
                         <option value="2026 - 2027">2026 - 2027</option>
                     </select>
+                    <input type="text" placeholder="times present" name="present" /><input type="text" placeholder="times absent" name="absent" /><input type="text" placeholder="Class Teacher Report" id="tReport" name="tReport" style="width:200px;"/><input type="text" placeholder="Head Teacher Report" name="Treport" id="Treport" style="width:200px"/><input type="text" placeholder="Promoted to" name="promote" /><input type="text" placeholder="outstanding fees" name="fees"/></p>
+                </fieldset>
+                <fieldset class="schoolInfo">
+                    <legend>School Info:</legend>
+                    <p><input type="text" placeholder="School name" name="schoolName" value="GOLDEN HILLS" id="schoolName" required="required"/></p>
+                    <p><input type="text" Placeholder="Address" name="schoolAdd" id="schoolAdd" required="required"/></p>
+
                 <button>Upload Result</button>
                 </fieldset>
+                
                 <p id="upload" style="color:red;"></p>
             </form>
         </div>
