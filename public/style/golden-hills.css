@@ -186,12 +186,17 @@ td{
    
 }
 .comment{
-    width:350px;
+    width:270px;
 }
 .comment p{
-    font-size:12px;
+    font-size:14px;
     font-weight:bold;
-    padding:1px 0px;
+    padding:1px 0px;   
+}
+.comment span{
+    color:rgb(71, 71, 161);
+    text-decoration:underline;
+    font-weight:bold;
 }
 span{
     padding:0px 3px;

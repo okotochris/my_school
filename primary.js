@@ -421,6 +421,9 @@ blogSchema = new Schema({
     fees:{
         type:String
     },
+    nextterm:{
+        type:String
+    }
 }, {timestamps: true})
 const Blog = mongoose.model('Blogp', blogSchema)
 

@@ -39,17 +39,21 @@
 			</div>
 			<!-- USING EJS TO SET THE CLASS LOGO -->
 			<% let roomName; %>
+			<% let teacher; %>
 			<% if (details.class == 'JSS 1') { %>
 				<% roomName = 'STER'; %>
+				<% teacher = 'Mr Courage'; %>
 			<% } else if (details.class == 'JSS 2') { %>
 				<% roomName = 'RUBY'; %>
+				<% teacher = 'Mr Godwin'; %>
+
 			<% } %>
 				
 			<div class="sudent-info">
 				<div><%= details.class %> <%= roomName %>, <%= details.term %> RESULT <%= details.section %> ACADEMIC SESSION</div>
 				<p>NAME OF PUPIL : <u><span><%= result.userName.toUpperCase() %></span></u> <!--SEX: <span><u>FEMALE</u></span> --> D.O.B: <span><u><%= result.dob %></u></span></p>
 				<P>TOTAL MARKS SCORE: <span><u> <%= details.score_obtain %></u></span> OUT OF: <span><u><%= details.score_obtainable %></u></span> AVERAGE: <span><u><%= details.average %></u></span> CLASS: <span><u><%= details.class.toUpperCase() %></u></span></P>
-				<P>ADMISSSION NO.: <span><u><%= result.addmissionNo.toUpperCase() %></u></span> NO. OF TIMES PRESENT: <span><u><%= details.present %></u></span> NO OF TIMES ABSET: <span><u><%= details.absent %></u></span></P>
+				<P>ADMISSSION NO.: <span><u><%= result.addmissionNo.toUpperCase() %></u></span> NO. OF TIMES PRESENT: <span><u><%= details.present %></u></span> NO OF TIMES ABSENT: <span><u><%= details.absent %></u></span></P>
 			</div>
 			
 			<div class="result">
@@ -489,20 +493,20 @@
 							</tr>
 						</table>
 					</div>
-					<div class="comment">
-						<p>Class Manager's Comment_______________________</p>
-						<p>_______________________________________________</p>
-						<p>_______________________________________________</p>
-						<p>Class Manager's Name___________________________</p>
-						<p>Signature______________________________________</p>
-						<p>Head of School Comment________________________</p>
-						<p>_______________________________________________</p>
-						<p>Promotd To____________________________________</p>
-						<p>Outstandind Fees_______________________________</p>
-						<p>Next Terms begins______________________________</p>
-						<P>Head of School's Signature_____________________</P>
-						<p>IDEHEN E.R (MRS.)</p>
-					</div>
+					
+						<div class="comment">
+							<p>Class Manager's Comment:<span> <%= details.tReport %></span></p>
+							<p>Class Manager's Name<span><%= teacher %></span></p>
+							<p>Signature<span><img src="jss.png" height="20" width="50"/></span></p>
+							<p>Head of School Comment: <span><%= details.Treport %> </span></p>
+							
+							<p>Promoted To:<span> <%=details.promote %></span></p>
+							<p>Outstandind Fees: <span><%= details.fees %></span></p>
+							<p>Next Terms begins: <span><%= details.nextterm %></span></p>
+							<P>Head of School's Signature<span></span></P>
+							<p>IDEHEN E.R (MRS.)</p>
+						</div>
+					
 				</div>
 			</div>
 		</div>

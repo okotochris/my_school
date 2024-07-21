@@ -484,7 +484,9 @@ const blogschema = new Schema({
     fees:{
         type:String
     },
-
+    nextterm:{
+        type:String
+    }
 }, {timestamps:true })
 const Blogs = mongoose.model('Sblog', blogschema)
 module.exports = Blogs;
