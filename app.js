@@ -215,7 +215,7 @@ app.post('/result', async (req, res)=>{
             
             let studentClass = clas.split(' ')
             if(studentClass[0] === "BASIC"){
-                let details = await PBlog.findOne({studentId:id, class:clas, term: term})
+                let details = await PBlog.findOne({studentId:id, class:clas, term: term}).sort({createdArt:-1})
                 if(details != null){
                     let schoolName = details.schoolName.toLowerCase()
                     let resultTemplate = schoolName.split(' ')
@@ -229,7 +229,7 @@ app.post('/result', async (req, res)=>{
                 }
             }
                 else if(studentClass[0] === "JSS"){
-                    let details = await Blog.findOne({studentId:id, class:clas, term: term})
+                    let details = await Blog.findOne({studentId:id, class:clas, term: term}).sort({createdArt:-1})
                     if(details != null){
                     let schoolName = details.schoolName.toLowerCase()
                     let resultTemplate = schoolName.split(' ')
@@ -243,7 +243,7 @@ app.post('/result', async (req, res)=>{
                     }
                 }
                 else if(studentClass[0] === "SS"){
-                    let details = await SBlog.findOne({studentId:id, class:clas, term: term})
+                    let details = await SBlog.findOne({studentId:id, class:clas, term: term}).sort({createdArt:-1})
                     if(details != null){
                         let schoolName = details.schoolName.toLowerCase()
                         let resultTemplate = schoolName.split(' ')
@@ -257,7 +257,7 @@ app.post('/result', async (req, res)=>{
                     }
                 }
                 else if(studentClass[0] === "NURSERY" || studentClass[1] ==="NURSERY"){
-                    let details = await nuseryBlog.findOne({studentId:id, class:clas, term: term})
+                    let details = await nuseryBlog.findOne({studentId:id, class:clas, term: term}).sort({createdArt:-1})
                     
                     if(details != null){
                         let schoolName = details.schoolName.toLowerCase()
@@ -277,61 +277,7 @@ app.post('/result', async (req, res)=>{
         console.log(err)
     }
 })
-//posting student result
-app.post("/details", (req, res) => {
 
-    let clas = req.body.class;
-    let term = req.body.term;
-    let id = req.body.studentId;
-    let name = req.body.userName;
-
-    //checking if the search is for junior scondary school
-    if (clas == "JSS1" || clas == "JSS2" || clas == "JSS3") {
-        Blog.findOne({ class: clas, term: term, studentId: id })
-
-            .then(result => {
-                if (result == null) {
-                    res.render('error', { name: name })
-                }
-                else {
-                    //const blog = result[0].toObject();
-                    res.render('junior-result', { blog: result })
-                }
-            })
-            .catch(err => { res.send(err) })
-    }
-    //checking if the result is senior secondary school
-    else if (clas == "SS1" || clas == "SS2" || clas == "SS3") {
-        SBlog.findOne({ class: clas, term: term, studentId: id })
-
-            .then(result => {
-                if (result == null) {
-                    res.render('error', { name: name })
-                }
-                else {
-                   
-                    res.render('senior-result', { blog: result })
-                   
-                }
-            })
-            .catch(err => { console.log(err) })
-    }
-    else {
-        PBlog.findOne({ class: clas, term: term, studentId: id })
-       
-            .then(result => {
-                if (result == null) {
-                    res.render('error', { name: name })
-                }
-                else {
-                    //const blog = result[0].toObject();
-                    res.render('primary-result', { blog: result })
-                   
-                }
-            })
-            .catch(err => { console.log(err) })
-    }
-})
 
 //searching student ID base on student name
 app.get('/getstudentid', async (req, res) => {
