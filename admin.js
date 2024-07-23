@@ -11,13 +11,7 @@ let blogSchema = new Schema({
     school:{
         type:String
     },
-    address:{
-        type:String
-    },
     gender:{
-        type:String
-    },
-   date:{
         type:String
     },
     password:{
@@ -26,9 +20,7 @@ let blogSchema = new Schema({
     number:{
         type:String
     },
-    date:{
-        type:String
-    },
+   
    
 }, {timestamps: true})
 

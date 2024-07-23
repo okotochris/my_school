@@ -7,6 +7,11 @@ let section = document.getElementById('section')
 getId.onclick = async (e) => {
     e.preventDefault();
     let student_name = document.getElementById('student_name').value;
+    if(student_name == ''){
+        loadingIndicator.style.display = 'block';
+        loadingIndicator.innerText = 'Field can not be empty';
+        return false;
+    }
     loadingIndicator.style.display = 'block';
    
     try {

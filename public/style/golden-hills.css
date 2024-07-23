@@ -15,10 +15,7 @@
     box-sizing: border-box; /* Ensure padding does not increase element width */
     
   }
-  .t_container {
-    
-  }
- 
+  
 .school{
     width:100%;
     height:auto;
@@ -189,7 +186,7 @@ td{
     width:270px;
 }
 .comment p{
-    font-size:14px;
+    font-size:13px;
     font-weight:bold;
     padding:1px 0px;   
 }
