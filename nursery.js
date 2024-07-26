@@ -219,6 +219,30 @@ blogSchema = new Schema({
     craRemark:{
         type:String
     },
+    plf:{
+        type:String
+    },
+    plf1st:{
+        type:String
+    },
+    plf2nd:{
+        type:String
+    }, 
+    plfca:{
+        type:String
+    },
+    plfexam:{
+        type:String
+    },
+    plfscore:{
+        type:String
+    },
+    plfG:{
+        type:String
+    },
+    plfRemark:{
+        type:String
+    },
     userName:{
         type: String,
         required: true
