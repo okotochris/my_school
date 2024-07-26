@@ -9,6 +9,7 @@ let pvsscore = document.getElementById('pvsscore')
 let verscore = document.getElementById('verscore')
 let vstscore = document.getElementById('vstscore')
 let crascore = document.getElementById('crascore')
+let plfscore = document.getElementById('plfscore')
 
 let userNam = document.getElementById('userName')
 let cal = document.getElementById('Calc')
@@ -64,6 +65,17 @@ qurscore.onmouseover = function(){
     comput(x, x2, ca, x3, score, grade, Remark)
 }
 
+//PRATICALL LIFE 
+plfscore.onmouseover = function(){
+    let x = Number(document.getElementById('plf2nd').value)
+    let x2 = Number(document.getElementById('plf1st').value)
+    let ca = Number(document.getElementById('plfca').value)
+    let x3 = Number(document.getElementById('plfexam').value)
+    let grade = document.getElementById('plfG')
+    let Remark = document.getElementById('plfRemark')
+    let score = plfscore;
+    comput(x, x2, ca, x3, score, grade, Remark)
+}
 //BASIC SCINECE TECHONOLOGY 
 bstscore.onmouseover = function(){
     let x = Number(document.getElementById('bst2nd').value)
@@ -181,7 +193,7 @@ cal.onclick= function(){
    
    //calculating the total student perfomance
     let course = 0;
-    let total = Number(rnvscore.value) + Number(bstscore.value) + Number(vstscore.value) + Number(mthscore.value)  + Number(qurscore.value) + Number(pvsscore.value) + Number(verscore.value) + Number(engscore.value) + Number(crascore.value);
+    let total = Number(rnvscore.value) + Number(bstscore.value) + Number(plfscore.value) + Number(vstscore.value) + Number(mthscore.value)  + Number(qurscore.value) + Number(pvsscore.value) + Number(verscore.value) + Number(engscore.value) + Number(crascore.value);
    
    // calculating the number of score offered 
         if(rnvscore.value != ""){
@@ -191,6 +203,9 @@ cal.onclick= function(){
             course++;
         }
         if(pvsscore.value != ""){
+            course++;
+        }
+        if(plfscore.value != ""){
             course++;
         }
         
