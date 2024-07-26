@@ -339,6 +339,7 @@ blogSchema = new Schema({
     musRemark:{
         type:String
     },
+   
     red:{
         type:String
     },
