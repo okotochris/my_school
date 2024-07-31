@@ -130,6 +130,7 @@ body > div.container > section > div > p{
     width:340px;
     margin:0px auto;
     margin-bottom:10px;
+    z-index:10;
     display:none;
 }
 .uploadform input{
@@ -394,10 +395,12 @@ label img{
 }
 .news_header{
     margin:10px auto;
+    z-index:4;
 }
 .upload{
     width:150px; 
     background:#179D95;
+    z-index:4;
 }
 .news_title{
     color:white;
@@ -416,7 +419,7 @@ label img{
     height: auto;
     cursor: pointer;
 }
-.fullscreen {
+.fullscreen, .cover {
     position: fixed;
     top: 0;
     left: 0;
@@ -426,5 +429,8 @@ label img{
     background-repeat: no-repeat;
     background-position: center;
     background-color: rgba(0, 0, 0, 0.8);
-    z-index: 1000;
+    z-index: 1;
+}
+.cover{
+    display:none;
 }
