@@ -272,7 +272,8 @@ app.post('/result', async (req, res)=>{
             
             let studentClass = clas.split(' ')
             if(studentClass[0] === "BASIC"){
-                let details = await PBlog.findOne({studentId:id, class:clas, term: term}).sort({createdArt:-1})
+                let details = await PBlog.find({studentId:id, class:clas, term: term}).sort({createdArt:-1}).limit(1);
+                details = details[0]
                 if(details != null){
                     let schoolName = details.schoolName.toLowerCase()
                     let resultTemplate = schoolName.split(' ')
@@ -286,7 +287,8 @@ app.post('/result', async (req, res)=>{
                 }
             }
                 else if(studentClass[0] === "JSS"){
-                    let details = await Blog.findOne({studentId:id, class:clas, term: term}).sort({createdArt:-1})
+                    let details = await Blog.find({studentId:id, class:clas, term: term}).sort({createdArt:-1}).limit(1);
+                    details = details[0]
                     if(details != null){
                     let schoolName = details.schoolName.toLowerCase()
                     let resultTemplate = schoolName.split(' ')
@@ -300,7 +302,8 @@ app.post('/result', async (req, res)=>{
                     }
                 }
                 else if(studentClass[0] === "SS"){
-                    let details = await SBlog.findOne({studentId:id, class:clas, term: term}).sort({createdArt:-1})
+                    let details = await SBlog.find({studentId:id, class:clas, term: term}).sort({createdArt:-1}).limit(1);
+                    details = details[0]
                     if(details != null){
                         let schoolName = details.schoolName.toLowerCase()
                         let resultTemplate = schoolName.split(' ')
@@ -314,8 +317,9 @@ app.post('/result', async (req, res)=>{
                     }
                 }
                 else if(studentClass[0] === "NURSERY" || studentClass[1] ==="NURSERY"){
-                    let details = await nuseryBlog.findOne({studentId:id, class:clas, term: term}).sort({createdArt:-1})
-                    
+                    let details = await nuseryBlog.find({studentId:id, class:clas, term: term}).sort({ createdAt: -1 }).limit(1);
+                    details = details[0]
+                    console.log(details.schoolName)
                     if(details != null){
                         let schoolName = details.schoolName.toLowerCase()
                         let resultTemplate = schoolName.split(' ')
