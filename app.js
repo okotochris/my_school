@@ -12,7 +12,8 @@ const Studentpassport = require('./goldenPassport.js')
 const fs = require('fs');
 const path = require('path');
 const cors = require('cors');
-
+const session = require('express-session');
+const { inflateRaw } = require('zlib');
 
 
 const app = express();
@@ -26,6 +27,14 @@ app.use(express.static('public', {
             res.setHeader('Content-Type', 'text/css');
         }
     },
+}));
+app.use(session({
+    secret: '@ieie37%ede',
+    resave: false,
+    saveUninitialized: false,
+    cookie:{
+        maxAge:6000 * 60,
+    }
 }));
 
 // Directory to store uploaded files
@@ -95,12 +104,65 @@ app.get('/admin', (req, res) => {
     res.render('admin')
 })
 
-app.get('/myschool', (req, res)=>{
-    res.render('myschool')
+//CHECKING IF USER HAS LOGIN
+function isAuthenticated(req, res, next){
+   if(req.session.user){
+        next()
+   }else{
+        req.session.returnTo = req.originalUrl; // Store the original URL
+        if(req.originalUrl == '/myschool'){
+            res.redirect('school')
+        }
+        res.redirect('login')
+   }
+}
+
+app.post('/login', async(req, res)=>{
+    const user = req.body.user;
+    const password = req.body.password;
+    try{
+        const data = await ABlog.findOne({ email: user, password: password })
+        if(data){
+            req.session.visited = true;
+            req.session.user = user;
+            const school = data.school;
+            req.session.school = school;
+            const redirectTo = req.session.returnTo || '/myschool';
+            delete req.session.returnTo; // Clear returnTo after use
+            res.redirect(redirectTo);
+        }else{
+            res.redirect('login')
+        }
+
+    }
+    catch(err){
+        console.log(err)
+    }
+
+})
+// API FOR SCHOOL MANAGEMENT SYSTEM 
+app.get('/myschool', isAuthenticated,(req, res)=>{
+        res.render('myschool')
+})
+app.get('/school', (req, res)=>{
+    res.render('school')
 })
 app.get("/admin_form", (req, res) => {
     res.render("admin_form")
 })
+//saving admin login
+app.post('/admin_form', (req, res) => {
+    const Ablog = new ABlog(req.body)
+    Ablog.save()
+        .then(result => {
+            console.log('sent')
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    res.render('admin')
+})
+
 /*
 app.get("/golden_hills", async (req, res)=>{
     try{
@@ -141,19 +203,6 @@ app.post('/nursery', (req, res) => {
         })
 })
 
-//saving admin login
-app.post('/admin_form', (req, res) => {
-    const Ablog = new ABlog(req.body)
-    Ablog.save()
-        .then(result => {
-            console.log('sent')
-        })
-        .catch(err => {
-            console.log(err)
-        })
-    res.render('admin')
-})
-
 //saving junior data
 app.post("/adminJunior", (req, res) => {
     res.render('adminJunior')
@@ -170,12 +219,17 @@ app.post("/adminSenior", (req, res) => {
         .catch(err => console.log(err))
     res.render('adminSenior')
 })
-//search API RESULT
+//LOGING IN TO ACCESSS SCHOOL RESULT PAGE
+app.get('/login', (req, res)=>{
+    res.render('login')
+})
+
+//LOGING IN TO UPLOAD STUDENT RESULT 
 app.post('/upload', (req, res) => {
     let x = req.body.Sclass
     const user = req.body.user;
     const password = req.body.password;
-
+   
     ABlog.findOne({ email: user, password: password })
         .then(result => {
 
@@ -183,6 +237,7 @@ app.post('/upload', (req, res) => {
                 res.render('wrong_user')
             }
             else {
+
                 if (x == "senior") {
                     res.render('adminSenior');
                 }
@@ -196,7 +251,9 @@ app.post('/upload', (req, res) => {
 
                     res.render('nursery')
                 }
+                
             }
+          
         })
         .catch(err => {
             console.log(err)
@@ -419,10 +476,13 @@ app.post('/contact', (req, res) => {
 });
 
 //STUDENT ID FORM
-app.get('/studentid', (req, res)=>{
+app.get('/studentid', isAuthenticated, (req, res)=>{
     res.render('studentid')
 })
-
+app.get('/logout', (req, res)=>{
+    req.session.destroy();
+    res.redirect('login')
+})
 app.use((req, res)=>{
     res.status(404).render('page_not_found')
 })

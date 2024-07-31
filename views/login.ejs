@@ -3,18 +3,13 @@
     <%- include('./partials/head.ejs') %>
     <body>
         <%- include('./partials/header.ejs') %>
+        
         <div class="add_form">
-            <form action="upload" method="post" onsubmit="return check()">
+            <form action="login" method="post" onsubmit="return check()">
                     <p><input type="email" id="user" name="user"  placeholder="Enter your email" required/></p>
                     <p><input type="password" id="password" name="password" placeholder="Password" required/></p>
-                    <select name="Sclass" id="Sclass">
-                            <option value=""> STUDENT CLASS</option>
-                            <option value="senior">Senior School</option>
-                            <option value="junior">Junior School</option>
-                            <option value="primary">Primary School</option>
-                            <option value="nursery">Nursery School</option>
-                    </select>
                     <button>Login</button>
+                   
                 
             </form>
         </div>
