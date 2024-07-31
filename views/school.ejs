@@ -107,7 +107,6 @@
     <div class="school_news">
         
         <div class="school_news_container">
-            <div class="news_title"><p>Shool Update</p></div>
             
                 <div class="news_content">
                     <img src="IMAGE/addmission2.jfif" type="image/png" class="news_image"/>
@@ -187,25 +186,6 @@
                
             }
      }
-     let uploadform = document.querySelector('.uploadform')
-     let upload = document.querySelector('.upload')
-     let x = 1;
-     upload.onclick=()=>{
-        if(x == 1){
-            uploadform.style.display = "block"
-            upload.innerText = "Close Form"
-            document.querySelector('.cover').style.display = 'block'
-            x = 2
-            document.body.style.overflow = 'hidden';
-        }
-        else{
-            uploadform.style.display = "none"
-            upload.innerText = "Upload News"
-            document.querySelector('.cover').style.display = 'none'
-            document.body.style.overflow = '';
-            x = 1
-        }
-    }
     
     //Galary Full Screen View 
     let imageGalary = document.querySelectorAll('.section2 img')
@@ -235,10 +215,11 @@
             div.classList.add('fullscreen');
             div.style.backgroundImage = `url(${image.src})`;
             document.body.appendChild(div)
-
+            document.body.style.overflow = 'hidden';
             //closing fullscreen
             div.onclick = ()=>{
                 document.body.removeChild(div)
+                document.body.style.overflow = '';
             }
         }
     })
