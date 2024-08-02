@@ -32,9 +32,6 @@ app.use(session({
     secret: '@ieie37%ede',
     resave: false,
     saveUninitialized: false,
-    cookie:{
-        maxAge:6000 * 60,
-    }
 }));
 
 // Directory to store uploaded files
