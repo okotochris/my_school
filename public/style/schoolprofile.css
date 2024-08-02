@@ -1,4 +1,16 @@
-
+*{
+    margin:0px;
+    padding:0px;
+    text-decoration:none; 
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  
+  }
+  
 .container{
    
     display:flex;
@@ -122,30 +134,49 @@ body > div.container > section > div > p{
    
 }
 .uploadform{
-    border:solid 2px black; 
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
-    width:340px;
+    text-align:center;
+    width:500px;
+    height:auto;
     margin:0px auto;
-    margin-bottom:10px;
-    z-index:10;
     display:none;
+    background:white;
+    z-index: 3;
+}
+@media only screen and (max-width:700px){
+    .uploadform{
+        width:98%;
+    }
 }
 .uploadform input{
-    width:99%;
+    width:90%;
     height:50px;
     padding:5px;
     margin:2px;
     font-size:14px;
+    border-radius:10px;
 }
 .uploadform textarea{
-    width:335px;
+    width:90%;
     height:200px;
     font-size:20px;
+    border-radius:10px;
+    font-size:14px;
 }
-
+.uploadform button{
+   width:90%;
+   height:40px;
+   background:#179D95;
+   border-radius:10px;
+   margin:5px 0px;
+}
 /*SMALL SCREEN DESIGN */
  /*DROPDOWN MANU*/
  #menu{
@@ -395,31 +426,26 @@ label img{
 }
 .news_header{
     margin:10px auto;
-    z-index:4;
 }
 .upload{
-    width:150px; 
-    background:#179D95;
-    z-index:4;
+    width:400px; 
+    height:40px;
+    border-radius:10px;
 }
-.news_title{
-    color:white;
-    background:purple;
-    height:70px;
-    width:130px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    position:relative;
-    left:4;
-    font-family:roboto;
+.cancel{
+    height:30px;
+    width:30px;
+    position:absolute;
+    top:0px;
+    right:0px;
+    background:#179D95;
 }
 .image-gallery img {
     width: 100px; /* Set a default size for the thumbnails */
     height: auto;
     cursor: pointer;
 }
-.fullscreen, .cover {
+.fullscreen {
     position: fixed;
     top: 0;
     left: 0;
@@ -429,8 +455,20 @@ label img{
     background-repeat: no-repeat;
     background-position: center;
     background-color: rgba(0, 0, 0, 0.8);
-    z-index: 1;
+    z-index: 2;
+
+    
 }
-.cover{
+.fullscreens {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 2;
     display:none;
 }
