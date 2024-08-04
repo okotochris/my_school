@@ -36,18 +36,20 @@ app.use(express.static('public', {
 
 
 app.use(session({
-    secret: process.env.SESSION_SECRET || '@ieie37%ede', // Better to use an environment variable
+    secret: process.env.SESSION_SECRET || 'your_secret',
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
+    store: MongoStore.create({
+        mongoUrl: process.env.MONGODB_URI,
+        mongoOptions: {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        }
+    }),
     cookie: {
-        maxAge: 31536000000, // 1 year in milliseconds
-        // secure: true, // Uncomment if using HTTPS
-        httpOnly: true, // Ensures the cookie is sent only over HTTP(S), not client JavaScript
-        sameSite: 'strict' // Helps prevent CSRF attacks
+        maxAge: 31536000000 // 1 year
     }
 }));
-
 
 // Directory to store uploaded files
 const uploadDir = path.join(__dirname, 'uploads');
