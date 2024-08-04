@@ -37,7 +37,7 @@ app.use(session({
     secret: process.env.SESSION_SECRET || '@ieie37%ede', // Better to use an environment variable
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: 'mongodb://localhost/sessions' }),
+    store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
     cookie: {
         maxAge: 31536000000, // 1 year in milliseconds
         // secure: true, // Uncomment if using HTTPS
