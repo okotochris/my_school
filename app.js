@@ -15,6 +15,8 @@ const cors = require('cors');
 const session = require('express-session');
 const { inflateRaw } = require('zlib');
 const MongoStore = require('connect-mongo');
+require('dotenv').config();
+
 
 
 const app = express();
