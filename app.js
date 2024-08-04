@@ -39,13 +39,6 @@ app.use(session({
     secret: process.env.SESSION_SECRET || 'your_secret',
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({
-        mongoUrl: process.env.MONGODB_URI,
-        mongoOptions: {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        }
-    }),
     cookie: {
         maxAge: 31536000000 // 1 year
     }
