@@ -14,6 +14,7 @@ const path = require('path');
 const cors = require('cors');
 const session = require('express-session');
 const { inflateRaw } = require('zlib');
+const MongoStore = require('connect-mongo');
 
 
 const app = express();
@@ -28,11 +29,23 @@ app.use(express.static('public', {
         }
     },
 }));
+
+
+
+
 app.use(session({
-    secret: '@ieie37%ede',
+    secret: process.env.SESSION_SECRET || '@ieie37%ede', // Better to use an environment variable
     resave: false,
     saveUninitialized: false,
+    store: MongoStore.create({ mongoUrl: 'mongodb://localhost/sessions' }),
+    cookie: {
+        maxAge: 31536000000, // 1 year in milliseconds
+        // secure: true, // Uncomment if using HTTPS
+        httpOnly: true, // Ensures the cookie is sent only over HTTP(S), not client JavaScript
+        sameSite: 'strict' // Helps prevent CSRF attacks
+    }
 }));
+
 
 // Directory to store uploaded files
 const uploadDir = path.join(__dirname, 'uploads');

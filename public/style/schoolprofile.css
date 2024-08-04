@@ -424,9 +424,7 @@ label img{
 .space{
     height:100px;
 }
-.news_header{
-    margin:10px auto;
-}
+
 .upload{
     width:400px; 
     height:40px;
@@ -438,13 +436,13 @@ label img{
         
     }
 }
-.cancel{
+.cancel, .cancelGallary{
     height:30px;
     width:30px;
     position:absolute;
     top:0px;
     right:0px;
-    background:#179D95;
+    background:white;
 }
 .image-gallery img {
     width: 100px; /* Set a default size for the thumbnails */
@@ -476,5 +474,37 @@ label img{
     background-position: center;
     background-color: rgba(0, 0, 0, 0.8);
     z-index: 2;
+    display:none;
+}
+#news{
+    width:100%;
+    height:60px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+#news div{
+    height:40px; 
+    width:40px; 
+    background:url('/school_logo.png'); 
+    background-size:cover;
+    border-radius: 10px;
+    margin-right:5px;
+}
+.gallaryDisplay{
+    position:fixed;
+    height:100%;
+    width:100%;
+    top: 0;
+    left: 0;
+    background:#179D95;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    text-align: center;
+    overflow-y: auto;
+    z-index:3;
     display:none;
 }

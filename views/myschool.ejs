@@ -3,7 +3,10 @@
 <%- include('partials/schoolHead.ejs') %>
 
 <body>
+    <!--full screen display-->
     <div class="fullscreens"></div>
+
+     </div>
         <div class="top_line">
 
         </div>
@@ -58,6 +61,8 @@
         <hr>
         <a href="/myschool">STUDENT PERFOMANCE</a>
         <hr>
+        <a href="/logout">LOGOUT</a>
+        <hr>
        
     </span>
 
@@ -76,23 +81,20 @@
             </div>
               <!--uploading profile image-->
               <label class="profileImage" for="profileImage"><img src="IMAGE/more_image.png" alt="upload image"/></label>
-              <div class="gallary">
+             
                   <div class="upload-field">
                       <form action="" method="post">
                           <input type="file" id="profileImage" name="profileImage" /> 
                       </form>
                   </div>
-              </div>
+             
             <div class="school_slonga">
                 <p>
                     Wisdom High International School is a beacon of educational excellence, 
                     fostering a global perspective in its students. With a
                      commitment to holistic development,the school provides a dynamic learning 
                      environment, integrating innovation and tradition. 
-                     Dedicated educators employ modern teaching methodologies, 
-                     nurturing students to become well-rounded individuals. 
-                     State-of-the-art facilities and a diverse curriculum 
-                     enhance academic and extracurricular pursuits. 
+                     Dedicated educators employ modern teaching methodologies
                     
                 </p>
                 
@@ -109,7 +111,7 @@
                 </div>
 
                 <!--Updating gallary-->
-                <div class="gallary">
+                <div>
                     <div class="upload-field">
                         <form action="" method="post">
                             <input type="file" id="moreImage" name="moreImage" /> 
@@ -122,18 +124,29 @@
     <!--gallary image upload icon-->
     <label for="moreImage"><img src="IMAGE/more_image.png" class="upload-fieldImage" alt="upload image"/></label>
     <div class="galary"><button>View Gallary</button></div>
+    <div class="gallaryDisplay">
+        <div class="cancelGallary"></div>
+    </div>
     <div class="space"></div>
     
-    <div class="news_header"id="news"> <input class="upload"></input> </div>
-    <div class="school_news">
+    
+        <div id="news">
+            <div></div> 
+            <input class="upload"></input> 
+        </div>
+   
+    
+    
+        <div class="school_news">
       
         <div class="uploadform">
             <h2>Create post</h2>
             <form action="myschool" method="post">
                 <div class="cancel">X</div>
-                <p><input type="text" placeholder="Title" required name="title"/></p>
+                <p><input type="text" placeholder="Title" required name="title" id="uploadTitle"/></p>
                 <p><textarea placeholder="content" name="content"></textarea></p>
-                <p><label for="image"><img src="IMAGE/more_image.png"/></label><input type="file" id="image" name="image" style="display:none;"/> </p>
+                <p><label for="imageUpload"><img src="IMAGE/more_image.png" /></label><input type="file" id="imageUpload" name="image" style="display:none;" accept="image"/> </p>
+                <div class="preview"></div>
                 <p><button>Upload</button></p>
             </form>
         </div>
@@ -193,84 +206,7 @@
         </div>
         <p style="color:white; text-align:center; margin-top:50px;">website built by Cristal tech || &copy; My School Simplify all right reserved </p>
    </footer>
-   <script>
-     let menu = document.getElementById('menu')
-     let droup_down = document.querySelector('.droup_down_manu')
-     
-        
-      
-        droup_down.style.display = 'none'
-        menu.onclick =()=>{
-            if( droup_down.style.display == 'none'){
-                droup_down.style.display='flex';
-                let offDisplay = document.querySelectorAll('.link')
-                offDisplay.forEach(link=>{
-                    link.onclick = ()=>{
-                        droup_down.style.display = 'none'
-                    }
-
-                })
-               
-            } 
-            else{
-                droup_down.style.display = 'none'
-               
-            }
-     }
-     let uploadform = document.querySelector('.uploadform')
-     let upload = document.querySelector('.upload')
-     
-     //uploading form call
-     upload.onclick=()=>{
-       
-            uploadform.style.display = "block"
-            document.querySelector('.fullscreens').style.display = "block"
-            document.body.style.overflow = 'hidden'
-        }
-        //uploading form close
-       document.querySelector('.cancel').onclick= ()=>{
-            uploadform.style.display = "none"
-            document.querySelector('.fullscreens').style.display = "none"
-            document.body.style.overflow = ''
-       }
-
-    
-
-
-    //Galary Full Screen View 
-    let imageGalary = document.querySelectorAll('.section2 img')
-    imageGalary.forEach(image=>{
-        image.onclick =()=>{
-            let div = document.createElement('div')
-            div.classList.add('fullscreen');
-            div.style.backgroundImage = `url(${image.src})`;
-            document.body.appendChild(div)
-           
-
-            //closing full screen;
-            div.onclick = ()=>{
-                document.body.removeChild(div)
-            }
-        }
-        
-    })
-
-    //NEWS IMAGE FULL SCREEN VIEW 
-    let newsImage = document.querySelectorAll('.news_content img')
-    newsImage.forEach(image =>{
-        image.onclick = ()=>{
-            let div = document.createElement('div')
-            div.classList.add('fullscreen');
-            div.style.backgroundImage = `url(${image.src})`;
-            document.body.appendChild(div)
-
-            //closing fullscreen
-            div.onclick = ()=>{
-                document.body.removeChild(div)
-            }
-        }
-    })
-   </script>
+   <script src="/Java Script/myschool.js"></script>
 </body>
 
 </html>
