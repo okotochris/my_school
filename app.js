@@ -107,6 +107,7 @@ app.use(cors(corsOptions));
 app.get('/', (req, res) => {
     res.render('index');
 })
+//adimin page to loging to result upload portal
 app.get('/admin', (req, res) => {
     res.render('admin')
 })
@@ -170,22 +171,8 @@ app.post('/admin_form', (req, res) => {
     res.render('admin')
 })
 
-/*
-app.get("/golden_hills", async (req, res)=>{
-    try{
-        let data = await Studentpassport.findOne({studentId:'BRS2624ZXB'})
-        if(data != null){
-           res.render('golden_hills', {result:data})
-        }
-        else{
-            console.log(`No data found for ${joy}`)
-        }
-    }
-    catch(err){
-        console.log(err)
-    }
-})
-*/
+
+
 //saving primary data to databse 
 app.post('/primary', (req, res) => {
     const Blog = new PBlog(req.body);
@@ -419,8 +406,8 @@ app.patch('/update-student-name', async (req, res) => {
 
 
 //generating student id and passport upload
-app.get('/passport-upload', (req, res)=>{
-    res.render('passport-upload')
+app.get('/generateid', isAuthenticated, (req, res)=>{
+    res.render('generateid')
 })
 
 // saving student ID and passport 
