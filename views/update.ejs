@@ -4,13 +4,14 @@
     <body>
         <%- include('./partials/header.ejs') %>
         <div class="add_form">
-            <form action="/passport" method="post" enctype="multipart/form-data">
-                <!-- User Name Field -->
-                <p><input type="text" id="userName" name="userName" placeholder="Last First Middle Name" required /></p>
+            <p>UPDATE STUDENT RECORED</p>
+            <form>
+                  <!-- Student ID Field -->
+                  <p><input type="text" id="studentId" name="studentId" placeholder="Student ID" required /></p>
+                  <p><button id="studentDetails">STUDENT INFO</button></p>
+                  <!-- User Name Field -->
+                <input type="text" id="newName" name="newName" placeholder="New Name" ></p>
                 
-                <!-- Student ID Field -->
-                <p><input type="text" id="studentId" name="studentId" placeholder="Student ID" required /></p>
-                <p><button id="GenerateId">Generate ID</button></p>
                 <!-- Admission Number Field -->
                 <p><input type="text" name="addmissionNo" id="addmissionNo" placeholder="Admission Number" /></p>
                 
@@ -18,7 +19,7 @@
                 <p><input type="date" name="dob" id="dob" placeholder="Date of Birth" /></p>
                 
                                  <p>
-                                    <select name="class">
+                                    <select name="class" id="classN">
                                         <option value="">Selet Class</option>
                                         <option value="SS3">SS3</option>
                                         <option value="SS2">SS2</option>
@@ -52,17 +53,18 @@
                 <p><input type="file" name="passport" id="passport"/></p>    
                 
                 <!-- Submit Button -->
-                <button type="submit">Upload Passport</button>
+                <button id="updateNameForm">Update Name</button>
             </form>
             
         </div> 
-        
+       <div class="cover">
+            <div class="loading"></div>
+       </div>
     </body>
 
-   <script src="studentId.js"></script>
+   <script src="Java Script/updateStudentRecord.js"></script>
    
 
 
 
 
-</html>

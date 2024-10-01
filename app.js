@@ -54,6 +54,7 @@ if (!fs.existsSync(uploadDir)) {
 
 //midle 
 app.use(express.urlencoded({ extended: true }))
+app.use(express.json()); 
 
 //connecting to dateabase
 const dbURI = 'mongodb+srv://data:L6EwGXzqyzLHNFxn@school.vvirl2y.mongodb.net/school?retryWrites=true&w=majority'
@@ -319,7 +320,17 @@ app.post('/result', async (req, res)=>{
     }
 })
 
-
+//GET STUDENT INFORMATION BASE ON ID 
+app.get('/studentinfomation', async (req, res)=>{
+    let studentId = req.query.studnetId
+    try{
+        info = await Studentpassport.findOne({studentId})
+        res.json(info)
+    }
+    catch(err){
+        console.log(err)
+    }
+})
 //searching student ID base on student name
 app.get('/getstudentid', async (req, res) => {
     try {
@@ -366,16 +377,19 @@ app.get('/getsectionid', async(req, res)=>{
 })
 
 //CORRECTING WRONG ENTRY NAME
-app.patch('/update-student-name', async (req, res) => {
-    const { currentName, newName } = req.query; // Capture currentName and newName from query parameters
-    
-
+app.patch('/update-student', async (req, res) => {
+    const { studentId, userName, addmissionNo, dob, classN, gender } = req.body; // Capture fields from the request body
+    console.log(req.body)
     try {
-        const regex = new RegExp(`^${currentName}$`, 'i'); // Ensure exact case-insensitive matc
-
         const updatedStudent = await Studentpassport.findOneAndUpdate(
-            { userName: { $regex: regex } }, // Case-insensitive search
-            { userName: newName },
+            {studentId}, // Use studentId to identify the student
+            { 
+                userName, 
+                addmissionNo, 
+                dob, 
+                class: classN, 
+                gender 
+            }, 
             { new: true } // Return the updated document
         );
 
@@ -393,6 +407,10 @@ app.patch('/update-student-name', async (req, res) => {
 });
 
 
+//UPDATING STUDENT RECORD PAGE
+app.get('/update', isAuthenticated, (req, res)=>{
+    res.render('update')
+})
 //generating student id and passport upload
 app.get('/generateid', isAuthenticated, (req, res)=>{
     res.render('generateid')
