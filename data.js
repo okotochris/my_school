@@ -451,7 +451,7 @@ const blogschema = new Schema({
     },
     schoolAdd:{
         type: String,
-        required: true
+       
     },
     absent:{
         type:String

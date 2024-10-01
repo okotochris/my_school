@@ -108,7 +108,7 @@ app.get('/', (req, res) => {
     res.render('index');
 })
 //adimin page to loging to result upload portal
-app.get('/admin', (req, res) => {
+app.get('/admin', isAuthenticated, (req, res) => {
     res.render('admin')
 })
 
@@ -135,7 +135,7 @@ app.post('/login', async(req, res)=>{
             req.session.user = user;
             const school = data.school;
             req.session.school = school;
-            const redirectTo = req.session.returnTo || '/myschool';
+            const redirectTo = req.session.returnTo || '/admin';
             delete req.session.returnTo; // Clear returnTo after use
             res.redirect(redirectTo);
         }else{
@@ -175,6 +175,7 @@ app.post('/admin_form', (req, res) => {
 
 //saving primary data to databse 
 app.post('/primary', (req, res) => {
+    req.body.schoolName = req.session.school;
     const Blog = new PBlog(req.body);
     Blog.save()
         .then((result) => {
@@ -187,6 +188,7 @@ app.post('/primary', (req, res) => {
 
 //saving nursery database
 app.post('/nursery', (req, res) => {
+    req.body.schoolName = req.session.school;
     const Blog = new nuseryBlog(req.body);
     Blog.save()
         .then((result) => {
@@ -200,6 +202,7 @@ app.post('/nursery', (req, res) => {
 //saving junior data
 app.post("/adminJunior", (req, res) => {
     res.render('adminJunior')
+    req.body.schoolName = req.session.school;
     const blog = new Blog(req.body)
     blog.save()
         .then(result => { console.log('uploaded') })
@@ -207,6 +210,7 @@ app.post("/adminJunior", (req, res) => {
 })
 //saving senior data
 app.post("/adminSenior", (req, res) => {
+    req.body.schoolName = req.session.school;
     const Sblog = new SBlog(req.body);
     Sblog.save()
         .then(result => console.log('uploaded'))
@@ -219,18 +223,8 @@ app.get('/login', (req, res)=>{
 })
 
 //LOGING IN TO UPLOAD STUDENT RESULT 
-app.post('/upload', (req, res) => {
+app.post('/upload', isAuthenticated, (req, res) => {
     let x = req.body.Sclass
-    const user = req.body.user;
-    const password = req.body.password;
-   
-    ABlog.findOne({ email: user, password: password })
-        .then(result => {
-
-            if (result == null) {
-                res.render('wrong_user')
-            }
-            else {
 
                 if (x == "senior") {
                     res.render('adminSenior');
@@ -245,14 +239,6 @@ app.post('/upload', (req, res) => {
 
                     res.render('nursery')
                 }
-                
-            }
-          
-        })
-        .catch(err => {
-            console.log(err)
-        })
-
 })
 
 //NEW EDITION STUDENT RESULT 
@@ -338,9 +324,9 @@ app.post('/result', async (req, res)=>{
 app.get('/getstudentid', async (req, res) => {
     try {
         let student_name = req.query.student_name;
-
-        let studentId = await Studentpassport.find({ userName:{ $regex: student_name, $options: 'i' } });
-
+        let school = req.session.school
+        let studentId = await Studentpassport.find({schoolName:school, userName:{ $regex: student_name, $options: 'i' } });
+        console.log(school)
         if (studentId) {
             res.json(studentId);
         } else {
@@ -355,8 +341,9 @@ app.get('/getstudentid', async (req, res) => {
 //getting student id by classname
 app.get('/getclassid', async(req, res)=>{
     let studentClass = req.query.class;
+    let schoolName= req.session.school;
    try{
-    let studentId = await Studentpassport.find({class: studentClass });
+    let studentId = await Studentpassport.find({schoolName, class: studentClass });
     res.json(studentId)
 
    }
@@ -368,8 +355,9 @@ app.get('/getclassid', async(req, res)=>{
 //getting student id by classname
 app.get('/getsectionid', async(req, res)=>{
     let studentClass = req.query.class;
+    let schoolName = req.session.school
    try{
-    let studentId = await Studentpassport.find({ class:{ $regex: studentClass, $options: 'i' } });
+    let studentId = await Studentpassport.find({schoolName, class:{ $regex: studentClass, $options: 'i' } });
     res.json(studentId)
    }
    catch(err){
@@ -420,13 +408,13 @@ app.post('/passport', upload.single('passport'), (req, res) => {
         addmissionNo: req.body.addmissionNo,
         dob: req.body.dob,
         class:req.body.class,
-        passport: req.file ? req.file.filename : null  // Save filename or null if no file uploaded
+        passport: req.file ? req.file.filename : null,  // Save filename or null if no file uploaded
+        schoolName: req.session.school
     });
 
     newPassport.save()
         .then(result => {
-            console.log(result);
-            res.redirect('/passport-upload');
+            res.redirect('/generateid');
         })
         .catch(err => {
             console.error(err);

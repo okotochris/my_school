@@ -2,26 +2,46 @@
 <html>
     <%- include('./partials/head.ejs') %>
     <body>
-        <%- include('./partials/header.ejs') %>
-        <div class="add_form">
-            <form action="upload" method="post" onsubmit="return check()">
-                    <p><input type="email" id="user" name="user"  placeholder="Enter your email" required/></p>
-                    <p><input type="password" id="password" name="password" placeholder="Password" required/></p>
-                    <select name="Sclass" id="Sclass">
-                            <option value=""> STUDENT CLASS</option>
-                            <option value="senior">Senior School</option>
-                            <option value="junior">Junior School</option>
-                            <option value="primary">Primary School</option>
-                            <option value="nursery">Nursery School</option>
-                    </select>
-                    <button>Login</button>
+        <div class="menu">
+            <div></div>
+            <div></div>
+            <div></div>
                 
-            </form>
         </div>
-        
+        <div class="admin-container">
+            <div class="navigation">
+               <div class="cancel">X</div>
+                <p>QUICK LINKS</p>
+                <p><a href="/">CHECK RESULT</a></p>
+                <p><a href="/admin">UPLOAD RESULT</a></p>
+                <p><a href="/studentid">GET STUDNET ID</a></p>
+                <p><a href="/generateid">NEW STUDENT</a></p>
+                <p><a href="/blacklist">BLACK LIST</a></p>
+                <p><a href="/logout">LOGOUT</a></p>
+            </div>
+           
+            <div class="section">
+                <div class="welcome">Welcome to My School Result Checker</div>
+                <div  class="add_form">
+                        <form action="upload" method="post" onsubmit="return check()">
+                            <select name="Sclass" id="Sclass">
+                                    <option value=""> STUDENT CLASS</option>
+                                    <option value="senior">Senior School</option>
+                                    <option value="junior">Junior School</option>
+                                    <option value="primary">Primary School</option>
+                                    <option value="nursery">Nursery School</option>
+                            </select>
+                            <button>Login</button>
+                        
+                        </form>
+                    </div>
+            </div>
+            
+        </div>
       
     </body>
-   <script src="main.js"></script>
+   <script src="Java Script/menu.js"></script>
+
 
 
 

@@ -411,7 +411,7 @@ blogSchema = new Schema({
     },
     schoolAdd:{
         type: String,
-        required: true
+        
     },
     tReport:{
         type:String

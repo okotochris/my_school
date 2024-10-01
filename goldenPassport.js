@@ -25,6 +25,10 @@ const blogschema = new Schema({
     },
     gender:{
         type:String
+    },
+    schoolName:{
+        type: String,
+        required: true
     }
 }, { timestamps: true });
 
