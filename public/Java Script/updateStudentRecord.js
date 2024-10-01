@@ -6,9 +6,11 @@ let male = document.getElementById('male')
 let female = document.getElementById('female')
 let passport = document.getElementById('passport')
 let updateNameForm = document.getElementById('updateNameForm')
+let loading = document.querySelector('.cover')
 //GETTING STUDENT CURRENT DETAILS 
 studentDetails.onclick = async (e)=>{
     e.preventDefault()
+     loading.style.display = 'block'
     let studentId = document.getElementById('studentId').value;
     try{
         let data = await fetch(`/studentinfomation?studnetId=${studentId}`)
@@ -29,16 +31,17 @@ studentDetails.onclick = async (e)=>{
     catch(err){
         console.log(err)
     }
-
+    finally {
+        // Hide the loading spinner
+        loading.style.display = 'none';
+    }
 }
 
 
-
-let loading = document.querySelector('.cover')
 // Handle form submission for updating student details
 updateNameForm.onclick = async (e) => {
     e.preventDefault();
-     loading.style.display = 'block'
+   
     let studentId = document.getElementById('studentId').value;
     let userName = username.value;
     let addmissionNo = document.getElementById('addmissionNo').value
@@ -72,12 +75,12 @@ updateNameForm.onclick = async (e) => {
         } else {
             alert(result.message || 'Error updating student.');
         }
-        loading.style.display = 'none'
+        
     } catch (err) {
         console.error(err);
-        loading.style.display = 'none'
+        
         alert('An error occurred.');
 
     }
-    
+   
 };

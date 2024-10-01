@@ -69,6 +69,7 @@
     }
     .navigation{
         display:none;
+        font-size:18px;
     }
     .section{
         margin: 0px auto;
@@ -100,7 +101,7 @@
     height:100%;
     position: fixed;
     top:0;
-    display:none;
+   display:none;
 }
 .loading{
     height: 100px;
