@@ -116,7 +116,9 @@ body {
   margin-bottom:4px;
   border:none; 
  }
-
+button:hover{
+  color:grey;
+}
  .add_form input, .add_form select{
   width:90%;
   height:45px;

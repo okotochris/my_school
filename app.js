@@ -5,6 +5,7 @@ const Blog = require('./data')
 const SBlog = require('./datas')
 const ABlog = require('./admin.js')
 const PBlog = require('./primary.js')
+const Blacklist = require('./blacklist.js')
 const nuseryBlog = require('./nursery.js')
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer')
@@ -172,7 +173,52 @@ app.post('/admin_form', (req, res) => {
     res.render('admin')
 })
 
+//BLACKLIST API
+app.get('/blacklist', isAuthenticated, async (req, res)=>{
+    try{
+        let school = req.session.school;
+        const data = await Blacklist.find({school:school})
+        res.render('blacklist', {data})
+    }
+    catch(err){
+        console.log(err)
+    }
+})
+//REMOVING NAME FROM BLACKLIST
+app.delete('/blacklist/:studentId', async (req, res) => {
+    const { studentId } = req.params;
 
+    try {
+        const deletedStudent = await Blacklist.findOneAndDelete({ studentId });
+
+        if (deletedStudent) {
+            res.status(200).json({ message: 'Student removed from blacklist' });
+        } else {
+            res.status(404).json({ message: 'Student not found' });
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Failed to delete student' });
+    }
+});
+
+//SAVING DATA TO BLACK LIST
+app.post('/blacklist', async (req, res)=>{
+    
+    let studentName = req.body.userName;
+    let school = 'Golden hill'
+    let studentId = req.body.studentId;
+    const data = {studentName, studentId, school}
+    
+    try{
+        const studnetInfo = new Blacklist(data)
+        await studnetInfo.save()
+        res.json('file added')
+    }
+    catch(err){
+        console.log(err)
+    }
+})
 
 //saving primary data to databse 
 app.post('/primary', (req, res) => {
@@ -300,7 +346,6 @@ app.post('/result', async (req, res)=>{
                 else if(studentClass[0] === "NURSERY" || studentClass[1] ==="NURSERY"){
                     let details = await nuseryBlog.find({studentId:id, class:clas, term: term}).sort({ createdAt: -1 }).limit(1);
                     details = details[0]
-                    console.log(details.schoolName)
                     if(details != null){
                         let schoolName = details.schoolName.toLowerCase()
                         let resultTemplate = schoolName.split(' ')

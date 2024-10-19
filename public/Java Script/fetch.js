@@ -27,3 +27,4 @@ const student = async (e) => {
         console.error(`${err} Unable to retrieve data`);
     }
 }
+

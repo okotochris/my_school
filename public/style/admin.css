@@ -1,13 +1,13 @@
 .admin-container{
     display:flex;
-    width: 100%;
+    width: 98%;
     height: 100%;
     position:relative;
 }
 .navigation{
     background:#13022F;
     height:100vh;
-    width: 15%;
+    width: 20%;
     display:flex;
     flex-direction: column;  
     justify-content: center;
@@ -27,9 +27,8 @@
     color:grey;
 }
 .section{
-    width: 80%;
+    width:75%;
     background: white;
-
 }
 .cancel{
     position:absolute;
@@ -73,21 +72,11 @@
     }
     .section{
         margin: 0px auto;
+        width:99%;
+        font-size: 14px;
     }
 }
 
-@media only screen and (min-width:800px){
-    .menu{
-        display:none;
-    }
-    .navigation{
-        display:flex;
-        width: 15%;
-    }
-    .section{
-        margin: 0px auto;
-    }
-}
 
 .navigation-mobile{
     position:absolute;
@@ -103,6 +92,7 @@
     top:0;
    display:none;
 }
+
 .loading{
     height: 100px;
     width: 100px;
@@ -120,4 +110,91 @@
     100% {
         transform: rotate(360deg); /* Rotate to 360 degrees */
     }
+}
+/*BLack list*/
+.blacklist{
+    display:flex; 
+    min-height: 100px; 
+    min-width: 600px; 
+    justify-content: space-around; 
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left:35%;
+    background:white;
+    box-shadow: -2px -2px 2px 2px grey;
+    font-size: 18px;
+    display: none;
+   
+}
+#studentName{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 90%;
+    min-height: 100px;
+    margin-top: 70px;
+}
+/*this class is added with js to style up the data from database in blocklist*/
+.dialogboxDisplay{
+    display:flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 5px;
+}
+#studentName button{
+    width: 70px;
+    height:30px;
+    margin: 0px;
+    padding: 0px;
+    font-size: 14px;
+}
+.studentList{
+    min-height: 300px;
+    width:700px;
+    margin:10px auto;
+}
+@media only screen and (max-width:700px){
+    .studentList{
+        width:100%;
+    }
+}
+.studentList table, .studentList th, .studentList td{
+    border-collapse: collapse;
+    border: 2px solid black;
+}
+.studentList th{
+    background:rgb(11, 11, 82);
+    color:white;
+}
+.studentList td:last-child{
+    color:blue;
+    cursor:pointer;
+    font-weight: bold;
+}
+.studentList td:last-child:hover{
+    color:rgb(171, 171, 218);
+}
+.studentList td, .studentList tr{
+    height: 50px;
+    padding:5px;
+    
+}
+.cancel2{
+    position:absolute;
+    height:50px;
+    width:50px;
+    display:flex;
+    margin-bottom: 20px;
+    justify-content: center;
+    align-items:center;
+    right:0;
+    top:0;
+    color:white;
+    background:red;
+    cursor:pointer;
+    border-radius:100%;
+}  
+.cancel2:hover{
+    background:pink;
 }

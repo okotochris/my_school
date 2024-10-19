@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <%- include('./partials/head.ejs') %>
+    <body>
+        <div class="menu">
+            <div></div>
+            <div></div>
+            <div></div>
+                
+        </div>
+        <div class="admin-container">
+            <div class="navigation">
+               <div class="cancel">X</div>
+                <p>QUICK LINKS</p>
+                <p><a href="/">CHECK RESULT</a></p>
+                <p><a href="/admin">UPLOAD RESULT</a></p>
+                <p><a href="/studentid">GET STUDENT ID</a></p>
+                <p><a href="/generateid">NEW STUDENT</a></p>
+                <p><a href="update">UPDATE STUDENT RECORD</a></p>
+                <p><a href="/blacklist">BLACKLIST</a></p>
+                <p><a href="/logout">LOGOUT</a></p>
+            </div>
+           
+            <div class="section">
+                <div class="welcome">ADD STUDENT TO BLACKLIST</div>
+                <div  class="add_form">
+                        <form>
+                           <input type="text" placeholder="Student Name" id="studentID"/>
+                            <button id="getStudent">ADD TO BLACKLIST</button>
+                        
+                        </form>
+                    </div>
+                    <div class="studentList">
+                        <h3>NAMES IN BLACKLIST CAN'T ACCESS THEIR RESULT</h3>
+                        <table>
+                            <tr>
+                                <th  width="50px">SN</th>
+                                <th  width="400px">NAME</th>
+                                <th>STUDENT ID</th>
+                                <th>REMOVE ALL</th>
+                            </tr>
+                            <% if(data.length > 0){ %>
+                              <% for(let i=0; i< data.length; i++){ %>
+                                <tr>
+                                    <td><%= i + 1 %></td>
+                                    <td><%= data[i].studentName %> </td>
+                                    <td><%= data[i].studentId %> </td>
+                                    <td><button class="remove-btn" data-id="<%= data[i].studentId %>">Remove</button></td>
+                                </tr>
+                                
+                              <% } %>
+
+                            <%}else{ %>
+                                <p>NO STUDENT NAME IN BLACKLIST</hp>
+                            <% } %>
+                            
+                            
+                        </table>
+                    </div>
+                    <div class="blacklist">
+                        <div class='cancel2' onclick="cancel1()">X</div>
+                        
+                        <div id='studentName'> </div>
+                    </div>
+            </div>
+            
+        </div>
+        <div class="cover">
+            <div class="loading"></div>
+       </div>
+ 
+   <script src="Java Script/menu.js"></script>
+   <script src="Java Script/blacklist.js"></script>
+   <script src="Java Script/remove.js"></script>
+
+</body>
+
+
+
+</html>
