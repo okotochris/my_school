@@ -382,7 +382,6 @@ app.get('/getstudentid', async (req, res) => {
         let student_name = req.query.student_name;
         let school = req.session.school
         let studentId = await Studentpassport.find({schoolName:school, userName:{ $regex: student_name, $options: 'i' } });
-        console.log(school)
         if (studentId) {
             res.json(studentId);
         } else {
@@ -424,7 +423,6 @@ app.get('/getsectionid', async(req, res)=>{
 //CORRECTING WRONG ENTRY NAME
 app.patch('/update-student', async (req, res) => {
     const { studentId, userName, addmissionNo, dob, classN, gender } = req.body; // Capture fields from the request body
-    console.log(req.body)
     try {
         const updatedStudent = await Studentpassport.findOneAndUpdate(
             {studentId}, // Use studentId to identify the student
@@ -439,10 +437,8 @@ app.patch('/update-student', async (req, res) => {
         );
 
         if (updatedStudent) {
-            console.log('Updated Student:', updatedStudent);
             res.status(200).json(updatedStudent);
         } else {
-            console.log('Student not found');
             res.status(404).json({ message: 'Student not found' });
         }
     } catch (err) {
@@ -487,7 +483,6 @@ app.post('/passport', upload.single('passport'), (req, res) => {
 
 // post request from school updating news field 
 app.post("/myschool", (req, res)=>{
-    console.log(req.body)
     res.redirect('index')
 })
 
@@ -517,7 +512,6 @@ app.post('/contact', (req, res) => {
             console.log(err);
             // Handle error, maybe send an error response to the client
         } else {
-            console.log('Mail sent');
             // Redirect the client to the index page after sending the email
             res.status(200).redirect('/');
         }

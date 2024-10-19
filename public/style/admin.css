@@ -115,7 +115,7 @@
 .blacklist{
     display:flex; 
     min-height: 100px; 
-    min-width: 600px; 
+    width: 700px; 
     justify-content: space-around; 
     align-items: center;
     position: absolute;
@@ -157,6 +157,11 @@
 @media only screen and (max-width:700px){
     .studentList{
         width:100%;
+    }
+    .blacklist{
+        width: 99%;
+        left: 0px;
+        font-size:14px;
     }
 }
 .studentList table, .studentList th, .studentList td{
