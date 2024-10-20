@@ -431,8 +431,7 @@ app.patch('/update-student', async (req, res) => {
                 addmissionNo, 
                 dob, 
                 class: classN, 
-                gender,
-                schoolName: 'Golden hills'
+                schoolName: req.session.school
             }, 
             { new: true } // Return the updated document
         );
