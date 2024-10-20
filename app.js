@@ -206,7 +206,7 @@ app.delete('/blacklist/:studentId', async (req, res) => {
 app.post('/blacklist', async (req, res)=>{
     
     let studentName = req.body.userName;
-    let school = 'Golden hill'
+    let school = 'Golden hills'
     let studentId = req.body.studentId;
     const data = {studentName, studentId, school}
     
@@ -431,7 +431,8 @@ app.patch('/update-student', async (req, res) => {
                 addmissionNo, 
                 dob, 
                 class: classN, 
-                gender 
+                gender,
+                schoolName: 'Golden hills'
             }, 
             { new: true } // Return the updated document
         );
