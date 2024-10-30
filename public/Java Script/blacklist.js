@@ -23,6 +23,7 @@ getStudent.onclick = async function getInfo(e){
                     return false;
               }
               docDisplay(data)
+             
                
           }
           catch(err){
@@ -34,6 +35,7 @@ getStudent.onclick = async function getInfo(e){
      }
 }
 
+//DIALOG BOX THAT DISPLAY STUDENT INFO FROM DATABASE 
 let infoDisplay = document.querySelector('.blacklist')
 let div = document.getElementById('studentName')
 function docDisplay(data){
@@ -56,16 +58,35 @@ function docDisplay(data){
      let currentData = data[i]
      button.onclick = function(){
          addToBlackList(currentData)
+         addNameToTable(currentData)
      }
    }
     
 }
 
+//TEMPORARY ADDING NAME TO HTML FORM TABLE
+let table = document.getElementById('table')
+function addNameToTable(data){
+     console.log(data)
+     let name = document.createElement('td')
+     let sn =document.createElement('td')
+     let studentId = document.createElement('td')
+     let remove = document.createElement('button')
+     remove.setAttribute('class', 'remove-btn')
+     let tr = document.createElement('tr')
+     name.innerText = data.userName.toUpperCase()
+     studentId.innerText = data.studentId
+     remove.innerText = 'Remove'
+     tr.appendChild(sn)
+     tr.appendChild(name)
+     tr.appendChild(studentId)
+     tr.appendChild(remove)
+     table.appendChild(tr)
+}
+
 
 //Addining Names to blacklist database
 async function addToBlackList(data){
-     console.log(data.userName)
-
      try{
           const promise = await fetch('/blacklist?data', 
                {

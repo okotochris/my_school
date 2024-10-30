@@ -18,7 +18,6 @@ function check(){
     }
     else{
         upload.innerText= "file for uploaded successfuly"
-        console.log('uploaded')
         //userName.value = userName.value.toUppercase();
         return true;
         

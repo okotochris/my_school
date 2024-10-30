@@ -9,16 +9,40 @@
     <body>
         <header>
             <nav>
-              <ul>
-                <li><a href="./">Home</a></li>
-                <li><a href="./admin">Admin</a></li>
-                
-              </ul>
+                <a href="./admin">Back to Admin</a>
             </nav>
+
           </header>
-        <h2>FORM FOR JUNIOR SECONDARY SCHOOL</h2>
+          <div class="platform"><h2>JUNIOR SECONDARY SCHOOL FORM</h2></div>
         <div class="upload_result"> 
+
             <form action="adminJunior" method="post" onsubmit="return check();">
+                <fieldset class="studentInfo">
+                    <legend>STUDENT INFO:</legend>
+                    <p>
+                        <input type="text" placeholder="First Name Middle Name Last Name" name="userName" id="userName" required="required" /><input type="text" Placeholder="Student ID" name="studentId" id="studentId" required="required"/>
+                        <button style="width:100px; font-size:14px;" onclick="student()" >Get ID</button>
+                    </p>
+                   
+                    <p>
+                        <p id="respond" style="color:red"></p>
+                        <label>CLASS</label>:
+                        <select id = "Sclass" name="class">
+                            <option></option>
+                            <option value="JSS 1">JSS 1</option>
+                            <option value="JSS 2">JSS 2</option>
+                            <option value="JSS 3">JSS 3</option>
+                        </select>
+                        <label>SCHOOL TERM</label>:
+                        <select id="Sterm" name="term">
+                            <option></option>
+                            <option value="FIRST TER;2M">FIRST TERM</option>
+                            <option value="SECOND TERM">SECNOND TERM</option>
+                            <option value="THIRD TERM">THRID TERM</option>
+                        </select>
+                    </p>
+                    
+                </fieldset>
                 <fieldset>
                     <legend>RESULT INFO:</legend>
                     <p><input type="text" value="English Language" name="eng" id="eng"/><input type="text" placeholder="1st Text" name="eng1st" id="eng1st"/><input type="text" placeholder="2st Text" name="eng2nd" id="eng2nd"/><input type="text" placeholder="continuous accessment" id="engca" name="engca"/><input type="text" placeholder="Exam" name="engexam" id="engexam"/><input type="text" placeholder="TOTAL SCORE" name="engscore" id="engscore"/><input type="text" placeholder="GRADE" name="engG" id="engG"/><input type="text" placeholder="Remark" name="engRemark" id="engRemark"/></p>
@@ -38,31 +62,15 @@
                     <p><input type="text" value="Civic Education" name="ced" id="ced"/><input type="text" placeholder="1st Text" name="ced1st" id="ced1st"/><input type="text" placeholder="2st Text" name="ced2nd" id="ced2nd"/><input type="text" placeholder="continuous accessment" id="cedca" name="cedca"/><input type="text" placeholder="Exam" name="cedexam" id="cedexam"/><input type="text" placeholder="TOTAL SCORE" name="cedscore" id="cedscore"/><input type="text" placeholder="GRADE" name="cedG" id="cedG"/><input type="text" placeholder="Remark" name="cedRemark" id="cedRemark"/></p>
                     
                 </fieldset>
-                <fieldset class="studentInfo">
-                    <legend>STUDENT INFO:</legend>
-                    <p><input type="text" placeholder="First Name Middle Name Last Name" name="userName" id="userName" required="required" /><input type="text" Placeholder="Student ID" name="studentId" id="studentId" required="required"/></p>
-                    <p><button style="width:100px; font-size:14px;" id="GenerateId" >Generate ID</button><button style="width:100px; font-size:14px;" onclick="student()" >Get ID</button></p>
-                    <input type="text" placeholder="No. subj offfer" id="No_subj" name="No_subj" /><input type="text" placeholder="average score" id="average" name="average" required/>
-                    <p><input type="text" placeholder="score obtainable" id="score_obtainable" name="score_obtainable"/> <input type="text" id="score_obtain" placeholder="total score obtain" name="score_obtain" /></p>
-                    <button style="width:300px; font-size:14px;" id="Calc">compute student Scores</button> </p>
+                <fieldset>
+                    <legend>STUDENT PERFOMANCE</legend>
                     <p>
-                        <p id="respond" style="color:red"></p>
-                        <label>CLASS</label>:
-                        <select id = "Sclass" name="class">
-                            <option></option>
-                            <option value="JSS 1">JSS 1</option>
-                            <option value="JSS 2">JSS 2</option>
-                            <option value="JSS 3">JSS 3</option>
-                        </select>
-                        <label>SCHOOL TERM</label>:
-                        <select id="Sterm" name="term">
-                            <option></option>
-                            <option value="FIRST TERM">FIRST TERM</option>
-                            <option value="SECOND TERM">SECNOND TERM</option>
-                            <option value="THIRD TERM">THRID TERM</option>
-                        </select>
-                    </p>
-                    
+                        <label>No. subj offfer:</label><input type="text" placeholder="No. subj offfer" id="No_subj" name="No_subj" />
+                        <label>average score:</label><input type="text" placeholder="average score" id="average" name="average" required/>
+                        <label>score obtainable:</label><input type="text" placeholder="score obtainable" id="score_obtainable" name="score_obtainable"/> 
+                        <label>total score obtain:</label><input type="text" id="score_obtain" placeholder="total score obtain" name="score_obtain" />
+                        <button style="width:150px; font-size:14px;" id="Calc">compute Scores</button> </p>
+                    <p>
                 </fieldset>
                 <fieldset>
                     <legend>OHTER INFOMATION </legend>
@@ -74,12 +82,22 @@
                         <option value="2025 - 2026">2025 - 2026</option>
                         <option value="2026 - 2027">2026 - 2027</option>
                     </select>
-                    <input type="text" placeholder="times present" name="present" /><input type="text" placeholder="times absent" name="absent" /><input type="text" placeholder="Class Teacher Report" id="tReport" name="tReport" style="width:200px;"/><input type="text" placeholder="Head Teacher Report" name="Treport" id="Treport" style="width:200px"/><input type="text" placeholder="Next term resume" name="nextterm"/><input type="text" placeholder="Promoted to" name="promote" /><input type="text" placeholder="outstanding fees" name="fees"/></p>
+                    <input type="text" placeholder="times present" name="present" />
+                    <input type="text" placeholder="times absent" name="absent" />
+                    <input type="text" placeholder="Class Teacher Report" id="tReport" name="tReport" style="width:200px;"/>
+                    <input type="text" placeholder="Head Teacher Report" name="Treport" id="Treport" style="width:200px"/>
+                    <input type="text" placeholder="Next term resume" name="nextterm"/>
+                    
+                    <select id = "promotedto" name="promote">
+                        <option value="">Promoted to</option>
+                        <option value="JSS 2">JSS 2</option>
+                        <option value="JSS 3">JSS 3</option>
+                        <option value="SS 1">SS 1</option>
+                    </select>
+                    <input type="text" placeholder="outstanding fees" name="fees"/></p>
                 </fieldset>
-                <fieldset class="schoolInfo">
-                    <legend>School Info:</legend>
+                   
                 <button>Upload Result</button>
-                </fieldset>
                 
                 <p id="upload" style="color:red;"></p>
             </form>
