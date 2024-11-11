@@ -296,9 +296,8 @@ app.post('/result', async (req, res)=>{
     let name = req.body.userName;
     try{
         let data = await Studentpassport.findOne({studentId:id})
-        let student = await Blacklist.findOne()
+        let student = await Blacklist.findOne({studentId:id})
         if(student){
-            console.log(student)
             res.render('blacklistfile', {student})
         }
             
