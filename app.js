@@ -296,6 +296,11 @@ app.post('/result', async (req, res)=>{
     let name = req.body.userName;
     try{
         let data = await Studentpassport.findOne({studentId:id})
+        let student = await Blacklist.findOne()
+        if(student){
+            console.log(student)
+            res.render('blacklistfile', {student})
+        }
             
             let studentClass = clas.split(' ')
             if(studentClass[0] === "BASIC"){
@@ -517,7 +522,10 @@ app.post('/contact', (req, res) => {
         }
     });
 });
-
+//TESTING RESULT TEMPLATE
+app.get('/primary-result', (req, res)=>{
+    res.render('primary-result')
+})
 //STUDENT ID FORM
 app.get('/studentid', isAuthenticated, (req, res)=>{
     res.render('studentid')

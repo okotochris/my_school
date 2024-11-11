@@ -27,7 +27,27 @@
   }
 }
 
-
+.logo{
+  height: 100px;
+  width: 100px;
+  background:url('/Image/nuel.png');
+  background-size: contain;
+}
+.avatar{
+  height: 100px;
+  width: 110px;
+  background:url('/Image/avatar.png');
+  background-size: cover;
+  display:flex;
+  align-items:end;
+  justify-content: center;
+  background-repeat: no-repeat;
+}
+.avatar p{
+  background:red;
+  color:white;
+  font-weight: bold;
+}
 table {
   margin-bottom: 20px;
 }
@@ -38,8 +58,11 @@ table, th, td {
   border: solid 1px black;
   border-collapse: collapse;
   padding: 5px;
-}
 
+}
+th, td{
+  height: 13px;
+}
 
 
 .top_info {
@@ -63,6 +86,8 @@ table, th, td {
 .school_details {
   text-align: center;
   margin-bottom: 10px;
+  display:flex;
+  justify-content: space-around;
 }
 
 .school_details h1 {

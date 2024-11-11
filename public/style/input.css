@@ -28,3 +28,8 @@ nav a{
 a:hover{
     color:rgb(206, 195, 195);
 }
+input::-webkit-outer-spin-button,
+.input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

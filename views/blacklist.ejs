@@ -32,14 +32,14 @@
                     </div>
                     <div class="studentList">
                         <h3>NAMES IN BLACKLIST CAN'T ACCESS THEIR RESULT</h3>
-                        <table id="table">
-                            <tr>
-                                <th  width="50px">SN</th>
-                                <th  width="400px">NAME</th>
-                                <th>STUDENT ID</th>
-                                <th>REMOVE ALL</th>
-                            </tr>
                             <% if(data.length > 0){ %>
+                                <table id="table">
+                                    <tr>
+                                        <th  width="50px">SN</th>
+                                        <th  width="400px">NAME</th>
+                                        <th>STUDENT ID</th>
+                                        <th>REMOVE ALL</th>
+                                    </tr>
                               <% for(let i=0; i< data.length; i++){ %>
                                 <tr>
                                     <td><%= i + 1 %></td>
@@ -51,7 +51,7 @@
                               <% } %>
 
                             <%}else{ %>
-                                <p>NO STUDENT NAME IN BLACKLIST</hp>
+                               
                             <% } %>
                             
                             

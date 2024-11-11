@@ -101,6 +101,7 @@ async function addToBlackList(data){
          if(promise.ok){
           alert(`${data.userName} has been added`)
           cancel1()
+          location.reload()
          }
      }
      catch(err){
