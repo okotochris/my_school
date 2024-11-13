@@ -14,9 +14,9 @@
   
 }
 .t_container {
-  border: solid 1px black;
+  border: solid 1px grey;
   position: relative;
-  background: black;
+  background: rgb(20, 32, 209);
   box-sizing: border-box; /* Ensure padding does not increase element width */
 }
 
@@ -66,6 +66,7 @@ th, td{
 
 
 .top_info {
+  height:30px;
   display: flex;
   justify-content: space-between;
   align-items: center; /* Center items vertically */
@@ -105,7 +106,7 @@ th, td{
 
 .reportSheet {
   height: 40px;
-  width: 450px;
+  width: 600px;
   background: white;
   display: flex;
   justify-content: center;
@@ -117,7 +118,7 @@ th, td{
 
 .reportSheet div {
   height: 35px;
-  width: 400px;
+  width: 550px;
   background: black;
   color: white;
   text-align: center;
@@ -226,12 +227,28 @@ button{
   font-size:20px;
 }
 button:hover{
-  color:grey;
+  color:rgb(212, 206, 206);
 }
 .school_report{
   display:flex;
-  margin:10px 0px;
+  padding:2px 0px;
   font-weight:bold;
-  justify-content:space-between;
+  justify-content:space-around;
   font-size:14px;
+  height: 50px;
+  font-size: 18px;
+  background:rgb(190, 190, 250);
+}
+.extraInfo{
+  display: flex;
+  font-size: 14px;
+  justify-content:space-around;
+  margin:10px auto;
+}
+.extraInfo p{
+  padding:3px 0px;
+}
+.extraInfo b{
+  color:rgb(200, 4, 4);
+  text-decoration: underline;
 }

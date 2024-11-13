@@ -446,7 +446,6 @@ app.patch('/update-student', async (req, res) => {
             res.status(404).json({ message: 'Student not found' });
         }
     } catch (err) {
-        console.error(err);
         res.status(500).json({ error: err.message });
     }
 });
