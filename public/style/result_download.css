@@ -30,13 +30,13 @@
 .logo{
   height: 100px;
   width: 100px;
-  background:url('/Image/nuel.png');
+  background:url('/IMAGE/nuel.png');
   background-size: contain;
 }
 .avatar{
   height: 100px;
   width: 110px;
-  background:url('/Image/avatar.png');
+  background:url('/IMAGE/avatar.png');
   background-size: cover;
   display:flex;
   align-items:end;
