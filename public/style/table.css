@@ -9,19 +9,13 @@ table{
 .table select{
     border: none;
     outline: none;
-    background: blue;
+    background: rgb(11, 11, 61);
     font-size: 16px;
     font-weight: bold;
-
     color:white;
 }
-.table{
-   width: 100%;
-   display: flex;
-   justify-content: center;
-   margin:2px;
-}
+
 .table th{
-    background:blue;
+    background:rgb(11, 11, 61);
     color:white;
 }

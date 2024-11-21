@@ -578,6 +578,9 @@ app.get('/studentperfomance', isAuthenticated, async (req, res)=>{
         if(result){
             res.json(result)
         }
+        else{
+            error.send(err)
+        }
     }
     catch(err){
         console.log(err)
