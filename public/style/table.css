@@ -5,6 +5,7 @@
 table{
     border-collapse: collapse;
 }
+
 .table select{
     border: none;
     outline: none;
