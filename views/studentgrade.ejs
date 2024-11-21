@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <%- include('./partials/adminhead.ejs') %>
+    
+    <body>
+        <div class="menu">
+            <div></div>
+            <div></div>
+            <div></div>
+                
+        </div>
+        <div class="admin-container">
+            <%- include('./partials/navigation.ejs') %>
+           
+            <div class="section">
+                <div class="welcome">OVER ALL STUDENT PERFORMANCE</div>
+                <div class="table">
+                   <table id="table">
+                    <tr>
+                        <th>SN</th>
+                        <th width="250px">NAME</th>
+                        <th>
+                            <select id="class">
+                                <option value=""> CLASS </option>
+                                <option value="SS 3"> SS 3 </option>
+                                <option value="SS 2"> SS 2 </option>
+                                <option value="SS 1"> SS 1 </option>
+                                <option value="JSS 3"> JSS 3 </option>
+                                <option value="JSS 2"> JSS 2 </option>
+                                <option value="JSS 1"> JSS 1 </option>
+                                <option value="BASIC 6"> BASIC 6 </option>
+                                <option value="BASIC 5" selected> BASIC 5 </option>
+                                <option value="BASIC 4"> BASIC 4 </option>
+                                <option value="BASIC 3"> BASIC 3 </option>
+                                <option value="BASIC 2"> BASIC 2 </option>
+                                <option value="BASIC 1"> BASIC 1 </option>
+                                <option value="NURSERY 3"> NURSERY 3 </option>
+                                <option value="NURSERY 2"> NURSERY 2 </option>
+                                <option value="NURSERY 1"> NURSERY 1 </option>
+                                <option value="NURSERY 1"> PRE NURSERY </option>
+                            </select>
+                        </th>
+                        <th>
+                            <h>
+                               <select id="year">
+                                <option value="2024 - 2025">2024 - 2025</option>
+                                <option value="2023 - 2024" selected>2023 - 2024</option>
+                               </select>
+                            </h>
+                        </th>
+                        <th>1ST TERM AVR</th>
+                        <th>2ND TERM AVR</th>
+                        <th>3rd TERM AVR</th>
+                        <th>AVR. TOTAL</th>
+                    </tr>
+                   </table>     
+                </div>
+            </div>
+            
+        </div>
+        <div class="cover">
+            <div class="loading"></div>
+       </div>
+    </body>
+   <script src="Java Script/menu.js"></script>
+   <script src="Java Script/studentGrade.js"></script>
+
+
+
+
+</html>

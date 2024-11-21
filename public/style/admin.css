@@ -1,5 +1,6 @@
 .admin-container{
     display:flex;
+    justify-content: space-between;
     width: 98%;
     height: 100%;
     position:relative;
@@ -27,8 +28,12 @@
     color:grey;
 }
 .section{
+    height:100%;
     width:75%;
-    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .cancel{
     position:absolute;

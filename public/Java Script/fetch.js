@@ -1,6 +1,6 @@
  studentId =document.getElementById('studentId')
-let schoolName = document.getElementById('schoolName')
-let schoolAdd = document.getElementById('schoolAdd')
+let user = document.getElementById('userName')
+Sclass = document.getElementById('Sclass')
 
 //fetching student info from database 
 const student = async (e) => {
@@ -25,7 +25,9 @@ const student = async (e) => {
         }
         else{
             studentId.value = userData[0].studentId
-            schoolName.value = userData[0].schoolName.toUpperCase()
+            user.value = userData[0].userName.toUpperCase()
+            Sclass.value = userData[0].class
+            
         }
     }
            

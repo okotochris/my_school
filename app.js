@@ -450,7 +450,6 @@ app.patch('/update-student', async (req, res) => {
     }
 });
 
-
 //UPDATING STUDENT RECORD PAGE
 app.get('/update', isAuthenticated, (req, res)=>{
     res.render('update')
@@ -528,10 +527,63 @@ app.get('/primary-result', (req, res)=>{
 app.get('/studentid', isAuthenticated, (req, res)=>{
     res.render('studentid')
 })
+
+//STUDENT GRADING
+app.get('/studentgrade', (req, res)=>{
+    res.render('studentgrade')
+})
+//UPDATE STUDENT CLASS
+app.patch('/updatestudentclass', async (req, res)=>{
+    let studentId= req.body.studentId;
+   try{
+    let student = await Studentpassport.findOneAndUpdate({studentId}, {class: req.body.studentClass}, {new: true})
+    if(student.ok){
+        console.log('updated')
+    }
+   }
+   catch(err){
+    console.log(err)
+   }
+   
+})
+//GET SCHOOL NAME
+app.get('/schoolname', (req, res)=>{
+    let school = req.session.school
+    res.json(school)
+})
 app.get('/logout', (req, res)=>{
     req.session.destroy();
     res.redirect('login')
 })
+//STUDENT PERFOMANCE 
+app.get('/studentperfomance', isAuthenticated, async (req, res)=>{
+    try{
+        let studentClass = req.query.class
+        let newClass = studentClass.split(' ')
+        let schoolName = req.session.school;
+        let result;
+        if(newClass[0] == 'SS'){
+            result = await SBlog.find({class: req.query.class, section: req.query.section, schoolName: { $regex: schoolName, $options: 'i' }})
+        }
+        else if(newClass[0] == 'JSS'){
+            result = await Blog.find({class: req.query.class, section: req.query.section, schoolName: { $regex: schoolName, $options: 'i' }})
+        }
+        else if(newClass[0] == 'BASIC'){
+            result = await PBlog.find({class: req.query.class, section: req.query.section, schoolName: { $regex: schoolName, $options: 'i' }})
+        }
+        else if(newClass[0] == 'NURSERY'){
+            result = await nuseryBlog.find({class: req.query.class, section: req.query.section, schoolName: { $regex: schoolName, $options: 'i' }})
+        }
+        
+        if(result){
+            res.json(result)
+        }
+    }
+    catch(err){
+        console.log(err)
+    }
+})
 app.use((req, res)=>{
     res.status(404).render('page_not_found')
 })
+
