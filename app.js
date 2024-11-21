@@ -560,7 +560,7 @@ app.get('/studentperfomance', isAuthenticated, async (req, res)=>{
     try{
         let studentClass = req.query.class
         let newClass = studentClass.split(' ')
-        let schoolName = req.session.school;
+        let schoolName = req.session.school || 'no school';
         let result;
         if(newClass[0] == 'SS'){
             result = await SBlog.find({class: req.query.class, section: req.query.section, schoolName: { $regex: schoolName, $options: 'i' }})
@@ -579,7 +579,7 @@ app.get('/studentperfomance', isAuthenticated, async (req, res)=>{
             res.json(result)
         }
         else{
-            error.send(err)
+            return res.status(404).json({ message: 'Data not found' })
         }
     }
     catch(err){
