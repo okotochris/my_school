@@ -562,6 +562,7 @@ app.get('/studentperfomance', isAuthenticated, async (req, res)=>{
         let newClass = studentClass.split(' ')
         let schoolName = req.session.school || 'no school';
         let result;
+        console.log(newClass[0])
         if(newClass[0] == 'SS'){
             result = await SBlog.find({class: req.query.class, section: req.query.section, schoolName: { $regex: schoolName, $options: 'i' }})
         }
@@ -573,8 +574,7 @@ app.get('/studentperfomance', isAuthenticated, async (req, res)=>{
         }
         else if(newClass[0] == 'NURSERY'){
             result = await nuseryBlog.find({class: req.query.class, section: req.query.section, schoolName: { $regex: schoolName, $options: 'i' }})
-        }
-        
+        }        
         if(result){
             res.json(result)
         }
