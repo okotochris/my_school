@@ -2,22 +2,29 @@
 <html lang="em">
     <%- include('./partials/head.ejs') %>
     <body>
-        <%- include('./partials/header.ejs') %>
-        <div class="add_form">
-            <p>UPDATE STUDENT RECORED</p>
-            <form>
+        <div class="menu">
+            <div></div>
+            <div></div>
+            <div></div>
+                
+        </div>
+        <div class="admin-container">
+            <%- include('./partials/navigation.ejs') %>
+            <div class="add_form">
+                <p>UPDATE STUDENT RECORED</p>
+                <form>
                   <!-- Student ID Field -->
                   <p><input type="text" id="studentId" name="studentId" placeholder="Student ID" required /></p>
                   <p><button id="studentDetails">STUDENT INFO</button></p>
                   <!-- User Name Field -->
-                <input type="text" id="newName" name="newName" placeholder="New Name" ></p>
+                  <input type="text" id="newName" name="newName" placeholder="New Name" ></p>
                 
-                <!-- Admission Number Field -->
-                <p><input type="text" name="addmissionNo" id="addmissionNo" placeholder="Admission Number" /></p>
-                
-                <!-- Date of Birth Field -->
-                <p><input type="date" name="dob" id="dob" placeholder="Date of Birth" /></p>
-                
+                    <!-- Admission Number Field -->
+                    <p><input type="text" name="addmissionNo" id="addmissionNo" placeholder="Admission Number" /></p>
+                    
+                    <!-- Date of Birth Field -->
+                    <p><input type="date" name="dob" id="dob" placeholder="Date of Birth" /></p>
+                    
                                  <p>
                                     <select name="class" id="classN">
                                         <option value="">Selet Class</option>
@@ -40,14 +47,10 @@
                                     </select>
                                 </p>
                 <div class="gender">
-                    <p>
-                        <label for="male">MALE</label>
-                         <input type="radio" value="MALE" name="gender" id="male" />
-                    </p>
-                    <p>
-                        <label for="female">FEMALE</label>
-                        <input type="radio" value="FEMALE" name="gender" id="female" />
-                    </p>
+                    <label for="male">MALE</label>
+                    <input type="radio" value="MALE" name="gender" id="male" />
+                    <label for="female">FEMALE</label>
+                    <input type="radio" value="FEMALE" name="gender" id="female" />
                 </div>
                  <!-- Passport File Upload -->
                 <p><input type="file" name="passport" id="passport"/></p>    
@@ -57,14 +60,13 @@
             </form>
             
         </div> 
+        </div>
        <div class="cover">
             <div class="loading"></div>
        </div>
     </body>
 
-   <script src="Java Script/updateStudentRecord.js"></script>
-   
-
-
-
+   <script src="Java Script/updateStudentRecord.js"></script>  
+   <script src="Java Script/menu.js"></script>
+</html>
 

@@ -56,8 +56,7 @@ body {
  }
  .add_form{
   width:95%;
-  margin: auto ;
-  text-align:center;
+  margin: 0px auto ;
   height:auto;
   position:relative;
   padding:9px;
@@ -89,20 +88,21 @@ body {
   align-self: stretch;
 }
 .add_form{
+  width: 332px;
   display: flex;
-  width: 331px;
   margin-bottom:20px;
   padding: 10px 0px;
-
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: 20px;
   background:white;
-  box-shadow: 0px 6px 30px 5px rgba(0, 0, 0, 0.12);
-  
 }
-
+.add_form form{
+  border-radius: 20px;
+  width: 331px;
+  box-shadow: 0px 6px 30px 5px rgba(0, 0, 0, 0.12);
+  padding: 4px 6px;
+}
 
  button{
   background:blue;
@@ -130,6 +130,17 @@ button:hover{
   border:none;
   padding:3px 10px;
   
+ }
+ .gender input{
+    width:30px; 
+    box-shadow: none;
+ }
+ .gender{
+    display:flex; 
+    flex-direction: row;
+    justify-content: space-around; 
+    align-items: center;
+
  }
  .add_form select, .add_form button{
   width:99%;

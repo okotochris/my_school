@@ -2,65 +2,70 @@
 <html lang="em">
     <%- include('./partials/head.ejs') %>
     <body>
-        <%- include('./partials/header.ejs') %>
-        <div class="add_form">
-            <form action="/passport" method="post" enctype="multipart/form-data">
-                <!-- User Name Field -->
-                <p><input type="text" id="userName" name="userName" placeholder="Last First Middle Name" required /></p>
+        <div class="menu">
+            <div></div>
+            <div></div>
+            <div></div>
                 
-                <!-- Student ID Field -->
-                <p><input type="text" id="studentId" name="studentId" placeholder="Student ID" required /></p>
-                <p><button id="GenerateId">Generate ID</button></p>
-                <!-- Admission Number Field -->
-                <p><input type="text" name="addmissionNo" id="addmissionNo" placeholder="Admission Number" /></p>
-                
-                <!-- Date of Birth Field -->
-                <p><input type="date" name="dob" id="dob" placeholder="Date of Birth" /></p>
-                
-                                 <p>
-                                    <select name="class">
-                                        <option value="">Selet Class</option>
-                                        <option value="SS3">SS3</option>
-                                        <option value="SS2">SS2</option>
-                                        <option value="SS1">SS1</option>
-                                        <option value="JSS3">JSS3</option>
-                                        <option value="JSS2">JSS2</option>
-                                        <option value="JSS1">JSS1</option>
-                                        <option value="BASIC 6">BASIC 6</option>
-                                        <option value="BASIC 5">BASIC 5</option>
-                                        <option value="BASIC 4">BASIC 4</option>
-                                        <option value="BASIC 3">BASIC 3</option>
-                                        <option value="BASIC 2">BASIC 2</option>
-                                        <option value="BASIC 1">BASIC 1</option>
-                                        <option value="NURSERY 3">NURSERY 3</option>
-                                        <option value="NURSERY 2">NURSERY 2</option>
-                                        <option value="NURSERY 1">NURSERY 1</option>
-                                        <option value="PRE-NURSERY">PRE-NURSERY</option>
-                                    </select>
-                                </p>
-                <div class="gender">
-                    <p>
+        </div>
+            <div class="admin-container">
+            <%- include('./partials/navigation.ejs') %>
+       
+            <div class="add_form">
+                <p>CREATE STUDENT PROFILE </p>
+                <form action="/passport" method="post" enctype="multipart/form-data">
+                    <!-- User Name Field -->
+                    <p><input type="text" id="userName" name="userName" placeholder="Last First Middle Name" required /></p>
+                    
+                    <!-- Student ID Field -->
+                    <p><input type="text" id="studentId" name="studentId" placeholder="Student ID" required /></p>
+                    <p><button id="GenerateId">Generate ID</button></p>
+                    <!-- Admission Number Field -->
+                    <p><input type="text" name="addmissionNo" id="addmissionNo" placeholder="Admission Number" /></p>
+                    
+                    <!-- Date of Birth Field -->
+                    <p><input type="date" name="dob" id="dob" placeholder="Date of Birth" /></p>
+                    
+                                    <p>
+                                        <select name="class">
+                                            <option value="">Selet Class</option>
+                                            <option value="SS3">SS3</option>
+                                            <option value="SS2">SS2</option>
+                                            <option value="SS1">SS1</option>
+                                            <option value="JSS3">JSS3</option>
+                                            <option value="JSS2">JSS2</option>
+                                            <option value="JSS1">JSS1</option>
+                                            <option value="BASIC 6">BASIC 6</option>
+                                            <option value="BASIC 5">BASIC 5</option>
+                                            <option value="BASIC 4">BASIC 4</option>
+                                            <option value="BASIC 3">BASIC 3</option>
+                                            <option value="BASIC 2">BASIC 2</option>
+                                            <option value="BASIC 1">BASIC 1</option>
+                                            <option value="NURSERY 3">NURSERY 3</option>
+                                            <option value="NURSERY 2">NURSERY 2</option>
+                                            <option value="NURSERY 1">NURSERY 1</option>
+                                            <option value="PRE-NURSERY">PRE-NURSERY</option>
+                                        </select>
+                                    </p>
+                    <div class="gender">
                         <label for="male">MALE</label>
-                         <input type="radio" value="MALE" name="gender" id="male" />
-                    </p>
-                    <p>
+                        <input type="radio" value="MALE" name="gender" id="male"  />
                         <label for="female">FEMALE</label>
-                        <input type="radio" value="FEMALE" name="gender" id="female" />
-                    </p>
-                </div>
-                 <!-- Passport File Upload -->
-                <p><input type="file" name="passport" id="passport"/></p>    
+                        <input type="radio" value="FEMALE" name="gender" id="female"/>
+                    </div>
+                    <!-- Passport File Upload -->
+                    <p><label for="passport">Upload Profile</label><input type="file" name="passport" id="passport" style="display:none;"/></p>    
+                    
+                    <!-- Submit Button -->
+                    <button type="submit">Upload</button>
+                </form>
                 
-                <!-- Submit Button -->
-                <button type="submit">Upload</button>
-            </form>
-            
-        </div> 
-        
+            </div> 
+        </div>
     </body>
 
    <script src="studentId.js"></script>
-   
+   <script src="Java Script/menu.js"></script>
 
 
 
