@@ -115,7 +115,7 @@ app.get('/admin', isAuthenticated, (req, res) => {
 })
 
 //CHECKING IF USER HAS LOGIN
-function isAuthenticated(req, res, next){
+ function isAuthenticated(req, res, next){
    if(req.session.user){
         next()
    }else{
@@ -454,7 +454,7 @@ app.patch('/update-student', async (req, res) => {
 app.get('/update', isAuthenticated, (req, res)=>{
     res.render('update')
 })
-//generating student id and passport upload
+//generating student id and passport page
 app.get('/generateid', isAuthenticated, (req, res)=>{
     res.render('generateid')
 })
@@ -561,19 +561,17 @@ app.get('/studentperfomance', isAuthenticated, async (req, res)=>{
         let studentClass = req.query.class
         let newClass = studentClass.split(' ')
         let schoolName = req.session.school || 'no school';
-        let result;
-        console.log(newClass[0])
         if(newClass[0] == 'SS'){
-            result = await SBlog.find({class: req.query.class, section: req.query.section, schoolName: { $regex: schoolName, $options: 'i' }})
+            result = await SBlog.find({class:  new RegExp("^" + req.query.class), section: req.query.section, schoolName: { $regex: schoolName, $options: 'i' }})
         }
         else if(newClass[0] == 'JSS'){
-            result = await Blog.find({class: req.query.class, section: req.query.section, schoolName: { $regex: schoolName, $options: 'i' }})
+            result = await Blog.find({class: new RegExp("^" + req.query.class), section: req.query.section, schoolName: { $regex: schoolName, $options: 'i' }})
         }
         else if(newClass[0] == 'BASIC'){
-            result = await PBlog.find({class: req.query.class, section: req.query.section, schoolName: { $regex: schoolName, $options: 'i' }})
+            result = await PBlog.find({class: new RegExp("^" + req.query.class), section: req.query.section, schoolName: { $regex: schoolName, $options: 'i' }})
         }
         else if(newClass[0] == 'NURSERY'){
-            result = await nuseryBlog.find({class: req.query.class, section: req.query.section, schoolName: { $regex: schoolName, $options: 'i' }})
+            result = await nuseryBlog.find({class: new RegExp("^" + req.query.class), section: req.query.section, schoolName: { $regex: schoolName, $options: 'i' }})
         }        
         if(result){
             res.json(result)

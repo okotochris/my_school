@@ -16,6 +16,7 @@ let physcore = document.getElementById('physcore')
 let comscore = document.getElementById('comscore')
 let crsscore = document.getElementById('crsscore')
 let accscore = document.getElementById('accscore')
+let mktscore = document.getElementById('mktscore')
 let term = document.getElementById('Sterm')
 let cal = document.getElementById('Calc')
 let sclass = document.getElementById('Sclass')
@@ -210,6 +211,17 @@ accscore.onmouseover = function(){
     let score = accscore;
     comput(x, x2, x3, x4, score, grade, Remark)
 }
+//MARKETING 
+mktscore.onmouseover = function(){
+    let x = Number(document.getElementById('mkt2nd').value)
+    let x2 = Number(document.getElementById('mkt1st').value)
+    let x3 = Number(document.getElementById('mktexam').value)
+    let x4 = Number(document.getElementById('mktcca').value)
+    let grade = document.getElementById('mktG')
+    let Remark = document.getElementById('mktRemark')
+    let score = mktscore;
+    comput(x, x2, x3, x4, score, grade, Remark)
+}
 
 // CACULATING THE GRADE POINT
 function comput(x, x2, x3, x4, score, grade, Remark){
@@ -256,7 +268,7 @@ let No_subj = document.getElementById('No_subj')
 let score_obtainable = document.getElementById('score_obtainable')
 let score_obtain = document.getElementById('score_obtain')
 
-cal.onclick= function(){
+cal.onclick= function(event){
     event.preventDefault()
     // converting name to upper case before uploading 
     let userNameElement = document.getElementById('userName')
@@ -264,7 +276,7 @@ cal.onclick= function(){
     userNameElement.value = userName;
 
     let course = 0;
-    let total = Number(govscore.value) + Number(bioscore.value) + Number(mthscore.value)+ Number(engscore.value) + Number(fmtscore.value) + Number(ecoscore.value) + Number(litscore.value) + Number(cstscore.value) + Number(civscore.value) + Number(chescore.value) + Number(agrscore.value) + Number(geoscore.value) + Number(physcore.value) + Number(comscore.value) + Number(crsscore.value) + Number(accscore.value)
+    let total = Number(govscore.value) + Number(bioscore.value) + Number(mthscore.value)+ Number(engscore.value) + Number(fmtscore.value) + Number(ecoscore.value) + Number(litscore.value) + Number(cstscore.value) + Number(civscore.value) + Number(chescore.value) + Number(agrscore.value) + Number(geoscore.value) + Number(physcore.value) + Number(comscore.value) + Number(crsscore.value) + Number(mktscore.value) + Number(accscore.value)
         if(govscore.value != ""){
             course++;
         }
@@ -312,6 +324,9 @@ cal.onclick= function(){
             course++;
         }
         if(accscore.value != ""){
+            course++;
+        }
+        if(mktscore.value != ""){
             course++;
         }
     

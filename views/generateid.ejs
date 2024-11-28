@@ -19,22 +19,22 @@
                     
                     <!-- Student ID Field -->
                     <p><input type="text" id="studentId" name="studentId" placeholder="Student ID" required /></p>
-                    <p><button id="GenerateId">Generate ID</button></p>
+                    <p><button onclick="generateId(event)">Generate ID</button></p>
                     <!-- Admission Number Field -->
                     <p><input type="text" name="addmissionNo" id="addmissionNo" placeholder="Admission Number" /></p>
                     
                     <!-- Date of Birth Field -->
-                    <p><input type="date" name="dob" id="dob" placeholder="Date of Birth" /></p>
+                    <p><input type="date" name="dob" id="dob"/></p>
                     
                                     <p>
                                         <select name="class">
                                             <option value="">Selet Class</option>
-                                            <option value="SS3">SS3</option>
-                                            <option value="SS2">SS2</option>
-                                            <option value="SS1">SS1</option>
-                                            <option value="JSS3">JSS3</option>
-                                            <option value="JSS2">JSS2</option>
-                                            <option value="JSS1">JSS1</option>
+                                            <option value="SS 3">SS 3</option>
+                                            <option value="SS 2">SS 2</option>
+                                            <option value="SS 1">SS 1</option>
+                                            <option value="JSS 3">JSS 3</option>
+                                            <option value="JSS 2">JSS 2</option>
+                                            <option value="JSS 1">JSS 1</option>
                                             <option value="BASIC 6">BASIC 6</option>
                                             <option value="BASIC 5">BASIC 5</option>
                                             <option value="BASIC 4">BASIC 4</option>
@@ -44,6 +44,7 @@
                                             <option value="NURSERY 3">NURSERY 3</option>
                                             <option value="NURSERY 2">NURSERY 2</option>
                                             <option value="NURSERY 1">NURSERY 1</option>
+
                                             <option value="PRE-NURSERY">PRE-NURSERY</option>
                                         </select>
                                     </p>
@@ -54,7 +55,7 @@
                         <input type="radio" value="FEMALE" name="gender" id="female"/>
                     </div>
                     <!-- Passport File Upload -->
-                    <p><label for="passport">Upload Profile</label><input type="file" name="passport" id="passport" style="display:none;"/></p>    
+                    <p><input type="file" name="passport" id="passport"  placeholder="Profile picture"/></p>    
                     
                     <!-- Submit Button -->
                     <button type="submit">Upload</button>

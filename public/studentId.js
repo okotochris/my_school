@@ -2,8 +2,8 @@ let aphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 let number = '1234567890'
 let studentId = document.getElementById('studentId')
 let GenerateId = document.getElementById('GenerateId')
-GenerateId.onclick = function(){
-    event.preventDefault();
+function generateId(event){
+    event.preventDefault()
     let random = '';
         for(let i = 1; i<=3; i++){
             random += aphabet[Math.floor(Math.random() * aphabet.length)]
@@ -14,8 +14,24 @@ GenerateId.onclick = function(){
         for(let i = 1; i<=3; i++){
             random += aphabet[Math.floor(Math.random() * aphabet.length)]
         }
-    studentId.value = random
-    studentId.select()
-    document.execCommand('copy')
+    
+    checkId(random)
 }
 
+ 
+//CHECKING IF THE ID EXIST IN DATABASE 
+async function checkId(random){
+    try{
+        let result = await fetch(`/studentinfomation?studnetId=${random}`);
+        let studentID = await result.json();
+        if(studentID){
+            generateId() 
+        }
+        else{
+            studentId.value = random
+        }
+    }
+    catch(err){
+        console.log(err)
+    }
+}

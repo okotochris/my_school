@@ -27,7 +27,7 @@ const student = async (e) => {
             studentId.value = userData[0].studentId
             user.value = userData[0].userName.toUpperCase()
             Sclass.value = userData[0].class
-            
+            console.log(userData[0].class)
         }
     }
            

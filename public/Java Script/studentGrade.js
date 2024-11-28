@@ -17,7 +17,7 @@ async function studentPerfomance(x, y){
         let promise = await fetch(`/studentperfomance?class=${x}&section=${y}`)
         let result = await promise.json()
         tableDis(result)
-        console.log(result[0])
+        console.log(result)
     }
     catch(err){
         console.log(err)
