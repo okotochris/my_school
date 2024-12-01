@@ -111,7 +111,7 @@ app.get('/', (req, res) => {
 })
 //adimin page to loging to result upload portal
 app.get('/admin', isAuthenticated, (req, res) => {
-    res.render('admin')
+    res.render('admin', {school: req.session.school})
 })
 
 //CHECKING IF USER HAS LOGIN
@@ -178,7 +178,7 @@ app.get('/blacklist', isAuthenticated, async (req, res)=>{
     try{
         let school = req.session.school;
         const data = await Blacklist.find({school:school})
-        res.render('blacklist', {data})
+        res.render('blacklist', {data, school: req.session.school})
     }
     catch(err){
         console.log(err)
@@ -452,11 +452,11 @@ app.patch('/update-student', async (req, res) => {
 
 //UPDATING STUDENT RECORD PAGE
 app.get('/update', isAuthenticated, (req, res)=>{
-    res.render('update')
+    res.render('update', {school: req.session.school})
 })
 //generating student id and passport page
 app.get('/generateid', isAuthenticated, (req, res)=>{
-    res.render('generateid')
+    res.render('generateid', {school: req.session.school})
 })
 
 // saving student ID and passport 
@@ -520,17 +520,17 @@ app.post('/contact', (req, res) => {
     });
 });
 //TESTING RESULT TEMPLATE
-app.get('/primary-result', (req, res)=>{
-    res.render('primary-result')
+app.get('/junior', (req, res)=>{
+    res.render('blixx-international-jss')
 })
 //STUDENT ID FORM
 app.get('/studentid', isAuthenticated, (req, res)=>{
-    res.render('studentid')
+    res.render('studentid', {school: req.session.school})
 })
 
 //STUDENT GRADING
 app.get('/studentgrade', (req, res)=>{
-    res.render('studentgrade')
+    res.render('studentgrade', {school: req.session.school})
 })
 //UPDATE STUDENT CLASS
 app.patch('/updatestudentclass', async (req, res)=>{
@@ -551,6 +551,8 @@ app.get('/schoolname', (req, res)=>{
     let school = req.session.school
     res.json(school)
 })
+
+//LOGOUT API
 app.get('/logout', (req, res)=>{
     req.session.destroy();
     res.redirect('login')
