@@ -7,6 +7,8 @@ let female = document.getElementById('female')
 let passport = document.getElementById('passport')
 let updateNameForm = document.getElementById('updateNameForm')
 let loading = document.querySelector('.cover')
+
+
 //GETTING STUDENT CURRENT DETAILS 
 studentDetails.onclick = async (e)=>{
     e.preventDefault()
@@ -15,7 +17,6 @@ studentDetails.onclick = async (e)=>{
     try{
         let data = await fetch(`/studentinfomation?studnetId=${studentId}`)
         let student = await data.json()
-        console.log(student)
         username.value = student.userName
         addmissionNo.value = student.addmissionNo
         dob.value = student.dob

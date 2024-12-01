@@ -54,15 +54,7 @@ body {
   border:solid 1px black;
 
  }
- .add_form{
-  width:95%;
-  margin: 0px auto ;
-  height:auto;
-  position:relative;
-  padding:9px;
-  font-size:22px;
-  color:blue;
- }
+
  .check_result{
   color:#13022F;
   font-family: "Josefin Sans";
@@ -87,21 +79,27 @@ body {
   flex-shrink: 0;
   align-self: stretch;
 }
+
 .add_form{
-  width: 332px;
+  width:95%;
   display: flex;
-  margin-bottom:20px;
-  padding: 10px 0px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background:white;
+  margin: 0px auto ;
+  height:auto;
+  position:relative;
+  padding:9px;
+  font-size:22px;
+  color:blue;
 }
 .add_form form{
   border-radius: 20px;
   width: 315px;
   box-shadow: 0px 6px 30px 5px rgba(0, 0, 0, 0.12);
   padding: 4px 6px;
+  background:white;
+  margin:0px auto;
 }
 
  button{
