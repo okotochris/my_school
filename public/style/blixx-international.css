@@ -3,7 +3,7 @@
     margin: 0px;
 }
 .container{
-    width: 800px;
+    width: 700px;
     overflow:hidden;
     margin:0px auto;    
 }
@@ -14,25 +14,28 @@
     align-items: center;
 }
 .header{
-    width: 750px;
+    width: 650px;
     text-align:center;
     font-weight: bold;
     margin:0px auto;
 }
-.header h2{
-    font-size: 40px;
+.header span{
+    font-size: 35px;
     color:blue;
+
 }
 .title div{
-   height:70px;
-   width:70px;
-   background:blue;
+   height:60px;
+   width:60px;
+   background:url("/IMAGE/blixx international.png");
+   background-size: contain;
    margin-right:5px;
+   background-repeat:no-repeat;
 }
 .studentId{
     display: flex;
     justify-content:space-between;
-    width:750px;
+    width:650px;
     margin:0px auto;
 
 }
@@ -43,7 +46,7 @@
     margin: 5px 0px;
 }
 .studentInfo{
-    width:750px;
+    width:650px;
     display:flex;
     flex-direction:column;
     font-weight: bold;
@@ -58,7 +61,7 @@
 }
 table{
     margin-top:15px;
-    width:750px;
+    width:650px;
     border-collapse: collapse;
     margin:5px auto;
 }

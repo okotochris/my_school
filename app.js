@@ -135,7 +135,7 @@ app.post('/login', async(req, res)=>{
         if(data){
             req.session.visited = true;
             req.session.user = user;
-            const school = data.school;
+            const school = data.school || 'Khristal Tech';
             req.session.school = school;
             const redirectTo = req.session.returnTo || '/admin';
             delete req.session.returnTo; // Clear returnTo after use
@@ -206,7 +206,7 @@ app.delete('/blacklist/:studentId', async (req, res) => {
 app.post('/blacklist', async (req, res)=>{
     
     let studentName = req.body.userName;
-    let school = 'Golden hills'
+    let school = req.session.school;
     let studentId = req.body.studentId;
     const data = {studentName, studentId, school}
     
