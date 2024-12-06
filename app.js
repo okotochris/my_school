@@ -521,7 +521,7 @@ app.post('/contact', (req, res) => {
 });
 //TESTING RESULT TEMPLATE
 app.get('/junior', (req, res)=>{
-    res.render('blixx-international-jss')
+    res.render('blixx-international-ss')
 })
 //STUDENT ID FORM
 app.get('/studentid', isAuthenticated, (req, res)=>{

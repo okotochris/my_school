@@ -17,17 +17,17 @@
     <div class="studentId">
         <div>
             <p style="color:red;">ADMISSION NO</p>
-            <div class="box"></div>
+            <div class="box"><%=result.addmissionNo %></div>
         </div>
         <div>
             <p style="color:red;">STUDENT ID</p>
-            <div class="box"></div>
+            <div class="box"><%= result.studentId %></div>
         </div>
     </div>
     <div class="studentInfo">
-        <div> <p>Name: OKOTOAZA CHRISTIAN</p> </div>
-        <div><p>Junior Secondary: Attendance: 33</p>  <p>Absent: 3</p></div> 
-        <div> <p>Class: JSS2</p><p>Year: 2023-2024</p><p>Term: THIRD TERM</p></div>
+        <div> <p>Name: <%= result.userName.toUpperCase() %></p> </div>
+        <div><p>Junior Secondary: Attendance: <% details.present %></p>  <p>Absent: <%= details.absent %></p></div> 
+        <div> <p>Class: <%= details.class %></p><p>Year: 2023-2024</p><p>Term: <%= details.term %></p></div>
     </div>
 
     <div>
@@ -43,137 +43,154 @@
                 <th>SIGNATURE</th>
             </tr>
             <tr>
-                <td>English Language</td>
-                <td>10</td>
-                <td>10</td>
-                <td>10</td>
-                <td>70</td>
-                <td>100</td>
-                <td>A+</td>
-                <td>Excellent</td>
+                <td><%= details.eng %></td>
+                <td><%= details.eng1st %></td>
+                <td><%= details.eng2nd %></td>
+                <td><%= details.engca %></td>
+                <td><%= details.engexam %></td>
+                <td><%= details.engscore %></td>
+                <td><%= details.engG %></td>
+                <td><%= details.engRemark %></td>
             </tr>
             <tr>
-                <td>English</td>
-                <td>10</td>
-                <td>10</td>
-                <td>10</td>
-                <td>70</td>
-                <td>100</td>
-                <td>A+</td>
-                <td>Excellent</td>
+                <td><%= details.mth %></td>
+                <td><%= details.mth1st %></td>
+                <td><%= details.mth2nd %></td>
+                <td><%= details.mthca %></td>
+                <td><%= details.mthexam %></td>
+                <td><%= details.mthscore %></td>
+                <td><%= details.mthG %></td>
+                <td><%= details.mthRemark %></td>
             </tr>
             <tr>
-                <td>English</td>
-                <td>10</td>
-                <td>10</td>
-                <td>10</td>
-                <td>70</td>
-                <td>100</td>
-                <td>A+</td>
-                <td>Excellent</td>
+                <td><%= details.bsc %></td>
+                <td><%= details.bsc1st %></td>
+                <td><%= details.bsc2nd %></td>
+                <td><%= details.bscca %></td>
+                <td><%= details.bscexam %></td>
+                <td><%= details.bscscore %></td>
+                <td><%= details.bscG %></td>
+                <td><%= details.bscRemark %></td>
             </tr>
             <tr>
-                <td>English</td>
-                <td>10</td>
-                <td>10</td>
-                <td>10</td>
-                <td>70</td>
-                <td>100</td>
-                <td>A+</td>
-                <td>Excellent</td>
+                <td><%= details.btc %></td>
+                <td><%= details.btc1st %></td>
+                <td><%= details.btc2nd %></td>
+                <td><%= details.btcca %></td>
+                <td><%= details.btcexam %></td>
+                <td><%= details.btcscore %></td>
+                <td><%= details.btcG %></td>
+                <td><%= details.btcRemark %></td>
             </tr>
             <tr>
-                <td>English</td>
-                <td>10</td>
-                <td>10</td>
-                <td>10</td>
-                <td>70</td>
-                <td>100</td>
-                <td>A+</td>
-                <td>Excellent</td>
+                <td><%= details.hec %></td>
+                <td><%= details.hec1st %></td>
+                <td><%= details.hec2nd %></td>
+                <td><%= details.hecca %></td>
+                <td><%= details.hecexam %></td>
+                <td><%= details.hecscore %></td>
+                <td><%= details.hecG %></td>
+                <td><%= details.hecRemark %></td>
+            </tr>
+            <tr><td><%= details.fre %></td>
+                <td><%= details.fre1st %></td>
+                <td><%= details.fre2nd %></td>
+                <td><%= details.freca %></td>
+                <td><%= details.freexam %></td>
+                <td><%= details.frescore %></td>
+                <td><%= details.freG %></td>
+                <td><%= details.freRemark %></td>
             </tr>
             <tr>
-                <td>English</td>
-                <td>10</td>
-                <td>10</td>
-                <td>10</td>
-                <td>70</td>
-                <td>100</td>
-                <td>A+</td>
-                <td>Excellent</td>
+                <td><%= details.fre %></td>
+                <td><%= details.fre1st %></td>
+                <td><%= details.fre2nd %></td>
+                <td><%= details.freca %></td>
+                <td><%= details.freexam %></td>
+                <td><%= details.frescore %></td>
+                <td><%= details.freG %></td>
+                <td><%= details.freRemark %></td>
             </tr>
             <tr>
-                <td>English</td>
-                <td>10</td>
-                <td>10</td>
-                <td>10</td>
-                <td>70</td>
-                <td>100</td>
-                <td>A+</td>
-                <td>Excellent</td>
+                <td><%= details.agr %></td>
+                <td><%= details.agr1st %></td>
+                <td><%= details.agr2nd %></td>
+                <td><%= details.agrca %></td>
+                <td><%= details.agrexam %></td>
+                <td><%= details.agrscore %></td>
+                <td><%= details.agrG %></td>
+                <td><%= details.agrRemark %></td>
             </tr>
             <tr>
-                <td>English</td>
-                <td>10</td>
-                <td>10</td>
-                <td>10</td>
-                <td>70</td>
-                <td>100</td>
-                <td>A+</td>
-                <td>Excellent</td>
+                <td><%= details.csc %></td>
+                <td><%= details.csc1st %></td>
+                <td><%= details.csc2nd %></td>
+                <td><%= details.cscca %></td>
+                <td><%= details.cscexam %></td>
+                <td><%= details.cscscore %></td>
+                <td><%= details.cscG %></td>
+                <td><%= details.cscRemark %></td>
             </tr>
             <tr>
-                <td>English</td>
-                <td>10</td>
-                <td>10</td>
-                <td>10</td>
-                <td>70</td>
-                <td>100</td>
-                <td>A+</td>
-                <td>Excellent</td>
+                <td><%= details.crs %></td>
+                <td><%= details.crs1st %></td>
+                <td><%= details.crs2nd %></td>
+                <td><%= details.crsca %></td>
+                <td><%= details.crsexam %></td>
+                <td><%= details.crsscore %></td>
+                <td><%= details.crsG %></td>
+                <td><%= details.crsRemark %></td>
             </tr>
             <tr>
-                <td>English</td>
-                <td>10</td>
-                <td>10</td>
-                <td>10</td>
-                <td>70</td>
-                <td>100</td>
-                <td>A+</td>
-                <td>Excellent</td>
+                <td><%= details.ped %></td>
+                <td><%= details.ped1st %></td>
+                <td><%= details.ped2nd %></td>
+                <td><%= details.pedca %></td>
+                <td><%= details.pedexam %></td>
+                <td><%= details.pedscore %></td>
+                <td><%= details.pedG %></td>
+                <td><%= details.pedRemark %></td>
             </tr>
             <tr>
-                <td>English</td>
-                <td>10</td>
-                <td>10</td>
-                <td>10</td>
-                <td>70</td>
-                <td>100</td>
-                <td>A+</td>
-                <td>Excellent</td>
+                <td><%= details.cra %></td>
+                <td><%= details.cra1st %></td>
+                <td><%= details.cra2nd %></td>
+                <td><%= details.craca %></td>
+                <td><%= details.craexam %></td>
+                <td><%= details.crascore %></td>
+                <td><%= details.craG %></td>
+                <td><%= details.craRemark %></td>
             </tr>
             <tr>
-                <td>English</td>
-                <td>10</td>
-                <td>10</td>
-                <td>10</td>
-                <td>70</td>
-                <td>100</td>
-                <td>A+</td>
-                <td>Excellent</td>
+                <td><%= details.hiy %></td>
+                <td><%= details.hiy1st %></td>
+                <td><%= details.hiy2nd %></td>
+                <td><%= details.hiyca %></td>
+                <td><%= details.hiyexam %></td>
+                <td><%= details.hiyscore %></td>
+                <td><%= details.hiyG %></td>
+                <td><%= details.hiyRemark %></td>
             </tr>
             <tr>
-                <td>English</td>
-                <td>10</td>
-                <td>10</td>
-                <td>10</td>
-                <td>70</td>
-                <td>100</td>
-                <td>A+</td>
-                <td>Excellent</td>
+                <td><%= details.ced %></td>
+                <td><%= details.ced1st %></td>
+                <td><%= details.ced2nd %></td>
+                <td><%= details.cedca %></td>
+                <td><%= details.cedexam %></td>
+                <td><%= details.cedscore %></td>
+                <td><%= details.cedG %></td>
+                <td><%= details.cedRemark %></td>
             </tr>
-           
-
+            <tr>
+                <td><%= details.bst %></td>
+                <td><%= details.bst1st %></td>
+                <td><%= details.bst2nd %></td>
+                <td><%= details.bstca %></td>
+                <td><%= details.bstexam %></td>
+                <td><%= details.bstscore %></td>
+                <td><%= details.bstG %></td>
+                <td><%= details.bstRemark %></td>
+            </tr>
             <tr>
                 <td>TOTAL</td>
                 <td></td>
@@ -184,6 +201,7 @@
                 <td></td>
                 <td></td>
             </tr>
+           
             <tr>
                 <td></td>
                 <td>10%</td>
@@ -199,13 +217,13 @@
 
     <div class="studentInfo" style="color:blue; position:relative">
         <div>
-            <p>Pass Grade: 79%</p><p>Average: 89.5</p><p>Position:</p><p>Out of:</p>
+            <p>Pass Grade: </p><p>Average:  <%= details.average %> </p><p>Total score: <%= details.score_obtain %></p><p>Out of: <%= details.score_obtainable %></p>
         </div>
         
         <p>From Master' Report</p>
         <div><p>Next term School Fees:</p><p>Exam fee: 2000</p><p>Next term begins: 22 of July 2025</p></div>
         <div>
-            <p>Date</p>         
+            <p>SESSION: <%= details.section %></p>         
         </div>
        <div style="color:red; display: flex; justify-content: flex-end; border:none"> <p>Proprietor's sign.</p> </div> 
     </div>
