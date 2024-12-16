@@ -13,7 +13,8 @@ window.addEventListener('load',  async ()=>{
             document.querySelector('#red').value = 'Home Economics'
             document.querySelector('#hst').value = 'PHE'
             document.querySelector('#vst').value = 'Agricultural Science'
-            document.querySelector('#hwr').value = 'Reading'
+            document.querySelector('#hwr').value = 'Computer Education'
+            document.querySelector('#pvs').value = 'Civic Education'
             
         }
     }

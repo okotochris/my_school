@@ -14,19 +14,19 @@
     align-items: center;
 }
 .header{
-    width: 650px;
+    width: 690px;
     text-align:center;
     font-weight: bold;
     margin:0px auto;
 }
 .header span{
-    font-size: 35px;
+    font-size: 30px;
     color:blue;
 
 }
 .title div{
-   height:60px;
-   width:60px;
+   height:70px;
+   width:70px;
    background:url("/IMAGE/blixx international.png");
    background-size: contain;
    margin-right:5px;
@@ -69,8 +69,11 @@ table th{
     color:red;
 }
 table th, table td{
-    border: solid 2px blue;
+   
     font-size:18px;
     width:18px;
     height:30px;
+}
+table, th, td{
+    border: 2px solid blue;
 }
