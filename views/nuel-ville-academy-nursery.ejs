@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" type="text/css" href="style/result_download.css" /> 
+  <link rel="stylesheet" type="text/css" href="style/download_button.css"/>
+</head>
+
+<body>
+  <!-- details.ejs -->
+  <div style="height:20px;"></div>
+  <div class="t_container" id="resultContainer">
+      <div class="style">
+        
+        <div class="school_details">
+          <div class="logo">
+            
+          </div>
+          <div>
+            <h1>
+              NUEL VILLE ACADEMY
+            </h1>
+            <p>
+              NO. 13, OBAS NUEL AVEN. OFF A. U ROAD, BY IDOKPA BYPASS
+              <p>Tel:077062035877 / 07068291163</p>
+            </p>
+            
+          </div>
+          <div class="avatar">
+            <p>ID: IHE2345INE</p>
+          </div>
+        </div>
+        
+        <div class="reportSheet">
+          <div>
+            <h3>BASIC SCHOOL STUDENT'S ACADEMIC REPORT/SHEET</h3>
+          </div>
+        </div>
+
+        <br />
+        <div class="top_info">
+            <p>Name: <b><%= result.userName.toUpperCase() %></b> </p>
+            <p>Class:<b><%= details.class.toUpperCase() %></b> </p>
+            <p>Term: <b><%= details.term %></b></p>
+   
+        </div>
+        <div class="table_design">
+          <div class="table">
+            <table>
+              <tr>
+                <th width="200px">Subject</th>
+                <th>1stTest [15%]</th>
+                <th>2ndTest [15%]</th>
+                <th>Exam [70%]</th>
+                <th>Total [100%]</th>
+                <th>Grade</th>
+                <th width="130px">Remark</th>
+              </tr>
+              <tr>
+                <td><%= details.eng.toUpperCase() %></td>
+                <td><%= details.eng1st %></td>
+                <td><%= details.eng2nd %></td>
+                <td><%= details.engexam %></td>
+                <td><%= details.engscore %></td>
+                <td><%= details.engG %></td>
+                <td><%= details.engRemark %></td>
+              </tr>
+              <tr>
+                  <td><%= details.mth.toUpperCase() %></td>
+                  <td><%= details.mth1st %></td>
+                  <td><%= details.mth2nd %></td>
+                  <td><%= details.mthexam %></td>
+                  <td><%= details.mthscore %></td>
+                  <td><%= details.mthG %></td>
+                  <td><%= details.mthRemark %></td>
+              </tr>
+              <tr>
+                  <td><%= details.bst.toUpperCase() %></td>
+                  <td><%= details.bst1st %></td>
+                  <td><%= details.bst2nd %></td>
+                  <td><%= details.bstexam %></td>
+                  <td><%= details.bstscore %></td>
+                  <td><%= details.bstG %></td>
+                  <td><%= details.bstRemark %></td>
+              </tr>
+              <tr>
+                  <td><%= details.cra.toUpperCase() %></td>
+                  <td><%= details.cra1st %></td>
+                  <td><%= details.cra2nd %></td>
+                  <td><%= details.craexam %></td>
+                  <td><%= details.crascore %></td>
+                  <td><%= details.craG %></td>
+                  <td><%= details.craRemark %></td>
+              </tr>
+              <tr>
+                <td><%= details.cra.toUpperCase() %></td>
+                  <td><%= details.cra1st %></td>
+                  <td><%= details.cra2nd %></td>
+                  <td><%= details.craexam %></td>
+                  <td><%= details.crascore %></td>
+                  <td><%= details.craG %></td>
+                  <td><%= details.craRemark %></td>
+              </tr>
+              <tr>
+                  <td><%= details.bsc.toUpperCase() %></td>
+                  <td><%= details.bsc1st %></td>
+                  <td><%= details.bsc2nd %></td>
+                  <td><%= details.bscca %></td>
+                  <td><%= details.bscexam %></td>
+                  <td><%= details.bscscore %></td>
+                  <td><%= details.bscG %></td>
+                  <td><%= details.bscRemark %></td>
+              </tr>
+              <tr>
+                <td><%= details.btc.toUpperCase() %></td>
+                <td><%= details.btc1st %></td>
+                <td><%= details.btc2nd %></td>
+                <td><%= details.btcca %></td>
+                <td><%= details.btcexam %></td>
+                <td><%= details.btcscore %></td>
+                <td><%= details.btcG %></td>
+                <td><%= details.btcRemark %></td>
+              </tr>
+              <tr>
+                <td>
+                  
+                </td>
+                <td>
+                 
+                </td>
+                <td>
+                 
+                </td>
+                <td>
+                 
+                </td>
+                <td>
+                 
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                 
+                </td>
+                <td>
+               
+                </td>
+                <td>
+                 
+                </td>
+                <td>
+                 
+                </td>
+                <td>
+                 
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                 
+                </td>
+                <td>
+                 
+                </td>
+                <td>
+                 
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  
+                </td>
+                <td>
+                
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                 
+                </td>
+                <td>
+                  
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  
+                </td>
+                <td>
+                 
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  
+                </td>
+                <td>
+                
+                </td>
+                <td>
+                 
+                </td>
+                <td>
+                 
+                </td>
+                <td>
+                 
+                </td>
+                <td>
+                 
+                </td>
+                <td>
+                  
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  
+                </td>
+                <td>
+                  
+                </td>
+                
+                <td>
+                  
+                </td>
+                <td>
+                 
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                 
+                </td>
+                <td>
+                  
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  
+                </td>
+                <td>
+                 
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                 
+                </td>
+                <td>
+                 
+                </td>
+                <td>
+                 
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="class_info">
+            <div>
+              <table style="font-size:10px; margin:0px;">
+                <tr>
+                  <th>
+                    <h3>Skill & Behavior</h3>
+                  </th>
+                  <th>5</th>
+                  <th>4</th>
+                  <th>3</th>
+                  <th>2</th>
+                  <th>1</th>
+                </tr>
+                <tr>
+                  <td>1. Attendance</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>2. Attentiveness</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>3. Honesty</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>4. Initiative</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>5. Neatness</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>6. Organization ability</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <tb></tb>
+                </tr>
+                <tr>
+                  <td>7. Perseverance</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>8. Punctuality </td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>9. Spirit of Cooperation</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>10. Self control</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </table>
+            </div>
+            <div>
+              <h4>KEYS TO SKILL & BEHAVIOR </h4>
+              <P> 5....Excellent degree of observation </P>
+              <P> 4....High level fo observation </P>
+              <P> 3....Acceptable level of observation </P>
+              <P> 2....Minimal level Observed </P>
+              <P> 1....No level observed </P>
+            </div>
+            <div class="grade">
+              <P> 80 - 100--A+ Distinction </P>
+              <P> 70 - 79---A Excellent </P>
+              <P> 60 - 69---B Very Good </P>
+              <P> 50 - 59---C Credit </P>
+              <p> 40 - 49---D Pass</p>
+              
+              <P> 0 -  39----F Fail</P>
+            </div>
+            <div>
+            <!---- <h3 style="font-size:16px;">CLASS TEACHER'S NAME</h3> 
+              <p>......................................................</p> -->
+            </div>
+          </div>
+        </div>
+
+        <h3>STUDENT PERFORMANCE ANALYSIS</h3>
+        <div class="score_container">
+          <div class="student_score">
+            <div><h5>SUBJECT OFFERED</h5><h4>12</h4></div>
+            <div><h5>SCORE OBTAINABLE</h5><h4>1200</h4></div>
+            <div><h5>SCORE OBTAIN</h5><h4>950</h4></div>
+            <div><h5>AVERAGE SCORE</h5><h4>72</h4></div>
+          </div>
+
+        </div>
+        
+        <div class="extraInfo">
+          <div>
+            <P>PROMOTED TO <b>BASIC 2</b></P>
+            <P>CLASS TEACHER'S REPORT </p><p><b> Quite and hard working</b></P>
+          </div>
+          <div>
+            <p>TIME PRESENT: <b>68</b></p>
+            <P>OUTSTANDING FEES </p><p><b>Cleard</b></P>
+          </div>
+          <div>
+            <p>TIME ABSENT: <b> 3</b></p>
+            <p>NEXT TERM BEGINS: </p><p><b>10TH January, 2025</b></p>
+          </div>
+        </div>
+      <div class="school_report">
+        <div>
+          <p>Head Teacher’s Remark :</p> 
+          <p style="color:rgb(200, 4, 4); text-decoration: underline;">Good Performance</p>
+        </div>
+
+        <hr/>
+      <div>
+        <p>Head Teacher’s Sign</p>
+        <p>.................... </p>
+      </div>
+       
+      </div>
+    </div>
+  </div>
+  <div id="captureWrapper">
+    <div id="resultContainer">
+        <!-- Your content here -->
+    </div>
+</div>
+
+  <div class="button"><button class="download" onclick="downloadResult()">Download Result</button></div>
+  <div class="button"><button class="download" onclick="downloadResultAsJPG()">Download JPEG</button></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+  <!-- Your custom JavaScript code -->
+  <script src="download.js"></script>
+  <script src="Java Script/dwonloadJPEG.js"></script>
+</body>
+
+</html>
