@@ -195,6 +195,55 @@ blogSchema = new Schema({
     vstRemark:{
         type:String
     },
+    vrn:{
+        type:String
+    },
+    vrn1st:{
+        type:String
+    },
+   vrn2nd:{
+        type:String
+    },
+    vrnca:{
+        type:String
+    }, 
+    vrnexam:{
+        type:String
+    },
+    vrnscore:{
+        type:String
+    },
+    vrnG:{
+        type:String
+    },
+    vrnRemark:{
+        type:String
+    },
+
+    crs:{
+        type:String
+    },
+    crs1st:{
+        type:String
+    },
+    crs2nd:{
+        type:String
+    },
+    crsca:{
+        type:String
+    }, 
+    crsexam:{
+        type:String
+    },
+    crsscore:{
+        type:String
+    },
+    crsG:{
+        type:String
+    },
+    crsRemark:{
+        type:String
+    },
     cra:{
         type:String
     },

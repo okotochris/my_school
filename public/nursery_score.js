@@ -9,8 +9,9 @@ let pvsscore = document.getElementById('pvsscore')
 let verscore = document.getElementById('verscore')
 let vstscore = document.getElementById('vstscore')
 let crascore = document.getElementById('crascore')
+let vrnscore = document.getElementById('vrnscore')
+let crsscore = document.getElementById('crsscore')
 let plfscore = document.getElementById('plfscore')
-
 let userNam = document.getElementById('userName')
 let cal = document.getElementById('Calc')
 let report = document.getElementById('Treport')
@@ -64,7 +65,29 @@ qurscore.onmouseover = function(){
     let score = qurscore;
     comput(x, x2, ca, x3, score, grade, Remark)
 }
+//verbal reasoning
+vrnscore.onmouseover = function(){
+    let x = Number(document.getElementById('vrn2nd').value)
+    let x2 = Number(document.getElementById('vrn1st').value)
+    let ca = Number(document.getElementById('vrnca').value)
+    let x3 = Number(document.getElementById('vrnexam').value)
+    let grade = document.getElementById('vrnG')
+    let Remark = document.getElementById('vrnRemark')
+    let score = vrnscore;
+    comput(x, x2, ca, x3, score, grade, Remark)
+}
 
+//CRS 
+crsscore.onmouseover = function(){
+    let x = Number(document.getElementById('crs2nd').value)
+    let x2 = Number(document.getElementById('crs1st').value)
+    let ca = Number(document.getElementById('crsca').value)
+    let x3 = Number(document.getElementById('crsexam').value)
+    let grade = document.getElementById('crsG')
+    let Remark = document.getElementById('crsRemark')
+    let score = crsscore;
+    comput(x, x2, ca, x3, score, grade, Remark)
+}
 //PRATICALL LIFE 
 plfscore.onmouseover = function(){
     let x = Number(document.getElementById('plf2nd').value)
@@ -193,7 +216,7 @@ cal.onclick= function(){
    
    //calculating the total student perfomance
     let course = 0;
-    let total = Number(rnvscore.value) + Number(bstscore.value) + Number(plfscore.value) + Number(vstscore.value) + Number(mthscore.value)  + Number(qurscore.value) + Number(pvsscore.value) + Number(verscore.value) + Number(engscore.value) + Number(crascore.value);
+    let total = Number(rnvscore.value) + Number(bstscore.value) + Number(plfscore.value) + Number(vstscore.value) + Number(mthscore.value)  + Number(qurscore.value) + Number(pvsscore.value) + Number(verscore.value) + Number(engscore.value) + Number(crascore.value) + Number(vrnscore.value) + Number(crsscore.value);
    
    // calculating the number of score offered 
         if(rnvscore.value != ""){
@@ -216,6 +239,12 @@ cal.onclick= function(){
             course++;
         }
         if(qurscore.value != ""){
+            course++;
+        }
+        if(vrnscore.value != ""){
+            course++;
+        }
+        if(crsscore.value != ""){
             course++;
         }
         if(verscore.value != ""){
