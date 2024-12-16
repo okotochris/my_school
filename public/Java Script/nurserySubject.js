@@ -16,8 +16,8 @@ window.addEventListener('load',  async ()=>{
             document.querySelector('#ver').value = 'Phonics'
             document.querySelector('#bst').value = 'Basic Science'
             document.querySelector('#rnv').value = 'Quantitative Reasoning'
+             document.querySelector('#vrn').value = 'CRS'
             document.querySelector('.extra').style.display='block';
-            
         }
     }
     catch(err){
