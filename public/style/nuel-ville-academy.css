@@ -7,7 +7,7 @@
   /* Base styles */
   /* Base styles */
   .t_container {
-    width: 700px; /* Set a maximum width for laptop view */
+    width: 720px; /* Set a maximum width for laptop view */
     margin: auto;
     padding: 10px;
     box-sizing: border-box;
@@ -20,12 +20,7 @@
     box-sizing: border-box; /* Ensure padding does not increase element width */
   }
   
-  /* Additional styles for phone view */
-  @media only screen and (max-width: 1000px) { /* Adjust the breakpoint as needed */
-    .t_container {
-      width: 98%; /* Make it full width on phones */
-    }
-  }
+  
   
   .logo{
     height: 100px;
@@ -136,7 +131,7 @@
   }
   
   .table {
-    width: 460px; /* Adjusted width to fit better */
+    width: 480px; /* Adjusted width to fit better */
     font-size: 14px;
     height: auto;
   }
@@ -247,4 +242,23 @@
     justify-content:space-around;
     border-bottom: 2px solid black;
     margin-bottom: 10px;
+  }
+  /* Additional styles for phone view */
+  @media only screen and (max-width: 1000px) { /* Adjust the breakpoint as needed */
+    .t_container {
+      width: 800px; /* Set a maximum width for laptop view */
+          
+    }
+    .table {
+      width: 520px; /* Adjusted width to fit better */
+      font-size: 16px;
+      height: auto;
+    }
+    .class_info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 220px; /* Adjusted width to fit better */
+      font-size: 14px;
+    }
   }

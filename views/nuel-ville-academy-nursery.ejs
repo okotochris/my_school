@@ -2,13 +2,14 @@
 <html lang="en">
 
 <head>
-  <link rel="stylesheet" type="text/css" href="style/result_download.css" /> 
+  <link rel="stylesheet" type="text/css" href="style/nuel-ville-academy.css" /> 
   <link rel="stylesheet" type="text/css" href="style/download_button.css"/>
 </head>
 
 <body>
   <!-- details.ejs -->
-  <div style="height:20px;"></div>
+
+  
   <div class="t_container" id="resultContainer">
       <div class="style">
         
@@ -48,13 +49,13 @@
           <div class="table">
             <table>
               <tr>
-                <th width="200px">Subject</th>
-                <th>1stTest [15%]</th>
-                <th>2ndTest [15%]</th>
+                <th style="width:200px;">Subject</th>
+                <th>1st Test [15%]</th>
+                <th>2nd Test [15%]</th>
                 <th>Exam [70%]</th>
                 <th>Total [100%]</th>
                 <th>Grade</th>
-                <th width="130px">Remark</th>
+                <th style="width:70px;">Remark</th>
               </tr>
               <tr>
                 <td><%= details.eng.toUpperCase() %></td>
@@ -66,271 +67,153 @@
                 <td><%= details.engRemark %></td>
               </tr>
               <tr>
-                  <td><%= details.mth.toUpperCase() %></td>
-                  <td><%= details.mth1st %></td>
-                  <td><%= details.mth2nd %></td>
-                  <td><%= details.mthexam %></td>
-                  <td><%= details.mthscore %></td>
-                  <td><%= details.mthG %></td>
-                  <td><%= details.mthRemark %></td>
+                <td><%= details.mth.toUpperCase() %></td>
+                <td><%= details.mth1st %></td>
+                <td><%= details.mth2nd %></td>
+                <td><%= details.mthexam %></td>
+                <td><%= details.mthscore %></td>
+                <td><%= details.mthG %></td>
+                <td><%= details.mthRemark %></td>
+              </tr>
+              
+              <tr>
+                <td><%= details.bst.toUpperCase() %></td>
+                <td><%= details.bst1st %></td>
+                <td><%= details.bst2nd %></td>
+                <td><%= details.bstexam %></td>
+                <td><%= details.bstscore %></td>
+                <td><%= details.bstG %></td>
+                <td><%= details.bstRemark %></td>
               </tr>
               <tr>
-                  <td><%= details.bst.toUpperCase() %></td>
-                  <td><%= details.bst1st %></td>
-                  <td><%= details.bst2nd %></td>
-                  <td><%= details.bstexam %></td>
-                  <td><%= details.bstscore %></td>
-                  <td><%= details.bstG %></td>
-                  <td><%= details.bstRemark %></td>
+                <td><%= details.rnv.toUpperCase() %></td>
+                <td><%= details.rnv1st %></td>
+                <td><%= details.rnv2nd %></td>
+                <td><%= details.rnvexam %></td>
+                <td><%= details.rnvscore %></td>
+                <td><%= details.rnvG %></td>
+                <td><%= details.rnvRemark %></td>
               </tr>
-              <tr>
-                  <td><%= details.cra.toUpperCase() %></td>
-                  <td><%= details.cra1st %></td>
-                  <td><%= details.cra2nd %></td>
-                  <td><%= details.craexam %></td>
-                  <td><%= details.crascore %></td>
-                  <td><%= details.craG %></td>
-                  <td><%= details.craRemark %></td>
-              </tr>
+              
               <tr>
                 <td><%= details.cra.toUpperCase() %></td>
-                  <td><%= details.cra1st %></td>
-                  <td><%= details.cra2nd %></td>
-                  <td><%= details.craexam %></td>
-                  <td><%= details.crascore %></td>
-                  <td><%= details.craG %></td>
-                  <td><%= details.craRemark %></td>
+                <td><%= details.cra1st %></td>
+                <td><%= details.cra2nd %></td>
+                <td><%= details.craexam %></td>
+                <td><%= details.crascore %></td>
+                <td><%= details.craG %></td>
+                <td><%= details.craRemark %></td>
+              </tr>
+              
+              
+              <tr>
+                <td><%= details.pvs.toUpperCase() %></td>
+                <td><%= details.pvs1st %></td>
+                <td><%= details.pvs2nd %></td>
+                <td><%= details.pvsexam %></td>
+                <td><%= details.pvsscore %></td>
+                <td><%= details.pvsG %></td>
+                <td><%= details.pvsRemark %></td>
               </tr>
               <tr>
-                  <td><%= details.bsc.toUpperCase() %></td>
-                  <td><%= details.bsc1st %></td>
-                  <td><%= details.bsc2nd %></td>
-                  <td><%= details.bscca %></td>
-                  <td><%= details.bscexam %></td>
-                  <td><%= details.bscscore %></td>
-                  <td><%= details.bscG %></td>
-                  <td><%= details.bscRemark %></td>
+                <td><%= details.vst.toUpperCase() %></td>
+                <td><%= details.vst1st %></td>
+                <td><%= details.vst2nd %></td>
+                <td><%= details.vstexam %></td>
+                <td><%= details.vstscore %></td>
+                <td><%= details.vstG %></td>
+                <td><%= details.vstRemark %></td>
               </tr>
+                      
               <tr>
-                <td><%= details.btc.toUpperCase() %></td>
-                <td><%= details.btc1st %></td>
-                <td><%= details.btc2nd %></td>
-                <td><%= details.btcca %></td>
-                <td><%= details.btcexam %></td>
-                <td><%= details.btcscore %></td>
-                <td><%= details.btcG %></td>
-                <td><%= details.btcRemark %></td>
+                <td><%= details.qur.toUpperCase() %></td>
+                <td><%= details.qur1st %></td>
+                <td><%= details.qur2nd %></td>
+                <td><%= details.qurexam %></td>
+                <td><%= details.qurscore %></td>
+                <td><%= details.qurG %></td>
+                <td><%= details.qurRemark %></td>
               </tr>
+      
               <tr>
-                <td>
-                  
-                </td>
-                <td>
-                 
-                </td>
-                <td>
-                 
-                </td>
-                <td>
-                 
-                </td>
-                <td>
-                 
-                </td>
-                <td>
-                  
-                </td>
-                <td>
-                
-                </td>
+                <td><%= details.ver.toUpperCase() %></td>
+                <td><%= details.ver1st %></td>
+                <td><%= details.ver2nd %></td>
+                <td><%= details.verexam %></td>
+                <td><%= details.verscore %></td>
+                <td><%= details.verG %></td>
+                <td><%= details.verRemark %></td>
               </tr>
-              <tr>
-                <td>
-                  
-                </td>
-                <td>
-                  
-                </td>
-                <td>
-                 
-                </td>
-                <td>
-               
-                </td>
-                <td>
-                 
-                </td>
-                <td>
-                 
-                </td>
-                <td>
-                 
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  
-                </td>
-                <td>
-                  
-                </td>
-                <td>
-                 
-                </td>
-                <td>
-                 
-                </td>
-                <td>
-                 
-                </td>
-                <td>
-                  
-                </td>
-                <td>
-                  
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  
-                </td>
-                <td>
-                  
-                </td>
-                <td>
-                  
-                </td>
-                <td>
-                  
-                </td>
-                <td>
-                  
-                </td>
-                <td>
-                  
-                </td>
-                <td>
-                  
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  
-                </td>
-                <td>
-                
-                </td>
-                <td>
-                  
-                </td>
-                <td>
-                  
-                </td>
-                <td>
-                  
-                </td>
-                <td>
-                 
-                </td>
-                <td>
-                  
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  
-                </td>
-                <td>
-                 
-                </td>
-                <td>
-                  
-                </td>
-                <td>
-                  
-                </td>
-                <td>
-                
-                </td>
-                <td>
-                  
-                </td>
-                <td>
-                  
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  
-                </td>
-                <td>
-                
-                </td>
-                <td>
-                 
-                </td>
-                <td>
-                 
-                </td>
-                <td>
-                 
-                </td>
-                <td>
-                 
-                </td>
-                <td>
-                  
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  
-                </td>
-                <td>
-                  
-                </td>
-                
-                <td>
-                  
-                </td>
-                <td>
-                 
-                </td>
-                <td>
-                  
-                </td>
-                <td>
-                 
-                </td>
-                <td>
-                  
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  
-                </td>
-                <td>
-                 
-                </td>
-                <td>
-                  
-                </td>
-                <td>
-                 
-                </td>
-                <td>
-                 
-                </td>
-                <td>
-                 
-                </td>
-              </tr>
+             
+                <tr>
+                  <td><%= details.plf.toUpperCase() %></td>
+                  <td><%= details.plf1st %></td>
+                  <td><%= details.plf2nd %></td>
+                  <td><%= details.plfexam %></td>
+                  <td><%= details.plfscore %></td>
+                  <td><%= details.plfG %></td>
+                  <td><%= details.plfRemark %></td>
+                </tr>
+                <tr>
+                  <td><%= details.crs.toUpperCase() %></td>
+                  <td><%= details.crs1st %></td>
+                  <td><%= details.crs2nd %></td>
+                  <td><%= details.crsexam %></td>
+                  <td><%= details.crsscore %></td>
+                  <td><%= details.crsG %></td>
+                  <td><%= details.crsRemark %></td>
+                </tr>
+                <tr>
+                  <td><%= details.vrn.toUpperCase() %></td>
+                  <td><%= details.vrn1st %></td>
+                  <td><%= details.vrn2nd %></td>
+                  <td><%= details.vrnexam %></td>
+                  <td><%= details.vrnscore %></td>
+                  <td><%= details.vrnG %></td>
+                  <td><%= details.vrnRemark %></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+  
             </table>
           </div>
           <div class="class_info">
             <div>
-              <table style="font-size:10px; margin:0px;">
+              <table style="font-size:12px; margin:0px;">
                 <tr>
                   <th>
                     <h3>Skill & Behavior</h3>
@@ -343,7 +226,7 @@
                 </tr>
                 <tr>
                   <td>1. Attendance</td>
-                  <td></td>
+                  <td>&#10003;</td>
                   <td></td>
                   <td></td>
                   <td></td>
@@ -351,7 +234,7 @@
                 </tr>
                 <tr>
                   <td>2. Attentiveness</td>
-                  <td></td>
+                  <td>&#10003;</td>
                   <td></td>
                   <td></td>
                   <td></td>
@@ -359,6 +242,7 @@
                 </tr>
                 <tr>
                   <td>3. Honesty</td>
+                  <td>&#10003;</td>
                   <td></td>
                   <td></td>
                   <td></td>
@@ -366,7 +250,7 @@
                 </tr>
                 <tr>
                   <td>4. Initiative</td>
-                  <td></td>
+                  <td>&#10003;</td>
                   <td></td>
                   <td></td>
                   <td></td>
@@ -374,7 +258,7 @@
                 </tr>
                 <tr>
                   <td>5. Neatness</td>
-                  <td></td>
+                  <td>&#10003;</td>
                   <td></td>
                   <td></td>
                   <td></td>
@@ -383,14 +267,15 @@
                 <tr>
                   <td>6. Organization ability</td>
                   <td></td>
-                  <td></td>
+                  <td>&#10003;</td>
                   <td></td>
                   <td></td>
                   <tb></tb>
+                  <td></td>
                 </tr>
                 <tr>
                   <td>7. Perseverance</td>
-                  <td></td>
+                  <td>&#10003;</td>
                   <td></td>
                   <td></td>
                   <td></td>
@@ -398,7 +283,7 @@
                 </tr>
                 <tr>
                   <td>8. Punctuality </td>
-                  <td></td>
+                  <td>&#10003;</td>
                   <td></td>
                   <td></td>
                   <td></td>
@@ -406,7 +291,7 @@
                 </tr>
                 <tr>
                   <td>9. Spirit of Cooperation</td>
-                  <td></td>
+                  <td>&#10003;</td>
                   <td></td>
                   <td></td>
                   <td></td>
@@ -414,7 +299,7 @@
                 </tr>
                 <tr>
                   <td>10. Self control</td>
-                  <td></td>
+                  <td>&#10003;</td>
                   <td></td>
                   <td></td>
                   <td></td>
@@ -449,48 +334,34 @@
         <h3>STUDENT PERFORMANCE ANALYSIS</h3>
         <div class="score_container">
           <div class="student_score">
-            <div><h5>SUBJECT OFFERED</h5><h4>12</h4></div>
-            <div><h5>SCORE OBTAINABLE</h5><h4>1200</h4></div>
-            <div><h5>SCORE OBTAIN</h5><h4>950</h4></div>
-            <div><h5>AVERAGE SCORE</h5><h4>72</h4></div>
+            <div><h5>SUBJECT OFFERED</h5><h4><%= details.No_subj %></h4></div>
+            <div><h5>SCORE OBTAINABLE</h5><h4></h4><%= details.score_obtainable %></div>
+            <div><h5>SCORE OBTAIN</h5><h4><%= details.score_obtain %></h4></div>
+            <div><h5>AVERAGE SCORE</h5><h4><%= details.average %></h4></div>
           </div>
 
         </div>
         
         <div class="extraInfo">
           <div>
-            <P>PROMOTED TO <b>BASIC 2</b></P>
-            <P>CLASS TEACHER'S REPORT </p><p><b> Quite and hard working</b></P>
+            <p>Time Present: <b><%= details.present %></b></p>
+            <p>Time Absent: <b> <%= details.absent %></b></p>
+            <P>Class Teacher's Report </p><p><b> <%= details.tReport %></b></P>
+              <P>Promoted to <b><%=details.promote %></b></P>
           </div>
+         
           <div>
-            <p>TIME PRESENT: <b>68</b></p>
-            <P>OUTSTANDING FEES </p><p><b>Cleard</b></P>
-          </div>
-          <div>
-            <p>TIME ABSENT: <b> 3</b></p>
-            <p>NEXT TERM BEGINS: </p><p><b>10TH January, 2025</b></p>
+            <p>Head Teacher Remark :<b><%= details.Treport %></b></p>
+            <p>Next Term Begin: <b><%= details.nextterm %></b></p>
+            <p>Head Teacher Sign</p>
           </div>
         </div>
-      <div class="school_report">
-        <div>
-          <p>Head Teacher’s Remark :</p> 
-          <p style="color:rgb(200, 4, 4); text-decoration: underline;">Good Performance</p>
-        </div>
-
-        <hr/>
-      <div>
-        <p>Head Teacher’s Sign</p>
-        <p>.................... </p>
-      </div>
-       
       </div>
     </div>
   </div>
-  <div id="captureWrapper">
-    <div id="resultContainer">
         <!-- Your content here -->
-    </div>
 </div>
+
 
   <div class="button"><button class="download" onclick="downloadResult()">Download Result</button></div>
   <div class="button"><button class="download" onclick="downloadResultAsJPG()">Download JPEG</button></div>
