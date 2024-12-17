@@ -170,7 +170,7 @@ app.post('/admin_form', (req, res) => {
         .catch(err => {
             console.log(err)
         })
-    res.render('admin')
+    res.render('login')
 })
 
 //BLACKLIST API
@@ -521,7 +521,7 @@ app.post('/contact', (req, res) => {
 });
 //TESTING RESULT TEMPLATE
 app.get('/junior', (req, res)=>{
-    res.render('blixx-international-ss')
+    res.render('primary-result')
 })
 //STUDENT ID FORM
 app.get('/studentid', isAuthenticated, (req, res)=>{
