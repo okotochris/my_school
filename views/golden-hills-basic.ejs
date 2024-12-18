@@ -40,18 +40,22 @@
 			<!-- USING EJS TO SET THE CLASS LOGO -->
 			<% let roomName; %>
 			<% let teacher; %>
+			<% let image = 'basic.png'; %>
 			<% if (details.class == 'BASIC 1' || details.class == 'BASIC 2') { %>
 				<% roomName = 'GOLD'; %>
 				<% teacher = 'Miss Peace'; %>
 			<% } else if (details.class == 'BASIC 3') { %>
-				<% roomName = 'EMPEROR'; %>
-				<% teacher = 'Miss Emmanuella'; %>
+				<% roomName = 'ADEBISI'; %>
+				<% let image = 'basic3.png' %>
+				<% teacher = 'Adebisi Deborah Olamide'; %>
 			<% } else if (details.class == 'BASIC 4') { %>
 				<% roomName = 'EMERALD'; %>
-				<% teacher = 'Miss Nadia'; %>
+				<% image = 'basic4.png'; %>
+				<% teacher = 'Deborah Attah'; %>
 			<% } else if (details.class == 'BASIC 5') { %>
 				<% teacher = 'Miss Nadia'; %>
-				<% roomName = 'SHINNING CRYSTAL'; %>
+				<% image = 'basic5.png' %>
+				<% roomName = 'Lawani comfort Omofah'; %>
 			<% }else if (details.class == 'BASIC 6') { %>
 				<% roomName = 'PACE SETTERS'; %>
 				<% teacher = 'Miss Deborah'; %>
@@ -533,7 +537,7 @@
 					<div class="comment">
 						<p>Class Manager's Comment:<span> <%= details.tReport %></span></p>
 						<p>Class Manager's Name<span><%= teacher %></span></p>
-						<p>Signature<span><img src="basic.png" height="20" width="50"/></span></p>
+						<p>Signature<span><img src="<%=image %>" height="20" width="50"/></span></p>
 						<p>Head of School Comment: <span><%= details.Treport %> </span></p>
 						
 						<p>Promoted To:<span> <%=details.promote %></span></p>
