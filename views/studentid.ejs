@@ -4,7 +4,6 @@
     <style>
        .table{
             width:70%;
-            
             color:white;
             margin:10px auto;
             padding:10px;
@@ -12,6 +11,12 @@
             justify-content:center;
             font-family:leelawadee;
             text-align:left;
+       }
+       @media screen and (max-height:700px) {
+        .table{
+            height:300px;
+            overflow-x: auto;;
+        }
        }
        table th, table tr, table td{
             border: solid 1px black;
