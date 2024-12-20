@@ -41,14 +41,16 @@
 			<!-- USING EJS TO SET THE CLASS LOGO -->
 				<% let roomName; %>
 				<% let teacher; %>
+				<% let signature = 'nur.png'; %>
 				<% if (details.class == 'PRE NURSERY') { %>
 					<% roomName = 'SILVER'; %>
 					<% teacher = 'Miss Anthonia'; %>
 				<% } else if (details.class == 'NURSERY 1') { %>
 					<% roomName = 'SAPPHIRE'; %>
-					<% teacher = 'Miss Jumoke'; %>
+					<% teacher = 'Miss Emmanuellar'; %>
 				<% } else if (details.class == 'NURSERY 2') { %>
 					<% roomName = 'HIGH FLYER'; %>
+					<% signature = 'nursery2.png' %>
 					<% teacher = 'Miss Enobong '; %>
 				<% } else if (details.class == 'NURSERY 3') { %>
 					<% roomName = 'DIAMOND'; %>
@@ -536,10 +538,11 @@
 							</tr>
 						</table>
 					</div>
+
 					<div class="comment">
 						<p>Class Manager's Comment:<span> <%= details.tReport %></span></p>
 						<p>Class Manager's Name<span><%= teacher %></span></p>
-						<p>Signature<span><img src="nur.png" height="20" width="50"/></span></p>
+						<p>Signature<span><img src="<%= signature %>" height="20" width="50"/></span></p>
 						<p>Head of School Comment: <span><%= details.Treport %> </span></p>
 						
 						<p>Promoted To:<span> <%=details.promote %></span></p>
@@ -557,8 +560,8 @@
 			</div>
 		</div>
 		
-		<!--
-			<div class="button"><button class="download" onclick="downloadResult()">Download PDF</button></div>
+		<!-- 
+			<div class="button"><button class="download" onclick="downloadResult()">Download PDF</button></div> 
 		-->
 			<div class="button"><button class="download" onclick="downloadResultAsJPG()">Download RESULT</button></div>
 

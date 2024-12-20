@@ -292,11 +292,12 @@ app.post('/upload', isAuthenticated, (req, res) => {
 app.post('/result', async (req, res)=>{
     let clas = req.body.class;
     let term = req.body.term;
-    let id = req.body.studentId;
+    let id = req.body.studentId.trim();
     let name = req.body.userName;
     try{
         let data = await Studentpassport.findOne({studentId:id})
         let student = await Blacklist.findOne({studentId:id})
+       
         if(student){
             res.render('blacklistfile', {student})
         }
@@ -335,6 +336,7 @@ app.post('/result', async (req, res)=>{
                 else if(studentClass[0] === "SS"){
                     let details = await SBlog.find({studentId:id, class:clas, term: term}).sort({createdArt:-1}).limit(1);
                     details = details[0]
+                    
                     if(details != null){
                         let schoolName = details.schoolName.toLowerCase().trim()
                         let resultTemplate = schoolName.split(' ')

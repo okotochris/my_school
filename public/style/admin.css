@@ -78,11 +78,12 @@
         width:100%;
         font-size: 14px;
     }
-    .table{
-        overflow: scroll;
-    }
+   
 }
-
+.table{
+    max-height:90vh;
+    overflow: auto;
+}
 
 .navigation-mobile{
     position:absolute;
