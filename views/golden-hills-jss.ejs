@@ -48,6 +48,11 @@
 				<% teacher = 'Mr Godwin'; %>
 
 			<% } %>
+			<% } else if (details.class == 'JSS 3') { %>
+				<% roomName = 'RUBY'; %>
+				<% teacher = 'Clement'; %>
+
+			<% } %>
 				
 			<div class="sudent-info">
 				<div><%= details.class %> <%= roomName %>, <%= details.term %> RESULT <%= details.section %> ACADEMIC SESSION</div>
