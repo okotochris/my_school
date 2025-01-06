@@ -1,6 +1,6 @@
 let inputforname = document.getElementById('studentID')
 let getStudent = document.getElementById('getStudent')
-let loading = document.querySelector('.cover')
+let loading = document.querySelector('.loading')
 
 
 //GETTING STUDENT ID AND NAME IN BLACKLIST

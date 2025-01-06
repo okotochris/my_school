@@ -13,7 +13,7 @@ accYear.onchange = ()=>{
 window.addEventListener('load',  studentPerfomance(studentClass.value, accYear.value))
 async function studentPerfomance(x, y){
     try{
-        document.querySelector('.cover').style.display = 'block'
+        document.querySelector('.loading').style.display = 'block'
         let promise = await fetch(`/studentperfomance?class=${x}&section=${y}`)
         let result = await promise.json()
         tableDis(result)
@@ -23,7 +23,7 @@ async function studentPerfomance(x, y){
         console.log(err)
     }
     finally{
-         document.querySelector('.cover').style.display = 'none'
+         document.querySelector('.loading').style.display = 'none'
         
     }
 }

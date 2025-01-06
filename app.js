@@ -15,8 +15,10 @@ const path = require('path');
 const cors = require('cors');
 const session = require('express-session');
 const { inflateRaw } = require('zlib');
-const MongoStore = require('connect-mongo');
 require('dotenv').config();
+const schoolPfofile = require('./schema/schoolProfile')
+const MongoStore = require('connect-mongo'); 
+
 
 
 
@@ -33,17 +35,30 @@ app.use(express.static('public', {
     },
 }));
 
-
+//connecting to dateabase
+const dbURI = 'mongodb+srv://data:L6EwGXzqyzLHNFxn@school.vvirl2y.mongodb.net/school?retryWrites=true&w=majority'
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(result => {
+    console.log('Connected to MongoDB');
+  })
+  .catch(err => {
+    console.log('Error connecting to MongoDB:', err);
+  });
 
 
 app.use(session({
-    secret: process.env.SESSION_SECRET || 'your_secret',
+    store: MongoStore.create({
+        mongoUrl: dbURI,  // Use the same MongoDB connection URI for session storage
+        collectionName: 'sessions',  // Store sessions in a collection named 'sessions'
+        client: mongoose.connection.getClient()  // Use the same mongoose connection for the store
+      }),
+    secret: process.env.SESSION_SECRET || 'jiiy8765yw',
     resave: false,
     saveUninitialized: false,
     cookie: {
         maxAge: 31536000000 // 1 year
     }
-}));
+}))
 
 // Directory to store uploaded files
 const uploadDir = path.join(__dirname, 'uploads');
@@ -56,16 +71,6 @@ if (!fs.existsSync(uploadDir)) {
 //midle 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json()); 
-
-//connecting to dateabase
-const dbURI = 'mongodb+srv://data:L6EwGXzqyzLHNFxn@school.vvirl2y.mongodb.net/school?retryWrites=true&w=majority'
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(result => {
-        console.log('connected to mongodb')
-    })
-    .catch(err => {
-        console.log(err)
-    })
 
 
   // configuring multer
@@ -102,8 +107,6 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
-
 
 //defining our route
 app.get('/', (req, res) => {
@@ -540,7 +543,7 @@ app.patch('/updatestudentclass', async (req, res)=>{
    try{
     let student = await Studentpassport.findOneAndUpdate({studentId}, {class: req.body.studentClass}, {new: true})
     if(student.ok){
-        console.log('updated')
+        res.send('updated')
     }
    }
    catch(err){
@@ -574,6 +577,10 @@ app.get('/studentperfomance', isAuthenticated, async (req, res)=>{
         else if(newClass[0] == 'BASIC'){
             result = await PBlog.find({class: new RegExp("^" + req.query.class), section: req.query.section, schoolName: { $regex: schoolName, $options: 'i' }})
         }
+        else if(newClass[0] == 'PRE'){
+            result = await nuseryBlog.find({class:req.query.class, section: req.query.section, schoolName: { $regex: schoolName, $options: 'i' }})
+        }
+
         else if(newClass[0] == 'NURSERY'){
             result = await nuseryBlog.find({class: new RegExp("^" + req.query.class), section: req.query.section, schoolName: { $regex: schoolName, $options: 'i' }})
         }        
@@ -586,6 +593,49 @@ app.get('/studentperfomance', isAuthenticated, async (req, res)=>{
     }
     catch(err){
         console.log(err)
+    }
+})
+
+//UPDATE SENIIOR RESULT
+app.get('/update-ss',isAuthenticated, (req, res)=>{
+    res.render('update_ss')
+})
+//UPDATE JUNIOR RESULT
+app.get('/update-jss',isAuthenticated, (req, res)=>{
+    res.render('update_jss')
+})
+//UPDATE  BASIC RESULT
+app.get('/update-basic', isAuthenticated, (req, res)=>{
+    res.render('update_basic')
+})
+//UPDATE NURSERY RESULT
+app.get('/update-nursery', isAuthenticated, (req, res)=>{
+    res.render('update_nursery')
+})
+app.get('/student-result', async (req, res)=>{
+    const {studentId, term, sClass} = req.query
+    let school = req.session.school;
+    let result = {};
+    try{
+        studentClass = sClass.split(' ')
+        school = req.session.school;
+        if(studentClass[0] == 'BASIC'){
+            result  = await Blog.findOne({studentId, term, class:sClass})
+        }
+        if(studentClass[0] == 'SS'){
+            result  = await Blog.findOne({studentId, term, class:sClass})
+        }
+        if(studentClass[0] == 'JSS'){
+            result  = await Blog.findOne({studentId, term, class:sClass})
+        }
+        else{
+            result  = await Blog.findOne({studentId, term, class:sClass})
+        }
+        res.send(result)
+       
+    }
+    catch(err){
+        res.send(err)
     }
 })
 app.use((req, res)=>{

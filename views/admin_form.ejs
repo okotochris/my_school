@@ -6,8 +6,13 @@
         <%- include('./partials/header.ejs') %>
         <div class="add_form">
             <form action="/admin_form" method="post" >
-                <p><input type="text" placeholder="Enter your full name" name="user_name" required/></p>
-                <p><input type="text" id="school" name="school"  placeholder="School Name" required/></p>
+                <p><input type="text" autocomplete="off" placeholder="Enter your full name" name="user_name" required/></p>
+                <p><input type="text" list="schoolName" autocomplete="off" id="school" name="school"  placeholder="School Name" required/></p>
+                <datalist id="schoolName">
+                    <option>Blixx International</option>
+                    <option>Golden Hills</option>
+                    <option>Nuel Ville Accademy</option>
+                </datalist>
                 <p> <input type="email" placeholder="Enter your email" name="email" required /></p>
                 <p><input type="number" placeholder="Enter your phone number" name="number" required /></p>
                 <select name ="gender" required>
@@ -16,9 +21,21 @@
                     <option value="Male">Male</option>
                 </select>
                 
-                <p><input type="password" placeholder="Password" name="password" required /></p>
+                <p><input type="password" autocomplete="off" placeholder="Password" name="password" required /></p>
                 <button>Register a new account</button>
             </form>
         </div>
+        <script>
+            let schoolName = document.getElementById('schoolName')
+            let school = document.getElementById('school')
+
+            school.onfocus= ()=>{
+                let schoolInput = school.value;
+              let comfirmSchool = schoolName.innerText.find((schoolInput, school)=>{
+                return school
+              })
+               console.log(comfirmSchool)
+            }
+        </script>
     </body>
 </html>

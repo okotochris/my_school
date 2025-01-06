@@ -1,17 +1,41 @@
 <div class="navigation">
     <div class="cancel">X</div>
-    <div style="background:white; margin:0px auto">
+    <div style="background:white; margin:10px auto">
         <img src="IMAGE/<%=school.toLowerCase() %>.png" alt="school logo" height="90px" width="90px"/>
     </div>
-     <p>QUICK LINKS</p>
+     <p style="color:#11ddd7">QUICK LINKS</p>
      <p><a href="/">CHECK RESULT</a></p>
      <p><a href="/admin">UPLOAD RESULT</a></p>
      <p><a href="/studentgrade">STUDENT GRADE</a></p>
      <p><a href="/studentid">GET STUDENT ID</a></p>
-     <p><a href="/generateid">NEW STUDENT</a></p>
-     <p><a href="update">UPDATE STUDENT RECORD</a></p>
+     <p><a href="/generateid">REGISTER STUDENT</a></p>
      <p><a href="/blacklist">BLACKLIST</a></p>
-     <p><a href="/logout">LOGOUT</a></p>
-     <p style="color:rgb(17, 221, 215); margin-top:30px;"><%=school.toUpperCase() %></p>
+     <p style="cursor: pointer; color:#11ddd7" onclick="updateResult()"> 
+        <span  id="menuIcon">⮞</span>MAKE UPDATE</p>
+     <div style="display:none" id="update">
+      <p><a href="update">UPDATE STUDENT INFO</a></p>
+        <p> <a href="/update-ss">UPDATE SINIOR RESULT</a> </p>
+        <p> <a href="/update-jss">UPDATE JUNIOR RESULT</a> </p>
+        <p> <a href="/update-basic">UPDATE BASIC RESULT</a> </p>
+        <p> <a href="/update-nursery">UPDATE NURSERY RESULT</a> </p>
+     </div>
+     <p style="color:#11ddd7; margin-top:30px; position:fixed; bottom:2px; background:#13022F">
+        <%=school.toUpperCase() %> <a href="/logout">LOGOUT</a></p>
+
+     <script>
+        let menuDisplay = false;
+        function updateResult(){
+          if(!menuDisplay){
+              document.getElementById('update').style.display = 'block'
+              document.getElementById('menuIcon').innerText = '⮟'
+             menuDisplay = true;
+          }
+          else{
+              document.getElementById('update').style.display = 'none'
+              document.getElementById('menuIcon').innerText = '⮞'
+              menuDisplay = false;
+          }
+        }
+     </script>
 
  </div>

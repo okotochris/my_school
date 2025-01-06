@@ -1,34 +1,35 @@
 let getId = document.getElementById('getId');
 let table = document.getElementById('table')
-let loadingIndicator = document.getElementById('loadingIndicator');
+let loadingIndicator = document.querySelector('.loading');
 let Sclass = document.getElementById('Sclass')
 let section = document.getElementById('section')
+
+
+// CLEAR TABLE
+function clearTable(){
+    table.replaceChildren()
+    table.innerHTML = `<tr>
+                            <th width="400px">NAME</th>
+                            <th width="100px">CLASS</th>
+                            <th width="250px">ID</th>
+                        </tr>`
+}
+
 // GETTING STUDENT ID BASE ON NAME 
 getId.onclick = async (e) => {
-    e.preventDefault();
+    clearTable()
+    e.preventDefault();    
     let student_name = document.getElementById('student_name').value;
     if(student_name == ''){
-        loadingIndicator.style.display = 'block';
-        loadingIndicator.innerText = 'Field can not be empty';
+       alert('Field can not be empty');
         return false;
     }
     loadingIndicator.style.display = 'block';
-   
     try {
         let response = await fetch(`/getstudentid?student_name=${student_name}`);
-        if (!response.ok) {
-            let div = document.createElement('div')
-            let container = document.querySelector('.table')
-            div.innerHTML = `ID has not been set for ${student_name}`
-            container.appendChild(div)
-            loadingIndicator.style.display = 'none';
-            
-
-        }
-        else{
             let datas = await response.json();
-            datas.forEach(data=>{
-                 
+
+            datas.forEach(data=>{   
             let tr = document.createElement('tr')
             let td1 = document.createElement('td')
             let td2 = document.createElement('td')
@@ -44,11 +45,11 @@ getId.onclick = async (e) => {
            
             loadingIndicator.style.display = 'none';
             table.style.display = 'block'
-        }
+      
         
     } catch (err) {
         console.error('Fetch error:', err);
-        let div = document.createElement('div')
+       alert('student not registered ')
       
     }
 };
@@ -57,19 +58,12 @@ getId.onclick = async (e) => {
 let classId = document.getElementById('classId')
     classId.onclick = async (e)=>{
         e.preventDefault()
+        clearTable()
         loadingIndicator.style.display = 'block';
 
         let studnetClass = document.getElementById('class').value;
         try{
             let response = await fetch(`/getclassid?class=${studnetClass}`)
-            if (!response.ok) {
-                let div = document.createElement('div')
-                let container = document.querySelector('.table')
-                div.innerHTML = `ID has not been set for ${studnetClass}`
-                container.appendChild(div)
-                loadingIndicator.style.display = 'none';    
-            }
-            else{
                 let datas = await response.json();
                 datas.forEach(data=>{
                      
@@ -88,7 +82,7 @@ let classId = document.getElementById('classId')
                
                 loadingIndicator.style.display = 'none';
                 table.style.display = 'block'
-            }
+            
         }
         catch(err){
             console.log(err)
@@ -99,18 +93,11 @@ let classId = document.getElementById('classId')
 let studentSection =document.getElementById('studentSection')
 studentSection.onclick = async (e)=>{
     e.preventDefault()
+    clearTable()
     loadingIndicator.style.display = 'block';
    try{
         let Sclass = document.getElementById('Sclass').value;
         let response = await fetch(`/getsectionid?class=${Sclass}`)
-        if (!response.ok) {
-            let div = document.createElement('div')
-            let container = document.querySelector('.table')
-            div.innerHTML = `ID has not been set for ${Sclass}`
-            container.appendChild(div)
-            loadingIndicator.style.display = 'none';    
-        }
-        else{
             let datas = await response.json();
             datas.forEach(data=>{
                  
@@ -129,7 +116,6 @@ studentSection.onclick = async (e)=>{
            
             loadingIndicator.style.display = 'none';
             table.style.display = 'block'
-        }
        
    }
    catch(err){
@@ -162,4 +148,3 @@ division.onclick=()=>{
     studentDivisionForm.style.display = 'block'
 }
 
-// UPDATING STUDENT NAME
