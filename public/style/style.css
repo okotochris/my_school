@@ -219,6 +219,9 @@ button:hover{
     padding: 8px 16px;
     margin-top:2px;
   }
+  .add_form{
+    width:98%;
+  }
   
 }
 #contact h2, #copy h2, #about h2{

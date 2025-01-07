@@ -46,7 +46,7 @@
                 
                 <fieldset>
                     <legend>RESULT INFO:</legend>
-                    <p><input type="text" value="English Language" name="eng" id="eng"/><input type="text" placeholder="1st Text" name="eng1st" id="eng1st"/><input type="text" placeholder="2st Text" name="eng2nd" id="eng2nd"/><input type="text" id="engca" name="engca" placeholder="continuous accessment"/ ><input type="text" placeholder="Exam" name="engexam" id="engexam"/><input type="text" placeholder="TOTAL SCORE" name="engscore" id="engscore"/><input type="text" placeholder="GRADE" name="engG" id="engG"/><input type="text" name="engRemark" id="engRemark"placeholder="Remark"/></p>
+                    <p><input type="text" value="English Language" name="eng" id="eng"/><input type="test" placeholder="1st Test" name="eng1st" id="eng1st"/><input type="text" placeholder="2st Text" name="eng2nd" id="eng2nd"/><input type="text" id="engca" name="engca" placeholder="continuous accessment"/ ><input type="text" placeholder="Exam" name="engexam" id="engexam"/><input type="text" placeholder="TOTAL SCORE" name="engscore" id="engscore"/><input type="text" placeholder="GRADE" name="engG" id="engG"/><input type="text" name="engRemark" id="engRemark"placeholder="Remark"/></p>
                     <p><input type="text" value="Mathematics" name="mth" id="mth"/><input type="text" placeholder="1st Text" name="mth1st"  id="mth1st"/><input type="text" placeholder="2st Text" name="mth2nd" id="mth2nd" /><input type="text" id="mthca" name="mthca" placeholder="continuous accessment"/ ><input type="text" placeholder="Exam" name="mthexam" id="mthexam"/><input type="text" placeholder="TOTAL SCORE" name="mthscore" id="mthscore"/><input type="text" placeholder="GRADE" name="mthG" id="mthG"/><input type="text" name="mthRemark" id="mthRemark"placeholder="Remark"/></p>
                     <p><input type="text" value="Christian Religion Studies" name="rnv" id="rnv"/><input type="text" placeholder="1st Text" name="rnv1st" id="rnv1st"/><input type="text" placeholder="2st Text" name="rnv2nd" id="rnv2nd"/><input type="text" id="rnvca" name="rnvca" placeholder="continuous accessment"/ ><input type="text" placeholder="Exam" name="rnvexam" id="rnvexam"/><input type="text" placeholder="TOTAL SCORE" name="rnvscore" id="rnvscore"/><input type="text" placeholder="GRADE" name="rnvG" id="rnvG"/><input type="text" name="rnvRemark" id="rnvRemark"placeholder="Remark"/></p>
                     <p><input type="text" value="Basic Science & Technology" name="bst" id="bst" /><input type="text" placeholder="1st Text" name="bst1st" id="bst1st"/><input type="text" placeholder="2st Text" name="bst2nd" id="bst2nd"/><input type="text" id="bstca" name="bstca" placeholder="continuous accessment"/ ><input type="text" placeholder="Exam" name="bstexam" id="bstexam"/><input type="text" placeholder="TOTAL SCORE" name="bstscore" id="bstscore"/><input type="text" placeholder="GRADE" name="bstG" id="bstG"/><input type="text" name="bstRemark" id="bstRemark"placeholder="Remark"/></p>
@@ -77,15 +77,15 @@
                 <fieldset>
                     <legend>OHTER INFOMATION </legend>
                     <p>                    
-                        <select name="section" required>
+                        <select name="section" id="section" required>
                         <option value="">Academic Section</option>
                         <option value="2023 - 2024">2023 - 2024</option>
                         <option value="2024 - 2025" selected>2024 - 2025</option>
                         <option value="2025 - 2026">2025 - 2026</option>
                         <option value="2026 - 2027">2026 - 2027</option>
                     </select>
-                    <input type="text" placeholder="times present" name="present" />
-                    <input type="text" placeholder="times absent" name="absent" />
+                    <input type="text" placeholder="times present" name="present" id="present"/>
+                    <input type="text" placeholder="times absent" name="absent" id="absent"/>
                     <input type="text" placeholder="Class Teacher Report" id="tReport" name="tReport" style="width:200px;"/>
                     <input type="text" placeholder="Head Teacher Report" name="Treport" id="Treport" style="width:200px"/>
                     <input type="text" placeholder="Next term resume" name="nextterm" value="6th Jan, 2025"/>
@@ -98,7 +98,7 @@
                         <option value="BASIC 6">BASIC 6</option>
                         <option value="JSS 1">JSS 1</option>
                     </select>
-                    <input type="text" placeholder="outstanding fees" name="fees"/></p>
+                    <input type="text" placeholder="outstanding fees" name="fees" id="fees"/></p>
                 </fieldset>
                 <fieldset class="schoolInfo">
                     <legend>School Info:</legend>                    
@@ -109,9 +109,6 @@
         </div>
         <script src="Java Script/main.js"></script>
         <script src="primary_score.js"></script>
-        <script src="../studentId.js"></script>
         <script src="Java Script/fetchResult.js"></script>
-        <script src="Java Script/upDateStudentClass.js"></script>
-        <script src="Java Script/basicSubject.js"></script>
     </body>
 </html>

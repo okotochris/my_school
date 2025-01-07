@@ -1,12 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose')
 const multer = require('multer')
-const Blog = require('./data')
-const SBlog = require('./datas')
-const ABlog = require('./admin.js')
-const PBlog = require('./primary.js')
+const Blog = require('./data') //junior class
+const SBlog = require('./datas') // sinior class
+const ABlog = require('./admin.js') 
+const PBlog = require('./primary.js') //basic class
 const Blacklist = require('./blacklist.js')
-const nuseryBlog = require('./nursery.js')
+const nuseryBlog = require('./nursery.js') // nursery 
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer')
 const Studentpassport = require('./goldenPassport.js')
@@ -616,26 +616,27 @@ app.get('/student-result', async (req, res)=>{
     const {studentId, term, sClass} = req.query
     let school = req.session.school;
     let result = {};
+    studentClass = sClass.split(' ')
+    school = req.session.school;
     try{
-        studentClass = sClass.split(' ')
-        school = req.session.school;
         if(studentClass[0] == 'BASIC'){
-            result  = await Blog.findOne({studentId, term, class:sClass})
+            result  = await PBlog.findOne({studentId, term, class:sClass})
         }
-        if(studentClass[0] == 'SS'){
-            result  = await Blog.findOne({studentId, term, class:sClass})
+        else if(studentClass[0] == 'SS'){
+            result  = await SBlog.findOne({studentId, term, class:sClass})
         }
-        if(studentClass[0] == 'JSS'){
+        else if(studentClass[0] == 'JSS'){
             result  = await Blog.findOne({studentId, term, class:sClass})
         }
         else{
-            result  = await Blog.findOne({studentId, term, class:sClass})
+            result  = await nuseryBlog.findOne({studentId, term, class:sClass})
         }
-        res.send(result)
-       
+        res.send(result)   
+        console.log(result)    
     }
     catch(err){
         res.send(err)
+        console.log(err)
     }
 })
 app.use((req, res)=>{
