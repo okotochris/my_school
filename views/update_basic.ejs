@@ -14,7 +14,7 @@
         </header>
         <div class="platform"><h2>UPDATE PRIMARY RESULT</h2></div>
             <div class="upload_result"> 
-            <form action="primary" method="post" onsubmit="return check();">
+            <form id="updateForm" onsubmit="return updateForm(event)">
                 <fieldset class="studentInfo">
                     <legend>STUDENT INFO:</legend>
                     <p>
@@ -107,6 +107,33 @@
                 <p id="upload" style="color:red;"></p>
             </form>
         </div>
+      
+        <script>
+            async function updateForm(e) {
+                e.preventDefault()
+                let form = document.getElementById('updateForm');
+                let formData = new FormData(form);
+                try {
+                    let result = await fetch('/update_basic_result', {
+                        method: 'PATCH',
+                        body: JSON.stringify(Object.fromEntries(formData)), // Convert FormData to JSON
+                        headers: {
+                            'Content-Type': 'application/json' // Correct header name
+                        }
+                    });
+                    result = await result.text()
+                    if (result) {
+                       alert(`${result}`)
+                    }
+                } catch (err) {
+                    console.log(err);
+                }
+            }
+        </script>
+        
+
+          </script>
+       
         <script src="Java Script/main.js"></script>
         <script src="primary_score.js"></script>
         <script src="Java Script/fetchResult.js"></script>

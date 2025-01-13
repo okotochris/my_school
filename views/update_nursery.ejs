@@ -14,7 +14,7 @@
         </header>
           <div class="platform"><h2>UPDATE NURSERY RESULT</h2></div>
             <div class="upload_result"> 
-            <form action="nursery" method="post" onsubmit="return check();">
+            <form onsubmit="return updateForm(event)" id="formUpdate">
                 <fieldset class="studentInfo">
                     <legend>STUDENT INFO:</legend>
                     <p>
@@ -44,21 +44,19 @@
 
                 <fieldset>
                     <legend>RESULT INFO:</legend>
-                    <p><input type="text" value="Literacy" name="eng" id="eng"/><input type="text" placeholder="1st Text" name="eng1st" id="eng1st"/><input type="text" placeholder="2st Text" name="eng2nd" id="eng2nd"/><input type="text" id="engca" name="engca" placeholder="continuous accessment"/ ><input type="text" placeholder="Exam" name="engexam" id="engexam"/><input type="text" placeholder="TOTAL SCORE" name="engscore" id="engscore"/><input type="text" placeholder="GRADE" name="engG" id="engG"/><input type="text" name="engRemark" id="engRemark"placeholder="Remark"/></p>
-                    <p><input type="text" value="Numeracy" name="mth" id="mth"/><input type="text" placeholder="1st Text" name="mth1st"  id="mth1st"/><input type="text" placeholder="2st Text" name="mth2nd" id="mth2nd" /><input type="text" id="mthca" name="mthca" placeholder="continuous accessment"/ ><input type="text" placeholder="Exam" name="mthexam" id="mthexam"/><input type="text" placeholder="TOTAL SCORE" name="mthscore" id="mthscore"/><input type="text" placeholder="GRADE" name="mthG" id="mthG"/><input type="text" name="mthRemark" id="mthRemark"placeholder="Remark"/></p>
-                    <p><input type="text" value="Christian Religion Studies" name="rnv" id="rnv"/><input type="text" placeholder="1st Text" name="rnv1st" id="rnv1st"/><input type="text" placeholder="2st Text" name="rnv2nd" id="rnv2nd"/><input type="text" id="rnvca" name="rnvca" placeholder="continuous accessment"/ ><input type="text" placeholder="Exam" name="rnvexam" id="rnvexam"/><input type="text" placeholder="TOTAL SCORE" name="rnvscore" id="rnvscore"/><input type="text" placeholder="GRADE" name="rnvG" id="rnvG"/><input type="text" name="rnvRemark" id="rnvRemark"placeholder="Remark"/></p>
-                    <p><input type="text" value="Pre Science" name="bst" id="bst" /><input type="text" placeholder="1st Text" name="bst1st" id="bst1st"/><input type="text" placeholder="2st Text" name="bst2nd" id="bst2nd"/><input type="text" id="bstca" name="bstca" placeholder="continuous accessment"/ ><input type="text" placeholder="Exam" name="bstexam" id="bstexam"/><input type="text" placeholder="TOTAL SCORE" name="bstscore" id="bstscore"/><input type="text" placeholder="GRADE" name="bstG" id="bstG"/><input type="text" name="bstRemark" id="bstRemark"placeholder="Remark"/></p>
-                    <p><input type="text" value="Personal Social and Emotional Development" name="pvs" id="pvs"/><input type="text" placeholder="1st Text" name="pvs1st" id="pvs1st"/><input type="text" placeholder="2st Text" name="pvs2nd" id="pvs2nd"/><input type="text" id="pvsca" name="pvsca" placeholder="continuous accessment"/ ><input type="text" placeholder="Exam" name="pvsexam" id="pvsexam"/><input type="text" placeholder="TOTAL SCORE" name="pvsscore" id="pvsscore"/><input type="text" placeholder="GRADE" name="pvsG" id="pvsG"/><input type="text" name="pvsRemark" id="pvsRemark"placeholder="Remark"/></p>
-                    <p><input type="text" value="Rhymes" name="qur" id="qur"/><input type="text" placeholder="1st Text" name="qur1st" id="qur1st"/><input type="text" placeholder="2st Text" name="qur2nd" id="qur2nd"/><input type="text" id="qurca" name="qurca" placeholder="continuous accessment"/ ><input type="text" placeholder="Exam" name="qurexam" id="qurexam"/><input type="text" placeholder="TOTAL SCORE" name="qurscore" id="qurscore"/><input type="text" placeholder="GRADE" name="qurG" id="qurG"/><input type="text" name="qurRemark" id="qurRemark"placeholder="Remark"/></p>
-                    <p><input type="text" value="Handwriting" name="vst" id="vst"/><input type="text" placeholder="1st Text" name="vst1st" id="vst1st"/><input type="text" placeholder="2st Text" name="vst2nd" id="vst2nd"/><input type="text" id="vstca" name="vstca" placeholder="continuous accessment"/ ><input type="text" placeholder="Exam" name="vstexam" id="vstexam"/><input type="text" placeholder="TOTAL SCORE" name="vstscore" id="vstscore"/><input type="text" placeholder="GRADE" name="vstG" id="vstG"/><input type="text" name="vstRemark" id="vstRemark"placeholder="Remark"/></p>
-                    <p><input type="text" value="Cultural and Creative Art" name="cra" id="cra"/><input type="text" placeholder="1st Text" name="cra1st" id="cra1st"/><input type="text" placeholder="2st Text" name="cra2nd" id="cra2nd"/><input type="text" id="craca" name="craca" placeholder="continuous accessment"/ ><input type="text" placeholder="Exam" name="craexam" id="craexam"/><input type="text" placeholder="TOTAL SCORE" name="crascore" id="crascore"/><input type="text" placeholder="GRADE" name="craG" id="craG"/><input type="text" name="craRemark" id="craRemark"placeholder="Remark"/></p>
-                    <p><input type="text" value="Speech Science" name="ver" id="ver"/><input type="text" placeholder="1st Text" name="ver1st" id="ver1st"/><input type="text" placeholder="2st Text" name="ver2nd" id="ver2nd"/><input type="text" id="verca" name="verca" placeholder="continuous accessment"/ ><input type="text" placeholder="Exam" name="verexam" id="verexam"/><input type="text" placeholder="TOTAL SCORE" name="verscore" id="verscore"/><input type="text" placeholder="GRADE" name="verG" id="verG"/><input type="text" name="verRemark" id="verRemark"placeholder="Remark"/></p>
-                    <p><input type="text" value="Practical Life" name="plf" id="plf"/><input type="text" placeholder="1st Text" name="plf1st" id="plf1st"/><input type="text" placeholder="2st Text" name="plf2nd" id="plf2nd"/><input type="text" id="plfca" name="plfca" placeholder="continuous accessment"/ ><input type="text" placeholder="Exam" name="plfexam" id="plfexam"/><input type="text" placeholder="TOTAL SCORE" name="plfscore" id="plfscore"/><input type="text" placeholder="GRADE" name="plfG" id="plfG"/><input type="text" name="plfRemark" id="plfRemark"placeholder="Remark"/></p>
-                    
-                    <div class="extra" style="display: none">
-                        <p><input type="text" value="Verbal Reasoning" name="vrn" id="vrn"/><input type="text" placeholder="1st Text" name="vrn1st" id="vrn1st"/><input type="text" placeholder="2st Text" name="vrn2nd" id="vrn2nd"/><input type="text" id="vrnca" name="vrnca" placeholder="continuous accessment"/ ><input type="text" placeholder="Exam" name="vrnexam" id="vrnexam"/><input type="text" placeholder="TOTAL SCORE" name="vrnscore" id="vrnscore"/><input type="text" placeholder="GRADE" name="vrnG" id="vrnG"/><input type="text" name="vrnRemark" id="vrnRemark"placeholder="Remark"/></p>
-                        <p><input type="text" value="CRS" name="crs" id="crs"/><input type="text" placeholder="1st Test" name="crs1st" id="crs1st"/><input type="text" placeholder="2st Test" name="crs2nd" id="crs2nd"/><input type="text" id="crsca" name="crsca" placeholder="continuous accessment"/ ><input type="text" placeholder="Exam" name="crsexam" id="crsexam"/><input type="text" placeholder="TOTAL SCORE" name="crsscore" id="crsscore"/><input type="text" placeholder="GRADE" name="crsG" id="crsG"/><input type="text" name="crsRemark" id="crsRemark"placeholder="Remark"/></p>
-                    </div>
+                    <p><input type="text"  name="eng" id="eng"/><input type="text" placeholder="1st Text" name="eng1st" id="eng1st"/><input type="text" placeholder="2st Text" name="eng2nd" id="eng2nd"/><input type="text" id="engca" name="engca" placeholder="continuous accessment"/ ><input type="text" placeholder="Exam" name="engexam" id="engexam"/><input type="text" placeholder="TOTAL SCORE" name="engscore" id="engscore"/><input type="text" placeholder="GRADE" name="engG" id="engG"/><input type="text" name="engRemark" id="engRemark"placeholder="Remark"/></p>
+                    <p><input type="text"  name="mth" id="mth"/><input type="text" placeholder="1st Text" name="mth1st"  id="mth1st"/><input type="text" placeholder="2st Text" name="mth2nd" id="mth2nd" /><input type="text" id="mthca" name="mthca" placeholder="continuous accessment"/ ><input type="text" placeholder="Exam" name="mthexam" id="mthexam"/><input type="text" placeholder="TOTAL SCORE" name="mthscore" id="mthscore"/><input type="text" placeholder="GRADE" name="mthG" id="mthG"/><input type="text" name="mthRemark" id="mthRemark"placeholder="Remark"/></p>
+                    <p><input type="text"  name="rnv" id="rnv"/><input type="text" placeholder="1st Text" name="rnv1st" id="rnv1st"/><input type="text" placeholder="2st Text" name="rnv2nd" id="rnv2nd"/><input type="text" id="rnvca" name="rnvca" placeholder="continuous accessment"/ ><input type="text" placeholder="Exam" name="rnvexam" id="rnvexam"/><input type="text" placeholder="TOTAL SCORE" name="rnvscore" id="rnvscore"/><input type="text" placeholder="GRADE" name="rnvG" id="rnvG"/><input type="text" name="rnvRemark" id="rnvRemark"placeholder="Remark"/></p>
+                    <p><input type="text"  name="bst" id="bst" /><input type="text" placeholder="1st Text" name="bst1st" id="bst1st"/><input type="text" placeholder="2st Text" name="bst2nd" id="bst2nd"/><input type="text" id="bstca" name="bstca" placeholder="continuous accessment"/ ><input type="text" placeholder="Exam" name="bstexam" id="bstexam"/><input type="text" placeholder="TOTAL SCORE" name="bstscore" id="bstscore"/><input type="text" placeholder="GRADE" name="bstG" id="bstG"/><input type="text" name="bstRemark" id="bstRemark"placeholder="Remark"/></p>
+                    <p><input type="text"  name="pvs" id="pvs"/><input type="text" placeholder="1st Text" name="pvs1st" id="pvs1st"/><input type="text" placeholder="2st Text" name="pvs2nd" id="pvs2nd"/><input type="text" id="pvsca" name="pvsca" placeholder="continuous accessment"/ ><input type="text" placeholder="Exam" name="pvsexam" id="pvsexam"/><input type="text" placeholder="TOTAL SCORE" name="pvsscore" id="pvsscore"/><input type="text" placeholder="GRADE" name="pvsG" id="pvsG"/><input type="text" name="pvsRemark" id="pvsRemark"placeholder="Remark"/></p>
+                    <p><input type="text"  name="qur" id="qur"/><input type="text" placeholder="1st Text" name="qur1st" id="qur1st"/><input type="text" placeholder="2st Text" name="qur2nd" id="qur2nd"/><input type="text" id="qurca" name="qurca" placeholder="continuous accessment"/ ><input type="text" placeholder="Exam" name="qurexam" id="qurexam"/><input type="text" placeholder="TOTAL SCORE" name="qurscore" id="qurscore"/><input type="text" placeholder="GRADE" name="qurG" id="qurG"/><input type="text" name="qurRemark" id="qurRemark"placeholder="Remark"/></p>
+                    <p><input type="text"  name="vst" id="vst"/><input type="text" placeholder="1st Text" name="vst1st" id="vst1st"/><input type="text" placeholder="2st Text" name="vst2nd" id="vst2nd"/><input type="text" id="vstca" name="vstca" placeholder="continuous accessment"/ ><input type="text" placeholder="Exam" name="vstexam" id="vstexam"/><input type="text" placeholder="TOTAL SCORE" name="vstscore" id="vstscore"/><input type="text" placeholder="GRADE" name="vstG" id="vstG"/><input type="text" name="vstRemark" id="vstRemark"placeholder="Remark"/></p>
+                    <p><input type="text"  name="cra" id="cra"/><input type="text" placeholder="1st Text" name="cra1st" id="cra1st"/><input type="text" placeholder="2st Text" name="cra2nd" id="cra2nd"/><input type="text" id="craca" name="craca" placeholder="continuous accessment"/ ><input type="text" placeholder="Exam" name="craexam" id="craexam"/><input type="text" placeholder="TOTAL SCORE" name="crascore" id="crascore"/><input type="text" placeholder="GRADE" name="craG" id="craG"/><input type="text" name="craRemark" id="craRemark"placeholder="Remark"/></p>
+                    <p><input type="text"  name="ver" id="ver"/><input type="text" placeholder="1st Text" name="ver1st" id="ver1st"/><input type="text" placeholder="2st Text" name="ver2nd" id="ver2nd"/><input type="text" id="verca" name="verca" placeholder="continuous accessment"/ ><input type="text" placeholder="Exam" name="verexam" id="verexam"/><input type="text" placeholder="TOTAL SCORE" name="verscore" id="verscore"/><input type="text" placeholder="GRADE" name="verG" id="verG"/><input type="text" name="verRemark" id="verRemark"placeholder="Remark"/></p>
+                    <p><input type="text"  name="plf" id="plf"/><input type="text" placeholder="1st Text" name="plf1st" id="plf1st"/><input type="text" placeholder="2st Text" name="plf2nd" id="plf2nd"/><input type="text" id="plfca" name="plfca" placeholder="continuous accessment"/ ><input type="text" placeholder="Exam" name="plfexam" id="plfexam"/><input type="text" placeholder="TOTAL SCORE" name="plfscore" id="plfscore"/><input type="text" placeholder="GRADE" name="plfG" id="plfG"/><input type="text" name="plfRemark" id="plfRemark"placeholder="Remark"/></p>              
+                    <p><input type="text"  name="vrn" id="vrn"/><input type="text" placeholder="1st Text" name="vrn1st" id="vrn1st"/><input type="text" placeholder="2st Text" name="vrn2nd" id="vrn2nd"/><input type="text" id="vrnca" name="vrnca" placeholder="continuous accessment"/ ><input type="text" placeholder="Exam" name="vrnexam" id="vrnexam"/><input type="text" placeholder="TOTAL SCORE" name="vrnscore" id="vrnscore"/><input type="text" placeholder="GRADE" name="vrnG" id="vrnG"/><input type="text" name="vrnRemark" id="vrnRemark"placeholder="Remark"/></p>
+                    <p><input type="text"  name="crs" id="crs"/><input type="text" placeholder="1st Test" name="crs1st" id="crs1st"/><input type="text" placeholder="2st Test" name="crs2nd" id="crs2nd"/><input type="text" id="crsca" name="crsca" placeholder="continuous accessment"/ ><input type="text" placeholder="Exam" name="crsexam" id="crsexam"/><input type="text" placeholder="TOTAL SCORE" name="crsscore" id="crsscore"/><input type="text" placeholder="GRADE" name="crsG" id="crsG"/><input type="text" name="crsRemark" id="crsRemark"placeholder="Remark"/></p>
+
                 </fieldset>
                 <fieldset>
                     <legend>STUDENT PERFOMANCE:</legend>
@@ -72,25 +70,25 @@
                 <fieldset>
                     <legend>OHTER INFOMATION </legend>
                     <p>                    
-                        <select name="section" required>
+                        <select name="section" required id="section">
                         <option value="">Academic Section</option>
                         <option value="2023 - 2024">2023 - 2024</option>
                         <option value="2024 - 2025" selected>2024 - 2025</option>
                         <option value="2025 - 2026">2025 - 2026</option>
                         <option value="2026 - 2027">2026 - 2027</option>
                     </select>
-                    <input type="text" placeholder="times present" name="present" />
-                    <input type="text" placeholder="times absent" name="absent" />
+                    <input type="text" placeholder="times present" name="present" id="present"/>
+                    <input type="text" placeholder="times absent" name="absent" id="absent"/>
                     <input type="text" placeholder="Class Teacher Report" id="tReport" name="tReport" style="width:200px;"/>
                     <input type="text" placeholder="Head Teacher Report" name="Treport" id="Treport" style="width:200px"/>
-                    <input type="text" placeholder="Next term resume" name="nextterm" value="6th Jan, 2025"/>
+                    <input type="text" placeholder="Next term resume" name="nextterm" id='nextterm' value="6th Jan, 2025"/>
                     <select id = "promotedto" name="promote">
                         <option value="">Promoted to</option>
                         <option value="NURSERY 1">NURSERY 1</option>
                         <option value="NURSERY 2">NURSERY 2</option>
                         <option value="NURSERY 3">NURSERY 3</option>
                     </select>
-                    <input type="text" placeholder="outstanding fees" name="fees"/></p>
+                    <input type="text" placeholder="outstanding fees" name="fees" id="fees"/></p>
                 </fieldset>
                 <fieldset class="schoolInfo">
                     <legend>School Info:</legend>
@@ -100,11 +98,31 @@
                 <p id="upload" style="color:red;"></p>
             </form>
         </div>
-        <script src="Java Script/main.js"></script>
+        <script>
+            async function updateForm(e){
+                e.preventDefault()
+                let form = document.getElementById('formUpdate')
+                let formData = new FormData(form)
+                try{
+                    let result = await fetch('/update_nursery_result', {
+                        method: 'PATCH',
+                        body: JSON.stringify(Object.fromEntries(formData)),
+                        headers:{
+                           'Content-Type': 'application/json'
+                        }
+                    })
+                    result = await result.text()
+                    if(result){
+                        alert(`${result}`)
+                    }
+                }
+                catch(err){
+                    alert('server error')
+                    console.log(err)
+                }
+            }
+        </script>
         <script src="nursery_score.js"></script>
-        <script src="../studentId.js"></script>
         <script src="Java Script/fetchResult.js"></script>
-        <script src="Java Script/upDateStudentClass.js"></script>
-        <script src="Java Script/nurserySubject.js"></script>
     </body>
 </html>

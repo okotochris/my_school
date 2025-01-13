@@ -16,7 +16,7 @@
           <div class="platform"><h2>UPDATE JUNIOR RESULT</h2></div>
         <div class="upload_result"> 
 
-            <form action="adminJunior" method="PATCH" onsubmit="return check();">
+            <form  onsubmit="return updateForm(event)" id="formUpdate">
                 <fieldset class="studentInfo">
                     <legend>STUDENT INFO:</legend>
                     <p>
@@ -75,26 +75,26 @@
                 <fieldset>
                     <legend>OHTER INFOMATION </legend>
                     <p>                    
-                        <select name="section" required>
+                        <select name="section" id="section" required>
                         <option value="">Academic Section</option>
                         <option value="2023 - 2024">2023 - 2024</option>
                         <option value="2024 - 2025" selected>2024 - 2025</option>
                         <option value="2025 - 2026">2025 - 2026</option>
                         <option value="2026 - 2027">2026 - 2027</option>
                     </select>
-                    <input type="text" placeholder="times present" name="present" />
-                    <input type="text" placeholder="times absent" name="absent" />
+                    <input type="text" placeholder="times present" name="present" id="present"/>
+                    <input type="text" placeholder="times absent" name="absent" id="absent"/>
                     <input type="text" placeholder="Class Teacher Report" id="tReport" name="tReport" style="width:200px;"/>
                     <input type="text" placeholder="Head Teacher Report" name="Treport" id="Treport" style="width:200px"/>
-                    <input type="text" placeholder="Next term resume" name="nextterm" value="6th Jan. 2025"/>
+                    <input type="text" placeholder="Next term resume" name="nextterm" value="6th Jan. 2025" id="nextterm"/>
                     
-                    <select id = "promotedto" name="promote">
+                    <select id = "promotedto" name="promote" id="promotedto">
                         <option value="">Promoted to</option>
                         <option value="JSS 2">JSS 2</option>
                         <option value="JSS 3">JSS 3</option>
                         <option value="SS 1">SS 1</option>
                     </select>
-                    <input type="text" placeholder="outstanding fees" name="fees"/></p>
+                    <input type="text" placeholder="outstanding fees" name="fees" id="fees"/></p>
                 </fieldset>
                    
                 <button>Update Result</button>
@@ -102,12 +102,32 @@
                 <p id="upload" style="color:red;"></p>
             </form>
         </div>
-        <script src="Java Script/main.js"></script>
+        <script>
+            async function updateForm(e){  
+                e.preventDefault()      
+                let form = document.getElementById('formUpdate')
+                let formData = new FormData(form)
+                try{
+                    let result = await fetch('/update_junior_result',{
+                        method: 'PATCH',
+                        body: JSON.stringify(Object.fromEntries(formData)),
+                        headers:{
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    result = await result.text()
+                    if(result){
+                        alert(`${result}`)
+                    }
+                }
+                catch(err){
+                    alert('server error')
+                   console.log(err)
+                }
+            }
+        </script>
         <script src="../junior_score.js"></script>
-        <script src="../studentId.js"></script>
         <script src="Java Script/fetchResult.js"></script>
-        <script src="Java Script/upDateStudentClass.js"></script>
-        <script src="Java Script/juniorSubject.js"></script>
 
     </body>
 </html>
