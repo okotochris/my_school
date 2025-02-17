@@ -290,7 +290,7 @@ app.post("/upload", isAuthenticated, (req, res) => {
 app.post("/result", async (req, res) => {
   let clas = req.body.class;
   let term = req.body.term;
-  let id = req.body.studentId.trim();
+  let id = req.body.studentId;
   let name = req.body.userName;
   try {
     let data = await Studentpassport.findOne({ studentId: id });
