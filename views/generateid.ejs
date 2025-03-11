@@ -14,16 +14,10 @@
             <div class="add_form">
                 <p>CREATE STUDENT PROFILE </p>
                 <form action="/passport" method="post" enctype="multipart/form-data">
-                    <!-- User Name Field -->
                     <p><input type="text" autocomplete="off" id="userName" name="userName" placeholder="Last First Middle Name" required /></p>
-                    
-                    <!-- Student ID Field -->
-                    <p><input type="text" id="studentId" name="studentId" placeholder="Student ID" required  disabled/></p>
+                    <p><input type="text" id="studentId" name="studentId" placeholder="Student ID" required  readonly/></p>
                     <p><button onclick="generateId(event)">Generate ID</button></p>
-                    <!-- Admission Number Field -->
                     <p><input type="text" autocomplete="off" name="addmissionNo" id="addmissionNo" placeholder="Admission Number" /></p>
-                    
-                    <!-- Date of Birth Field -->
                     <p><input type="date" name="dob" id="dob"/></p>
                     
                      <p>

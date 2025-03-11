@@ -15,4 +15,5 @@ const profile = new mongoose.Schema({
     }
 }, {timestamp: true})
 
-const schoolPfofile = mongoose.model( 'schoolPfofile', profile)
+
+const schoolPfofile = mongoose.model( 'schoolPfofile', profile);
