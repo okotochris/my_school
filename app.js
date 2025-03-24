@@ -57,7 +57,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      maxAge: 31536000000, // 1 year
+      maxAge: 31536000, 
     },
   })
 );
@@ -114,7 +114,7 @@ app.get("/", (req, res) => {
 });
 //adimin page to loging to result upload portal
 app.get("/admin", isAuthenticated, (req, res) => {
-  res.render("admin", { school: req.session.school });
+  res.render("admin", { school: req.session.school, fees: req.session.fees });
 });
 
 //CHECKING IF USER HAS LOGIN
@@ -134,12 +134,19 @@ app.post("/login", async (req, res) => {
   const user = req.body.user;
   const password = req.body.password;
   try {
-    const data = await ABlog.findOne({ email: user, password: password });
-    if (data) {
+    let data = await ABlog.findOne({ email: user, password: password });
+    if(!data){
+      res.redirect("login");
+    }
+    let schoolName = data.school;
+    let schoolFee = await schoolPfofile.findOne({schoolName})
+    if (data && schoolFee) {
       req.session.visited = true;
       req.session.user = user;
       const school = data.school || "Khristal Tech";
+      const fees = schoolFee.fees;
       req.session.school = school;
+      req.session.fees = fees;
       const redirectTo = req.session.returnTo || "/admin";
       delete req.session.returnTo; // Clear returnTo after use
       res.redirect(redirectTo);
@@ -178,7 +185,7 @@ app.get("/blacklist", isAuthenticated, async (req, res) => {
   try {
     let school = req.session.school;
     const data = await Blacklist.find({ school: school });
-    res.render("blacklist", { data, school: req.session.school });
+    res.render("blacklist", { data, school: req.session.school, fees: req.session.fees });
   } catch (err) {
     console.log(err);
   }
@@ -218,54 +225,69 @@ app.post("/blacklist", async (req, res) => {
 });
 
 //saving primary data to databse
-app.post("/primary", (req, res) => {
+app.post("/primary", async (req, res) => {
   req.body.schoolName = req.session.school;
-  const Blog = new PBlog(req.body);
-  Blog.save()
-    .then((result) => {
-      res.render("primary");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  try{
+    const Blog = new PBlog(req.body);
+    await Blog.save()
+    await updateFees(req.session.school, req)
+  }
+  catch(err){
+    console.log(err)
+  }
+    
 });
 
 //saving nursery database
-app.post("/nursery", (req, res) => {
+app.post("/nursery", async (req, res) => {
   req.body.schoolName = req.session.school;
-  const Blog = new nuseryBlog(req.body);
-  Blog.save()
-    .then((result) => {
-      res.render("nursery");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  
+  try{
+    const Blog = new nuseryBlog(req.body);
+    await Blog.save()
+    await updateFees(req.session.school, req)
+  }
+  catch(err){
+    console.log(err)
+  }
 });
 
+
 //saving junior data
-app.post("/adminJunior", (req, res) => {
-  res.render("adminJunior");
+app.post("/adminJunior", async (req, res) => {
   req.body.schoolName = req.session.school;
-  const blog = new Blog(req.body);
-  blog
-    .save()
-    .then((result) => {
-      console.log("uploaded");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  let schoolName = req.session.school;
+  try{
+    const blog = new Blog(req.body);
+    await blog.save()
+    res.render("adminJunior");
+    await updateFees(schoolName, req)
+  }
+  catch(err){
+    console.log(err)
+  }
+   
 });
+
 //saving senior data
-app.post("/adminSenior", (req, res) => {
-  req.body.schoolName = req.session.school;
-  const Sblog = new SBlog(req.body);
-  Sblog.save()
-    .then((result) => console.log("uploaded"))
-    .catch((err) => console.log(err));
-  res.render("adminSenior");
+app.post("/adminSenior", async (req, res) => {
+  try {
+    const schoolName = req.session.school;
+    req.body.schoolName = schoolName; // Attach school name from session
+
+    // Save new senior blog entry
+    const Sblog = new SBlog(req.body);
+    await Sblog.save();
+
+    // Increment the school fee by 500 and update in MongoDB
+    res.render("adminSenior"); // Redirect after processing
+    await updateFees(schoolName, req)
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal Server Error");
+  }
 });
+
 //LOGING IN TO ACCESSS SCHOOL RESULT PAGE
 app.get("/login", (req, res) => {
   res.render("login");
@@ -456,11 +478,11 @@ app.patch("/update-student", async (req, res) => {
 
 //UPDATING STUDENT RECORD PAGE
 app.get("/update", isAuthenticated, (req, res) => {
-  res.render("update", { school: req.session.school });
+  res.render("update", { school: req.session.school, fees: req.session.fees });
 });
 //generating student id and passport page
 app.get("/generateid", isAuthenticated, (req, res) => {
-  res.render("generateid", { school: req.session.school });
+  res.render("generateid", { school: req.session.school, fees: req.session.fees });
 });
 
 // saving student ID and passport
@@ -527,12 +549,12 @@ app.get("/junior", (req, res) => {
 });
 //STUDENT ID FORM
 app.get("/studentid", isAuthenticated, (req, res) => {
-  res.render("studentid", { school: req.session.school });
+  res.render("studentid", { school: req.session.school, fees: req.session.fees });
 });
 
 //STUDENT GRADING
 app.get("/studentgrade", (req, res) => {
-  res.render("studentgrade", { school: req.session.school });
+  res.render("studentgrade", { school: req.session.school, fees: req.session.fees });
 });
 //UPDATE STUDENT CLASS
 app.patch("/updatestudentclass", async (req, res) => {
@@ -559,6 +581,7 @@ app.get("/schoolname", (req, res) => {
 //LOGOUT API
 app.get("/logout", (req, res) => {
   req.session.destroy();
+  //res.clearCookie('connect.sid'); 
   res.redirect("login");
 });
 //STUDENT PERFOMANCE
@@ -624,6 +647,7 @@ app.get("/update-basic", isAuthenticated, (req, res) => {
 app.get("/update-nursery", isAuthenticated, (req, res) => {
   res.render("update_nursery");
 });
+//GETING RESULT FROM DATABASE
 app.get("/student-result", async (req, res) => {
   const { studentId, term, sClass } = req.query;
   let school = req.session.school;
@@ -668,24 +692,6 @@ app.patch("/update_basic_result", async (req, res) => {
     res.status(500).send("server error");
   }
 });
-//UPDATING JUNIOR SCHOOL RESULT
-app.patch("/update_junior_result", async (req, res) => {
-  const { studentId, term, sClass } = req.body;
-  try {
-    let updated = await Blog.findOneAndUpdate(
-      { studentId, term, sClass },
-      req.body,
-      { new: true }
-    );
-    if (updated) {
-      res.status(200).send("Updated successfully");
-    } else {
-      res.status(404).send("result not found");
-    }
-  } catch (err) {
-    res.status(500).send(err);
-  }
-});
 //UPDATING NURSERY
 app.patch("/update_nursery_result", async (req, res) => {
   const { studentId, term, sClass } = req.body;
@@ -704,6 +710,55 @@ app.patch("/update_nursery_result", async (req, res) => {
     res.status(500).send(err);
   }
 });
+//UPDATING JUNIOR SCHOOL RESULT
+app.patch("/update_junior_result", async (req, res) => {
+  const { studentId, term, sClass } = req.body;
+  try {
+    let updated = await Blog.findOneAndUpdate(
+      { studentId, term, sClass },
+      req.body,
+      { new: true }
+    );
+    if (updated) {
+      res.status(200).send("Updated successfully");
+    } else {
+      res.status(404).send("result not found");
+    }
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+//UPDATING SENIOR SCHOOL RESULT
+app.patch("/update_senior_result", async (req, res) => {
+  const { studentId, term, sClass } = req.body;
+  try {
+    let updated = await SBlog.findOneAndUpdate(
+      { studentId, term, sClass },
+      req.body,
+      { new: true }
+    );
+    if (updated) {
+      res.status(200).send("Updated successfully");
+    } else {
+      res.status(404).send("result not found");
+      console.log('not found')
+    }
+  } catch (err) {
+    res.status(500).send('server error');
+  }
+});
+//updating school fees
+async function updateFees(schoolName, req){
+  const updatedSchool = await schoolPfofile.findOneAndUpdate(
+    { schoolName },
+    { $inc: { fees: 500 } },
+    { new: true } // Return updated document
+  );
+  // Update the session with the new fees
+  req.session.fees = updatedSchool.fees;
+}
+
 app.use((req, res) => {
   res.status(404).render("page_not_found");
 });
+

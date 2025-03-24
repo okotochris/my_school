@@ -28,7 +28,7 @@
     </div>
     <div class="studentInfo">
         <div> <p>Name: <%= result.userName.toUpperCase() %></p> </div>
-        <div><p>Junior Secondary: Attendance: <% details.present %></p>  <p>Absent: <%= details.absent %></p></div> 
+        <div><p>Senior Secondary Attendance: <%= details.present %></p>  <p>Absent: <%= details.absent %></p></div> 
         <div> <p>Class: <%= details.class %></p><p>Year: 2023-2024</p><p>Term: <%= details.term %></p></div>
     </div>
 
@@ -84,16 +84,7 @@
                 <td><%= details.govG %></td>
                 <td><%= details.govRemark %></td>
             </tr>
-            <tr>
-                <td><%= details.fmt %></td>
-                <td><%= details.fmt1st %></td>
-                <td><%= details.fmt2nd %></td>
-                <td><%= details.fmtca %></td>
-                <td><%= details.fmtexam %></td>
-                <td><%= details.fmtscore %></td>
-                <td><%= details.fmtG %></td>
-                <td><%= details.fmtRemark %></td>
-            </tr>
+           
             <tr><td><%= details.eco %></td>
                 <td><%= details.eco1st %></td>
                 <td><%= details.eco2nd %></td>
@@ -113,16 +104,7 @@
                 <td><%= details.litG %></td>
                 <td><%= details.litRemark %></td>
             </tr>
-            <tr>
-                <td><%= details.cst %></td>
-                <td><%= details.cst1st %></td>
-                <td><%= details.cst2nd %></td>
-                <td><%= details.cstca %></td>
-                <td><%= details.cstexam %></td>
-                <td><%= details.cstscore %></td>
-                <td><%= details.cstG %></td>
-                <td><%= details.cstRemark %></td>
-            </tr>
+           
             <tr>
                 <td><%= details.civ %></td>
                 <td><%= details.civ1st %></td>
@@ -194,14 +176,14 @@
                 <td><%= details.crsRemark %></td>
             </tr>
             <tr>
-                <td><%= details.acc %></td>
-                <td><%= details.acc1st %></td>
-                <td><%= details.acc2nd %></td>
-                <td><%= details.accca %></td>
-                <td><%= details.accexam %></td>
-                <td><%= details.accscore %></td>
-                <td><%= details.accG %></td>
-                <td><%= details.accRemark %></td>
+                <td><%= details.mkt %></td>
+                <td><%= details.mkt1st %></td>
+                <td><%= details.mkt2nd %></td>
+                <td><%= details.mktcca %></td>
+                <td><%= details.mktexam %></td>
+                <td><%= details.mktscore %></td>
+                <td><%= details.mktG %></td>
+                <td><%= details.mktRemark %></td>
             </tr>
             
             <tr>

@@ -424,6 +424,31 @@ const blogschema = new Schema({
     acccca:{
         type: String,
     },
+
+    mkt:{
+        type: String,
+    },
+    mkt1st:{
+        type: String,
+    },
+    mkt2nd:{
+        type: String,
+    },
+    mktcca:{
+        type: String,
+    },
+    mktexam:{
+        type: String,
+    },
+    mktscore:{
+        type: String,
+    },
+    mktG:{
+        type: String,
+    },
+    mktRemark:{
+        type: String,
+    },
     userName:{
         type: String,
         required: true

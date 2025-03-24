@@ -306,114 +306,117 @@ function nurseryStudentResultTemplate(data) {
 }
 //SENIOR RESULT
 function seniorStudentResultTemplate(data) {
+  console.log(data)
   //English
   document.getElementById("eng").value = data.eng;
   document.getElementById("eng1st").value = data.eng1st;
   document.getElementById("eng2nd").value = data.eng2nd;
-  document.getElementById("engca").value = data.engca;
+  document.getElementById("engcca").value = data.engcca;
   document.getElementById("engexam").value = data.engexam;
   //mathes
   document.getElementById("mth").value = data.mth;
   document.getElementById("mth1st").value = data.mth1st;
   document.getElementById("mth2nd").value = data.mth2nd;
-  document.getElementById("mthca").value = data.mthca;
+  document.getElementById("mthcca").value = data.mthcca;
   document.getElementById("mthexam").value = data.mthexam;
   //CRS
   document.getElementById("crs").value = data.crs;
   document.getElementById("crs1st").value = data.crs1st;
   document.getElementById("crs2nd").value = data.crs2nd;
-  document.getElementById("crsca").value = data.crsca;
+  document.getElementById("crscca").value = data.crscca;
   document.getElementById("crsexam").value = data.crsexam;
   //BIOLOGY
   document.getElementById("bio").value = data.bio;
   document.getElementById("bio1st").value = data.bio1st;
   document.getElementById("bio2nd").value = data.bio2nd;
-  document.getElementById("bioca").value = data.bioca;
+  document.getElementById("biocca").value = data.biocca;
   document.getElementById("bioexam").value = data.bioexam;
   //GOVERNMENT
   document.getElementById("gov").value = data.gov;
   document.getElementById("gov1st").value = data.gov1st;
   document.getElementById("gov2nd").value = data.gov2nd;
-  document.getElementById("govca").value = data.govca;
+  document.getElementById("govcca").value = data.govcca;
   document.getElementById("govexam").value = data.govexam;
   //ECONOMICS
   document.getElementById("eco").value = data.eco;
   document.getElementById("eco1st").value = data.eco1st;
   document.getElementById("eco2nd").value = data.eco2nd;
-  document.getElementById("ecoca").value = data.ecoca;
+  document.getElementById("ecocca").value = data.ecocca;
   document.getElementById("ecoexam").value = data.ecoexam;
   //LITERATURE
   document.getElementById("lit").value = data.lit;
   document.getElementById("lit1st").value = data.lit1st;
   document.getElementById("lit2nd").value = data.lit2nd;
-  document.getElementById("litca").value = data.litca;
+  document.getElementById("litcca").value = data.litcca;
   document.getElementById("litexam").value = data.litexam;
   //CIVIC EDCUCATION
   document.getElementById("civ").value = data.civ;
   document.getElementById("civ1st").value = data.civ1st;
   document.getElementById("civ2nd").value = data.civ2nd;
-  document.getElementById("civca").value = data.civca;
+  document.getElementById("civcca").value = data.civcca;
   document.getElementById("civexam").value = data.civexam;
   //CHEMISTRY
   document.getElementById("che").value = data.che;
   document.getElementById("che1st").value = data.che1st;
   document.getElementById("che2nd").value = data.che2nd;
-  document.getElementById("checa").value = data.checa;
+  document.getElementById("checca").value = data.checca;
   document.getElementById("cheexam").value = data.cheexam;
   //AGRICUTURE
   document.getElementById("agr").value = data.agr;
   document.getElementById("agr1st").value = data.agr1st;
   document.getElementById("agr2nd").value = data.agr2nd;
-  document.getElementById("agrca").value = data.agrca;
+  document.getElementById("agrcca").value = data.agrcca;
   document.getElementById("agrexam").value = data.agrexam;
   //Geography
   document.getElementById("geo").value = data.geo;
   document.getElementById("geo1st").value = data.geo1st;
   document.getElementById("geo2nd").value = data.geo2nd;
-  document.getElementById("geoca").value = data.geoca;
+  document.getElementById("geocca").value = data.geocca;
   document.getElementById("geoexam").value = data.geoexam;
   //Physics
   document.getElementById("phy").value = data.phy;
   document.getElementById("phy1st").value = data.phy1st;
   document.getElementById("phy2nd").value = data.phy2nd;
-  document.getElementById("phyca").value = data.phyca;
+  document.getElementById("phycca").value = data.phycca;
   document.getElementById("phyexam").value = data.phyexam;
   //Commerce
   document.getElementById("com").value = data.com;
   document.getElementById("com1st").value = data.com1st;
   document.getElementById("com2nd").value = data.com2nd;
-  document.getElementById("comca").value = data.comca;
+  document.getElementById("comcca").value = data.comcca;
   document.getElementById("comexam").value = data.comexam;
   //Marketing
   document.getElementById("mkt").value = data.mkt;
   document.getElementById("mkt1st").value = data.mkt1st;
   document.getElementById("mkt2nd").value = data.mkt2nd;
-  document.getElementById("mktca").value = data.mktca;
+  document.getElementById("mktcca").value = data.mktcca;
   document.getElementById("mktexam").value = data.mktexam;
-  //Accounting
-  document.getElementById("acc").value = data.acc;
-  document.getElementById("acc1st").value = data.acc1st;
-  document.getElementById("acc2nd").value = data.acc2nd;
-  document.getElementById("acca").value = data.accca;
-  document.getElementById("accexam").value = data.accexam;
-  //Visual Art
-  document.getElementById("vat").value = data.vat;
-  document.getElementById("vat1st").value = data.vat1st;
-  document.getElementById("vat2nd").value = data.vat2nd;
-  document.getElementById("vatca").value = data.vatca;
-  document.getElementById("vatexam").value = data.vatexam;
-  //Further Mathematics
-  document.getElementById("fmt").value = data.fmt;
-  document.getElementById("fmt1st").value = data.fmt1st;
-  document.getElementById("fmt2nd").value = data.fmt2nd;
-  document.getElementById("fmtca").value = data.fmtca;
-  document.getElementById("fmtexam").value = data.fmtexam;
-  //Computer Studies
-  document.getElementById("cst").value = data.cst;
-  document.getElementById("cst1st").value = data.cst1st;
-  document.getElementById("cst2nd").value = data.cst2nd;
-  document.getElementById("cstca").value = data.cstca;
-  document.getElementById("cstexam").value = data.cstexam;
+  
+  // //Accounting
+  // document.getElementById("acc").value = data.acc;
+  // document.getElementById("acc1st").value = data.acc1st;
+  // document.getElementById("acc2nd").value = data.acc2nd;
+  // document.getElementById("acccca").value = data.acccca;
+  // document.getElementById("accexam").value = data.accexam;
+  // //Visual Art
+  // document.getElementById("vat").value = data.vat;
+  // document.getElementById("vat1st").value = data.vat1st;
+  // document.getElementById("vat2nd").value = data.vat2nd;
+  // document.getElementById("vatcca").value = data.vatcca;
+  // document.getElementById("vatexam").value = data.vatexam;
+  // //Further Mathematics
+  // document.getElementById("fmt").value = data.fmt;
+  // document.getElementById("fmt1st").value = data.fmt1st;
+  // document.getElementById("fmt2nd").value = data.fmt2nd;
+  // document.getElementById("fmtcca").value = data.fmtcca;
+  // document.getElementById("fmtexam").value = data.fmtexam;
+  // //Computer Studies
+  // document.getElementById("cst").value = data.cst;
+  // document.getElementById("cst1st").value = data.cst1st;
+  // document.getElementById("cst2nd").value = data.cst2nd;
+  // document.getElementById("cstcca").value = data.cstcca;
+  // document.getElementById("cstexam").value = data.cstexam;
+  otherInfo(data)
 }
 //other infomation
 function otherInfo(data) {

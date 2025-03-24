@@ -5,8 +5,8 @@ const profile = new mongoose.Schema({
         type: String,
         require: true,
     },
-    fee:{
-        type: String,
+    fees:{
+        type: Number,
         require: true,
     },
     address:{
@@ -17,3 +17,4 @@ const profile = new mongoose.Schema({
 
 
 const schoolPfofile = mongoose.model( 'schoolPfofile', profile);
+module.exports = schoolPfofile;

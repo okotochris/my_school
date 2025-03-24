@@ -28,7 +28,7 @@
     </div>
     <div class="studentInfo">
         <div> <p>Name: <%= result.userName.toUpperCase() %></p> </div>
-        <div><p>Junior Secondary: Attendance: <% details.present %></p>  <p>Absent: <%= details.absent %></p></div> 
+        <div><p>Junior Secondary Attendance: <%= details.present %></p>  <p>Absent: <%= details.absent %></p></div> 
         <div> <p>Class: <%= details.class %></p><p>Year: 2023-2024</p><p>Term: <%= details.term %></p></div>
     </div>
 
@@ -143,16 +143,7 @@
                 <td><%= details.crsG %></td>
                 <td><%= details.crsRemark %></td>
             </tr>
-            <tr>
-                <td><%= details.ped %></td>
-                <td><%= details.ped1st %></td>
-                <td><%= details.ped2nd %></td>
-                <td><%= details.pedca %></td>
-                <td><%= details.pedexam %></td>
-                <td><%= details.pedscore %></td>
-                <td><%= details.pedG %></td>
-                <td><%= details.pedRemark %></td>
-            </tr>
+          
             <tr>
                 <td><%= details.cra %></td>
                 <td><%= details.cra1st %></td>
