@@ -230,6 +230,7 @@ app.post("/primary", async (req, res) => {
   try{
     const Blog = new PBlog(req.body);
     await Blog.save()
+    res.render('primary')
     await updateFees(req.session.school, req)
   }
   catch(err){
@@ -245,6 +246,7 @@ app.post("/nursery", async (req, res) => {
   try{
     const Blog = new nuseryBlog(req.body);
     await Blog.save()
+    res.render('nursery')
     await updateFees(req.session.school, req)
   }
   catch(err){
