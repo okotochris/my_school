@@ -4,14 +4,7 @@ window.addEventListener('load',  async ()=>{
         let school = await res.json()
         school = school.toUpperCase()
         if(school == 'BLIXX INTERNATIONAL'){
-            console.log(school)
-            document.querySelector('#pvd').value = 'Vocation Studies'
-            document.querySelector('#bst').value = 'Basic Science'
-            document.querySelector('#spe').value = 'Social Studies'
-            document.querySelector('#red').value = 'Home Economics'
-            document.querySelector('#hst').value = 'PHE'
-            document.querySelector('#vst').value = 'Agricultural Science'
-            document.querySelector('#hwr').value = 'Reading'
+            document.querySelector('.accounting').style.display = 'block'
         }
         else if(school == 'NUEL VILLE ACADEMY'){
             

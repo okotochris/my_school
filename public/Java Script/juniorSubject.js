@@ -11,7 +11,8 @@ window.addEventListener('load',  async ()=>{
             document.querySelector('#btc').value = 'PHE'
             document.querySelector('#ped').value = 'Home Economics'
             document.querySelector('#fre').value = 'Basic Technology'
-             document.querySelector('#crs').value = 'Social Studies'
+            document.querySelector('#crs').value = 'Social Studies'
+            document.querySelector('.showSubject').style.display = 'block'
         }
         else if(school == 'NUEL VILLE ACADEMY'){
            

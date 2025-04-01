@@ -185,6 +185,16 @@
                 <td><%= details.bstRemark %></td>
             </tr>
             <tr>
+                <td><%= details.art %></td>
+                <td><%= details.art1st %></td>
+                <td><%= details.art2nd %></td>
+                <td><%= details.artca %></td>
+                <td><%= details.artexam %></td>
+                <td><%= details.artscore %></td>
+                <td><%= details.artG %></td>
+                <td><%= details.artRemark %></td>
+            </tr>
+            <tr>
                 <td>Total</td>
                 <td>10%</td>
                 <td>10%</td>
@@ -204,7 +214,7 @@
         </div>
         
         <p>From Master' Report</p>
-        <div><p>Next term School Fees:</p><p>Exam fee: 2000</p><p>Next term begins: 22 of July 2025</p></div>
+        <div><p>Next term begins: <%=details.nextterm %></p></div>
         <div>
             <p>SESSION: <%= details.section %></p>         
         </div>

@@ -11,7 +11,7 @@ let frescore = document.getElementById('frescore')
 let cscscore = document.getElementById('cscscore')
 let pedscore = document.getElementById('pedscore')
 let crascore = document.getElementById('crascore')
-
+let artscore = document.getElementById('artscore')
 let bstscore = document.getElementById('bstscore')
 let cedscore = document.getElementById('cedscore')
 let hiyscore = document.getElementById('hiyscore')
@@ -46,6 +46,18 @@ mthscore.onmouseover = function(){
     let grade = document.getElementById('mthG')
     let remark = document.getElementById('mthRemark')
     let score = mthscore;
+    comput(x, x2, x3, ca, score, grade, remark)   
+}
+
+// CCA called art
+artscore.onmouseover = function(){
+    let x = Number(document.getElementById('art2nd').value)
+    let x2 = Number(document.getElementById('art1st').value)
+    let x3 = Number(document.getElementById('artexam').value)
+    let ca = Number(document.getElementById('artca').value)
+    let grade = document.getElementById('artG')
+    let remark = document.getElementById('artRemark')
+    let score = artscore;
     comput(x, x2, x3, ca, score, grade, remark)   
 }
 
@@ -250,7 +262,7 @@ cal.onclick= function(){
 
     //calculating for the total student perfomance 
     let course = 0;
-    let total = Number(bscscore.value) + Number(agrscore.value) + Number(hiyscore.value)  + Number(bstscore.value) + Number(mthscore.value)  + Number(frescore.value) + Number(btcscore.value) + Number(engscore.value) + Number(cscscore.value) + Number(hecscore.value) + Number(crascore.value) + Number(pedscore.value)  + Number(cedscore.value) + Number(crsscore.value);
+    let total = Number(bscscore.value) + Number(agrscore.value) + Number(hiyscore.value)  + Number(bstscore.value) + Number(artscore.value) + Number(mthscore.value)  + Number(frescore.value) + Number(btcscore.value) + Number(engscore.value) + Number(cscscore.value) + Number(hecscore.value) + Number(crascore.value) + Number(pedscore.value)  + Number(cedscore.value) + Number(crsscore.value);
     
     //checking the number of courses offered 
         if(bscscore.value != ""){
@@ -296,6 +308,9 @@ cal.onclick= function(){
             course++;
         }
         if(bstscore.value != ""){
+            course++;
+        }
+        if(artscore.value != ""){
             course++;
         }
         

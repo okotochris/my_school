@@ -411,6 +411,30 @@ const blogschema = new Schema({
     bstRemark:{
         type: String,
     },
+   art:{
+        type: String,
+    },
+   art1st:{
+        type: String,
+    },
+   art2nd:{
+        type: String,
+    },
+   artca:{
+        type:String
+    },
+   artexam:{
+        type: String,
+    },
+   artscore:{
+        type: String,
+    },
+   artG:{
+        type: String,
+    },
+   artRemark:{
+        type: String,
+    },
     userName:{
         type: String,
         required: true

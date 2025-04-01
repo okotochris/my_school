@@ -219,6 +219,13 @@ function juniorStudentResultTemplate(data) {
   document.getElementById("ced2nd").value = data.ced2nd;
   document.getElementById("cedca").value = data.cedca;
   document.getElementById("cedexam").value = data.cedexam;
+
+   //CCA having art id
+   document.getElementById("art").value = data.art;
+   document.getElementById("art1st").value = data.art1st;
+   document.getElementById("art2nd").value = data.art2nd;
+   document.getElementById("artca").value = data.artca;
+   document.getElementById("artexam").value = data.artexam;
   otherInfo(data);
 }
 //NURSERY
@@ -392,12 +399,12 @@ function seniorStudentResultTemplate(data) {
   document.getElementById("mktcca").value = data.mktcca;
   document.getElementById("mktexam").value = data.mktexam;
   
-  // //Accounting
-  // document.getElementById("acc").value = data.acc;
-  // document.getElementById("acc1st").value = data.acc1st;
-  // document.getElementById("acc2nd").value = data.acc2nd;
-  // document.getElementById("acccca").value = data.acccca;
-  // document.getElementById("accexam").value = data.accexam;
+  //Accounting
+  document.getElementById("acc").value = data.acc;
+  document.getElementById("acc1st").value = data.acc1st;
+  document.getElementById("acc2nd").value = data.acc2nd;
+  document.getElementById("acccca").value = data.acccca;
+  document.getElementById("accexam").value = data.accexam;
   // //Visual Art
   // document.getElementById("vat").value = data.vat;
   // document.getElementById("vat1st").value = data.vat1st;
