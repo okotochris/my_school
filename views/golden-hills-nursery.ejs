@@ -38,7 +38,7 @@
 				<div class="passport"></div>
 			</div>	
 			
-			<!-- USING EJS TO SET THE CLASS LOGO -->
+			<!-- USING EJS TO SET THE CLASS TACHERS NAME AND SLUGAN -->
 				<% let roomName; %>
 				<% let teacher; %>
 				<% let signature = 'nur.png'; %>
@@ -51,10 +51,10 @@
 				<% } else if (details.class == 'NURSERY 2') { %>
 					<% roomName = 'HIGH FLYER'; %>
 					<% signature = 'nursery2.png' %>
-					<% teacher = 'Miss Emmanuellar'; %>
+					<% teacher = 'Miss Abigail'; %>
 				<% } else if (details.class == 'NURSERY 3') { %>
 					<% roomName = 'DIAMOND'; %>
-					<% teacher = 'Miss Favour'; %>
+					<% teacher = 'Miss Emmanuella'; %>
 				<% } %>
 			<div class="sudent-info">
 				<div><%= details.class %> <%=roomName %>, <%= details.term %> RESULT <%= details.section %> ACADEMIC SESSION</div>
