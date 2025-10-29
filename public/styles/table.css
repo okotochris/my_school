@@ -1,5 +1,5 @@
 .table tr, .table td, .table th{
-    border:solid 2px black;
+    border:solid 2px #2c056c;;;
     padding:5px;
 }
 table{
@@ -9,13 +9,13 @@ table{
 .table select{
     border: none;
     outline: none;
-    background: rgb(11, 11, 61);
+    background: #2c056c;;
     font-size: 16px;
     font-weight: bold;
     color:white;
 }
 
 .table th{
-    background:rgb(11, 11, 61);
+    background:#2c056c;;
     color:white;
 }

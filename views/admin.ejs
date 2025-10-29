@@ -1,36 +1,112 @@
 <!DOCTYPE html>
-<html>
-    <%- include('./partials/head.ejs') %>
-    <body>
-        <div class="menu">
-            <div></div>
-            <div></div>
-            <div></div>
-                
-        </div>
-        <div class="admin-container">
-            <%- include('./partials/navigation.ejs') %>
-           
-            <div class="section">
-                <div class="welcome"><h2>Welcome Back <%= school %></h2></div>
-                <div  class="add_form">
-                        <form action="upload" method="post" onsubmit="return check()">
-                            <select name="Sclass" id="Sclass" required>
-                                    <option value=""> STUDENT CLASS</option>
-                                    <option value="senior">Senior School</option>
-                                    <option value="junior">Junior School</option>
-                                    <option value="primary">Primary School</option>
-                                    <option value="nursery">Nursery School</option>
-                            </select>
-                            <button>Login</button>
-                        
-                        </form>
-                    </div>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/global.css">
+  <link rel="stylesheet" href="/styles/admin.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <title>Admin Dashboard</title>
+</head>
+<body>
+  <%- include('./partials/header.ejs') %>
+  <div class="admin-container">
+    <%- include('./partials/navigation.ejs') %>
+    <main class="section">
+      <div class="container center-container">
+        <div class="dashboard-container">
+          <div class="dashboard-banner">
+            <h1>Welcome Back, <%= school %></h1>
+            <p>Your central hub for managing school operations.</p>
+            <div class="banner-overlay"></div>
+          </div>
+          <div class="dashboard-actions">
+            <button class="button upload-results-btn">Upload Results</button>
+          </div>
+          <div class="dashboard-metrics">
+            <div class="metric-card">
+              <h3>Total Students</h3>
+              <p class="metric-value">1,234</p>
+              <span class="metric-subtext">Across all classes</span>
+              <span class="metric-icon">👨‍🎓</span>
             </div>
-            
+            <div class="metric-card">
+              <h3>Total Staff</h3>
+              <p class="metric-value">56</p>
+              <span class="metric-subtext">Active administrators</span>
+              <span class="metric-icon">👩‍🏫</span>
+            </div>
+            <div class="metric-card">
+              <h3>Blacklisted Students</h3>
+              <p class="metric-value">12</p>
+              <span class="metric-subtext">Restricted access</span>
+              <span class="metric-icon">🚫</span>
+            </div>
+            <div class="metric-card">
+              <h3>Total Classes</h3>
+              <p class="metric-value">28</p>
+              <span class="metric-subtext">Nursery to Senior</span>
+              <span class="metric-icon">🏫</span>
+            </div>
+          </div>
+          <div class="dashboard-charts">
+            <div class="chart-card">
+              <h3>Student Distribution by Class</h3>
+              <canvas id="studentBarChart"></canvas>
+            </div>
+            <div class="chart-card">
+              <h3>Grade Distribution</h3>
+              <canvas id="gradePieChart"></canvas>
+            </div>
+          </div>
+          <div class="dashboard-activity">
+            <h3>Recent Activity</h3>
+            <ul class="activity-list">
+              <li><span class="activity-time">Today, 10:30 AM</span> Added John Doe to blacklist</li>
+              <li><span class="activity-time">Yesterday, 3:15 PM</span> Uploaded grades for Senior School</li>
+              <li><span class="activity-time">Oct 20, 9:00 AM</span> Created new staff account for Jane Smith</li>
+              <li><span class="activity-time">Oct 19, 2:45 PM</span> Generated 50 student IDs</li>
+            </ul>
+          </div>
+          <div class="upload-dialog" style="display: none;">
+            <div class="dialog-content">
+              <span class="cancel-btn" onclick="closeUploadDialog()">×</span>
+              <div class="form-header">
+                <h2>Upload Student Data</h2>
+              </div>
+              <div class="description">
+                <p>Select a class to upload student data.</p>
+              </div>
+              <form id="uploadForm" action="upload" method="POST" onsubmit="return check()">
+                
+                <div class="form-controls">
+                  <div class="form-group">
+                    <label for="Sclass">Student Class</label>
+                    <select name="Sclass" id="Sclass" required aria-label="Select Student Class">
+                      <option value="">Select Class</option>
+                      <option value="senior">Senior School</option>
+                      <option value="junior">Junior School</option>
+                      <option value="primary">Primary School</option>
+                      <option value="nursery">Nursery School</option>
+                    </select>
+                    <span class="error-message"></span>
+                  </div>
+                  <button type="submit" class="button">Upload</button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="alert-dialog" style="display: none;" aria-live="polite">
+            <span class="cancel-btn" onclick="closeAlert()">×</span>
+            <div id="alertMessage"></div>
+          </div>
+          <div class="dialog-backdrop" style="display: none;"></div>
         </div>
-    
-    <script src="Java Script/menu.js"></script>
-    </body>
+      </div>
+    </main>
+  </div>
 
+  <script src="/js/menu.js"></script>
+  <script src="/js/dashboard.js"></script>
+</body>
 </html>

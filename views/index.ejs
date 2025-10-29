@@ -1,54 +1,211 @@
 <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="My School Result - Check academic results online instantly. Empowering students, parents, and schools with secure, reliable result management."
+    />
+    <meta
+      name="keywords"
+      content="school results, academic results, online result checker, student portal, school management"
+    />
+    <meta name="author" content="My School Result" />
+    <title>My School Result - Check Academic Results Online</title>
+    <link rel="stylesheet" href="/styles/index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <%-include('partials/header2')%>
 
-<html>
-    
-    <%- include('./partials/head.ejs') %>
-    <body>
-        <div style="background:url('background.jpg'); background-size: cover;">
-                    <img src="IMAGE/myschoolresult.png" type="image/png" class="logo"/>
-                        <div style="width: 300px; margin:auto">Welcome to My School Result Checker</div>
-                        <div class="add_form">
-                            <div class="check_result">Check Result</div>
-                            <form action="/result" method="post" onsubmit="return check()">
-                                <p><input type="text" placeholder="Enter Your Name" name="userName"/ required></p>
-                                <p><input type="text" Placeholder="Enter Your ID" name="studentId" required/></p>
-                                <p>
-                                    <select id = "Sclass" name="class">
-                                        <option value=""> SELECT CLASS</option>
-                                        <option  value="SS 1">SS1</option>
-                                        <option  value="SS 2" >SS2</option>
-                                        <option value="SS 3">SS3</option>
-                                        <option  value="JSS 1">JSS1</option>
-                                        <option  value="JSS 2">JSS2</option>
-                                        <option  value="JSS 3">JSS3</option>
-                                        <option  value="BASIC 1">BASIC 1</option>
-                                        <option  value="BASIC 2">BASIC 2</option>
-                                        <option  value="BASIC 3">BASIC 3</option>
-                                        <option  value="BASIC 4">BASIC 4</option>
-                                        <option  value="BASIC 5">BASIC 5</option>
-                                        <option  value="BASIC 6">BASIC 6</option>
-                                        <option  value="NURSERY 1">NURSERY 1</option>
-                                        <option  value="NURSERY 2">NURSERY 2</option>
-                                        <option  value="NURSERY 3">NURSERY 3</option>
-                                        <option  value="PRE NURSERY">PRE-NURSERY</option>
-                                    </select>
-                                
-                                    <select id="Sterm" name="term">
-                                        <option value="">SELECT TERM</option>
+    <section class="hero">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1>Check Results Anytime, Anywhere</h1>
+        <p>
+          Empowering students and schools with instant online result access.
+        </p>
+        <a href="#result-checker" class="hero-cta">Check Result Now</a>
+      </div>
+    </section>
+
+    <section id="result-checker" class="result-checker">
+      <div class="container">
+        <h2>Check Your Results</h2>
+
+        <form
+          action="/result"
+          method="post"
+          onsubmit="return check()"
+          class="result-form"
+        >
+          <div class="form-group">
+            <label for="student-id">Student ID</label>
+            <input
+              type="text"
+              id="student-id"
+              placeholder="Enter Student ID"
+              required
+              aria-label="Student ID"
+              name="studentId"
+            />
+          </div>
+       
+          <div class="form-group">
+            <label for="session">Class</label>
+            <select id="Sclass" name="class">
+              <option value="">SELECT CLASS</option>
+              <option value="SS 1">SS1</option>
+              <option value="SS 2">SS2</option>
+              <option value="SS 3">SS3</option>
+              <option value="JSS 1">JSS1</option>
+              <option value="JSS 2">JSS2</option>
+              <option value="JSS 3">JSS3</option>
+              <option value="BASIC 1">BASIC 1</option>
+              <option value="BASIC 2">BASIC 2</option>
+              <option value="BASIC 3">BASIC 3</option>
+              <option value="BASIC 4">BASIC 4</option>
+              <option value="BASIC 5">BASIC 5</option>
+              <option value="BASIC 6">BASIC 6</option>
+              <option value="NURSERY 1">NURSERY 1</option>
+              <option value="NURSERY 2">NURSERY 2</option>
+              <option value="NURSERY 3">NURSERY 3</option>
+              <option value="PRE NURSERY">PRE-NURSERY</option>
+            </select>
+          </div>
+             <div class="form-group">
+            <label for="term">Term</label>
+            <select id="term" required aria-label="Select Term" name="term">
+               <option value="">SELECT TERM</option>
                                         <option value="FIRST TERM">FIRST TERM</option>
                                         <option value="SECOND TERM">SECOND TERM</option>
                                         <option value="THIRD TERM">THIRD TERM</option>
-                                    </select>
-                                </p>
-                            <button class="button">View Result</button>
-                        
-                        </form>
-                
-                    </div>
-                    <p id="respond" style="color:red; width:300px; margin:auto;"></p>
-                    <div style="height:83.5px;"></div>
+            </select>
+          </div>
+          <button type="submit" class="form-button">View Result</button>
+        </form>
+      </div>
+    </section>
+
+   <section id="news" class="news">
+  <div class="container">
+    <h2>Latest School News & Updates</h2>
+
+    <!-- Dynamic news will be inserted here by JS -->
+    <div class="news-grid">
+      <p>Loading latest news...</p>
+    </div>
+
+    <div class="ad-banner" aria-hidden="true">
+      <a href="/news" class="hero-cta">view more</a>
+    </div>
+  </div>
+</section>
+
+    <section class="features">
+      <div class="container">
+        <h2>Why Choose My School Result?</h2>
+        <div class="features-grid">
+          <article class="feature-card">
+            <i class="fas fa-check-circle feature-icon"></i>
+            <h3>Instant Result Access</h3>
+            <p>
+              Check your academic results in seconds with our user-friendly
+              platform.
+            </p>
+          </article>
+          <article class="feature-card">
+            <i class="fas fa-shield-alt feature-icon"></i>
+            <h3>Secure and Reliable</h3>
+            <p>Your data is protected with top-tier security and encryption.</p>
+          </article>
+          <article class="feature-card">
+            <i class="fas fa-school feature-icon"></i>
+            <h3>Multi-School Support</h3>
+            <p>Seamlessly manage results for multiple schools in one place.</p>
+          </article>
+          <article class="feature-card">
+            <i class="fas fa-user-friends feature-icon"></i>
+            <h3>Parent-Student Dashboard</h3>
+            <p>Access personalized dashboards for students and parents.</p>
+          </article>
         </div>
-        <%- include('./partials/footer.ejs') %>
-        <script src="Java Script/main.js"></script>
-    </body>
+      </div>
+    </section>
+    <section class="testimonials">
+      <div class="container">
+        <h2>What Our Users Say</h2>
+        <div class="testimonials-grid">
+          <article class="testimonial-card">
+            <img
+              src="https://ui-avatars.com/api/?name=Student+Name&background=0D8ABC&color=fff" alt="Avatar"
+              alt="Student"
+              class="testimonial-image"
+            />
+            <p>"Checking my results was so easy and fast! Highly recommend."</p>
+            <h4>Adeola, Student</h4>
+          </article>
+          <article class="testimonial-card">
+            <img
+            src="https://ui-avatars.com/api/?name=Parent+Name&background=0D8ABC&color=fff" alt="Avatar"
+              alt="Parent"
+              class="testimonial-image"
+            />
+            <p>
+              "I love the parent dashboard. It keeps me updated on my child's
+              progress."
+            </p>
+            <h4>Mrs. Okonkwo, Parent</h4>
+          </article>
+          <article class="testimonial-card">
+            <img
+             src="https://ui-avatars.com/api/?name=Admin+Name&background=0D8ABC&color=fff" alt="Avatar"
+              alt="School Admin"
+              class="testimonial-image"
+            />
+            <p>"This platform streamlined our result management process."</p>
+            <h4>Principal Adebayo, School Admin</h4>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <%-include('partials/footer') %>
+    <script src="js/fetchNews.js"></script>
+    <script>
+      const hamburger = document.querySelector(".hamburger");
+      const mobileMenu = document.querySelector(".mobile-menu");
+      const closeMenu = document.querySelector(".close-menu");
+
+      // Toggle mobile menu
+      hamburger.addEventListener("click", () => {
+        mobileMenu.style.display = "block";
+        setTimeout(() => mobileMenu.classList.add("active"), 10);
+      });
+
+      closeMenu.addEventListener("click", () => {
+        mobileMenu.classList.remove("active");
+        setTimeout(() => (mobileMenu.style.display = "none"), 300);
+      });
+
+      // Hide mobile menu on resize to desktop
+      window.addEventListener("resize", () => {
+        if (window.innerWidth > 768) {
+          mobileMenu.classList.remove("active");
+          mobileMenu.style.display = "none";
+        }
+      });
+
+      // Ensure mobile menu is hidden on page load for desktop
+      document.addEventListener("DOMContentLoaded", () => {
+        if (window.innerWidth > 768) {
+          mobileMenu.style.display = "none";
+        }
+      });
+    </script>
+  </body>
 </html>

@@ -1,76 +1,80 @@
 <!DOCTYPE html>
-<html>
-    <%- include('./partials/adminhead.ejs') %>
-    
-    <body>
-        <div class="menu">
-            <div></div>
-            <div></div>
-            <div></div>
-                
-        </div>
-        <div class="admin-container">
-            <%- include('./partials/navigation.ejs') %>
-           
-            <div class="section">
-                <div class="welcome">OVER ALL STUDENT PERFORMANCE</div>
-                <div class="table">
-                   <table id="table">
-                    <tr>
-                        <th>SN</th>
-                        <th style="min-width:260px;">NAME</th>
-                        <th>
-                            <select id="class">
-                                <option value=""> CLASS </option>
-                                <option value="SS 3"> SS 3 </option>
-                                <option value="SS 2"> SS 2 </option>
-                                <option value="SS 1"> SS 1 </option>
-                                <option value="SS">SS</option>
-                                <option value="JSS 3"> JSS 3 </option>
-                                <option value="JSS 2"> JSS 2 </option>
-                                <option value="JSS 1"> JSS 1 </option>
-                                <option>JSS</option>
-                                <option value="BASIC 6"> BASIC 6 </option>
-                                <option value="BASIC 5" > BASIC 5 </option>
-                                <option value="BASIC 4"> BASIC 4 </option>
-                                <option value="BASIC 3"> BASIC 3 </option>
-                                <option value="BASIC 2"> BASIC 2 </option>
-                                <option value="BASIC 1"> BASIC 1 </option>
-                                <option value="BASIC" selected>BASIC</option>
-                                <option value="NURSERY 3"> NURSERY 3 </option>
-                                <option value="NURSERY 2"> NURSERY 2 </option>
-                                <option value="NURSERY 1"> NURSERY 1 </option>
-                                <option value="PRE NURSERY"> PRE NURSERY </option>
-                                <option value="NURSERY">NURSERY </option>
-                            </select>
-                        </th>
-                        <th>
-                            <h>
-                               <select id="year">
-                                <option value="2024 - 2025" selected>2024 - 2025</option>
-                                <option value="2023 - 2024">2023 - 2024</option>
-                               </select>
-                            </h>
-                        </th>
-                        <th style="min-width:60px;">1ST TERM AVR</th>
-                        <th style="min-width:60px;">2ND TERM AVR</th>
-                        <th style="min-width:60px;">3RD TERM AVR</th>
-                        <th style="min-width:60px;">AVR. TOTAL</th>
-                    </tr>
-                   </table>     
-                </div>
-                <div class="loading"></div>
+<html lang="en">
+<head>
+  <%- include('./partials/adminhead.ejs') %>
+  <link rel="stylesheet" href="/styles/global.css" />
+  <title>Student Performance</title>
+</head>
+<body>
+  <%- include('./partials/header.ejs') %>
+  <div class="admin-container">
+    <%- include('./partials/navigation.ejs') %>
+    <main class="section">
+      <div class="container center-container">
+        <div class="table-container">
+          <div class="form-header">
+            <h2>Overall Student Performance</h2>
+          </div>
+          <div class="table-controls">
+            <div class="form-group">
+              <label for="class">Class</label>
+              <select id="class" aria-label="Select Class">
+                <option value="">Select Class</option>
+                <option value="SS 3">SS 3</option>
+                <option value="SS 2">SS 2</option>
+                <option value="SS 1">SS 1</option>
+                <option value="SS">SS</option>
+                <option value="JSS 3">JSS 3</option>
+                <option value="JSS 2">JSS 2</option>
+                <option value="JSS 1">JSS 1</option>
+                <option value="JSS">JSS</option>
+                <option value="BASIC 6">BASIC 6</option>
+                <option value="BASIC 5">BASIC 5</option>
+                <option value="BASIC 4">BASIC 4</option>
+                <option value="BASIC 3">BASIC 3</option>
+                <option value="BASIC 2">BASIC 2</option>
+                <option value="BASIC 1">BASIC 1</option>
+                <option value="BASIC" selected>BASIC</option>
+                <option value="NURSERY 3">NURSERY 3</option>
+                <option value="NURSERY 2">NURSERY 2</option>
+                <option value="NURSERY 1">NURSERY 1</option>
+                <option value="PRE NURSERY">PRE NURSERY</option>
+                <option value="NURSERY">NURSERY</option>
+              </select>
             </div>
-            
+            <div class="form-group">
+              <label for="year">Academic Year</label>
+              <select id="year" aria-label="Select Academic Year">
+                <option value="2024 - 2025" selected>2024 - 2025</option>
+                <option value="2023 - 2024">2023 - 2024</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-wrapper">
+            <table id="table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Class</th>
+                  <th>Year</th>
+                  <th>1st Term</th>
+                  <th>2nd Term</th>
+                  <th>3rd Term</th>
+                  <th>Total Avg</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+            <div class="table-empty" style="display: none;">No data available</div>
+          </div>
+          <div class="loading">Loading...</div>
         </div>
-        
-          
-    
-    </body>
-   <script src="Java Script/menu.js"></script>
-   <script src="Java Script/studentGrade.js"></script>
+      </div>
+    </main>
+  </div>
 
-
-
-
+  <script src="/js/menu.js"></script>
+  <script src="/js/studentGrade.js"></script>
+</body>
 </html>

@@ -1,134 +1,393 @@
 <!DOCTYPE html>
+<html lang="en">
 
-<html>
-    <head>
-        <title>Admin page</title>
-        <link rel="stylesheet" type="text/css" href="style/style.css">
-        <link rel="stylesheet" type="text/css" href="style/input.css">
-    </head>
-    <body>
-        <header>
-            <nav>
-                <a href="./admin">Back to Admin</a></li>
-            </nav>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Update Senior Result</title>
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+</head>
 
-        </header>
-          <div class="platform"><h2>SENIOR SECONDARY SCHOOL FORM</h2></div>
-            <div class="upload_result"> 
-                <form  onsubmit="return updateForm(event)" id="formUpdate">
-                <fieldset class="studentInfo">
-                    <legend>STUDENT INFO:</legend>
-                    <p>
-                        <input type="text" placeholder="First Name Middle Name Last Name" name="userName" id="userName" required="required" /><input type="text" Placeholder="Student ID" name="studentId" id="studentId" required="required"/>
-                        <button style="width:100px; font-size:14px;" id="getDetails" >Get ID</button>
-                    </p>
-                    
-                        <p id="respond" style="color:red"></p>
-                        <label>CLASS</label>:
-                         <select name="class" id="Sclass">
-                            <option value="">Class</option>
-                            <option value="SS 1">SS 1</option>
-                            <option value="SS 2">SS 2</option>
-                            <option value="SS 3">SS 3</option>
-                        </select>
-                        <label>SCHOOL TERM</label>:
-                        <select id="Sterm" name="term">
-                            <option value="">TERM</option>
-                            <option value="FIRST TERM">FIRST TERM</option>
-                            <option value="SECOND TERM">SECNOND TERM</option>
-                            <option value="THIRD TERM">THRID TERM</option>
-                        </select>
-                    </p>
-                    
-                </fieldset>
-                <fieldset>
-                    <legend>RESULT INFO:</legend>
-                    <p><input type="text" value="English Language" name="eng" id="eng"/><input type="text" placeholder="1st Text" name="eng1st" id="eng1st"/><input type="text" placeholder="2st Text" name="eng2nd" id="eng2nd"/><input type="text" placeholder="CCA" name="engcca" id="engcca"/><input type="text" placeholder="Exam" name="engexam" id="engexam"/><input type="text" placeholder="TOTAL SCORE" name="engscore" id="engscore"/><input type="text" placeholder="GRADE" name="engG" id="engG"/><input type="text" placeholder="REMARK" name="engRemark" id="engRemark"/></p>
-                    <p><input type="text" value="Mathematics" name="mth" id="mth"/><input type="text" placeholder="1st Text" name="mth1st" id="mth1st"/><input type="text" placeholder="2st Text" name="mth2nd" id="mth2nd"/><input type="text" placeholder="CCA" name="mthcca" id="mthcca"/><input type="text" placeholder="Exam" name="mthexam" id="mthexam"/><input type="text" placeholder="TOTAL SCORE" name="mthscore" id="mthscore"/><input type="text" placeholder="GRADE" name="mthG" id="mthG"/><input type="text" placeholder="REMARK" name="mthRemark" id="mthRemark"/></p>
-                    <p><input type="text" value="Biology" name="bio" id="bio"/><input type="text" placeholder="1st Text" name="bio1st" id="bio1st"/><input type="text" placeholder="2st Text" name="bio2nd"  id="bio2nd"/><input type="text" placeholder="CCA" name="biocca" id="biocca"/><input type="text" placeholder="Exam" name="bioexam" id="bioexam"/><input type="text" placeholder="TOTAL SCORE" name="bioscore" id="bioscore"/><input type="text" placeholder="GRADE" name="bioG" id="bioG"/><input type="text" placeholder="REMARK" name="bioRemark" id="bioRemark"/></p>
-                    <p><input type="text" value="Goverment" name="gov" id="gov"/><input type="text" placeholder="1st Text" name="gov1st" id="gov1st"/><input type="text" placeholder="2st Text" name="gov2nd" id="gov2nd"/><input type="text" placeholder="CCA" name="govcca" id="govcca"/><input type="text" placeholder="Exam" name="govexam" id="govexam"/><input type="text" placeholder="TOTAL SCORE" name="govscore" id="govscore"/><input type="text" placeholder="GRADE" name="govG"  id="govG"/><input type="text" placeholder="REMARK" name="govRemark" id="govRemark"/></p>
-                    <p><input type="text" value="Economics" name="eco" id="eco"/><input type="text" placeholder="1st Text" name="eco1st" id="eco1st"/><input type="text" placeholder="2st Text" name="eco2nd" id="eco2nd"/><input type="text" placeholder="CCA" name="ecocca" id="ecocca"/><input type="text" placeholder="Exam" name="ecoexam" id="ecoexam"/><input type="text" placeholder="TOTAL SCORE" name="ecoscore" id="ecoscore"/><input type="text" placeholder="GRADE" name="ecoG" id="ecoG"/><input type="text" placeholder="REMARK" name="ecoRemark" id="ecoRemark"/></p>
-                    <p><input type="text" value="Literature" name="lit" id="lit"/><input type="text" placeholder="1st Text" name="lit1st" id="lit1st"/><input type="text" placeholder="2st Text" name="lit2nd" id="lit2nd"/><input type="text" placeholder="CCA" name="litcca" id="litcca"/><input type="text" placeholder="Exam" name="litexam" id="litexam"/><input type="text" placeholder="TOTAL SCORE" name="litscore" id="litscore"/><input type="text" placeholder="GRADE" name="litG"  id="litG"/><input type="text" placeholder="REMARK" name="litRemark" id="litRemark"/></p>
-                    <p><input type="text" value="Civic Education" name="civ" id="civ"/><input type="text" placeholder="1st Text" name="civ1st" id="civ1st"/><input type="text" placeholder="2st Text" name="civ2nd" id="civ2nd"/><input type="text" placeholder="CCA" name="civcca" id="civcca"/><input type="text" placeholder="Exam" name="civexam" id="civexam"/><input type="text" placeholder="TOTAL SCORE" name="civscore" id="civscore"/><input type="text" placeholder="GRADE" name="civG" id="civG"/><input type="text" placeholder="REMARK" name="civRemark" id="civRemark"/></p>
-                    <p><input type="text" value="Chemistry" name="che" id="che"/><input type="text" placeholder="1st Text" name="che1st" id="che1st"/><input type="text" placeholder="2st Text" name="che2nd" id="che2nd"/><input type="text" placeholder="CCA" name="checca" id="checca"/><input type="text" placeholder="Exam" name="cheexam" id="cheexam"/><input type="text" placeholder="TOTAL SCORE" name="chescore" id="chescore"/><input type="text" placeholder="GRADE" name="cheG" id="cheG"/><input type="text" placeholder="REMARK" name="cheRemark" id="cheRemark"/></p>
-                    <p><input type="text" value="Agriculture" name="agr" id="agr"/><input type="text" placeholder="1st Text" name="agr1st" id="agr1st"/><input type="text" placeholder="2st Text" name="agr2nd" id="agr2nd"/><input type="text" placeholder="CCA" name="agrcca" id="agrcca"/><input type="text" placeholder="Exam" name="agrexam" id="agrexam"/><input type="text" placeholder="TOTAL SCORE" name="agrscore" id="agrscore"/><input type="text" placeholder="GRADE" name="agrG" id="agrG"/><input type="text" placeholder="REMARK" name="agrRemark" id="agrRemark"/></p>
-                    <p><input type="text" value="Geography" name="geo" id="geo"/><input type="text" placeholder="1st Text" name="geo1st" id="geo1st"/><input type="text" placeholder="2st Text" name="geo2nd" id="geo2nd"/><input type="text" placeholder="CCA" name="geocca" id="geocca"/><input type="text" placeholder="Exam" name="geoexam" id="geoexam"/><input type="text" placeholder="TOTAL SCORE" name="geoscore" id="geoscore"/><input type="text" placeholder="GRADE" name="geoG" id="geoG"/><input type="text" placeholder="REMARK" name="geoRemark" id="geoRemark"/></p>
-                    <p><input type="text" value="Physics" name="phy" id="phy"/><input type="text" placeholder="1st Text" name="phy1st" id="phy1st"/><input type="text" placeholder="2st Text" name="phy2nd" id="phy2nd"/><input type="text" placeholder="CCA" name="phycca" id="phycca"/><input type="text" placeholder="Exam" name="phyexam" id="phyexam"/><input type="text" placeholder="TOTAL SCORE" name="physcore" id="physcore"/><input type="text" placeholder="GRADE" name="phyG" id="phyG"/><input type="text" placeholder="REMARK" name="phyRemark" id="phyRemark"/></p>
-                    <p><input type="text" value="Commerce" name="com" id="com"/><input type="text" placeholder="1st Text" name="com1st" id="com1st"/><input type="text" placeholder="2st Text" name="com2nd" id="com2nd"/><input type="text" placeholder="CCA" name="comcca" id="comcca"/><input type="text" placeholder="Exam" name="comexam" id="comexam"/><input type="text" placeholder="TOTAL SCORE" name="comscore" id="comscore"/><input type="text" placeholder="GRADE" name="comG" id="comG"/><input type="text" placeholder="REMARK" name="comRemark" id="comRemark"/></p>
-                    <p><input type="text" value="C.R.S" name="crs" id="crs"/><input type="text" placeholder="1st Text" name="crs1st" id="crs1st"/><input type="text" placeholder="2st Text" name="crs2nd" id="crs2nd"/><input type="text" placeholder="CCA" name="crscca" id="crscca"/><input type="text" placeholder="Exam" name="crsexam" id="crsexam"/><input type="text" placeholder="TOTAL SCORE" name="crsscore" id="crsscore"/><input type="text" placeholder="GRADE" name="crsG" id="crsG"/><input type="text" placeholder="REMARK" name="crsRemark" id="crsRemark"/></p>                    
-                    <p><input type="text" value="Marketing" name="mkt" id="mkt"/><input type="text" placeholder="1st Text" name="mkt1st" id="mkt1st"/><input type="text" placeholder="2st Text" name="mkt2nd" id="mkt2nd"/><input type="text" placeholder="CCA" name="mktcca" id="mktcca"/><input type="text" placeholder="Exam" name="mktexam" id="mktexam"/><input type="text" placeholder="TOTAL SCORE" name="mktscore" id="mktscore"/><input type="text" placeholder="GRADE" name="mktG" id="mktG"/><input type="text" placeholder="REMARK" name="mktRemark" id="mktRemark"/></p>
-                    <p><input type="text" value="" name="acc" id="acc"/><input type="text" placeholder="1st Text" name="acc1st" id="acc1st"/><input type="text" placeholder="2st Text" name="acc2nd" id="acc2nd"/><input type="text" placeholder="CCA" name="acccca" id="acccca"/><input type="text" placeholder="Exam" name="accexam" id="accexam"/><input type="text" placeholder="TOTAL SCORE" name="accscore" id="accscore"/><input type="text" placeholder="GRADE" name="accG" id="accG"/><input type="text" placeholder="REMARK" name="accRemark" id="accRemark"/></p>
-                    
-                    <div style="display:none;">
-                        <p><input type="text" value="Further Mathematics" name="fmt" id="fmt"/><input type="text" placeholder="1st Text" name="fmt1st" id="fmt1st"/><input type="text" placeholder="2st Text" name="fmt2nd" id="fmt2nd"/><input type="text" placeholder="CCA" name="fmtcca" id="fmtcca"/><input type="text" placeholder="Exam" name="fmtexam" id="fmtexam"/><input type="text" placeholder="TOTAL SCORE" name="fmtscore" id="fmtscore"/><input type="text" placeholder="GRADE" name="fmtG" id="fmtG"/><input type="text" placeholder="REMARK" name="fmtRemark" id="fmtRemark"/></p>
-                        <p><input type="text" value="Computer Studies" name="cst" id="cst"/><input type="text" placeholder="1st Text" name="cst1st" id="cst1st"/><input type="text" placeholder="2st Text" name="cst2nd" id="cst2nd"/><input type="text" placeholder="CCA" name="cstcca" id="cstcca"/><input type="text" placeholder="Exam" name="cstexam" id="cstexam"/><input type="text" placeholder="TOTAL SCORE" name="cstscore" id="cstscore"/><input type="text" placeholder="GRADE" name="cstG" id="cstG"/><input type="text" placeholder="REMARK" name="cstRemark" id="cstRemark"/></p>
+<body>
+    <header>
+        <nav>
+            <a href="./admin">Back to Admin</a>
+        </nav>
+    </header>
+    <div class="platform">
+        <h2>UPDATE SENIOR RESULT</h2>
+    </div>
+    <div class="upload_result">
+        <form onsubmit="return updateForm(event)" id="formUpdate">
+            <fieldset class="studentInfo">
+                <legend>STUDENT INFO:</legend>
+                <div class="student-info-grid">
+                    <input type="text" placeholder="name is read automatically" name="userName" id="userName"
+                        required readonly />
+                    <input type="text" placeholder="Student ID" name="studentId" id="studentId" required  />
+                </div>
+                <div id="respond" style="color:red; text-align: center; margin: 0.5rem 0;"></div>
+                <div class="term-class-grid">
+                    <label>CLASS</label>
+                    <select name="class" id="Sclass" required>
+                        <option value="" disabled selected>Select Class</option>
+                        <option value="SS 1">SS 1</option>
+                        <option value="SS 2">SS 2</option>
+                        <option value="SS 3">SS 3</option>
+                    </select>
+                    <label>SCHOOL TERM</label>
+                    <select id="Sterm" name="term" required>
+                        <option value="" disabled selected>Select Term</option>
+                        <option value="FIRST TERM">FIRST TERM</option>
+                        <option value="SECOND TERM">SECOND TERM</option>
+                        <option value="THIRD TERM">THIRD TERM</option>
+                    </select>
+                </div>
+                 <button type="button" style="width:150px; font-size:14px;" id="getDetails">Get Result</button>
+            </fieldset>
+            
+            <fieldset>
+                <legend>RESULT INFO:</legend>
+                <!-- English Language -->
+                <div class="subject-row">
+                    <input type="text" value="English Language" id="eng" readonly />
+                    <input type="number" placeholder="1st Test" name="eng1st" id="eng1st"
+                        oninput="calculateSubject('eng')" />
+                    <input type="number" placeholder="2nd Test" name="eng2nd" id="eng2nd"
+                        oninput="calculateSubject('eng')" />
+                    <input type="number" placeholder="CCA" name="engcca" id="engcca"
+                        oninput="calculateSubject('eng')" />
+                    <input type="number" placeholder="Exam" name="engexam" id="engexam"
+                        oninput="calculateSubject('eng')" />
+                    <input type="text" placeholder="TOTAL SCORE" name="engscore" id="engscore" readonly />
+                    <input type="text" placeholder="GRADE" name="engG" id="engG" readonly />
+                    <input type="text" placeholder="REMARK" name="engRemark" id="engRemark" readonly />
+                </div>
+                <!-- Mathematics -->
+                <div class="subject-row">
+                    <input type="text" value="Mathematics" id="mth" readonly />
+                    <input type="number" placeholder="1st Test" name="mth1st" id="mth1st"
+                        oninput="calculateSubject('mth')" />
+                    <input type="number" placeholder="2nd Test" name="mth2nd" id="mth2nd"
+                        oninput="calculateSubject('mth')" />
+                    <input type="number" placeholder="CCA" name="mthcca" id="mthcca"
+                        oninput="calculateSubject('mth')" />
+                    <input type="number" placeholder="Exam" name="mthexam" id="mthexam"
+                        oninput="calculateSubject('mth')" />
+                    <input type="text" placeholder="TOTAL SCORE" name="mthscore" id="mthscore" readonly />
+                    <input type="text" placeholder="GRADE" name="mthG" id="mthG" readonly />
+                    <input type="text" placeholder="REMARK" name="mthRemark" id="mthRemark" readonly />
+                </div>
+                <!-- Biology -->
+                <div class="subject-row">
+                    <input type="text" value="Biology" id='bio' readonly />
+                    <input type="number" placeholder="1st Test" name="bio1st" id="bio1st"
+                        oninput="calculateSubject('bio')" />
+                    <input type="number" placeholder="2nd Test" name="bio2nd" id="bio2nd"
+                        oninput="calculateSubject('bio')" />
+                    <input type="number" placeholder="CCA" name="biocca" id="biocca"
+                        oninput="calculateSubject('bio')" />
+                    <input type="number" placeholder="Exam" name="bioexam" id="bioexam"
+                        oninput="calculateSubject('bio')" />
+                    <input type="text" placeholder="TOTAL SCORE" name="bioscore" id="bioscore" readonly />
+                    <input type="text" placeholder="GRADE" name="bioG" id="bioG" readonly />
+                    <input type="text" placeholder="REMARK" name="bioRemark" id="bioRemark" readonly />
+                </div>
+                <!-- Government -->
+                <div class="subject-row">
+                    <input type="text" value="Government" id="gov" readonly />
+                    <input type="number" placeholder="1st Test" name="gov1st" id="gov1st"
+                        oninput="calculateSubject('gov')" />
+                    <input type="number" placeholder="2nd Test" name="gov2nd" id="gov2nd"
+                        oninput="calculateSubject('gov')" />
+                    <input type="number" placeholder="CCA" name="govcca" id="govcca"
+                        oninput="calculateSubject('gov')" />
+                    <input type="number" placeholder="Exam" name="govexam" id="govexam"
+                        oninput="calculateSubject('gov')" />
+                    <input type="text" placeholder="TOTAL SCORE" name="govscore" id="govscore" readonly />
+                    <input type="text" placeholder="GRADE" name="govG" id="govG" readonly />
+                    <input type="text" placeholder="REMARK" name="govRemark" id="govRemark" readonly />
+                </div>
+                <!-- Economics -->
+                <div class="subject-row">
+                    <input type="text" value="Economics" id="eco" readonly />
+                    <input type="number" placeholder="1st Test" name="eco1st" id="eco1st"
+                        oninput="calculateSubject('eco')" />
+                    <input type="number" placeholder="2nd Test" name="eco2nd" id="eco2nd"
+                        oninput="calculateSubject('eco')" />
+                    <input type="number" placeholder="CCA" name="ecocca" id="ecocca"
+                        oninput="calculateSubject('eco')" />
+                    <input type="number" placeholder="Exam" name="ecoexam" id="ecoexam"
+                        oninput="calculateSubject('eco')" />
+                    <input type="text" placeholder="TOTAL SCORE" name="ecoscore" id="ecoscore" readonly />
+                    <input type="text" placeholder="GRADE" name="ecoG" id="ecoG" readonly />
+                    <input type="text" placeholder="REMARK" name="ecoRemark" id="ecoRemark" readonly />
+                </div>
+                <!-- Literature -->
+                <div class="subject-row">
+                    <input type="text" value="Literature" id="lit" readonly />
+                    <input type="number" placeholder="1st Test" name="lit1st" id="lit1st"
+                        oninput="calculateSubject('lit')" />
+                    <input type="number" placeholder="2nd Test" name="lit2nd" id="lit2nd"
+                        oninput="calculateSubject('lit')" />
+                    <input type="number" placeholder="CCA" name="litcca" id="litcca"
+                        oninput="calculateSubject('lit')" />
+                    <input type="number" placeholder="Exam" name="litexam" id="litexam"
+                        oninput="calculateSubject('lit')" />
+                    <input type="text" placeholder="TOTAL SCORE" name="litscore" id="litscore" readonly />
+                    <input type="text" placeholder="GRADE" name="litG" id="litG" readonly />
+                    <input type="text" placeholder="REMARK" name="litRemark" id="litRemark" readonly />
+                </div>
+                <!-- Civic Education -->
+                <div class="subject-row">
+                    <input type="text" value="Civic Education" id="civ" readonly />
+                    <input type="number" placeholder="1st Test" name="civ1st" id="civ1st"
+                        oninput="calculateSubject('civ')" />
+                    <input type="number" placeholder="2nd Test" name="civ2nd" id="civ2nd"
+                        oninput="calculateSubject('civ')" />
+                    <input type="number" placeholder="CCA" name="civcca" id="civcca"
+                        oninput="calculateSubject('civ')" />
+                    <input type="number" placeholder="Exam" name="civexam" id="civexam"
+                        oninput="calculateSubject('civ')" />
+                    <input type="text" placeholder="TOTAL SCORE" name="civscore" id="civscore" readonly />
+                    <input type="text" placeholder="GRADE" name="civG" id="civG" readonly />
+                    <input type="text" placeholder="REMARK" name="civRemark" id="civRemark" readonly />
+                </div>
+
+                <!-- Chemistry -->
+                <div class="subject-row">
+                    <input type="text" value="Chemistry" id="che" readonly />
+                    <input type="number" placeholder="1st Test" name="che1st" id="che1st"
+                        oninput="calculateSubject('che')" />
+                    <input type="number" placeholder="2nd Test" name="che2nd" id="che2nd"
+                        oninput="calculateSubject('che')" />
+                    <input type="number" placeholder="CCA" name="checca" id="checca"
+                        oninput="calculateSubject('che')" />
+                    <input type="number" placeholder="Exam" name="cheexam" id="cheexam"
+                        oninput="calculateSubject('che')" />
+                    <input type="text" placeholder="TOTAL SCORE" name="chescore" id="chescore" readonly />
+                    <input type="text" placeholder="GRADE" name="cheG" id="cheG" readonly />
+                    <input type="text" placeholder="REMARK" name="cheRemark" id="cheRemark" readonly />
+                </div>
+                <!-- Agriculture -->
+                <div class="subject-row">
+                    <input type="text" value="Agriculture" id="agr" readonly />
+                    <input type="number" placeholder="1st Test" name="agr1st" id="agr1st"
+                        oninput="calculateSubject('agr')" />
+                    <input type="number" placeholder="2nd Test" name="agr2nd" id="agr2nd"
+                        oninput="calculateSubject('agr')" />
+                    <input type="number" placeholder="CCA" name="agrcca" id="agrcca"
+                        oninput="calculateSubject('agr')" />
+                    <input type="number" placeholder="Exam" name="agrexam" id="agrexam"
+                        oninput="calculateSubject('agr')" />
+                    <input type="text" placeholder="TOTAL SCORE" name="agrscore" id="agrscore" readonly />
+                    <input type="text" placeholder="GRADE" name="agrG" id="agrG" readonly />
+                    <input type="text" placeholder="REMARK" name="agrRemark" id="agrRemark" readonly />
+                </div>
+                <!-- Geography -->
+                <div class="subject-row">
+                    <input type="text" value="Geography" id="geo" readonly />
+                    <input type="number" placeholder="1st Test" name="geo1st" id="geo1st"
+                        oninput="calculateSubject('geo')" />
+                    <input type="number" placeholder="2nd Test" name="geo2nd" id="geo2nd"
+                        oninput="calculateSubject('geo')" />
+                    <input type="number" placeholder="CCA" name="geocca" id="geocca"
+                        oninput="calculateSubject('geo')" />
+                    <input type="number" placeholder="Exam" name="geoexam" id="geoexam"
+                        oninput="calculateSubject('geo')" />
+                    <input type="text" placeholder="TOTAL SCORE" name="geoscore" id="geoscore" readonly />
+                    <input type="text" placeholder="GRADE" name="geoG" id="geoG" readonly />
+                    <input type="text" placeholder="REMARK" name="geoRemark" id="geoRemark" readonly />
+                </div>
+
+                <!-- Physics -->
+                <div class="subject-row">
+                    <input type="text" value="Physics" id="phy" readonly />
+                    <input type="number" placeholder="1st Test" name="phy1st" id="phy1st"
+                        oninput="calculateSubject('phy')" />
+                    <input type="number" placeholder="2nd Test" name="phy2nd" id="phy2nd"
+                        oninput="calculateSubject('phy')" />
+                    <input type="number" placeholder="CCA" name="phycca" id="phycca"
+                        oninput="calculateSubject('phy')" />
+                    <input type="number" placeholder="Exam" name="phyexam" id="phyexam"
+                        oninput="calculateSubject('phy')" />
+                    <input type="text" placeholder="TOTAL SCORE" name="physcore" id="physcore" readonly />
+                    <input type="text" placeholder="GRADE" name="phyG" id="phyG" readonly />
+                    <input type="text" placeholder="REMARK" name="phyRemark" id="phyRemark" readonly />
+                </div>
+                <!-- Commerce -->
+                <div class="subject-row">
+                    <input type="text" value="Commerce" id="com" readonly />
+                    <input type="number" placeholder="1st Test" name="com1st" id="com1st"
+                        oninput="calculateSubject('com')" />
+                    <input type="number" placeholder="2nd Test" name="com2nd" id="com2nd"
+                        oninput="calculateSubject('com')" />
+                    <input type="number" placeholder="CCA" name="comcca" id="comcca"
+                        oninput="calculateSubject('com')" />
+                    <input type="number" placeholder="Exam" name="comexam" id="comexam"
+                        oninput="calculateSubject('com')" />
+                    <input type="text" placeholder="TOTAL SCORE" name="comscore" id="comscore" readonly />
+                    <input type="text" placeholder="GRADE" name="comG" id="comG" readonly />
+                    <input type="text" placeholder="REMARK" name="comRemark" id="comRemark" readonly />
+                </div>
+                <!-- C.R.S -->
+                <div class="subject-row">
+                    <input type="text" value="C.R.S" id="crs" readonly />
+                    <input type="number" placeholder="1st Test" name="crs1st" id="crs1st"
+                        oninput="calculateSubject('crs')" />
+                    <input type="number" placeholder="2nd Test" name="crs2nd" id="crs2nd"
+                        oninput="calculateSubject('crs')" />
+                    <input type="number" placeholder="CCA" name="crscca" id="crscca"
+                        oninput="calculateSubject('crs')" />
+                    <input type="number" placeholder="Exam" name="crsexam" id="crsexam"
+                        oninput="calculateSubject('crs')" />
+                    <input type="text" placeholder="TOTAL SCORE" name="crsscore" id="crsscore" readonly />
+                    <input type="text" placeholder="GRADE" name="crsG" id="crsG" readonly />
+                    <input type="text" placeholder="REMARK" name="crsRemark" id="crsRemark" readonly />
+                </div>
+                <!-- Marketing -->
+                <div class="subject-row">
+                    <input type="text" value="Marketing" id="mkt" readonly />
+                    <input type="number" placeholder="1st Test" name="mkt1st" id="mkt1st"
+                        oninput="calculateSubject('mkt')" />
+                    <input type="number" placeholder="2nd Test" name="mkt2nd" id="mkt2nd"
+                        oninput="calculateSubject('mkt')" />
+                    <input type="number" placeholder="CCA" name="mktcca" id="mktcca"
+                        oninput="calculateSubject('mkt')" />
+                    <input type="number" placeholder="Exam" name="mktexam" id="mktexam"
+                        oninput="calculateSubject('mkt')" />
+                    <input type="text" placeholder="TOTAL SCORE" name="mktscore" id="mktscore" readonly />
+                    <input type="text" placeholder="GRADE" name="mktG" id="mktG" readonly />
+                    <input type="text" placeholder="REMARK" name="mktRemark" id="mktRemark" readonly />
+                </div>
+                <!-- Accounting -->
+                <div class="subject-row">
+                    <input type="text" value="Accounting" id="acc" readonly />
+                    <input type="number" placeholder="1st Test" name="acc1st" id="acc1st"
+                        oninput="calculateSubject('acc')" />
+                    <input type="number" placeholder="2nd Test" name="acc2nd" id="acc2nd"
+                        oninput="calculateSubject('acc')" />
+                    <input type="number" placeholder="CCA" name="acccca" id="acccca"
+                        oninput="calculateSubject('acc')" />
+                    <input type="number" placeholder="Exam" name="accexam" id="accexam"
+                        oninput="calculateSubject('acc')" />
+                    <input type="text" placeholder="TOTAL SCORE" name="accscore" id="accscore" readonly />
+                    <input type="text" placeholder="GRADE" name="accG" id="accG" readonly />
+                    <input type="text" placeholder="REMARK" name="accRemark" id="accRemark" readonly />
+                </div>
+
+                <div class="extra" style="display: none;">
+                    <!-- Further Mathematics -->
+                    <div class="subject-row">
+                        <input type="text" value="Further Mathematics" id="fmt" readonly />
+                        <input type="number" placeholder="1st Test" name="fmt1st" id="fmt1st"
+                            oninput="calculateSubject('fmt')" />
+                        <input type="number" placeholder="2nd Test" name="fmt2nd" id="fmt2nd"
+                            oninput="calculateSubject('fmt')" />
+                        <input type="number" placeholder="CCA" name="fmtcca" id="fmtcca"
+                            oninput="calculateSubject('fmt')" />
+                        <input type="number" placeholder="Exam" name="fmtexam" id="fmtexam"
+                            oninput="calculateSubject('fmt')" />
+                        <input type="text" placeholder="TOTAL SCORE" name="fmtscore" id="fmtscore" readonly />
+                        <input type="text" placeholder="GRADE" name="fmtG" id="fmtG" readonly />
+                        <input type="text" placeholder="REMARK" name="fmtRemark" id="fmtRemark" readonly />
                     </div>
-                  
-                </fieldset>
-               
-                <fieldset>
-                    <legend>STUDENT PERFOMANCE</legend>
-                    <p>
-                        <label>No. subj offfer:</label><input type="text" placeholder="No. subj offfer" id="No_subj" name="No_subj" />
-                        <label>average score:</label><input type="text" placeholder="average score" id="average" name="average" required/>
-                        <label>score obtainable:</label><input type="text" placeholder="score obtainable" id="score_obtainable" name="score_obtainable"/> 
-                        <label>total score obtain:</label><input type="text" id="score_obtain" placeholder="total score obtain" name="score_obtain" />
-                        <button style="width:150px; font-size:14px;" id="Calc">compute Scores</button> </p>
-                    <p>
-                </fieldset>
+                    <!-- Computer Studies -->
+                    <div class="subject-row">
+                        <input type="text" value="Computer Studies" id="cst" readonly />
+                        <input type="number" placeholder="1st Test" name="cst1st" id="cst1st"
+                            oninput="calculateSubject('cst')" />
+                        <input type="number" placeholder="2nd Test" name="cst2nd" id="cst2nd"
+                            oninput="calculateSubject('cst')" />
+                        <input type="number" placeholder="CCA" name="cstcca" id="cstcca"
+                            oninput="calculateSubject('cst')" />
+                        <input type="number" placeholder="Exam" name="cstexam" id="cstexam"
+                            oninput="calculateSubject('cst')" />
+                        <input type="text" placeholder="TOTAL SCORE" name="cstscore" id="cstscore" readonly />
+                        <input type="text" placeholder="GRADE" name="cstG" id="cstG" readonly />
+                        <input type="text" placeholder="REMARK" name="cstRemark" id="cstRemark" readonly />
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>STUDENT PERFORMANCE</legend>
+                <div class="performance-grid">
+                    <div>
+                        <label>No. of subjects offered:</label>
+                        <input type="text" placeholder="No. of subjects offered" id="No_subj" name="No_subj" readonly />
+                    </div>
+                    <div>
+                        <label>Average score:</label>
+                        <input type="text" placeholder="Average score" id="average" name="average" required readonly />
+                    </div>
+                    <div>
+                        <label>Score obtainable:</label>
+                        <input type="text" placeholder="Score obtainable" id="score_obtainable" name="score_obtainable"
+                            readonly />
+                    </div>
+                    <div>
+                        <label>Total score obtained:</label>
+                        <input type="text" id="score_obtain" placeholder="Total score obtained" name="score_obtain"
+                            readonly />
+                    </div>
+                    <button type="button" style="width:150px; font-size:14px;" id="Calc">Compute Scores</button>
+                </div>
+            </fieldset>
+            -
+            <fieldset>
+                <legend>OTHER INFORMATION</legend>
+                <div class="other-info-grid">
+                    <select name="section" id="section" required>
+                        <option value="" disabled selected>Academic Section</option>
+                        <option value="2023 - 2024">2023 - 2024</option>
+                        <option value="2024 - 2025" selected>2024 - 2025</option>
+                        <option value="2025 - 2026">2025 - 2026</option>
+                        <option value="2026 - 2027">2026 - 2027</option>
+                    </select>
+                    <input type="number" placeholder="Times present" name="present" id="present" min="0" />
+                    <input type="number" placeholder="Times absent" name="absent" id="absent" min="0" />
+                    <input type="text" placeholder="Class Teacher Report" id="tReport" name="tReport" />
+                    <input type="text" placeholder="Head Teacher Report" id="Treport" name="Treport" readonly />
+                    <input type="text" placeholder="Next term resume" name="nextterm" value="6th Jan, 2026" />
+                    <select id="promotedto" name="promote">
+                        <option value="" disabled selected>Promoted to</option>
+                        <option value="SS 2">SS 2</option>
+                        <option value="SS 3">SS 3</option>
+                    </select>
+                    <input type="number" placeholder="Outstanding fees" name="fees" min="0" step="0.01" />
+                </div>
+            </fieldset>
+            <button type="submit">Update</button>
+            <p id="upload" style="color:red;"></p>
+        </form>
+    </div>
 
-                <fieldset>
-                    <legend>OHTER INFOMATION </legend>
-                    <p>                    
-                        <select name="section" required id="section">
-                            <option value="">Academic Section</option>
-                            <option value="2023 - 2024">2023 - 2024</option>
-                            <option value="2024 - 2025" selected>2024 - 2025</option>
-                            <option value="2025 - 2026">2025 - 2026</option>
-                            <option value="2026 - 2027">2026 - 2027</option>
-                        </select>
-                        <input type="text" placeholder="times present" name="present" id="present"/>
-                        <input type="text" placeholder="times absent" name="absent" id="absent" />
-                        <input type="text" placeholder="Class Teacher Report" id="tReport" name="tReport" style="width:200px;" id="tReport"/>
-                        <input type="text" placeholder="Head Teacher Report" name="Treport" id="Treport" style="width:200px" id="Treport"/>
-                        <input type="text" placeholder="Next term resume" name="nextterm" value="6th Jan, 2025" id="nextterm"/>
-                        <select id = "promotedto" name="promote">
-                            <option value="">Promoted to</option>
-                            <option value="SS 2">SS 2</option>
-                            <option value="SS 3">SS 3</option>
-                        </select>
-                         <input type="text" placeholder="outstanding fees" name="fees"/></p>
-                </fieldset>
-                <button>Update</button>
-                <p id="upload" style="color:red;"></p>
-            </form>
-        </div>
-
-        <script>
-            async function updateForm(e){  
-                e.preventDefault()      
-                let form = document.getElementById('formUpdate')
-                let formData = new FormData(form)
-                try{
-                    let result = await fetch('/update_senior_result',{
-                        method: 'PATCH',
-                        body: JSON.stringify(Object.fromEntries(formData)),
-                        headers:{
-                            'Content-Type': 'application/json'
-                        }
-                    })
-                    result = await result.text()
-                    if(result){
-                        alert(`${result}`)
+    <script>
+        async function updateForm(e) {
+            e.preventDefault()
+            let form = document.getElementById('formUpdate')
+            let formData = new FormData(form)
+            try {
+                let result = await fetch('/update_senior_result', {
+                    method: 'PATCH',
+                    body: JSON.stringify(Object.fromEntries(formData)),
+                    headers: {
+                        'Content-Type': 'application/json'
                     }
-                }
-                catch(err){
-                    alert('server error')
-                   console.log(err)
+                })
+                result = await result.text()
+                if (result) {
+                    alert(`${result}`)
                 }
             }
-        </script>
-        <script src="Java Script/senior_score.js"></script>
-        <script src="Java Script/fetchResult.js"></script>
-    </body>
+            catch (err) {
+                alert('server error')
+                console.log(err)
+            }
+        }
+    </script>
+    <script src="js/senior_score.js"></script>
+    <script src="js/fetchResult.js"></script>
+</body>
+
 </html>

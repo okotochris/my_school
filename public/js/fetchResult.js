@@ -11,6 +11,7 @@ getDetails.onclick = async (e) => {
   console.log(`${studentIdNum}, ${schoolTerm}, ${studentclass}`);
   if (studentIdNum != "" && schoolTerm != "" && studentclass != "") {
     try {
+      showLoading();
       const result = await fetch(
         `/student-result?studentId=${studentIdNum}&&term=${schoolTerm}&&sClass=${studentclass}`
       );
@@ -32,6 +33,8 @@ getDetails.onclick = async (e) => {
       }
     } catch (err) {
       console.log(err);
+    }finally{
+        hideLoading();
     }
   } else {
     alert("student Id, Class and Term most be filled");
@@ -435,4 +438,15 @@ function otherInfo(data) {
   document.getElementById("promotedto").value = data.promote;
   document.getElementById("fees").value = data.fees;
   document.getElementById("nextterm").value = data.nextterm;
+}
+// Helper: Show loading on button
+function showLoading() {
+    getDetails.innerHTML = '<span style="display: inline-flex; align-items: center; gap: 0.5rem;">Loading <div style="width: 12px; height: 12px; border: 2px solid #fff; border-top: 2px solid transparent; border-radius: 50%; animation: spin 1s linear infinite;"></div></span>';
+    getDetails.disabled = true;
+}
+
+// Helper: Hide loading
+function hideLoading() {
+    getDetails.innerHTML = 'Get Details';
+    getDetails.disabled = false;
 }

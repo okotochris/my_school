@@ -1,67 +1,88 @@
 <!DOCTYPE html>
-<html>
-    <%- include('./partials/head.ejs') %>
-    <body>
-        <div class="menu">
-            <div></div>
-            <div></div>
-            <div></div>
-                
-        </div>
-        <div class="admin-container">
-            <%- include('./partials/navigation.ejs') %>
-            <div class="section">
-                <div class="welcome">ADD STUDENT TO BLACKLIST</div>
-                <div  class="add_form">
-                        <form>
-                           <input type="text" placeholder="Student Name" id="studentID"/>
-                            <button id="getStudent">ADD TO BLACKLIST</button>
-                        
-                        </form>
-                    </div>
-                    <div class="studentList">
-                        <h3>NAMES IN BLACKLIST CAN'T ACCESS THEIR RESULT</h3>
-                            <% if(data.length > 0){ %>
-                                <table id="table">
-                                    <tr>
-                                        <th  width="50px">SN</th>
-                                        <th  width="400px">NAME</th>
-                                        <th>STUDENT ID</th>
-                                        <th>REMOVE ALL</th>
-                                    </tr>
-                              <% for(let i=0; i< data.length; i++){ %>
-                                <tr>
-                                    <td><%= i + 1 %></td>
-                                    <td><%= data[i].studentName %> </td>
-                                    <td><%= data[i].studentId %> </td>
-                                    <td><button class="remove-btn" data-id="<%= data[i].studentId %>">Remove</button></td>
-                                </tr>
-                                
-                              <% } %>
-
-                            <%}else{ %>
-                               <P>NO STUDENT IN BLACKLIST</P>
-                            <% } %>
-                            
-                            
-                        </table>
-                    </div>
-                    <div class="blacklist">
-                        <div class='cancel2' onclick="cancel1()">X</div>
-                        
-                        <div id='studentName'> </div>
-                    </div>
-                    <div class="loading"></div>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/global.css">
+  <title>Blacklist Management</title>
+</head>
+<body>
+  <%- include('./partials/header.ejs') %>
+  <div class="admin-container">
+    <%- include('./partials/navigation.ejs') %>
+    <main class="section">
+      <div class="container center-container">
+        <div class="form-container">
+          <div class="form-header">
+            <h2>Add Student to Blacklist</h2>
+          </div>
+          <div class="description">
+            <p>Students on the blacklist cannot access their results.</p>
+          </div>
+          <form id="blacklistForm">
+            <div class="form-controls">
+              <div class="form-group">
+                <label for="studentID">Student Name or ID</label>
+                <input
+                  type="text"
+                  id="studentID"
+                  name="studentID"
+                  placeholder="Enter Student Name or ID"
+                  required
+                  autocomplete="off"
+                  aria-label="Student Name or ID"
+                />
+                <span class="error-message"></span>
+              </div>
+              <button type="button" id="getStudent" class="button">Add to Blacklist</button>
             </div>
-            
+          </form>
+          <div class="blacklist" style="display: none;">
+            <span class="cancel-btn" onclick="cancel1()">×</span>
+            <div id="studentName"></div>
+          </div>
+          <div class="alert-dialog" style="display: none;">
+            <span class="cancel-btn" onclick="closeAlert()">×</span>
+            <div id="alertMessage"></div>
+          </div>
+          <div class="table-wrapper">
+            <% if (data && data.length > 0) { %>
+              <table id="table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Student ID</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% data.forEach((student, index) => { %>
+                    <tr>
+                      <td><%= index + 1 %></td>
+                      <td><%= student.studentName %></td>
+                      <td><%= student.studentId %></td>
+                      <td>
+                        <span class="action remove-btn" data-id="<%= student.studentId %>" aria-label="Remove <%= student.studentName %> from blacklist">
+                          <span class="icon-trash">🗑️</span>
+                        </span>
+                      </td>
+                    </tr>
+                  <% }) %>
+                </tbody>
+              </table>
+            <% } else { %>
+              <div class="table-empty">No students in blacklist</div>
+            <% } %>
+          </div>
+          <div class="loading">Loading...</div>
         </div>
- 
-   <script src="Java Script/menu.js"></script>
-   <script src="Java Script/blacklist.js"></script>
-   <script src="Java Script/remove.js"></script>
+      </div>
+    </main>
+  </div>
 
+  <script src="/js/menu.js"></script>
+  <script src="/js/blacklist.js"></script>
+  <script src="/js/remove.js"></script>
 </body>
-
-
-
 </html>

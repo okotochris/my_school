@@ -7,18 +7,16 @@ const ABlog = require("./admin.js");
 const PBlog = require("./primary.js"); //basic class
 const Blacklist = require("./blacklist.js");
 const nuseryBlog = require("./nursery.js"); // nursery
-const bodyParser = require("body-parser");
 const nodemailer = require("nodemailer");
 const Studentpassport = require("./goldenPassport.js");
 const fs = require("fs");
 const path = require("path");
 const cors = require("cors");
 const session = require("express-session");
-const { inflateRaw } = require("zlib");
 require("dotenv").config();
 const schoolPfofile = require("./schema/schoolProfile");
 const MongoStore = require("connect-mongo");
-
+const { router: newsRouter, fetchNigerianSchoolNews } = require('./routes/news');
 const app = express();
 
 // middleware
@@ -41,6 +39,7 @@ mongoose
   .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((result) => {
     console.log("Connected to MongoDB");
+    // fetchNigerianSchoolNews();
   })
   .catch((err) => {
     console.log("Error connecting to MongoDB:", err);
@@ -112,6 +111,10 @@ app.use(cors(corsOptions));
 app.get("/", (req, res) => {
   res.render("index");
 });
+app.get('/about', (req, res)=>{
+  res.render('about')
+})
+
 //adimin page to loging to result upload portal
 app.get("/admin", isAuthenticated, (req, res) => {
   res.render("admin", { school: req.session.school, fees: req.session.fees });
@@ -136,9 +139,9 @@ app.post("/login", async (req, res) => {
   try {
     let data = await ABlog.findOne({ email: user, password: password });
     if(!data){
-      res.redirect("login");
+      res.status(404).json({msg:"Invalid login details"})
     }
-    let schoolName = data.school;
+    let schoolName = data.school 
     let schoolFee = await schoolPfofile.findOne({schoolName})
     if (data && schoolFee) {
       req.session.visited = true;
@@ -149,7 +152,7 @@ app.post("/login", async (req, res) => {
       req.session.fees = fees;
       const redirectTo = req.session.returnTo || "/admin";
       delete req.session.returnTo; // Clear returnTo after use
-      res.redirect(redirectTo);
+      res.status(200).json(redirectTo);
     } else {
       res.redirect("login");
     }
@@ -169,7 +172,9 @@ app.get("/admin_form", (req, res) => {
 });
 //saving admin login
 app.post("/admin_form", (req, res) => {
+  req.body.school = req.session.school;
   const Ablog = new ABlog(req.body);
+  console.log(req.body);
   Ablog.save()
     .then((result) => {
       console.log("sent");
@@ -429,21 +434,6 @@ app.get("/getclassid", async (req, res) => {
   try {
     let studentId = await Studentpassport.find({
       schoolName,
-      class: studentClass,
-    });
-    res.json(studentId);
-  } catch (err) {
-    console.log(err);
-  }
-});
-
-//getting student id by classname
-app.get("/getsectionid", async (req, res) => {
-  let studentClass = req.query.class;
-  let schoolName = req.session.school;
-  try {
-    let studentId = await Studentpassport.find({
-      schoolName,
       class: { $regex: studentClass, $options: "i" },
     });
     res.json(studentId);
@@ -452,7 +442,6 @@ app.get("/getsectionid", async (req, res) => {
   }
 });
 
-//CORRECTING WRONG ENTRY NAME
 app.patch("/update-student", async (req, res) => {
   const { studentId, userName, addmissionNo, dob, classN, gender } = req.body; // Capture fields from the request body
   try {
@@ -486,7 +475,26 @@ app.get("/update", isAuthenticated, (req, res) => {
 app.get("/generateid", isAuthenticated, (req, res) => {
   res.render("generateid", { school: req.session.school, fees: req.session.fees });
 });
+app.get('/staffmanagement', isAuthenticated, async (req, res)=>{
+  const staff = await ABlog.find({school:req.session.school})
+  res.render('staff', { school: req.session.school, fees: req.session.fees, staff })
+})
 
+app.delete('/deletestaff', async (req, res)=>{
+  let _id = req.query.id;
+  try{
+    const response = await ABlog.findOneAndDelete({_id});
+    if(response){
+      res.status(200).json("deleted")
+    }
+    else{
+      res.status(404).json("file not found")
+    }
+  }
+  catch(err){
+    console.log(err)
+  }
+})
 // saving student ID and passport
 app.post("/passport", upload.single("passport"), (req, res) => {
   // Create a new instance of the Mongoose model
@@ -759,7 +767,17 @@ async function updateFees(schoolName, req){
   // Update the session with the new fees
   req.session.fees = updatedSchool.fees;
 }
-
+//KHRISTAL TECH SUMMAR DETAILS 
+app.get('/summary', isAuthenticated, async (req, res)=>{
+  try{
+    const school = await schoolPfofile.find()
+    res.render('summary', {school})
+  }
+  catch(err){
+    console.log(err)
+  }
+})
+app.use(newsRouter)
 app.use((req, res) => {
   res.status(404).render("page_not_found");
 });

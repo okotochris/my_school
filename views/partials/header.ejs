@@ -1,2 +1,19 @@
-<img src="IMAGE/myschoolresult.png" type="image/png" class="logo"/>
-<div class="welcome">Welcome to My School Result Checker</div>
+<div class="header sticky">
+  <div class="menu" onclick="toggleNav()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <div class="school-design">
+    <img src="IMAGE/<%= school.toLowerCase() %>.png" alt="School Logo" class="school-logo" />
+    <div class="school-info">
+      <h1 class="school-name">School Name</h1>
+      <p class="page-name">Page Name</p>
+    </div>
+  </div>
+
+  <div class="header-actions">
+    <a href="/logout" class="logout-btn">Logout</a>
+  </div>
+</div>

@@ -12,6 +12,7 @@ function clearTable(){
                             <th width="400px">NAME</th>
                             <th width="100px">CLASS</th>
                             <th width="250px">ID</th>
+                            <th width="100px">Action</th>
                         </tr>`
 }
 
@@ -34,12 +35,16 @@ getId.onclick = async (e) => {
             let td1 = document.createElement('td')
             let td2 = document.createElement('td')
             let td3 = document.createElement('td')
+            let td4 = document.createElement('td')
             td1.innerText = data.userName.toUpperCase()
             td2.innerText = data.class.toUpperCase()
             td3.innerText = data.studentId.toUpperCase()
+            td4.innerText = "View"
+            td4.classList.add("action");
             tr.appendChild(td1)
             tr.appendChild(td2)
             tr.appendChild(td3)
+            tr.appendChild(td4)
             table.appendChild(tr)
             })
            
@@ -71,57 +76,61 @@ let classId = document.getElementById('classId')
                 let td1 = document.createElement('td')
                 let td2 = document.createElement('td')
                 let td3 = document.createElement('td')
+                 let td4 = document.createElement('td')
                 td1.innerText = data.userName.toUpperCase()
                 td2.innerText = data.class.toUpperCase()
                 td3.innerText = data.studentId.toUpperCase()
+                td4.innerText = "View"
+                td4.classList.add("action");
                 tr.appendChild(td1)
                 tr.appendChild(td2)
                 tr.appendChild(td3)
+                 tr.appendChild(td4)
                 table.appendChild(tr)
                 })
                
                 loadingIndicator.style.display = 'none';
                 table.style.display = 'block'
-            
+            document.getElementById('total').innerText = `Total ${datas.length}`;
         }
         catch(err){
             console.log(err)
         }
 } 
 
-//GETTING STUDENT ID BASE ON SENIOR JUNIOR OR BASIC
-let studentSection =document.getElementById('studentSection')
-studentSection.onclick = async (e)=>{
-    e.preventDefault()
-    clearTable()
-    loadingIndicator.style.display = 'block';
-   try{
-        let Sclass = document.getElementById('Sclass').value;
-        let response = await fetch(`/getsectionid?class=${Sclass}`)
-            let datas = await response.json();
-            datas.forEach(data=>{
+// //GETTING STUDENT ID BASE ON SENIOR JUNIOR OR BASIC
+// let studentSection =document.getElementById('studentSection')
+// studentSection.onclick = async (e)=>{
+//     e.preventDefault()
+//     clearTable()
+//     loadingIndicator.style.display = 'block';
+//    try{
+//         let Sclass = document.getElementById('Sclass').value;
+//         let response = await fetch(`/getsectionid?class=${Sclass}`)
+//             let datas = await response.json();
+//             datas.forEach(data=>{
                  
-            let tr = document.createElement('tr')
-            let td1 = document.createElement('td')
-            let td2 = document.createElement('td')
-            let td3 = document.createElement('td')
-            td1.innerText = data.userName.toUpperCase()
-            td2.innerText = data.class.toUpperCase()
-            td3.innerText = data.studentId.toUpperCase()
-            tr.appendChild(td1)
-            tr.appendChild(td2)
-            tr.appendChild(td3)
-            table.appendChild(tr)
-            })
+//             let tr = document.createElement('tr')
+//             let td1 = document.createElement('td')
+//             let td2 = document.createElement('td')
+//             let td3 = document.createElement('td')
+//             td1.innerText = data.userName.toUpperCase()
+//             td2.innerText = data.class.toUpperCase()
+//             td3.innerText = data.studentId.toUpperCase()
+//             tr.appendChild(td1)
+//             tr.appendChild(td2)
+//             tr.appendChild(td3)
+//             table.appendChild(tr)
+//             })
            
-            loadingIndicator.style.display = 'none';
-            table.style.display = 'block'
+//             loadingIndicator.style.display = 'none';
+//             table.style.display = 'block'
        
-   }
-   catch(err){
-    console.log(err)
-   }
-}
+//    }
+//    catch(err){
+//     console.log(err)
+//    }
+// }
 
 
 //SELECTING STUDENT ID BASE ON CATEGORIES 

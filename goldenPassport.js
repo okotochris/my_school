@@ -10,6 +10,10 @@ const blogschema = new Schema({
         type: String,
         required: true
     },
+    schoolsession: {
+        type: String,
+        required: true
+    },
     addmissionNo: {
         type: String
     },

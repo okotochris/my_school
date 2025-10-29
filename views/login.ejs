@@ -1,24 +1,81 @@
 <!DOCTYPE html>
 <html>
-    <%- include('./partials/head.ejs') %>
+    <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="My School Result - Check academic results online instantly. Empowering students, parents, and schools with secure, reliable result management.">
+  <meta name="keywords" content="school results, academic results, online result checker, student portal, school management">
+  <meta name="author" content="My School Result">
+  <title>My School Result - Check Academic Results Online</title>
+  <link rel="stylesheet" href="/styles/index.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+</head>
     <body>
-        <%- include('./partials/header.ejs') %>
+    
+        <%-include('partials/header2') %>
+        <div style="height:100px"></div>
+        <section id="result-checker" class="result-checker">
+            <div class="container">
+                <h2>WELCOME TO MYSCHOOLRESLT </h2>
+                <form id="login-form"  class="result-form">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                        <p><input type="email" id="email" name="user"  placeholder="Enter your email" required/></p>
+                </div>
+                  <div class="form-group">
+                    <label for="user">Password</label>
+                        <p><input type="password" id="password" name="password" placeholder="Password" required/></p>
         
-        <div class="add_form">
-            <form action="login" method="post" onsubmit="return check()">
-                    <p><input type="email" id="user" name="user"  placeholder="Enter your email" required/></p>
-                    <p><input type="password" id="password" name="password" placeholder="Password" required/></p>
-                    <button>Login</button>
-                   
-                
-            </form>
-        </div>
-        
-      
+                    </div>
+                        <button id="submit-button" class="form-button">Login</button>
+                </form>
+            </div>
+        </section>
+    <%-include('partials/footer') %>
     </body>
-   <script src="Java Script/main.js"></script>
+   <script>
+const form = document.getElementById('login-form');
+const button =document.getElementById('submit-button')
+form.addEventListener('submit', async (e) => {
+    e.preventDefault(); // ✅ prevent default form submission
 
-
-
-
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    button.innerText = "loading..."
+    button.disabled = true;
+    try {
+        const res = await fetch('/login', {
+            method: "POST",
+            headers: {
+                'Content-Type': "application/json"
+            },
+            body: JSON.stringify({ user: email, password })
+        });
+         const data = await res.json();
+        if(res.ok){
+           return window.location.href = `${data}`;
+        }
+        button.style.backgroundColor = 'red'
+        button.innerText = data.msg
+    } catch (error) {
+        button.style.backgroundColor = 'red'
+        button.innerText = 'server error'
+        console.error(error);
+    }
+    });
+    function reset(){
+        button.style.backgroundColor = ' #0ea5e9'
+        button.disabled = false;
+        button.innerText = "Login"
+    }
+    document.getElementById('email').oninput=()=>{
+        reset()
+    }
+    document.getElementById('password').oninput=()=>{
+        reset()
+    }
+</script>
+    <script src="js/navigation.js"></script>
 </html>

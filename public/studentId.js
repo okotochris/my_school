@@ -2,8 +2,8 @@ let aphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 let number = '1234567890'
 let studentId = document.getElementById('studentId')
 let GenerateId = document.getElementById('GenerateId')
-function generateId(event){
-    event.preventDefault()
+function generateId(){
+ 
     let random = '';
         for(let i = 1; i<=3; i++){
             random += aphabet[Math.floor(Math.random() * aphabet.length)]
@@ -35,3 +35,4 @@ async function checkId(random){
         console.log(err)
     }
 }
+generateId()

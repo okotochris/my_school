@@ -1,144 +1,90 @@
 <!DOCTYPE html>
-<html>
-    <%- include('./partials/head.ejs') %>
-    <style>
-       .table{
-            width:70%;
-            color:white;
-            margin:10px auto;
-            padding:10px;
-            display:flex;
-            justify-content:center;
-            font-family:leelawadee;
-            text-align:left;
-       }
-       @media screen and (max-height:700px) {
-        .table{
-            height:300px;
-            overflow-x: auto;;
-        }
-       }
-       table th, table tr, table td{
-            border: solid 1px black;
-            background:rgb(115, 115, 248);
-            height:50px;
-            text-align:center;
-            font-weight:bold;
-       }
-       table th{
-            color:black;
-            
-       }
-       table{
-        border-collapse:collapse;
-        display:none;
-       }
-       @media only screen and (max-width:800px){
-            .table{
-                width:95%;
-            }
-       }
-       #loadingIndicator {
-            display: none; /* Initially hidden */
-            text-align: center;
-            margin-top: 10px; /* Adjust as needed */
-            font-style: italic;
-            color: #888;
-        }
-      
-        #student-name, #student-class, #student-division{
-            display:none;
-        }
-        .container{
-            width:98%;
-            margin:0px auto;
-        }
-       
-    </style>
-    <body>
-        <div class="menu">
-            <div></div>
-            <div></div>
-            <div></div>
-                
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/global.css">
+  <title>Get Student ID</title>
+</head>
+<body>
+  <%- include('./partials/header.ejs') %>
+  <div class="admin-container">
+    <%- include('./partials/navigation.ejs') %>
+    <main class="section">
+      <div class="container center-container">
+        <div class="form-container">
+          <div class="form-header">
+            <h2>Get Student ID</h2>
+          </div>
+          <form id="studentIdForm">
+            <div class="form-controls">
+              <div class="form-group">
+                <label for="student_name">Name</label>
+                <input
+                  type="text"
+                  id="student_name"
+                  name="student_name"
+                  placeholder="Last, First, Middle Name"
+                  required
+                  autocomplete="off"
+                  aria-label="Student Name"
+                />
+                <span class="error-message"></span>
+              </div>
+              <button type="button" id="getId" class="button">Get ID</button>
+            </div>
+            <div class="form-controls">
+              <div class="form-group">
+                <label for="class">Class</label>
+                <select id="class" name="class" aria-label="Select Class">
+                  <option value="">Select Class</option>
+                  <option value="SS">SS</option>
+                  <option value="SS 3">SS 3</option>
+                  <option value="SS 2">SS 2</option>
+                  <option value="SS 1">SS 1</option>
+                  <option value="JSS">JSS</option>
+                  <option value="JSS 3">JSS 3</option>
+                  <option value="JSS 2">JSS 2</option>
+                  <option value="JSS 1">JSS 1</option>
+                  <option value="BASIC 6">BASIC 6</option>
+                  <option value="BASIC 5">BASIC 5</option>
+                  <option value="BASIC 4">BASIC 4</option>
+                  <option value="BASIC 3">BASIC 3</option>
+                  <option value="BASIC 2">BASIC 2</option>
+                  <option value="BASIC 1">BASIC 1</option>
+                  <option value="NURSERY 3">NURSERY 3</option>
+                  <option value="NURSERY 2">NURSERY 2</option>
+                  <option value="NURSERY 1">NURSERY 1</option>
+                  <option value="PRE-NURSERY">PRE-NURSERY</option>
+                </select>
+                <span class="error-message"></span>
+              </div>
+              <button type="button" id="classId" class="button">Get ID</button>
+            </div>
+          </form>
+          <div class="table-wrapper">
+            <table id="table" style="display: none;">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Class</th>
+                  <th>Student ID</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+            <div class="table-empty" style="display: none;">No data available</div>
+          </div>
+          <p class="total-count">Total: <span id="total"></span></p>
+          <div class="loading">Loading...</div>
         </div>
-        <div class="admin-container">
-            <%- include('./partials/navigation.ejs') %>
-           
-        <div class="section">
-            <div class="container">
-                <!-- GET STUDENT ID VIA STUDENT NAME-->
-                <button class="student-name">GET STUDENT ID VIA NAME</button>
-            <div class="add_form" id="student-name">
-                <form>
-                    <p><input type="text" id="student_name" name="student_name" require="required" placeholder="Last name, Fisrt name, Middle name" required/></p>
-                    <button id="getId">Get ID</button>
-                </form>
-            </div>
-            <!-- GET STUDENT ID VIA CLASS-->
-            <button  class="student-class">GET STUDENT ID VIA CLASS</button>
-            <div class="add_form" id="student-class">
-                <form>
-                        <p>
-                            <select id="class">
-                                <option value="">Selet Class</option>
-                                <option value="SS 3">SS3</option>
-                                <option value="SS 2">SS2</option>
-                                <option value="SS 1">SS1</option>
-                                <option value="JSS 3">JSS3</option>
-                                <option value="JSS 2">JSS2</option>
-                                <option value="JSS 1">JSS1</option>
-                                <option value="BASIC 6">BASIC 6</option>
-                                <option value="BASIC 5">BASIC 5</option>
-                                <option value="BASIC 4">BASIC 4</option>
-                                <option value="BASIC 3">BASIC 3</option>
-                                <option value="BASIC 2">BASIC 2</option>
-                                <option value="BASIC 1">BASIC 1 </option>
-                                <option value="NURSERY 3">NURSERY 3</option>
-                                <option value="NURSERY 2">NURSERY 2</option>
-                                <option value="NURSERY 1">NURSERY 1</option>
-                                <option value="PRE-NURSERY">PRE-NURSERY</option>
-                            </select>
-                        </p>
-                        <button id="classId">Get ID</button>
-                    
-                </form>
-            </div>
+      </div>
+    </main>
+  </div>
 
-            <!-- GET STUDENT ID VIA DIVISION-->
-            <button class="division">GET STUDENT ID VIA DIVISON</button> 
-            
-            <div class="add_form" id="student-division">
-                <form>
-                    
-                    <select name="Sclass" id="Sclass">
-                            <option value=""> STUDENT DISION</option>
-                            <option value="SS">Senior School</option>
-                            <option value="JSS">Junior School</option>
-                            <option value="BASIC">Basic School</option>
-                            <option value="NURSERY">Nusery School</option>
-                    </select>
-                
-                    <button id="studentSection">Get ID</button>
-                </form>
-            </div>
-            </div>
-            
-            <div class="loading"></div>
-            <div class="table">
-                <table id="table">
-                    
-                </table>
-            </div>
-            
-        </div>
-        </div>
-        <script src="Java Script/student-id-school.js"></script>
-        <script src="Java Script/menu.js"></script>
-    </body>
-   
-
-
-
-
+  <script src="/js/menu.js"></script>
+  <script src="/js/student-id-school.js"></script>
+</body>
 </html>

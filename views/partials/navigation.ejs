@@ -1,42 +1,38 @@
-<div class="navigation">
-    <div class="cancel">X</div>
-    <div style="background:white; margin:10px auto">
-        <img src="IMAGE/<%=school.toLowerCase() %>.png" alt="school logo" height="90px" width="90px"/>
+<!-- Overlay for mobile -->
+<div id="navOverlay" class="nav-overlay" onclick="toggleNav()"></div>
+
+<nav class="navigation" id="sideNav">
+  <div class="nav-scroll">
+    <div class="nav-header">
+      <h3>Quick Links</h3>
+      <span class="nav-close" onclick="toggleNav()">×</span>
     </div>
-     <p style="color:#11ddd7">QUICK LINKS</p>
-     <p><a href="/">CHECK RESULT</a></p>
-     <p><a href="/admin">UPLOAD RESULT</a></p>
-     <p><a href="/studentgrade">STUDENT GRADE</a></p>
-     <p><a href="/studentid">GET STUDENT ID</a></p>
-     <p><a href="/generateid">REGISTER STUDENT</a></p>
-     <p><a href="/blacklist">BLACKLIST</a></p>
-     <p style="cursor: pointer; color:#11ddd7" onclick="updateResult()"> 
-        <span  id="menuIcon">⮞</span>MAKE UPDATE</p>
-     <div style="display:none" id="update">
-      <p><a href="update">UPDATE STUDENT INFO</a></p>
-        <p> <a href="/update-ss">UPDATE SINIOR RESULT</a> </p>
-        <p> <a href="/update-jss">UPDATE JUNIOR RESULT</a> </p>
-        <p> <a href="/update-basic">UPDATE BASIC RESULT</a> </p>
-        <p> <a href="/update-nursery">UPDATE NURSERY RESULT</a> </p>
-     </div>
-     <p>Fees: &#8358; <span><%=fees %></span></p>
-     <p style="color:#11ddd7; margin-top:30px; position:fixed; bottom:2px; background:#13022F">
-        <%=school.school %> <a href="/logout">LOGOUT</a></p>
 
-     <script>
-        let menuDisplay = false;
-        function updateResult(){
-          if(!menuDisplay){
-              document.getElementById('update').style.display = 'block'
-              document.getElementById('menuIcon').innerText = '⮟'
-             menuDisplay = true;
-          }
-          else{
-              document.getElementById('update').style.display = 'none'
-              document.getElementById('menuIcon').innerText = '⮞'
-              menuDisplay = false;
-          }
-        }
-     </script>
+    <ul class="nav-list">
+      <li><a href="/"><span class="icon">🏫</span> Check Result</a></li>
+      <li><a href="/admin"><span class="icon">📤</span> Upload Result</a></li>
+      <li><a href="/studentgrade"><span class="icon">📘</span> Student Grade</a></li>
+      <li><a href="/studentid"><span class="icon">🎫</span> Get Student ID</a></li>
+      <li><a href="/generateid"><span class="icon">🧾</span> Register Student</a></li>
+      <li><a href="/blacklist"><span class="icon">🚫</span> Blacklist</a></li>
+      <li><a href="/staffmanagement"><span class="icon">👩‍🏫</span> Staff Management</a></li>
+    </ul>
 
- </div>
+    <div class="dropdown">
+      <button class="dropdown-toggle" onclick="toggleUpdate()">
+        <span class="icon">⮟</span> Make Update
+      </button>
+      <ul class="dropdown-menu" id="updateMenu">
+        <li><a href="/update"><span class="sub-icon">✎</span> Update Student Info</a></li>
+        <li><a href="/update-ss"><span class="sub-icon">📊</span> Update Senior Result</a></li>
+        <li><a href="/update-jss"><span class="sub-icon">📊</span> Update Junior Result</a></li>
+        <li><a href="/update-basic"><span class="sub-icon">📊</span> Update Basic Result</a></li>
+        <li><a href="/update-nursery"><span class="sub-icon">📊</span> Update Nursery Result</a></li>
+      </ul>
+    </div>
+
+    <div class="fees">
+      Fees: ₦<span><%= fees %></span>
+    </div>
+  </div>
+</nav>

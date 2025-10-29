@@ -1,0 +1,701 @@
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #f3f4f6;
+  color: #1f2937;
+  line-height: 1.5;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, #4f46e5, #06b6d4);
+  color: white;
+  padding: 1rem 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 10000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.menu span {
+  width: 24px;
+  height: 3px;
+  background: white;
+  transition: all 0.3s ease;
+}
+
+@media (min-width: 769px) {
+  .menu {
+    display: none;
+  }
+}
+
+.school-design {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.school-logo {
+  height: 40px;
+  width: 40px;
+  object-fit: contain;
+}
+
+.school-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.school-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.page-name {
+  font-size: 0.875rem;
+  opacity: 0.8;
+}
+
+.logout-btn {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+}
+
+.logout-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Navigation */
+.nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 999;
+}
+
+.nav-overlay.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (min-width: 769px) {
+  .nav-overlay {
+    display: none;
+  }
+}
+
+.navigation {
+  position: fixed;
+  top: 0;
+  left: -280px;
+  width: 25%;
+  height: 100%;
+  background: #ffffff;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  transition: left 0.3s ease;
+}
+
+.navigation.open {
+  left: 0;
+}
+
+.nav-scroll {
+  height: 100%;
+  overflow-y: auto;
+  padding: 1rem;
+}
+
+.nav-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.nav-scroll::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+
+.nav-scroll::-webkit-scrollbar-track {
+  background: #f3f4f6;
+}
+
+.nav-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.nav-header h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.nav-close {
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #4b5563;
+}
+
+@media (min-width: 769px) {
+  .nav-close {
+    display: none;
+  }
+  .navigation {
+    left: 0;
+    position: sticky;
+    top: 64px;
+    height: calc(100vh - 64px);
+  }
+}
+
+.nav-list {
+  list-style: none;
+  padding: 1rem 0;
+}
+
+.nav-list li {
+  margin-bottom: 0.5rem;
+}
+
+.nav-list a {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  color: #1f2937;
+  text-decoration: none;
+  font-weight: 500;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+}
+
+.nav-list a:hover {
+  background: #f3f4f6;
+}
+
+.nav-list .icon {
+  font-size: 1.25rem;
+}
+
+.dropdown {
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+  background: #f9fafb;
+  border-radius: 8px;
+}
+
+.dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: linear-gradient(135deg, #4f46e5, #06b6d4);
+  color: white;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.dropdown-toggle:hover {
+  background: linear-gradient(135deg, #4338ca, #0891b2);
+  transform: translateY(-2px);
+}
+
+.dropdown-menu {
+  list-style: none;
+  padding: 0.5rem 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+.dropdown-menu.open {
+  max-height: 300px;
+}
+
+.dropdown-menu li {
+  margin-bottom: 0.25rem;
+}
+
+.dropdown-menu a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  color: #1f2937;
+  text-decoration: none;
+  font-size: 0.95rem;
+  border-radius: 4px;
+}
+
+.dropdown-menu a:hover {
+  background: #e5e7eb;
+}
+
+.dropdown-menu .sub-icon {
+  font-size: 1rem;
+  color: #4f46e5;
+}
+
+.fees {
+  padding: 1rem;
+  font-weight: 500;
+  color: #1f2937;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* Main Content */
+.admin-container {
+  min-height: calc(100vh - 64px);
+
+  display: flex;
+  flex-direction:row;
+}
+
+.section {
+  padding: 2rem;
+  margin-left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 64px);
+  width: 100%;
+  
+
+}
+
+@media (min-width: 769px) {
+  .section {
+  
+    width: 74%;
+     
+  }
+}
+
+/* Form Container (for generateid.ejs) */
+.form-container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  max-width: 600px;
+  width: 100%;
+}
+
+.form-container:hover {
+  transform: translateY(-3px);
+}
+
+.form-header {
+  background: linear-gradient(135deg, #4f46e5, #06b6d4);
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.form-header h2 {
+  font-size: 1.5rem;
+  letter-spacing: 0.5px;
+}
+
+form {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group select {
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  background: white;
+  transition: all 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+  outline: none;
+}
+
+.form-group input[readonly] {
+  background: #e5e7eb;
+  cursor: not-allowed;
+}
+
+.form-group .error-message {
+  color: #dc2626;
+  font-size: 0.85rem;
+  min-height: 1rem;
+}
+
+.form-group input.error,
+.form-group select.error {
+  border-color: #dc2626;
+}
+
+.gender {
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 0.75rem;
+}
+
+.gender legend {
+  font-weight: 500;
+  color: #374151;
+  font-size: 0.9rem;
+}
+
+.gender label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.button {
+  background: linear-gradient(135deg, #4f46e5, #06b6d4);
+  color: white;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.button:hover {
+  background: linear-gradient(135deg, #4338ca, #0891b2);
+  transform: translateY(-2px);
+}
+
+.button:active {
+  transform: translateY(0);
+}
+
+/* Table Container (for studentgrade.ejs) */
+.table-container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  max-width: 1000px;
+  width: 100%;
+}
+
+.table-container:hover {
+  transform: translateY(-3px);
+}
+
+.table-controls {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+  flex-wrap: wrap;
+}
+
+.table-controls .form-group {
+  flex: 1;
+  min-width: 180px;
+}
+
+.table-controls select {
+  cursor: pointer;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  padding: 0 1.5rem 1.5rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  table-layout: fixed;
+}
+
+thead {
+  background: #f1f5f9;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: #1f2937;
+  border-bottom: 2px solid #e5e7eb;
+  white-space: nowrap;
+}
+
+th:first-child {
+  width: 60px;
+}
+
+th:nth-child(2) {
+  width: 250px;
+}
+
+th:nth-child(3),
+th:nth-child(4),
+th:nth-child(5),
+th:nth-child(6),
+th:nth-child(7),
+th:nth-child(8) {
+  width: 120px;
+}
+
+td {
+  padding: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+tbody tr {
+  transition: background 0.2s ease;
+}
+
+tbody tr:hover {
+  background: #f3f4f6;
+}
+
+.table-empty {
+  text-align: center;
+  padding: 1.5rem;
+  color: #6b7280;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.loading {
+  display: none;
+  text-align: center;
+  padding: 1.5rem;
+  color: #4f46e5;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.loading::before {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid #4f46e5;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 0.5rem;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Centering for Both Pages */
+.container {
+  width: 100%;
+}
+
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navigation {
+    width: 100%;
+    max-width: 280px;
+  }
+  .dialogboxDisplay {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+  .section {
+    padding: 1rem;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .container {
+    max-width: 100%;
+  }
+
+  .form-container,
+  .table-container {
+    margin: 1rem;
+  }
+
+  .table-controls {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  th, td {
+    padding: 0.75rem;
+  }
+
+ 
+}
+
+@media (max-width: 640px) {
+  .header {
+    padding: 0.75rem 1rem;
+  }
+
+  .school-name {
+    font-size: 1.1rem;
+  }
+
+  .page-name {
+    font-size: 0.75rem;
+  }
+
+  table {
+    font-size: 0.85rem;
+  }
+}
+.blacklist {
+  display: none;
+  position: relative;
+  padding: 1.5rem;
+  background: #fef2f2;
+  border: 1px solid #f87171;
+  border-radius: 6px;
+  margin: 1rem 1.5rem;
+}
+.cancel-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  font-size: 1.25rem;
+  color: #dc2626;
+  cursor: pointer;
+  font-weight: 600;
+}
+.cancel-btn:hover {
+  color: #b91c1c;
+}
+.dialogboxDisplay {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+.dialogboxDisplay:last-child {
+  border-bottom: none;
+}
+.dialogboxDisplay p {
+  flex: 1;
+  margin: 0;
+  font-size: 0.95rem;
+  color: #1f2937;
+}
+.dialogboxDisplay button {
+  background: linear-gradient(135deg, #4f46e5, #06b6d4);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.dialogboxDisplay button:hover {
+  background: linear-gradient(135deg, #4338ca, #0891b2);
+  transform: translateY(-2px);
+}
+.dialogboxDisplay button:active {
+  transform: translateY(0);
+}
+.alert-dialog {
+  display: none;
+  position: relative;
+  padding: 1.5rem;
+  background: #fef2f2;
+  border: 1px solid #f87171;
+  border-radius: 6px;
+  margin: 1rem 1.5rem;
+  text-align: center;
+}
+#alertMessage {
+  font-size: 0.95rem;
+  color: #1f2937;
+  font-weight: 500;
+}
+.icon-trash {
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+.remove-btn:hover{
+  background: red;
+}
