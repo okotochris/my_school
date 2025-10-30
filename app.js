@@ -9,7 +9,6 @@ const Blacklist = require("./blacklist.js");
 const nuseryBlog = require("./nursery.js"); // nursery
 const nodemailer = require("nodemailer");
 const Studentpassport = require("./goldenPassport.js");
-const fs = require("fs");
 const path = require("path");
 const cors = require("cors");
 const session = require("express-session");
@@ -17,6 +16,7 @@ require("dotenv").config();
 const schoolPfofile = require("./schema/schoolProfile");
 const MongoStore = require("connect-mongo");
 const { router: newsRouter, fetchNigerianSchoolNews } = require('./routes/news');
+const generateSitemap = require('./sitemap/sitemap.js')
 const app = express();
 
 // middleware
@@ -40,6 +40,8 @@ mongoose
   .then((result) => {
     console.log("Connected to MongoDB");
     // fetchNigerianSchoolNews();
+    generateSitemap();
+
   })
   .catch((err) => {
     console.log("Error connecting to MongoDB:", err);
@@ -64,10 +66,10 @@ app.use(
 // Directory to store uploaded files
 const uploadDir = path.join(__dirname, "uploads");
 
-// Check if directory exists and create it if it doesn't
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true });
-}
+// // Check if directory exists and create it if it doesn't
+// if (!fs.existsSync(uploadDir)) {
+//   fs.mkdirSync(uploadDir, { recursive: true });
+// }
 
 //midle
 app.use(express.urlencoded({ extended: true }));
