@@ -1,50 +1,36 @@
-function toggleNav() {
-  const nav = document.getElementById("sideNav");
-  const overlay = document.getElementById("navOverlay");
-  const isMobile = window.innerWidth <= 768;
-  
-  if (isMobile) {
-    nav.classList.toggle("open");
-    overlay.classList.toggle("visible");
+const hamburger = document.querySelector('.hamburger');
+  const mobileMenu = document.querySelector('.mobile-menu');
+  const closeMenu = document.querySelector('.close-menu');
+
+  document.addEventListener('DOMContentLoaded', () => {
+  if (window.location.pathname !== '/' && window.location.pathname !== '/index.ejs') {
+    document.getElementById('result').href = '/#result-checker';
+     document.getElementById('home').href = '/';
   }
-}
+});
 
-function toggleUpdate() {
-  const menu = document.getElementById("updateMenu");
-  const toggle = document.querySelector(".dropdown-toggle .icon");
-  const isOpen = menu.classList.contains("open");
-  menu.classList.toggle("open");
-  toggle.textContent = isOpen ? "⮟" : "⮞";
-}
+  // Toggle mobile menu
+  hamburger.addEventListener('click', () => {
+    mobileMenu.style.display = 'block';
+    setTimeout(() => mobileMenu.classList.add('active'), 10);
+  });
 
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && window.innerWidth <= 768) {
-    document.getElementById("sideNav").classList.remove("open");
-    document.getElementById("navOverlay").classList.remove("visible");
-    const updateMenu = document.getElementById("updateMenu");
-    if (updateMenu.classList.contains("open")) {
-      updateMenu.classList.remove("open");
-      document.querySelector(".dropdown-toggle .icon").textContent = "⮟";
+  closeMenu.addEventListener('click', () => {
+    mobileMenu.classList.remove('active');
+    setTimeout(() => mobileMenu.style.display = 'none', 300);
+  });
+
+  // Hide mobile menu on resize to desktop
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+      mobileMenu.classList.remove('active');
+      mobileMenu.style.display = 'none';
     }
-  }
-});
+  });
 
-// Handle window resize to ensure correct nav state
-window.addEventListener("resize", () => {
-  const nav = document.getElementById("sideNav");
-  const overlay = document.getElementById("navOverlay");
-  if (window.innerWidth > 768) {
-    nav.classList.add("open");
-    overlay.classList.remove("visible");
-  } else {
-    nav.classList.remove("open");
-    overlay.classList.remove("visible");
-  }
-});
-
-// Set initial state on page load
-document.addEventListener("DOMContentLoaded", () => {
-  if (window.innerWidth > 768) {
-    document.getElementById("sideNav").classList.add("open");
-  }
-});
+  // Ensure mobile menu is hidden on page load for desktop
+  document.addEventListener('DOMContentLoaded', () => {
+    if (window.innerWidth > 768) {
+      mobileMenu.style.display = 'none';
+    }
+  });

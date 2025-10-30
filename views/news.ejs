@@ -1,4 +1,4 @@
-up date it i want to display all news 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,11 +8,15 @@ up date it i want to display all news
     <meta name="description" content="Latest news, announcements, and educational updates from MySchoolResult. Stay informed about new features, partnerships, and student success stories.">
     <meta name="keywords" content="school results, education news, student performance, academic updates, edtech">
     <link rel="canonical" href="https://myschoolresult.com/news">
-    <link rel="stylesheet" href="/styles/index.css">
-    <link rel="stylesheet" href="/styles/news.css">
+     <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+      <link rel="stylesheet" href="/styles/index.css">
+      <link rel="stylesheet" href="/styles/news.css">
 </head>
 <body>
-    <%- include('partials/header2') %>
+   <%- include('partials/header2') %>
 
     <section class="hero">
         <div class="container">
@@ -63,6 +67,7 @@ up date it i want to display all news
 
     <%- include('partials/footer') %>
     <script src="js/navigation.js"></script>
+    <script src="js/menu.js"></script>
   <script>
     let currentPage = 1;
     let hasMore = true;
@@ -249,10 +254,6 @@ up date it i want to display all news
       renderArticles(articles, false);
     });
   </script>
-
-
-
-
 
 </body>
 </html>

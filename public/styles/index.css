@@ -95,7 +95,7 @@ body {
   position: fixed;
   top: 0;
   right: 0;
-  width: 400px; /* Slightly wider for better spacing */
+  width: 300px; /* Slightly wider for better spacing */
   height: 100%;
   background: #1f2937;
   padding: 3rem 2rem;
