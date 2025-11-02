@@ -57,14 +57,7 @@ async function fetchAndSaveNews() {
   }
 }
 
-// ==========================
-// SCHEDULE DAILY REFRESH
-// ==========================
-// cron.schedule(REFRESH_INTERVAL, fetchAndSaveNews);
 
-// ==========================
-// SERVE ROUTE: GET NEWS
-// ==========================
 router.get('/api/news', async (req, res) => {
   try {
     const page = Math.max(parseInt(req.query.page) || 1, 1); // >=1
@@ -111,7 +104,7 @@ router.get('/api/news_details', async (req, res) => {
     }
 
     // Fetch the latest news batch (sorted by recency)
-    const latest = await News.findOne({ query: 'schools OR education Nigeria' }) // Use your QUERY const if shared
+    const latest = await News.findOne({ query: 'nigeria-school-news' }) // Use your QUERY const if shared
       .sort({ fetchedAt: -1 })
       .limit(1);
 
@@ -126,7 +119,7 @@ router.get('/api/news_details', async (req, res) => {
     }
 
     // Optional: Add a timestamp or metadata
-    console.log(article)
+
     res.json({
       ...article,
       fetchedAt: latest.fetchedAt, // Include batch timestamp for frontend use
