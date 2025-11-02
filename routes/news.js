@@ -135,20 +135,33 @@ router.get('/api/news_details', async (req, res) => {
 
 
 async function fetchNigerianSchoolNews() {
- 
   try {
-    // Build query for Nigerian education sources
+    // Build a broad query focused on Nigerian education
     const q = new QueryArticles({
       sourceUri: QueryItems.OR([
         "vanguardngr.com",
         "tribuneonlineng.com",
         "legit.ng",
         "thisdaylive.com",
+        "punchng.com",
+        "sunnewsonline.com",
+        "guardian.ng",
+        "thenationonlineng.net",
       ]),
-      keyword: QueryItems.OR(["JAMB", "WAEC", "NECO", "school", "education"]),
+      keyword: QueryItems.OR([
+        "JAMB",
+        "WAEC",
+        "NECO",
+        "school",
+        "education",
+        "university",
+        "students",
+        "teachers",
+        "admission",
+      ]),
       lang: "eng",
       sortBy: "date",
-      maxItems: 10, // number of articles to fetch
+      maxItems: 20, // Fetch a healthy mix
     });
 
     // Fetch articles
@@ -156,11 +169,11 @@ async function fetchNigerianSchoolNews() {
     const articles = response.articles?.results;
 
     if (!articles || articles.length === 0) {
-      console.log("⚠️ No Nigerian school news found.");
+      console.log("⚠️ No school-related news found.");
       return;
     }
 
-    // Map articles to a clean structure
+    // Clean and keep all results (even if not strictly school news)
     const formattedArticles = articles.map((article) => ({
       title: article.title,
       url: article.url,
@@ -171,22 +184,24 @@ async function fetchNigerianSchoolNews() {
       image: article.image || "",
     }));
 
-    // Save to MongoDB using upsert
+    // Save to MongoDB using upsert (replace old data)
     await News.updateOne(
       { query: "nigeria-school-news" },
       { $set: { articles: formattedArticles, fetchedAt: new Date() } },
       { upsert: true }
     );
 
-    console.log(`✅ Saved ${formattedArticles.length} articles to MongoDB`);
-
+    console.log(`✅ Saved ${formattedArticles.length} school-related articles to MongoDB`);
   } catch (error) {
     console.error("❌ Fetch failed:", error.message);
   }
 }
-cron.schedule('0 2 * * *', async () => {
-  console.log('🕑 Running daily Nigerian school news fetch...');
+
+
+cron.schedule('0 2 */2 * *', async () => {
+  console.log('🕑 Running Nigerian school news fetch (every 2 days)...');
   await fetchNigerianSchoolNews();
 });
+
 
 module.exports = { router, fetchNigerianSchoolNews };
