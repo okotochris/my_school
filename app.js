@@ -17,6 +17,7 @@ const schoolPfofile = require("./schema/schoolProfile");
 const MongoStore = require("connect-mongo");
 const { router: newsRouter, fetchNigerianSchoolNews } = require('./routes/news');
 const generateSitemap = require('./sitemap/sitemap.js')
+const resultGuide = require('./routes/resultCheckGuide.js')
 const app = express();
 
 // middleware
@@ -780,6 +781,7 @@ app.get('/summary', isAuthenticated, async (req, res)=>{
   }
 })
 app.use(newsRouter)
+app.use(resultGuide)
 app.use((req, res) => {
   res.status(404).render("page_not_found");
 });

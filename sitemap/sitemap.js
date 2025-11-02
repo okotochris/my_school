@@ -13,6 +13,12 @@ async function generateSitemap() {
   smStream.write({ url: '/', changefreq: 'daily', priority: 1.0 });
   smStream.write({ url: '/about', changefreq: 'weekly', priority: 0.8 });
   smStream.write({ url: '/contact', changefreq: 'monthly', priority: 0.5 });
+  smStream.write({ url: '/result_check_guide', changefreq: 'monthly', priority: 0.5 });
+  smStream.write({ url: '/neco', changefreq: 'monthly', priority: 0.5 }); 
+  smStream.write({ url: '/waec', changefreq: 'monthly', priority: 0.5 });
+  smStream.write({ url: '/jamb', changefreq: 'monthly', priority: 0.5 });
+  smStream.write({ url: '/post-utme', changefreq: 'monthly', priority: 0.5 });
+  smStream.write({ url: '/nabteb', changefreq: 'monthly', priority: 0.5 });
   smStream.write({ url: '/news', changefreq: 'daily', priority: 0.9 });
 
   // Fetch latest news document (no query filter)
