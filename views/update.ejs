@@ -99,7 +99,7 @@
             <fieldset class="form-group gender">
               <legend>Gender</legend>
               <label><input type="radio" value="MALE" name="gender" id="male" required /> Male</label>
-              <label><input type="radio" value="FEMALE" name="gender" id="false" /> Female</label>
+              <label><input type="radio" value="FEMALE" name="gender" id="female" /> Female</label>
               <span class="error-message"></span>
             </fieldset>
 
@@ -115,41 +115,11 @@
       </div>
     </main>
   </div>
-  <div class="cover"><span id="loading"></span></div>
+    <div class="cover">
+        <dev id="loading"></dev>
+    </div>
   <script src="/js/menu.js"></script>
   <script src="js/updateStudentRecord.js"></script>
-  <script>
-    // Basic form validation (adapted from register structure)
-    document.getElementById('updateStudentForm').addEventListener('submit', function(e) {
-      const form = e.target;
-      let isValid = true;
-      const inputs = form.querySelectorAll('input[required], select[required]');
-      
-      inputs.forEach(input => {
-        const errorMessage = input.nextElementSibling;
-        if (!input.value.trim()) {
-          isValid = false;
-          errorMessage.textContent = 'This field is required';
-          input.classList.add('error');
-        } else {
-          errorMessage.textContent = '';
-          input.classList.remove('error');
-        }
-      });
-
-      const gender = form.querySelector('input[name="gender"]:checked');
-      const genderError = form.querySelector('.gender .error-message');
-      if (!gender) {
-        isValid = false;
-        genderError.textContent = 'Please select a gender';
-      } else {
-        genderError.textContent = '';
-      }
-
-      if (!isValid) {
-        e.preventDefault();
-      }
-    });
-  </script>
+ 
 </body>
 </html>

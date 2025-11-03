@@ -357,7 +357,7 @@ app.get("/studentinfomation", async (req, res) => {
   let studentId = req.query.studnetId;
   try {
     let info = await Studentpassport.findOne({ studentId });
-    console.log(info)
+  
     res.json(info);
   } catch (err) {
     console.log(err);
@@ -399,7 +399,8 @@ app.get("/getclassid", async (req, res) => {
 });
 
 app.patch("/update-student", async (req, res) => {
-  const { studentId, userName, addmissionNo, dob, classN, gender } = req.body; // Capture fields from the request body
+  const { studentId, userName, addmissionNo, dob, classN, gender } = req.body; 
+  console.log(req.body)
   try {
     const updatedStudent = await Studentpassport.findOneAndUpdate(
       { studentId }, // Use studentId to identify the student
@@ -407,6 +408,7 @@ app.patch("/update-student", async (req, res) => {
         userName,
         addmissionNo,
         dob,
+        gender,
         class: classN,
         schoolName: req.session.school,
       },

@@ -8,14 +8,15 @@ const router = express.Router()
 
 
 router.post("/admin_form", async (req, res) => {
-  const { user, school } = req.body
+  const { user_name, school } = req.body
 
   const Ablog = new ABlog(req.body);
   Ablog.save()
     .then((result) => {
        req.session.visited = true;
-       req.session.user = user;
+       req.session.user = user_name;
        req.session.school = school;
+        req.session.role = 'admin'
        req.session.fees = 38000;
        res.status(200).json("/admin")
     })
@@ -27,7 +28,6 @@ router.post("/admin_form", async (req, res) => {
 router.post("/login", async (req, res) => {
   const user = req.body.user;
   const password = req.body.password;
-
   try {
     let data = await ABlog.findOne({ email: user, password: password });
     if(!data){

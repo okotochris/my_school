@@ -12,6 +12,8 @@ let loadingCover = document.querySelector('.cover');
 let loadingSpinner = document.getElementById('loading'); // Assuming .loading inside .cover
 
 // Create error dialog modal (simple JS-based modal)
+  var color =  '#dc2626'
+    var text = 'Error'
 function createErrorDialog() {
   // Remove existing dialog if any
   const existingDialog = document.getElementById('errorDialog');
@@ -34,7 +36,7 @@ function createErrorDialog() {
     border: 1px solid #e5e7eb;
   `;
   dialog.innerHTML = `
-    <h3 style="color: #dc2626; margin-bottom: 1rem;">Error</h3>
+    <h3 style="color:${color}; margin-bottom: 1rem;">${text}</h3>
     <p id="errorMessage" style="margin-bottom: 1rem; color: #374151;"></p>
     <button onclick="this.closest('#errorDialog').remove()" style="background: #dc2626; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer;">Close</button>
   `;
@@ -50,7 +52,7 @@ function showError(message) {
 
 // Show loading indicator
 function showLoading() {
-  loadingCover.style.display = 'block';
+  loadingCover.style.display = 'flex';
   loadingSpinner.style.display = 'block';
 }
 
@@ -124,7 +126,7 @@ updateStudentForm.addEventListener('submit', async (e) => {
   const classValue = classN.value;
   const gender = male.checked ? 'MALE' : (female.checked ? 'FEMALE' : '');
   const passportFile = passportInput.files[0]; // Get selected file
-
+   const data = {studentId, userName, addmissionNo, dobValue, classValue,gender}
   // Basic client-side validation
   if (!studentId) {
     showError('Student ID is required.');
@@ -149,29 +151,32 @@ updateStudentForm.addEventListener('submit', async (e) => {
   showLoading();
 
   try {
-    // Use FormData for file upload support
-    const formData = new FormData();
-    formData.append('studentId', studentId);
-    formData.append('userName', userName);
-    formData.append('addmissionNo', addmissionNo);
-    formData.append('dob', dobValue);
-    formData.append('classN', classValue);
-    formData.append('gender', gender);
-    if (passportFile) {
-      formData.append('passport', passportFile);
-    }
+    // // Use FormData for file upload support
+    // const formData = new FormData();
+    // formData.append('studentId', studentId);
+    // formData.append('userName', userName);
+    // formData.append('addmissionNo', addmissionNo);
+    // formData.append('dob', dobValue);
+    // formData.append('classN', classValue);
+    // formData.append('gender', gender);
+    // if (passportFile) {
+    //   formData.append('passport', passportFile);
+    // }
 
     const response = await fetch('/update-student', {
       method: 'PATCH',
-      body: formData // No Content-Type header; browser sets multipart/form-data
+      headers:{"Content-Type":"application/json"},
+      body: JSON.stringify(data)
     });
 
     const result = await response.json();
     
     if (response.ok) {
       // Success: You could show a success dialog here similarly
-      alert('Student updated successfully!'); // Or replace with success modal
-      console.log('Updated student:', result);
+     
+      color = '#173de6ff'
+      text = 'Uploaded'
+      showError(" Updated successfuly")
       // Optionally reset form or redirect
       updateStudentForm.reset();
     } else {
@@ -185,3 +190,4 @@ updateStudentForm.addEventListener('submit', async (e) => {
     hideLoading();
   }
 });
+

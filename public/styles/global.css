@@ -699,3 +699,48 @@ tbody tr:hover {
 .remove-btn:hover{
   background: red;
 }
+/* Loading Cover (Overlay) */
+.cover {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+  z-index: 999;
+  display: none; /* Hidden by default */
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.3s ease; /* Smooth fade in/out */
+}
+
+.cover.show { /* Add 'show' class via JS to fade in */
+  display: flex;
+  opacity: 1;
+}
+
+/* Loading Spinner (Centered Animation) */
+#loading {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: 4px solid #e5e7eb; /* Light border matching global */
+  border-top: 4px solid #4f46e5; /* Primary color for spin */
+  border-radius: 50%;
+  animation: spin 1s linear infinite; /* Continuous rotation */
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive: Scale down on small screens */
+@media (max-width: 480px) {
+  #loading {
+    width: 40px;
+    height: 40px;
+    border-width: 3px;
+  }
+} 
