@@ -15,7 +15,9 @@
       <li><a href="/studentid"><span class="icon">🎫</span> Get Student ID</a></li>
       <li><a href="/generateid"><span class="icon">🧾</span> Register Student</a></li>
       <li><a href="/blacklist"><span class="icon">🚫</span> Blacklist</a></li>
-      <li><a href="/staffmanagement"><span class="icon">👩‍🏫</span> Staff Management</a></li>
+      <% if(role == 'admin'){ %>
+        <li><a href="/staffmanagement"><span class="icon">👩‍🏫</span> Staff Management</a></li>
+      <%} %>
     </ul>
 
     <div class="dropdown">

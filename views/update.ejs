@@ -1,72 +1,155 @@
 <!DOCTYPE html>
-<html lang="em">
-    <%- include('./partials/head.ejs') %>
-    <body>
-        <div class="menu">
-            <div></div>
-            <div></div>
-            <div></div>
-                
-        </div>
-        <div class="admin-container">
-            <%- include('./partials/navigation.ejs') %>
-            <div class="add_form">
-                <p>UPDATE STUDENT RECORED</p>
-                <form>
-                  <!-- Student ID Field -->
-                  <p><input type="text" id="studentId" name="studentId" placeholder="Student ID" required /></p>
-                  <p><button id="studentDetails">STUDENT INFO</button></p>
-                  <!-- User Name Field -->
-                  <input type="text" id="newName" name="newName" placeholder="New Name" ></p>
-                
-                    <!-- Admission Number Field -->
-                    <p><input type="text" name="addmissionNo" id="addmissionNo" placeholder="Admission Number" /></p>
-                    
-                    <!-- Date of Birth Field -->
-                    <p><input type="date" name="dob" id="dob" placeholder="Date of Birth" /></p>
-                    
-                                 <p>
-                                    <select name="class" id="classN">
-                                        <option value="">Selet Class</option>
-                                        <option value="SS 3">SS 3</option>
-                                        <option value="SS 2">SS 2</option>
-                                        <option value="SS 1">SS 1</option>
-                                        <option value="JSS 3">JSS 3</option>
-                                        <option value="JSS 2">JSS 2</option>
-                                        <option value="JSS 1">JSS 1</option>
-                                        <option value="BASIC 6">BASIC 6</option>
-                                        <option value="BASIC 5">BASIC 5</option>
-                                        <option value="BASIC 4">BASIC 4</option>
-                                        <option value="BASIC 3">BASIC 3</option>
-                                        <option value="BASIC 2">BASIC 2</option>
-                                        <option value="BASIC 1">BASIC 1</option>
-                                        <option value="NURSERY 3">NURSERY 3</option>
-                                        <option value="NURSERY 2">NURSERY 2</option>
-                                        <option value="NURSERY 1">NURSERY 1</option>
-                                        <option value="PRE-NURSERY">PRE-NURSERY</option>
-                                    </select>
-                                </p>
-                <div class="gender">
-                    <label for="male">MALE</label>
-                    <input type="radio" value="MALE" name="gender" id="male" />
-                    <label for="female">FEMALE</label>
-                    <input type="radio" value="FEMALE" name="gender" id="female" />
-                </div>
-                 <!-- Passport File Upload -->
-                <p><input type="file" name="passport" id="passport"/></p>    
-                
-                <!-- Submit Button -->
-                <button id="updateNameForm">Update Name</button>
-            </form>
-            
-        </div> 
-        </div>
-       <div class="cover">
-            <div class="loading"></div>
-       </div>
-    </body>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZRDY8JQBQ7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ZRDY8JQBQ7');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/styles/global.css" />
+  <title>Update Student Record</title>
+</head>
+<body>
+  <%- include('./partials/header.ejs') %>
+  <div class="admin-container">
+    <%- include('./partials/navigation.ejs') %>
+    <main class="section">
+      <div class="container center-container">
+        <div class="form-container">
+          <div class="form-header">
+            <h2>Update Student Record</h2>
+          </div>
+          <form action="/update-student" method="post" enctype="multipart/form-data" id="updateStudentForm" novalidate>
+            <div class="form-group">
+              <label for="studentId">Student ID</label>
+              <input
+                type="text"
+                id="studentId"
+                name="studentId"
+                placeholder="Enter Student ID (e.g., STU001)"
+                required
+                autocomplete="off"
+              />
+              <span class="error-message"></span>
+            </div>
 
-   <script src="Java Script/updateStudentRecord.js"></script>  
-   <script src="Java Script/menu.js"></script>
+            <div class="form-group">
+              <button type="button" id="studentDetails" class="button">Fetch Student Info</button>
+            </div>
+
+            <div class="form-group">
+              <label for="newName">New Name</label>
+              <input
+                type="text"
+                id="newName"
+                name="newName"
+                placeholder="Enter updated full name"
+                autocomplete="off"
+              />
+              <span class="error-message"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="addmissionNo">Admission Number</label>
+              <input
+                type="text"
+                id="addmissionNo"
+                name="addmissionNo"
+                placeholder="Admission Number"
+                autocomplete="off"
+              />
+              <span class="error-message"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="dob">Date of Birth</label>
+              <input type="date" id="dob" name="dob" />
+              <span class="error-message"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="classN">Class</label>
+              <select name="class" id="classN" required>
+                <option value="">Select Class</option>
+                <option value="SS 3">SS 3</option>
+                <option value="SS 2">SS 2</option>
+                <option value="SS 1">SS 1</option>
+                <option value="JSS 3">JSS 3</option>
+                <option value="JSS 2">JSS 2</option>
+                <option value="JSS 1">JSS 1</option>
+                <option value="BASIC 6">BASIC 6</option>
+                <option value="BASIC 5">BASIC 5</option>
+                <option value="BASIC 4">BASIC 4</option>
+                <option value="BASIC 3">BASIC 3</option>
+                <option value="BASIC 2">BASIC 2</option>
+                <option value="BASIC 1">BASIC 1</option>
+                <option value="NURSERY 3">NURSERY 3</option>
+                <option value="NURSERY 2">NURSERY 2</option>
+                <option value="NURSERY 1">NURSERY 1</option>
+                <option value="PRE-NURSERY">PRE-NURSERY</option>
+              </select>
+              <span class="error-message"></span>
+            </div>
+
+            <fieldset class="form-group gender">
+              <legend>Gender</legend>
+              <label><input type="radio" value="MALE" name="gender" id="male" required /> Male</label>
+              <label><input type="radio" value="FEMALE" name="gender" id="false" /> Female</label>
+              <span class="error-message"></span>
+            </fieldset>
+
+            <div class="form-group">
+              <label for="passport">Passport Photo</label>
+              <input type="file" id="passport" name="passport" accept="image/*" />
+              <span class="error-message"></span>
+            </div>
+
+            <button type="submit" class="button">Update Record</button>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+  <div class="cover"><span id="loading"></span></div>
+  <script src="/js/menu.js"></script>
+  <script src="js/updateStudentRecord.js"></script>
+  <script>
+    // Basic form validation (adapted from register structure)
+    document.getElementById('updateStudentForm').addEventListener('submit', function(e) {
+      const form = e.target;
+      let isValid = true;
+      const inputs = form.querySelectorAll('input[required], select[required]');
+      
+      inputs.forEach(input => {
+        const errorMessage = input.nextElementSibling;
+        if (!input.value.trim()) {
+          isValid = false;
+          errorMessage.textContent = 'This field is required';
+          input.classList.add('error');
+        } else {
+          errorMessage.textContent = '';
+          input.classList.remove('error');
+        }
+      });
+
+      const gender = form.querySelector('input[name="gender"]:checked');
+      const genderError = form.querySelector('.gender .error-message');
+      if (!gender) {
+        isValid = false;
+        genderError.textContent = 'Please select a gender';
+      } else {
+        genderError.textContent = '';
+      }
+
+      if (!isValid) {
+        e.preventDefault();
+      }
+    });
+  </script>
+</body>
 </html>
-

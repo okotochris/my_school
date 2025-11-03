@@ -1,14 +1,14 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const multer = require("multer");
-const Blog = require("./data"); //junior class
-const SBlog = require("./datas"); // sinior class
-const ABlog = require("./admin.js");
-const PBlog = require("./primary.js"); //basic class
-const Blacklist = require("./blacklist.js");
-const nuseryBlog = require("./nursery.js"); // nursery
+const Blog = require("./schema/data.js"); //junior class
+const SBlog = require("./schema/datas.js"); // sinior class
+const ABlog = require("./schema/admin.js");
+const PBlog = require("./schema/primary.js"); //basic class
+const Blacklist = require("./schema/blacklist.js");
+const nuseryBlog = require("./schema/nursery.js"); // nursery
 const nodemailer = require("nodemailer");
-const Studentpassport = require("./goldenPassport.js");
+const Studentpassport = require("./schema/goldenPassport.js");
 const path = require("path");
 const cors = require("cors");
 const session = require("express-session");
@@ -18,6 +18,8 @@ const MongoStore = require("connect-mongo");
 const { router: newsRouter, fetchNigerianSchoolNews } = require('./routes/news');
 const generateSitemap = require('./sitemap/sitemap.js')
 const resultGuide = require('./routes/resultCheckGuide.js')
+const authRoute = require('./routes/auth.js')
+const isAuthenticated = require('./utility/authenticated.js')
 const app = express();
 
 // middleware
@@ -120,49 +122,10 @@ app.get('/about', (req, res)=>{
 
 //adimin page to loging to result upload portal
 app.get("/admin", isAuthenticated, (req, res) => {
-  res.render("admin", { school: req.session.school, fees: req.session.fees });
+   const role= req.session.role
+  res.render("admin", { school: req.session.school, fees: req.session.fees, role });
 });
 
-//CHECKING IF USER HAS LOGIN
-function isAuthenticated(req, res, next) {
-  if (req.session.user) {
-    next();
-  } else {
-    req.session.returnTo = req.originalUrl; // Store the original URL
-    if (req.originalUrl == "/myschool") {
-      res.redirect("school");
-    }
-    res.redirect("login");
-  }
-}
-
-app.post("/login", async (req, res) => {
-  const user = req.body.user;
-  const password = req.body.password;
-  try {
-    let data = await ABlog.findOne({ email: user, password: password });
-    if(!data){
-      res.status(404).json({msg:"Invalid login details"})
-    }
-    let schoolName = data.school 
-    let schoolFee = await schoolPfofile.findOne({schoolName})
-    if (data && schoolFee) {
-      req.session.visited = true;
-      req.session.user = user;
-      const school = data.school || "Khristal Tech";
-      const fees = schoolFee.fees;
-      req.session.school = school;
-      req.session.fees = fees;
-      const redirectTo = req.session.returnTo || "/admin";
-      delete req.session.returnTo; // Clear returnTo after use
-      res.status(200).json(redirectTo);
-    } else {
-      res.redirect("login");
-    }
-  } catch (err) {
-    console.log(err);
-  }
-});
 // API FOR SCHOOL MANAGEMENT SYSTEM
 app.get("/myschool", isAuthenticated, (req, res) => {
   res.render("myschool");
@@ -173,27 +136,15 @@ app.get("/school", (req, res) => {
 app.get("/admin_form", (req, res) => {
   res.render("admin_form");
 });
-//saving admin login
-app.post("/admin_form", (req, res) => {
-  req.body.school = req.session.school;
-  const Ablog = new ABlog(req.body);
-  console.log(req.body);
-  Ablog.save()
-    .then((result) => {
-      console.log("sent");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  res.render("login");
-});
+
 
 //BLACKLIST API
 app.get("/blacklist", isAuthenticated, async (req, res) => {
+   const role= req.session.role
   try {
     let school = req.session.school;
     const data = await Blacklist.find({ school: school });
-    res.render("blacklist", { data, school: req.session.school, fees: req.session.fees });
+    res.render("blacklist", { data, school: req.session.school, fees: req.session.fees, role });
   } catch (err) {
     console.log(err);
   }
@@ -402,9 +353,11 @@ app.post("/result", async (req, res) => {
 
 //GET STUDENT INFORMATION BASE ON ID
 app.get("/studentinfomation", async (req, res) => {
+
   let studentId = req.query.studnetId;
   try {
-    info = await Studentpassport.findOne({ studentId });
+    let info = await Studentpassport.findOne({ studentId });
+    console.log(info)
     res.json(info);
   } catch (err) {
     console.log(err);
@@ -472,15 +425,23 @@ app.patch("/update-student", async (req, res) => {
 
 //UPDATING STUDENT RECORD PAGE
 app.get("/update", isAuthenticated, (req, res) => {
-  res.render("update", { school: req.session.school, fees: req.session.fees });
+  const role= req.session.role
+  res.render("update", { school: req.session.school, fees: req.session.fees, role });
+  
 });
 //generating student id and passport page
 app.get("/generateid", isAuthenticated, (req, res) => {
-  res.render("generateid", { school: req.session.school, fees: req.session.fees });
+  const role= req.session.role
+  res.render("generateid", { school: req.session.school, fees: req.session.fees, role });
 });
 app.get('/staffmanagement', isAuthenticated, async (req, res)=>{
-  const staff = await ABlog.find({school:req.session.school})
-  res.render('staff', { school: req.session.school, fees: req.session.fees, staff })
+  const role= req.session.role
+  if(role !== "admin"){
+    res.redirect('/admin')
+  }
+
+  const staff = (await ABlog.find({school:req.session.school}))
+  res.render('staff', { school: req.session.school, fees: req.session.fees, staff, role })
 })
 
 app.delete('/deletestaff', async (req, res)=>{
@@ -562,12 +523,14 @@ app.get("/junior", (req, res) => {
 });
 //STUDENT ID FORM
 app.get("/studentid", isAuthenticated, (req, res) => {
-  res.render("studentid", { school: req.session.school, fees: req.session.fees });
+   const role= req.session.role
+  res.render("studentid", { school: req.session.school, fees: req.session.fees, role });
 });
 
 //STUDENT GRADING
 app.get("/studentgrade", (req, res) => {
-  res.render("studentgrade", { school: req.session.school, fees: req.session.fees });
+   const role= req.session.role
+  res.render("studentgrade", { school: req.session.school, fees: req.session.fees, role });
 });
 //UPDATE STUDENT CLASS
 app.patch("/updatestudentclass", async (req, res) => {
@@ -782,6 +745,7 @@ app.get('/summary', isAuthenticated, async (req, res)=>{
 })
 app.use(newsRouter)
 app.use(resultGuide)
+app.use(authRoute)
 app.use((req, res) => {
   res.status(404).render("page_not_found");
 });

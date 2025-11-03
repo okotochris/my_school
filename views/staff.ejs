@@ -96,7 +96,9 @@
                       <td><%= item.email.length > 15 ? item.email.substring(0, 15) + '...' : item.email %></td>
                       <td>
                         <span class="action delete-btn" data-id="<%= item._id %>" aria-label="Delete <%= item.user_name %>">
-                          <span class="icon-trash">🗑️</span>
+                          <% if(item.role !== 'admin'){ %>
+                            <span class="icon-trash">🗑️</span>
+                         <% } %>
                         </span>
                       </td>
                     </tr>

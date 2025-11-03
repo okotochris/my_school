@@ -20,6 +20,9 @@ let blogSchema = new Schema({
     number:{
         type:String
     },
+    role:{
+        type:String
+    },
    
    
 }, {timestamps: true})

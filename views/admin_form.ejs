@@ -1,37 +1,117 @@
 <!DOCTYPE html>
 
 <html>
-    <%- include('./partials/head.ejs') %>
+        <head>
+        <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZRDY8JQBQ7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-ZRDY8JQBQ7');
+</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="My School Result - Check academic results online instantly. Empowering students, parents, and schools with secure, reliable result management.">
+  <meta name="keywords" content="school results, academic results, online result checker, student portal, school management">
+  <meta name="author" content="My School Result">
+  <title>My School Result - Check Academic Results Online</title>
+  <link rel="stylesheet" href="/styles/index.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+</head>
     <body>
-        <%- include('./partials/header.ejs') %>
-        <div class="add_form">
-            <form action="/admin_form" method="post" >
-                <p><input type="text" autocomplete="off" placeholder="Enter your full name" name="user_name" required/></p>
-                <p><input type="text"  autocomplete="off" id="school" name="school"  placeholder="School Name" required/></p>
+        <%-include('partials/header2') %>
+        <div style="height:100px"></div>
+        <section id="result-checker" class="result-checker">
+             <div class="container"></div>
+            <form id="login-form"  class="result-form" >
+                <div class="form-group">
+                     <label for="name">Full Name</label>
+                     <input type="text" autocomplete="off" placeholder="Enter your full name" name="user_name" id="user_name" required/>
+                </div>
+                <div class="form-group">
+                    <label for="school">School Name</label>
+                    <input type="text" autocomplete="off" id="school" name="school" value="Golden hills" readonly placeholder="School Name" required/>
+                </div>
+                <div class="form-group">
+                     <label for="email">Email</label>
+                     <input type="email" placeholder="Enter your email" name="email" id="email" autocomplete="off" required />
+                </div>
+                <div class="form-group">
+                     <label for="role">Role</label>
+                     <input type="text" name="role" readonly value="admin" id="role" required />
+                </div>
+                 <div class="form-group">
+                    <label for="Gender">Gender</label>
+                    <select name ="gender" id="gender" required>
+                        <option value="">Select Gender</option>
+                        <option value="Female">Female</option>
+                        <option value="Male">Male</option>
+                    </select>
                 
-                <p> <input type="email" placeholder="Enter your email" name="email" autocomplete="off" required /></p>
-                <p><input type="number" placeholder="Enter your phone number" name="number"  autocomplete="off" required /></p>
-                <select name ="gender" required>
-                    <option value="">Select Gender</option>
-                    <option value="Female">Female</option>
-                    <option value="Male">Male</option>
-                </select>
+                 <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" autocomplete="off" placeholder="Password" name="password" id="password" required /></p>
+                 </div>
                 
-                <p><input type="password" autocomplete="off" placeholder="Password" name="password" required /></p>
-                <button>Register a new account</button>
+                <p>
+                <button  class="form-button" id="submit-button" >Create Account</button>
             </form>
         </div>
-        <script>
-            let schoolName = document.getElementById('schoolName')
-            let school = document.getElementById('school')
+        </section>
+    <%-include("partials/footer") %>
+    <script>
+        const form = document.getElementById('login-form');
+        const button =document.getElementById('submit-button')
+       
+        form.addEventListener('submit', async (e) => {
+        e.preventDefault(); // ✅ prevent default form submission
 
-            school.onfocus= ()=>{
-                let schoolInput = school.value;
-              let comfirmSchool = schoolName.innerText.find((schoolInput, school)=>{
-                return school
-              })
-               console.log(comfirmSchool)
+        const user_name = document.getElementById("user_name").value
+        const email = document.getElementById('email').value;
+        const school = document.getElementById('school').value
+        const role = document.getElementById('role').value;
+        const password = document.getElementById('password').value
+        button.innerText = "loading..."
+        button.disabled = true;
+        try {
+            const res = await fetch('/admin_form', {
+                method: "POST",
+                headers: {
+                    'Content-Type': "application/json"
+                },
+                body: JSON.stringify({user_name, email, school, role, password })
+            });
+            const data = await res.json();
+            if(res.ok){
+            return window.location.href = `${data}`;
             }
-        </script>
+            button.style.backgroundColor = 'red'
+            button.innerText = data.msg
+        } catch (error) {
+            button.style.backgroundColor = 'red'
+            button.innerText = 'server error'
+            console.error(error);
+        }finally{
+             button.disabled = false;
+        }
+        });
+        function reset(){
+            button.style.backgroundColor = ' #0ea5e9'
+            button.disabled = false;
+            button.innerText = "Login"
+        }
+        document.getElementById('email').oninput=()=>{
+            reset()
+        }
+        document.getElementById('password').oninput=()=>{
+            reset()
+        }
+    </script>
+    <script src="js/navigation.js"></script>
+     <script src="js/menu2.js"></script>
     </body>
 </html>
