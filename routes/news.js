@@ -5,6 +5,7 @@ const News = require('../schema/news');
 const { EventRegistry, QueryArticles, QueryItems } = require("eventregistry");
 var erBase = require("eventregistry"); 
 const er = new EventRegistry({ apiKey: "836ebeeb-6a91-4ec5-b945-dd802b0119b9" });
+const Newsupdate = require('../schema/updatedSchema')
 
 const router = express.Router();
 
@@ -93,6 +94,30 @@ router.get('/api/news', async (req, res) => {
   }
 });
 
+router.get('/api/updated/news', async (req, res) => {
+   try {
+    const page = Math.max(parseInt(req.query.page) || 1, 1);
+    const limit = Math.min(Math.max(parseInt(req.query.limit) || 10, 1), 50);
+    const skip = (page - 1) * limit;
+
+    const total = await Newsupdate.countDocuments();
+    const articles = await Newsupdate.find()
+      .sort({ dateTime: -1 })
+      .skip(skip)
+      .limit(limit);
+
+    res.json({
+      articles,
+      currentPage: page,
+      totalPages: Math.ceil(total / limit),
+      total,
+    });
+  } catch (error) {
+    console.error('❌ Error fetching paginated news:', error.message);
+    res.status(500).json({ error: 'Failed to load news' });
+  }
+});
+
 // GET /api/news/:id
 router.get('/api/news_details', async (req, res) => {
  
@@ -131,12 +156,48 @@ router.get('/api/news_details', async (req, res) => {
   }
 });
 
+router.get('/api/updated/news_details', async (req, res) => {
+   try {
+    const { id } = req.query;
+    const article = await Newsupdate.findById(id);
 
+    if (!article) return res.status(404).json({ error: 'Article not found' });
+    res.json(article);
+  } catch (error) {
+    console.error('❌ Error fetching article details:', error.message);
+    res.status(500).json({ error: 'Failed to load article' });
+  }
+});
 
 
 async function fetchNigerianSchoolNews() {
   try {
-    // Build a broad query focused on Nigerian education
+    // Helper: Detect category based on article title or content
+    function getCategory(article) {
+      const text = `${article.title} ${article.body}`.toLowerCase();
+
+      if (text.includes("waec")) return "WAEC";
+      if (text.includes("jamb")) return "JAMB";
+      if (text.includes("neco")) return "NECO";
+      if (text.includes("nabteb")) return "NABTEB";
+      if (text.includes("post utme") || text.includes("utme")) return "Post UTME";
+      if (
+        text.includes("university") ||
+        text.includes("polytechnic") ||
+        text.includes("college") ||
+        text.includes("school") ||
+        text.includes("student") ||
+        text.includes("teacher") ||
+        text.includes("admission") ||
+        text.includes("education") ||
+        text.includes("asuu")
+      )
+        return "Education";
+
+      return "General";
+    }
+
+    // Build the query for Nigerian education-related sources
     const q = new QueryArticles({
       sourceUri: QueryItems.OR([
         "vanguardngr.com",
@@ -158,50 +219,62 @@ async function fetchNigerianSchoolNews() {
         "students",
         "teachers",
         "admission",
+        "NABTEB",
       ]),
       lang: "eng",
       sortBy: "date",
-      maxItems: 20, // Fetch a healthy mix
+      maxItems: 20,
     });
 
-    // Fetch articles
+    // Fetch from API
     const response = await er.execQuery(q);
-    const articles = response.articles?.results;
+    const articles = response.articles?.results || [];
 
-    if (!articles || articles.length === 0) {
+    if (articles.length === 0) {
       console.log("⚠️ No school-related news found.");
       return;
     }
 
-    // Clean and keep all results (even if not strictly school news)
-    const formattedArticles = articles.map((article) => ({
-      title: article.title,
-      url: article.url,
-      dateTime: article.dateTimePub || article.dateTime,
-      body: article.body || "No content",
-      source: article.source?.title || "Unknown",
-      authors: article.authors || [],
-      image: article.image || "",
-    }));
+    // Process and store each article as an individual document
+    for (const article of articles) {
+      const formattedArticle = {
+        title: article.title,
+        url: article.url,
+        dateTime: article.dateTimePub || article.dateTime,
+        body: article.body || "No content available.",
+        source: article.source?.title || "Unknown",
+        authors: article.authors || [],
+        image: article.image || "/images/placeholder-news.jpg", // ✅ fallback image
+        category: getCategory(article), // ✅ smart category detection
+        fetchedAt: new Date(),
+      };
 
-    // Save to MongoDB using upsert (replace old data)
-    await News.updateOne(
-      { query: "nigeria-school-news" },
-      { $set: { articles: formattedArticles, fetchedAt: new Date() } },
-      { upsert: true }
-    );
+      // Upsert (create or update by URL)
+      await Newsupdate.updateOne(
+        { url: formattedArticle.url },
+        { $set: formattedArticle },
+        { upsert: true }
+      );
+    }
 
-    console.log(`✅ Saved ${formattedArticles.length} school-related articles to MongoDB`);
+    console.log(`✅ Upserted ${articles.length} Nigerian school-related news articles.`);
   } catch (error) {
     console.error("❌ Fetch failed:", error.message);
   }
 }
 
 
+
 cron.schedule('0 2 */2 * *', async () => {
   console.log('🕑 Running Nigerian school news fetch (every 2 days)...');
   await fetchNigerianSchoolNews();
 });
+async function cleanupOldNews() {
+  const cutoff = new Date();
+  cutoff.setDate(cutoff.getDate() - 30);
+  const result = await News.deleteMany({ fetchedAt: { $lt: cutoff } });
+  console.log(`🧹 Removed ${result.deletedCount} old news articles`);
+}
 
 
 module.exports = { router, fetchNigerianSchoolNews };

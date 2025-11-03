@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     const response = await fetch("/api/news");
     const data = await response.json();
-
+    console.log(data)
     // Store full articles globally for easy access in click handlers
     window.__LATEST_NEWS = data.articles || [];
 
