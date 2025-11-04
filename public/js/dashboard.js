@@ -1,3 +1,55 @@
+document.addEventListener("DOMContentLoaded", async () => {
+  try {
+    // Check cache
+    const cached = localStorage.getItem("analysisData");
+    const cacheTime = localStorage.getItem("analysisTime");
+
+    // Cache validity: 10 minutes (you can change it)
+    const isCacheValid =
+      cached && cacheTime && Date.now() - parseInt(cacheTime) < 10 * 60 * 1000;
+
+    let data;
+
+    if (isCacheValid) {
+      console.log("📦 Loaded analysis from cache");
+      data = JSON.parse(cached);
+    } else {
+      console.log("🌐 Fetching fresh analysis data...");
+      const res = await fetch("/api/analysis");
+      data = await res.json();
+
+      // Save data + timestamp
+      localStorage.setItem("analysisData", JSON.stringify(data));
+      localStorage.setItem("analysisTime", Date.now().toString());
+    }
+
+    const {
+      totalStaff,
+      totalStudent,
+      totalBlacklist,
+      totalNursery,
+      totalBasic,
+      totalJss,
+      totalSS,
+      gradeSummary,
+    } = data;
+
+    // Update dashboard values
+    document.getElementById("blacklist").innerText = totalBlacklist;
+    document.getElementById("staff").innerText = totalStaff;
+    document.getElementById("students").innerText = totalStudent;
+
+    // Draw charts
+    barGraph(totalNursery, totalBasic, totalJss, totalSS);
+    pieGraph(gradeSummary.percentages);
+    gradeCount(gradeSummary.counts);
+  } catch (err) {
+    console.error("❌ Error loading analysis:", err);
+  }
+});
+
+
+
 // dashboard.js
 const form = document.getElementById('uploadForm');
 const sClass = document.getElementById('Sclass');
@@ -39,14 +91,15 @@ uploadBtn.addEventListener('click', showUploadDialog);
 
 // Form submission
 
-// Initialize Bar Chart (Student Distribution by Class)
+function barGraph( totalNursery,totalBasic, totalJss, totalSS){
+  // Initialize Bar Chart (Student Distribution by Class)
 const barChart = new Chart(document.getElementById('studentBarChart'), {
   type: 'bar',
   data: {
     labels: ['Nursery', 'Primary', 'Junior', 'Senior'],
     datasets: [{
       label: 'Students',
-      data: [300, 450, 350, 134], // Static data
+      data: [totalNursery, totalBasic, totalJss, totalSS], // Static data
       backgroundColor: 'rgba(79, 70, 229, 0.6)',
       borderColor: '#4f46e5',
       borderWidth: 1
@@ -75,14 +128,17 @@ const barChart = new Chart(document.getElementById('studentBarChart'), {
     }
   }
 });
+}
 
 // Initialize Pie Chart (Grade Distribution)
-const pieChart = new Chart(document.getElementById('gradePieChart'), {
+function pieGraph(gradeSummary){
+  const {A, B, C, D, F} = gradeSummary
+  const pieChart = new Chart(document.getElementById('gradePieChart'), {
   type: 'pie',
   data: {
     labels: ['A', 'B', 'C', 'D', 'F'],
     datasets: [{
-      data: [30, 25, 20, 15, 10], // Static data (percentages)
+      data: [A, B, C, D, F], // Static data (percentages)
       backgroundColor: [
         '#4f46e5',
         '#06b6d4',
@@ -107,3 +163,20 @@ const pieChart = new Chart(document.getElementById('gradePieChart'), {
     }
   }
 });
+}
+
+//CALCULATING GRADE
+function gradeCount(grades, ) {
+  const gradeHeader = document.querySelector('.gradeCount');
+  if (!gradeHeader) return console.error('Element with .gradeCount not found');
+
+  // Loop through each grade (A, B, C, D, F)
+  Object.entries(grades).forEach(([key, value]) => {
+    gradeHeader.innerHTML += `
+      <div class="gradeItem">
+        <div class="gradeTitle">${key}</div>
+        <span>${value}</span>
+      </div>
+    `;
+  });
+}

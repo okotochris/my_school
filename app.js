@@ -20,6 +20,8 @@ const generateSitemap = require('./sitemap/sitemap.js')
 const resultGuide = require('./routes/resultCheckGuide.js')
 const authRoute = require('./routes/auth.js')
 const isAuthenticated = require('./utility/authenticated.js')
+const analysisRoute = require('./routes/analysis.js')
+const updateRoute = require('./routes/update.js')
 const app = express();
 
 // middleware
@@ -123,7 +125,7 @@ app.get('/about', (req, res)=>{
 //adimin page to loging to result upload portal
 app.get("/admin", isAuthenticated, (req, res) => {
    const role= req.session.role
-  res.render("admin", { school: req.session.school, fees: req.session.fees, role });
+  res.render("admin", { school: req.session.school, fees: req.session.fees, role, title:"Upload Result"});
 });
 
 // API FOR SCHOOL MANAGEMENT SYSTEM
@@ -141,15 +143,16 @@ app.get("/admin_form", (req, res) => {
 //BLACKLIST API
 app.get("/blacklist", isAuthenticated, async (req, res) => {
    const role= req.session.role
+
   try {
     let school = req.session.school;
     const data = await Blacklist.find({ school: school });
-    res.render("blacklist", { data, school: req.session.school, fees: req.session.fees, role });
+    res.render("blacklist", { data, school: req.session.school, fees: req.session.fees, role, title:"Black List" });
   } catch (err) {
     console.log(err);
   }
 });
-//REMOVING NAME FROM BLACKLIST
+//REMOVING NAME FROM BLACKLIST API CALL
 app.delete("/blacklist/:studentId", async (req, res) => {
   const { studentId } = req.params;
 
@@ -167,7 +170,7 @@ app.delete("/blacklist/:studentId", async (req, res) => {
   }
 });
 
-//SAVING DATA TO BLACK LIST
+//SAVING DATA TO BLACK LIST API CALL
 app.post("/blacklist", async (req, res) => {
   let studentName = req.body.userName;
   let school = req.session.school;
@@ -351,7 +354,7 @@ app.post("/result", async (req, res) => {
   }
 });
 
-//GET STUDENT INFORMATION BASE ON ID
+//GET STUDENT INFORMATION BASE ON ID API CALL
 app.get("/studentinfomation", async (req, res) => {
 
   let studentId = req.query.studnetId;
@@ -363,7 +366,7 @@ app.get("/studentinfomation", async (req, res) => {
     console.log(err);
   }
 });
-//searching student ID base on student name
+//searching student ID base on student name API CALL
 app.get("/getstudentid", async (req, res) => {
   try {
     let student_name = req.query.student_name;
@@ -383,7 +386,7 @@ app.get("/getstudentid", async (req, res) => {
   }
 });
 
-//getting student id by classname
+//getting student id by classname API CALL
 app.get("/getclassid", async (req, res) => {
   let studentClass = req.query.class;
   let schoolName = req.session.school;
@@ -398,43 +401,17 @@ app.get("/getclassid", async (req, res) => {
   }
 });
 
-app.patch("/update-student", async (req, res) => {
-  const { studentId, userName, addmissionNo, dob, classN, gender } = req.body; 
-  console.log(req.body)
-  try {
-    const updatedStudent = await Studentpassport.findOneAndUpdate(
-      { studentId }, // Use studentId to identify the student
-      {
-        userName,
-        addmissionNo,
-        dob,
-        gender,
-        class: classN,
-        schoolName: req.session.school,
-      },
-      { new: true } // Return the updated document
-    );
-
-    if (updatedStudent) {
-      res.status(200).json(updatedStudent);
-    } else {
-      res.status(404).json({ message: "Student not found" });
-    }
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
 
 //UPDATING STUDENT RECORD PAGE
 app.get("/update", isAuthenticated, (req, res) => {
   const role= req.session.role
-  res.render("update", { school: req.session.school, fees: req.session.fees, role });
+  res.render("update", { school: req.session.school, fees: req.session.fees, role, title:"Update Info" });
   
 });
 //generating student id and passport page
 app.get("/generateid", isAuthenticated, (req, res) => {
   const role= req.session.role
-  res.render("generateid", { school: req.session.school, fees: req.session.fees, role });
+  res.render("generateid", { school: req.session.school, fees: req.session.fees, role, title: "Onboard Student"});
 });
 app.get('/staffmanagement', isAuthenticated, async (req, res)=>{
   const role= req.session.role
@@ -443,7 +420,7 @@ app.get('/staffmanagement', isAuthenticated, async (req, res)=>{
   }
 
   const staff = (await ABlog.find({school:req.session.school}))
-  res.render('staff', { school: req.session.school, fees: req.session.fees, staff, role })
+  res.render('staff', { school: req.session.school, fees: req.session.fees, staff, role, title:"Staff Management" })
 })
 
 app.delete('/deletestaff', async (req, res)=>{
@@ -526,30 +503,15 @@ app.get("/junior", (req, res) => {
 //STUDENT ID FORM
 app.get("/studentid", isAuthenticated, (req, res) => {
    const role= req.session.role
-  res.render("studentid", { school: req.session.school, fees: req.session.fees, role });
+  res.render("studentid", { school: req.session.school, fees: req.session.fees, role, title:"Student ID" });
 });
 
 //STUDENT GRADING
 app.get("/studentgrade", (req, res) => {
    const role= req.session.role
-  res.render("studentgrade", { school: req.session.school, fees: req.session.fees, role });
+  res.render("studentgrade", { school: req.session.school, fees: req.session.fees, role, title:"Student Grade" });
 });
-//UPDATE STUDENT CLASS
-app.patch("/updatestudentclass", async (req, res) => {
-  let studentId = req.body.studentId;
-  try {
-    let student = await Studentpassport.findOneAndUpdate(
-      { studentId },
-      { class: req.body.studentClass },
-      { new: true }
-    );
-    if (student.ok) {
-      res.send("updated");
-    }
-  } catch (err) {
-    console.log(err);
-  }
-});
+
 //GET SCHOOL NAME
 app.get("/schoolname", (req, res) => {
   let school = req.session.school;
@@ -562,7 +524,7 @@ app.get("/logout", (req, res) => {
   //res.clearCookie('connect.sid'); 
   res.redirect("login");
 });
-//STUDENT PERFOMANCE
+//STUDENT PERFOMANCE API CALL
 app.get("/studentperfomance", isAuthenticated, async (req, res) => {
   try {
     let studentClass = req.query.class;
@@ -652,79 +614,7 @@ app.get("/student-result", async (req, res) => {
     console.log(err);
   }
 });
-//UPDATING BASIC SCHOOL RESULT
-app.patch("/update_basic_result", async (req, res) => {
-  const { studentId, term, sClass } = req.body;
-  try {
-    let updated = await PBlog.findOneAndUpdate(
-      { studentId, term, sClass },
-      req.body,
-      { new: true }
-    );
-    if (updated) {
-      res.status(200).send("updated successfully");
-    } else {
-      res.status(400).send("file not found");
-    }
-  } catch (err) {
-    res.status(500).send("server error");
-  }
-});
-//UPDATING NURSERY
-app.patch("/update_nursery_result", async (req, res) => {
-  const { studentId, term, sClass } = req.body;
-  try {
-    let updated = await nuseryBlog.findOneAndUpdate(
-      { studentId, term, sClass },
-      req.body,
-      { new: true }
-    );
-    if (updated) {
-      res.status(200).send("Updated successfully");
-    } else {
-      res.status(404).send("result not found");
-    }
-  } catch {
-    res.status(500).send(err);
-  }
-});
-//UPDATING JUNIOR SCHOOL RESULT
-app.patch("/update_junior_result", async (req, res) => {
-  const { studentId, term, sClass } = req.body;
-  try {
-    let updated = await Blog.findOneAndUpdate(
-      { studentId, term, sClass },
-      req.body,
-      { new: true }
-    );
-    if (updated) {
-      res.status(200).send("Updated successfully");
-    } else {
-      res.status(404).send("result not found");
-    }
-  } catch (err) {
-    res.status(500).send(err);
-  }
-});
-//UPDATING SENIOR SCHOOL RESULT
-app.patch("/update_senior_result", async (req, res) => {
-  const { studentId, term, sClass } = req.body;
-  try {
-    let updated = await SBlog.findOneAndUpdate(
-      { studentId, term, sClass },
-      req.body,
-      { new: true }
-    );
-    if (updated) {
-      res.status(200).send("Updated successfully");
-    } else {
-      res.status(404).send("result not found");
-      console.log('not found')
-    }
-  } catch (err) {
-    res.status(500).send('server error');
-  }
-});
+
 //updating school fees
 async function updateFees(schoolName, req){
   const updatedSchool = await schoolPfofile.findOneAndUpdate(
@@ -735,20 +625,13 @@ async function updateFees(schoolName, req){
   // Update the session with the new fees
   req.session.fees = updatedSchool.fees;
 }
-//KHRISTAL TECH SUMMAR DETAILS 
-app.get('/summary', isAuthenticated, async (req, res)=>{
-  try{
-    const school = await schoolPfofile.find()
-    res.render('summary', {school})
-  }
-  catch(err){
-    console.log(err)
-  }
-})
+
 app.use(newsRouter)
 app.use(resultGuide)
 app.use(authRoute)
+app.use(analysisRoute)
+app.use(updateRoute)
 app.use((req, res) => {
-  res.status(404).render("page_not_found");
+  res.status(404).render("index");
 });
 

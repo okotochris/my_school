@@ -261,3 +261,18 @@
     max-height: 200px;
   }
 }
+.gradeCount{
+  display: flex; 
+  justify-content: space-around; 
+  margin-top: 10px;
+}
+.gradeHeader{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.gradeTitle{
+  font-size: 18px; 
+  
+}

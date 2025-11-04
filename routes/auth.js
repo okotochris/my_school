@@ -1,6 +1,5 @@
 const express = require('express')
 const ABlog = require("../schema/admin.js");
-const isAuthenticated = require('../utility/authenticated.js')
 const schoolPfofile = require('../schema/schoolProfile.js')
 
 const router = express.Router()

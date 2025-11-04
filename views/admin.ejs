@@ -35,28 +35,23 @@
           <div class="dashboard-metrics">
             <div class="metric-card">
               <h3>Total Students</h3>
-              <p class="metric-value">1,234</p>
+              <p class="metric-value" id="students"></p>
               <span class="metric-subtext">Across all classes</span>
               <span class="metric-icon">👨‍🎓</span>
             </div>
             <div class="metric-card">
               <h3>Total Staff</h3>
-              <p class="metric-value">56</p>
+              <p class="metric-value" id="staff"></p>
               <span class="metric-subtext">Active administrators</span>
               <span class="metric-icon">👩‍🏫</span>
             </div>
             <div class="metric-card">
               <h3>Blacklisted Students</h3>
-              <p class="metric-value">12</p>
+              <p class="metric-value" id="blacklist"></p>
               <span class="metric-subtext">Restricted access</span>
               <span class="metric-icon">🚫</span>
             </div>
-            <div class="metric-card">
-              <h3>Total Classes</h3>
-              <p class="metric-value">28</p>
-              <span class="metric-subtext">Nursery to Senior</span>
-              <span class="metric-icon">🏫</span>
-            </div>
+            
           </div>
           <div class="dashboard-charts">
             <div class="chart-card">
@@ -66,8 +61,9 @@
             <div class="chart-card">
               <h3>Grade Distribution</h3>
               <canvas id="gradePieChart"></canvas>
+                <div class="gradeCount"></div>
+              </div>
             </div>
-          </div>
           <div class="dashboard-activity">
             <h3>Recent Activity</h3>
             <ul class="activity-list">

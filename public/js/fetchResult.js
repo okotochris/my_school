@@ -48,36 +48,54 @@ function basicStudentResultTemplate(data) {
   document.getElementById("eng2nd").value = data.eng2nd;
   document.getElementById("engca").value = data.engca;
   document.getElementById("engexam").value = data.engexam;
+  document.getElementById("engscore").value = data.engscore
+  document.getElementById("engG").value = data.engG
+  document.getElementById("engRemark").value = data.engRemark
   //mathes
   document.getElementById("mth").value = data.mth;
   document.getElementById("mth1st").value = data.mth1st;
   document.getElementById("mth2nd").value = data.mth2nd;
   document.getElementById("mthca").value = data.mthca;
   document.getElementById("mthexam").value = data.mthexam;
+  document.getElementById("mthscore").value = data.mthscore
+  document.getElementById("mtbG").value = data.mthG
+  document.getElementById("mthRemark").value = data.mthRemark
   //CRS
   document.getElementById("rnv").value = data.rnv;
   document.getElementById("rnv1st").value = data.rnv1st;
   document.getElementById("rnv2nd").value = data.rnv2nd;
   document.getElementById("rnvca").value = data.rnvca;
   document.getElementById("rnvexam").value = data.rnvexam;
+  document.getElementById("rnvscore").value = data.rnvscore
+  document.getElementById("rnvG").value = data.rnvG
+  document.getElementById("rnvRemark").value = data.rnvRemark
   //Basic science
   document.getElementById("bst").value = data.bst;
   document.getElementById("bst1st").value = data.bst1st;
   document.getElementById("bst2nd").value = data.bst2nd;
   document.getElementById("bstca").value = data.bstca;
   document.getElementById("bstexam").value = data.bstexam;
+  document.getElementById("bstscore").value = data.bstscore
+  document.getElementById("bstG").value = data.bstG
+  document.getElementById("bstRemark").value = data.bstRemark
   //Edo language
   document.getElementById("pvs").value = data.pvs;
   document.getElementById("pvs1st").value = data.pvs1st;
   document.getElementById("pvs2nd").value = data.pvs2nd;
   document.getElementById("pvsca").value = data.pvsca;
   document.getElementById("pvsexam").value = data.pvsexam;
+  document.getElementById("pvsscore").value = data.pvsscore
+  document.getElementById("pvsG").value = data.pvsG
+  document.getElementById("pvsRemark").value = data.pvsRemark
   //quantitative reasoning
   document.getElementById("qur").value = data.qur;
   document.getElementById("qur1st").value = data.qur1st;
   document.getElementById("qur2nd").value = data.qur2nd;
   document.getElementById("qurca").value = data.qurca;
   document.getElementById("qurexam").value = data.qurexam;
+  document.getElementById("engscore").value = data.engscore
+  document.getElementById("engG").value = data.engG
+  document.getElementById("engRemark").value = data.engRemark
   //virber atitude
   document.getElementById("ver").value = data.ver;
   document.getElementById("ver1st").value = data.ver1st;
