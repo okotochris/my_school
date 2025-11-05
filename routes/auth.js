@@ -45,7 +45,6 @@ router.post("/login", async (req, res) => {
       req.session.school = school;
       req.session.fees = fees;
       const redirectTo = req.session.returnTo || "/admin";
-      console.log("hello")
       delete req.session.returnTo; // Clear returnTo after use
       res.status(200).json(redirectTo);
     } else {
