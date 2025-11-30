@@ -48,7 +48,7 @@
                 <legend>RESULT INFO:</legend>
                 <!-- Literacy -->
                 <div class="subject-row">
-                    <input type="text" value="Literacy" readonly />
+                    <input type="text" value="Literacy" id="eng" readonly />
                     <input type="number" placeholder="1st Test" name="eng1st" id="eng1st" oninput="calculateSubject('eng')" />
                     <input type="number" placeholder="2nd Test" name="eng2nd" id="eng2nd" oninput="calculateSubject('eng')" />
                     <input type="number" id="engca" name="engca" placeholder="CCA" oninput="calculateSubject('eng')" />
@@ -59,7 +59,7 @@
                 </div>
                 <!-- Numeracy -->
                 <div class="subject-row">
-                    <input type="text" value="Numeracy" readonly />
+                    <input type="text" value="Numeracy" id="mth" readonly />
                     <input type="number" placeholder="1st Test" name="mth1st" id="mth1st" oninput="calculateSubject('mth')" />
                     <input type="number" placeholder="2nd Test" name="mth2nd" id="mth2nd" oninput="calculateSubject('mth')" />
                     <input type="number" id="mthca" name="mthca" placeholder="CCA" oninput="calculateSubject('mth')" />
@@ -70,7 +70,7 @@
                 </div>
                 <!-- Christian Religion Studies -->
                 <div class="subject-row">
-                    <input type="text" value="Christian Religion Studies" readonly />
+                    <input type="text" value="Christian Religion Studies" id="rnv" readonly />
                     <input type="number" placeholder="1st Test" name="rnv1st" id="rnv1st" oninput="calculateSubject('rnv')" />
                     <input type="number" placeholder="2nd Test" name="rnv2nd" id="rnv2nd" oninput="calculateSubject('rnv')" />
                     <input type="number" id="rnvca" name="rnvca" placeholder="CCA" oninput="calculateSubject('rnv')" />
@@ -81,7 +81,7 @@
                 </div>
                 <!-- Pre Science -->
                 <div class="subject-row">
-                    <input type="text" value="Pre Science" readonly />
+                    <input type="text" value="Pre Science" id="bst" readonly />
                     <input type="number" placeholder="1st Test" name="bst1st" id="bst1st" oninput="calculateSubject('bst')" />
                     <input type="number" placeholder="2nd Test" name="bst2nd" id="bst2nd" oninput="calculateSubject('bst')" />
                     <input type="number" id="bstca" name="bstca" placeholder="CCA" oninput="calculateSubject('bst')" />
@@ -92,7 +92,7 @@
                 </div>
                 <!-- Personal Social and Emotional Development -->
                 <div class="subject-row">
-                    <input type="text" value="Personal Social and Emotional Development" readonly />
+                    <input type="text" value="Personal Social and Emotional Development" id="pvs" readonly />
                     <input type="number" placeholder="1st Test" name="pvs1st" id="pvs1st" oninput="calculateSubject('pvs')" />
                     <input type="number" placeholder="2nd Test" name="pvs2nd" id="pvs2nd" oninput="calculateSubject('pvs')" />
                     <input type="number" id="pvsca" name="pvsca" placeholder="CCA" oninput="calculateSubject('pvs')" />
@@ -103,7 +103,7 @@
                 </div>
                 <!-- Rhymes -->
                 <div class="subject-row">
-                    <input type="text" value="Rhymes" readonly />
+                    <input type="text" value="Rhymes" id="qur" readonly />
                     <input type="number" placeholder="1st Test" name="qur1st" id="qur1st" oninput="calculateSubject('qur')" />
                     <input type="number" placeholder="2nd Test" name="qur2nd" id="qur2nd" oninput="calculateSubject('qur')" />
                     <input type="number" id="qurca" name="qurca" placeholder="CCA" oninput="calculateSubject('qur')" />
@@ -114,7 +114,7 @@
                 </div>
                 <!-- Handwriting -->
                 <div class="subject-row">
-                    <input type="text" value="Handwriting" readonly />
+                    <input type="text" value="Handwriting" id="vst" readonly />
                     <input type="number" placeholder="1st Test" name="vst1st" id="vst1st" oninput="calculateSubject('vst')" />
                     <input type="number" placeholder="2nd Test" name="vst2nd" id="vst2nd" oninput="calculateSubject('vst')" />
                     <input type="number" id="vstca" name="vstca" placeholder="CCA" oninput="calculateSubject('vst')" />
@@ -125,7 +125,7 @@
                 </div>
                 <!-- Cultural and Creative Art -->
                 <div class="subject-row">
-                    <input type="text" value="Cultural and Creative Art" readonly />
+                    <input type="text" value="Cultural and Creative Art" id="cra" readonly />
                     <input type="number" placeholder="1st Test" name="cra1st" id="cra1st" oninput="calculateSubject('cra')" />
                     <input type="number" placeholder="2nd Test" name="cra2nd" id="cra2nd" oninput="calculateSubject('cra')" />
                     <input type="number" id="craca" name="craca" placeholder="CCA" oninput="calculateSubject('cra')" />
@@ -136,7 +136,7 @@
                 </div>
                 <!-- Speech Science -->
                 <div class="subject-row">
-                    <input type="text" value="Speech Science" readonly />
+                    <input type="text" value="Speech Science" id="ver" readonly />
                     <input type="number" placeholder="1st Test" name="ver1st" id="ver1st" oninput="calculateSubject('ver')" />
                     <input type="number" placeholder="2nd Test" name="ver2nd" id="ver2nd" oninput="calculateSubject('ver')" />
                     <input type="number" id="verca" name="verca" placeholder="CCA" oninput="calculateSubject('ver')" />
@@ -147,7 +147,7 @@
                 </div>
                 <!-- Practical Life -->
                 <div class="subject-row">
-                    <input type="text" value="Practical Life" readonly />
+                    <input type="text" value="Practical Life" id="plf" readonly />
                     <input type="number" placeholder="1st Test" name="plf1st" id="plf1st" oninput="calculateSubject('plf')" />
                     <input type="number" placeholder="2nd Test" name="plf2nd" id="plf2nd" oninput="calculateSubject('plf')" />
                     <input type="number" id="plfca" name="plfca" placeholder="CCA" oninput="calculateSubject('plf')" />
@@ -160,7 +160,7 @@
                 <div class="extra" style="display: none;">
                     <!-- Verbal Reasoning -->
                     <div class="subject-row">
-                        <input type="text" value="Verbal Reasoning" readonly />
+                        <input type="text" value="Verbal Reasoning" id="vrn" readonly />
                         <input type="number" placeholder="1st Test" name="vrn1st" id="vrn1st" oninput="calculateSubject('vrn')" />
                         <input type="number" placeholder="2nd Test" name="vrn2nd" id="vrn2nd" oninput="calculateSubject('vrn')" />
                         <input type="number" id="vrnca" name="vrnca" placeholder="CCA" oninput="calculateSubject('vrn')" />
@@ -171,7 +171,7 @@
                     </div>
                     <!-- CRS -->
                     <div class="subject-row">
-                        <input type="text" value="CRS" readonly />
+                        <input type="text" value="CRS"  id="crs" readonly />
                         <input type="number" placeholder="1st Test" name="crs1st" id="crs1st" oninput="calculateSubject('crs')" />
                         <input type="number" placeholder="2nd Test" name="crs2nd" id="crs2nd" oninput="calculateSubject('crs')" />
                         <input type="number" id="crsca" name="crsca" placeholder="CCA" oninput="calculateSubject('crs')" />

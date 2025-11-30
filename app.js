@@ -44,7 +44,8 @@ mongoose
   .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((result) => {
     console.log("Connected to MongoDB");
-    // fetchNigerianSchoolNews();
+    // 
+fetchNigerianSchoolNews();
     generateSitemap();
 
   })
