@@ -30,7 +30,7 @@ router.post("/login", async (req, res) => {
   try {
     let data = await ABlog.findOne({ email: user, password: password });
     if(!data){
-      res.status(404).json({msg:"Invalid login details"})
+     return res.status(404).json({msg:"Invalid login details"})
     }
     let schoolName = data.school 
     let role = data.role;
