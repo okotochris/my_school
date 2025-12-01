@@ -33,28 +33,34 @@ router.patch("/update-student", async (req, res) => {
 });
 //UPDATING BASIC SCHOOL RESULT
 router.patch("/update_basic_result", async (req, res) => {
-  const { studentId, term, sClass } = req.body;
+let { studentId, term, class: sClass } = req.body;
+  studentId = studentId.trim()
+ 
   try {
     let updated = await PBlog.findOneAndUpdate(
-      { studentId, term, sClass },
+      { studentId, term, class:sClass },
       req.body,
       { new: true }
     );
+    console.log(updated)
     if (updated) {
       res.status(200).send("updated successfully");
     } else {
       res.status(400).send("file not found");
     }
   } catch (err) {
+    console.log(err)
     res.status(500).send("server error");
   }
 });
 //UPDATING NURSERY
 router.patch("/update_nursery_result", async (req, res) => {
-  const { studentId, term, sClass } = req.body;
+  let { studentId, term, class: sClass } = req.body;
+   studentId = studentId.trim()
+  console.log(studentId, term, sClass)
   try {
     let updated = await nuseryBlog.findOneAndUpdate(
-      { studentId, term, sClass },
+      { studentId, term, class:sClass },
       req.body,
       { new: true }
     );

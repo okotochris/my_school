@@ -378,7 +378,6 @@ app.get("/getstudentid", async (req, res) => {
     });
 
     if (studentId) {
-      console.log(studentId)
       res.json(studentId);
     } else {
       res.status(404).json({ message: "Student not found" });
@@ -443,10 +442,11 @@ app.delete('/deletestaff', async (req, res)=>{
 })
 // saving student ID and passport
 app.post("/passport", upload.single("passport"), (req, res) => {
-  // Create a new instance of the Mongoose model
+    console.log(req.body)
   const newPassport = new Studentpassport({
     userName: req.body.userName,
     studentId: req.body.studentId,
+    schoolsession:req.body.schoolsession,
     addmissionNo: req.body.addmissionNo,
     dob: req.body.dob,
     class: req.body.class,

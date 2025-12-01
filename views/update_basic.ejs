@@ -16,12 +16,12 @@
         <h2>UPDATE PRIMARY RESULT</h2>
     </div>
     <div class="upload_result">
-        <form id="updateForm" onsubmit="return updateForm(event)">
+        <form id="updateForm" method="POST" enctype="multipart/form-data">
             <fieldset class="studentInfo">
                 <legend>STUDENT INFO:</legend>
                 <div class="student-info-grid">
-                    <input type="text" placeholder="First Name Middle Name Last Name" name="userName" id="userName" required />
-                    <input type="text" placeholder="Student ID" name="studentId" id="studentId" required readonly />
+                    <input type="text" placeholder="First Name Middle Name Last Name" name="userName" id="userName" readonly />
+                    <input type="text" placeholder="Student ID" name="studentId" id="studentId" required />
                     <button type="button" style="width:100px; font-size:14px;" id="getDetails">Get Details</button>
                 </div>
                 <div id="respond" style="color:red; text-align: center; margin: 0.5rem 0;"></div>
@@ -50,7 +50,7 @@
                 <legend>RESULT INFO:</legend>
                 <!-- English Language -->
                 <div class="subject-row">
-                    <input type="text" value="English Language" readonly />
+                    <input type="text" value="English Language" name="eng" id="eng" readonly />
                     <input type="number" placeholder="1st Test" name="eng1st" id="eng1st" oninput="calculateSubject('eng')" />
                     <input type="number" placeholder="2nd Test" name="eng2nd" id="eng2nd" oninput="calculateSubject('eng')" />
                     <input type="number" id="engca" name="engca" placeholder="CCA" oninput="calculateSubject('eng')" />
@@ -61,7 +61,7 @@
                 </div>
                 <!-- Mathematics -->
                 <div class="subject-row">
-                    <input type="text" value="Mathematics" readonly />
+                    <input type="text" value="Mathematics" name="mth" id="mth" readonly />
                     <input type="number" placeholder="1st Test" name="mth1st" id="mth1st" oninput="calculateSubject('mth')" />
                     <input type="number" placeholder="2nd Test" name="mth2nd" id="mth2nd" oninput="calculateSubject('mth')" />
                     <input type="number" id="mthca" name="mthca" placeholder="CCA" oninput="calculateSubject('mth')" />
@@ -72,7 +72,7 @@
                 </div>
                 <!-- Christian Religion Studies -->
                 <div class="subject-row">
-                    <input type="text" value="Christian Religion Studies" readonly />
+                    <input type="text" value="Christian Religion Studies" name="rnv" id="rnv" readonly />
                     <input type="number" placeholder="1st Test" name="rnv1st" id="rnv1st" oninput="calculateSubject('rnv')" />
                     <input type="number" placeholder="2nd Test" name="rnv2nd" id="rnv2nd" oninput="calculateSubject('rnv')" />
                     <input type="number" id="rnvca" name="rnvca" placeholder="CCA" oninput="calculateSubject('rnv')" />
@@ -83,7 +83,7 @@
                 </div>
                 <!-- Basic Science & Technology -->
                 <div class="subject-row">
-                    <input type="text" value="Basic Science & Technology" readonly />
+                    <input type="text" value="Basic Science & Technology" name="bst" id="bst" readonly />
                     <input type="number" placeholder="1st Test" name="bst1st" id="bst1st" oninput="calculateSubject('bst')" />
                     <input type="number" placeholder="2nd Test" name="bst2nd" id="bst2nd" oninput="calculateSubject('bst')" />
                     <input type="number" id="bstca" name="bstca" placeholder="CCA" oninput="calculateSubject('bst')" />
@@ -94,7 +94,7 @@
                 </div>
                 <!-- Edo Language -->
                 <div class="subject-row">
-                    <input type="text" value="Edo Language" readonly />
+                    <input type="text" value="Edo Language" readonly name="pvs" id="pvs"/>
                     <input type="number" placeholder="1st Test" name="pvs1st" id="pvs1st" oninput="calculateSubject('pvs')" />
                     <input type="number" placeholder="2nd Test" name="pvs2nd" id="pvs2nd" oninput="calculateSubject('pvs')" />
                     <input type="number" id="pvsca" name="pvsca" placeholder="CCA" oninput="calculateSubject('pvs')" />
@@ -105,7 +105,7 @@
                 </div>
                 <!-- Quantitative Reasoning -->
                 <div class="subject-row">
-                    <input type="text" value="Quantitative Reasoning" readonly />
+                    <input type="text" value="Quantitative Reasoning" readonly name="qur" id="qur"/>
                     <input type="number" placeholder="1st Test" name="qur1st" id="qur1st" oninput="calculateSubject('qur')" />
                     <input type="number" placeholder="2nd Test" name="qur2nd" id="qur2nd" oninput="calculateSubject('qur')" />
                     <input type="number" id="qurca" name="qurca" placeholder="CCA" oninput="calculateSubject('qur')" />
@@ -116,7 +116,7 @@
                 </div>
                 <!-- Verbal Aptitude -->
                 <div class="subject-row">
-                    <input type="text" value="Verbal Aptitude" readonly />
+                    <input type="text" value="Verbal Aptitude" readonly name="ver" id="ver" />
                     <input type="number" placeholder="1st Test" name="ver1st" id="ver1st" oninput="calculateSubject('ver')" />
                     <input type="number" placeholder="2nd Test" name="ver2nd" id="ver2nd" oninput="calculateSubject('ver')" />
                     <input type="number" id="verca" name="verca" placeholder="CCA" oninput="calculateSubject('ver')" />
@@ -127,7 +127,7 @@
                 </div>
                 <!-- Pre Vocational Study -->
                 <div class="subject-row">
-                    <input type="text" value="Pre Vocational Study" readonly />
+                    <input type="text" value="Pre Vocational Study" id="pvd" id="pvd"  readonly />
                     <input type="number" placeholder="1st Test" name="pvd1st" id="pvd1st" oninput="calculateSubject('pvd')" />
                     <input type="number" placeholder="2nd Test" name="pvd2nd" id="pvd2nd" oninput="calculateSubject('pvd')" />
                     <input type="number" id="pvdca" name="pvdca" placeholder="CCA" oninput="calculateSubject('pvd')" />
@@ -138,7 +138,7 @@
                 </div>
                 <!-- Numerical Aptitude -->
                 <div class="subject-row">
-                    <input type="text" value="Numerical Aptitude" readonly />
+                    <input type="text" value="Numerical Aptitude" name="vst" id="vst" readonly />
                     <input type="number" placeholder="1st Test" name="vst1st" id="vst1st" oninput="calculateSubject('vst')" />
                     <input type="number" placeholder="2nd Test" name="vst2nd" id="vst2nd" oninput="calculateSubject('vst')" />
                     <input type="number" id="vstca" name="vstca" placeholder="CCA" oninput="calculateSubject('vst')" />
@@ -149,7 +149,7 @@
                 </div>
                 <!-- Cultural & Creative Art -->
                 <div class="subject-row">
-                    <input type="text" value="Cultural & Creative Art" readonly />
+                    <input type="text" value="Cultural & Creative Art" name="cra" id="cra" readonly />
                     <input type="number" placeholder="1st Test" name="cra1st" id="cra1st" oninput="calculateSubject('cra')" />
                     <input type="number" placeholder="2nd Test" name="cra2nd" id="cra2nd" oninput="calculateSubject('cra')" />
                     <input type="number" id="craca" name="craca" placeholder="CCA" oninput="calculateSubject('cra')" />
@@ -160,7 +160,7 @@
                 </div>
                 <!-- National Value -->
                 <div class="subject-row">
-                    <input type="text" value="National Value" readonly />
+                    <input type="text" value="National Value" readonly name="spe" id="spe" />
                     <input type="number" placeholder="1st Test" name="spe1st" id="spe1st" oninput="calculateSubject('spe')" />
                     <input type="number" placeholder="2nd Test" name="spe2nd" id="spe2nd" oninput="calculateSubject('spe')" />
                     <input type="number" id="speca" name="speca" placeholder="CCA" oninput="calculateSubject('spe')" />
@@ -171,7 +171,7 @@
                 </div>
                 <!-- Hand Writing -->
                 <div class="subject-row">
-                    <input type="text" value="Hand Writing" readonly />
+                    <input type="text" value="Hand Writing" readonly name="hwr" id="hwr"/>
                     <input type="number" placeholder="1st Test" name="hwr1st" id="hwr1st" oninput="calculateSubject('hwr')" />
                     <input type="number" placeholder="2nd Test" name="hwr2nd" id="hwr2nd" oninput="calculateSubject('hwr')" />
                     <input type="number" id="hwrca" name="hwrca" placeholder="CCA" oninput="calculateSubject('hwr')" />
@@ -182,7 +182,7 @@
                 </div>
                 <!-- Phonics (Speech Sci.) -->
                 <div class="subject-row">
-                    <input type="text" value="Phonics (Speech Sci.)" readonly />
+                    <input type="text" value="Phonics (Speech Sci.)" readonly name="mus" id="mus"/>
                     <input type="number" placeholder="1st Test" name="mus1st" id="mus1st" oninput="calculateSubject('mus')" />
                     <input type="number" placeholder="2nd Test" name="mus2nd" id="mus2nd" oninput="calculateSubject('mus')" />
                     <input type="number" id="musca" name="musca" placeholder="CCA" oninput="calculateSubject('mus')" />
@@ -193,7 +193,7 @@
                 </div>
                 <!-- French Language -->
                 <div class="subject-row">
-                    <input type="text" value="French Language" readonly />
+                    <input type="text" value="French Language"  name="red" id="red" />
                     <input type="number" placeholder="1st Test" name="red1st" id="red1st" oninput="calculateSubject('red')" />
                     <input type="number" placeholder="2nd Test" name="red2nd" id="red2nd" oninput="calculateSubject('red')" />
                     <input type="number" id="redca" name="redca" placeholder="CCA" oninput="calculateSubject('red')" />
@@ -204,7 +204,7 @@
                 </div>
                 <!-- History -->
                 <div class="subject-row">
-                    <input type="text" value="History" readonly />
+                    <input type="text" value="History" id="hst" name="hst" />
                     <input type="number" placeholder="1st Test" name="hst1st" id="hst1st" oninput="calculateSubject('hst')" />
                     <input type="number" placeholder="2nd Test" name="hst2nd" id="hst2nd" oninput="calculateSubject('hst')" />
                     <input type="number" id="hstca" name="hstca" placeholder="CCA" oninput="calculateSubject('hst')" />
@@ -212,6 +212,16 @@
                     <input type="text" placeholder="TOTAL SCORE" name="hstscore" id="hstscore" readonly />
                     <input type="text" placeholder="GRADE" name="hstG" id="hstG" readonly />
                     <input type="text" name="hstRemark" id="hstRemark" placeholder="Remark" readonly />
+                </div>
+                 <div class="subject-row">
+                    <input type="text" value="History" id="ped" name="ped" />
+                    <input type="number" placeholder="1st Test" name="ped1st" id="ped1st" oninput="calculateSubject('ped')" />
+                    <input type="number" placeholder="2nd Test" name="ped2nd" id="ped2nd" oninput="calculateSubject('ped')" />
+                    <input type="number" id="pedca" name="pedca" placeholder="CCA" oninput="calculateSubject('ped')" />
+                    <input type="number" placeholder="Exam" name="pedexam" id="pedexam" oninput="calculateSubject('ped')" />
+                    <input type="text" placeholder="TOTAL SCORE" name="pedscore" id="pedscore" readonly />
+                    <input type="text" placeholder="GRADE" name="pedG" id="pedG" readonly />
+                    <input type="text" name="pedRemark" id="pedRemark" placeholder="Remark" readonly />
                 </div>
             </fieldset>
             <fieldset>
@@ -265,109 +275,38 @@
             </fieldset>
             <fieldset class="schoolInfo">
                 <legend>School Info:</legend>
-                <button type="submit">Update Result</button>
+                <button id="submitbutton" type="submit">Update Result</button>
             </fieldset>
             <p id="upload" style="color:red;"></p>
         </form>
     </div>
 
     <script>
-        // Student selection popup logic (from previous)
-        let studentId = document.getElementById('studentId');
-        let user = document.getElementById('userName');
-        let Sclass = document.getElementById('Sclass');
-        let searchResults = [];
-        let getDetailsBtn = document.getElementById('getDetails');
-
-        function showLoading() {
-            if (getDetailsBtn) {
+      
+        function showLoading(getDetailsBtn) {
+               
                 getDetailsBtn.innerHTML = '<span style="display: inline-flex; align-items: center; gap: 0.5rem;">Loading <div style="width: 12px; height: 12px; border: 2px solid #fff; border-top: 2px solid transparent; border-radius: 50%; animation: spin 1s linear infinite;"></div></span>';
                 getDetailsBtn.disabled = true;
-            }
         }
 
-        function hideLoading() {
-            if (getDetailsBtn) {
-                getDetailsBtn.innerHTML = 'Get Details';
+        function hideLoading(getDetailsBtn) {
+                getDetailsBtn.innerHTML = 'Update Result';
                 getDetailsBtn.disabled = false;
-            }
+        
         }
 
-        function populateStudent(data) {
-            studentId.value = data.studentId;
-            user.value = data.userName.toUpperCase();
-            Sclass.value = data.class;
-            // Fetch existing results for this student
-            fetchExistingResults(data.studentId);
-        }
 
-        async function fetchExistingResults(studentId) {
-            try {
-                const response = await fetch(`/get_primary_result?studentId=${studentId}&class=${Sclass.value}&term=${Sterm.value}`);
-                const resultData = await response.json();
-                if (resultData) {
-                    // Populate all fields from resultData (assume structure matches form)
-                    // Example: document.getElementById('eng1st').value = resultData.eng1st || '';
-                    // ... populate all subjects
-                    console.log('Populated existing results:', resultData);
-                    alert('Existing results loaded. Edit as needed.');
-                }
-            } catch (err) {
-                console.error('Error fetching results:', err);
-                alert('Error loading existing results.');
-            }
-        }
-
-        function showResultsList(data) {
-            searchResults = data;
-            // ... (same modal code as before, adapted for 'Get Details')
-            // Use previous showResultsList implementation
-        }
-
-        function selectStudent(index) {
-            const data = searchResults[index];
-            populateStudent(data);
-        }
-
-        function closeResultsList() {
-            // ... (same as before)
-        }
-
-        // Get Details button click
-        getDetailsBtn.addEventListener('click', async () => {
-            let userName = document.getElementById('userName').value.trim();
-            if (userName === '') {
-                alert('Enter student name');
-                return;
-            }
-            showLoading();
-            try {
-                const userInfo = await fetch(`/getstudentid?student_name=${encodeURIComponent(userName)}`);
-                const userData = await userInfo.json();
-                hideLoading();
-                if (userData && userData.length === 1) {
-                    populateStudent(userData[0]);
-                } else if (userData && userData.length > 1) {
-                    showResultsList(userData);
-                } else {
-                    alert(`${userName} is not registered`);
-                }
-            } catch (err) {
-                hideLoading();
-                console.error(err);
-                alert('Error fetching student data.');
-            }
-        });
-
-        // Update form submission
-        async function updateForm(e) {
+    let form = document.getElementById('updateForm');
+      form.onsubmit = async (e)=> {
             e.preventDefault();
-            let form = document.getElementById('updateForm');
+            showLoading(document.getElementById('submitbutton'))
             let formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries())
             try {
                 let result = await fetch('/update_basic_result', {
                     method: 'PATCH',
-                    body: formData, // Use FormData directly for mixed types
+                    headers:{'Content-Type':"application/json"},
+                    body: JSON.stringify(data)
                 });
                 let responseText = await result.text();
                 if (responseText) {
@@ -379,6 +318,8 @@
             } catch (err) {
                 console.log(err);
                 alert('Update failed. Please try again.');
+            }finally{
+                hideLoading(document.getElementById('submitbutton'))
             }
         }
     </script>
