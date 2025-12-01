@@ -26,7 +26,6 @@ function populateStudent(data) {
     studentId.value = data.studentId;
     user.value = data.userName.toUpperCase();
     Sclass.value = data.class;
-    console.log(data.class);
 }
 
 // Function to show results list with improved UI

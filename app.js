@@ -376,7 +376,9 @@ app.get("/getstudentid", async (req, res) => {
       schoolName: school,
       userName: { $regex: student_name, $options: "i" },
     });
+
     if (studentId) {
+      console.log(studentId)
       res.json(studentId);
     } else {
       res.status(404).json({ message: "Student not found" });
