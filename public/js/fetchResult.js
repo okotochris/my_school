@@ -633,3 +633,4 @@ function hideLoading() {
     getDetails.innerHTML = 'Get Details';
     getDetails.disabled = false;
 }
+
