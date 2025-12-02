@@ -42,7 +42,7 @@ let { studentId, term, class: sClass } = req.body;
       req.body,
       { new: true }
     );
-    console.log(updated)
+
     if (updated) {
       res.status(200).send("updated successfully");
     } else {
@@ -57,7 +57,6 @@ let { studentId, term, class: sClass } = req.body;
 router.patch("/update_nursery_result", async (req, res) => {
   let { studentId, term, class: sClass } = req.body;
    studentId = studentId.trim()
-  console.log(studentId, term, sClass)
   try {
     let updated = await nuseryBlog.findOneAndUpdate(
       { studentId, term, class:sClass },

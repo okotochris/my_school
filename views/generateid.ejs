@@ -109,7 +109,7 @@
 
             <fieldset class="form-group gender">
               <legend>Gender</legend>
-              <label><input type="radio" value="MALE" name="gender" required /> Male</label>
+              <label><input type="radio" value="MALE" name="gender" /> Male</label>
               <label><input type="radio" value="FEMALE" name="gender" /> Female</label>
               <span class="error-message"></span>
             </fieldset>
@@ -127,8 +127,6 @@
     </main>
   </div>
 
-  <script src="/js/menu.js"></script>
-  <script src="/studentId.js"></script>
   <script>
     // Basic form validation
     document.getElementById('studentForm').addEventListener('submit', function(e) {
@@ -143,7 +141,7 @@
           errorMessage.textContent = 'This field is required';
           input.classList.add('error');
         } else {
-          errorMessage.textContent = '';
+       //   errorMessage.textContent = '';
           input.classList.remove('error');
         }
       });
@@ -153,15 +151,18 @@
       if (!gender) {
         isValid = false;
         genderError.textContent = 'Please select a gender';
+    
       } else {
-        genderError.textContent = '';
+        //genderError.textContent = '';
       }
-
-      if (!isValid) {
+    if (!isValid) {
         e.preventDefault();
       }
     });
   </script>
+
+  <script src="/studentId.js"></script>
+  
 </body>
 </html>
 
