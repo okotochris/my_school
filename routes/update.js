@@ -7,16 +7,16 @@ const SBlog = require("../schema/datas.js"); // sinior class
 const router = express.Router()
 
 router.patch("/update-student", async (req, res) => {
-  const { studentId, userName, addmissionNo, dob, classN, gender } = req.body; 
+  const { studentId, userName, addmissionNo, dobValue, classValue, gender } = req.body; 
   try {
     const updatedStudent = await Studentpassport.findOneAndUpdate(
       { studentId }, // Use studentId to identify the student
       {
         userName,
         addmissionNo,
-        dob,
+        dob: dobValue,
         gender,
-        class: classN,
+        class: classValue,
         schoolName: req.session.school,
       },
       { new: true } // Return the updated document
