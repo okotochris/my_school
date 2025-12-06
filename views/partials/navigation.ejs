@@ -33,8 +33,69 @@
       </ul>
     </div>
 
-    <div class="fees">
-      Fees: ₦<span><%= fees %></span>
-    </div>
+<div class="fees">
+    Fees: ₦<span id="fee"><%= fees %></span>
+</div>
+<button type="button" onclick="makePayment()" id="button" 
+style="padding:10px; font-size: 18px; background: #3535e0; color:white; border:0px">Make Paymetnt</button>
+
+<script src="https://checkout.flutterwave.com/v3.js"></script>
+
+<script>
+  const buttonId = document.getElementById('button')
+  async function makePayment() {
+    buttonId.innerText = "Loading.."
+    const res = await fetch('/payment/schoolinfo')
+    if(!res.ok){
+      return;
+    }
+     const data = await res.json()
+      buttonId.innerText = "Pay Now"
+    const {email, school, user_name } = data.result;
+    const fee = data.fee
+    const amountInNumber = Number(fee);
+    const meta = {
+        schoolName:  school,
+        amount: amountInNumber,
+        staffName:user_name,
+        refId: `${user_name}${Date.now()}`          
+      }
+    FlutterwaveCheckout({
+      public_key: "FLWPUBK-f8514622db2e398152c1a94f24a478a5-X",
+      tx_ref: "SCHL-" + Date.now(), // better unique ref
+      amount: amountInNumber,      // use dynamic amount
+      currency: "NGN",
+      payment_options: "card,ussd,banktransfer",
+
+      customer: {
+        email: email,   
+        name: user_name,
+      },
+
+      callback: function (data) {
+        fetch("/api/payment-callback", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            tx_ref: data.tx_ref,
+            meta
+          })
+        })
+        .then(res => res.json())
+        .then(result => {
+          document.getElementById('fee"').innerHTML = 0;
+        });
+      },
+
+      onclose: function() {
+        console.log("Payment closed");
+      }
+    });
+  }
+</script>
+
+
+
+
   </div>
 </nav>

@@ -34,6 +34,7 @@ router.post("/login", async (req, res) => {
     }
     let schoolName = data.school 
     let role = data.role;
+    let id = data._id
     let schoolFee = await schoolPfofile.findOne({schoolName})
     
     if (data && schoolFee) {
@@ -44,6 +45,7 @@ router.post("/login", async (req, res) => {
       const fees = schoolFee.fees;
       req.session.school = school;
       req.session.fees = fees;
+      req.session.userId = id
       const redirectTo = req.session.returnTo || "/admin";
       delete req.session.returnTo; // Clear returnTo after use
       res.status(200).json(redirectTo);

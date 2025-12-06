@@ -22,6 +22,9 @@ const authRoute = require('./routes/auth.js')
 const isAuthenticated = require('./utility/authenticated.js')
 const analysisRoute = require('./routes/analysis.js')
 const updateRoute = require('./routes/update.js')
+const payment = require('./routes/payment.js')
+const schoolRoute = require('./routes/schoolRoute.js')
+const apiCallsRoute = require('./routes/apiCalls.js')
 const app = express();
 
 // middleware
@@ -114,7 +117,6 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
 //defining our route
 app.get("/", (req, res) => {
   res.render("index");
@@ -140,19 +142,6 @@ app.get("/admin_form", (req, res) => {
   res.render("admin_form");
 });
 
-
-//BLACKLIST API
-app.get("/blacklist", isAuthenticated, async (req, res) => {
-   const role= req.session.role
-
-  try {
-    let school = req.session.school;
-    const data = await Blacklist.find({ school: school });
-    res.render("blacklist", { data, school: req.session.school, fees: req.session.fees, role, title:"Black List" });
-  } catch (err) {
-    console.log(err);
-  }
-});
 //REMOVING NAME FROM BLACKLIST API CALL
 app.delete("/blacklist/:studentId", async (req, res) => {
   const { studentId } = req.params;
@@ -193,8 +182,8 @@ app.post("/primary", async (req, res) => {
   try{
     const Blog = new PBlog(req.body);
     await Blog.save()
-    res.render('primary')
     await updateFees(req.session.school, req)
+    res.render('primary')
   }
   catch(err){
     console.log(err)
@@ -209,8 +198,8 @@ app.post("/nursery", async (req, res) => {
   try{
     const Blog = new nuseryBlog(req.body);
     await Blog.save()
-    res.render('nursery')
     await updateFees(req.session.school, req)
+    res.render('nursery')
   }
   catch(err){
     console.log(err)
@@ -225,8 +214,8 @@ app.post("/adminJunior", async (req, res) => {
   try{
     const blog = new Blog(req.body);
     await blog.save()
-    res.render("adminJunior");
     await updateFees(schoolName, req)
+    res.render("adminJunior");
   }
   catch(err){
     console.log(err)
@@ -245,8 +234,9 @@ app.post("/adminSenior", async (req, res) => {
     await Sblog.save();
 
     // Increment the school fee by 500 and update in MongoDB
-    res.render("adminSenior"); // Redirect after processing
     await updateFees(schoolName, req)
+    res.render("adminSenior"); // Redirect after processing
+ 
   } catch (err) {
     console.error(err);
     res.status(500).send("Internal Server Error");
@@ -404,26 +394,6 @@ app.get("/getclassid", async (req, res) => {
 });
 
 
-//UPDATING STUDENT RECORD PAGE
-app.get("/update", isAuthenticated, (req, res) => {
-  const role= req.session.role
-  res.render("update", { school: req.session.school, fees: req.session.fees, role, title:"Update Info" });
-  
-});
-//generating student id and passport page
-app.get("/generateid", isAuthenticated, (req, res) => {
-  const role= req.session.role
-  res.render("generateid", { school: req.session.school, fees: req.session.fees, role, title: "Onboard Student"});
-});
-app.get('/staffmanagement', isAuthenticated, async (req, res)=>{
-  const role= req.session.role
-  if(role !== "admin"){
-    res.redirect('/admin')
-  }
-
-  const staff = (await ABlog.find({school:req.session.school}))
-  res.render('staff', { school: req.session.school, fees: req.session.fees, staff, role, title:"Staff Management" })
-})
 
 app.delete('/deletestaff', async (req, res)=>{
   let _id = req.query.id;
@@ -503,17 +473,7 @@ app.post("/contact", (req, res) => {
 app.get("/junior", (req, res) => {
   res.render("primary-result");
 });
-//STUDENT ID FORM
-app.get("/studentid", isAuthenticated, (req, res) => {
-   const role= req.session.role
-  res.render("studentid", { school: req.session.school, fees: req.session.fees, role, title:"Student ID" });
-});
 
-//STUDENT GRADING
-app.get("/studentgrade", (req, res) => {
-   const role= req.session.role
-  res.render("studentgrade", { school: req.session.school, fees: req.session.fees, role, title:"Student Grade" });
-});
 
 //GET SCHOOL NAME
 app.get("/schoolname", (req, res) => {
@@ -625,7 +585,6 @@ async function updateFees(schoolName, req){
     { $inc: { fees: 500 } },
     { new: true } // Return updated document
   );
-  // Update the session with the new fees
   req.session.fees = updatedSchool.fees;
 }
 
@@ -634,6 +593,9 @@ app.use(resultGuide)
 app.use(authRoute)
 app.use(analysisRoute)
 app.use(updateRoute)
+app.use(payment)
+app.use(schoolRoute)
+app.use(apiCallsRoute)
 app.use((req, res) => {
   res.status(404).render("index");
 });

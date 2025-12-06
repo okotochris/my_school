@@ -340,7 +340,7 @@ function juniorStudentResultTemplate(data) {
 //NURSERY
 function nurseryStudentResultTemplate(data) {
   //English
-  document.getElementById("eng").value = data.eng;
+  document.getElementById("eng").value = "Letter Work" //data.eng;
   document.getElementById("eng1st").value = data.eng1st;
   document.getElementById("eng2nd").value = data.eng2nd;
   document.getElementById("engca").value = data.engca;
@@ -349,7 +349,7 @@ function nurseryStudentResultTemplate(data) {
   document.getElementById("engG").value = data.engG
   document.getElementById("engRemark").value = data.engRemark
   //mathes
-  document.getElementById("mth").value =data.mth;
+  document.getElementById("mth").value = "Number Work" //data.mth;
   document.getElementById("mth1st").value = data.mth1st;
   document.getElementById("mth2nd").value = data.mth2nd;
   document.getElementById("mthca").value = data.mthca;
@@ -359,7 +359,7 @@ function nurseryStudentResultTemplate(data) {
   document.getElementById("mthRemark").value = data.mthRemark
   
   //CRS
-  document.getElementById("rnv").value = data.rnv;
+  document.getElementById("rnv").value ='Quantitative Reasoning' // data.rnv;
   document.getElementById("rnv1st").value = data.rnv1st;
   document.getElementById("rnv2nd").value = data.rnv2nd;
   document.getElementById("rnvca").value = data.rnvca;
@@ -369,7 +369,7 @@ function nurseryStudentResultTemplate(data) {
   document.getElementById("rnvRemark").value = data.rnvRemark
   
   //Basic science
-  document.getElementById("bst").value = data.bst;
+  document.getElementById("bst").value = 'Basic Science' //data.bst;
   document.getElementById("bst1st").value = data.bst1st;
   document.getElementById("bst2nd").value = data.bst2nd;
   document.getElementById("bstca").value = data.bstca;
@@ -378,7 +378,7 @@ function nurseryStudentResultTemplate(data) {
   document.getElementById("bstG").value = data.bstG
   document.getElementById("bstRemark").value = data.bstRemark
   //Edo language
-  document.getElementById("pvs").value = data.pvs;
+  document.getElementById("pvs").value = 'Social Habit'// data.pvs;
   document.getElementById("pvs1st").value = data.pvs1st;
   document.getElementById("pvs2nd").value = data.pvs2nd;
   document.getElementById("pvsca").value = data.pvsca;
@@ -388,7 +388,7 @@ function nurseryStudentResultTemplate(data) {
   document.getElementById("pvsRemark").value = data.pvsRemark
  
   //quantitative reasoning
-  document.getElementById("qur").value = data.qur;
+  document.getElementById("qur").value = 'Poems'//data.qur;
   document.getElementById("qur1st").value = data.qur1st;
   document.getElementById("qur2nd").value = data.qur2nd;
   document.getElementById("qurca").value = data.qurca;
@@ -398,7 +398,7 @@ function nurseryStudentResultTemplate(data) {
   document.getElementById("qurRemark").value = data.qurRemark
 
   //virber atitude
-  document.getElementById("ver").value = data.ver;
+  //document.getElementById("ver").value = data.ver;
   document.getElementById("ver1st").value = data.ver1st;
   document.getElementById("ver2nd").value = data.ver2nd;
   document.getElementById("verca").value = data.verca;
@@ -406,9 +406,8 @@ function nurseryStudentResultTemplate(data) {
    document.getElementById("verscore").value = data.verscore
    document.getElementById("verG").value = data.verG
   document.getElementById("verRemark").value = data.verRemark
-
   //Numerical Aptitude
-  document.getElementById("vst").value = data.vst;
+  document.getElementById("vst").value = 'Writing'//data.vst;
   document.getElementById("vst1st").value = data.vst1st;
   document.getElementById("vst2nd").value = data.vst2nd;
   document.getElementById("vstca").value = data.vstca;
@@ -418,7 +417,7 @@ function nurseryStudentResultTemplate(data) {
   document.getElementById("vstRemark").value = data.vstRemark
   //culture creative art
 
-  document.getElementById("cra").value = data.cra;
+  //document.getElementById("cra").value = data.cra;
   document.getElementById("cra1st").value = data.cra1st;
   document.getElementById("cra2nd").value = data.cra2nd;
   document.getElementById("craca").value = data.craca;
@@ -428,7 +427,7 @@ function nurseryStudentResultTemplate(data) {
   document.getElementById("craRemark").value = data.craRemark
 
   //SPEACH SCIENCE
-  document.getElementById("ver").value = data.ver;
+  //document.getElementById("ver").value = data.ver;
   document.getElementById("ver1st").value = data.ver1st;
   document.getElementById("ver2nd").value = data.ver2nd;
   document.getElementById("verca").value = data.verca;
@@ -436,9 +435,8 @@ function nurseryStudentResultTemplate(data) {
    document.getElementById("verscore").value = data.verscore
    document.getElementById("verG").value = data.verG
   document.getElementById("verRemark").value = data.verRemark
-
   //Practical Life
-  document.getElementById("plf").value = data.plf;
+  document.getElementById("plf").value = 'Health Habit'// data.plf;
   document.getElementById("plf1st").value = data.plf1st;
   document.getElementById("plf2nd").value = data.plf2nd;
   document.getElementById("plfca").value = data.plfca;
@@ -447,8 +445,7 @@ function nurseryStudentResultTemplate(data) {
   document.getElementById("plfG").value = data.plfG
   document.getElementById("plfRemark").value = data.plfRemark
   //Verbal Reasoning
-  
-  document.getElementById("vrn").value = data.vrn;
+  //document.getElementById("vrn").value = data.vrn;
   document.getElementById("vrn1st").value = data.vrn1st;
   document.getElementById("vrn2nd").value = data.vrn2nd;
   document.getElementById("vrnca").value = data.vrnca;
@@ -459,7 +456,7 @@ function nurseryStudentResultTemplate(data) {
   
   
   //Verbal Reasoning
-  document.getElementById("crs").value = data.crs;
+  document.getElementById("crs").value =  'Phonics'//data.crs;
   document.getElementById("crs1st").value = data.crs1st;
   document.getElementById("crs2nd").value = data.crs2nd;
   document.getElementById("crsca").value = data.crsca;
@@ -633,4 +630,3 @@ function hideLoading() {
     getDetails.innerHTML = 'Get Details';
     getDetails.disabled = false;
 }
-
