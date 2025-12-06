@@ -61,7 +61,6 @@ router.get('/payment/schoolinfo', async (req, res)=>{
 		const school = result.school;
 		const schoolFee = await schoolPfofile.findOne({schoolName :school })
 		const fee = schoolFee.fees
-		console.log(result, fee)
 		res.status(200).json({result, fee})
 	} catch (err) {
 		console.log(err)

@@ -412,7 +412,6 @@ app.delete('/deletestaff', async (req, res)=>{
 })
 // saving student ID and passport
 app.post("/passport", upload.single("passport"), (req, res) => {
-    console.log(req.body)
   const newPassport = new Studentpassport({
     userName: req.body.userName,
     studentId: req.body.studentId,

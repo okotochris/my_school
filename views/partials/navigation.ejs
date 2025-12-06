@@ -53,7 +53,7 @@ style="padding:10px; font-size: 18px; background: #3535e0; color:white; border:0
       buttonId.innerText = "Make Payment"
     const {email, school, user_name } = data.result;
     const fee = data.fee
-    if(fee < 500){
+    if(fee < 100){
       return 
     }
     const amountInNumber = Number(fee);
