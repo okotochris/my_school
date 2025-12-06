@@ -37,7 +37,7 @@
     Fees: ₦<span id="fee"><%= fees %></span>
 </div>
 <button type="button" onclick="makePayment()" id="button" 
-style="padding:10px; font-size: 18px; background: #3535e0; color:white; border:0px">Make Paymetnt</button>
+style="padding:10px; font-size: 18px; background: #3535e0; color:white; border:0px">Make Payment</button>
 
 <script src="https://checkout.flutterwave.com/v3.js"></script>
 
@@ -50,7 +50,7 @@ style="padding:10px; font-size: 18px; background: #3535e0; color:white; border:0
       return;
     }
      const data = await res.json()
-      buttonId.innerText = "Pay Now"
+      buttonId.innerText = "Make Payment"
     const {email, school, user_name } = data.result;
     const fee = data.fee
     if(fee < 500){
