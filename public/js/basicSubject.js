@@ -17,6 +17,9 @@ window.addEventListener('load',  async ()=>{
             document.querySelector('#pvs').value = 'Civic Education'
             document.querySelector('#pre').value = 'History'
             
+        }else{
+            document.getElementById('additionalSubject').style.display="none"
+            console.log("hello")
         }
     }
     catch(err){

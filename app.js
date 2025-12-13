@@ -47,6 +47,36 @@ mongoose
   .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((result) => {
     console.log("Connected to MongoDB");
+  PBlog.updateMany(
+  {
+    section: "2025 - 2026",
+    term: "FIRST TERM",
+   
+  },
+  [
+    {
+      $set: {
+        mth: {
+          $cond: [
+            { $eq: ["$mth", ""] },
+            "Mathematics",
+            "$mth"
+          ]
+        },
+        pvd: {
+          $cond: [
+            { $eq: ["$pvd", ""] },
+            "Pre Vocational Study",
+            "$pvd"
+          ]
+        }
+      }
+    }
+  ]
+).then(result=>{
+  console.log("updated")
+}).catch(err=>console.log(err))
+
     // 
 fetchNigerianSchoolNews();
     generateSitemap();
@@ -99,11 +129,12 @@ const upload = multer({ storage: fileEngineStorage });
 //setting port and connecting to server
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, (err) => {
+app.listen(PORT, async(err) => {
   if (err) {
     console.error(`Error starting the server: ${err.message}`);
   } else {
     console.log(`App is listening on port ${PORT}`);
+   
   }
 });
 
