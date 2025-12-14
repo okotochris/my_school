@@ -15,8 +15,12 @@ window.addEventListener('load',  async ()=>{
            
         }
         else if(school == 'NUEL VILLE ACADEMY'){
-           
+           document.querySelector('#agr').value = 'Agriculture'
+     
+        }else if(school == "GOLDEN HILLS"){
             
+        }else{
+            console.log(school)
         }
     }
     catch(err){

@@ -19,7 +19,7 @@ window.addEventListener('load',  async ()=>{
             
         }else{
             document.getElementById('additionalSubject').style.display="none"
-            console.log("hello")
+           
         }
     }
     catch(err){

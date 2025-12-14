@@ -15,7 +15,7 @@ const session = require("express-session");
 require("dotenv").config();
 const schoolPfofile = require("./schema/schoolProfile");
 const MongoStore = require("connect-mongo");
-const { router: newsRouter, fetchNigerianSchoolNews } = require('./routes/news');
+const { router: newsRouter} = require('./routes/news');
 const generateSitemap = require('./sitemap/sitemap.js')
 const resultGuide = require('./routes/resultCheckGuide.js')
 const authRoute = require('./routes/auth.js')
@@ -25,6 +25,7 @@ const updateRoute = require('./routes/update.js')
 const payment = require('./routes/payment.js')
 const schoolRoute = require('./routes/schoolRoute.js')
 const apiCallsRoute = require('./routes/apiCalls.js')
+const checkResultRoute = require('./routes/checkresult.js')
 const app = express();
 
 // middleware
@@ -47,38 +48,8 @@ mongoose
   .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((result) => {
     console.log("Connected to MongoDB");
-  PBlog.updateMany(
-  {
-    section: "2025 - 2026",
-    term: "FIRST TERM",
-   
-  },
-  [
-    {
-      $set: {
-        mth: {
-          $cond: [
-            { $eq: ["$mth", ""] },
-            "Mathematics",
-            "$mth"
-          ]
-        },
-        pvd: {
-          $cond: [
-            { $eq: ["$pvd", ""] },
-            "Pre Vocational Study",
-            "$pvd"
-          ]
-        }
-      }
-    }
-  ]
-).then(result=>{
-  console.log("updated")
-}).catch(err=>console.log(err))
 
-    // 
-fetchNigerianSchoolNews();
+    //fetchNigerianSchoolNews();
     generateSitemap();
 
   })
@@ -294,88 +265,6 @@ app.post("/upload", isAuthenticated, (req, res) => {
   }
 });
 
-//NEW EDITION STUDENT RESULT
-app.post("/result", async (req, res) => {
-  let clas = req.body.class;
-  let term = req.body.term;
-  let id = req.body.studentId;
-  let name = req.body.userName;
-  try {
-    let data = await Studentpassport.findOne({ studentId: id });
-    let student = await Blacklist.findOne({ studentId: id });
-
-    if (student) {
-      res.render("blacklistfile", { student });
-    }
-
-    let studentClass = clas.split(" ");
-    if (studentClass[0] === "BASIC") {
-      let details = await PBlog.find({ studentId: id, class: clas, term: term })
-        .sort({ createdArt: -1 })
-        .limit(1);
-      details = details[0];
-      if (details != null) {
-        let schoolName = details.schoolName.toLowerCase().trim();
-        let resultTemplate = schoolName.split(" ");
-        resultTemplate = resultTemplate.join("-");
-        resultTemplate = `${resultTemplate}-basic`;
-
-        res.render(resultTemplate, { result: data, details });
-      } else {
-        res.render("error", { name: name });
-      }
-    } else if (studentClass[0] === "JSS") {
-      let details = await Blog.find({ studentId: id, class: clas, term: term })
-        .sort({ createdArt: -1 })
-        .limit(1);
-      details = details[0];
-      if (details != null) {
-        let schoolName = details.schoolName.toLowerCase().trim();
-        let resultTemplate = schoolName.split(" ");
-        resultTemplate = resultTemplate.join("-");
-        resultTemplate = `${resultTemplate}-jss`;
-
-        res.render(resultTemplate, { result: data, details });
-      } else {
-        res.render("error", { name: name });
-      }
-    } else if (studentClass[0] === "SS") {
-      let details = await SBlog.find({ studentId: id, class: clas, term: term })
-        .sort({ createdArt: -1 })
-        .limit(1);
-      details = details[0];
-
-      if (details != null) {
-        let schoolName = details.schoolName.toLowerCase().trim();
-        let resultTemplate = schoolName.split(" ");
-        resultTemplate = resultTemplate.join("-");
-        resultTemplate = `${resultTemplate}-ss`;
-
-        res.render(resultTemplate, { result: data, details });
-      } else {
-        res.render("error", { name: name });
-      }
-    } else if (studentClass[0] === "NURSERY" || studentClass[1] === "NURSERY") {
-      let details = await nuseryBlog
-        .find({ studentId: id, class: clas, term: term })
-        .sort({ createdAt: -1 })
-        .limit(1);
-      details = details[0];
-      if (details != null) {
-        let schoolName = details.schoolName.toLowerCase().trim();
-        let resultTemplate = schoolName.split(" ");
-        resultTemplate = resultTemplate.join("-");
-        resultTemplate = `${resultTemplate}-nursery`;
-        res.render(resultTemplate, { result: data, details });
-      } else {
-        res.render("error", { name: name });
-      }
-    }
-  } catch (err) {
-    console.log(err);
-  }
-});
-
 //GET STUDENT INFORMATION BASE ON ID API CALL
 app.get("/studentinfomation", async (req, res) => {
 
@@ -423,8 +312,6 @@ app.get("/getclassid", async (req, res) => {
     console.log(err);
   }
 });
-
-
 
 app.delete('/deletestaff', async (req, res)=>{
   let _id = req.query.id;
@@ -503,8 +390,6 @@ app.post("/contact", (req, res) => {
 app.get("/junior", (req, res) => {
   res.render("primary-result");
 });
-
-
 //GET SCHOOL NAME
 app.get("/schoolname", (req, res) => {
   let school = req.session.school;
@@ -626,6 +511,8 @@ app.use(updateRoute)
 app.use(payment)
 app.use(schoolRoute)
 app.use(apiCallsRoute)
+app.use(checkResultRoute)
+
 app.use((req, res) => {
   res.status(404).render("index");
 });

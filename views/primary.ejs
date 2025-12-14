@@ -128,7 +128,65 @@
                     <input type="text" placeholder="GRADE" name="speG" id="speG" readonly />
                     <input type="text" name="speRemark" id="speRemark" placeholder="Remark" readonly />
                 </div>
-                <!-- Phonics (Speech Sci.) -->
+                 <!-- Speech Science -->
+                <div class="subject-row">
+                    <input type="text" value="Speech Science" id="pvs" name="pvs" readonly />
+                    <input type="number" placeholder="1st Test" name="pvs1st" id="pvs1st" oninput="calculateSubject('pvs')" />
+                    <input type="number" placeholder="2nd Test" name="pvs2nd" id="pvs2nd" oninput="calculateSubject('pvs')" />
+                    <input type="number" id="pvsca" name="pvsca" placeholder="CCA" oninput="calculateSubject('pvs')" />
+                    <input type="number" placeholder="Exam" name="pvsexam" id="pvsexam" oninput="calculateSubject('pvs')" />
+                    <input type="text" placeholder="TOTAL SCORE" name="pvsscore" id="pvsscore" readonly />
+                    <input type="text" placeholder="GRADE" name="pvsG" id="pvsG" readonly />
+                    <input type="text" name="pvsRemark" id="pvsRemark" placeholder="Remark" readonly />
+                </div>
+                
+                 <!-- Quantitative Reasoning -->
+                <div class="subject-row">
+                    <input type="text" value="Quantitative Reasoning" name="qur" readonly />
+                    <input type="number" placeholder="1st Test" name="qur1st" id="qur1st" oninput="calculateSubject('qur')" />
+                    <input type="number" placeholder="2nd Test" name="qur2nd" id="qur2nd" oninput="calculateSubject('qur')" />
+                    <input type="number" id="qurca" name="qurca" placeholder="CCA" oninput="calculateSubject('qur')" />
+                    <input type="number" placeholder="Exam" name="qurexam" id="qurexam" oninput="calculateSubject('qur')" />
+                    <input type="text" placeholder="TOTAL SCORE" name="qurscore" id="qurscore" readonly />
+                    <input type="text" placeholder="GRADE" name="qurG" id="qurG" readonly />
+                    <input type="text" name="qurRemark" id="qurRemark" placeholder="Remark" readonly />
+                </div>
+                 <!-- Verbal Aptitude -->
+                <div class="subject-row">
+                    <input type="text" value="Verbal Reasoning" name="ver" readonly />
+                    <input type="number" placeholder="1st Test" name="ver1st" id="ver1st" oninput="calculateSubject('ver')" />
+                    <input type="number" placeholder="2nd Test" name="ver2nd" id="ver2nd" oninput="calculateSubject('ver')" />
+                    <input type="number" id="verca" name="verca" placeholder="CCA" oninput="calculateSubject('ver')" />
+                    <input type="number" placeholder="Exam" name="verexam" id="verexam" oninput="calculateSubject('ver')" />
+                    <input type="text" placeholder="TOTAL SCORE" name="verscore" id="verscore" readonly />
+                    <input type="text" placeholder="GRADE" name="verG" id="verG" readonly />
+                    <input type="text" name="verRemark" id="verRemark" placeholder="Remark" readonly />
+                </div>
+                 <!-- Hand Writing -->
+                <div class="subject-row">
+                    <input type="text" value="Hand Writing" id="hwr" name="hwr" readonly />
+                    <input type="number" placeholder="1st Test" name="hwr1st" id="hwr1st" oninput="calculateSubject('hwr')" />
+                    <input type="number" placeholder="2nd Test" name="hwr2nd" id="hwr2nd" oninput="calculateSubject('hwr')" />
+                    <input type="number" id="hwrca" name="hwrca" placeholder="CCA" oninput="calculateSubject('hwr')" />
+                    <input type="number" placeholder="Exam" name="hwrexam" id="hwrexam" oninput="calculateSubject('hwr')" />
+                    <input type="text" placeholder="TOTAL SCORE" name="hwrscore" id="hwrscore" readonly />
+                    <input type="text" placeholder="GRADE" name="hwrG" id="hwrG" readonly />
+                    <input type="text" name="hwrRemark" id="hwrRemark" placeholder="Remark" readonly />
+                </div>
+               
+                <div id="additionalSubject">
+                       <!-- History -->
+                <div class="subject-row">
+                    <input type="text" value="History" id="hst" name="hst" readonly />
+                    <input type="number" placeholder="1st Test" name="hst1st" id="hst1st" oninput="calculateSubject('hst')" />
+                    <input type="number" placeholder="2nd Test" name="hst2nd" id="hst2nd" oninput="calculateSubject('hst')" />
+                    <input type="number" id="hstca" name="hstca" placeholder="CCA" oninput="calculateSubject('hst')" />
+                    <input type="number" placeholder="Exam" name="hstexam" id="hstexam" oninput="calculateSubject('hst')" />
+                    <input type="text" placeholder="TOTAL SCORE" name="hstscore" id="hstscore" readonly />
+                    <input type="text" placeholder="GRADE" name="hstG" id="hstG" readonly />
+                    <input type="text" name="hstRemark" id="hstRemark" placeholder="Remark" readonly />
+                </div>
+                     <!-- Phonics (Speech Sci.) -->
                 <div class="subject-row">
                     <input type="text" value="Phonics (Speech Sci.)" name="mus" readonly />
                     <input type="number" placeholder="1st Test" name="mus1st" id="mus1st" oninput="calculateSubject('mus')" />
@@ -140,31 +198,7 @@
                     <input type="text" name="musRemark" id="musRemark" placeholder="Remark" readonly />
                 </div>
 
-
-
-                <div id="additionalSubject">
-                       <!-- Quantitative Reasoning -->
-                <div class="subject-row">
-                    <input type="text" value="Quantitative Reasoning" name="qur" readonly />
-                    <input type="number" placeholder="1st Test" name="qur1st" id="qur1st" oninput="calculateSubject('qur')" />
-                    <input type="number" placeholder="2nd Test" name="qur2nd" id="qur2nd" oninput="calculateSubject('qur')" />
-                    <input type="number" id="qurca" name="qurca" placeholder="CCA" oninput="calculateSubject('qur')" />
-                    <input type="number" placeholder="Exam" name="qurexam" id="qurexam" oninput="calculateSubject('qur')" />
-                    <input type="text" placeholder="TOTAL SCORE" name="qurscore" id="qurscore" readonly />
-                    <input type="text" placeholder="GRADE" name="qurG" id="qurG" readonly />
-                    <input type="text" name="qurRemark" id="qurRemark" placeholder="Remark" readonly />
-                </div>
-                <!-- Verbal Aptitude -->
-                <div class="subject-row">
-                    <input type="text" value="Verbal Aptitude" name="ver" readonly />
-                    <input type="number" placeholder="1st Test" name="ver1st" id="ver1st" oninput="calculateSubject('ver')" />
-                    <input type="number" placeholder="2nd Test" name="ver2nd" id="ver2nd" oninput="calculateSubject('ver')" />
-                    <input type="number" id="verca" name="verca" placeholder="CCA" oninput="calculateSubject('ver')" />
-                    <input type="number" placeholder="Exam" name="verexam" id="verexam" oninput="calculateSubject('ver')" />
-                    <input type="text" placeholder="TOTAL SCORE" name="verscore" id="verscore" readonly />
-                    <input type="text" placeholder="GRADE" name="verG" id="verG" readonly />
-                    <input type="text" name="verRemark" id="verRemark" placeholder="Remark" readonly />
-                </div>
+               
                  <!-- Numerical Aptitude -->
                 <div class="subject-row">
                     <input type="text" value="Numerical Aptitude" id="vst" name="vst" readonly />
@@ -175,17 +209,6 @@
                     <input type="text" placeholder="TOTAL SCORE" name="vstscore" id="vstscore" readonly />
                     <input type="text" placeholder="GRADE" name="vstG" id="vstG" readonly />
                     <input type="text" name="vstRemark" id="vstRemark" placeholder="Remark" readonly />
-                </div>
-                <!-- Hand Writing -->
-                <div class="subject-row">
-                    <input type="text" value="Hand Writing" id="hwr" name="hwr" readonly />
-                    <input type="number" placeholder="1st Test" name="hwr1st" id="hwr1st" oninput="calculateSubject('hwr')" />
-                    <input type="number" placeholder="2nd Test" name="hwr2nd" id="hwr2nd" oninput="calculateSubject('hwr')" />
-                    <input type="number" id="hwrca" name="hwrca" placeholder="CCA" oninput="calculateSubject('hwr')" />
-                    <input type="number" placeholder="Exam" name="hwrexam" id="hwrexam" oninput="calculateSubject('hwr')" />
-                    <input type="text" placeholder="TOTAL SCORE" name="hwrscore" id="hwrscore" readonly />
-                    <input type="text" placeholder="GRADE" name="hwrG" id="hwrG" readonly />
-                    <input type="text" name="hwrRemark" id="hwrRemark" placeholder="Remark" readonly />
                 </div>
                
                 <!-- French Language -->
@@ -199,29 +222,8 @@
                     <input type="text" placeholder="GRADE" name="redG" id="redG" readonly />
                     <input type="text" name="redRemark" id="redRemark" placeholder="Remark" readonly />
                 </div>
-                <!-- History -->
-                <div class="subject-row">
-                    <input type="text" value="History" id="hst" name="hst" readonly />
-                    <input type="number" placeholder="1st Test" name="hst1st" id="hst1st" oninput="calculateSubject('hst')" />
-                    <input type="number" placeholder="2nd Test" name="hst2nd" id="hst2nd" oninput="calculateSubject('hst')" />
-                    <input type="number" id="hstca" name="hstca" placeholder="CCA" oninput="calculateSubject('hst')" />
-                    <input type="number" placeholder="Exam" name="hstexam" id="hstexam" oninput="calculateSubject('hst')" />
-                    <input type="text" placeholder="TOTAL SCORE" name="hstscore" id="hstscore" readonly />
-                    <input type="text" placeholder="GRADE" name="hstG" id="hstG" readonly />
-                    <input type="text" name="hstRemark" id="hstRemark" placeholder="Remark" readonly />
-                </div>
 
-                <!-- Edo Language -->
-                <div class="subject-row">
-                    <input type="text" value="Edo Language" id="pvs" name="pvs" readonly />
-                    <input type="number" placeholder="1st Test" name="pvs1st" id="pvs1st" oninput="calculateSubject('pvs')" />
-                    <input type="number" placeholder="2nd Test" name="pvs2nd" id="pvs2nd" oninput="calculateSubject('pvs')" />
-                    <input type="number" id="pvsca" name="pvsca" placeholder="CCA" oninput="calculateSubject('pvs')" />
-                    <input type="number" placeholder="Exam" name="pvsexam" id="pvsexam" oninput="calculateSubject('pvs')" />
-                    <input type="text" placeholder="TOTAL SCORE" name="pvsscore" id="pvsscore" readonly />
-                    <input type="text" placeholder="GRADE" name="pvsG" id="pvsG" readonly />
-                    <input type="text" name="pvsRemark" id="pvsRemark" placeholder="Remark" readonly />
-                </div>
+              
                 </div>
             </fieldset>
             <fieldset>

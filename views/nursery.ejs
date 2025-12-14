@@ -146,13 +146,20 @@
                         <input type="number" placeholder="TOTAL SCORE" name="vrnscore" id="vrnscore" readonly />
                         <input type="text" placeholder="GRADE" name="vrnG" id="vrnG" readonly />
                         <input type="text" name="vrnRemark" id="vrnRemark" placeholder="Remark" readonly />
+                      <!-- Handwriting -->
+                    </div> <div class="subject-row">
+                        <input type="text" value="Handwriting" id="vst" name="vst" readonly />
+                        <input type="number" placeholder="1st Test" name="vst1st" id="vst1st" oninput="calculateSubject('vst')" />
+                        <input type="number" placeholder="2nd Test" name="vst2nd" id="vst2nd" oninput="calculateSubject('vst')" />
+                        <input type="number" id="vstca" name="vstca" placeholder="CCA" oninput="calculateSubject('vst')" />
+                        <input type="number" placeholder="Exam" name="vstexam" id="vstexam" oninput="calculateSubject('vst')" />
+                        <input type="number" placeholder="TOTAL SCORE" name="vstscore" id="vstscore" readonly />
+                        <input type="text" placeholder="GRADE" name="vstG" id="vstG" readonly />
+                        <input type="text" name="vstRemark" id="vstRemark" placeholder="Remark" readonly />
                     </div>
-                <div class="extra" style="display: none;">
-                    <!-- Verbal Reasoning -->
-                    
-                   
-                     <div class="subject-row">
-                    <input type="text" value="Personal Social and Emotional Development" name="pvs" id="pvs" readonly />
+                <!-- Verbal Reasoning -->  
+                <div class="subject-row">
+                    <input type="text" value="Quantitative Reasoning" name="pvs" id="pvs" readonly />
                     <input type="number" placeholder="1st Test" name="pvs1st" id="pvs1st" oninput="calculateSubject('pvs')" />
                     <input type="number" placeholder="2nd Test" name="pvs2nd" id="pvs2nd" oninput="calculateSubject('pvs')" />
                     <input type="number" id="pvsca" name="pvsca" placeholder="CCA" oninput="calculateSubject('pvs')" />
@@ -160,21 +167,10 @@
                     <input type="number" placeholder="TOTAL SCORE" name="pvsscore" id="pvsscore" readonly />
                     <input type="text" placeholder="GRADE" name="pvsG" id="pvsG" readonly />
                     <input type="text" name="pvsRemark" id="pvsRemark" placeholder="Remark" readonly />
-                </div>
-
-                <div class="subject-row">
-                    <input type="text" value="Handwriting" id="vst" name="vst" readonly />
-                    <input type="number" placeholder="1st Test" name="vst1st" id="vst1st" oninput="calculateSubject('vst')" />
-                    <input type="number" placeholder="2nd Test" name="vst2nd" id="vst2nd" oninput="calculateSubject('vst')" />
-                    <input type="number" id="vstca" name="vstca" placeholder="CCA" oninput="calculateSubject('vst')" />
-                    <input type="number" placeholder="Exam" name="vstexam" id="vstexam" oninput="calculateSubject('vst')" />
-                    <input type="number" placeholder="TOTAL SCORE" name="vstscore" id="vstscore" readonly />
-                    <input type="text" placeholder="GRADE" name="vstG" id="vstG" readonly />
-                    <input type="text" name="vstRemark" id="vstRemark" placeholder="Remark" readonly />
-                </div>
+                </div>               
                  <!-- CRS -->
                     <div class="subject-row">
-                        <input type="text" value="CRS"  id="crs" readonly name="crs" />
+                        <input type="text" value="Verbal Reasoning"  id="crs" readonly name="crs" />
                         <input type="number" placeholder="1st Test" name="crs1st" id="crs1st" oninput="calculateSubject('crs')" />
                         <input type="number" placeholder="2nd Test" name="crs2nd" id="crs2nd" oninput="calculateSubject('crs')" />
                         <input type="number" id="crsca" name="crsca" placeholder="CCA" oninput="calculateSubject('crs')" />
@@ -183,8 +179,10 @@
                         <input type="text" placeholder="GRADE" name="crsG" id="crsG" readonly />
                         <input type="text" name="crsRemark" id="crsRemark" placeholder="Remark" readonly />
                     </div>
-                </div>
-                  <!-- Handwriting -->
+               
+                <div class="extra" style="display: none;">  </div>
+ 
+                
                
             </fieldset>
             <fieldset>

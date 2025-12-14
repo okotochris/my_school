@@ -13,7 +13,14 @@
     </div>
   </div>
 
-  <div class="header-actions">
+  <div class="header-actions" onclick="clearStorage()">
     <a href="/logout" class="logout-btn">Logout</a>
   </div>
+
+  <script>
+    function clearStorage(){
+      localStorage.clear()
+      console.log("cleared")
+    }
+  </script>
 </div>

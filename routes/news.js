@@ -6,15 +6,45 @@ const { EventRegistry, QueryArticles, QueryItems } = require("eventregistry");
 var erBase = require("eventregistry"); 
 const er = new EventRegistry({ apiKey: "836ebeeb-6a91-4ec5-b945-dd802b0119b9" });
 const Newsupdate = require('../schema/updatedSchema')
+const mongoose = require('mongoose')
 
 const router = express.Router();
 
 router.get('/news', async (req, res)=>{
+  
   res.render('news')
 })
-router.get('/news_details', (req, res)=>{
-  res.render('news_details')
-})
+router.get('/news_details/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const index = parseInt(id);
+    if (isNaN(index) || index < 0) {
+      return res.status(400).json({ error: 'Invalid article ID' });
+    }
+
+    const latest = await News.findOne({ query: 'nigeria-school-news' })
+      .sort({ fetchedAt: -1 });
+
+    if (!latest || !Array.isArray(latest.articles) || latest.articles.length === 0) {
+      return res.status(404).json({ error: 'No news available' });
+    }
+
+    const article = latest.articles[index];
+    if (!article) {
+      return res.status(404).json({ error: 'Article not found' });
+    }
+
+    const relatedArticles = await getRelatedArticles(article.category, 6, article.title);
+
+    // Render template once
+    res.render("news_details", { article, relatedArticles });
+
+  } catch (err) {
+    console.error('News details error:', err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 
 // ==========================
 // CONFIGURATION
@@ -275,6 +305,25 @@ async function cleanupOldNews() {
   const result = await News.deleteMany({ fetchedAt: { $lt: cutoff } });
   console.log(`🧹 Removed ${result.deletedCount} old news articles`);
 }
+
+
+
+
+async function getRelatedArticles(category, limit = 6, currentTitle = null) {
+  const latest = await News.findOne({ query: 'nigeria-school-news' })
+    .sort({ fetchedAt: -1 });
+
+  if (!latest || !Array.isArray(latest.articles)) return [];
+
+  // Filter by same category and exclude current article by title
+  const filtered = latest.articles
+    .filter(a => a.category === category && a.title !== currentTitle)
+    .sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate)) // newest first
+    .slice(0, limit);
+
+  return filtered;
+}
+
 
 
 module.exports = { router, fetchNigerianSchoolNews };

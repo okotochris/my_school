@@ -25,7 +25,6 @@ router.get('/summary', isAuthenticated, async (req, res)=>{
 router.get('/api/analysis', isAuthenticated, async (req, res) => {
   try {
     const school = req.session.school;
-
     // Run all queries in parallel for better performance
     const [
       totalStaff,
