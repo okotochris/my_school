@@ -289,7 +289,52 @@ blogSchema = new Schema({
     plfG:{
         type:String
     },
-    plfRemark:{
+     sen:{
+        type:String
+    },
+    sen1st:{
+        type:String
+    },
+    sen2nd:{
+        type:String
+    }, 
+    senca:{
+        type:String
+    },
+    senexam:{
+        type:String
+    },
+    senscore:{
+        type:String
+    },
+    senG:{
+        type:String
+    },
+    senRemark:{
+        type:String
+    },
+    cst:{
+        type:String
+    },
+    cst1st:{
+        type:String
+    },
+    cst2nd:{
+        type:String
+    }, 
+    cstca:{
+        type:String
+    },
+    cstexam:{
+        type:String
+    },
+    cstscore:{
+        type:String
+    },
+    cstG:{
+        type:String
+    },
+    cstRemark:{
         type:String
     },
     userName:{

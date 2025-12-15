@@ -157,7 +157,7 @@
                         <input type="text" placeholder="GRADE" name="vstG" id="vstG" readonly />
                         <input type="text" name="vstRemark" id="vstRemark" placeholder="Remark" readonly />
                     </div>
-                <!-- Verbal Reasoning -->  
+
                 <div class="subject-row">
                     <input type="text" value="Quantitative Reasoning" name="pvs" id="pvs" readonly />
                     <input type="number" placeholder="1st Test" name="pvs1st" id="pvs1st" oninput="calculateSubject('pvs')" />
@@ -168,7 +168,7 @@
                     <input type="text" placeholder="GRADE" name="pvsG" id="pvsG" readonly />
                     <input type="text" name="pvsRemark" id="pvsRemark" placeholder="Remark" readonly />
                 </div>               
-                 <!-- CRS -->
+                                <!-- Verbal Reasoning -->  
                     <div class="subject-row">
                         <input type="text" value="Verbal Reasoning"  id="crs" readonly name="crs" />
                         <input type="number" placeholder="1st Test" name="crs1st" id="crs1st" oninput="calculateSubject('crs')" />
@@ -179,8 +179,31 @@
                         <input type="text" placeholder="GRADE" name="crsG" id="crsG" readonly />
                         <input type="text" name="crsRemark" id="crsRemark" placeholder="Remark" readonly />
                     </div>
-               
-                <div class="extra" style="display: none;">  </div>
+
+                <div class="extra" style="display: none;">  
+                  <!-- ⁠Computer Science -->
+                    <div class="subject-row">
+                        <input type="text" value="Computer Science"  id="cst" readonly name="cst" />
+                        <input type="number" placeholder="1st Test" name="cst1st" id="cst1st" oninput="calculateSubject('cst')" />
+                        <input type="number" placeholder="2nd Test" name="cst2nd" id="cst2nd" oninput="calculateSubject('cst')" />
+                        <input type="number" id="cstca" name="cstca" placeholder="CCA" oninput="calculateSubject('cst')" />
+                        <input type="number" placeholder="Exam" name="cstexam" id="cstexam" oninput="calculateSubject('cst')" />
+                        <input type="number" placeholder="TOTAL SCORE" name="cstscore" id="cstscore" readonly />
+                        <input type="text" placeholder="GRADE" name="cstG" id="cstG" readonly />
+                        <input type="text" name="cstRemark" id="cstRemark" placeholder="Remark" readonly />
+                    </div>
+                    <!-- Sensorial -->
+                    <div class="subject-row">
+                        <input type="text" value="Sensorial"  id="sen" readonly name="sen" />
+                        <input type="number" placeholder="1st Test" name="sen1st" id="sen1st" oninput="calculateSubject('sen')" />
+                        <input type="number" placeholder="2nd Test" name="sen2nd" id="sen2nd" oninput="calculateSubject('sen')" />
+                        <input type="number" id="senca" name="senca" placeholder="CCA" oninput="calculateSubject('sen')" />
+                        <input type="number" placeholder="Exam" name="senexam" id="senexam" oninput="calculateSubject('sen')" />
+                        <input type="number" placeholder="TOTAL SCORE" name="senscore" id="senscore" readonly />
+                        <input type="text" placeholder="GRADE" name="senG" id="senG" readonly />
+                        <input type="text" name="senRemark" id="senRemark" placeholder="Remark" readonly />
+                    </div>
+                </div>
  
                 
                
@@ -239,7 +262,7 @@
         </form>
     </div>
     <%- include('./partials/popup') %>
-    <script src="nursery_score.js"></script>
+    <script src="js/nursery_score.js"></script>
     <!-- <script src="../studentId.js"></script> -->
     <script src="js/fetch.js"></script>
     <script src="js/upDateStudentClass.js"></script>

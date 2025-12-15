@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - MySchoolResult</title>
+  <link rel="stylesheet" href="/styles/index.css">
+  <style>
+    .contact-form { max-width: 600px; margin: 2rem auto; padding: 2rem; background: var(--card-bg, #f9f9f9); border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .contact-form label { display: block; margin: 1rem 0 0.5rem; font-weight: bold; }
+    .contact-form input, .contact-form textarea { width: 100%; padding: 1rem; border: 1px solid #ccc; border-radius: 8px; }
+    .contact-form button { margin-top: 1.5rem; padding: 1rem 2rem; background: var(--primary-color, #007bff); color: white; border: none; border-radius: 8px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <%- include('partials/header2') %>
+
+  <section class="hero" style="background: var(--primary-color, #007bff); color: white; text-align: center; padding: 4rem 1rem;">
+    <h1>Contact Us</h1>
+    <p>Get in touch for support, feedback, or partnerships.</p>
+  </section>
+
+  <section class="container">
+    <div class="contact-form">
+      <form action="https://formspree.io/f/your-form-id" method="POST"> <!-- Replace with Formspree, EmailJS, or your backend -->
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" required>
+        
+        <label for="email">Your Email</label>
+        <input type="email" id="email" name="email" required>
+        
+        <label for="subject">Subject</label>
+        <input type="text" id="subject" name="subject" required>
+        
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="6" required></textarea>
+        
+        <button type="submit">Send Message</button>
+      </form>
+      
+      <p style="text-align: center; margin-top: 2rem;">
+        Or email us directly: <strong>support@myschoolresult.com</strong><br>
+        Phone: +234 706 8291 163
+      </p>
+    </div>
+  </section>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

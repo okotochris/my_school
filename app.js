@@ -26,6 +26,9 @@ const payment = require('./routes/payment.js')
 const schoolRoute = require('./routes/schoolRoute.js')
 const apiCallsRoute = require('./routes/apiCalls.js')
 const checkResultRoute = require('./routes/checkresult.js')
+const staticRoute = require('./routes/staticRoute.js')
+const fetchNigerianSchoolNews = require('./utility/getNews.js')
+const cron = require("node-cron")
 const app = express();
 
 // middleware
@@ -48,8 +51,6 @@ mongoose
   .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((result) => {
     console.log("Connected to MongoDB");
-
-    //fetchNigerianSchoolNews();
     generateSitemap();
 
   })
@@ -73,6 +74,17 @@ app.use(
   })
 );
 
+// Schedule the task to run once a day at 2:00 AM
+cron.schedule("0 2 * * *", async () => {
+  console.log("🕑 Daily news fetch started:", new Date().toISOString());
+
+  try {
+    fetchNigerianSchoolNews();
+    console.log("✅ Daily news fetch completed:", new Date().toISOString());
+  } catch (err) {
+    console.error("❌ Daily news fetch failed:", err);
+  }
+});
 // Directory to store uploaded files
 const uploadDir = path.join(__dirname, "uploads");
 
@@ -512,7 +524,7 @@ app.use(payment)
 app.use(schoolRoute)
 app.use(apiCallsRoute)
 app.use(checkResultRoute)
-
+app.use(staticRoute)
 app.use((req, res) => {
   res.status(404).render("index");
 });

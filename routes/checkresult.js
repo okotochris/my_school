@@ -111,8 +111,6 @@ async function isOutStandingPayment(school){
      const data = await schoolPfofile.findOne({
         schoolName: { $regex: `^${school}$`, $options: 'i' }
         });
-
-     console.log(school, data)
      if(data && data.fees > 0){
         return 
      }

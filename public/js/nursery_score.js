@@ -68,11 +68,13 @@ document.getElementById('Calc').onclick = function(event) {
                 Number(document.getElementById('engscore').value) +
                 Number(document.getElementById('crascore').value) +
                 Number(document.getElementById('vrnscore').value) +
+                Number(document.getElementById('cstscore').value) +
+                Number(document.getElementById('senscore').value) +
                 Number(document.getElementById('crsscore').value);
 
     // Count non-empty scores
     let course = 0;
-    const scores = ['rnvscore', 'bstscore', 'pvsscore', 'plfscore', 'mthscore', 'engscore', 'qurscore', 'vrnscore', 'crsscore', 'verscore', 'vstscore', 'crascore'];
+    const scores = ['rnvscore', 'bstscore', 'pvsscore', 'plfscore', 'mthscore', 'engscore', 'qurscore', 'vrnscore', 'crsscore', 'verscore', 'vstscore', 'crascore', 'cstscore', 'senscore'];
     scores.forEach(id => {
         if (document.getElementById(id).value !== '') {
             course++;
