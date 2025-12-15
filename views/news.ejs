@@ -7,7 +7,8 @@
   <title>News & Updates - MySchoolResult</title>
   <meta name="description" content="Latest news, announcements, and educational updates from MySchoolResult...">
   <link rel="canonical" href="https://myschoolresult.com/news">
-  <!-- Adsense scripts -->
+ <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2077324357254940"
+     crossorigin="anonymous"></script>
   <link rel="stylesheet" href="/styles/index.css">
   <link rel="stylesheet" href="/styles/news.css">
 </head>
@@ -139,7 +140,7 @@
     async function loadMore() {
       if (isLoading || !hasMore) return;
       isLoading = true;
-     
+      loadingEl.style.display = "none";
 
       try {
         currentPage++;
