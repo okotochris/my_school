@@ -51,7 +51,6 @@ mongoose
   .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((result) => {
     console.log("Connected to MongoDB");
-    generateSitemap();
 
   })
   .catch((err) => {
@@ -80,6 +79,7 @@ cron.schedule("0 2 * * *", async () => {
 
   try {
     fetchNigerianSchoolNews();
+    generateSitemap();
     console.log("✅ Daily news fetch completed:", new Date().toISOString());
   } catch (err) {
     console.error("❌ Daily news fetch failed:", err);
