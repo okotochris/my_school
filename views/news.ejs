@@ -1,319 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZRDY8JQBQ7"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-
-    gtag('config', 'G-ZRDY8JQBQ7');
-  </script>
+  <!-- Your existing head content (meta, css, adsense, etc.) -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>News & Updates - MySchoolResult</title>
-  <meta name="description"
-    content="Latest news, announcements, and educational updates from MySchoolResult. Stay informed about new features, partnerships, and student success stories.">
-  <meta name="keywords" content="school results, education news, student performance, academic updates, edtech">
+  <meta name="description" content="Latest news, announcements, and educational updates from MySchoolResult...">
   <link rel="canonical" href="https://myschoolresult.com/news">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2077324357254940"
-    crossorigin="anonymous"></script>
-  <meta name="google-adsense-account" content="ca-pub-2077324357254940">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- Adsense scripts -->
   <link rel="stylesheet" href="/styles/index.css">
   <link rel="stylesheet" href="/styles/news.css">
 </head>
-
 <body>
   <%- include('partials/header2') %>
 
-    <section class="hero">
-      <div class="container">
-        <h1>News & Updates</h1>
-        <p>Stay informed with the latest announcements, feature releases, partnerships, and inspiring student success
-          stories from MySchoolResult.</p>
+  <section class="hero">
+    <div class="container">
+      <h1>News & Updates</h1>
+      <p>Stay informed with the latest announcements, feature releases, partnerships, and inspiring student success stories from MySchoolResult.</p>
+    </div>
+  </section>
+
+  <section class="news-section">
+    <div class="container">
+      <div class="filters">
+        <button class="filter-btn active" data-filter="all">All News</button>
+        <button class="filter-btn" data-filter="education">Education</button>
+        <button class="filter-btn" data-filter="exams">Exams</button>
+        <button class="filter-btn" data-filter="schools">Schools</button>
+        <button class="filter-btn" data-filter="students">Students</button>
       </div>
-    </section>
 
-    <section class="news-section">
-      <div class="container">
-        <div class="filters">
-          <button class="filter-btn active" data-filter="all">All News</button>
-          <button class="filter-btn" data-filter="education">Education</button>
-          <button class="filter-btn" data-filter="exams">Exams</button>
-          <button class="filter-btn" data-filter="schools">Schools</button>
-          <button class="filter-btn" data-filter="students">Students</button>
-        </div>
-
-        <!-- Featured News (Dynamic - First Article) -->
-        <article class="featured-news" id="featured-news" style="display: none;">
-          <!-- Populated by JS -->
+      <!-- Featured News - Rendered Server-Side -->
+      <% if (featuredArticle) { %>
+        <article class="featured-news">
+          <div class="featured-image"  style="background-image: url('<%= featuredArticle.image || featuredArticle.urlToImage || featuredArticle.image_url %>')">></div>
+          <div class="featured-content">
+            <span class="news-badge featured-badge">Featured</span>
+            <h2 class="featured-title"><%= featuredArticle.title || "Featured News" %></h2>
+            <p style="margin-bottom:1.5rem;color:var(--gray);">
+              <%= (featuredArticle.description || "").substring(0, 150) %>...
+            </p>
+            <div class="news-meta">
+              <span>🗓️ <%= new Date(featuredArticle.pubDate || featuredArticle.dateTime).toLocaleDateString() %></span>
+              <span>✍️ <%= Array.isArray(featuredArticle.creator) ? featuredArticle.creator[0] : featuredArticle.creator || "MySchoolResult" %></span>
+            </div>
+            <a href="/news_details/<%= allArticlesForJS.indexOf(featuredArticle) %>" 
+               class="read-more" 
+               data-article-index="<%= allArticlesForJS.indexOf(featuredArticle) %>">
+              Read Full Story
+            </a>
+          </div>
         </article>
+      <% } %>
 
-        <!-- News Grid -->
-        <div class="news-grid" id="news-grid">
-          <!-- Dynamically populated by JS -->
-          <div class="loading" id="loading" style="display: none; text-align: center; padding: 2rem;">
-            <p>Loading more news...</p>
-          </div>
-          <div class="no-news" id="no-news" style="display: none; text-align: center; padding: 2rem;">
-            <p>No news available at the moment. Check back soon!</p>
-          </div>
-        </div>
+      <!-- News Grid - First 9 rendered server-side -->
+      <div class="news-grid">
+        <% if (articles.length === 0 && !featuredArticle) { %>
+          <p style="text-align: center; padding: 3rem;">No news available at the moment. Check back soon!</p>
+        <% } else { %>
+          <% articles.forEach((article, i) => { %>
+            <% const globalIndex = allArticlesForJS.indexOf(article); %>
+            <article class="news-card" data-category="<%= (article.category || 'education').toLowerCase() %>">
+              <img src="<%= article.image || 'https://via.placeholder.com/400x250?text=School+News' %>" 
+                   alt="<%= article.title %>" class="news-image" />
+              <div class="news-content">
+                <h3><%= article.title || "Untitled Article" %></h3>
+                <p><%= (article.description || "").substring(0, 150) %>...</p>
+                <p class="news-meta">
+                  🗓️ <%= new Date(article.pubDate || article.dateTime).toLocaleDateString() %> | 
+                  ✍️ <%= Array.isArray(article.creator) ? article.creator[0] : article.creator || "MySchoolResult" %>
+                </p>
+                <a href="/news_details/<%= globalIndex %>" 
+                   class="news-link" 
+                   data-article-index="<%= globalIndex %>">Read More</a>
+              </div>
+            </article>
+          <% }); %>
+        <% } %>
 
-        <!-- Newsletter -->
-        <div class="newsletter">
-          <h3>Never Miss an Update</h3>
-          <p>Subscribe to our newsletter for exclusive feature announcements, success stories, and education insights
-            delivered monthly.</p>
-          <form class="newsletter-form">
-            <input type="email" class="newsletter-input" placeholder="Enter your email" required>
-            <button type="submit" class="newsletter-btn">Subscribe</button>
-          </form>
+        <div id="loading-spinner" style="display: none; text-align: center; padding: 2rem;">
+          
         </div>
+        <div id="sentinel"></div>
       </div>
 
+      <!-- Newsletter -->
+      <div class="newsletter">
+        <h3>Never Miss an Update</h3>
+        <p>Subscribe to our newsletter for exclusive feature announcements, success stories, and education insights delivered monthly.</p>
+        <form class="newsletter-form">
+          <input type="email" class="newsletter-input" placeholder="Enter your email" required>
+          <button type="submit" class="newsletter-btn">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </section>
 
-    </section>
+  <%- include('partials/footer') %>
 
-    <%- include('partials/footer') %>
-      <script src="js/navigation.js"></script>
-      <script src="js/menu2.js"></script>
-      <script>
-        let currentPage = 1;
-        let hasMore = true;
-        let isLoading = false;
-        let allArticles = [];
-        let currentFilter = "all";
-        const PAGE_SIZE = 9;
-        const API_BASE = "/api/news";
+  <!-- Keep minimal JS for infinite scroll, filtering, and caching -->
+  <script>
+    // Pass full initial articles to JS (for infinite scroll & click caching)
+    window.__INITIAL_ARTICLES = <%- JSON.stringify(allArticlesForJS) %>
 
-        const newsGrid = document.getElementById("news-grid");
-        const featuredEl = document.getElementById("featured-news");
-        const noNewsEl = document.getElementById("no-news");
+    let allArticles = window.__INITIAL_ARTICLES || [];
+    let currentPage = 1;
+    let hasMore = allArticles.length >= 9; // If we got 9, likely more exist
+    let isLoading = false;
+    let currentFilter = "all";
+    const PAGE_SIZE = 9;
+    const API_BASE = "/api/news";
 
-        let featuredIndex = null;
-        let featuredTimer = null;
-        const FEATURED_INTERVAL = 8000; // 8 seconds
+    const newsGrid = document.querySelector(".news-grid");
+    const loadingEl = document.getElementById("loading-spinner");
 
-        // Create spinner
-        let loadingEl = document.getElementById("loading-spinner");
-        if (!loadingEl) {
-          loadingEl = document.createElement("div");
-          loadingEl.id = "loading-spinner";
-          loadingEl.style.textAlign = "center";
-          loadingEl.style.padding = "2rem";
-          loadingEl.innerHTML = '<span>Loading more news...</span>';
-          newsGrid.appendChild(loadingEl);
-        }
-        loadingEl.style.display = "none";
+    // Helper: create card (same as before)
+    function createCard(article, index) {
+      const desc = (article.description || "").substring(0, 150) + (article.description?.length > 150 ? "..." : "");
+      const date = new Date(article.pubDate || article.dateTime).toLocaleDateString();
+      const author = Array.isArray(article.creator) ? article.creator[0] : article.creator || "MySchoolResult";
+      const image = article.image || "https://via.placeholder.com/400x250?text=School+News";
 
-        // -------------------- Helper Functions --------------------
-        function formatDate(article) {
-          const dateStr = article.pubDate || article.dateTime || article.publishedAt;
-          if (!dateStr) return "N/A";
-          const date = new Date(dateStr);
-          return isNaN(date.getTime()) ? "N/A" : date.toLocaleDateString();
-        }
-
-        function getImageUrl(article) {
-          return article.image || article.urlToImage || article.image_url || "https://via.placeholder.com/400x250?text=School+News";
-        }
-
-        function createCard(article, index) {
-          const category = (article.category || "education").toLowerCase();
-          const date = formatDate(article);
-          const author = Array.isArray(article.creator) ? article.creator[0] : article.creator || "MySchoolResult";
-          const desc = (article.description || "Click below to read the full article.").slice(0, 150);
-
-          return `
-        <article class="news-card" data-category="${category}">
-          <img src="${getImageUrl(article)}" alt="${article.title || 'News'}" class="news-image" />
+      return `
+        <article class="news-card" data-category="${(article.category || 'education').toLowerCase()}">
+          <img src="${image}" alt="${article.title}" class="news-image" />
           <div class="news-content">
-            <h3>${article.title || "Untitled Article"}</h3>
+            <h3>${article.title || "Untitled"}</h3>
             <p>${desc}</p>
             <p class="news-meta">🗓️ ${date} | ✍️ ${author}</p>
             <a href="/news_details/${index}" class="news-link" data-article-index="${index}">Read More</a>
           </div>
         </article>
       `;
-        }
+    }
 
-        //------------------get random number--------------------------------
-        function getRandomInt(min, max) {
-          return Math.floor(Math.random() * (max - min + 1)) + min;
-        }
+    // Infinite scroll fetch & append
+    async function loadMore() {
+      if (isLoading || !hasMore) return;
+      isLoading = true;
+     
 
-        // -------------------- Render Functions first news --------------------
-        function renderFeatured(filteredArticles, forceIndex = null) {
-          if (!featuredEl) return;
+      try {
+        currentPage++;
+        const params = new URLSearchParams({ page: currentPage, limit: PAGE_SIZE });
+        const res = await fetch(`${API_BASE}?${params}`);
+        const data = await res.json();
+        const newArticles = data.articles || [];
 
-          if (filteredArticles.length === 0) {
-            featuredEl.style.display = "none";
-            return;
-          }
-
-          // Pick random or forced index
-          featuredIndex =
-            forceIndex !== null
-              ? forceIndex
-              : getRandomInt(0, filteredArticles.length - 1);
-
-          const featured = filteredArticles[featuredIndex];
-
-          const date = formatDate(featured);
-          const author = Array.isArray(featured.creator)
-            ? featured.creator[0]
-            : featured.creator || "MySchoolResult";
-          const desc = (featured.description || "").slice(0, 150);
-
-          const realIndex = allArticles.indexOf(featured);
-
-          featuredEl.innerHTML = `
-    <article class="featured-news fade-in">
-      <div class="featured-image" style="background-image:url(${getImageUrl(featured)})"></div>
-      <div class="featured-content">
-        <span class="news-badge featured-badge">Featured</span>
-        <h2 class="featured-title">${featured.title || "Featured News"}</h2>
-        <p style="margin-bottom:1.5rem;color:var(--gray);">${desc}</p>
-        <div class="news-meta">
-          <span>🗓️ ${date}</span>
-          <span>✍️ ${author}</span>
-        </div>
-        <a href="/news_details/${realIndex}" class="read-more" data-article-index="${realIndex}">
-          Read Full Story
-        </a>
-      </div>
-    </article>
-  `;
-
-          featuredEl.style.display = "flex";
-        }
-        function startFeaturedRotation() {
-          if (featuredTimer) clearInterval(featuredTimer);
-
-          featuredTimer = setInterval(() => {
-            const filtered = getFilteredArticles();
-            if (filtered.length > 1) {
-              let next;
-              do {
-                next = getRandomInt(0, filtered.length - 1);
-              } while (next === featuredIndex);
-
-              renderFeatured(filtered, next);
-            }
-          }, FEATURED_INTERVAL);
-        }
-
-
-        function renderGrid(filteredArticles) {
-          if (!newsGrid) return;
-
-          if (currentPage === 1) newsGrid.innerHTML = "";
-
-          if (filteredArticles.length === 0) {
-            noNewsEl.style.display = "block";
-            return;
-          }
-
-          const articlesToRender = filteredArticles.slice(1); // Exclude featured
-          articlesToRender.forEach(article => {
-            const index = allArticles.indexOf(article);
-            newsGrid.insertAdjacentHTML("beforeend", createCard(article, index));
-          });
-
-          noNewsEl.style.display = "none";
-        }
-
-        function getFilteredArticles() {
-          return currentFilter === "all"
-            ? allArticles
-            : allArticles.filter(a => (a.category || "education").toLowerCase() === currentFilter);
-        }
-
-        function renderArticles(newArticles, append = false) {
-          if (!append) allArticles = newArticles;
-          else allArticles = [...allArticles, ...newArticles];
-
-          const filtered = getFilteredArticles();
-
-          renderFeatured(filtered);
-          renderGrid(filtered);
-
-          startFeaturedRotation(); // ✅ START rotation
-
-          setupSentinel();
-          hasMore = newArticles.length === PAGE_SIZE;
-        }
-
-
-        // -------------------- Fetch Function --------------------
-        async function fetchArticles(page = 1) {
-          if (isLoading || !hasMore) return [];
-          isLoading = true;
-          loadingEl.style.display = "flex";
-
-          try {
-            const params = new URLSearchParams({ page, limit: PAGE_SIZE }); // ✅ Use 'limit'
-            const res = await fetch(`${API_BASE}?${params}`);
-            if (!res.ok) throw new Error("Failed to fetch");
-            const data = await res.json();
-            return data.articles || [];
-          } catch (err) {
-            console.error(err);
-            return [];
-          } finally {
-            isLoading = false;
-            loadingEl.style.display = "none";
-          }
-        }
-
-        // -------------------- Infinite Scroll --------------------
-        function setupSentinel() {
-          let sentinel = document.getElementById("sentinel");
-          if (sentinel) sentinel.remove();
-
-          sentinel = document.createElement("div");
-          sentinel.id = "sentinel";
-          newsGrid.appendChild(sentinel);
-
-          const observer = new IntersectionObserver(async (entries) => {
-            if (entries[0].isIntersecting && hasMore && !isLoading) {
-              currentPage++;
-              const articles = await fetchArticles(currentPage);
-              if (articles.length > 0) renderArticles(articles, true);
-
-              if (articles.length < PAGE_SIZE) {
-                hasMore = false;
-                const noMore = document.getElementById("no-more-news");
-                if (noMore) noMore.style.display = "block";
-                sentinel.remove();
-              }
-            }
-          }, { threshold: 0.5 });
-
-          observer.observe(sentinel);
-        }
-
-        // -------------------- Cache Read More --------------------
-        document.addEventListener("click", (e) => {
-          const link = e.target.closest("a[data-article-index]");
-          if (!link) return;
-          const index = parseInt(link.dataset.articleIndex, 10);
-          const article = allArticles[index];
-          if (article) localStorage.setItem(`selectedArticle_${index}`, JSON.stringify(article));
+        newArticles.forEach((article, i) => {
+          const globalIndex = allArticles.length;
+          allArticles.push(article);
+          newsGrid.insertAdjacentHTML("beforeend", createCard(article, globalIndex));
         });
 
-        // -------------------- Initialize --------------------
-        document.addEventListener("DOMContentLoaded", async () => {
-          const articles = await fetchArticles(currentPage);
-          renderArticles(articles, false);
-        });
-      </script>
+        hasMore = newArticles.length === PAGE_SIZE;
+      } catch (err) {
+        console.error(err);
+      } finally {
+        isLoading = false;
+        loadingEl.style.display = "none";
+      }
+    }
 
+    // Setup infinite scroll
+    const observer = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting && hasMore && !isLoading) {
+        loadMore();
+      }
+    }, { threshold: 0.1 });
+
+    observer.observe(document.getElementById("sentinel"));
+
+    // Cache on click
+    document.addEventListener("click", e => {
+      const link = e.target.closest("a[data-article-index]");
+      if (!link) return;
+      const index = parseInt(link.dataset.articleIndex);
+      const article = allArticles[index];
+      if (article) {
+        localStorage.setItem(`selectedArticle_${index}`, JSON.stringify(article));
+      }
+    });
+  </script>
 </body>
-
 </html>

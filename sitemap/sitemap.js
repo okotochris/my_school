@@ -27,7 +27,7 @@ async function generateSitemap() {
   if (latest && Array.isArray(latest.articles) && latest.articles.length > 0) {
     latest.articles.forEach((_, index) => {
       smStream.write({
-        url: `/news_details?id=${index}`,
+        url: `/news_details/{index}`,
         changefreq: 'daily',
         priority: 0.7,
       });

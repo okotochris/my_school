@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const imageUrl = article.image || "https://via.placeholder.com/400x250?text=School+News";
         const title = article.title || "Untitled Article";
         const description = article.description || "Click below to read the full article.";
-        const link = `/news_details?id=${index}`; // Use index as a simple ID
+        const link = `/news_details/${index}`; // Use index as a simple ID
         const date = new Date(article.pubDate || article.dateTime).toLocaleDateString();
         const author = (Array.isArray(article.creator) ? article.creator[0] : article.creator) || "MySchoolResult";
 
