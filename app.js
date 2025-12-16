@@ -51,7 +51,7 @@ mongoose
   .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((result) => {
     console.log("Connected to MongoDB");
-
+      generateSitemap();
   })
   .catch((err) => {
     console.log("Error connecting to MongoDB:", err);
