@@ -15,13 +15,12 @@
 
   <!-- Dynamic Title & Meta (server-side rendered) -->
   <title><%= article.title %> | MySchoolResult</title>
-  <meta name="description" content="<%= article.summary || article.body.substring(0, 160) %>">
-  <meta name="keywords" content="education, student analytics, personalized learning, academic performance, edtech">
-  <meta name="author" content="<%= article.author || 'MySchoolResult' %>">
-
+<meta property="og:image" content="<%= article.image %>">
+<meta name="description" content="<%= article.summary || article.body.substring(0, 160) %>">
+<meta name="keywords" content="education, student analytics, personalized learning, academic performance, edtech">
+<meta name="author" content="<%= article.author || 'MySchoolResult' %>">
 <meta property="og:title" content="<%= article.title || 'MySchoolResult - Education News' %>">
 <meta property="og:description" content="<%= article.displayContent.replace(/(<([^>]+)>)/gi, '').substring(0, 300) %>">
-<meta property="og:image" content="<%= article.image ? 'https://myschoolresult.com' + article.image : 'https://myschoolresult.com/default-news.png' %>">
 <meta property="og:url" content="https://myschoolresult.com/news_details/<%= article._id %>">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="MySchoolResult">
