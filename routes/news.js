@@ -46,20 +46,20 @@ router.get("/news", async (req, res) => {
 router.get("/news_details/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const index = parseInt(id);
+    //const index = parseInt(id);
 
-    if (isNaN(index) || index < 0) {
-      return res.status(400).json({ error: "Invalid article ID" });
-    }
+    // if (isNaN(index) || index < 0) {
+    //   return res.status(400).json({ error: "Invalid article ID" });
+    // }
 
     // Fetch all news articles, newest first
-    const allArticles = await News.find().sort({ fetchedAt: -1 });
+    const allArticles = await News.findOne({_id:id}).sort({ fetchedAt: -1 });
 
-    if (!Array.isArray(allArticles) || allArticles.length === 0) {
-      return res.status(404).json({ error: "No news available" });
-    }
+    // if (!Array.isArray(allArticles) || allArticles.length === 0) {
+    //   return res.status(404).json({ error: "No news available" });
+    // }
 
-    const article = allArticles[index];
+    const article = allArticles
     if (!article) {
       return res.status(404).json({ error: "Article not found" });
     }

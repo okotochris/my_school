@@ -32,9 +32,9 @@ async function generateSitemap() {
     .lean();
 
   if (articles.length > 0) {
-    articles.forEach((_, index) => {
+    articles.forEach((item) => {
       smStream.write({
-        url: `/news_details/${index}`,
+        url: `/news_details/${item._id}`,
         changefreq: "daily",
         priority: 0.7,
       });

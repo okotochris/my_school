@@ -16,13 +16,13 @@
   <!-- Dynamic Title & Meta (server-side rendered) -->
   <title><%= article.title %> | MySchoolResult</title>
   <meta name="description" content="<%= article.summary || article.body.substring(0, 160) %>">
-  <meta name="keywords" content="AI education, student analytics, personalized learning, academic performance, edtech">
+  <meta name="keywords" content="education, student analytics, personalized learning, academic performance, edtech">
   <meta name="author" content="<%= article.author || 'MySchoolResult' %>">
 
-  <meta property="og:title" content="<%= article.title %> | MySchoolResult">
+  <meta property="og:title" content="<%= article.title %>">
   <meta property="og:description" content="<%= article.body.substring(0, 300) %>">
-  <meta property="og:image" content="<%= article.image || 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80' %>">
-  <meta property="og:url" content="https://myschoolresult.com/news/<%= article.slug || article.id %>">
+  <meta property="og:image" content="<%= article.image  %>">
+  <meta property="og:url" content="https://myschoolresult.com/news/<%=article._id %>">
   <meta property="og:type" content="article">
 
   <!-- Twitter Cards -->
@@ -33,12 +33,15 @@
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2077324357254940"
      crossorigin="anonymous"></script>
-
+<!-- STYLE LINK-->
   <link rel="canonical" href="https://myschoolresult.com/news/<%= article.slug || article.id %>">
   <link rel="stylesheet" href="/styles/index.css">
   <link rel="stylesheet" href="/styles/newsDetails.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
   <link rel="icon" href="/myschoolresult.png" type="image/png" sizes="32x32">
+
+  <!---FACEBOOK TAG -->
+
 </head>
 <body>
   <%- include('partials/header2') %>
@@ -86,10 +89,11 @@
            target="_blank" rel="noopener" class="share-btn twitter" title="Share on Twitter">
           <i class="fab fa-twitter"></i>
         </a>
-        <a href="https://www.facebook.com/sharer/sharer.php?u=<%= encodeURIComponent('https://myschoolresult.com/news/' + (article.slug || article.id)) %>" 
-           target="_blank" rel="noopener" class="share-btn facebook" title="Share on Facebook">
-          <i class="fab fa-facebook-f"></i>
-        </a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=<%= encodeURIComponent('https://myschoolresult.com/news_details/' + article._id) %>" 
+        target="_blank" rel="noopener" class="share-btn facebook" title="Share on Facebook">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+
         <a href="https://wa.me/?text=<%= encodeURIComponent(article.title + ' — via MySchoolResult ' + 'https://myschoolresult.com/news/' + (article.slug || article.id)) %>" 
            target="_blank" rel="noopener" class="share-btn whatsapp" title="Share on WhatsApp">
           <i class="fab fa-whatsapp"></i>
@@ -109,7 +113,7 @@
             <div class="related-image" style="background-image:url('<%= rel.image %>')"></div>
             <div class="related-content">
               <span class="related-badge"><%= rel.category || 'News' %></span>
-              <h3 class="related-card-title"><a href="/news/<%= rel.slug || rel.id %>"><%= rel.title %></a></h3>
+              <h3 class="related-card-title"><a href="/news_details/<%=rel._id %>"><%= rel.title %></a></h3>
               <p class="related-meta"><%= rel.pubDate ? new Date(rel.pubDate).toLocaleDateString() : '' %></p>
             </div>
           </div>

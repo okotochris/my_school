@@ -46,9 +46,9 @@
               <span>🗓️ <%= new Date(featuredArticle.pubDate || featuredArticle.dateTime).toLocaleDateString() %></span>
               <span>✍️ <%= Array.isArray(featuredArticle.creator) ? featuredArticle.creator[0] : featuredArticle.creator || "MySchoolResult" %></span>
             </div>
-            <a href="/news_details/<%= allArticlesForJS.indexOf(featuredArticle) %>" 
+            <a href="/news_details/<%=featuredArticle._id %>" 
                class="read-more" 
-               data-article-index="<%= allArticlesForJS.indexOf(featuredArticle) %>">
+               data-article-index="<%=featuredArticle._id %>">
               Read Full Story
             </a>
           </div>
@@ -72,7 +72,7 @@
                   🗓️ <%= new Date(article.pubDate || article.dateTime).toLocaleDateString() %> | 
                   ✍️ <%= Array.isArray(article.creator) ? article.creator[0] : article.creator || "MySchoolResult" %>
                 </p>
-                <a href="/news_details/<%= globalIndex %>" 
+                <a href="/news_details/<%= article._id %>" 
                    class="news-link" 
                    data-article-index="<%= globalIndex %>">Read More</a>
               </div>
@@ -130,7 +130,7 @@
             <h3>${article.title || "Untitled"}</h3>
             <p>${desc}</p>
             <p class="news-meta">🗓️ ${date} | ✍️ ${author}</p>
-            <a href="/news_details/${index}" class="news-link" data-article-index="${index}">Read More</a>
+            <a href="/news_details/${article._id}" class="news-link" data-article-index="${index}">Read More</a>
           </div>
         </article>
       `;
