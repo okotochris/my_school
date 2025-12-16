@@ -19,11 +19,13 @@
   <meta name="keywords" content="education, student analytics, personalized learning, academic performance, edtech">
   <meta name="author" content="<%= article.author || 'MySchoolResult' %>">
 
-  <meta property="og:title" content="<%= article.title %>">
-  <meta property="og:description" content="<%= article.body.substring(0, 300) %>">
-  <meta property="og:image" content="<%= article.image  %>">
-  <meta property="og:url" content="https://myschoolresult.com/news/<%=article._id %>">
-  <meta property="og:type" content="article">
+<meta property="og:title" content="<%= article.title || 'MySchoolResult - Education News' %>">
+<meta property="og:description" content="<%= article.displayContent.replace(/(<([^>]+)>)/gi, '').substring(0, 300) %>">
+<meta property="og:image" content="<%= article.image ? 'https://myschoolresult.com' + article.image : 'https://myschoolresult.com/default-news.png' %>">
+<meta property="og:url" content="https://myschoolresult.com/news_details/<%= article._id %>">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="MySchoolResult">
+
 
   <!-- Twitter Cards -->
   <meta name="twitter:card" content="summary_large_image">
@@ -85,7 +87,7 @@
     <div class="share-section" style="margin-top:2rem; display:flex; align-items:center; gap:1rem;">
       <span>Share this article:</span>
       <div style="display:flex; gap:1rem;">
-        <a href="https://twitter.com/intent/tweet?url=<%= encodeURIComponent('https://myschoolresult.com/news/' + (article.slug || article.id)) %>&text=<%= encodeURIComponent(article.title + ' — via MySchoolResult') %>" 
+        <a href="https://twitter.com/intent/tweet?url=<%= encodeURIComponent('https://myschoolresult.com/news_details/' + article._id) %>" 
            target="_blank" rel="noopener" class="share-btn twitter" title="Share on Twitter">
           <i class="fab fa-twitter"></i>
         </a>
@@ -94,11 +96,11 @@
         <i class="fab fa-facebook-f"></i>
       </a>
 
-        <a href="https://wa.me/?text=<%= encodeURIComponent(article.title + ' — via MySchoolResult ' + 'https://myschoolresult.com/news/' + (article.slug || article.id)) %>" 
+        <a href="https://wa.me/?text=<%= encodeURIComponent('https://myschoolresult.com/news_details/' + article._id) %>" 
            target="_blank" rel="noopener" class="share-btn whatsapp" title="Share on WhatsApp">
           <i class="fab fa-whatsapp"></i>
         </a>
-        <a href="#" class="share-btn" title="Copy link" onclick="navigator.clipboard.writeText('https://myschoolresult.com/news/<%= article.slug || article.id %>'); alert('Link copied!'); return false;">
+        <a href="#" class="share-btn" title="Copy link" onclick="navigator.clipboard.writeText('https://myschoolresult.com/news/<%= article._id%>'); alert('Link copied!'); return false;">
           <i class="fas fa-link"></i>
         </a>
       </div>

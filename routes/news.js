@@ -80,6 +80,8 @@ router.get("/news_details/:id", async (req, res) => {
     res.render("news_details", {
       article: { ...article.toObject(), displayContent },
       relatedArticles,
+      title: article.title,
+      image: article.image
     });
   } catch (err) {
     console.error("News details error:", err);
