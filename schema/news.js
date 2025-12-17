@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const newsSchema = new mongoose.Schema(
   {
-    title: String,
+    title: {type: String, unique:true},
     url: { type: String, unique: true }, // ensures no duplicates
     pubDate: String,
     description: String,
