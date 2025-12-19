@@ -31,10 +31,10 @@ router.post("/result", async (req, res) => {
      
       if (details != null) {
         let schoolName = details.schoolName.toLowerCase().trim();
-        // const payment = await isOutStandingPayment(schoolName)
-        // if(!payment){
-        //     return res.render('block_school', {school: schoolName})
-        // }
+        const payment = await isOutStandingPayment(schoolName)
+        if(!payment){
+            return res.render('block_school', {school: schoolName})
+        }
         let resultTemplate = schoolName.split(" ");
         resultTemplate = resultTemplate.join("-");
         resultTemplate = `${resultTemplate}-basic`;
