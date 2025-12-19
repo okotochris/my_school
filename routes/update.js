@@ -31,6 +31,7 @@ router.patch("/update-student", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
 //UPDATING BASIC SCHOOL RESULT
 router.patch("/update_basic_result", async (req, res) => {
 let { studentId, term, class: sClass } = req.body;
@@ -53,6 +54,7 @@ let { studentId, term, class: sClass } = req.body;
     res.status(500).send("server error");
   }
 });
+
 //UPDATING NURSERY
 router.patch("/update_nursery_result", async (req, res) => {
   let { studentId, term, class: sClass } = req.body;
@@ -72,12 +74,13 @@ router.patch("/update_nursery_result", async (req, res) => {
     res.status(500).send(err);
   }
 });
+
 //UPDATING JUNIOR SCHOOL RESULT
 router.patch("/update_junior_result", async (req, res) => {
-  const { studentId, term, sClass } = req.body;
+  const { studentId, term, class: sClass } = req.body;
   try {
     let updated = await Blog.findOneAndUpdate(
-      { studentId, term, sClass },
+      { studentId, term, class:sClass },
       req.body,
       { new: true }
     );
@@ -88,8 +91,11 @@ router.patch("/update_junior_result", async (req, res) => {
     }
   } catch (err) {
     res.status(500).send(err);
+    console.log(err)
   }
 });
+
+
 //UPDATING SENIOR SCHOOL RESULT
 router.patch("/update_senior_result", async (req, res) => {
   const { studentId, term, sClass } = req.body;

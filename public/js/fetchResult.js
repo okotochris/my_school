@@ -1,4 +1,4 @@
-let studentId = document.getElementById("studentId");
+ studentId = document.getElementById("studentId");
 term = document.getElementById("Sterm");
 Sclass = document.getElementById("Sclass");
 let getDetails = document.getElementById("getDetails");
@@ -219,7 +219,7 @@ function juniorStudentResultTemplate(data) {
   document.getElementById("mthca").value = data.mthca;
   document.getElementById("mthexam").value = data.mthexam;
    document.getElementById("mthscore").value = data.mthscore
-   document.getElementById("mth").value = data.mthG
+   document.getElementById("mthG").value = data.mthG
   document.getElementById("mthRemark").value = data.mthRemark
   //BASIC SCIENCE
   document.getElementById("bsc").value =  data.bsc;
@@ -302,7 +302,7 @@ function juniorStudentResultTemplate(data) {
   document.getElementById("cscca").value = data.cscca;
   document.getElementById("cscexam").value = data.cscexam;
   document.getElementById("cscscore").value = data.cscscore
-  document.getElementById("cscgG").value = data.cscG
+  document.getElementById("cscG").value = data.cscG
   document.getElementById("cscRemark").value = data.cscRemark
   
   //HOME ECONOMICS
