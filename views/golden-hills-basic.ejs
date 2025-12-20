@@ -57,9 +57,9 @@
 				<% image = 'basic4.png'; %>
 				<% teacher = ' Miss Praise'; %>
 			<% } else if (details.class == 'BASIC 5') { %>
-				<% teacher = 'Miss Lawani comfort Omofah'; %>
+				<% teacher = 'Miss Abby'; %>
 				<% image = 'basic5.png' %>
-				<% roomName = 'Miss Abby'; %>
+				<% roomName = 'Shining Crystal'; %>
 			<% }else if (details.class == 'BASIC 6') { %>
 				<% roomName = 'PACE SETTERS'; %>
 				<% teacher = 'Miss Abby'; %>
@@ -188,6 +188,16 @@
 							<td><%= details.spescore %></td>
 							<td><%= details.speG %></td>
 							<td><%= details.speRemark %></td>
+						</tr>
+						<tr>
+							<td><%= details.pvs.toUpperCase() %></td>
+							<td><%= details.pvs1st %></td>
+							<td><%= details.pvs2nd %></td>
+							<td><%= details.pvsca %></td>
+							<td><%= details.pvsexam %></td>
+							<td><%= details.pvsscore %></td>
+							<td><%= details.pvsG %></td>
+							<td><%= details.pvsRemark %></td>
 						</tr>
 						<tr>
 							<td><%= details.mus.toUpperCase() %></td>
