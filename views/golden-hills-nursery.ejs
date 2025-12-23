@@ -48,6 +48,7 @@
 				<% } else if (details.class == 'NURSERY 1') { %>
 					<% roomName = 'SAPPHIRE'; %>
 					<% teacher = 'Miss Vanessa'; %>
+					<% signature = 'nursery1.png'; %>
 				<% } else if (details.class == 'NURSERY 2') { %>
 					<% roomName = 'HIGH FLYER'; %>
 					<% signature = 'nursery2.png' %>
@@ -55,6 +56,7 @@
 				<% } else if (details.class == 'NURSERY 3') { %>
 					<% roomName = 'DIAMOND'; %>
 					<% teacher = 'Miss Osas'; %>
+					<% signature = 'nursery3.png'; %>
 				<% } %>
 			<div class="sudent-info">
 				<div><%= details.class %> <%=roomName %>, <%= details.term %> RESULT <%= details.section %> ACADEMIC SESSION</div>
@@ -553,7 +555,7 @@
 					<div class="comment">
 						<p>Class Manager's Comment:<span> <%= details.tReport %></span></p>
 						<p>Class Manager's Name<span><%= teacher %></span></p>
-						<!-- <p>Signature<span><img src="<%= signature %>" height="20" width="50"/></span></p> -->
+						<p>Signature<span><img src="<%= signature %>" height="20" width="50"/></span></p>
 						<p>Head of School Comment: <span><%= details.Treport %> </span></p>
 						
 						<p>Promoted To:<span> <%=details.promote %></span></p>
