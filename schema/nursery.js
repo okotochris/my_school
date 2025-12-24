@@ -289,6 +289,9 @@ blogSchema = new Schema({
     plfG:{
         type:String
     },
+    plfRemark:{
+        type:String
+    },
      sen:{
         type:String
     },

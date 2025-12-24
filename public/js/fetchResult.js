@@ -33,9 +33,7 @@ getDetails.onclick = async (e) => {
       );
       if (result.ok) {
         const data = await result.json();
-        console.log("data" + data)
         let currentClass = studentclass.split(" ");
-        console.log(currentClass[0]);
         if (currentClass[0] == "BASIC") {
           basicStudentResultTemplate(data);
         } else if (currentClass[0] == "JSS") {
@@ -113,7 +111,16 @@ function basicStudentResultTemplate(data) {
   document.getElementById("qurscore").value = data.qurscore
   document.getElementById("qurG").value = data.qurG
   document.getElementById("qurRemark").value = data.qurRemark
-  //virber atitude
+
+    //CULTURAL AND CREATIVE ART
+  document.getElementById("cra").value = data.cra;
+  document.getElementById("cra1st").value = data.cra1st;
+  document.getElementById("cra2nd").value = data.cra2nd;
+  document.getElementById("craca").value = data.craca;
+  document.getElementById("craexam").value = data.craexam;
+  document.getElementById("crascore").value = data.crascore
+  document.getElementById("craG").value = data.craG
+  document.getElementById("craRemark").value = data.craRemark
   
   document.getElementById("ver").value = data.ver;
   document.getElementById("ver1st").value = data.ver1st;
@@ -133,15 +140,7 @@ function basicStudentResultTemplate(data) {
   document.getElementById("vstscore").value = data.vstscore
   document.getElementById("vstG").value = data.vstG
   document.getElementById("vstRemark").value = data.vstRemark
-  //culture creative art
-  document.getElementById("cra").value =  data.cra;
-  document.getElementById("cra1st").value = data.cra1st;
-  document.getElementById("cra2nd").value = data.cra2nd;
-  document.getElementById("craca").value = data.craca;
-  document.getElementById("craexam").value = data.craexam;
-   document.getElementById("crascore").value = data.crascore
-  document.getElementById("craG").value = data.craG
-  document.getElementById("craRemark").value = data.craRemark
+
   //natianl value
   document.getElementById("spe").value = data.spe;
   document.getElementById("spe1st").value = data.spe1st;
@@ -286,6 +285,7 @@ function juniorStudentResultTemplate(data) {
   document.getElementById("hiyscore").value = data.hiyscore
   document.getElementById("hiyG").value = data.hiyG
   document.getElementById("hiyRemark").value = data.hiyRemark
+
   //CULTURAL AND CREATIVE ART
   document.getElementById("cra").value = data.cra;
   document.getElementById("cra1st").value = data.cra1st;
@@ -357,9 +357,27 @@ function nurseryStudentResultTemplate(data) {
    document.getElementById("mthscore").value = data.mthscore
   document.getElementById("mthG").value = data.mthG
   document.getElementById("mthRemark").value = data.mthRemark
+  //quantitative reasoning
+  document.getElementById("sen").value = data.sen;
+  document.getElementById("sen1st").value = data.sen1st;
+  document.getElementById("sen2nd").value = data.sen2nd;
+  document.getElementById("senca").value = data.senca;
+  document.getElementById("senexam").value = data.senexam;
+  document.getElementById("senscore").value = data.senscore
+  document.getElementById("senG").value = data.senG
+  document.getElementById("senRemark").value = data.senRemark
+    //CULTURAL AND CREATIVE ART
+  document.getElementById("cra").value = data.cra;
+  document.getElementById("cra1st").value = data.cra1st;
+  document.getElementById("cra2nd").value = data.cra2nd;
+  document.getElementById("craca").value = data.craca;
+  document.getElementById("craexam").value = data.craexam;
+  document.getElementById("crascore").value = data.crascore
+  document.getElementById("craG").value = data.craG
+  document.getElementById("craRemark").value = data.craRemark
   
   //CRS
-  document.getElementById("rnv").value ='Quantitative Reasoning' // data.rnv;
+  document.getElementById("rnv").value = data.rnv;
   document.getElementById("rnv1st").value = data.rnv1st;
   document.getElementById("rnv2nd").value = data.rnv2nd;
   document.getElementById("rnvca").value = data.rnvca;
@@ -415,19 +433,10 @@ function nurseryStudentResultTemplate(data) {
    document.getElementById("vstscore").value = data.vstscore
    document.getElementById("vstG").value = data.vstG
   document.getElementById("vstRemark").value = data.vstRemark
-  //culture creative art
 
-  //document.getElementById("cra").value = data.cra;
-  document.getElementById("cra1st").value = data.cra1st;
-  document.getElementById("cra2nd").value = data.cra2nd;
-  document.getElementById("craca").value = data.craca;
-  document.getElementById("craexam").value = data.craexam;
-   document.getElementById("crascore").value = data.crascore
-   document.getElementById("craG").value = data.craG
-  document.getElementById("craRemark").value = data.craRemark
 
   //SPEACH SCIENCE
-  //document.getElementById("ver").value = data.ver;
+  document.getElementById("ver").value = data.ver;
   document.getElementById("ver1st").value = data.ver1st;
   document.getElementById("ver2nd").value = data.ver2nd;
   document.getElementById("verca").value = data.verca;
@@ -436,7 +445,7 @@ function nurseryStudentResultTemplate(data) {
    document.getElementById("verG").value = data.verG
   document.getElementById("verRemark").value = data.verRemark
   //Practical Life
-  document.getElementById("plf").value = 'Health Habit'// data.plf;
+  document.getElementById("plf").value = data.plf;
   document.getElementById("plf1st").value = data.plf1st;
   document.getElementById("plf2nd").value = data.plf2nd;
   document.getElementById("plfca").value = data.plfca;
@@ -444,8 +453,9 @@ function nurseryStudentResultTemplate(data) {
   document.getElementById("plfscore").value = data.plfscore
   document.getElementById("plfG").value = data.plfG
   document.getElementById("plfRemark").value = data.plfRemark
+
   //Verbal Reasoning
-  //document.getElementById("vrn").value = data.vrn;
+  document.getElementById("vrn").value = data.vrn;
   document.getElementById("vrn1st").value = data.vrn1st;
   document.getElementById("vrn2nd").value = data.vrn2nd;
   document.getElementById("vrnca").value = data.vrnca;
@@ -453,10 +463,18 @@ function nurseryStudentResultTemplate(data) {
    document.getElementById("vrnscore").value = data.vrnscore
    document.getElementById("vrnG").value = data.vrnG
   document.getElementById("vrnRemark").value = data.vrnRemark
-  
-  
+
   //Verbal Reasoning
-  document.getElementById("crs").value =  'Phonics'//data.crs;
+  document.getElementById("cst1st").value = data.cst1st;
+  document.getElementById("cst2nd").value = data.cst2nd;
+  document.getElementById("cstca").value = data.cstca;
+  document.getElementById("cstexam").value = data.cstexam;
+  document.getElementById("cstscore").value = data.cstscore
+  document.getElementById("cstG").value = data.cstG
+  document.getElementById("cstRemark").value = data.cstRemark
+
+  //Verbal Reasoning
+  document.getElementById("crs").value =  data.crs;
   document.getElementById("crs1st").value = data.crs1st;
   document.getElementById("crs2nd").value = data.crs2nd;
   document.getElementById("crsca").value = data.crsca;
