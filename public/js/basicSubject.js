@@ -15,7 +15,8 @@ window.addEventListener('load',  async ()=>{
             document.querySelector('#vst').value = 'Agricultural Science'
             document.querySelector('#hwr').value = 'Computer Education'
             document.querySelector('#pvs').value = 'Civic Education'
-            document.querySelector('#pre').value = 'History'
+            document.querySelector('#pvd').value = 'History'
+            
             
         }else{
             document.getElementById('additionalSubject').style.display="none"
