@@ -151,22 +151,21 @@ updateStudentForm.addEventListener('submit', async (e) => {
   showLoading();
 
   try {
-    // // Use FormData for file upload support
-    // const formData = new FormData();
-    // formData.append('studentId', studentId);
-    // formData.append('userName', userName);
-    // formData.append('addmissionNo', addmissionNo);
-    // formData.append('dob', dobValue);
-    // formData.append('classN', classValue);
-    // formData.append('gender', gender);
-    // if (passportFile) {
-    //   formData.append('passport', passportFile);
-    // }
+    // Use FormData for file upload support
+    const formData = new FormData();
+    formData.append('studentId', studentId);
+    formData.append('userName', userName);
+    formData.append('addmissionNo', addmissionNo);
+    formData.append('dob', dobValue);
+    formData.append('classN', classValue);
+    formData.append('gender', gender);
+    if (passportFile) {
+      formData.append('passport', passportFile);
+    }
 
     const response = await fetch('/update-student', {
       method: 'PATCH',
-      headers:{"Content-Type":"application/json"},
-      body: JSON.stringify(data)
+      body: formData
     });
 
     const result = await response.json();

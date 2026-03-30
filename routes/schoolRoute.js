@@ -1,6 +1,7 @@
 const express = require('express');
 const schoolPfofile = require('../schema/schoolProfile') 
 const isAuthenticated = require('../utility/authenticated.js')
+const Studentpassport = require('../schema/goldenPassport.js')
 const ABlog = require('../schema/admin.js')
 const Blacklist = require('../schema/blacklist.js')
 const router = express.Router()
@@ -62,4 +63,16 @@ const fees = await schoolFees(req.session.school)
   res.render("generateid", { school: req.session.school, fees, role, title: "Onboard Student"});
 });
 
+router.get("/student-profile/:studentId", async (req, res) => {
+    try {
+        const student = await Studentpassport.findOne({ studentId: req.params.studentId });
+        if (!student) {
+            return res.status(404).send("Student not found");
+        }
+        console.log(student)
+        res.render("student-profile", { student });
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
+});
 module.exports = router;

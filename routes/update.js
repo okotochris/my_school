@@ -5,33 +5,48 @@ const nuseryBlog = require("../schema/nursery.js"); // nursery
 const Blog = require("../schema/data.js"); //junior class
 const SBlog = require("../schema/datas.js"); // sinior class
 const router = express.Router()
+const upload = require("../middleware/upload.js");
+const cloudinary = require("../middleware/cloudinary.js");
+const fs = require("fs");
 
-router.patch("/update-student", async (req, res) => {
-  const { studentId, userName, addmissionNo, dobValue, classValue, gender } = req.body; 
+router.patch("/update-student", upload.single("passport"), async (req, res) => {
+  const { studentId, userName, addmissionNo, dobValue, classValue, gender } = req.body;
+
+  if (!studentId) {
+    return res.status(400).json({ message: "studentId is required" });
+  }
+
+  let image = null;
+  if (req.file) {
+    image = await cloudinary.uploader.upload(req.file.path);
+    fs.unlinkSync(req.file.path); // remove local file
+  }
+
+  const updateData = {};
+  if (userName) updateData.userName = userName;
+  if (addmissionNo) updateData.addmissionNo = addmissionNo;
+  if (dobValue) updateData.dob = dobValue;
+  if (gender) updateData.gender = gender;
+  if (classValue) updateData.class = classValue;
+  if (req.session.school) updateData.schoolName = req.session.school;
+  if (image) updateData.passport = image.secure_url;
+
   try {
     const updatedStudent = await Studentpassport.findOneAndUpdate(
-      { studentId }, // Use studentId to identify the student
-      {
-        userName,
-        addmissionNo,
-        dob: dobValue,
-        gender,
-        class: classValue,
-        schoolName: req.session.school,
-      },
-      { new: true } // Return the updated document
+      { studentId },
+      updateData,
+      { new: true }
     );
 
-    if (updatedStudent) {
-      res.status(200).json(updatedStudent);
-    } else {
-      res.status(404).json({ message: "Student not found" });
+    if (!updatedStudent) {
+      return res.status(404).json({ message: "Student not found" });
     }
+
+    res.status(200).json(updatedStudent);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
-
 //UPDATING BASIC SCHOOL RESULT
 router.patch("/update_basic_result", async (req, res) => {
 let { studentId, term, class: sClass } = req.body;

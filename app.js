@@ -29,6 +29,8 @@ const checkResultRoute = require('./routes/checkresult.js')
 const staticRoute = require('./routes/staticRoute.js')
 const fetchNigerianSchoolNews = require('./utility/getNews.js')
 const cron = require("node-cron")
+const upload = require("./middleware/upload.js");
+const cloudinary = require("./middleware/cloudinary.js");
 const app = express();
 
 // middleware
@@ -97,17 +99,7 @@ const uploadDir = path.join(__dirname, "uploads");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// configuring multer
-const fileEngineStorage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads/"); // Ensure the directory 'uploads/' exists
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + "--" + file.originalname);
-  },
-});
 
-const upload = multer({ storage: fileEngineStorage });
 
 //setting port and connecting to server
 const PORT = process.env.PORT || 3000;
@@ -340,30 +332,38 @@ app.delete('/deletestaff', async (req, res)=>{
     console.log(err)
   }
 })
+
 // saving student ID and passport
-app.post("/passport", upload.single("passport"), (req, res) => {
-  const newPassport = new Studentpassport({
-    userName: req.body.userName,
-    studentId: req.body.studentId,
-    schoolsession:req.body.schoolsession,
-    addmissionNo: req.body.addmissionNo,
-    dob: req.body.dob,
-    class: req.body.class,
-    passport: req.file ? req.file.filename : null, // Save filename or null if no file uploaded
-    schoolName: req.session.school,
-  });
+app.post("/passport", upload.single("passport"), async (req, res) => {
+  try {
+    let image = null;
 
-  newPassport
-    .save()
-    .then((result) => {
-      res.redirect("/generateid");
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Internal Server Error");
+    if (req.file) {
+      // Upload to Cloudinary and wait for result
+      const result = await cloudinary.uploader.upload(req.file.path, { folder: "passports" });
+      image = result.secure_url;
+    }
+
+    const newPassport = new Studentpassport({
+      userName: req.body.userName,
+      studentId: req.body.studentId,
+      schoolsession: req.body.schoolsession,
+      addmissionNo: req.body.addmissionNo,
+      dob: req.body.dob,
+      class: req.body.class,
+      passport: image, // Cloudinary URL or null
+      schoolName: req.session.school,
+      gender: req.body.gender
     });
-});
 
+    await newPassport.save();
+    res.redirect("/generateid");
+
+  } catch (err) {
+    console.error("Error saving passport:", err);
+    res.status(500).send("Internal Server Error");
+  }
+});
 // post request from school updating news field
 app.post("/myschool", (req, res) => {
   res.redirect("index");
