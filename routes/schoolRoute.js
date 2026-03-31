@@ -75,4 +75,5 @@ router.get("/student-profile/:studentId", async (req, res) => {
         res.status(500).send(err.message);
     }
 });
+
 module.exports = router;

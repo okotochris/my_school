@@ -529,3 +529,14 @@ app.use((req, res) => {
   res.status(404).render("index");
 });
 
+const fs = require("fs");
+
+// CONFIGURE CLOUDINARY
+// DB MIGRATION FUNCTION
+
+// CONFIG
+
+
+
+
+
