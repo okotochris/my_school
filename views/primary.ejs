@@ -173,7 +173,27 @@
                     <input type="text" placeholder="GRADE" name="hwrG" id="hwrG" readonly />
                     <input type="text" name="hwrRemark" id="hwrRemark" placeholder="Remark" readonly />
                 </div>
-               
+               <div class="subject-row">
+                    <input type="text" value="General Subject" id="hst" name="hst" readonly />
+                    <input type="number" placeholder="1st Test" name="hst1st" id="hst1st" oninput="calculateSubject('hst')" />
+                    <input type="number" placeholder="2nd Test" name="hst2nd" id="hst2nd" oninput="calculateSubject('hst')" />
+                    <input type="number" id="hstca" name="hstca" placeholder="CCA" oninput="calculateSubject('hst')" />
+                    <input type="number" placeholder="Exam" name="hstexam" id="hstexam" oninput="calculateSubject('hst')" />
+                    <input type="text" placeholder="TOTAL SCORE" name="hstscore" id="hstscore" readonly />
+                    <input type="text" placeholder="GRADE" name="hstG" id="hstG" readonly />
+                    <input type="text" name="hstRemark" id="hstRemark" placeholder="Remark" readonly />
+                </div>
+                     <!-- Phonics (Speech Sci.) -->
+                <div class="subject-row">
+                    <input type="text" value="Phonics (Speech Sci.)" name="mus" readonly />
+                    <input type="number" placeholder="1st Test" name="mus1st" id="mus1st" oninput="calculateSubject('mus')" />
+                    <input type="number" placeholder="2nd Test" name="mus2nd" id="mus2nd" oninput="calculateSubject('mus')" />
+                    <input type="number" id="musca" name="musca" placeholder="CCA" oninput="calculateSubject('mus')" />
+                    <input type="number" placeholder="Exam" name="musexam" id="musexam" oninput="calculateSubject('mus')" />
+                    <input type="text" placeholder="TOTAL SCORE" name="musscore" id="musscore" readonly />
+                    <input type="text" placeholder="GRADE" name="musG" id="musG" readonly />
+                    <input type="text" name="musRemark" id="musRemark" placeholder="Remark" readonly />
+                </div>
                 <div id="additionalSubject">
                        <!-- History -->
                 <div class="subject-row">
@@ -224,7 +244,7 @@
                 </div>
 
               
-                </div>
+            </div>
             </fieldset>
             <fieldset>
                 <legend>STUDENT PERFORMANCE</legend>

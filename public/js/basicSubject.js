@@ -19,7 +19,7 @@ window.addEventListener('load',  async ()=>{
             
             
         }else{
-            document.getElementById('additionalSubject').style.display="none"
+            document.getElementById('additionalSubject').style.display="none" 
            
         }
     }

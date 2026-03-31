@@ -179,7 +179,16 @@
                         <input type="text" placeholder="GRADE" name="crsG" id="crsG" readonly />
                         <input type="text" name="crsRemark" id="crsRemark" placeholder="Remark" readonly />
                     </div>
-
+                      <div class="subject-row">
+                        <input type="text" value="Sensorial"  id="sen" readonly name="sen" />
+                        <input type="number" placeholder="1st Test" name="sen1st" id="sen1st" oninput="calculateSubject('sen')" />
+                        <input type="number" placeholder="2nd Test" name="sen2nd" id="sen2nd" oninput="calculateSubject('sen')" />
+                        <input type="number" id="senca" name="senca" placeholder="CCA" oninput="calculateSubject('sen')" />
+                        <input type="number" placeholder="Exam" name="senexam" id="senexam" oninput="calculateSubject('sen')" />
+                        <input type="number" placeholder="TOTAL SCORE" name="senscore" id="senscore" readonly />
+                        <input type="text" placeholder="GRADE" name="senG" id="senG" readonly />
+                        <input type="text" name="senRemark" id="senRemark" placeholder="Remark" readonly />
+                    </div>
                 <div class="extra" style="display: none;">  
                   <!-- ⁠Computer Science -->
                     <div class="subject-row">
@@ -193,16 +202,7 @@
                         <input type="text" name="cstRemark" id="cstRemark" placeholder="Remark" readonly />
                     </div>
                     <!-- Sensorial -->
-                    <div class="subject-row">
-                        <input type="text" value="Sensorial"  id="sen" readonly name="sen" />
-                        <input type="number" placeholder="1st Test" name="sen1st" id="sen1st" oninput="calculateSubject('sen')" />
-                        <input type="number" placeholder="2nd Test" name="sen2nd" id="sen2nd" oninput="calculateSubject('sen')" />
-                        <input type="number" id="senca" name="senca" placeholder="CCA" oninput="calculateSubject('sen')" />
-                        <input type="number" placeholder="Exam" name="senexam" id="senexam" oninput="calculateSubject('sen')" />
-                        <input type="number" placeholder="TOTAL SCORE" name="senscore" id="senscore" readonly />
-                        <input type="text" placeholder="GRADE" name="senG" id="senG" readonly />
-                        <input type="text" name="senRemark" id="senRemark" placeholder="Remark" readonly />
-                    </div>
+                  
                 </div>
  
                 
