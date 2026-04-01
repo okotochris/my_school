@@ -5,6 +5,7 @@
 <title>Student Profile</title>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 * {
@@ -31,6 +32,7 @@ body {
     box-shadow: 
         0 10px 30px rgba(0,0,0,0.08),
         0 2px 10px rgba(0,0,0,0.04);
+    position:relative;
 }
 
 /* 🧾 HEADINGS */
@@ -132,6 +134,7 @@ h3 {
 /* 📈 CHART */
 .chart-container {
     margin-top: 30px;
+    width: 100%;
     background: linear-gradient(135deg, #ffffff, #f9fafb);
     padding: 20px;
     border-radius: 16px;
@@ -305,7 +308,7 @@ h3 {
 }
 
 /* 📱 RESPONSIVE */
-@media (max-width: 700px) {
+@media (max-width: 600px) {
     .top-section {
         flex-direction: column;
         text-align: center;
@@ -326,7 +329,16 @@ h3 {
    <div class="top-section">
 
     <!-- LEFT: STUDENT -->
-    <div class="student-box">
+     <div class="school-box">
+        <img 
+          src="/IMAGE/<%= encodeURIComponent(student.schoolName.toLowerCase()) %>.png"
+          class="school-logo"
+        />
+        <h3 class="school-name"><%= student.schoolName %></h3>
+    </div>
+
+    <!-- RIGHT: SCHOOL -->
+  <div class="student-box">
         <img class="passport" 
         src="<%= student.passport || 'https://via.placeholder.com/150' %>" />
 
@@ -336,16 +348,6 @@ h3 {
             <p><strong>Session:</strong> <%= student.schoolsession %></p>
         </div>
     </div>
-
-    <!-- RIGHT: SCHOOL -->
-    <div class="school-box">
-        <img 
-          src="/IMAGE/<%= encodeURIComponent(student.schoolName.toLowerCase()) %>.png"
-          class="school-logo"
-        />
-        <h3 class="school-name"><%= student.schoolName %></h3>
-    </div>
-
 </div>
 
     <div class="grid">
@@ -445,6 +447,7 @@ function resultAnalysisA(data) {
 
 function renderResults(data) {
     const container = document.querySelector('.results-list');
+    console.log(data[0])
     let html = '';
 
     data.forEach(item => {
@@ -457,7 +460,7 @@ function renderResults(data) {
                     <div>
                         <p class="term">${item.term}</p>
                         <p class="session">${item.class}</p>
-                        <p class="session">${item.session}</p>
+                        <p class="session">${item.section}</p>
                     </div>
 
                     <div class="result-stats">

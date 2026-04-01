@@ -13,7 +13,7 @@
 			height:120px;
 			width:100px;
 			border:solid 1px black;
-			background: url('/<%= result.passport %>');
+			background: url('<%= result.passport %>');
 			background-repeat: no-repeat;
 			background-size:cover;
 			background-position: center;
@@ -176,16 +176,20 @@
 							<td><%= details.verG %></td>
 							<td><%= details.verRemark %></td>
 						</tr>
-						 <tr>
-							<td><%= details.sen.toUpperCase() %></td>
-							<td><%= details.sen1st %></td>
-							<td><%= details.sen2nd %></td>
-							<td><%= details.senca %></td>
-							<td><%= details.senexam %></td>
-							<td><%= details.senscore %></td>
-							<td><%= details.senG %></td>
-							<td><%= details.senRemark %></td>
-						</tr>
+						<% if(details.sen){ %>
+							<tr>
+								<td><%= details.sen.toUpperCase() %></td>
+								<td><%= details.sen1st %></td>
+								<td><%= details.sen2nd %></td>
+								<td><%= details.senca %></td>
+								<td><%= details.senexam %></td>
+								<td><%= details.senscore %></td>
+								<td><%= details.senG %></td>
+								<td><%= details.senRemark %></td>
+							</tr>
+						<% } %>
+						
+						<% if(details.cst){ %>
 						 <tr>
 							<td><%= details.cst.toUpperCase() %></td>
 							<td><%= details.cst1st %></td>
@@ -196,6 +200,8 @@
 							<td><%= details.cstG %></td>
 							<td><%= details.cstRemark %></td>
 						</tr>
+						 <% } %>
+						 
 						 <!-- <tr>
 							<td><%= details.crs.toUpperCase() %></td>
 							<td><%= details.crs1st %></td>
