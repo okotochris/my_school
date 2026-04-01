@@ -36,6 +36,7 @@ const app = express();
 // middleware
 app.use(express.static("image"));
 app.use(express.static("uploads"));
+app.use(express.static('public'))
 app.use(
   express.static("public", {
     setHeaders: (res, path, stat) => {

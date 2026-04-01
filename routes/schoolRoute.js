@@ -65,12 +65,11 @@ const fees = await schoolFees(req.session.school)
 
 router.get("/student-profile/:studentId", async (req, res) => {
     try {
-        const student = await Studentpassport.findOne({ studentId: req.params.studentId });
+        const student = await Studentpassport.findOne({ studentId: req.params.studentId});
         if (!student) {
             return res.status(404).send("Student not found");
         }
-        console.log(student)
-        res.render("student-profile", { student });
+        res.render("student-profile", { student, school: req.session.school, title: "Student Profile" });
     } catch (err) {
         res.status(500).send(err.message);
     }

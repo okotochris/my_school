@@ -47,4 +47,28 @@ router.get('/api/is_uploaded', async(req, res)=>{
         res.status(500).json({msg:"server error"})
     }
 })
+router.get('/api/get_result', async(req, res)=>{
+    try {
+        const studentResult = []
+        const {studentId} = req.query
+        console.log(studentId)
+        const student = await PBlog.find({studentId: studentId})
+        studentResult.push(...student)
+        const student2 = await Blog.find({studentId: studentId})
+        studentResult.push(...student2)
+        const student3 = await SBlog.find({studentId: studentId})
+        studentResult.push(...student3)
+            const student4 = await nuseryBlog.find({studentId: studentId})
+        studentResult.push(...student4)
+
+        if(studentResult.length > 0){
+            res.status(200).json(studentResult)
+        } else{
+            res.status(404).json({msg:"result not found"})
+        }
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({msg:"server error"})
+    }
+})
 module.exports =  router

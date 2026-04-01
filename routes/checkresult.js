@@ -8,7 +8,7 @@ const Blacklist = require("../schema/blacklist.js");
 const schoolPfofile = require("../schema/schoolProfile");
 const router = express.Router()
 
-//NEW EDITION STUDENT RESULT
+//view student result from home page
 router.post("/result", async (req, res) => {
   let clas = req.body.class;
   let term = req.body.term;
@@ -116,4 +116,47 @@ async function isOutStandingPayment(school){
      }
      return true
 }
+
+//view student result from student profile page
+router.get('/view-student-result', async(req, res)=>{
+    if(!req.session){
+      res.render('login')
+    }
+    const {term, sclass, school, studentId} = req.query
+    // Fetch student details and result based on class and term
+    const studentResult = {}
+     console.log(`sclass: ${sclass}`);
+    if(sclass.toLowerCase().includes('basic')){
+        studentResult.details = await PBlog.findOne({ studentId: studentId, class: sclass, term: term, schoolName: school })
+    } else if(sclass.toLowerCase().includes('jss')){
+        studentResult.details = await Blog.findOne({ studentId: studentId, class: sclass, term: term, schoolName: school })
+    } else if(sclass.toLowerCase().includes('ss')){
+        studentResult.details = await SBlog.findOne({ studentId: studentId, class: sclass, term: term, schoolName: school })
+    } else if(sclass.toLowerCase().includes('nursery')){
+        studentResult.details = await nuseryBlog.findOne({ studentId: studentId, class: sclass, term: term, schoolName: school })
+    }
+
+   //Cheking if result details exist
+   if(!studentResult.details){
+    return res.render('error', {name: 'Student'})
+   }
+
+   //Rendering result page based on school name and class
+   let schoolName = studentResult.details.schoolName.toLowerCase().trim();
+    let resultTemplate = schoolName.split(" ");
+    resultTemplate = resultTemplate.join("-");
+    if(sclass.toLowerCase().includes('basic')){
+        resultTemplate = `${resultTemplate}-basic`;
+    } else if(sclass.toLowerCase().includes('jss')){
+        resultTemplate = `${resultTemplate}-jss`;
+    } else if(sclass.toLowerCase().includes('ss')){
+        resultTemplate = `${resultTemplate}-ss`;
+    } else if(sclass.toLowerCase().includes('nursery')){
+        resultTemplate = `${resultTemplate}-nursery`;
+    }
+    const data = await Studentpassport.findOne({ studentId: studentId });
+    res.render(resultTemplate, { result:data, details: studentResult.details });
+
+});
+
 module.exports = router;
