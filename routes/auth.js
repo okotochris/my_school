@@ -57,4 +57,14 @@ router.post("/login", async (req, res) => {
     res.status(500).json({msg:"server error"})
   }
 });
+//LOGING IN TO ACCESSS SCHOOL RESULT PAGE
+router.get("/login", (req, res) => {
+  res.render("login");
+});
+//LOGOUT API
+router.get("/logout", (req, res) => {
+  req.session.destroy();
+  //res.clearCookie('connect.sid'); 
+  res.redirect("login");
+});
 module.exports = router;

@@ -1,36 +1,17 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const multer = require("multer");
-const Blog = require("./schema/data.js"); //junior class
-const SBlog = require("./schema/datas.js"); // sinior class
-const ABlog = require("./schema/admin.js");
-const PBlog = require("./schema/primary.js"); //basic class
-const Blacklist = require("./schema/blacklist.js");
-const nuseryBlog = require("./schema/nursery.js"); // nursery
-const nodemailer = require("nodemailer");
-const Studentpassport = require("./schema/goldenPassport.js");
 const path = require("path");
 const cors = require("cors");
 const session = require("express-session");
 require("dotenv").config();
-const schoolPfofile = require("./schema/schoolProfile");
 const MongoStore = require("connect-mongo");
-const { router: newsRouter} = require('./routes/news');
 const generateSitemap = require('./sitemap/sitemap.js')
-const resultGuide = require('./routes/resultCheckGuide.js')
-const authRoute = require('./routes/auth.js')
-const isAuthenticated = require('./utility/authenticated.js')
-const analysisRoute = require('./routes/analysis.js')
-const updateRoute = require('./routes/update.js')
-const payment = require('./routes/payment.js')
-const schoolRoute = require('./routes/schoolRoute.js')
-const apiCallsRoute = require('./routes/apiCalls.js')
-const checkResultRoute = require('./routes/checkresult.js')
-const staticRoute = require('./routes/staticRoute.js')
-const fetchNigerianSchoolNews = require('./utility/getNews.js')
-const cron = require("node-cron")
+const isAuthenticated = require("./utility/authenticated.js");
 const upload = require("./middleware/upload.js");
-const cloudinary = require("./middleware/cloudinary.js");
+const dashboardRoute = require("./routes/dashboardRoute.js");
+
+
+
 const app = express();
 
 // middleware
@@ -76,25 +57,8 @@ app.use(
   })
 );
 
-// Schedule the task to run once a day at 2:00 AM
-cron.schedule("0 2 * * *", async () => {
-  console.log("🕑 Daily news fetch started:", new Date().toISOString());
 
-  try {
-    fetchNigerianSchoolNews();
-    generateSitemap();
-    console.log("✅ Daily news fetch completed:", new Date().toISOString());
-  } catch (err) {
-    console.error("❌ Daily news fetch failed:", err);
-  }
-});
-// Directory to store uploaded files
-const uploadDir = path.join(__dirname, "uploads");
 
-// // Check if directory exists and create it if it doesn't
-// if (!fs.existsSync(uploadDir)) {
-//   fs.mkdirSync(uploadDir, { recursive: true });
-// }
 
 //midle
 app.use(express.urlencoded({ extended: true }));
@@ -138,16 +102,6 @@ app.get("/admin", isAuthenticated, (req, res) => {
   res.render("admin", { school: req.session.school, fees: req.session.fees, role, title:"Upload Result"});
 });
 
-// API FOR SCHOOL MANAGEMENT SYSTEM
-app.get("/myschool", isAuthenticated, (req, res) => {
-  res.render("myschool");
-});
-app.get("/school", (req, res) => {
-  res.render("school");
-});
-app.get("/admin_form", (req, res) => {
-  res.render("admin_form");
-});
 
 //REMOVING NAME FROM BLACKLIST API CALL
 app.delete("/blacklist/:studentId", async (req, res) => {
@@ -250,10 +204,7 @@ app.post("/adminSenior", async (req, res) => {
   }
 });
 
-//LOGING IN TO ACCESSS SCHOOL RESULT PAGE
-app.get("/login", (req, res) => {
-  res.render("login");
-});
+
 
 //LOGING IN TO UPLOAD STUDENT RESULT
 app.post("/upload", isAuthenticated, (req, res) => {
@@ -370,35 +321,7 @@ app.post("/myschool", (req, res) => {
   res.redirect("index");
 });
 
-// configuring nodemailer
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: "okotoazachristain@gmail.com",
-    pass: "bsnk bhyp bebw hwbt",
-  },
-});
-//contact us form API
-app.post("/contact", (req, res) => {
-  const { name, school, email, number, message } = req.body;
-  const mailOptions = {
-    from: email,
-    to: "okotoazachristain@gmail.com",
-    subject: "MY SCHOOL RESULT HELP",
-    text: `from\n Email: ${email} \n Name: ${name} \n School: ${school} \n Number: ${number}  \n ${message}`,
-    phone_number: number,
-  };
 
-  transporter.sendMail(mailOptions, (err, info) => {
-    if (err) {
-      console.log(err);
-      // Handle error, maybe send an error response to the client
-    } else {
-      // Redirect the client to the index page after sending the email
-      res.status(200).redirect("/");
-    }
-  });
-});
 //TESTING RESULT TEMPLATE
 app.get("/junior", (req, res) => {
   res.render("primary-result");
@@ -409,12 +332,7 @@ app.get("/schoolname", (req, res) => {
   res.json(school);
 });
 
-//LOGOUT API
-app.get("/logout", (req, res) => {
-  req.session.destroy();
-  //res.clearCookie('connect.sid'); 
-  res.redirect("login");
-});
+
 //STUDENT PERFOMANCE API CALL
 app.get("/studentperfomance", isAuthenticated, async (req, res) => {
   try {
@@ -461,23 +379,6 @@ app.get("/studentperfomance", isAuthenticated, async (req, res) => {
     console.log(err);
   }
 });
-
-//UPDATE SENIIOR RESULT
-app.get("/update-ss", isAuthenticated, (req, res) => {
-  res.render("update_ss");
-});
-//UPDATE JUNIOR RESULT
-app.get("/update-jss", isAuthenticated, (req, res) => {
-  res.render("update_jss");
-});
-//UPDATE  BASIC RESULT
-app.get("/update-basic", isAuthenticated, (req, res) => {
-  res.render("update_basic");
-});
-//UPDATE NURSERY RESULT
-app.get("/update-nursery", isAuthenticated, (req, res) => {
-  res.render("update_nursery");
-});
 //GETING RESULT FROM DATABASE
 app.get("/student-result", async (req, res) => {
   const { studentId, term, sClass } = req.query;
@@ -516,28 +417,11 @@ async function updateFees(schoolName, req){
   req.session.fees = updatedSchool.fees;
 }
 
-app.use(newsRouter)
-app.use(resultGuide)
-app.use(authRoute)
-app.use(analysisRoute)
-app.use(updateRoute)
-app.use(payment)
-app.use(schoolRoute)
-app.use(apiCallsRoute)
-app.use(checkResultRoute)
-app.use(staticRoute)
+
+app.use(dashboardRoute);
 app.use((req, res) => {
   res.status(404).render("index");
 });
-
-const fs = require("fs");
-
-// CONFIGURE CLOUDINARY
-// DB MIGRATION FUNCTION
-
-// CONFIG
-
-
 
 
 
