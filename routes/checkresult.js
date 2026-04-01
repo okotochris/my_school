@@ -158,4 +158,27 @@ router.get('/view-student-result', async(req, res)=>{
 
 });
 
+router.delete('/api/delete_result', async(req, res)=>{
+  const {dataId, sclass} = req.body
+  try {
+    let deletedResult;
+    if(sclass.toLowerCase().includes('basic')){
+        deletedResult = await PBlog.findByIdAndDelete(dataId);
+    } else if(sclass.toLowerCase().includes('jss')){
+        deletedResult = await Blog.findByIdAndDelete(dataId);
+    } else if(sclass.toLowerCase().includes('ss')){     
+        deletedResult = await SBlog.findByIdAndDelete(dataId);
+    } else if(sclass.toLowerCase().includes('nursery')){
+        deletedResult = await nuseryBlog.findByIdAndDelete(dataId);
+    }
+    if(deletedResult){
+        return res.json({message: "Result deleted successfully"})
+    }
+    res.status(404).json({message: "Result not found"})
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({message: "Server error"})
+  }
+})
+
 module.exports = router;

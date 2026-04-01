@@ -222,9 +222,12 @@ h3 {
 }
 
 /* 🔘 BUTTON */
-.view-btn {
+.result-actions{
+    display: flex;
+    gap: 10px;
+}
+.view-btn, .del-btn {
     width: 100%;
-    background: linear-gradient(135deg, #4f46e5, #0ea5e9);
     border: none;
     padding: 10px;
     border-radius: 10px;
@@ -234,10 +237,20 @@ h3 {
     font-weight: 500;
     box-shadow: 0 4px 12px rgba(79,70,229,0.3);
 }
-
+.view-btn {
+     background: linear-gradient(135deg, #4f46e5, #0ea5e9);
+}
+.del-btn {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+}
 .view-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(79,70,229,0.4);
+}
+
+.del-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(239,68,68,0.4);
 }
 
 /* ⏳ LOADER */
@@ -262,7 +275,30 @@ h3 {
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
-
+.del-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+   
+}
+.cover-del-model {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    z-index: 999;
+    display: none;
+    justify-content: center;
+    align-items: center;
+     z-index: 1000;
+}
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
@@ -335,7 +371,16 @@ h3 {
     <div class="results-list"></div>
 </div>
 </div>
-
+<div class="cover-del-model">
+    <div class="del-modal">
+    <h2>Delete Result</h2>
+    <p>This will permanently delete the selected result.</p>
+    <div style="display:flex; gap:10px; margin-top:20px">
+        <button class="view-btn" onclick="document.querySelector('.cover-del-model').style.display = 'none'">Cancel</button>
+        <button class="del-btn" onclick="detResult()">Confirm Delete</button>
+    </div>
+</div>
+</div>
 <div class="cover">
         <dev id="loading"></dev>
     </div>
@@ -357,7 +402,7 @@ async function getResult(studentId) {
         document.querySelector('.cover').style.display = 'none';
     }
 }
-
+let resultDetails = null;
 function resultAnalysisA(data) {
    
     const labels = [];
@@ -400,7 +445,6 @@ function resultAnalysisA(data) {
 
 function renderResults(data) {
     const container = document.querySelector('.results-list');
-     console.log(data);
     let html = '';
 
     data.forEach(item => {
@@ -424,12 +468,21 @@ function renderResults(data) {
                     </div>
                 </div>
 
-                <button 
-                    class="view-btn"
-                    onclick="viewResult('${item.studentId}', '${item.term}', '${item.class}', '${item.schoolName}')"
-                >
-                    View Full Result →
-                </button>
+               <div class="result-actions">
+                    <button 
+                        class="view-btn"
+                        onclick="viewResult('${item.studentId}', '${item.term}', '${item.class}', '${item.schoolName}')"
+                    >
+                        View  Result →
+                    </button>
+                    <button 
+                        class="del-btn"
+                        onclick="delAction('${item._id}', '${item.class}')"
+                    >
+                        Delete Result X
+                    </button>
+                
+                </div>
 
             </div>
         `;
@@ -440,11 +493,37 @@ function renderResults(data) {
 
 // NAVIGATION FUNCTION
 function viewResult(studentId, term, sclass, school) {
-    console.log(studentId, term, sclass, school);
     window.location.href = `/view-student-result?studentId=${studentId}&term=${term}&sclass=${sclass}&school=${school}`;
 }
 
+//ASSIGN RESULT ID FOR DELETION AND ASK USER TO CONFIRM
+function delAction(dataId, sclass){
+    resultDetails = {dataId, sclass};
+    document.querySelector('.cover-del-model').style.display = 'block';
+}
 
+// DELETE FUNCTION
+async function detResult(){
+    if(!resultDetails) return;
+    try {
+        const res = await fetch('/api/delete_result', {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(resultDetails)
+        });
+        const data = await res.json();
+        if(res.ok){
+           return window.location.reload();
+        }
+        alert(data.msg);
+    } catch (error) {
+        alert('server error');
+        console.error(error);
+    }
+
+}
 </script>
 
 </body>
