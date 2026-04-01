@@ -339,6 +339,32 @@ blogSchema = new Schema({
     musRemark:{
         type:String
     },
+
+
+    new:{
+        type:String
+    },
+    new1st:{
+        type:String
+    },
+    new2nd:{
+        type:String
+    }, 
+    newca:{
+        type:String
+    },
+    newexam:{
+        type:String
+    },
+    newscore:{
+        type:String
+    },
+    newG:{
+        type:String
+    },
+    newRemark:{
+        type:String
+    },
    
     red:{
         type:String

@@ -211,16 +211,18 @@
 							<td><%= details.musRemark %></td>
 						</tr>
 						
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
+						<% if(details.new){ %>
+							<tr>
+							<td><%= details.new.toUpperCase() %></td>
+							<td><%= details.new1st %></td>
+							<td><%= details.new2nd %></td>
+							<td><%= details.newca %></td>
+							<td><%= details.newexam %></td>
+							<td><%= details.newscore %></td>
+							<td><%= details.newG %></td>
+							<td><%= details.newRemark %></td>
 						</tr>
+						<% } %>
 							<tr>
 							<td></td>
 							<td></td>
