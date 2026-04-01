@@ -125,7 +125,6 @@ router.get('/view-student-result', async(req, res)=>{
     const {term, sclass, school, studentId} = req.query
     // Fetch student details and result based on class and term
     const studentResult = {}
-     console.log(`sclass: ${sclass}`);
     if(sclass.toLowerCase().includes('basic')){
         studentResult.details = await PBlog.findOne({ studentId: studentId, class: sclass, term: term, schoolName: school })
     } else if(sclass.toLowerCase().includes('jss')){
