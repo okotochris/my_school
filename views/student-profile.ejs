@@ -19,7 +19,7 @@
 body {
     background: linear-gradient(135deg, #eef2ff, #f8fafc);
     color: #1f2937;
-    padding: 30px;
+   
 }
 
 /* 📦 MAIN CONTAINER */
@@ -317,6 +317,9 @@ h3 {
     .grid {
         grid-template-columns: 1fr;
     }
+    .container{
+        max-width: 100%;
+    }
 }
 </style>
 </head>
@@ -328,17 +331,17 @@ h3 {
 
    <div class="top-section">
 
-    <!-- LEFT: STUDENT -->
-     <div class="school-box">
-        <img 
-          src="/IMAGE/<%= encodeURIComponent(student.schoolName.toLowerCase()) %>.png"
-          class="school-logo"
-        />
-        <h3 class="school-name"><%= student.schoolName %></h3>
-    </div>
+        <!-- LEFT: STUDENT -->
+        <div class="school-box">
+            <img 
+            src="/IMAGE/<%= encodeURIComponent(student.schoolName.toLowerCase()) %>.png"
+            class="school-logo"
+            />
+            <h3 class="school-name"><%= student.schoolName %></h3>
+        </div>
 
     <!-- RIGHT: SCHOOL -->
-  <div class="student-box">
+    <div class="student-box">
         <img class="passport" 
         src="<%= student.passport || 'https://via.placeholder.com/150' %>" />
 
