@@ -6,7 +6,9 @@
     <title>Start Quiz - JAMB</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-
+    <link rel="stylesheet" href="../styles/index.css">
+    
+    <link rel="icon" href="myschoolresult.png" type="image/png" size="32x32"/>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
@@ -34,8 +36,11 @@
     </style>
 </head>
 <body class="min-h-screen flex items-center justify-center p-4">
+     <%- include('partials/header2') %>
+     
     <div class="max-w-lg w-full">
-
+        <div class="h-14"></div>
+        <div class="h-14"></div>
         <!-- Header -->
         <div class="text-center mb-10">
             <div class="inline-flex items-center justify-center w-20 h-20 bg-white rounded-2xl shadow-md mb-4">
@@ -145,6 +150,39 @@
                 startQuiz();
             }
         });
+
+
+
+        //MENU LOGIC
+         const hamburger = document.querySelector(".hamburger");
+      const mobileMenu = document.querySelector(".mobile-menu");
+      const closeMenu = document.querySelector(".close-menu");
+
+      // Toggle mobile menu
+      hamburger.addEventListener("click", () => {
+        mobileMenu.style.display = "block";
+        setTimeout(() => mobileMenu.classList.add("active"), 10);
+      });
+
+      closeMenu.addEventListener("click", () => {
+        mobileMenu.classList.remove("active");
+        setTimeout(() => (mobileMenu.style.display = "none"), 300);
+      });
+
+      // Hide mobile menu on resize to desktop
+      window.addEventListener("resize", () => {
+        if (window.innerWidth > 768) {
+          mobileMenu.classList.remove("active");
+          mobileMenu.style.display = "none";
+        }
+      });
+
+      // Ensure mobile menu is hidden on page load for desktop
+      document.addEventListener("DOMContentLoaded", () => {
+        if (window.innerWidth > 768) {
+          mobileMenu.style.display = "none";
+        }
+      });
     </script>
 </body>
 </html>
