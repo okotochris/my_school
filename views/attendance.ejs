@@ -1,0 +1,190 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="max-w-7xl mx-auto p-6">
+
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl p-6 text-white shadow-lg">
+
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+
+            <div>
+                <h1 class="text-3xl font-bold">📅 Attendance Register</h1>
+                <p class="text-blue-100 mt-1">
+                    Mark today's attendance quickly and accurately.
+                </p>
+            </div>
+
+            <button
+                class="bg-white text-blue-600 font-semibold px-6 py-3 rounded-xl hover:bg-slate-100 transition">
+
+                ✓ Save Attendance
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- Filters -->
+    <div class="bg-white rounded-2xl shadow-sm border mt-6 p-6">
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+
+            <div>
+                <label class="block text-sm font-medium mb-2">
+                    Class
+                </label>
+
+                <select class="w-full rounded-xl border border-slate-300 p-3">
+                    <option>JSS1</option>
+                    <option>JSS2</option>
+                    <option>JSS3</option>
+                    <option>SSS1</option>
+                    <option>SSS2</option>
+                    <option>SSS3</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium mb-2">
+                    Date
+                </label>
+
+                <input
+                    type="date"
+                    class="w-full rounded-xl border border-slate-300 p-3">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium mb-2">
+                    Search Student
+                </label>
+
+                <input
+                    type="text"
+                    placeholder="Search..."
+                    class="w-full rounded-xl border border-slate-300 p-3">
+            </div>
+
+            <div class="flex items-end">
+
+                <button
+                    class="w-full bg-green-600 hover:bg-green-700 text-white rounded-xl py-3">
+
+                    ✓ Mark All Present
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Statistics -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+
+        <div class="bg-green-50 rounded-xl p-5">
+            <h3 class="text-green-700 text-sm">Present</h3>
+            <p class="text-3xl font-bold">18</p>
+        </div>
+
+        <div class="bg-red-50 rounded-xl p-5">
+            <h3 class="text-red-700 text-sm">Absent</h3>
+            <p class="text-3xl font-bold">2</p>
+        </div>
+
+        <div class="bg-yellow-50 rounded-xl p-5">
+            <h3 class="text-yellow-700 text-sm">Late</h3>
+            <p class="text-3xl font-bold">1</p>
+        </div>
+
+        <div class="bg-blue-50 rounded-xl p-5">
+            <h3 class="text-blue-700 text-sm">Total Students</h3>
+            <p class="text-3xl font-bold">21</p>
+        </div>
+
+    </div>
+
+    <!-- Student Cards -->
+    <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6 mt-8">
+
+        <!-- Card -->
+        <div class="bg-white border rounded-2xl shadow-sm hover:shadow-md transition p-5">
+
+            <div class="flex justify-between items-center">
+
+                <div class="flex items-center gap-3">
+
+                    <div class="w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold">
+
+                        JD
+
+                    </div>
+
+                    <div>
+
+                        <h2 class="font-semibold text-lg">
+                            John Doe
+                        </h2>
+
+                        <p class="text-sm text-gray-500">
+                            Student ID: ST10234
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs">
+                    JSS2
+                </span>
+
+            </div>
+
+            <div class="grid grid-cols-2 gap-3 mt-6">
+
+                <button
+                    class="attendance-btn bg-green-100 hover:bg-green-600 hover:text-white text-green-700 rounded-xl py-3 transition">
+
+                    ✓ Present
+
+                </button>
+
+                <button
+                    class="attendance-btn bg-red-100 hover:bg-red-600 hover:text-white text-red-700 rounded-xl py-3 transition">
+
+                    ✕ Absent
+
+                </button>
+
+                <button
+                    class="attendance-btn bg-yellow-100 hover:bg-yellow-500 hover:text-white text-yellow-700 rounded-xl py-3 transition">
+
+                    ⏰ Late
+
+                </button>
+
+                <button
+                    class="attendance-btn bg-slate-100 hover:bg-slate-700 hover:text-white text-slate-700 rounded-xl py-3 transition">
+
+                    Excused
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- Duplicate this card inside your EJS loop -->
+
+    </div>
+
+</div>
+</body>
+</html>

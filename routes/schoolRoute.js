@@ -59,7 +59,7 @@ router.get("/update", isAuthenticated, async(req, res) => {
 //generating student id and passport page
 router.get("/generateid", isAuthenticated, async(req, res) => {
   const role= req.session.role
-const fees = await schoolFees(req.session.school)
+  const fees = await schoolFees(req.session.school)
   res.render("generateid", { school: req.session.school, fees, role, title: "Onboard Student"});
 });
 
@@ -75,4 +75,19 @@ router.get("/student-profile/:studentId", async (req, res) => {
     }
 });
 
+router.get('/admin/exam-settings', isAuthenticated, async(req, res)=>{
+  const role= req.session.role
+  const fees = await schoolFees(req.session.school)
+    res.render('exam_settings', { school: req.session.school, fees, role, title: "Onboard Student"})
+})
+router.get('/admin/upload-question', isAuthenticated, async(req, res)=>{
+  const role= req.session.role
+  const fees = await schoolFees(req.session.school)
+    res.render('upload_question', { school: req.session.school, fees, role, title: "Onboard Student"})
+})
+router.get('/admin/attendance', isAuthenticated, async(req, res)=>{
+  const role= req.session.role
+  const fees = await schoolFees(req.session.school)
+    res.render('attendance', { school: req.session.school, fees, role, title: "Onboard Student"})
+})
 module.exports = router;

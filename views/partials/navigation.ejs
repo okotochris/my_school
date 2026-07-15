@@ -1,4 +1,5 @@
 <!-- Overlay for mobile -->
+ <script src="https://unpkg.com/lucide@latest"></script>
 <div id="navOverlay" class="nav-overlay" onclick="toggleNav()"></div>
 
 <nav class="navigation" id="sideNav">
@@ -14,6 +15,9 @@
       <li><a href="/studentgrade"><span class="icon">📘</span> Student Grade</a></li>
       <li><a href="/studentid"><span class="icon">🎫</span> Get Student ID</a></li>
       <li><a href="/generateid"><span class="icon">🧾</span> Register Student</a></li>
+      <li><a href="/admin/attendance"><span class="icon">📝</span> Attendance</a></li>
+      <li><a href="/admin/exam-settings"><span class="icon">🖊️</span> Set exam</a></li>
+      <li><a href="/admin/upload-question"><span class="icon">📤</span>Upload questions</a></li>
       <li><a href="/blacklist"><span class="icon">🚫</span> Blacklist</a></li>
       <% if(role == 'admin'){ %>
         <li><a href="/staffmanagement"><span class="icon">👩‍🏫</span> Staff Management</a></li>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/global.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Upload Questions</title>
+</head>
+<body class="bg-slate-100">
+
+<%- include("./partials/header.ejs") %>
+
+<div class="flex">
+    <%- include("./partials/navigation.ejs") %>
+
+    <main class="flex-1 p-8">
+
+        <div class="flex items-center justify-between mb-8">
+            <div>
+                <h1 class="text-4xl font-bold text-slate-800">📝 Upload Questions</h1>
+                <p class="text-slate-500 mt-2">Add questions to the question bank</p>
+            </div>
+            <a href="/teacher/set-exam" class="bg-white border px-6 py-3 rounded-xl hover:bg-slate-50 font-semibold">
+                ← Back to Exam Setup
+            </a>
+        </div>
+
+        <!-- Progress -->
+        <div class="bg-white rounded-2xl shadow-sm p-6 mb-8">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-gray-300 text-white flex items-center justify-center font-bold">1</div>
+                    <div><h3 class="font-semibold">Exam Details</h3></div>
+                </div>
+                <div class="flex-1 h-1 bg-blue-600 mx-6 rounded"></div>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold">2</div>
+                    <div><h3 class="font-semibold text-blue-700">Upload Questions</h3></div>
+                </div>
+                <div class="flex-1 h-1 bg-gray-200 mx-6 rounded"></div>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-gray-300 text-white flex items-center justify-center font-bold">3</div>
+                    <div><h3 class="font-semibold">Publish</h3></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid lg:grid-cols-12 gap-8">
+
+            <!-- Main Upload Area -->
+            <div class="lg:col-span-8 space-y-8">
+
+                <!-- CSV Upload -->
+                <div class="bg-white rounded-2xl shadow-sm p-8">
+                    <h2 class="text-2xl font-bold mb-4">Upload via CSV</h2>
+                    <p class="text-gray-500 mb-6">Bulk upload questions using CSV file</p>
+                    
+                    <div class="border-2 border-dashed border-gray-300 rounded-2xl p-12 text-center hover:border-blue-400 transition">
+                        <input type="file" id="csvFile" accept=".csv" class="hidden" onchange="handleCSVUpload(event)">
+                        <button onclick="document.getElementById('csvFile').click()" 
+                                class="bg-slate-800 text-white px-8 py-4 rounded-xl font-semibold hover:bg-slate-700 flex items-center gap-3 mx-auto">
+                            📤 Upload CSV File
+                        </button>
+                        <p class="text-sm text-gray-500 mt-4">Supported format: Question, OptionA, OptionB, OptionC, OptionD, CorrectAnswer</p>
+                    </div>
+                </div>
+
+                <!-- Manual Question Upload -->
+                <div class="bg-white rounded-2xl shadow-sm p-8">
+                    <h2 class="text-2xl font-bold mb-6">Add Question Manually</h2>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Question</label>
+                            <textarea id="questionText" rows="4" 
+                                class="w-full rounded-2xl border border-gray-300 px-5 py-4 focus:ring-2 focus:ring-blue-500"
+                                placeholder="Type your question here..."></textarea>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Option A</label>
+                                <input type="text" id="optA" class="w-full rounded-2xl border px-5 py-4">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Option B</label>
+                                <input type="text" id="optB" class="w-full rounded-2xl border px-5 py-4">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Option C</label>
+                                <input type="text" id="optC" class="w-full rounded-2xl border px-5 py-4">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Option D</label>
+                                <input type="text" id="optD" class="w-full rounded-2xl border px-5 py-4">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Correct Answer</label>
+                            <select id="correctAnswer" class="w-full rounded-2xl border border-gray-300 px-5 py-4">
+                                <option value="">Select Correct Option</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                            </select>
+                        </div>
+
+                        <button onclick="addManualQuestion()" 
+                                class="w-full bg-blue-600 hover:bg-blue-700 text-white py-5 rounded-2xl font-semibold text-lg">
+                            Add This Question
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="lg:col-span-4">
+                <div class="bg-white rounded-2xl shadow-sm p-8 sticky top-6">
+                    <h3 class="font-semibold text-lg mb-6">Question Bank Status</h3>
+                    <div class="space-y-6">
+                        <div class="text-center py-8 border rounded-2xl">
+                            <div class="text-5xl mb-3">📚</div>
+                            <p class="text-4xl font-bold text-blue-600" id="totalQuestions">0</p>
+                            <p class="text-gray-500">Questions in Bank</p>
+                        </div>
+                    </div>
+
+                    <button onclick="finishUpload()" 
+                            class="mt-10 w-full bg-green-600 hover:bg-green-700 text-white py-5 rounded-2xl font-semibold">
+                        Finish & Return to Exam
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script>
+    let totalCount = 0;
+
+    function addManualQuestion() {
+        const question = document.getElementById("questionText").value.trim();
+        if (!question) return alert("Please enter a question");
+
+        totalCount++;
+        document.getElementById("totalQuestions").innerText = totalCount;
+
+        alert("Question added successfully!");
+        clearForm();
+    }
+
+    function clearForm() {
+        document.getElementById("questionText").value = "";
+        document.getElementById("optA").value = "";
+        document.getElementById("optB").value = "";
+        document.getElementById("optC").value = "";
+        document.getElementById("optD").value = "";
+        document.getElementById("correctAnswer").value = "";
+    }
+
+    function handleCSVUpload(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        alert(`CSV file "${file.name}" uploaded successfully!\n\nQuestions will be processed and added to the bank.`);
+        totalCount += 15; // Simulated
+        document.getElementById("totalQuestions").innerText = totalCount;
+    }
+
+    function finishUpload() {
+        if (totalCount === 0) {
+            alert("Please add at least one question.");
+            return;
+        }
+        window.location.href = "/teacher/set-exam";
+    }
+</script>
+
+</body>
+</html>

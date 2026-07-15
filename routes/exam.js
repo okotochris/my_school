@@ -21,4 +21,5 @@ router.get('/myschool/quiz/exam/summary', (req, res)=>{
 router.get('/myschool/quiz/exam_intro', (req, res)=>{
     res.render('exam_intro')
 })
+
 module.exports = router
