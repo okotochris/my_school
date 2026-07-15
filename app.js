@@ -31,6 +31,7 @@ const fetchNigerianSchoolNews = require('./utility/getNews.js')
 const cron = require("node-cron")
 const upload = require("./middleware/upload.js");
 const cloudinary = require("./middleware/cloudinary.js");
+const exam = require('./routes/exam.js')
 const app = express();
 
 // middleware
@@ -526,6 +527,7 @@ app.use(schoolRoute)
 app.use(apiCallsRoute)
 app.use(checkResultRoute)
 app.use(staticRoute)
+app.use(exam)
 app.use((req, res) => {
   res.status(404).render("index");
 });

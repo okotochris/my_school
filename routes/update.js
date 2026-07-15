@@ -47,6 +47,7 @@ router.patch("/update-student", upload.single("passport"), async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
 //UPDATING BASIC SCHOOL RESULT
 router.patch("/update_basic_result", async (req, res) => {
 let { studentId, term, class: sClass } = req.body;
