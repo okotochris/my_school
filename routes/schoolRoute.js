@@ -75,4 +75,9 @@ router.get("/student-profile/:studentId", async (req, res) => {
     }
 });
 
+router.get('/admin/school-setting', async(req, res)=>{
+  const student = await Studentpassport.findOne({ studentId: req.params.studentId});
+   res.render("school_settings", { student, school: req.session.school, title: "Student Profile" });
+})
+
 module.exports = router;

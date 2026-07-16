@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/global.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>School Management</title>
+</head>
+<body class="bg-slate-100">
+
+<%- include("./partials/header.ejs") %>
+
+<div class="flex">
+    <%- include("./partials/navigation.ejs") %>
+
+    <main class="flex-1 p-8">
+
+        <div class="mb-10">
+            <h1 class="text-4xl font-bold text-slate-800">🏫 School Management</h1>
+            <p class="text-slate-500 mt-2">Manage your entire school operations from one place</p>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+            <div class="bg-white rounded-3xl p-6 shadow-sm">
+                <p class="text-gray-500">Total Students</p>
+                <p class="text-5xl font-bold text-slate-800 mt-3">1,248</p>
+            </div>
+            <div class="bg-white rounded-3xl p-6 shadow-sm">
+                <p class="text-gray-500">Total Staff</p>
+                <p class="text-5xl font-bold text-slate-800 mt-3">87</p>
+            </div>
+            <div class="bg-white rounded-3xl p-6 shadow-sm">
+                <p class="text-gray-500">Classes</p>
+                <p class="text-5xl font-bold text-slate-800 mt-3">48</p>
+            </div>
+            <div class="bg-white rounded-3xl p-6 shadow-sm">
+                <p class="text-gray-500">Active Exams</p>
+                <p class="text-5xl font-bold text-blue-600 mt-3">6</p>
+            </div>
+        </div>
+
+        <!-- Management Sections -->
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+
+            <!-- Students -->
+            <a href="/admin/students" class="group">
+                <div class="bg-white rounded-3xl p-8 hover:shadow-xl transition-all hover:-translate-y-1">
+                    <div class="text-5xl mb-6">👨‍🎓</div>
+                    <h3 class="text-2xl font-bold mb-2">Student Management</h3>
+                    <p class="text-gray-600">Register, view, edit and manage all students</p>
+                </div>
+            </a>
+
+            <!-- Staff -->
+            <a href="/admin/staff" class="group">
+                <div class="bg-white rounded-3xl p-8 hover:shadow-xl transition-all hover:-translate-y-1">
+                    <div class="text-5xl mb-6">👔</div>
+                    <h3 class="text-2xl font-bold mb-2">Staff Management</h3>
+                    <p class="text-gray-600">Manage teachers and non-teaching staff</p>
+                </div>
+            </a>
+
+            <!-- Classes -->
+            <a href="/admin/classes" class="group">
+                <div class="bg-white rounded-3xl p-8 hover:shadow-xl transition-all hover:-translate-y-1">
+                    <div class="text-5xl mb-6">🏫</div>
+                    <h3 class="text-2xl font-bold mb-2">Class Management</h3>
+                    <p class="text-gray-600">Create and manage classes & sections</p>
+                </div>
+            </a>
+
+            <!-- Subjects -->
+            <a href="/admin/subjects" class="group">
+                <div class="bg-white rounded-3xl p-8 hover:shadow-xl transition-all hover:-translate-y-1">
+                    <div class="text-5xl mb-6">📚</div>
+                    <h3 class="text-2xl font-bold mb-2">Subject Management</h3>
+                    <p class="text-gray-600">Manage subjects and assign to classes</p>
+                </div>
+            </a>
+
+            <!-- Examinations -->
+            <a href="/teacher/set-exam" class="group">
+                <div class="bg-white rounded-3xl p-8 hover:shadow-xl transition-all hover:-translate-y-1">
+                    <div class="text-5xl mb-6">📝</div>
+                    <h3 class="text-2xl font-bold mb-2">Examination Management</h3>
+                    <p class="text-gray-600">Create exams, upload questions & generate codes</p>
+                </div>
+            </a>
+
+            <!-- Attendance -->
+            <a href="/attendance" class="group">
+                <div class="bg-white rounded-3xl p-8 hover:shadow-xl transition-all hover:-translate-y-1">
+                    <div class="text-5xl mb-6">📅</div>
+                    <h3 class="text-2xl font-bold mb-2">Attendance Management</h3>
+                    <p class="text-gray-600">Mark and track daily attendance</p>
+                </div>
+            </a>
+
+            <!-- Results -->
+            <a href="/admin/results" class="group">
+                <div class="bg-white rounded-3xl p-8 hover:shadow-xl transition-all hover:-translate-y-1">
+                    <div class="text-5xl mb-6">📊</div>
+                    <h3 class="text-2xl font-bold mb-2">Result Management</h3>
+                    <p class="text-gray-600">Manage and publish academic results</p>
+                </div>
+            </a>
+
+            <!-- Settings -->
+            <a href="/admin/settings" class="group">
+                <div class="bg-white rounded-3xl p-8 hover:shadow-xl transition-all hover:-translate-y-1">
+                    <div class="text-5xl mb-6">⚙️</div>
+                    <h3 class="text-2xl font-bold mb-2">School Settings</h3>
+                    <p class="text-gray-600">General school configuration</p>
+                </div>
+            </a>
+
+        </div>
+
+    </main>
+</div>
+
+<script src="/js/menu.js"></script>
+</body>
+</html>
