@@ -71,4 +71,13 @@ router.get('/api/get_result', async(req, res)=>{
         res.status(500).json({msg:"server error"})
     }
 })
+
+router.get('/api/student', async(req, res)=>{
+    const {studentClass} =  req.body
+    try{
+
+    }catch(err){
+        res.status(500).json({message:"Server error"})
+    }
+})
 module.exports =  router

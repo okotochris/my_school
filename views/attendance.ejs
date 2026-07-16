@@ -1,190 +1,193 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="/styles/global.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Mark Attendance</title>
 </head>
-<body>
-    <div class="max-w-7xl mx-auto p-6">
+<body class="bg-slate-100">
 
-    <!-- Header -->
-    <div class="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl p-6 text-white shadow-lg">
+<%- include("./partials/header.ejs") %>
 
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+<div class="flex">
+    <%- include("./partials/navigation.ejs") %>
 
+    <main class="flex-1 p-8">
+
+        <div class="flex items-center justify-between mb-8">
             <div>
-                <h1 class="text-3xl font-bold">📅 Attendance Register</h1>
-                <p class="text-blue-100 mt-1">
-                    Mark today's attendance quickly and accurately.
-                </p>
+                <h1 class="text-4xl font-bold text-slate-800">📅 Mark Attendance</h1>
             </div>
-
-            <button
-                class="bg-white text-blue-600 font-semibold px-6 py-3 rounded-xl hover:bg-slate-100 transition">
-
-                ✓ Save Attendance
-
-            </button>
-
         </div>
 
-    </div>
-
-    <!-- Filters -->
-    <div class="bg-white rounded-2xl shadow-sm border mt-6 p-6">
-
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-
-            <div>
-                <label class="block text-sm font-medium mb-2">
-                    Class
-                </label>
-
-                <select class="w-full rounded-xl border border-slate-300 p-3">
-                    <option>JSS1</option>
-                    <option>JSS2</option>
-                    <option>JSS3</option>
-                    <option>SSS1</option>
-                    <option>SSS2</option>
-                    <option>SSS3</option>
-                </select>
-            </div>
-
-            <div>
-                <label class="block text-sm font-medium mb-2">
-                    Date
-                </label>
-
-                <input
-                    type="date"
-                    class="w-full rounded-xl border border-slate-300 p-3">
-            </div>
-
-            <div>
-                <label class="block text-sm font-medium mb-2">
-                    Search Student
-                </label>
-
-                <input
-                    type="text"
-                    placeholder="Search..."
-                    class="w-full rounded-xl border border-slate-300 p-3">
-            </div>
-
-            <div class="flex items-end">
-
-                <button
-                    class="w-full bg-green-600 hover:bg-green-700 text-white rounded-xl py-3">
-
-                    ✓ Mark All Present
-
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- Statistics -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
-
-        <div class="bg-green-50 rounded-xl p-5">
-            <h3 class="text-green-700 text-sm">Present</h3>
-            <p class="text-3xl font-bold">18</p>
-        </div>
-
-        <div class="bg-red-50 rounded-xl p-5">
-            <h3 class="text-red-700 text-sm">Absent</h3>
-            <p class="text-3xl font-bold">2</p>
-        </div>
-
-        <div class="bg-yellow-50 rounded-xl p-5">
-            <h3 class="text-yellow-700 text-sm">Late</h3>
-            <p class="text-3xl font-bold">1</p>
-        </div>
-
-        <div class="bg-blue-50 rounded-xl p-5">
-            <h3 class="text-blue-700 text-sm">Total Students</h3>
-            <p class="text-3xl font-bold">21</p>
-        </div>
-
-    </div>
-
-    <!-- Student Cards -->
-    <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6 mt-8">
-
-        <!-- Card -->
-        <div class="bg-white border rounded-2xl shadow-sm hover:shadow-md transition p-5">
-
-            <div class="flex justify-between items-center">
-
-                <div class="flex items-center gap-3">
-
-                    <div class="w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold">
-
-                        JD
-
-                    </div>
-
-                    <div>
-
-                        <h2 class="font-semibold text-lg">
-                            John Doe
-                        </h2>
-
-                        <p class="text-sm text-gray-500">
-                            Student ID: ST10234
-                        </p>
-
-                    </div>
-
+        <!-- Class & Date Selection -->
+        <div class="bg-white rounded-2xl shadow-sm p-6 mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                    <label class="block text-sm font-medium mb-2">Select Class</label>
+                    <select id="classSelect" onchange="loadClassAttendance()" 
+                            class="w-full rounded-2xl border border-gray-300 px-5 py-4 text-lg">
+                        <option value="">-- Select Class --</option>
+                        <option value="JSS1">JSS1</option>
+                        <option value="JSS2" selected>JSS2</option>
+                        <option value="JSS3">JSS3</option>
+                        <option value="SSS1">SSS1</option>
+                        <option value="SSS2">SSS2</option>
+                        <option value="SSS3">SSS3</option>
+                    </select>
                 </div>
 
-                <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs">
-                    JSS2
-                </span>
+                <div>
+                    <label class="block text-sm font-medium mb-2">Subject (Optional)</label>
+                    <input type="text" id="subject" placeholder="Mathematics" 
+                           class="w-full rounded-2xl border border-gray-300 px-5 py-4">
+                </div>
 
+                <div>
+                    <label class="block text-sm font-medium mb-2">Date</label>
+                    <input type="date" id="attendanceDate" value="2025-07-15" 
+                           class="w-full rounded-2xl border border-gray-300 px-5 py-4">
+                </div>
             </div>
-
-            <div class="grid grid-cols-2 gap-3 mt-6">
-
-                <button
-                    class="attendance-btn bg-green-100 hover:bg-green-600 hover:text-white text-green-700 rounded-xl py-3 transition">
-
-                    ✓ Present
-
-                </button>
-
-                <button
-                    class="attendance-btn bg-red-100 hover:bg-red-600 hover:text-white text-red-700 rounded-xl py-3 transition">
-
-                    ✕ Absent
-
-                </button>
-
-                <button
-                    class="attendance-btn bg-yellow-100 hover:bg-yellow-500 hover:text-white text-yellow-700 rounded-xl py-3 transition">
-
-                    ⏰ Late
-
-                </button>
-
-                <button
-                    class="attendance-btn bg-slate-100 hover:bg-slate-700 hover:text-white text-slate-700 rounded-xl py-3 transition">
-
-                    Excused
-
-                </button>
-
-            </div>
-
         </div>
 
-        <!-- Duplicate this card inside your EJS loop -->
+        <!-- Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white rounded-2xl shadow-sm p-6">
+                <p class="text-gray-500 text-sm">Total Students</p>
+                <p class="text-4xl font-bold text-slate-800 mt-2" id="totalStudents">34</p>
+            </div>
+            <div class="bg-white rounded-2xl shadow-sm p-6">
+                <p class="text-gray-500 text-sm">Present</p>
+                <p class="text-4xl font-bold text-green-600 mt-2" id="presentCount">29</p>
+            </div>
+            <div class="bg-white rounded-2xl shadow-sm p-6">
+                <p class="text-gray-500 text-sm">Absent</p>
+                <p class="text-4xl font-bold text-red-600 mt-2" id="absentCount">5</p>
+            </div>
+            <div class="bg-white rounded-2xl shadow-sm p-6">
+                <p class="text-gray-500 text-sm">Attendance Rate</p>
+                <p class="text-4xl font-bold text-blue-600 mt-2" id="percentage">85%</p>
+            </div>
+        </div>
 
-    </div>
+        <!-- Attendance Table -->
+        <div class="bg-white rounded-3xl shadow-sm overflow-hidden">
+            <div class="p-6 border-b flex items-center justify-between bg-slate-50">
+                <h2 class="text-xl font-semibold" id="classTitle">JSS2 Students</h2>
+                <input type="text" id="searchInput" placeholder="Search student..." 
+                       class="border border-gray-300 rounded-xl px-5 py-3 w-80 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                       onkeyup="filterStudents()">
+            </div>
 
+            <table class="w-full">
+                <thead>
+                    <tr class="bg-slate-50 border-b">
+                        <th class="text-left py-5 px-8 font-medium text-gray-600">S/N</th>
+                        <th class="text-left py-5 px-8 font-medium text-gray-600">Student Name</th>
+                        <th class="text-left py-5 px-8 font-medium text-gray-600">Admission No.</th>
+                        <th class="text-center py-5 px-8 font-medium text-gray-600">Attendance</th>
+                    </tr>
+                </thead>
+                <tbody id="attendanceBody" class="divide-y">
+                    <!-- Populated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mt-8 flex justify-end">
+            <button onclick="saveAttendance()" 
+                    class="bg-green-600 text-white px-10 py-4 rounded-2xl font-semibold text-lg hover:bg-green-700">
+                Save Attendance
+            </button>
+        </div>
+
+    </main>
 </div>
+
+<script>
+// Mock Data (Replace with real data from backend)
+let currentStudents = [
+    { id: 1, name: "John Okoro", admissionNo: "JSS2/015", status: "present" },
+    { id: 2, name: "Aisha Bello", admissionNo: "JSS2/016", status: "present" },
+    { id: 3, name: "Chukwudi Eze", admissionNo: "JSS2/017", status: "absent" },
+    { id: 4, name: "Fatima Yusuf", admissionNo: "JSS2/018", status: "present" },
+    { id: 5, name: "David Adebayo", admissionNo: "JSS2/019", status: "present" },
+    { id: 6, name: "Blessing Nwosu", admissionNo: "JSS2/020", status: "absent" },
+    // Add more as needed...
+];
+
+function loadClassAttendance() {
+    const selectedClass = document.getElementById("classSelect").value;
+    document.getElementById("classTitle").innerText = selectedClass ? `${selectedClass} Students` : "Students";
+    renderAttendance();
+}
+
+function renderAttendance() {
+    const tbody = document.getElementById("attendanceBody");
+    tbody.innerHTML = "";
+
+    currentStudents.forEach((student, index) => {
+        const row = document.createElement("tr");
+        row.className = "hover:bg-slate-50 transition-colors";
+        row.innerHTML = `
+            <td class="py-6 px-8">${index + 1}</td>
+            <td class="py-6 px-8 font-medium">${student.name}</td>
+            <td class="py-6 px-8 text-gray-500">${student.admissionNo}</td>
+            <td class="py-6 px-8 text-center">
+                <select onchange="updateStudentStatus(${student.id}, this.value)" 
+                        class="rounded-2xl border px-8 py-3 text-sm font-medium cursor-pointer
+                        ${student.status === 'present' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}">
+                    <option value="present" ${student.status === 'present' ? 'selected' : ''}>Present</option>
+                    <option value="absent" ${student.status === 'absent' ? 'selected' : ''}>Absent</option>
+                </select>
+            </td>
+        `;
+        tbody.appendChild(row);
+    });
+
+    updateSummary();
+}
+
+function updateStudentStatus(id, status) {
+    const student = currentStudents.find(s => s.id === id);
+    if (student) student.status = status;
+    updateSummary();
+}
+
+function updateSummary() {
+    const present = currentStudents.filter(s => s.status === "present").length;
+    const total = currentStudents.length;
+    const percentage = Math.round((present / total) * 100);
+
+    document.getElementById("totalStudents").innerText = total;
+    document.getElementById("presentCount").innerText = present;
+    document.getElementById("absentCount").innerText = total - present;
+    document.getElementById("percentage").innerText = percentage + "%";
+}
+
+function filterStudents() {
+    const term = document.getElementById("searchInput").value.toLowerCase();
+    const rows = document.querySelectorAll("#attendanceBody tr");
+
+    rows.forEach(row => {
+        const name = row.children[1].innerText.toLowerCase();
+        row.style.display = name.includes(term) ? "" : "none";
+    });
+}
+
+function saveAttendance() {
+    const selectedClass = document.getElementById("classSelect").value || "JSS2";
+    alert(`✅ Attendance for ${selectedClass} has been saved successfully!`);
+}
+
+// Initialize on page load
+window.onload = () => {
+    loadClassAttendance();
+};
+</script>
+
 </body>
 </html>

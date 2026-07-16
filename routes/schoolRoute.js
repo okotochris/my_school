@@ -4,6 +4,7 @@ const isAuthenticated = require('../utility/authenticated.js')
 const Studentpassport = require('../schema/goldenPassport.js')
 const ABlog = require('../schema/admin.js')
 const Blacklist = require('../schema/blacklist.js')
+const Attendance = require('../schema/attendance.js')
 const router = express.Router()
 
 
@@ -90,4 +91,66 @@ router.get('/admin/attendance', isAuthenticated, async(req, res)=>{
   const fees = await schoolFees(req.session.school)
     res.render('attendance', { school: req.session.school, fees, role, title: "Onboard Student"})
 })
+
+//ATTENCE ROUTER
+router.post("/admin/update_attendance", isAuthenticated, async (req, res) => {
+    const {
+        studentClass,
+        term,
+        session,
+        date,
+        attendance: attendanceData
+    } = req.body;
+
+    try {
+
+        const schoolName = req.session.school;
+
+        if (!schoolName) {
+            return res.status(404).json({
+                message: "School not found."
+            });
+        }
+        const existingAttendance = await Attendance.findOne({
+            schoolName,
+            class: studentClass,
+            term,
+            session,
+            date
+        });
+
+        if (existingAttendance) {
+            return res.status(409).json({
+                message: "Attendance has already been taken for this class today."
+            });
+        }
+
+      
+        const record = new Attendance({
+            schoolName,
+            class: studentClass,
+            term,
+            session,
+            date,
+            attendance: attendanceData
+        });
+
+        await record.save();
+
+        return res.status(200).json({
+            message: "Attendance saved successfully."
+        });
+
+    } catch (err) {
+
+        console.error(err);
+
+        return res.status(500).json({
+            message: "Server error."
+        });
+
+    }
+
+});
+
 module.exports = router;
