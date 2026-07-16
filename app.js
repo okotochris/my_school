@@ -8,9 +8,18 @@ const MongoStore = require("connect-mongo");
 const generateSitemap = require('./sitemap/sitemap.js')
 const isAuthenticated = require("./utility/authenticated.js");
 const upload = require("./middleware/upload.js");
+const cloudinary = require("./middleware/cloudinary.js");
 const dashboardRoute = require("./routes/dashboardRoute.js");
-
-
+const adminRoute = require('./routes/schoolRoute.js')
+const exam = require('./routes/exam.js')
+const apiCallsRoute = require('./routes/apiCalls.js')
+// const checkResultRoute = require('./routes/checkresult.js')
+// const payment = require('./routes/payment.js')
+// const staticRoute = require('./routes/staticRoute.js')
+// const updateRoute = require('./routes/update.js')
+// const authRoute = require('./routes/auth.js')
+// const analysisRoute = require('./routes/analysis.js')
+//const newsRouter = require('./routes/news.js')
 
 const app = express();
 
@@ -418,7 +427,21 @@ async function updateFees(schoolName, req){
 }
 
 
+
 app.use(dashboardRoute);
+// app.use(newsRouter)
+app.use(apiCallsRoute)
+//app.use(resultGuide)
+// app.use(authRoute)
+// app.use(analysisRoute)
+// app.use(updateRoute)
+// app.use(payment)
+app.use(adminRoute)
+
+// app.use(checkResultRoute)
+// app.use(staticRoute)
+app.use(exam)
+
 app.use((req, res) => {
   res.status(404).render("index");
 });

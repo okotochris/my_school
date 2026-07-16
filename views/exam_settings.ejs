@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/global.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Create Examination</title>
+</head>
+<body class="bg-slate-100">
+
+<%- include("./partials/header.ejs") %>
+
+<div class="flex">
+    <%- include("./partials/navigation.ejs") %>
+
+    <main class="flex-1 p-8">
+
+        <div class="flex items-center justify-between mb-8">
+            <div>
+                <h1 class="text-4xl font-bold text-slate-800">📚 Create New Examination</h1>
+                <p class="text-slate-500 mt-2">Configure your examination and select questions</p>
+            </div>
+        </div>
+
+        <!-- Progress -->
+        <div class="bg-white rounded-2xl shadow-sm p-6 mb-8">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold">1</div>
+                    <div><h3 class="font-semibold">Exam Details</h3></div>
+                </div>
+                <div class="flex-1 h-1 bg-blue-600 mx-6 rounded"></div>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold">2</div>
+                    <div><h3 class="font-semibold text-blue-700">Select Questions</h3></div>
+                </div>
+                <div class="flex-1 h-1 bg-gray-200 mx-6 rounded"></div>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-gray-300 text-white flex items-center justify-center font-bold">3</div>
+                    <div><h3 class="font-semibold">Publish</h3></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid lg:grid-cols-12 gap-8">
+
+            <!-- LEFT - Exam Setup -->
+            <div class="lg:col-span-7 space-y-8">
+
+                <!-- Exam Information -->
+                <div class="bg-white rounded-2xl shadow-sm p-8">
+                    <h2 class="text-2xl font-bold mb-6">Exam Information</h2>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="text-sm font-medium">Exam Title</label>
+                            <input type="text" id="title" placeholder="First Term Mathematics Examination" 
+                                   class="mt-2 w-full rounded-xl border border-gray-300 px-4 py-3">
+                        </div>
+                        <div>
+                            <label class="text-sm font-medium">Subject</label>
+                            <input type="text" id="subject" placeholder="Mathematics" 
+                                   class="mt-2 w-full rounded-xl border border-gray-300 px-4 py-3">
+                        </div>
+                        <div>
+                            <label class="text-sm font-medium">Class</label>
+                            <select id="class" class="mt-2 w-full rounded-xl border border-gray-300 px-4 py-3">
+                                <option>JSS1</option><option>JSS2</option><option>JSS3</option>
+                                <option>SSS1</option><option>SSS2</option><option>SSS3</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="text-sm font-medium">Session</label>
+                            <input type="text" id="session" value="2025/2026" 
+                                   class="mt-2 w-full rounded-xl border border-gray-300 px-4 py-3">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exam Configuration -->
+                <div class="bg-white rounded-2xl shadow-sm p-8">
+                    <h2 class="text-2xl font-bold mb-6">Configuration</h2>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label>Duration (Minutes)</label>
+                            <input type="number" id="duration" value="45" class="mt-2 w-full rounded-xl border px-4 py-3">
+                        </div>
+                        <div>
+                            <label>Exam Mode</label>
+                            <select id="mode" class="mt-2 w-full rounded-xl border px-4 py-3">
+                                <option value="cbt">CBT (Online Computer Based Test)</option>
+                                <option value="offline">Offline (Printable)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question Selection -->
+                <div class="bg-white rounded-2xl shadow-sm p-8">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold">Select Questions from Bank</h2>
+                        <a href="/admin/upload-question" 
+                           class="text-blue-600 hover:underline font-medium flex items-center gap-2">
+                            + Upload New Questions
+                        </a>
+                    </div>
+
+                    <div class="max-h-96 overflow-y-auto border rounded-2xl p-4 space-y-3" id="questionBank">
+                        <!-- Questions will be loaded here dynamically -->
+                        <p class="text-gray-500 text-center py-8">Loading questions from bank...</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- RIGHT - Summary -->
+            <div class="lg:col-span-5">
+                <div class="bg-white rounded-2xl shadow-sm p-8 sticky top-6">
+                    <h2 class="text-2xl font-bold mb-6">Exam Summary</h2>
+                    
+                    <div class="space-y-5">
+                        <div class="flex justify-between"><span class="text-gray-500">Title</span><span id="sumTitle" class="font-medium">-</span></div>
+                        <div class="flex justify-between"><span class="text-gray-500">Subject</span><span id="sumSubject" class="font-medium">-</span></div>
+                        <div class="flex justify-between"><span class="text-gray-500">Class</span><span id="sumClass" class="font-medium">-</span></div>
+                        <div class="flex justify-between"><span class="text-gray-500">Duration</span><span id="sumDuration" class="font-medium">45 mins</span></div>
+                        <div class="flex justify-between"><span class="text-gray-500">Selected Questions</span><span id="sumQuestions" class="font-medium text-green-600">0</span></div>
+                    </div>
+
+                    <button onclick="publishExam()" 
+                            class="w-full mt-10 bg-green-600 hover:bg-green-700 text-white py-5 rounded-2xl font-semibold text-lg">
+                        Generate Exam Code & Publish
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script>
+    // Live Preview
+    document.getElementById("title").addEventListener("input", (e) => {
+        document.getElementById("sumTitle").innerText = e.target.value || "-";
+    });
+    document.getElementById("subject").addEventListener("input", (e) => {
+        document.getElementById("sumSubject").innerText = e.target.value || "-";
+    });
+    document.getElementById("class").addEventListener("change", (e) => {
+        document.getElementById("sumClass").innerText = e.target.value || "-";
+    });
+    document.getElementById("duration").addEventListener("input", (e) => {
+        document.getElementById("sumDuration").innerText = e.target.value + " mins";
+    });
+
+    function publishExam() {
+        alert("✅ Exam Published Successfully!\n\nExam Code: EXAM-A7K9P3\nShare this code with students.");
+    }
+</script>
+
+</body>
+</html>

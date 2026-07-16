@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Summary</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-sky-100 min-h-screen">
+
+    <div class="max-w-md mx-auto pt-12 px-6">
+
+        <div class="text-center mb-10">
+            <div class="w-24 h-24 mx-auto bg-white rounded-3xl shadow flex items-center justify-center text-5xl mb-6">
+                🎯
+            </div>
+            <h1 class="text-3xl font-bold text-gray-800">Quiz Completed!</h1>
+        </div>
+
+        <!-- Score Card -->
+        <div class="bg-white rounded-3xl shadow-xl p-8 text-center mb-8">
+            <p class="text-gray-600 text-sm mb-1">Your Score</p>
+            <p class="text-7xl font-bold text-blue-600" id="score">0</p>
+            <p class="text-2xl font-semibold text-gray-700" ><span id="total-score">0</span>/<span id="total">0</span></p>
+            
+            <div class="mt-8 grid grid-cols-3 gap-4 text-center">
+                <div>
+                    <p class="text-emerald-600 text-2xl font-bold" id="correct">0</p>
+                    <p class="text-xs text-gray-500">Correct</p>
+                </div>
+                <div>
+                    <p class="text-red-500 text-2xl font-bold" id="wrong">0</p>
+                    <p class="text-xs text-gray-500">Wrong</p>
+                </div>
+                <div>
+                    <p class="text-amber-500 text-2xl font-bold" id="percent">0%</p>
+                    <p class="text-xs text-gray-500">Accuracy</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Info -->
+        <div class="bg-white rounded-3xl shadow p-6 mb-8 text-sm">
+            <div class="flex justify-between py-3 border-b">
+                <span class="text-gray-600">Time Taken</span>
+                <span class="font-medium" id="time-taken">29:45</span>
+            </div>
+            <div class="flex justify-between py-3 border-b">
+                <span class="text-gray-600">Completed On</span>
+                <span class="font-medium" id="completed-date">Just now</span>
+            </div>
+            <div class="flex justify-between py-3">
+                <span class="text-gray-600">Questions</span>
+                <span class="font-medium" id="total-questions">20</span>
+            </div>
+        </div>
+
+        <div class="space-y-4">
+            <!-- <button onclick="reviewAnswers()" 
+                    class="w-full bg-white hover:bg-gray-50 border-2 border-blue-200 hover:border-blue-300 py-4 rounded-2xl font-medium text-lg transition-all">
+                📝 Review My Answers
+            </button> -->
+
+            <button onclick="takeAnotherExam()" 
+                    class="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-2xl font-semibold text-lg transition-all">
+                Take Another Exam
+            </button>
+        </div>
+
+        <p class="text-center text-gray-500 text-sm mt-10">
+            Well done, James11!
+        </p>
+    </div>
+
+<script>
+// Get stored data
+const storedData = sessionStorage.getItem('quizData');
+
+if (!storedData) {
+    window.location.href = '/myschool/quiz';
+  
+}
+
+const quizResult = JSON.parse(storedData);
+
+// Calculate values
+const wrongAnswers = quizResult.total - quizResult.score;
+const timeTaken = 1800 - (quizResult.timeLeft || 0); // 30 minutes = 1800 seconds
+const minutes = Math.floor(timeTaken / 60);
+const seconds = timeTaken % 60;
+
+// Update Score
+document.getElementById('score').innerText = quizResult.score;
+document.getElementById('total-score').innerText = ` ${quizResult.score}`;
+document.getElementById('total').innerText = ` ${quizResult.total}`;
+document.getElementById('correct').innerText = quizResult.score;
+document.getElementById('wrong').innerText = wrongAnswers;
+document.getElementById('percent').innerText = `${quizResult.percentage}%`;
+
+// Update Additional Info
+document.getElementById('time-taken').innerText = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+document.getElementById('completed-date').innerText = quizResult.completedAt.toLocaleString() || new Date().toLocaleString();
+document.getElementById('total-questions').innerText = quizResult.total;
+
+// Functions
+function reviewAnswers() {
+    if (confirm("Would you like to review your answers?")) {
+        window.location.href = "summary-review.html";
+    }
+}
+
+function takeAnotherExam() {
+    if (confirm("Start a new exam?")) {
+        sessionStorage.removeItem('quizResult');
+        window.location.href = "/myschool/quiz";
+    }
+}
+
+
+</script>
+</body>
+</html>

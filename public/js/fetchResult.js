@@ -33,6 +33,7 @@ getDetails.onclick = async (e) => {
       );
       if (result.ok) {
         const data = await result.json();
+        console.log(data)
         let currentClass = studentclass.split(" ");
         if (currentClass[0] == "BASIC") {
           basicStudentResultTemplate(data);

@@ -1,90 +1,296 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/styles/global.css">
-  <title>Get Student ID</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Directory</title>
+      <link rel="stylesheet" href="/styles/global.css">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <%- include('./partials/header.ejs') %>
-  <div class="admin-container">
-    <%- include('./partials/navigation.ejs') %>
-    <main class="section">
-      <div class="container center-container">
-        <div class="form-container">
-          <div class="form-header">
-            <h2>Get Student ID</h2>
-          </div>
-          <form id="studentIdForm">
-            <div class="form-controls">
-              <div class="form-group">
-                <label for="student_name">Name</label>
-                <input
-                  type="text"
-                  id="student_name"
-                  name="student_name"
-                  placeholder="Last, First, Middle Name"
-                  required
-                  autocomplete="off"
-                  aria-label="Student Name"
-                />
-                <span class="error-message"></span>
-              </div>
-              <button type="button" id="getId" class="button">Get ID</button>
-            </div>
-            <div class="form-controls">
-              <div class="form-group">
-                <label for="class">Class</label>
-                <select id="class" name="class" aria-label="Select Class">
-                  <option value="">Select Class</option>
-                  <option value="SS">SS</option>
-                  <option value="SS 3">SS 3</option>
-                  <option value="SS 2">SS 2</option>
-                  <option value="SS 1">SS 1</option>
-                  <option value="JSS">JSS</option>
-                  <option value="JSS 3">JSS 3</option>
-                  <option value="JSS 2">JSS 2</option>
-                  <option value="JSS 1">JSS 1</option>
-                  <option value="BASIC 6">BASIC 6</option>
-                  <option value="BASIC 5">BASIC 5</option>
-                  <option value="BASIC 4">BASIC 4</option>
-                  <option value="BASIC 3">BASIC 3</option>
-                  <option value="BASIC 2">BASIC 2</option>
-                  <option value="BASIC 1">BASIC 1</option>
-                  <option value="NURSERY 3">NURSERY 3</option>
-                  <option value="NURSERY 2">NURSERY 2</option>
-                  <option value="NURSERY 1">NURSERY 1</option>
-                  <option value="PRE-NURSERY">PRE-NURSERY</option>
-                </select>
-                <span class="error-message"></span>
-              </div>
-              <button type="button" id="classId" class="button">Get ID</button>
-            </div>
-          </form>
-          <div class="table-wrapper">
-            <table id="table" style="display: none;">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Name</th>
-                  <th>Class</th>
-                  <th>Student ID</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-            </table>
-            <div class="table-empty" style="display: none;">No data available</div>
-          </div>
-          <p class="total-count">Total: <span id="total"></span></p>
-          <div class="loading">Loading...</div>
-        </div>
-      </div>
-    </main>
-  </div>
 
-  <script src="/js/menu.js"></script>
-  <script src="/js/student-id-school.js"></script>
+<body class="bg-slate-100">
+
+<%- include("./partials/header.ejs") %>
+
+<div class="flex min-h-screen">
+
+    <%- include("./partials/navigation.ejs") %>
+
+    <main class="flex-1 p-8">
+
+        <!-- Page Header -->
+        <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-8">
+
+            <div>
+                <h1 class="text-3xl font-bold text-slate-800">
+                    👨‍🎓 Student Directory
+                </h1>
+
+                <p class="text-slate-500 mt-2">
+                    Search students and quickly retrieve their Student IDs.
+                </p>
+            </div>
+
+            <div class="bg-blue-600 text-white px-6 py-4 rounded-2xl shadow">
+
+                <p class="text-sm opacity-80" >
+                    Total Results
+                </p>
+
+                <h2 class="text-3xl font-bold" id="result_count">
+                    0
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <!-- Search Cards -->
+
+        <div class="grid lg:grid-cols-2 gap-6 mb-8">
+
+            <!-- Search by Name -->
+
+            <div class="bg-white rounded-3xl shadow-sm p-8">
+
+                <div class="flex items-center gap-3 mb-6">
+
+                    <div class="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center text-2xl">
+
+                        🔍
+
+                    </div>
+
+                    <div>
+
+                        <h2 class="text-xl font-bold">
+
+                            Search Student
+
+                        </h2>
+
+                        <p class="text-gray-500 text-sm">
+
+                            Search using student's full name
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="space-y-5">
+
+                    <div>
+
+                        <label class="block mb-2 text-sm font-semibold">
+
+                            Student Name
+
+                        </label>
+
+                        <input
+                            id="student_name"
+                            type="text"
+                            name="student_name"
+                            placeholder="John Doe"
+                            class="w-full rounded-xl border border-slate-300 px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none">
+
+                    </div>
+
+                    <button
+                        id="getId"
+                        type="button"
+                        class="w-full bg-blue-600 hover:bg-blue-700 transition text-white font-semibold rounded-xl py-3">
+
+                        Search Student
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Search By Class -->
+
+            <div class="bg-white rounded-3xl shadow-sm p-8">
+
+                <div class="flex items-center gap-3 mb-6">
+
+                    <div class="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center text-2xl">
+
+                        🎓
+
+                    </div>
+
+                    <div>
+
+                        <h2 class="text-xl font-bold">
+
+                            Browse By Class
+
+                        </h2>
+
+                        <p class="text-gray-500 text-sm">
+
+                            View every student in a class
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="space-y-5">
+
+                    <div>
+
+                        <label class="block mb-2 text-sm font-semibold">
+
+                            Select Class
+
+                        </label>
+
+                        <select
+                            id="class"
+                            class="w-full rounded-xl border border-slate-300 px-4 py-3 focus:ring-2 focus:ring-green-500">
+
+                            <option value="">Choose Class</option>
+
+                            <option>SS</option>
+                            <option>SS 3</option>
+                            <option>SS 2</option>
+                            <option>SS 1</option>
+
+                            <option>JSS</option>
+                            <option>JSS 3</option>
+                            <option>JSS 2</option>
+                            <option>JSS 1</option>
+
+                            <option>BASIC 6</option>
+                            <option>BASIC 5</option>
+                            <option>BASIC 4</option>
+                            <option>BASIC 3</option>
+                            <option>BASIC 2</option>
+                            <option>BASIC 1</option>
+
+                            <option>NURSERY 3</option>
+                            <option>NURSERY 2</option>
+                            <option>NURSERY 1</option>
+                            <option>PRE-NURSERY</option>
+
+                        </select>
+
+                    </div>
+
+                    <button
+                        id="classId"
+                        type="button"
+                        class="w-full bg-green-600 hover:bg-green-700 transition text-white font-semibold rounded-xl py-3">
+
+                        Browse Students
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Results -->
+
+        <div class="bg-white rounded-3xl shadow-sm overflow-hidden">
+
+            <div class="flex justify-between items-center px-8 py-6 border-b">
+
+                <div>
+
+                    <h2 class="text-2xl font-bold text-slate-800">
+
+                        Student Records
+
+                    </h2>
+
+                    <p class="text-gray-500 mt-1">
+
+                        Matching students will appear below.
+
+                    </p>
+
+                </div>
+
+                <div class="bg-slate-100 px-4 py-2 rounded-full text-sm font-medium">
+
+                    Results:
+                    <span id="result_count2" class="font-bold">
+                        0
+                    </span>
+
+                </div>
+
+            </div>
+
+           
+
+    <div
+    id="studentCards"
+    class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+</div>
+
+
+
+            <!-- Empty State -->
+
+            <div
+                class="py-20 text-center text-slate-500"
+                id="emptyState">
+
+                <div class="text-7xl mb-5">
+
+                    🎓
+
+                </div>
+
+                <h3 class="text-2xl font-bold text-slate-700 hidden" id="notFound">
+
+                    No Students Found
+
+                </h3>
+
+                <p class="mt-3">
+
+                    Search by student name or browse by class to view records.
+
+                </p>
+
+            </div>
+
+            <!-- Loading -->
+
+            <div
+                class="hidden py-16 text-center"
+                id="loadingIndicator">
+
+                <div class="animate-spin w-10 h-10 rounded-full border-4 border-blue-600 border-t-transparent mx-auto"></div>
+
+                <p class="mt-4 text-gray-500"></p>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="/js/menu.js"></script>
+<script src="/js/student-id-school.js"></script>
+
 </body>
 </html>
