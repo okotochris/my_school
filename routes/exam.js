@@ -5,7 +5,7 @@ const router = express.Router()
 router.get('/myschool/quiz', (req, res)=>{
 
     try {
-        res.render('quiz')
+        res.render('exam/quiz')
     } catch (error) {
         res.status(500)
         console.log(error)
@@ -13,13 +13,13 @@ router.get('/myschool/quiz', (req, res)=>{
 })
 
 router.get('/myschool/quiz/exam', (req, res)=>{
-    res.render('exam')
+    res.render('exam/exam')
 })
 router.get('/myschool/quiz/exam/summary', (req, res)=>{
-    res.render('exam-summary')
+    res.render('exam/exam-summary')
 })
 router.get('/myschool/quiz/exam_intro', (req, res)=>{
-    res.render('exam_intro')
+    res.render('exam/exam_intro')
 })
 
 module.exports = router

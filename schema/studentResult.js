@@ -13,9 +13,9 @@ const studentResultSchema = new Schema({
       subjectName: { type: String, required: true },
       firstTest: { type: Number, default: 0 },
       secondTest: { type: Number, default: 0 },
-      ca: { type: Number, default: 0 },
+      cca: { type: Number, default: 0 },
       exam: { type: Number, default: 0 },
-      score: { type: Number, default: 0 }, // calculated total
+      total: { type: Number, default: 0 }, // calculated total
       grade: String,
       remark: String
     }
@@ -25,15 +25,16 @@ const studentResultSchema = new Schema({
   score_obtain: { type: Number, default: 0 },
   promote: String,
   nextTerm: String,
+  No_subj:String,
   fees: Number,
-  attendance: {
+ 
     present: { type: Number, default: 0 },
-    absent: { type: Number, default: 0 }
-  },
-  reports: {
+    absent: { type: Number, default: 0 },
+
+
     Treport: String,
     tReport: String
-  }
+  
 }, { timestamps: true });
 
 const StudentResult = mongoose.model('StudentResult', studentResultSchema);

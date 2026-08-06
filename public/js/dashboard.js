@@ -25,22 +25,22 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const {
       totalStaff,
-      totalStudent,
+      totalStudents,
       totalBlacklist,
       totalNursery,
       totalBasic,
-      totalJss,
-      totalSS,
+      totalJunior,
+      totalSenior,
       gradeSummary,
     } = data;
 
     // Update dashboard values
     document.getElementById("blacklist").innerText = totalBlacklist;
     document.getElementById("staff").innerText = totalStaff;
-    document.getElementById("students").innerText = totalStudent;
+    document.getElementById("students").innerText = totalStudents;
 
     // Draw charts
-    barGraph(totalNursery, totalBasic, totalJss, totalSS);
+    barGraph(totalNursery, totalBasic, totalJunior, totalSenior);
     pieGraph(gradeSummary.percentages);
     gradeCount(gradeSummary.counts);
   } catch (err) {
@@ -67,7 +67,8 @@ function showAlert(message) {
 
 // Close alert dialog
 function closeAlert() {
-  alertDialog.style.display = 'none';
+  document.getElementById('upload-dialog').style.display = 'none';
+  document.querySelector('.dialog-backdrop').style.display = 'none'
   alertMessage.textContent = '';
 }
 
@@ -91,7 +92,7 @@ uploadBtn.addEventListener('click', showUploadDialog);
 
 // Form submission
 
-function barGraph( totalNursery,totalBasic, totalJss, totalSS){
+function barGraph( totalNursery,totalBasic, totalJunior, totalSenior){
   // Initialize Bar Chart (Student Distribution by Class)
 const barChart = new Chart(document.getElementById('studentBarChart'), {
   type: 'bar',
@@ -99,7 +100,7 @@ const barChart = new Chart(document.getElementById('studentBarChart'), {
     labels: ['Nursery', 'Primary', 'Junior', 'Senior'],
     datasets: [{
       label: 'Students',
-      data: [totalNursery, totalBasic, totalJss, totalSS], // Static data
+      data: [totalNursery, totalBasic, totalJunior, totalSenior], // Static data
       backgroundColor: 'rgba(79, 70, 229, 0.6)',
       borderColor: '#4f46e5',
       borderWidth: 1

@@ -1,0 +1,1022 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head') %>
+
+<body class="bg-slate-50 text-slate-800">
+
+    <div class="min-h-screen">
+
+        <!-- ==========================================
+             NAVIGATION
+        =========================================== -->
+
+        <%- include('./partials/navigation') %>
+
+
+        <!-- ==========================================
+             MAIN
+        =========================================== -->
+
+        <main class="lg:ml-64">
+
+            <!-- HEADER -->
+
+            <%- include('./partials/header') %>
+
+
+            <!-- ==========================================
+                 CONTENT
+            =========================================== -->
+
+            <section class="mx-auto max-w-[1500px] p-4 sm:p-6 lg:p-8">
+
+
+                <!-- ==========================================
+                     PAGE HEADER
+                =========================================== -->
+
+                <div class="mb-6">
+
+                    <h1 class="text-xl font-bold text-slate-900 sm:text-2xl">
+                        Assignments
+                    </h1>
+
+                    <p class="mt-1 text-sm text-slate-500">
+                        View your assignments, deadlines and submission status.
+                    </p>
+
+                </div>
+
+
+                <!-- ==========================================
+                     STATISTICS
+                =========================================== -->
+
+                <div class="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+
+
+                    <!-- Pending -->
+
+                    <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+
+                        <div class="flex items-center justify-between">
+
+                            <p class="text-xs font-medium text-slate-500">
+                                Pending
+                            </p>
+
+                            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-orange-50 text-sm">
+                                📝
+                            </div>
+
+                        </div>
+
+                        <p class="mt-3 text-2xl font-bold text-slate-900">
+                            3
+                        </p>
+
+                        <p class="mt-1 text-[10px] text-slate-400">
+                            Need your attention
+                        </p>
+
+                    </div>
+
+
+                    <!-- Submitted -->
+
+                    <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+
+                        <div class="flex items-center justify-between">
+
+                            <p class="text-xs font-medium text-slate-500">
+                                Submitted
+                            </p>
+
+                            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 text-sm">
+                                📤
+                            </div>
+
+                        </div>
+
+                        <p class="mt-3 text-2xl font-bold text-slate-900">
+                            5
+                        </p>
+
+                        <p class="mt-1 text-[10px] text-slate-400">
+                            Awaiting review
+                        </p>
+
+                    </div>
+
+
+                    <!-- Graded -->
+
+                    <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+
+                        <div class="flex items-center justify-between">
+
+                            <p class="text-xs font-medium text-slate-500">
+                                Graded
+                            </p>
+
+                            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 text-sm">
+                                ✓
+                            </div>
+
+                        </div>
+
+                        <p class="mt-3 text-2xl font-bold text-slate-900">
+                            8
+                        </p>
+
+                        <p class="mt-1 text-[10px] text-slate-400">
+                            Completed assignments
+                        </p>
+
+                    </div>
+
+
+                    <!-- Total -->
+
+                    <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+
+                        <div class="flex items-center justify-between">
+
+                            <p class="text-xs font-medium text-slate-500">
+                                Total
+                            </p>
+
+                            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-purple-50 text-sm">
+                                📚
+                            </div>
+
+                        </div>
+
+                        <p class="mt-3 text-2xl font-bold text-slate-900">
+                            16
+                        </p>
+
+                        <p class="mt-1 text-[10px] text-slate-400">
+                            This term
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ==========================================
+                     FILTERS
+                =========================================== -->
+
+                <div class="mb-6 rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+
+                    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+
+                        <!-- Search -->
+
+                        <div class="relative w-full sm:max-w-sm">
+
+                            <span class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-sm text-slate-400">
+                                🔍
+                            </span>
+
+                            <input
+                                type="text"
+                                placeholder="Search assignments..."
+                                class="w-full rounded-lg border border-slate-200 bg-slate-50 py-2.5 pl-9 pr-3 text-xs text-slate-700 outline-none transition focus:border-blue-400 focus:bg-white focus:ring-2 focus:ring-blue-100"
+                            >
+
+                        </div>
+
+
+                        <!-- Filters -->
+
+                        <div class="flex gap-2">
+
+                            <select
+                                class="rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-xs font-medium text-slate-600 outline-none focus:border-blue-400"
+                            >
+
+                                <option>All Subjects</option>
+                                <option>Mathematics</option>
+                                <option>English Language</option>
+                                <option>Physics</option>
+                                <option>Chemistry</option>
+                                <option>Biology</option>
+
+                            </select>
+
+
+                            <select
+                                class="rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-xs font-medium text-slate-600 outline-none focus:border-blue-400"
+                            >
+
+                                <option>All Status</option>
+                                <option>Pending</option>
+                                <option>Submitted</option>
+                                <option>Graded</option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ==========================================
+                     ASSIGNMENT LIST
+                =========================================== -->
+
+                <div class="rounded-xl border border-slate-200 bg-white shadow-sm">
+
+
+                    <!-- Header -->
+
+                    <div class="border-b border-slate-100 px-5 py-4 sm:px-6">
+
+                        <h2 class="text-sm font-bold text-slate-900">
+                            Recent Assignments
+                        </h2>
+
+                        <p class="mt-1 text-xs text-slate-500">
+                            Assignments for Second Term, 2025/2026.
+                        </p>
+
+                    </div>
+
+
+                    <!-- ======================================
+                         ASSIGNMENT 1
+                    ======================================= -->
+
+                    <div class="border-b border-slate-100 p-5 sm:p-6">
+
+                        <div class="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+
+                            <div class="flex gap-4">
+
+                                <!-- Icon -->
+
+                                <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-lg">
+                                    📐
+                                </div>
+
+
+                                <!-- Details -->
+
+                                <div>
+
+                                    <div class="flex flex-wrap items-center gap-2">
+
+                                        <h3 class="text-sm font-bold text-slate-800">
+                                            Quadratic Equations
+                                        </h3>
+
+                                        <span class="rounded-full bg-orange-50 px-2 py-1 text-[9px] font-semibold text-orange-600">
+                                            Pending
+                                        </span>
+
+                                    </div>
+
+                                    <p class="mt-1 text-xs font-medium text-blue-600">
+                                        Mathematics
+                                    </p>
+
+                                    <p class="mt-2 max-w-2xl text-xs leading-5 text-slate-500">
+                                        Solve the ten quadratic equation problems
+                                        provided in class and show all working steps.
+                                    </p>
+
+                                    <div class="mt-3 flex flex-wrap gap-x-5 gap-y-2">
+
+                                        <span class="text-[10px] text-slate-400">
+                                            👨‍🏫 Mr. Johnson
+                                        </span>
+
+                                        <span class="text-[10px] font-medium text-red-500">
+                                            ⏰ Due: August 7, 2026
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Action -->
+
+                            <div class="shrink-0">
+
+                                <button
+                                    onclick="openAssignment('Quadratic Equations')"
+                                    class="w-full rounded-lg bg-[#0b2a4a] px-4 py-2.5 text-xs font-semibold text-white transition hover:bg-[#17619a] lg:w-auto"
+                                >
+                                    View Assignment
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ======================================
+                         ASSIGNMENT 2
+                    ======================================= -->
+
+                    <div class="border-b border-slate-100 p-5 sm:p-6">
+
+                        <div class="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+
+                            <div class="flex gap-4">
+
+                                <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-lg">
+                                    🧬
+                                </div>
+
+                                <div>
+
+                                    <div class="flex flex-wrap items-center gap-2">
+
+                                        <h3 class="text-sm font-bold text-slate-800">
+                                            Human Reproductive System
+                                        </h3>
+
+                                        <span class="rounded-full bg-orange-50 px-2 py-1 text-[9px] font-semibold text-orange-600">
+                                            Pending
+                                        </span>
+
+                                    </div>
+
+                                    <p class="mt-1 text-xs font-medium text-emerald-600">
+                                        Biology
+                                    </p>
+
+                                    <p class="mt-2 max-w-2xl text-xs leading-5 text-slate-500">
+                                        Explain the functions of the major organs
+                                        involved in the human reproductive system.
+                                    </p>
+
+                                    <div class="mt-3 flex flex-wrap gap-x-5 gap-y-2">
+
+                                        <span class="text-[10px] text-slate-400">
+                                            👩‍🏫 Mrs. Mercy
+                                        </span>
+
+                                        <span class="text-[10px] font-medium text-orange-500">
+                                            ⏰ Due: August 9, 2026
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="shrink-0">
+
+                                <button
+                                    onclick="openAssignment('Human Reproductive System')"
+                                    class="w-full rounded-lg bg-[#0b2a4a] px-4 py-2.5 text-xs font-semibold text-white transition hover:bg-[#17619a] lg:w-auto"
+                                >
+                                    View Assignment
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ======================================
+                         ASSIGNMENT 3
+                    ======================================= -->
+
+                    <div class="border-b border-slate-100 p-5 sm:p-6">
+
+                        <div class="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+
+                            <div class="flex gap-4">
+
+                                <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-purple-50 text-lg">
+                                    ⚛️
+                                </div>
+
+                                <div>
+
+                                    <div class="flex flex-wrap items-center gap-2">
+
+                                        <h3 class="text-sm font-bold text-slate-800">
+                                            Newton's Laws of Motion
+                                        </h3>
+
+                                        <span class="rounded-full bg-blue-50 px-2 py-1 text-[9px] font-semibold text-blue-600">
+                                            Submitted
+                                        </span>
+
+                                    </div>
+
+                                    <p class="mt-1 text-xs font-medium text-purple-600">
+                                        Physics
+                                    </p>
+
+                                    <p class="mt-2 max-w-2xl text-xs leading-5 text-slate-500">
+                                        Describe Newton's three laws of motion and
+                                        provide one practical example for each.
+                                    </p>
+
+                                    <div class="mt-3 flex flex-wrap gap-x-5 gap-y-2">
+
+                                        <span class="text-[10px] text-slate-400">
+                                            👨‍🏫 Mr. David
+                                        </span>
+
+                                        <span class="text-[10px] text-slate-400">
+                                            Submitted: August 2, 2026
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="shrink-0">
+
+                                <button
+                                    onclick="openAssignment('Newton’s Laws of Motion')"
+                                    class="w-full rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-xs font-semibold text-slate-600 transition hover:bg-slate-50 lg:w-auto"
+                                >
+                                    View Submission
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ======================================
+                         ASSIGNMENT 4
+                    ======================================= -->
+
+                    <div class="border-b border-slate-100 p-5 sm:p-6">
+
+                        <div class="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+
+                            <div class="flex gap-4">
+
+                                <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-orange-50 text-lg">
+                                    🧪
+                                </div>
+
+                                <div>
+
+                                    <div class="flex flex-wrap items-center gap-2">
+
+                                        <h3 class="text-sm font-bold text-slate-800">
+                                            Organic Chemistry
+                                        </h3>
+
+                                        <span class="rounded-full bg-emerald-50 px-2 py-1 text-[9px] font-semibold text-emerald-600">
+                                            Graded
+                                        </span>
+
+                                    </div>
+
+                                    <p class="mt-1 text-xs font-medium text-orange-600">
+                                        Chemistry
+                                    </p>
+
+                                    <p class="mt-2 max-w-2xl text-xs leading-5 text-slate-500">
+                                        Answer the questions on organic compounds
+                                        and explain the differences between alkanes,
+                                        alkenes and alkynes.
+                                    </p>
+
+                                    <div class="mt-3 flex flex-wrap gap-x-5 gap-y-2">
+
+                                        <span class="text-[10px] text-slate-400">
+                                            👩‍🏫 Mrs. Esther
+                                        </span>
+
+                                        <span class="text-[10px] text-slate-400">
+                                            Submitted: July 28, 2026
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="flex items-center gap-2">
+
+                                <div class="rounded-lg bg-emerald-50 px-3 py-2 text-center">
+
+                                    <p class="text-[9px] font-medium uppercase text-emerald-600">
+                                        Score
+                                    </p>
+
+                                    <p class="text-sm font-bold text-emerald-700">
+                                        18/20
+                                    </p>
+
+                                </div>
+
+                                <button
+                                    onclick="openAssignment('Organic Chemistry')"
+                                    class="rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-xs font-semibold text-slate-600 transition hover:bg-slate-50"
+                                >
+                                    View
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ======================================
+                         ASSIGNMENT 5
+                    ======================================= -->
+
+                    <div class="p-5 sm:p-6">
+
+                        <div class="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+
+                            <div class="flex gap-4">
+
+                                <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-pink-50 text-lg">
+                                    📖
+                                </div>
+
+                                <div>
+
+                                    <div class="flex flex-wrap items-center gap-2">
+
+                                        <h3 class="text-sm font-bold text-slate-800">
+                                            Comprehension Exercise
+                                        </h3>
+
+                                        <span class="rounded-full bg-emerald-50 px-2 py-1 text-[9px] font-semibold text-emerald-600">
+                                            Graded
+                                        </span>
+
+                                    </div>
+
+                                    <p class="mt-1 text-xs font-medium text-pink-600">
+                                        English Language
+                                    </p>
+
+                                    <p class="mt-2 max-w-2xl text-xs leading-5 text-slate-500">
+                                        Read the provided passage and answer all
+                                        comprehension questions that follow.
+                                    </p>
+
+                                    <div class="mt-3 flex flex-wrap gap-x-5 gap-y-2">
+
+                                        <span class="text-[10px] text-slate-400">
+                                            👩‍🏫 Mrs. Grace
+                                        </span>
+
+                                        <span class="text-[10px] text-slate-400">
+                                            Submitted: July 25, 2026
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="flex items-center gap-2">
+
+                                <div class="rounded-lg bg-emerald-50 px-3 py-2 text-center">
+
+                                    <p class="text-[9px] font-medium uppercase text-emerald-600">
+                                        Score
+                                    </p>
+
+                                    <p class="text-sm font-bold text-emerald-700">
+                                        17/20
+                                    </p>
+
+                                </div>
+
+                                <button
+                                    onclick="openAssignment('Comprehension Exercise')"
+                                    class="rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-xs font-semibold text-slate-600 transition hover:bg-slate-50"
+                                >
+                                    View
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ==========================================
+                     PAGINATION
+                =========================================== -->
+
+                <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+
+                    <p class="text-xs text-slate-500">
+                        Showing <span class="font-semibold text-slate-700">1–5</span>
+                        of <span class="font-semibold text-slate-700">16</span>
+                        assignments
+                    </p>
+
+
+                    <div class="flex items-center gap-1">
+
+                        <button
+                            class="rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-medium text-slate-400"
+                            disabled
+                        >
+                            Previous
+                        </button>
+
+                        <button
+                            class="rounded-lg bg-[#0b2a4a] px-3 py-2 text-xs font-semibold text-white"
+                        >
+                            1
+                        </button>
+
+                        <button
+                            class="rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-medium text-slate-600 hover:bg-slate-50"
+                        >
+                            2
+                        </button>
+
+                        <button
+                            class="rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-medium text-slate-600 hover:bg-slate-50"
+                        >
+                            3
+                        </button>
+
+                        <button
+                            class="rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-medium text-slate-600 hover:bg-slate-50"
+                        >
+                            Next
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ==========================================
+                     NOTICE
+                =========================================== -->
+
+                <div class="mt-6 flex gap-3 rounded-xl border border-blue-100 bg-blue-50 p-4">
+
+                    <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-100 text-sm">
+                        ℹ️
+                    </div>
+
+                    <div>
+
+                        <p class="text-xs font-semibold text-blue-900">
+                            Assignment Notice
+                        </p>
+
+                        <p class="mt-1 text-xs leading-5 text-blue-700">
+                            Make sure you submit your assignments before the
+                            stated deadline. Late submissions may not be
+                            accepted by your teacher.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- ==========================================
+         ASSIGNMENT MODAL
+    =========================================== -->
+
+    <div
+        id="assignmentModal"
+        class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/50 p-4"
+    >
+
+        <div
+            id="modalContent"
+            class="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-white shadow-xl"
+        >
+
+            <!-- Modal Header -->
+
+            <div class="flex items-center justify-between border-b border-slate-100 px-5 py-4 sm:px-6">
+
+                <div>
+
+                    <p class="text-[10px] font-semibold uppercase tracking-wide text-blue-600">
+                        Assignment Details
+                    </p>
+
+                    <h2
+                        id="modalTitle"
+                        class="mt-1 text-base font-bold text-slate-900"
+                    >
+                        Assignment
+                    </h2>
+
+                </div>
+
+
+                <button
+                    onclick="closeAssignment()"
+                    class="flex h-8 w-8 items-center justify-center rounded-lg text-lg text-slate-400 transition hover:bg-slate-100 hover:text-slate-700"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <!-- Modal Body -->
+
+            <div class="space-y-5 p-5 sm:p-6">
+
+
+                <!-- Subject -->
+
+                <div class="flex flex-wrap gap-2">
+
+                    <span class="rounded-full bg-blue-50 px-3 py-1 text-[10px] font-semibold text-blue-600">
+                        Mathematics
+                    </span>
+
+                    <span class="rounded-full bg-orange-50 px-3 py-1 text-[10px] font-semibold text-orange-600">
+                        Pending
+                    </span>
+
+                </div>
+
+
+                <!-- Description -->
+
+                <div>
+
+                    <p class="text-[10px] font-semibold uppercase tracking-wide text-slate-400">
+                        Instructions
+                    </p>
+
+                    <p class="mt-2 text-sm leading-6 text-slate-600">
+                        Solve the ten quadratic equation problems provided
+                        in class. Show all working steps and make sure your
+                        answers are clearly written.
+                    </p>
+
+                </div>
+
+
+                <!-- Information -->
+
+                <div class="grid grid-cols-2 gap-4 rounded-xl bg-slate-50 p-4 sm:grid-cols-4">
+
+                    <div>
+
+                        <p class="text-[9px] uppercase tracking-wide text-slate-400">
+                            Teacher
+                        </p>
+
+                        <p class="mt-1 text-xs font-semibold text-slate-700">
+                            Mr. Johnson
+                        </p>
+
+                    </div>
+
+                    <div>
+
+                        <p class="text-[9px] uppercase tracking-wide text-slate-400">
+                            Subject
+                        </p>
+
+                        <p class="mt-1 text-xs font-semibold text-slate-700">
+                            Mathematics
+                        </p>
+
+                    </div>
+
+                    <div>
+
+                        <p class="text-[9px] uppercase tracking-wide text-slate-400">
+                            Assigned
+                        </p>
+
+                        <p class="mt-1 text-xs font-semibold text-slate-700">
+                            August 1, 2026
+                        </p>
+
+                    </div>
+
+                    <div>
+
+                        <p class="text-[9px] uppercase tracking-wide text-slate-400">
+                            Due Date
+                        </p>
+
+                        <p class="mt-1 text-xs font-semibold text-red-600">
+                            August 7, 2026
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Attachment -->
+
+                <div>
+
+                    <p class="mb-2 text-[10px] font-semibold uppercase tracking-wide text-slate-400">
+                        Attachment
+                    </p>
+
+                    <div class="flex items-center justify-between rounded-lg border border-slate-200 p-3">
+
+                        <div class="flex items-center gap-3">
+
+                            <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-red-50">
+                                📄
+                            </div>
+
+                            <div>
+
+                                <p class="text-xs font-semibold text-slate-700">
+                                    Mathematics_Assignment.pdf
+                                </p>
+
+                                <p class="mt-0.5 text-[10px] text-slate-400">
+                                    PDF • 1.2 MB
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <button class="text-xs font-semibold text-blue-600 hover:text-blue-700">
+                            Download
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Submission -->
+
+                <div class="rounded-xl border border-dashed border-slate-300 p-4">
+
+                    <p class="text-xs font-bold text-slate-800">
+                        Submit Assignment
+                    </p>
+
+                    <p class="mt-1 text-[10px] leading-5 text-slate-500">
+                        Upload your completed assignment before the deadline.
+                    </p>
+
+
+                    <label
+                        class="mt-4 flex cursor-pointer flex-col items-center justify-center rounded-lg border border-slate-200 bg-slate-50 p-6 text-center transition hover:bg-slate-100"
+                    >
+
+                        <span class="text-2xl">
+                            📤
+                        </span>
+
+                        <span class="mt-2 text-xs font-semibold text-slate-700">
+                            Click to upload your file
+                        </span>
+
+                        <span class="mt-1 text-[10px] text-slate-400">
+                            PDF, DOC, DOCX or image • Max 10MB
+                        </span>
+
+                        <input
+                            type="file"
+                            class="hidden"
+                            accept=".pdf,.doc,.docx,image/*"
+                        >
+
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <!-- Modal Footer -->
+
+            <div class="flex flex-col-reverse gap-2 border-t border-slate-100 bg-slate-50 px-5 py-4 sm:flex-row sm:justify-end sm:px-6">
+
+                <button
+                    onclick="closeAssignment()"
+                    class="rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-50"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    class="rounded-lg bg-[#0b2a4a] px-4 py-2.5 text-xs font-semibold text-white hover:bg-[#17619a]"
+                >
+                    Submit Assignment
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         JAVASCRIPT
+    =========================================== -->
+
+    <script>
+
+        const assignmentModal = document.getElementById("assignmentModal");
+        const modalTitle = document.getElementById("modalTitle");
+
+
+        function openAssignment(title) {
+
+            modalTitle.textContent = title;
+
+            assignmentModal.classList.remove("hidden");
+            assignmentModal.classList.add("flex");
+
+            document.body.classList.add("overflow-hidden");
+
+        }
+
+
+        function closeAssignment() {
+
+            assignmentModal.classList.add("hidden");
+            assignmentModal.classList.remove("flex");
+
+            document.body.classList.remove("overflow-hidden");
+
+        }
+
+
+        // Close when clicking outside the modal
+
+        assignmentModal.addEventListener("click", function(event) {
+
+            if (event.target === assignmentModal) {
+
+                closeAssignment();
+
+            }
+
+        });
+
+
+        // Close with Escape key
+
+        document.addEventListener("keydown", function(event) {
+
+            if (event.key === "Escape") {
+
+                closeAssignment();
+
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>

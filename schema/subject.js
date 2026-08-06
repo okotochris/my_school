@@ -1,20 +1,60 @@
-const mongoose = require('mongoose');
-const { Schema } = mongoose;
+const mongoose = require("mongoose");
 
-const subjectSchema = new Schema({
-  schoolName: { type: String, required: true },
-  studentClass: { type: String, required: true },
-  subjects: [
-    {
-      subjectName: { type: String, required: true },
-      subjectCode: String, // optional
-      teacherName: String  // optional
-    }
-  ]
-}, { timestamps: true });
+const subjectSchema = new mongoose.Schema(
+  {
+    schoolName: {
+      type: String,
+      required: true,
+      trim: true,
+    },
 
-// Optional: prevent duplicate school+class
-subjectSchema.index({ schoolName: 1, studentClass: 1 }, { unique: true });
+    subjectClass: {
+      type: String,
+      required: true,
+      trim: true,
+    },
 
-const Subject = mongoose.model('Subject', subjectSchema);
-module.exports = Subject;
+    classTeacherId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Teacher",
+      default: null,
+    },
+
+    subjects: [
+      {
+        subjectName: {
+          type: String,
+          required: true,
+          trim: true,
+        },
+
+        subjectCode: {
+          type: String,
+          default: null,
+        },
+
+        teacherId: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Teacher",
+          default: null,
+        },
+      },
+    ],
+  },
+  {
+    timestamps: true,
+  }
+);
+
+// One document per school + class
+subjectSchema.index(
+  {
+    schoolName: 1,
+    subjectClass: 1,
+  },
+  {
+    unique: true,
+  }
+);
+
+module.exports = mongoose.model("Subject", subjectSchema);

@@ -1,14 +1,12 @@
 const express = require('express')
-const Studentpassport = require("../schema/goldenPassport.js");
-const PBlog = require("../schema/primary.js"); //basic class
-const nuseryBlog = require("../schema/nursery.js"); // nursery
-const Blog = require("../schema/data.js"); //junior class
-const SBlog = require("../schema/datas.js"); // sinior class
 const router = express.Router()
 const upload = require("../middleware/upload.js");
 const cloudinary = require("../middleware/cloudinary.js");
+const StudentResult = require('../schema/studentResult.js')
+const StudentProfile = require('../schema/studentProfile.js')
 const fs = require("fs");
 
+//UPDATE STUDENT PROFILE
 router.patch("/update-student", upload.single("passport"), async (req, res) => {
   const { studentId, userName, addmissionNo, dobValue, classValue, gender } = req.body;
 
@@ -32,7 +30,7 @@ router.patch("/update-student", upload.single("passport"), async (req, res) => {
   if (image) updateData.passport = image.secure_url;
 
   try {
-    const updatedStudent = await Studentpassport.findOneAndUpdate(
+    const updatedStudent = await StudentProfile.findOneAndUpdate(
       { studentId },
       updateData,
       { new: true }
@@ -49,12 +47,12 @@ router.patch("/update-student", upload.single("passport"), async (req, res) => {
 });
 
 //UPDATING BASIC SCHOOL RESULT
-router.patch("/update_basic_result", async (req, res) => {
+router.patch("/update_student_result", async (req, res) => {
 let { studentId, term, class: sClass } = req.body;
   studentId = studentId.trim()
  
   try {
-    let updated = await PBlog.findOneAndUpdate(
+    let updated = await PBlog.StudentResult(
       { studentId, term, class:sClass },
       req.body,
       { new: true }
@@ -71,70 +69,11 @@ let { studentId, term, class: sClass } = req.body;
   }
 });
 
-//UPDATING NURSERY
-router.patch("/update_nursery_result", async (req, res) => {
-  let { studentId, term, class: sClass } = req.body;
-   studentId = studentId.trim()
-  try {
-    let updated = await nuseryBlog.findOneAndUpdate(
-      { studentId, term, class:sClass },
-      req.body,
-      { new: true }
-    );
-    if (updated) {
-      res.status(200).send("Updated successfully");
-    } else {
-      res.status(404).send("result not found");
-    }
-  } catch {
-    res.status(500).send(err);
-  }
-});
-
-//UPDATING JUNIOR SCHOOL RESULT
-router.patch("/update_junior_result", async (req, res) => {
-  const { studentId, term, class: sClass } = req.body;
-  try {
-    let updated = await Blog.findOneAndUpdate(
-      { studentId, term, class:sClass },
-      req.body,
-      { new: true }
-    );
-    if (updated) {
-      res.status(200).send("Updated successfully");
-    } else {
-      res.status(404).send("result not found");
-    }
-  } catch (err) {
-    res.status(500).send(err);
-    console.log(err)
-  }
-});
-
-
-//UPDATING SENIOR SCHOOL RESULT
-router.patch("/update_senior_result", async (req, res) => {
-  const { studentId, term, sClass } = req.body;
-  try {
-    let updated = await SBlog.findOneAndUpdate(
-      { studentId, term, sClass },
-      req.body,
-      { new: true }
-    );
-    if (updated) {
-      res.status(200).send("Updated successfully");
-    } else {
-      res.status(404).send("result not found");
-    }
-  } catch (err) {
-    res.status(500).send('server error');
-  }
-});
 //UPDATE STUDENT CLASS
 router.patch("/updatestudentclass", async (req, res) => {
   let studentId = req.body.studentId;
   try {
-    let student = await Studentpassport.findOneAndUpdate(
+    let student = await StudentProfile.findOneAndUpdate(
       { studentId },
       { class: req.body.studentClass },
       { new: true }

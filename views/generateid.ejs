@@ -23,7 +23,7 @@
   <div class="flex">
     <%- include('./partials/navigation.ejs') %>
 
-    <main class="flex-1 p-8">
+    <main class="flex-1 p-4 md:p-8">
 
       <div class="flex items-center justify-between mb-8">
         <div>
@@ -33,9 +33,9 @@
       </div>
 
       <div class="max-w-3xl mx-auto">
-        <div class="bg-white rounded-3xl shadow-sm p-10">
+        <div class="bg-white rounded-3xl shadow-sm p-2 md:p-10">
 
-          <form action="/passport" method="post" enctype="multipart/form-data" id="studentForm" novalidate>
+          <form id="studentForm" novalidate>
 
             <div class="grid md:grid-cols-2 gap-6">
 
@@ -44,8 +44,7 @@
                 <label class="block text-sm font-medium mb-2">Full Name</label>
                 <input
                   type="text"
-                  id="userName"
-                  name="userName"
+                  name="fullname"
                   placeholder="Last Name, First Name Middle Name"
                   class="w-full rounded-2xl border border-gray-300 px-5 py-4 focus:ring-2 focus:ring-blue-500 outline-none"
                   required
@@ -158,10 +157,11 @@
             <!-- Submit Button -->
             <button 
               type="submit" 
+              id="register-student"
               class="w-full mt-10 bg-blue-600 hover:bg-blue-700 text-white py-5 rounded-2xl text-xl font-semibold transition">
               Register Student
             </button>
-
+            <p id="respond"></p>
           </form>
         </div>
       </div>
@@ -170,17 +170,48 @@
   </div>
 
   <script src="/js/menu.js"></script>
-  <script src="/studentId.js"></script>
+  <script src="/js/studentId.js"></script>
 
   <script>
     // Basic form validation
-    document.getElementById('studentForm').addEventListener('submit', function(e) {
+    const form = document.getElementById("studentForm");
+    let loading = false
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        if(loading){
+          return
+        }
+        loading = true
       const gender = document.querySelector('input[name="gender"]:checked');
       if (!gender) {
         e.preventDefault();
         alert("Please select the student's gender.");
       }
+        const formData = new FormData(form);
+        // Send to backend
+       try {
+          document.getElementById('register-student').innerText = 'Registering......'
+          // Send to backend
+          const res = await fetch("/create-studentProfile", {
+              method: "POST",
+              body: formData
+          });
+        if(!res.ok){
+           document.getElementById('respond').innerHTML ='<span style="color:red">the student you are trying to register has already been registerd</span>'
+          return
+        }
+        form.reset();
+        generateId()
+        document.getElementById('respond').innerHTML ='<span style="color:green">Student registerd succefully</span>'
+       } catch (error) {
+        console.log(error)
+        document.getElementById('respond').innerHTML ='<span style="color:red">Server error</span>'
+       }finally{
+        document.getElementById('register-student').innerText = 'Register Student'
+        loading = false
+       }
     });
+
   </script>
 
 </body>

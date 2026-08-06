@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const blogschema = new Schema({
     fullname: {
         type: String,
-        required: true
+        required: true,
+        unique:true
     },
     studentId: {
         type: String,
@@ -36,5 +37,5 @@ const blogschema = new Schema({
     }
 }, { timestamps: true });
 
-const Studentpassport = mongoose.model('Studentpassport', blogschema);
+const Studentpassport = mongoose.model('StudentProfile', blogschema);
 module.exports = Studentpassport;

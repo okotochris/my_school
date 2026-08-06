@@ -13,14 +13,13 @@ const dashboardRoute = require("./routes/dashboardRoute.js");
 const adminRoute = require('./routes/schoolRoute.js')
 const exam = require('./routes/exam.js')
 const apiCallsRoute = require('./routes/apiCalls.js')
-// const checkResultRoute = require('./routes/checkresult.js')
-// const payment = require('./routes/payment.js')
-// const staticRoute = require('./routes/staticRoute.js')
-// const updateRoute = require('./routes/update.js')
-// const authRoute = require('./routes/auth.js')
-// const analysisRoute = require('./routes/analysis.js')
-//const newsRouter = require('./routes/news.js')
-
+const authRoute = require('./routes/auth.js')
+const resultUpload = require('./routes/uploadResult.js')
+const StudentProfile = require('./schema/studentProfile.js')
+const updateRoute = require('./routes/update.js')
+const  analysisRoute = require('./routes/analysis.js');
+const StudentResult = require("./schema/studentResult.js");
+const studentRoute = require('./routes/student.js')
 const app = express();
 
 // middleware
@@ -44,6 +43,7 @@ mongoose
   .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((result) => {
     console.log("Connected to MongoDB");
+   
       generateSitemap();
   })
   .catch((err) => {
@@ -146,137 +146,21 @@ app.post("/blacklist", async (req, res) => {
   }
 });
 
-//saving primary data to databse
-app.post("/primary", async (req, res) => {
-  req.body.schoolName = req.session.school;
-  try{
-    const Blog = new PBlog(req.body);
-    await Blog.save()
-    await updateFees(req.session.school, req)
-    res.render('primary')
-  }
-  catch(err){
-    console.log(err)
-  }
-    
-});
-
-//saving nursery database
-app.post("/nursery", async (req, res) => {
-  req.body.schoolName = req.session.school;
-  
-  try{
-    const Blog = new nuseryBlog(req.body);
-    await Blog.save()
-    await updateFees(req.session.school, req)
-    res.render('nursery')
-  }
-  catch(err){
-    console.log(err)
-  }
-});
-
-
-//saving junior data
-app.post("/adminJunior", async (req, res) => {
-  req.body.schoolName = req.session.school;
-  let schoolName = req.session.school;
-  try{
-    const blog = new Blog(req.body);
-    await blog.save()
-    await updateFees(schoolName, req)
-    res.render("adminJunior");
-  }
-  catch(err){
-    console.log(err)
-  }
-   
-});
-
-//saving senior data
-app.post("/adminSenior", async (req, res) => {
-  try {
-    const schoolName = req.session.school;
-    req.body.schoolName = schoolName; // Attach school name from session
-
-    // Save new senior blog entry
-    const Sblog = new SBlog(req.body);
-    await Sblog.save();
-
-    // Increment the school fee by 500 and update in MongoDB
-    await updateFees(schoolName, req)
-    res.render("adminSenior"); // Redirect after processing
- 
-  } catch (err) {
-    console.error(err);
-    res.status(500).send("Internal Server Error");
-  }
-});
-
-
-
-//LOGING IN TO UPLOAD STUDENT RESULT
-app.post("/upload", isAuthenticated, (req, res) => {
-  let x = req.body.Sclass;
-
-  if (x == "senior") {
-    res.render("adminSenior");
-  } else if (x == "junior") {
-    res.render("adminJunior");
-  } else if (x == "primary") {
-    res.render("primary");
-  } else {
-    res.render("nursery");
-  }
-});
 
 //GET STUDENT INFORMATION BASE ON ID API CALL
 app.get("/studentinfomation", async (req, res) => {
 
   let studentId = req.query.studnetId;
+
   try {
-    let info = await Studentpassport.findOne({ studentId });
+    let info = await StudentProfile.findOne({ studentId });
   
     res.json(info);
   } catch (err) {
     console.log(err);
   }
 });
-//searching student ID base on student name API CALL
-app.get("/getstudentid", async (req, res) => {
-  try {
-    let student_name = req.query.student_name;
-    let school = req.session.school;
-    let studentId = await Studentpassport.find({
-      schoolName: school,
-      userName: { $regex: student_name, $options: "i" },
-    });
 
-    if (studentId) {
-      res.json(studentId);
-    } else {
-      res.status(404).json({ message: "Student not found" });
-    }
-  } catch (err) {
-    console.error("Server error:", err);
-    res.status(500).json({ message: "Server error" });
-  }
-});
-
-//getting student id by classname API CALL
-app.get("/getclassid", async (req, res) => {
-  let studentClass = req.query.class;
-  let schoolName = req.session.school;
-  try {
-    let studentId = await Studentpassport.find({
-      schoolName,
-      class: { $regex: studentClass, $options: "i" },
-    });
-    res.json(studentId);
-  } catch (err) {
-    console.log(err);
-  }
-});
 
 app.delete('/deletestaff', async (req, res)=>{
   let _id = req.query.id;
@@ -295,7 +179,7 @@ app.delete('/deletestaff', async (req, res)=>{
 })
 
 // saving student ID and passport
-app.post("/passport", upload.single("passport"), async (req, res) => {
+app.post("/create-studentProfile", upload.single("passport"), async (req, res) => {
   try {
     let image = null;
 
@@ -305,8 +189,8 @@ app.post("/passport", upload.single("passport"), async (req, res) => {
       image = result.secure_url;
     }
 
-    const newPassport = new Studentpassport({
-      userName: req.body.userName,
+    const studentProfile = new StudentProfile({
+      fullname: req.body.fullname,
       studentId: req.body.studentId,
       schoolsession: req.body.schoolsession,
       addmissionNo: req.body.addmissionNo,
@@ -317,9 +201,8 @@ app.post("/passport", upload.single("passport"), async (req, res) => {
       gender: req.body.gender
     });
 
-    await newPassport.save();
-    res.redirect("/generateid");
-
+    await studentProfile.save();
+    res.status(200).json({message:"Saved"})
   } catch (err) {
     console.error("Error saving passport:", err);
     res.status(500).send("Internal Server Error");
@@ -341,53 +224,6 @@ app.get("/schoolname", (req, res) => {
   res.json(school);
 });
 
-
-//STUDENT PERFOMANCE API CALL
-app.get("/studentperfomance", isAuthenticated, async (req, res) => {
-  try {
-    let studentClass = req.query.class;
-    let newClass = studentClass.split(" ");
-    let schoolName = req.session.school || "no school";
-    if (newClass[0] == "SS") {
-      result = await SBlog.find({
-        class: new RegExp("^" + req.query.class),
-        section: req.query.section,
-        schoolName: { $regex: schoolName, $options: "i" },
-      });
-    } else if (newClass[0] == "JSS") {
-      result = await Blog.find({
-        class: new RegExp("^" + req.query.class),
-        section: req.query.section,
-        schoolName: { $regex: schoolName, $options: "i" },
-      });
-    } else if (newClass[0] == "BASIC") {
-      result = await PBlog.find({
-        class: new RegExp("^" + req.query.class),
-        section: req.query.section,
-        schoolName: { $regex: schoolName, $options: "i" },
-      });
-    } else if (newClass[0] == "PRE") {
-      result = await nuseryBlog.find({
-        class: req.query.class,
-        section: req.query.section,
-        schoolName: { $regex: schoolName, $options: "i" },
-      });
-    } else if (newClass[0] == "NURSERY") {
-      result = await nuseryBlog.find({
-        class: new RegExp("^" + req.query.class),
-        section: req.query.section,
-        schoolName: { $regex: schoolName, $options: "i" },
-      });
-    }
-    if (result) {
-      res.json(result);
-    } else {
-      return res.status(404).json({ message: "Data not found" });
-    }
-  } catch (err) {
-    console.log(err);
-  }
-});
 //GETING RESULT FROM DATABASE
 app.get("/student-result", async (req, res) => {
   const { studentId, term, sClass } = req.query;
@@ -432,12 +268,13 @@ app.use(dashboardRoute);
 // app.use(newsRouter)
 app.use(apiCallsRoute)
 //app.use(resultGuide)
-// app.use(authRoute)
-// app.use(analysisRoute)
-// app.use(updateRoute)
+ app.use(authRoute)
+app.use(analysisRoute)
+app.use(updateRoute)
 // app.use(payment)
 app.use(adminRoute)
-
+app.use(resultUpload)
+app.use(studentRoute)
 // app.use(checkResultRoute)
 // app.use(staticRoute)
 app.use(exam)
@@ -448,3 +285,10 @@ app.use((req, res) => {
 
 
 
+const passportSchema = new mongoose.Schema({}, { strict: false });
+const Passport = mongoose.model('studentpassport', passportSchema, 'studentpassport');
+
+// Now you can query
+Passport.find().then(docs => {
+  console.log(docs);
+});

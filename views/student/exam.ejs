@@ -1,0 +1,818 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head') %>
+
+<body class="bg-slate-50 text-slate-800">
+
+    <div class="min-h-screen">
+
+        <!-- ==========================================
+             NAVIGATION
+        =========================================== -->
+
+        <%- include('./partials/navigation') %>
+
+
+        <!-- ==========================================
+             MAIN
+        =========================================== -->
+
+        <main class="lg:ml-64">
+
+            <!-- HEADER -->
+
+            <%- include('./partials/header') %>
+
+
+            <!-- ==========================================
+                 CONTENT
+            =========================================== -->
+
+            <section class="mx-auto max-w-[1500px] p-4 sm:p-6 lg:p-8">
+
+
+                <!-- ==========================================
+                     PAGE HEADER
+                =========================================== -->
+
+                <div class="mb-6">
+
+                    <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+
+                        <div>
+
+                            <h1 class="text-xl font-bold text-slate-900 sm:text-2xl">
+                                Examinations
+                            </h1>
+
+                            <p class="mt-1 text-sm text-slate-500">
+                                View your examination schedule, venues and important instructions.
+                            </p>
+
+                        </div>
+
+
+                        <!-- Session / Term -->
+
+                        <div class="flex gap-2">
+
+                            <select
+                                class="rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-xs font-medium text-slate-600 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
+                            >
+
+                                <option>
+                                    2025/2026
+                                </option>
+
+                                <option>
+                                    2024/2025
+                                </option>
+
+                            </select>
+
+
+                            <select
+                                class="rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-xs font-medium text-slate-600 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
+                            >
+
+                                <option>
+                                    Second Term
+                                </option>
+
+                                <option>
+                                    First Term
+                                </option>
+
+                                <option>
+                                    Third Term
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ==========================================
+                     EXAM OVERVIEW CARD
+                =========================================== -->
+
+                <div class="mb-6 overflow-hidden rounded-2xl bg-gradient-to-br from-[#0b2a4a] to-[#17619a] p-6 text-white shadow-sm sm:p-8">
+
+                    <div class="flex flex-col justify-between gap-6 lg:flex-row lg:items-center">
+
+
+                        <!-- Information -->
+
+                        <div>
+
+                            <div class="mb-3 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5">
+
+                                <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
+
+                                <span class="text-[10px] font-medium text-blue-100">
+                                    Examination Scheduled
+                                </span>
+
+                            </div>
+
+
+                            <h2 class="text-xl font-bold sm:text-2xl">
+                                Second Term Examination
+                            </h2>
+
+
+                            <p class="mt-2 max-w-xl text-xs leading-5 text-blue-100 sm:text-sm">
+                                Your second term examination is scheduled to begin
+                                on August 12, 2026. Make sure you arrive at the
+                                examination venue on time.
+                            </p>
+
+
+                            <div class="mt-5 flex flex-wrap gap-x-6 gap-y-3">
+
+                                <div>
+
+                                    <p class="text-[9px] uppercase tracking-wider text-blue-200">
+                                        Start Date
+                                    </p>
+
+                                    <p class="mt-1 text-xs font-semibold">
+                                        August 12, 2026
+                                    </p>
+
+                                </div>
+
+
+                                <div>
+
+                                    <p class="text-[9px] uppercase tracking-wider text-blue-200">
+                                        End Date
+                                    </p>
+
+                                    <p class="mt-1 text-xs font-semibold">
+                                        August 28, 2026
+                                    </p>
+
+                                </div>
+
+
+                                <div>
+
+                                    <p class="text-[9px] uppercase tracking-wider text-blue-200">
+                                        Class
+                                    </p>
+
+                                    <p class="mt-1 text-xs font-semibold">
+                                        SS 2 Gold
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Countdown -->
+
+                        <div class="shrink-0 rounded-2xl bg-white/10 p-5 backdrop-blur-sm lg:min-w-[220px]">
+
+                            <p class="text-center text-[9px] font-medium uppercase tracking-wider text-blue-200">
+                                Examination Begins In
+                            </p>
+
+
+                            <div
+                                id="countdown"
+                                class="mt-3 grid grid-cols-3 gap-2"
+                            >
+
+                                <div class="rounded-lg bg-white/10 p-2 text-center">
+
+                                    <p
+                                        id="days"
+                                        class="text-xl font-bold"
+                                    >
+                                        08
+                                    </p>
+
+                                    <p class="mt-1 text-[8px] text-blue-200">
+                                        Days
+                                    </p>
+
+                                </div>
+
+
+                                <div class="rounded-lg bg-white/10 p-2 text-center">
+
+                                    <p
+                                        id="hours"
+                                        class="text-xl font-bold"
+                                    >
+                                        14
+                                    </p>
+
+                                    <p class="mt-1 text-[8px] text-blue-200">
+                                        Hours
+                                    </p>
+
+                                </div>
+
+
+                                <div class="rounded-lg bg-white/10 p-2 text-center">
+
+                                    <p
+                                        id="minutes"
+                                        class="text-xl font-bold"
+                                    >
+                                        32
+                                    </p>
+
+                                    <p class="mt-1 text-[8px] text-blue-200">
+                                        Minutes
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ==========================================
+                     SUMMARY STATISTICS
+                =========================================== -->
+
+                <div class="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4">
+
+
+                    <!-- Total Exams -->
+
+                    <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
+
+                        <div class="mb-4 flex items-center justify-between">
+
+                            <p class="text-xs font-medium text-slate-500">
+                                Total Exams
+                            </p>
+
+                            <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-50 text-sm font-bold text-blue-600">
+                                #
+                            </div>
+
+                        </div>
+
+                        <p class="text-2xl font-bold text-slate-900">
+                            10
+                        </p>
+
+                        <p class="mt-1 text-[11px] text-slate-400">
+                            This examination period
+                        </p>
+
+                    </div>
+
+
+                    <!-- Upcoming -->
+
+                    <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
+
+                        <div class="mb-4 flex items-center justify-between">
+
+                            <p class="text-xs font-medium text-slate-500">
+                                Upcoming
+                            </p>
+
+                            <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-orange-50 text-sm">
+                                ◷
+                            </div>
+
+                        </div>
+
+                        <p class="text-2xl font-bold text-orange-600">
+                            10
+                        </p>
+
+                        <p class="mt-1 text-[11px] text-slate-400">
+                            Exams remaining
+                        </p>
+
+                    </div>
+
+
+                    <!-- Completed -->
+
+                    <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
+
+                        <div class="mb-4 flex items-center justify-between">
+
+                            <p class="text-xs font-medium text-slate-500">
+                                Completed
+                            </p>
+
+                            <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-50 text-sm font-bold text-emerald-600">
+                                ✓
+                            </div>
+
+                        </div>
+
+                        <p class="text-2xl font-bold text-slate-900">
+                            0
+                        </p>
+
+                        <p class="mt-1 text-[11px] text-slate-400">
+                            Exams completed
+                        </p>
+
+                    </div>
+
+
+                    <!-- Subjects -->
+
+                    <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
+
+                        <div class="mb-4 flex items-center justify-between">
+
+                            <p class="text-xs font-medium text-slate-500">
+                                Subjects
+                            </p>
+
+                            <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-purple-50 text-sm">
+                                📚
+                            </div>
+
+                        </div>
+
+                        <p class="text-2xl font-bold text-slate-900">
+                            10
+                        </p>
+
+                        <p class="mt-1 text-[11px] text-slate-400">
+                            Subjects to write
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+           
+<!-- ==========================================
+     ONLINE EXAMINATION
+=========================================== -->
+
+<div class="mt-6 overflow-hidden rounded-2xl border border-blue-100 bg-white shadow-sm">
+
+    <div class="flex flex-col gap-5 p-5 sm:p-6 lg:flex-row lg:items-center lg:justify-between">
+
+        <!-- Information -->
+
+        <div class="flex items-start gap-4">
+
+            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-xl">
+                📝
+            </div>
+
+            <div>
+
+                <div class="flex flex-wrap items-center gap-2">
+
+                    <h3 class="text-sm font-bold text-slate-900">
+                        Online Examination
+                    </h3>
+
+                    <span class="rounded-full bg-emerald-50 px-2 py-1 text-[9px] font-semibold text-emerald-600">
+                        Available
+                    </span>
+
+                </div>
+
+                <p class="mt-1 max-w-xl text-xs leading-5 text-slate-500">
+                    Your online examination portal is available.
+                    Click the button to access your examination and begin writing.
+                </p>
+
+                <p class="mt-2 text-[10px] text-slate-400">
+                    You will be redirected to the online examination portal.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Button -->
+
+        <div class="shrink-0">
+
+            <a
+                href="/myschool/quiz"
+                class="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#0b2a4a] px-5 py-3 text-xs font-semibold text-white shadow-sm transition hover:bg-[#17619a] sm:w-auto"
+            >
+
+                Start Online Examination
+
+                <span class="text-sm">
+                    →
+                </span>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+                <!-- ==========================================
+                     EXAMINATION INSTRUCTIONS
+                =========================================== -->
+
+                <div class="mt-6 grid gap-6 lg:grid-cols-2">
+
+
+                    <!-- Instructions -->
+
+                    <div class="rounded-xl border border-slate-200 bg-white shadow-sm">
+
+                        <div class="border-b border-slate-100 px-5 py-4">
+
+                            <h2 class="text-sm font-bold text-slate-900">
+                                Examination Instructions
+                            </h2>
+
+                        </div>
+
+
+                        <div class="p-5 sm:p-6">
+
+                            <ul class="space-y-4">
+
+
+                                <li class="flex gap-3">
+
+                                    <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-50 text-[10px] font-bold text-blue-600">
+                                        1
+                                    </span>
+
+                                    <p class="text-xs leading-5 text-slate-500">
+                                        Students must arrive at the examination
+                                        venue at least <strong class="text-slate-700">30 minutes</strong>
+                                        before the examination begins.
+                                    </p>
+
+                                </li>
+
+
+                                <li class="flex gap-3">
+
+                                    <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-50 text-[10px] font-bold text-blue-600">
+                                        2
+                                    </span>
+
+                                    <p class="text-xs leading-5 text-slate-500">
+                                        Students must come with their valid
+                                        <strong class="text-slate-700">student ID card</strong>.
+                                    </p>
+
+                                </li>
+
+
+                                <li class="flex gap-3">
+
+                                    <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-50 text-[10px] font-bold text-blue-600">
+                                        3
+                                    </span>
+
+                                    <p class="text-xs leading-5 text-slate-500">
+                                        Mobile phones and unauthorized electronic
+                                        devices are not permitted inside the
+                                        examination hall.
+                                    </p>
+
+                                </li>
+
+
+                                <li class="flex gap-3">
+
+                                    <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-50 text-[10px] font-bold text-blue-600">
+                                        4
+                                    </span>
+
+                                    <p class="text-xs leading-5 text-slate-500">
+                                        Students should bring their own approved
+                                        writing materials.
+                                    </p>
+
+                                </li>
+
+
+                                <li class="flex gap-3">
+
+                                    <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-50 text-[10px] font-bold text-blue-600">
+                                        5
+                                    </span>
+
+                                    <p class="text-xs leading-5 text-slate-500">
+                                        Follow all instructions given by the
+                                        examination supervisors.
+                                    </p>
+
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Exam Status -->
+
+                    <div class="rounded-xl border border-slate-200 bg-white shadow-sm">
+
+                        <div class="border-b border-slate-100 px-5 py-4">
+
+                            <h2 class="text-sm font-bold text-slate-900">
+                                Examination Information
+                            </h2>
+
+                        </div>
+
+
+                        <div class="divide-y divide-slate-100">
+
+                            <div class="flex items-center justify-between px-5 py-4">
+
+                                <div>
+
+                                    <p class="text-[10px] uppercase tracking-wide text-slate-400">
+                                        Student
+                                    </p>
+
+                                    <p class="mt-1 text-xs font-semibold text-slate-700">
+                                        Christian Okotoaza
+                                    </p>
+
+                                </div>
+
+                                <p class="text-xs text-slate-500">
+                                    MSR/2025/00245
+                                </p>
+
+                            </div>
+
+
+                            <div class="flex items-center justify-between px-5 py-4">
+
+                                <div>
+
+                                    <p class="text-[10px] uppercase tracking-wide text-slate-400">
+                                        Class
+                                    </p>
+
+                                    <p class="mt-1 text-xs font-semibold text-slate-700">
+                                        SS 2 Gold
+                                    </p>
+
+                                </div>
+
+                                <span class="rounded-full bg-blue-50 px-2.5 py-1 text-[9px] font-semibold text-blue-600">
+                                    2025/2026
+                                </span>
+
+                            </div>
+
+
+                            <div class="flex items-center justify-between px-5 py-4">
+
+                                <div>
+
+                                    <p class="text-[10px] uppercase tracking-wide text-slate-400">
+                                        Examination Period
+                                    </p>
+
+                                    <p class="mt-1 text-xs font-semibold text-slate-700">
+                                        Aug 12 – Aug 28
+                                    </p>
+
+                                </div>
+
+                                <span class="rounded-full bg-orange-50 px-2.5 py-1 text-[9px] font-semibold text-orange-600">
+                                    Upcoming
+                                </span>
+
+                            </div>
+
+
+                            <div class="flex items-center justify-between px-5 py-4">
+
+                                <div>
+
+                                    <p class="text-[10px] uppercase tracking-wide text-slate-400">
+                                        Total Subjects
+                                    </p>
+
+                                    <p class="mt-1 text-xs font-semibold text-slate-700">
+                                        10 Subjects
+                                    </p>
+
+                                </div>
+
+                                <span class="text-xs text-slate-400">
+                                    0 Completed
+                                </span>
+
+                            </div>
+
+
+                            <div class="flex items-center justify-between px-5 py-4">
+
+                                <div>
+
+                                    <p class="text-[10px] uppercase tracking-wide text-slate-400">
+                                        Examination Venue
+                                    </p>
+
+                                    <p class="mt-1 text-xs font-semibold text-slate-700">
+                                        Hall A & Hall B
+                                    </p>
+
+                                </div>
+
+                                <span class="text-xs">
+                                    🏫
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ==========================================
+                     NOTICE
+                =========================================== -->
+
+                <div class="mt-6 flex items-start gap-3 rounded-xl border border-amber-100 bg-amber-50 p-4">
+
+                    <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white text-sm">
+                        ⚠️
+                    </div>
+
+                    <div>
+
+                        <p class="text-xs font-semibold text-amber-900">
+                            Important Notice
+                        </p>
+
+                        <p class="mt-1 text-[10px] leading-5 text-amber-700">
+                            Examination dates and times are subject to change.
+                            Please check this page and school announcements regularly
+                            for updates from the school administration.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- ==========================================
+         MOBILE MENU SCRIPT
+    =========================================== -->
+
+    <script>
+
+        const menuButton =
+            document.getElementById("menuButton");
+
+        const mobileMenu =
+            document.getElementById("mobileMenu");
+
+
+        if (menuButton && mobileMenu) {
+
+            menuButton.addEventListener("click", (event) => {
+
+                event.stopPropagation();
+
+                mobileMenu.classList.toggle("hidden");
+
+            });
+
+
+            document.addEventListener("click", (event) => {
+
+                if (
+                    !mobileMenu.contains(event.target) &&
+                    !menuButton.contains(event.target)
+                ) {
+
+                    mobileMenu.classList.add("hidden");
+
+                }
+
+            });
+
+        }
+
+
+        // ==========================================
+        // EXAM COUNTDOWN
+        // ==========================================
+
+        const examDate =
+            new Date("August 12, 2026 09:00:00").getTime();
+
+
+        function updateCountdown() {
+
+            const now = new Date().getTime();
+
+            const difference = examDate - now;
+
+
+            if (difference <= 0) {
+
+                document.getElementById("countdown").innerHTML = `
+                    
+                    <div class="col-span-3 py-2 text-center">
+
+                        <p class="text-sm font-bold">
+                            Examination has started
+                        </p>
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            const days =
+                Math.floor(
+                    difference / (1000 * 60 * 60 * 24)
+                );
+
+
+            const hours =
+                Math.floor(
+                    (difference % (1000 * 60 * 60 * 24)) /
+                    (1000 * 60 * 60)
+                );
+
+
+            const minutes =
+                Math.floor(
+                    (difference % (1000 * 60 * 60)) /
+                    (1000 * 60)
+                );
+
+
+            document.getElementById("days").textContent =
+                String(days).padStart(2, "0");
+
+
+            document.getElementById("hours").textContent =
+                String(hours).padStart(2, "0");
+
+
+            document.getElementById("minutes").textContent =
+                String(minutes).padStart(2, "0");
+
+        }
+
+
+        updateCountdown();
+
+        setInterval(updateCountdown, 60000);
+
+    </script>
+
+</body>
+
+</html>
+

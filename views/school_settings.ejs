@@ -1,126 +1,454 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles/global.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>School Management</title>
+    <title>School Settings</title>
 </head>
+
 <body class="bg-slate-100">
 
-<%- include("./partials/header.ejs") %>
+    <%- include("./partials/header.ejs") %>
 
-<div class="flex">
-    <%- include("./partials/navigation.ejs") %>
+        <div class="flex">
+            <%- include("./partials/navigation.ejs") %>
 
-    <main class="flex-1 p-8">
+                <main class="flex-1 relative p-8">
 
-        <div class="mb-10">
-            <h1 class="text-4xl font-bold text-slate-800">🏫 School Management</h1>
-            <p class="text-slate-500 mt-2">Manage your entire school operations from one place</p>
+                    <div class="mb-10">
+                        <h1 class="text-4xl font-bold text-slate-800">⚙️ School Settings</h1>
+                        <p class="text-slate-500 mt-2">Manage core school configurations</p>
+                    </div>
+
+                    <!-- Tabs -->
+                    <div class="flex border-b mb-8">
+                        <button onclick="switchTab(0)"
+                            class="tab-button active px-8 py-4 font-semibold border-b-4 border-blue-600 text-blue-600">Subjects</button>
+                        <button onclick="switchTab(1)"
+                            class="tab-button px-8 py-4 font-semibold text-gray-600 hover:text-slate-800">Class
+                            Teachers</button>
+                        <button onclick="switchTab(2)"
+                            class="tab-button px-8 py-4 font-semibold text-gray-600 hover:text-slate-800">Academic
+                            Session</button>
+                        <button onclick="switchTab(3)"
+                            class="tab-button px-8 py-4 font-semibold text-gray-600 hover:text-slate-800">Grading
+                            System</button>
+                        <button onclick="switchTab(4)"
+                            class="tab-button px-8 py-4 font-semibold text-gray-600 hover:text-slate-800">Student
+                            Rating</button>
+                    </div>
+
+                    <!-- ==================== SUBJECTS TAB ==================== -->
+                      <%- include('./partials/subjectManagement.ejs') %>
+                    <!-- SUBJECT MANAGEMENT -->
+                  
+                    <!-- ==================== CLASS TEACHERS TAB ==================== -->
+                    <div id="tab-1" class="tab-content hidden">
+                        <%- include('./partials/teacher-management.ejs') %>
+
+                        <!-- ==================== ACADEMIC SESSION TAB ==================== -->
+                        <div id="tab-2" class="tab-content hidden">
+                            <div class="bg-white rounded-3xl shadow-sm p-8">
+                                <div class="flex justify-between items-center mb-8">
+                                    <h2 class="text-2xl font-bold">Academic Session Management</h2>
+                                    <button onclick="addNewSession()"
+                                        class="bg-blue-600 text-white px-6 py-3 rounded-2xl font-semibold hover:bg-blue-700 flex items-center gap-2">
+                                        <span>+</span> New Session
+                                    </button>
+                                </div>
+
+                                <!-- Current Session -->
+                                <div class="border border-blue-200 bg-blue-50 rounded-3xl p-8 mb-10">
+                                    <div class="flex items-center gap-3 mb-4">
+                                        <span
+                                            class="px-4 py-1 bg-blue-600 text-white text-sm font-medium rounded-full">ACTIVE</span>
+                                        <h3 class="text-xl font-semibold">Current Academic Session</h3>
+                                    </div>
+                                    <p class="text-4xl font-bold text-slate-800" id="currentSession">2025-2026</p>
+                                    <p class="text-gray-500 mt-1">Started: January 2025 • Ends: December 2025</p>
+                                </div>
+
+                                <!-- All Sessions -->
+                                <h3 class="text-lg font-semibold mb-5">All Academic Sessions</h3>
+
+                                <div class="space-y-4" id="sessionsList">
+                                    <!-- Populated by JavaScript -->
+                                </div>
+
+                                <!-- Add New Session Modal Form -->
+                                <div id="newSessionForm" class="hidden mt-10 border-t pt-8">
+                                    <h3 class="font-semibold mb-6">Add New Academic Session</h3>
+                                    <div class="grid md:grid-cols-2 gap-6">
+                                        <div>
+                                            <label class="block text-sm font-medium mb-2">Session Name</label>
+                                            <input type="text" id="newSessionName" placeholder="2026-2027"
+                                                class="w-full rounded-2xl border border-gray-300 px-5 py-4">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium mb-2">Start Date</label>
+                                            <input type="date" id="startDate"
+                                                class="w-full rounded-2xl border border-gray-300 px-5 py-4">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium mb-2">End Date</label>
+                                            <input type="date" id="endDate"
+                                                class="w-full rounded-2xl border border-gray-300 px-5 py-4">
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-4 mt-8">
+                                        <button onclick="saveNewSession()"
+                                            class="flex-1 bg-green-600 text-white py-4 rounded-2xl font-semibold">
+                                            Save Session
+                                        </button>
+                                        <button onclick="cancelNewSession()"
+                                            class="flex-1 bg-gray-200 text-gray-700 py-4 rounded-2xl font-semibold">
+                                            Cancel
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ==================== GRADING SYSTEM TAB ==================== -->
+                        <div id="tab-3" class="tab-content hidden">
+                            <div class="bg-white rounded-3xl shadow-sm p-8">
+                                <div class="flex justify-between items-center mb-8">
+                                    <h2 class="text-2xl font-bold">Grading System</h2>
+                                    <button onclick="addNewGrade()"
+                                        class="bg-blue-600 text-white px-6 py-3 rounded-2xl font-semibold hover:bg-blue-700">
+                                        + Add Grade
+                                    </button>
+                                </div>
+
+                                <!-- Grading Scale Table -->
+                                <div class="overflow-x-auto">
+                                    <table class="w-full">
+                                        <thead>
+                                            <tr class="bg-slate-50 border-b">
+                                                <th class="text-left py-5 px-6 font-medium">Grade</th>
+                                                <th class="text-left py-5 px-6 font-medium">Score Range</th>
+                                                <th class="text-left py-5 px-6 font-medium">Remark</th>
+                                                <th class="text-center py-5 px-6 font-medium">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="gradingTable" class="divide-y">
+                                            <!-- Populated by JavaScript -->
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <!-- Grading Settings -->
+                                <div class="mt-12 grid md:grid-cols-2 gap-8">
+                                    <div>
+                                        <h3 class="font-semibold mb-4">Grading Configuration</h3>
+                                        <div class="space-y-6">
+                                            <div>
+                                                <label class="block text-sm font-medium mb-2">Total Marks</label>
+                                                <input type="number" value="100"
+                                                    class="w-full rounded-2xl border border-gray-300 px-5 py-4">
+                                            </div>
+                                            <div>
+                                                <label class="block text-sm font-medium mb-2">Passing Score (%)</label>
+                                                <input type="number" value="50"
+                                                    class="w-full rounded-2xl border border-gray-300 px-5 py-4">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <h3 class="font-semibold mb-4">Grading Type</h3>
+                                        <div class="space-y-3">
+                                            <label class="flex items-center gap-3 cursor-pointer">
+                                                <input type="radio" name="gradingType" checked class="accent-blue-600">
+                                                <span>Percentage Based (A - F)</span>
+                                            </label>
+                                            <label class="flex items-center gap-3 cursor-pointer">
+                                                <input type="radio" name="gradingType" class="accent-blue-600">
+                                                <span>Point Based (4.0 Scale)</span>
+                                            </label>
+                                            <label class="flex items-center gap-3 cursor-pointer">
+                                                <input type="radio" name="gradingType" class="accent-blue-600">
+                                                <span>Custom Grading</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-10 flex justify-end">
+                                    <button onclick="saveGradingSystem()"
+                                        class="bg-green-600 text-white px-10 py-4 rounded-2xl font-semibold hover:bg-green-700">
+                                        Save Grading System
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ==================== STUDENT RATING TAB ==================== -->
+                        <div id="tab-4" class="tab-content hidden">
+                            <div class="bg-white rounded-3xl shadow-sm p-8">
+                                <div class="flex justify-between items-center mb-8">
+                                    <h2 class="text-2xl font-bold">Student Rating & Conduct</h2>
+                                </div>
+
+                                <!-- Class Selector -->
+                                <div class="max-w-md mb-8">
+                                    <label class="block text-sm font-medium mb-2">Select Class</label>
+                                    <select id="ratingClassSelect" onchange="loadStudentsForRating()"
+                                        class="w-full rounded-2xl border border-gray-300 px-5 py-4 text-lg">
+                                        <option value="">-- Select Class --</option>
+                                        <option value="JSS1">JSS1</option>
+                                        <option value="JSS2">JSS2</option>
+                                        <option value="JSS3">JSS3</option>
+                                        <option value="SS1">SS1</option>
+                                        <option value="SS2">SS2</option>
+                                        <option value="SS3">SS3</option>
+                                    </select>
+                                </div>
+
+                                <!-- Students Rating List -->
+                                <div class="max-h-[650px] overflow-y-auto border border-gray-200 rounded-2xl"
+                                    id="ratingStudentsList">
+                                    <!-- Populated dynamically by JavaScript -->
+                                    <p class="text-center text-gray-500 py-20">Please select a class to load students
+                                    </p>
+                                </div>
+
+                                <div class="mt-8 flex justify-end">
+                                    <button onclick="saveAllRatings()"
+                                        class="bg-green-600 text-white px-10 py-4 rounded-2xl font-semibold hover:bg-green-700">
+                                        Save All Ratings
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                </main>
         </div>
 
-        <!-- Quick Stats -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-            <div class="bg-white rounded-3xl p-6 shadow-sm">
-                <p class="text-gray-500">Total Students</p>
-                <p class="text-5xl font-bold text-slate-800 mt-3">1,248</p>
-            </div>
-            <div class="bg-white rounded-3xl p-6 shadow-sm">
-                <p class="text-gray-500">Total Staff</p>
-                <p class="text-5xl font-bold text-slate-800 mt-3">87</p>
-            </div>
-            <div class="bg-white rounded-3xl p-6 shadow-sm">
-                <p class="text-gray-500">Classes</p>
-                <p class="text-5xl font-bold text-slate-800 mt-3">48</p>
-            </div>
-            <div class="bg-white rounded-3xl p-6 shadow-sm">
-                <p class="text-gray-500">Active Exams</p>
-                <p class="text-5xl font-bold text-blue-600 mt-3">6</p>
-            </div>
-        </div>
+        <script>
+            // Tab Switching
+            function switchTab(n) {
+                document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
+                document.getElementById(`tab-${n}`).classList.remove('hidden');
 
-        <!-- Management Sections -->
-        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active', 'border-b-4', 'border-blue-600', 'text-blue-600'));
+                document.querySelectorAll('.tab-button')[n].classList.add('active', 'border-b-4', 'border-blue-600', 'text-blue-600');
+            }
 
-            <!-- Students -->
-            <a href="/admin/students" class="group">
-                <div class="bg-white rounded-3xl p-8 hover:shadow-xl transition-all hover:-translate-y-1">
-                    <div class="text-5xl mb-6">👨‍🎓</div>
-                    <h3 class="text-2xl font-bold mb-2">Student Management</h3>
-                    <p class="text-gray-600">Register, view, edit and manage all students</p>
+            // Initialize
+
+            switchTab(0);
+        </script>
+        <script>
+            let gradingSystem = [
+                { grade: "A", min: 80, max: 100, remark: "Excellent" },
+                { grade: "B", min: 70, max: 79, remark: "Very Good" },
+                { grade: "C", min: 60, max: 69, remark: "Good" },
+                { grade: "D", min: 50, max: 59, remark: "Pass" },
+                { grade: "F", min: 0, max: 49, remark: "Fail" },
+            ];
+
+            function renderGradingTable() {
+                const tbody = document.getElementById("gradingTable");
+                tbody.innerHTML = "";
+
+                gradingSystem.forEach((item, index) => {
+                    const row = document.createElement("tr");
+                    row.className = "hover:bg-slate-50 transition";
+                    row.innerHTML = `
+                <td class="py-6 px-6 font-bold text-lg">${item.grade}</td>
+                <td class="py-6 px-6">${item.min} - ${item.max}</td>
+                <td class="py-6 px-6">${item.remark}</td>
+                <td class="py-6 px-6 text-center">
+                    <button onclick="deleteGrade(${index})" 
+                            class="text-red-500 hover:text-red-700 text-xl">×</button>
+                </td>
+            `;
+                    tbody.appendChild(row);
+                });
+            }
+
+            function addNewGrade() {
+                const grade = prompt("Enter Grade (e.g., A+):");
+                if (!grade) return;
+
+                const min = parseInt(prompt("Minimum Score:"));
+                const max = parseInt(prompt("Maximum Score:"));
+                const remark = prompt("Remark (e.g., Excellent):");
+
+                if (min !== null && max !== null) {
+                    gradingSystem.unshift({ grade, min, max, remark });
+                    renderGradingTable();
+                }
+            }
+
+            function deleteGrade(index) {
+                if (confirm("Delete this grade?")) {
+                    gradingSystem.splice(index, 1);
+                    renderGradingTable();
+                }
+            }
+
+            function saveGradingSystem() {
+                alert("✅ Grading System saved successfully!");
+            }
+
+            // Initialize when tab is shown
+            function initGradingTab() {
+                renderGradingTable();
+            }
+        </script>
+        <script>
+            let sessions = [
+                { name: "2025-2026", start: "2025-01-10", end: "2025-12-20", active: true },
+                { name: "2024-2025", start: "2024-01-08", end: "2024-12-15", active: false },
+                { name: "2023-2024", start: "2023-01-09", end: "2023-12-18", active: false },
+            ];
+
+            function renderSessions() {
+                const container = document.getElementById("sessionsList");
+                container.innerHTML = "";
+
+                sessions.forEach((session, index) => {
+                    const div = document.createElement("div");
+                    div.className = `flex items-center justify-between p-6 rounded-2xl border ${session.active ? 'border-blue-500 bg-blue-50' : 'border-gray-200'}`;
+                    div.innerHTML = `
+                <div>
+                    <p class="font-semibold text-lg">${session.name}</p>
+                    <p class="text-sm text-gray-500">${session.start} — ${session.end}</p>
                 </div>
-            </a>
-
-            <!-- Staff -->
-            <a href="/admin/staff" class="group">
-                <div class="bg-white rounded-3xl p-8 hover:shadow-xl transition-all hover:-translate-y-1">
-                    <div class="text-5xl mb-6">👔</div>
-                    <h3 class="text-2xl font-bold mb-2">Staff Management</h3>
-                    <p class="text-gray-600">Manage teachers and non-teaching staff</p>
+                <div class="text-right">
+                    ${session.active ?
+                            '<span class="px-5 py-2 bg-blue-600 text-white text-sm rounded-full">Active</span>' :
+                            `<button onclick="activateSession(${index})" class="text-blue-600 hover:underline text-sm">Make Active</button>`}
                 </div>
-            </a>
+            `;
+                    container.appendChild(div);
+                });
+            }
 
-            <!-- Classes -->
-            <a href="/admin/classes" class="group">
-                <div class="bg-white rounded-3xl p-8 hover:shadow-xl transition-all hover:-translate-y-1">
-                    <div class="text-5xl mb-6">🏫</div>
-                    <h3 class="text-2xl font-bold mb-2">Class Management</h3>
-                    <p class="text-gray-600">Create and manage classes & sections</p>
+            function addNewSession() {
+                document.getElementById("newSessionForm").classList.remove("hidden");
+            }
+
+            function cancelNewSession() {
+                document.getElementById("newSessionForm").classList.add("hidden");
+            }
+
+            function saveNewSession() {
+                const name = document.getElementById("newSessionName").value;
+                if (name) {
+                    sessions.unshift({
+                        name: name,
+                        start: document.getElementById("startDate").value || "2026-01-01",
+                        end: document.getElementById("endDate").value || "2026-12-31",
+                        active: false
+                    });
+                    renderSessions();
+                    cancelNewSession();
+                    alert("New academic session added successfully!");
+                }
+            }
+
+            function activateSession(index) {
+                sessions.forEach(s => s.active = false);
+                sessions[index].active = true;
+                document.getElementById("currentSession").innerText = sessions[index].name;
+                renderSessions();
+            }
+
+            // Initialize
+            renderSessions();
+        </script>
+        <script>
+            let studentsForRating = [];
+
+            const mockStudents = {
+                "JSS2": [
+                    { id: 1, name: "Adebayo Samuel", admissionNo: "JSS2/015", rating: "Good", comment: "" },
+                    { id: 2, name: "Chinonso Okoro", admissionNo: "JSS2/016", rating: "Excellent", comment: "" },
+                    { id: 3, name: "Fatima Yusuf", admissionNo: "JSS2/017", rating: "Fair", comment: "" },
+                    { id: 4, name: "David Okafor", admissionNo: "JSS2/018", rating: "Good", comment: "" },
+                ]
+            };
+
+            function loadStudentsForRating() {
+                const selectedClass = document.getElementById("ratingClassSelect").value;
+                const container = document.getElementById("ratingStudentsList");
+
+                if (!selectedClass) {
+                    container.innerHTML = `<p class="text-center text-gray-500 py-20">Please select a class to load students</p>`;
+                    return;
+                }
+
+                studentsForRating = mockStudents[selectedClass] || [];
+
+                let html = `<h3 class="font-semibold px-6 py-5 bg-slate-50 border-b">${selectedClass} Students</h3>`;
+
+                studentsForRating.forEach(student => {
+                    html += `
+                <div class="p-6 border-b last:border-none hover:bg-slate-50 transition">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="font-medium">${student.name}</p>
+                            <p class="text-sm text-gray-500">${student.admissionNo}</p>
+                        </div>
+
+                        <div class="flex items-center gap-6">
+                            <!-- Rating Select -->
+                            <select onchange="updateStudentRating(${student.id}, this.value)" 
+                                    class="rounded-2xl border border-gray-300 px-5 py-3 text-sm font-medium">
+                                <option value="Excellent" ${student.rating === 'Excellent' ? 'selected' : ''}>Excellent</option>
+                                <option value="Very Good" ${student.rating === 'Very Good' ? 'selected' : ''}>Very Good</option>
+                                <option value="Good" ${student.rating === 'Good' ? 'selected' : ''}>Good</option>
+                                <option value="Fair" ${student.rating === 'Fair' ? 'selected' : ''}>Fair</option>
+                                <option value="Poor" ${student.rating === 'Poor' ? 'selected' : ''}>Poor</option>
+                            </select>
+
+                            <!-- Comment -->
+                            <input type="text" value="${student.comment}" 
+                                   placeholder="Add comment..."
+                                   onchange="updateStudentComment(${student.id}, this.value)"
+                                   class="w-80 rounded-2xl border border-gray-300 px-5 py-3 text-sm focus:ring-2 focus:ring-blue-500">
+                        </div>
+                    </div>
                 </div>
-            </a>
+            `;
+                });
 
-            <!-- Subjects -->
-            <a href="/admin/subjects" class="group">
-                <div class="bg-white rounded-3xl p-8 hover:shadow-xl transition-all hover:-translate-y-1">
-                    <div class="text-5xl mb-6">📚</div>
-                    <h3 class="text-2xl font-bold mb-2">Subject Management</h3>
-                    <p class="text-gray-600">Manage subjects and assign to classes</p>
-                </div>
-            </a>
+                container.innerHTML = html;
+            }
 
-            <!-- Examinations -->
-            <a href="/teacher/set-exam" class="group">
-                <div class="bg-white rounded-3xl p-8 hover:shadow-xl transition-all hover:-translate-y-1">
-                    <div class="text-5xl mb-6">📝</div>
-                    <h3 class="text-2xl font-bold mb-2">Examination Management</h3>
-                    <p class="text-gray-600">Create exams, upload questions & generate codes</p>
-                </div>
-            </a>
+            function updateStudentRating(id, rating) {
+                const student = studentsForRating.find(s => s.id === id);
+                if (student) student.rating = rating;
+            }
 
-            <!-- Attendance -->
-            <a href="/attendance" class="group">
-                <div class="bg-white rounded-3xl p-8 hover:shadow-xl transition-all hover:-translate-y-1">
-                    <div class="text-5xl mb-6">📅</div>
-                    <h3 class="text-2xl font-bold mb-2">Attendance Management</h3>
-                    <p class="text-gray-600">Mark and track daily attendance</p>
-                </div>
-            </a>
+            function updateStudentComment(id, comment) {
+                const student = studentsForRating.find(s => s.id === id);
+                if (student) student.comment = comment;
+            }
 
-            <!-- Results -->
-            <a href="/admin/results" class="group">
-                <div class="bg-white rounded-3xl p-8 hover:shadow-xl transition-all hover:-translate-y-1">
-                    <div class="text-5xl mb-6">📊</div>
-                    <h3 class="text-2xl font-bold mb-2">Result Management</h3>
-                    <p class="text-gray-600">Manage and publish academic results</p>
-                </div>
-            </a>
+            function saveAllRatings() {
+                if (studentsForRating.length === 0) {
+                    alert("No students loaded. Please select a class.");
+                    return;
+                }
+                alert("✅ All student ratings and comments have been saved successfully!");
+            }
 
-            <!-- Settings -->
-            <a href="/admin/settings" class="group">
-                <div class="bg-white rounded-3xl p-8 hover:shadow-xl transition-all hover:-translate-y-1">
-                    <div class="text-5xl mb-6">⚙️</div>
-                    <h3 class="text-2xl font-bold mb-2">School Settings</h3>
-                    <p class="text-gray-600">General school configuration</p>
-                </div>
-            </a>
+            // Initialize when tab is opened
+            function initRatingTab() {
+                // Optional: auto-load a default class
+                // document.getElementById("ratingClassSelect").value = "JSS2";
+                // loadStudentsForRating();
+            }
+        </script>
+      
 
-        </div>
-
-    </main>
-</div>
-
-<script src="/js/menu.js"></script>
 </body>
+
 </html>

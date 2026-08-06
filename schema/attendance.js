@@ -1,25 +1,28 @@
 const mongoose = require("mongoose");
 
 const attendanceSchema = new mongoose.Schema({
+    schoolName: {
+        type: String,
+        required: true
+    },
 
-    shcoolName: {
-        type:String,
-        required: true
-    },
-    class: {
+    studentClass: {
         type: String,
         required: true
     },
-    subject: {
-        type: String,
-       
-    },
+
     term: {
         type: String,
         required: true
     },
+
     session: {
         type: String,
+        required: true
+    },
+
+    date: {
+        type: Date,
         required: true
     },
 
@@ -27,7 +30,7 @@ const attendanceSchema = new mongoose.Schema({
         type: Map,
         of: {
             type: String,
-            enum: ["Present", "Absent", "Late", "Excused"]
+            enum: ["present", "absent", "late", "excused"]
         },
         default: {}
     }
@@ -35,5 +38,16 @@ const attendanceSchema = new mongoose.Schema({
 }, {
     timestamps: true
 });
+
+attendanceSchema.index(
+    {
+        schoolName: 1,
+        class: 1,
+        term: 1,
+        session: 1,
+        date: 1
+    },
+    { unique: true }
+);
 
 module.exports = mongoose.model("Attendance", attendanceSchema);

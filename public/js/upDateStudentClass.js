@@ -2,8 +2,6 @@ let studentClass = document.getElementById('promotedto');
 
 studentClass.onchange = async ()=>{
     let studentId = document.getElementById('studentId').value;
-    console.log(studentId)
-    console.log(studentClass.value)
     let student = {
         studentId:studentId,
         studentClass: studentClass.value

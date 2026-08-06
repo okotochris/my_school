@@ -24,7 +24,7 @@ function hideLoading() {
 // Function to populate fields with selected student data
 function populateStudent(data) {
     studentId.value = data.studentId;
-    user.value = data.userName.toUpperCase();
+    user.value = data.fullname.toUpperCase();
     Sclass.value = data.class;
 }
 
@@ -47,7 +47,7 @@ function showResultsList(data) {
                     ${data.map((stu, index) => `
                         <li class="result-item" onclick="selectStudent(${index})" tabindex="0" onkeydown="if(event.key==='Enter') selectStudent(${index})">
                             <div class="student-info">
-                                <div class="student-name">${stu.userName}</div>
+                                <div class="student-name">${stu.fullname}</div>
                                 <div class="student-id">ID: ${stu.studentId}</div>
                             </div>
                             <div class="student-class">Class: ${stu.class}</div>
@@ -279,9 +279,11 @@ const student = async () => {
                 showResultsList(userData);
             }
         }
+        return
     } catch (err) {
-        hideLoading();
-        console.error(`${err} Unable to retrieve data`);
+        console.log(err);
         alert('Error fetching student data. Please try again.');
+    }finally{
+         hideLoading();
     }
 };

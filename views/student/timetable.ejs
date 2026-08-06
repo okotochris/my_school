@@ -1,0 +1,1304 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head') %>
+
+<body class="bg-slate-50 text-slate-800">
+
+    <div class="min-h-screen">
+
+        <!-- ==========================================
+             NAVIGATION
+        =========================================== -->
+
+        <%- include('./partials/navigation') %>
+
+
+        <!-- ==========================================
+             MAIN
+        =========================================== -->
+
+        <main class="lg:ml-64">
+
+            <!-- HEADER -->
+
+            <%- include('./partials/header') %>
+
+
+            <!-- ==========================================
+                 CONTENT
+            =========================================== -->
+
+            <section class="mx-auto max-w-[1500px] p-4 sm:p-6 lg:p-8">
+
+
+                <!-- ==========================================
+                     PAGE HEADER
+                =========================================== -->
+
+                <div class="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+
+                    <div>
+
+                        <h1 class="text-xl font-bold text-slate-900 sm:text-2xl">
+                            Class Timetable
+                        </h1>
+
+                        <p class="mt-1 text-sm text-slate-500">
+                            View your weekly class schedule.
+                        </p>
+
+                    </div>
+
+
+                    <!-- Current term -->
+
+                    <div class="flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 shadow-sm">
+
+                        <span class="text-sm">
+                            📅
+                        </span>
+
+                        <div>
+
+                            <p class="text-[10px] font-medium uppercase tracking-wide text-slate-400">
+                                Academic Session
+                            </p>
+
+                            <p class="text-xs font-semibold text-slate-700">
+                                2025/2026 • Second Term
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ==========================================
+                     CLASS INFORMATION
+                =========================================== -->
+
+                <div class="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+
+
+                    <!-- Class -->
+
+                    <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+
+                        <p class="text-[10px] font-semibold uppercase tracking-wide text-slate-400">
+                            Class
+                        </p>
+
+                        <p class="mt-1 text-sm font-bold text-slate-800">
+                            SS 2 Gold
+                        </p>
+
+                    </div>
+
+
+                    <!-- Class Teacher -->
+
+                    <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+
+                        <p class="text-[10px] font-semibold uppercase tracking-wide text-slate-400">
+                            Class Teacher
+                        </p>
+
+                        <p class="mt-1 text-sm font-bold text-slate-800">
+                            Mrs. Grace Williams
+                        </p>
+
+                    </div>
+
+
+                    <!-- School Days -->
+
+                    <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+
+                        <p class="text-[10px] font-semibold uppercase tracking-wide text-slate-400">
+                            School Days
+                        </p>
+
+                        <p class="mt-1 text-sm font-bold text-slate-800">
+                            Monday – Friday
+                        </p>
+
+                    </div>
+
+
+                    <!-- Periods -->
+
+                    <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+
+                        <p class="text-[10px] font-semibold uppercase tracking-wide text-slate-400">
+                            Daily Periods
+                        </p>
+
+                        <p class="mt-1 text-sm font-bold text-slate-800">
+                            8 Periods
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ==========================================
+                     TIMETABLE CARD
+                =========================================== -->
+
+                <div class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+
+
+                    <!-- Card Header -->
+
+                    <div class="flex flex-col gap-3 border-b border-slate-100 px-5 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+
+                        <div>
+
+                            <h2 class="text-sm font-bold text-slate-900">
+                                Weekly Timetable
+                            </h2>
+
+                            <p class="mt-1 text-xs text-slate-500">
+                                SS 2 Gold — Second Term
+                            </p>
+
+                        </div>
+
+
+                        <!-- Print button -->
+
+                        <button
+                            onclick="window.print()"
+                            class="inline-flex w-fit items-center gap-2 rounded-lg bg-[#0b2a4a] px-3 py-2 text-xs font-semibold text-white transition hover:bg-[#17619a]"
+                        >
+                            🖨️
+                            Print Timetable
+                        </button>
+
+                    </div>
+
+
+                    <!-- ======================================
+                         TABLE
+                    ======================================= -->
+
+                    <div class="overflow-x-auto">
+
+                        <table class="w-full min-w-[1000px] border-collapse">
+
+
+                            <!-- TABLE HEADER -->
+
+                            <thead>
+
+                                <tr class="bg-slate-50">
+
+                                    <th class="w-28 border-b border-r border-slate-200 px-4 py-4 text-left text-[10px] font-bold uppercase tracking-wide text-slate-500">
+                                        Time
+                                    </th>
+
+                                    <th class="border-b border-r border-slate-200 px-4 py-4 text-left text-[10px] font-bold uppercase tracking-wide text-slate-500">
+                                        Monday
+                                    </th>
+
+                                    <th class="border-b border-r border-slate-200 px-4 py-4 text-left text-[10px] font-bold uppercase tracking-wide text-slate-500">
+                                        Tuesday
+                                    </th>
+
+                                    <th class="border-b border-r border-slate-200 px-4 py-4 text-left text-[10px] font-bold uppercase tracking-wide text-slate-500">
+                                        Wednesday
+                                    </th>
+
+                                    <th class="border-b border-r border-slate-200 px-4 py-4 text-left text-[10px] font-bold uppercase tracking-wide text-slate-500">
+                                        Thursday
+                                    </th>
+
+                                    <th class="border-b border-slate-200 px-4 py-4 text-left text-[10px] font-bold uppercase tracking-wide text-slate-500">
+                                        Friday
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <!-- TABLE BODY -->
+
+                            <tbody>
+
+
+                                <!-- ==================================
+                                     PERIOD 1
+                                =================================== -->
+
+                                <tr>
+
+                                    <td class="border-b border-r border-slate-200 bg-slate-50 px-4 py-4 align-top">
+
+                                        <p class="text-xs font-bold text-slate-700">
+                                            8:00 – 8:45
+                                        </p>
+
+                                        <p class="mt-1 text-[10px] text-slate-400">
+                                            Period 1
+                                        </p>
+
+                                    </td>
+
+
+                                    <!-- Monday -->
+
+                                    <td class="border-b border-r border-slate-200 p-3 align-top">
+
+                                        <div class="rounded-lg bg-blue-50 p-3">
+
+                                            <p class="text-xs font-bold text-blue-800">
+                                                Mathematics
+                                            </p>
+
+                                            <p class="mt-1 text-[10px] text-blue-600">
+                                                Mr. Johnson
+                                            </p>
+
+                                            <span class="mt-2 inline-block rounded bg-white px-2 py-1 text-[9px] text-slate-500">
+                                                Room 4
+                                            </span>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <!-- Tuesday -->
+
+                                    <td class="border-b border-r border-slate-200 p-3 align-top">
+
+                                        <div class="rounded-lg bg-purple-50 p-3">
+
+                                            <p class="text-xs font-bold text-purple-800">
+                                                Physics
+                                            </p>
+
+                                            <p class="mt-1 text-[10px] text-purple-600">
+                                                Mr. David
+                                            </p>
+
+                                            <span class="mt-2 inline-block rounded bg-white px-2 py-1 text-[9px] text-slate-500">
+                                                Lab 1
+                                            </span>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <!-- Wednesday -->
+
+                                    <td class="border-b border-r border-slate-200 p-3 align-top">
+
+                                        <div class="rounded-lg bg-emerald-50 p-3">
+
+                                            <p class="text-xs font-bold text-emerald-800">
+                                                English Language
+                                            </p>
+
+                                            <p class="mt-1 text-[10px] text-emerald-600">
+                                                Mrs. Grace
+                                            </p>
+
+                                            <span class="mt-2 inline-block rounded bg-white px-2 py-1 text-[9px] text-slate-500">
+                                                Room 4
+                                            </span>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <!-- Thursday -->
+
+                                    <td class="border-b border-r border-slate-200 p-3 align-top">
+
+                                        <div class="rounded-lg bg-orange-50 p-3">
+
+                                            <p class="text-xs font-bold text-orange-800">
+                                                Chemistry
+                                            </p>
+
+                                            <p class="mt-1 text-[10px] text-orange-600">
+                                                Mrs. Esther
+                                            </p>
+
+                                            <span class="mt-2 inline-block rounded bg-white px-2 py-1 text-[9px] text-slate-500">
+                                                Lab 2
+                                            </span>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <!-- Friday -->
+
+                                    <td class="border-b border-slate-200 p-3 align-top">
+
+                                        <div class="rounded-lg bg-pink-50 p-3">
+
+                                            <p class="text-xs font-bold text-pink-800">
+                                                Biology
+                                            </p>
+
+                                            <p class="mt-1 text-[10px] text-pink-600">
+                                                Mrs. Mercy
+                                            </p>
+
+                                            <span class="mt-2 inline-block rounded bg-white px-2 py-1 text-[9px] text-slate-500">
+                                                Lab 3
+                                            </span>
+
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+
+                                <!-- ==================================
+                                     PERIOD 2
+                                =================================== -->
+
+                                <tr>
+
+                                    <td class="border-b border-r border-slate-200 bg-slate-50 px-4 py-4 align-top">
+
+                                        <p class="text-xs font-bold text-slate-700">
+                                            8:45 – 9:30
+                                        </p>
+
+                                        <p class="mt-1 text-[10px] text-slate-400">
+                                            Period 2
+                                        </p>
+
+                                    </td>
+
+
+                                    <td class="border-b border-r border-slate-200 p-3 align-top">
+
+                                        <div class="rounded-lg bg-purple-50 p-3">
+
+                                            <p class="text-xs font-bold text-purple-800">
+                                                Physics
+                                            </p>
+
+                                            <p class="mt-1 text-[10px] text-purple-600">
+                                                Mr. David
+                                            </p>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td class="border-b border-r border-slate-200 p-3 align-top">
+
+                                        <div class="rounded-lg bg-blue-50 p-3">
+
+                                            <p class="text-xs font-bold text-blue-800">
+                                                Mathematics
+                                            </p>
+
+                                            <p class="mt-1 text-[10px] text-blue-600">
+                                                Mr. Johnson
+                                            </p>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td class="border-b border-r border-slate-200 p-3 align-top">
+
+                                        <div class="rounded-lg bg-orange-50 p-3">
+
+                                            <p class="text-xs font-bold text-orange-800">
+                                                Chemistry
+                                            </p>
+
+                                            <p class="mt-1 text-[10px] text-orange-600">
+                                                Mrs. Esther
+                                            </p>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td class="border-b border-r border-slate-200 p-3 align-top">
+
+                                        <div class="rounded-lg bg-emerald-50 p-3">
+
+                                            <p class="text-xs font-bold text-emerald-800">
+                                                English Language
+                                            </p>
+
+                                            <p class="mt-1 text-[10px] text-emerald-600">
+                                                Mrs. Grace
+                                            </p>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td class="border-b border-slate-200 p-3 align-top">
+
+                                        <div class="rounded-lg bg-blue-50 p-3">
+
+                                            <p class="text-xs font-bold text-blue-800">
+                                                Mathematics
+                                            </p>
+
+                                            <p class="mt-1 text-[10px] text-blue-600">
+                                                Mr. Johnson
+                                            </p>
+
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+
+                                <!-- ==================================
+                                     BREAK
+                                =================================== -->
+
+                                <tr>
+
+                                    <td
+                                        colspan="6"
+                                        class="border-b border-slate-200 bg-amber-50 px-4 py-3 text-center"
+                                    >
+
+                                        <span class="text-[10px] font-bold uppercase tracking-wider text-amber-700">
+                                            ☕ Short Break • 9:30 – 10:00
+                                        </span>
+
+                                    </td>
+
+                                </tr>
+
+
+                                <!-- ==================================
+                                     PERIOD 3
+                                =================================== -->
+
+                                <tr>
+
+                                    <td class="border-b border-r border-slate-200 bg-slate-50 px-4 py-4 align-top">
+
+                                        <p class="text-xs font-bold text-slate-700">
+                                            10:00 – 10:45
+                                        </p>
+
+                                        <p class="mt-1 text-[10px] text-slate-400">
+                                            Period 3
+                                        </p>
+
+                                    </td>
+
+
+                                    <td class="border-b border-r border-slate-200 p-3 align-top">
+
+                                        <div class="rounded-lg bg-emerald-50 p-3">
+
+                                            <p class="text-xs font-bold text-emerald-800">
+                                                Biology
+                                            </p>
+
+                                            <p class="mt-1 text-[10px] text-emerald-600">
+                                                Mrs. Mercy
+                                            </p>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td class="border-b border-r border-slate-200 p-3 align-top">
+
+                                        <div class="rounded-lg bg-orange-50 p-3">
+
+                                            <p class="text-xs font-bold text-orange-800">
+                                                Chemistry
+                                            </p>
+
+                                            <p class="mt-1 text-[10px] text-orange-600">
+                                                Mrs. Esther
+                                            </p>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td class="border-b border-r border-slate-200 p-3 align-top">
+
+                                        <div class="rounded-lg bg-blue-50 p-3">
+
+                                            <p class="text-xs font-bold text-blue-800">
+                                                Mathematics
+                                            </p>
+
+                                            <p class="mt-1 text-[10px] text-blue-600">
+                                                Mr. Johnson
+                                            </p>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td class="border-b border-r border-slate-200 p-3 align-top">
+
+                                        <div class="rounded-lg bg-pink-50 p-3">
+
+                                            <p class="text-xs font-bold text-pink-800">
+                                                Biology
+                                            </p>
+
+                                            <p class="mt-1 text-[10px] text-pink-600">
+                                                Mrs. Mercy
+                                            </p>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td class="border-b border-slate-200 p-3 align-top">
+
+                                        <div class="rounded-lg bg-purple-50 p-3">
+
+                                            <p class="text-xs font-bold text-purple-800">
+                                                Physics
+                                            </p>
+
+                                            <p class="mt-1 text-[10px] text-purple-600">
+                                                Mr. David
+                                            </p>
+
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+
+                                <!-- ==================================
+                                     PERIOD 4
+                                =================================== -->
+
+                                <tr>
+
+                                    <td class="border-b border-r border-slate-200 bg-slate-50 px-4 py-4 align-top">
+
+                                        <p class="text-xs font-bold text-slate-700">
+                                            10:45 – 11:30
+                                        </p>
+
+                                        <p class="mt-1 text-[10px] text-slate-400">
+                                            Period 4
+                                        </p>
+
+                                    </td>
+
+
+                                    <td class="border-b border-r border-slate-200 p-3 align-top">
+
+                                        <div class="rounded-lg bg-pink-50 p-3">
+
+                                            <p class="text-xs font-bold text-pink-800">
+                                                Biology
+                                            </p>
+
+                                            <p class="mt-1 text-[10px] text-pink-600">
+                                                Mrs. Mercy
+                                            </p>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td class="border-b border-r border-slate-200 p-3 align-top">
+
+                                        <div class="rounded-lg bg-emerald-50 p-3">
+
+                                            <p class="text-xs font-bold text-emerald-800">
+                                                English Language
+                                            </p>
+
+                                            <p class="mt-1 text-[10px] text-emerald-600">
+                                                Mrs. Grace
+                                            </p>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td class="border-b border-r border-slate-200 p-3 align-top">
+
+                                        <div class="rounded-lg bg-purple-50 p-3">
+
+                                            <p class="text-xs font-bold text-purple-800">
+                                                Physics
+                                            </p>
+
+                                            <p class="mt-1 text-[10px] text-purple-600">
+                                                Mr. David
+                                            </p>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td class="border-b border-r border-slate-200 p-3 align-top">
+
+                                        <div class="rounded-lg bg-blue-50 p-3">
+
+                                            <p class="text-xs font-bold text-blue-800">
+                                                Mathematics
+                                            </p>
+
+                                            <p class="mt-1 text-[10px] text-blue-600">
+                                                Mr. Johnson
+                                            </p>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td class="border-b border-slate-200 p-3 align-top">
+
+                                        <div class="rounded-lg bg-orange-50 p-3">
+
+                                            <p class="text-xs font-bold text-orange-800">
+                                                Chemistry
+                                            </p>
+
+                                            <p class="mt-1 text-[10px] text-orange-600">
+                                                Mrs. Esther
+                                            </p>
+
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+
+                                <!-- ==================================
+                                     LUNCH
+                                =================================== -->
+
+                                <tr>
+
+                                    <td
+                                        colspan="6"
+                                        class="border-b border-slate-200 bg-slate-100 px-4 py-3 text-center"
+                                    >
+
+                                        <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500">
+                                            🍽️ Lunch Break • 11:30 – 12:00
+                                        </span>
+
+                                    </td>
+
+                                </tr>
+
+
+                                <!-- ==================================
+                                     PERIOD 5
+                                =================================== -->
+
+                                <tr>
+
+                                    <td class="border-b border-r border-slate-200 bg-slate-50 px-4 py-4 align-top">
+
+                                        <p class="text-xs font-bold text-slate-700">
+                                            12:00 – 12:45
+                                        </p>
+
+                                        <p class="mt-1 text-[10px] text-slate-400">
+                                            Period 5
+                                        </p>
+
+                                    </td>
+
+
+                                    <td class="border-b border-r border-slate-200 p-3 align-top">
+
+                                        <div class="rounded-lg bg-orange-50 p-3">
+
+                                            <p class="text-xs font-bold text-orange-800">
+                                                Chemistry
+                                            </p>
+
+                                            <p class="mt-1 text-[10px] text-orange-600">
+                                                Mrs. Esther
+                                            </p>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td class="border-b border-r border-slate-200 p-3 align-top">
+
+                                        <div class="rounded-lg bg-pink-50 p-3">
+
+                                            <p class="text-xs font-bold text-pink-800">
+                                                Biology
+                                            </p>
+
+                                            <p class="mt-1 text-[10px] text-pink-600">
+                                                Mrs. Mercy
+                                            </p>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td class="border-b border-r border-slate-200 p-3 align-top">
+
+                                        <div class="rounded-lg bg-emerald-50 p-3">
+
+                                            <p class="text-xs font-bold text-emerald-800">
+                                                English Language
+                                            </p>
+
+                                            <p class="mt-1 text-[10px] text-emerald-600">
+                                                Mrs. Grace
+                                            </p>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td class="border-b border-r border-slate-200 p-3 align-top">
+
+                                        <div class="rounded-lg bg-purple-50 p-3">
+
+                                            <p class="text-xs font-bold text-purple-800">
+                                                Physics
+                                            </p>
+
+                                            <p class="mt-1 text-[10px] text-purple-600">
+                                                Mr. David
+                                            </p>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td class="border-b border-slate-200 p-3 align-top">
+
+                                        <div class="rounded-lg bg-emerald-50 p-3">
+
+                                            <p class="text-xs font-bold text-emerald-800">
+                                                English Language
+                                            </p>
+
+                                            <p class="mt-1 text-[10px] text-emerald-600">
+                                                Mrs. Grace
+                                            </p>
+
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+
+                                <!-- ==================================
+                                     PERIOD 6
+                                =================================== -->
+
+                                <tr>
+
+                                    <td class="border-b border-r border-slate-200 bg-slate-50 px-4 py-4 align-top">
+
+                                        <p class="text-xs font-bold text-slate-700">
+                                            12:45 – 1:30
+                                        </p>
+
+                                        <p class="mt-1 text-[10px] text-slate-400">
+                                            Period 6
+                                        </p>
+
+                                    </td>
+
+
+                                    <td class="border-b border-r border-slate-200 p-3 align-top">
+
+                                        <div class="rounded-lg bg-blue-50 p-3">
+
+                                            <p class="text-xs font-bold text-blue-800">
+                                                Mathematics
+                                            </p>
+
+                                            <p class="mt-1 text-[10px] text-blue-600">
+                                                Mr. Johnson
+                                            </p>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td class="border-b border-r border-slate-200 p-3 align-top">
+
+                                        <div class="rounded-lg bg-purple-50 p-3">
+
+                                            <p class="text-xs font-bold text-purple-800">
+                                                Physics
+                                            </p>
+
+                                            <p class="mt-1 text-[10px] text-purple-600">
+                                                Mr. David
+                                            </p>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td class="border-b border-r border-slate-200 p-3 align-top">
+
+                                        <div class="rounded-lg bg-orange-50 p-3">
+
+                                            <p class="text-xs font-bold text-orange-800">
+                                                Chemistry
+                                            </p>
+
+                                            <p class="mt-1 text-[10px] text-orange-600">
+                                                Mrs. Esther
+                                            </p>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td class="border-b border-r border-slate-200 p-3 align-top">
+
+                                        <div class="rounded-lg bg-pink-50 p-3">
+
+                                            <p class="text-xs font-bold text-pink-800">
+                                                Biology
+                                            </p>
+
+                                            <p class="mt-1 text-[10px] text-pink-600">
+                                                Mrs. Mercy
+                                            </p>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td class="border-b border-slate-200 p-3 align-top">
+
+                                        <div class="rounded-lg bg-blue-50 p-3">
+
+                                            <p class="text-xs font-bold text-blue-800">
+                                                Mathematics
+                                            </p>
+
+                                            <p class="mt-1 text-[10px] text-blue-600">
+                                                Mr. Johnson
+                                            </p>
+
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+
+                                <!-- ==================================
+                                     PERIOD 7
+                                =================================== -->
+
+                                <tr>
+
+                                    <td class="border-b border-r border-slate-200 bg-slate-50 px-4 py-4 align-top">
+
+                                        <p class="text-xs font-bold text-slate-700">
+                                            1:30 – 2:15
+                                        </p>
+
+                                        <p class="mt-1 text-[10px] text-slate-400">
+                                            Period 7
+                                        </p>
+
+                                    </td>
+
+
+                                    <td class="border-b border-r border-slate-200 p-3 align-top">
+
+                                        <div class="rounded-lg bg-emerald-50 p-3">
+
+                                            <p class="text-xs font-bold text-emerald-800">
+                                                English Language
+                                            </p>
+
+                                            <p class="mt-1 text-[10px] text-emerald-600">
+                                                Mrs. Grace
+                                            </p>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td class="border-b border-r border-slate-200 p-3 align-top">
+
+                                        <div class="rounded-lg bg-orange-50 p-3">
+
+                                            <p class="text-xs font-bold text-orange-800">
+                                                Chemistry
+                                            </p>
+
+                                            <p class="mt-1 text-[10px] text-orange-600">
+                                                Mrs. Esther
+                                            </p>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td class="border-b border-r border-slate-200 p-3 align-top">
+
+                                        <div class="rounded-lg bg-blue-50 p-3">
+
+                                            <p class="text-xs font-bold text-blue-800">
+                                                Mathematics
+                                            </p>
+
+                                            <p class="mt-1 text-[10px] text-blue-600">
+                                                Mr. Johnson
+                                            </p>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td class="border-b border-r border-slate-200 p-3 align-top">
+
+                                        <div class="rounded-lg bg-purple-50 p-3">
+
+                                            <p class="text-xs font-bold text-purple-800">
+                                                Physics
+                                            </p>
+
+                                            <p class="mt-1 text-[10px] text-purple-600">
+                                                Mr. David
+                                            </p>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td class="border-b border-slate-200 p-3 align-top">
+
+                                        <div class="rounded-lg bg-pink-50 p-3">
+
+                                            <p class="text-xs font-bold text-pink-800">
+                                                Biology
+                                            </p>
+
+                                            <p class="mt-1 text-[10px] text-pink-600">
+                                                Mrs. Mercy
+                                            </p>
+
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+
+                                <!-- ==================================
+                                     PERIOD 8
+                                =================================== -->
+
+                                <tr>
+
+                                    <td class="border-r border-slate-200 bg-slate-50 px-4 py-4 align-top">
+
+                                        <p class="text-xs font-bold text-slate-700">
+                                            2:15 – 3:00
+                                        </p>
+
+                                        <p class="mt-1 text-[10px] text-slate-400">
+                                            Period 8
+                                        </p>
+
+                                    </td>
+
+
+                                    <td class="border-r border-slate-200 p-3 align-top">
+
+                                        <div class="rounded-lg bg-slate-100 p-3">
+
+                                            <p class="text-xs font-bold text-slate-700">
+                                                Civic Education
+                                            </p>
+
+                                            <p class="mt-1 text-[10px] text-slate-500">
+                                                Mr. Peter
+                                            </p>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td class="border-r border-slate-200 p-3 align-top">
+
+                                        <div class="rounded-lg bg-slate-100 p-3">
+
+                                            <p class="text-xs font-bold text-slate-700">
+                                                Economics
+                                            </p>
+
+                                            <p class="mt-1 text-[10px] text-slate-500">
+                                                Mrs. Jane
+                                            </p>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td class="border-r border-slate-200 p-3 align-top">
+
+                                        <div class="rounded-lg bg-slate-100 p-3">
+
+                                            <p class="text-xs font-bold text-slate-700">
+                                                Data Processing
+                                            </p>
+
+                                            <p class="mt-1 text-[10px] text-slate-500">
+                                                Mr. Michael
+                                            </p>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td class="border-r border-slate-200 p-3 align-top">
+
+                                        <div class="rounded-lg bg-slate-100 p-3">
+
+                                            <p class="text-xs font-bold text-slate-700">
+                                                Civic Education
+                                            </p>
+
+                                            <p class="mt-1 text-[10px] text-slate-500">
+                                                Mr. Peter
+                                            </p>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td class="p-3 align-top">
+
+                                        <div class="rounded-lg bg-slate-100 p-3">
+
+                                            <p class="text-xs font-bold text-slate-700">
+                                                Economics
+                                            </p>
+
+                                            <p class="mt-1 text-[10px] text-slate-500">
+                                                Mrs. Jane
+                                            </p>
+
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ==========================================
+                     TIMETABLE LEGEND
+                =========================================== -->
+
+                <div class="mt-6 rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+
+                    <h3 class="mb-4 text-xs font-bold text-slate-800">
+                        Timetable Information
+                    </h3>
+
+
+                    <div class="grid grid-cols-2 gap-4 sm:grid-cols-4">
+
+
+                        <div class="flex items-center gap-2">
+
+                            <span class="h-3 w-3 rounded bg-blue-100"></span>
+
+                            <span class="text-xs text-slate-500">
+                                Mathematics
+                            </span>
+
+                        </div>
+
+
+                        <div class="flex items-center gap-2">
+
+                            <span class="h-3 w-3 rounded bg-purple-100"></span>
+
+                            <span class="text-xs text-slate-500">
+                                Physics
+                            </span>
+
+                        </div>
+
+
+                        <div class="flex items-center gap-2">
+
+                            <span class="h-3 w-3 rounded bg-emerald-100"></span>
+
+                            <span class="text-xs text-slate-500">
+                                English
+                            </span>
+
+                        </div>
+
+
+                        <div class="flex items-center gap-2">
+
+                            <span class="h-3 w-3 rounded bg-orange-100"></span>
+
+                            <span class="text-xs text-slate-500">
+                                Chemistry
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ==========================================
+                     NOTICE
+                =========================================== -->
+
+                <div class="mt-6 flex gap-3 rounded-xl border border-blue-100 bg-blue-50 p-4">
+
+                    <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-100 text-sm">
+                        ℹ️
+                    </div>
+
+                    <div>
+
+                        <p class="text-xs font-semibold text-blue-900">
+                            Timetable Notice
+                        </p>
+
+                        <p class="mt-1 text-xs leading-5 text-blue-700">
+                            Students are expected to be seated in their
+                            classrooms before the start of each period.
+                            Timetable changes will be communicated through
+                            the student portal.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- ==========================================
+         PRINT STYLES
+    =========================================== -->
+
+    <style>
+
+        @media print {
+
+            body {
+                background: white !important;
+            }
+
+            body * {
+                visibility: hidden;
+            }
+
+            main,
+            main * {
+                visibility: visible;
+            }
+
+            main {
+                margin-left: 0 !important;
+            }
+
+            header,
+            button,
+            nav,
+            aside {
+                display: none !important;
+            }
+
+            section {
+                padding: 0 !important;
+                max-width: none !important;
+            }
+
+            .shadow-sm {
+                box-shadow: none !important;
+            }
+
+        }
+
+    </style>
+
+</body>
+</html>
+

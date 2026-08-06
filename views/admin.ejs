@@ -1,117 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZRDY8JQBQ7"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-ZRDY8JQBQ7"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-  gtag('config', 'G-ZRDY8JQBQ7');
-</script>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/styles/global.css">
-  <link rel="stylesheet" href="/styles/admin.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
-  <title>Admin Dashboard</title>
-</head>
-<body>
-  <%- include('./partials/header.ejs') %>
-  <div class="admin-container">
-    <%- include('./partials/navigation.ejs') %>
-    <main class="section">
-      <div class="container center-container">
-        <div class="dashboard-container">
-          <div class="dashboard-banner">
-            <h1>Welcome Back, <%= school %></h1>
-            <p>Your central hub for managing school operations.</p>
-            <div class="banner-overlay"></div>
-          </div>
-          <div class="dashboard-actions">
-            <button class="button upload-results-btn">Upload Results</button>
-          </div>
-          <div class="dashboard-metrics">
-            <div class="metric-card">
-              <h3>Total Students</h3>
-              <p class="metric-value" id="students"></p>
-              <span class="metric-subtext">Across all classes</span>
-              <span class="metric-icon">👨‍🎓</span>
+      gtag("config", "G-ZRDY8JQBQ7");
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/global.css" />
+    <link rel="stylesheet" href="/styles/admin.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Admin Dashboard</title>
+  </head>
+  <body>
+    <%- include('./partials/header.ejs') %>
+    <div class="admin-container">
+      <%- include('./partials/navigation.ejs') %>
+      <main class="section">
+        <div class="container center-container">
+          <div class="dashboard-container">
+            <div class="dashboard-banner">
+              <h1>Welcome Back, <%= school %></h1>
+              <p>Your central hub for managing school operations.</p>
+              <div class="banner-overlay"></div>
             </div>
-            <div class="metric-card">
-              <h3>Total Staff</h3>
-              <p class="metric-value" id="staff"></p>
-              <span class="metric-subtext">Active administrators</span>
-              <span class="metric-icon">👩‍🏫</span>
+            <div class="dashboard-actions">
+              <button class="button upload-results-btn">Upload Results</button>
             </div>
-            <div class="metric-card">
-              <h3>Blacklisted Students</h3>
-              <p class="metric-value" id="blacklist"></p>
-              <span class="metric-subtext">Restricted access</span>
-              <span class="metric-icon">🚫</span>
+            <div class="dashboard-metrics">
+              <div class="metric-card">
+                <h3>Total Students</h3>
+                <p class="metric-value" id="students"></p>
+                <span class="metric-subtext">Across all classes</span>
+                <span class="metric-icon">👨‍🎓</span>
+              </div>
+              <div class="metric-card">
+                <h3>Total Staff</h3>
+                <p class="metric-value" id="staff"></p>
+                <span class="metric-subtext">Active administrators</span>
+                <span class="metric-icon">👩‍🏫</span>
+              </div>
+              <div class="metric-card">
+                <h3>Blacklisted Students</h3>
+                <p class="metric-value" id="blacklist"></p>
+                <span class="metric-subtext">Restricted access</span>
+                <span class="metric-icon">🚫</span>
+              </div>
             </div>
-            
-          </div>
-          <div class="dashboard-charts">
-            <div class="chart-card">
-              <h3>Student Distribution by Class</h3>
-              <canvas id="studentBarChart"></canvas>
-            </div>
-            <div class="chart-card">
-              <h3>Grade Distribution</h3>
-              <canvas id="gradePieChart"></canvas>
+            <div class="dashboard-charts">
+              <div class="chart-card">
+                <h3>Student Distribution by Class</h3>
+                <canvas id="studentBarChart"></canvas>
+              </div>
+              <div class="chart-card">
+                <h3>Grade Distribution</h3>
+                <canvas id="gradePieChart"></canvas>
                 <div class="gradeCount"></div>
               </div>
             </div>
-          <!-- <div class="dashboard-activity">
-            <h3>Recent Activity</h3>
-            <ul class="activity-list">
-              <li><span class="activity-time">Today, 10:30 AM</span> Added John Doe to blacklist</li>
-              <li><span class="activity-time">Yesterday, 3:15 PM</span> Uploaded grades for Senior School</li>
-              <li><span class="activity-time">Oct 20, 9:00 AM</span> Created new staff account for Jane Smith</li>
-              <li><span class="activity-time">Oct 19, 2:45 PM</span> Generated 50 student IDs</li>
-            </ul>
-          </div> -->
-          <div class="upload-dialog" style="display: none;">
-            <div class="dialog-content">
-              <span class="cancel-btn" onclick="closeUploadDialog()">×</span>
-              <div class="form-header">
-                <h2>Upload Student Data</h2>
-              </div>
-              <div class="description">
-                <p>Select a class to upload student data.</p>
-              </div>
-              <form id="uploadForm" action="upload" method="POST" onsubmit="return check()">
-                
-                <div class="form-controls">
-                  <div class="form-group">
-                    <label for="Sclass">Student Class</label>
-                    <select name="Sclass" id="Sclass" required aria-label="Select Student Class">
-                      <option value="">Select Class</option>
-                      <option value="senior">Senior School</option>
-                      <option value="junior">Junior School</option>
-                      <option value="primary">Primary School</option>
-                      <option value="nursery">Nursery School</option>
-                    </select>
-                    <span class="error-message"></span>
-                  </div>
-                  <button type="submit" class="button">Upload</button>
-                </div>
-              </form>
-            </div>
-          </div>
-          <div class="alert-dialog" style="display: none;" aria-live="polite">
-            <span class="cancel-btn" onclick="closeAlert()">×</span>
-            <div id="alertMessage"></div>
-          </div>
-          <div class="dialog-backdrop" style="display: none;"></div>
-        </div>
-      </div>
-    </main>
-  </div>
 
-  <script src="/js/menu.js"></script>
-  <script src="/js/dashboard.js"></script>
-</body>
+            <div class="upload-dialog"  id="upload-dialog" style="display: none">
+              <div class="dialog-content">
+               <div >
+                  <button
+                      onclick="closeAlert()"
+                      class="flex h-8 w-8 items-center justify-center rounded-full bg-red-500 text-xl font-bold text-white shadow-lg hover:bg-red-600 transition"
+                  >
+                      ×
+                  </button>
+
+                  <div
+                      id="alertMessage"
+                      class="mt-3 rounded-xl bg-white p-4 shadow-xl border border-slate-200"
+                  ></div>
+              </div>
+                <div class="grid grid-cols-2 gap-5 max-w-3xl mx-auto">
+                  <!-- Nursery -->
+                  <a
+                    href="/upload_result/Nursery"
+                    class="group bg-white border border-emerald-100 rounded-3xl p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                  >
+                    <div class="flex flex-col items-center text-center">
+                      <div
+                        class="w-16 h-16 rounded-2xl bg-emerald-100 flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition"
+                      >
+                        🌱
+                      </div>
+
+                      <h3 class="text-xl font-bold text-slate-800">Nursery</h3>
+
+                      <p class="text-sm text-slate-500 mt-2">
+                        Upload Nursery Results
+                      </p>
+                    </div>
+                  </a>
+
+                  <!-- Basic -->
+                  <a
+                    href="/upload_result/Basic"
+                    class="group bg-white border border-blue-100 rounded-3xl p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                  >
+                    <div class="flex flex-col items-center text-center">
+                      <div
+                        class="w-16 h-16 rounded-2xl bg-blue-100 flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition"
+                      >
+                        📘
+                      </div>
+
+                      <h3 class="text-xl font-bold text-slate-800">Basic</h3>
+
+                      <p class="text-sm text-slate-500 mt-2">
+                        Upload Basic Results
+                      </p>
+                    </div>
+                  </a>
+
+                  <!-- Junior -->
+                  <a
+                    href="/upload_result/Junior"
+                    class="group bg-white border border-amber-100 rounded-3xl p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                  >
+                    <div class="flex flex-col items-center text-center">
+                      <div
+                        class="w-16 h-16 rounded-2xl bg-amber-100 flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition"
+                      >
+                        🏫
+                      </div>
+
+                      <h3 class="text-xl font-bold text-slate-800">Junior</h3>
+
+                      <p class="text-sm text-slate-500 mt-2">
+                        Upload JSS Results
+                      </p>
+                    </div>
+                  </a>
+
+                  <!-- Senior -->
+                  <a
+                    href="/upload_result/Senior"
+                    class="group bg-white border border-purple-100 rounded-3xl p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                  >
+                    <div class="flex flex-col items-center text-center">
+                      <div
+                        class="w-16 h-16 rounded-2xl bg-purple-100 flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition"
+                      >
+                        🎓
+                      </div>
+
+                      <h3 class="text-xl font-bold text-slate-800">Senior</h3>
+
+                      <p class="text-sm text-slate-500 mt-2">
+                        Upload SS Results
+                      </p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="dialog-backdrop" style="display: none"></div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="/js/menu.js"></script>
+    <script src="/js/dashboard.js"></script>
+  </body>
 </html>

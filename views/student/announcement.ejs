@@ -1,0 +1,1237 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head') %>
+
+<body class="bg-slate-50 text-slate-800">
+
+    <div class="min-h-screen">
+
+        <!-- ==========================================
+             NAVIGATION
+        =========================================== -->
+
+        <%- include('./partials/navigation') %>
+
+
+        <!-- ==========================================
+             MAIN
+        =========================================== -->
+
+        <main class="lg:ml-64">
+
+            <!-- HEADER -->
+
+            <%- include('./partials/header') %>
+
+
+            <!-- ==========================================
+                 CONTENT
+            =========================================== -->
+
+            <section class="mx-auto max-w-[1500px] p-4 sm:p-6 lg:p-8">
+
+
+                <!-- ==========================================
+                     PAGE HEADER
+                =========================================== -->
+
+                <div class="mb-6">
+
+                    <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+
+                        <div>
+
+                            <h1 class="text-xl font-bold text-slate-900 sm:text-2xl">
+                                Announcements
+                            </h1>
+
+                            <p class="mt-1 text-sm text-slate-500">
+                                Stay updated with the latest news and information from your school.
+                            </p>
+
+                        </div>
+
+
+                        <!-- Notification -->
+
+                        <div class="flex items-center gap-2 rounded-lg border border-blue-100 bg-blue-50 px-3 py-2">
+
+                            <span class="flex h-7 w-7 items-center justify-center rounded-full bg-blue-100 text-sm">
+                                🔔
+                            </span>
+
+                            <div>
+
+                                <p class="text-[10px] font-medium text-blue-600">
+                                    New announcements
+                                </p>
+
+                                <p class="text-xs font-bold text-blue-900">
+                                    3 unread
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ==========================================
+                     SUMMARY CARDS
+                =========================================== -->
+
+                <div class="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+
+
+                    <!-- All -->
+
+                    <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+
+                        <div class="flex items-center justify-between">
+
+                            <p class="text-xs font-medium text-slate-500">
+                                All
+                            </p>
+
+                            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 text-sm">
+                                📢
+                            </div>
+
+                        </div>
+
+                        <p class="mt-3 text-2xl font-bold text-slate-900">
+                            12
+                        </p>
+
+                        <p class="mt-1 text-[10px] text-slate-400">
+                            Total announcements
+                        </p>
+
+                    </div>
+
+
+                    <!-- Unread -->
+
+                    <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+
+                        <div class="flex items-center justify-between">
+
+                            <p class="text-xs font-medium text-slate-500">
+                                Unread
+                            </p>
+
+                            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-orange-50 text-sm">
+                                🔔
+                            </div>
+
+                        </div>
+
+                        <p class="mt-3 text-2xl font-bold text-slate-900">
+                            3
+                        </p>
+
+                        <p class="mt-1 text-[10px] text-slate-400">
+                            Need your attention
+                        </p>
+
+                    </div>
+
+
+                    <!-- Academic -->
+
+                    <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+
+                        <div class="flex items-center justify-between">
+
+                            <p class="text-xs font-medium text-slate-500">
+                                Academic
+                            </p>
+
+                            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-purple-50 text-sm">
+                                📚
+                            </div>
+
+                        </div>
+
+                        <p class="mt-3 text-2xl font-bold text-slate-900">
+                            5
+                        </p>
+
+                        <p class="mt-1 text-[10px] text-slate-400">
+                            Academic notices
+                        </p>
+
+                    </div>
+
+
+                    <!-- Events -->
+
+                    <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+
+                        <div class="flex items-center justify-between">
+
+                            <p class="text-xs font-medium text-slate-500">
+                                Events
+                            </p>
+
+                            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 text-sm">
+                                📅
+                            </div>
+
+                        </div>
+
+                        <p class="mt-3 text-2xl font-bold text-slate-900">
+                            4
+                        </p>
+
+                        <p class="mt-1 text-[10px] text-slate-400">
+                            School events
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ==========================================
+                     SEARCH & FILTER
+                =========================================== -->
+
+                <div class="mb-6 rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+
+                    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+
+
+                        <!-- Search -->
+
+                        <div class="relative w-full sm:max-w-md">
+
+                            <span class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-sm text-slate-400">
+                                🔍
+                            </span>
+
+                            <input
+                                id="announcementSearch"
+                                type="text"
+                                placeholder="Search announcements..."
+                                class="w-full rounded-lg border border-slate-200 bg-slate-50 py-2.5 pl-9 pr-3 text-xs text-slate-700 outline-none transition focus:border-blue-400 focus:bg-white focus:ring-2 focus:ring-blue-100"
+                            >
+
+                        </div>
+
+
+                        <!-- Filter -->
+
+                        <select
+                            id="announcementFilter"
+                            class="w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-xs font-medium text-slate-600 outline-none focus:border-blue-400 sm:w-auto"
+                        >
+
+                            <option value="all">
+                                All Announcements
+                            </option>
+
+                            <option value="academic">
+                                Academic
+                            </option>
+
+                            <option value="event">
+                                Events
+                            </option>
+
+                            <option value="general">
+                                General
+                            </option>
+
+                            <option value="important">
+                                Important
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ==========================================
+                     ANNOUNCEMENTS
+                =========================================== -->
+
+                <div class="grid gap-6 xl:grid-cols-[1.5fr_1fr]">
+
+
+                    <!-- ======================================
+                         ANNOUNCEMENT LIST
+                    ======================================= -->
+
+                    <div class="rounded-xl border border-slate-200 bg-white shadow-sm">
+
+                        <div class="flex items-center justify-between border-b border-slate-100 px-5 py-4 sm:px-6">
+
+                            <div>
+
+                                <h2 class="text-sm font-bold text-slate-900">
+                                    Recent Announcements
+                                </h2>
+
+                                <p class="mt-1 text-xs text-slate-500">
+                                    Latest updates from your school.
+                                </p>
+
+                            </div>
+
+
+                            <button
+                                onclick="markAllRead()"
+                                class="text-xs font-medium text-blue-600 hover:text-blue-700"
+                            >
+                                Mark all as read
+                            </button>
+
+                        </div>
+
+
+                        <div id="announcementList">
+
+
+                            <!-- ==================================
+                                 ANNOUNCEMENT 1
+                            =================================== -->
+
+                            <article
+                                class="announcement-item relative border-b border-slate-100 p-5 sm:p-6"
+                                data-category="academic"
+                                data-title="second term examination timetable"
+                            >
+
+                                <!-- Unread indicator -->
+
+                                <span class="absolute right-5 top-6 h-2 w-2 rounded-full bg-blue-600"></span>
+
+
+                                <div class="flex gap-4">
+
+                                    <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-lg">
+                                        📚
+                                    </div>
+
+
+                                    <div class="min-w-0 flex-1">
+
+                                        <div class="flex flex-wrap items-center gap-2 pr-5">
+
+                                            <span class="rounded-full bg-blue-50 px-2 py-1 text-[9px] font-semibold text-blue-600">
+                                                Academic
+                                            </span>
+
+                                            <span class="rounded-full bg-red-50 px-2 py-1 text-[9px] font-semibold text-red-600">
+                                                Important
+                                            </span>
+
+                                        </div>
+
+
+                                        <h3 class="mt-2 text-sm font-bold text-slate-900">
+                                            Second Term Examination Timetable
+                                        </h3>
+
+
+                                        <p class="mt-2 text-xs leading-5 text-slate-500">
+                                            The timetable for the second term examination
+                                            has been released. Students are advised to
+                                            check the timetable carefully and prepare
+                                            adequately for all examinations.
+                                        </p>
+
+
+                                        <div class="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2">
+
+                                            <span class="text-[10px] text-slate-400">
+                                                📅 August 2, 2026
+                                            </span>
+
+                                            <span class="text-[10px] text-slate-400">
+                                                👨‍💼 School Administration
+                                            </span>
+
+                                        </div>
+
+
+                                        <button
+                                            onclick="viewAnnouncement(
+                                                'Second Term Examination Timetable',
+                                                'Academic',
+                                                'The timetable for the second term examination has been released. Students are advised to check the timetable carefully and prepare adequately for all examinations.',
+                                                'August 2, 2026',
+                                                'School Administration'
+                                            )"
+                                            class="mt-4 text-xs font-semibold text-blue-600 hover:text-blue-700"
+                                        >
+                                            Read announcement →
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
+                            </article>
+
+
+                            <!-- ==================================
+                                 ANNOUNCEMENT 2
+                            =================================== -->
+
+                            <article
+                                class="announcement-item relative border-b border-slate-100 p-5 sm:p-6"
+                                data-category="general"
+                                data-title="school assembly"
+                            >
+
+                                <span class="absolute right-5 top-6 h-2 w-2 rounded-full bg-blue-600"></span>
+
+
+                                <div class="flex gap-4">
+
+                                    <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-purple-50 text-lg">
+                                        📢
+                                    </div>
+
+
+                                    <div class="min-w-0 flex-1">
+
+                                        <div class="flex flex-wrap items-center gap-2">
+
+                                            <span class="rounded-full bg-purple-50 px-2 py-1 text-[9px] font-semibold text-purple-600">
+                                                General
+                                            </span>
+
+                                        </div>
+
+
+                                        <h3 class="mt-2 text-sm font-bold text-slate-900">
+                                            Monday Morning Assembly
+                                        </h3>
+
+
+                                        <p class="mt-2 text-xs leading-5 text-slate-500">
+                                            All students are expected to attend the
+                                            Monday morning assembly. Students should
+                                            arrive at the assembly ground before
+                                            7:45 AM.
+                                        </p>
+
+
+                                        <div class="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2">
+
+                                            <span class="text-[10px] text-slate-400">
+                                                📅 July 30, 2026
+                                            </span>
+
+                                            <span class="text-[10px] text-slate-400">
+                                                👨‍💼 School Administration
+                                            </span>
+
+                                        </div>
+
+
+                                        <button
+                                            onclick="viewAnnouncement(
+                                                'Monday Morning Assembly',
+                                                'General',
+                                                'All students are expected to attend the Monday morning assembly. Students should arrive at the assembly ground before 7:45 AM.',
+                                                'July 30, 2026',
+                                                'School Administration'
+                                            )"
+                                            class="mt-4 text-xs font-semibold text-blue-600 hover:text-blue-700"
+                                        >
+                                            Read announcement →
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
+                            </article>
+
+
+                            <!-- ==================================
+                                 ANNOUNCEMENT 3
+                            =================================== -->
+
+                            <article
+                                class="announcement-item border-b border-slate-100 p-5 sm:p-6"
+                                data-category="event"
+                                data-title="inter house sports"
+                            >
+
+                                <div class="flex gap-4">
+
+                                    <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-lg">
+                                        🏃
+                                    </div>
+
+
+                                    <div class="min-w-0 flex-1">
+
+                                        <div class="flex flex-wrap items-center gap-2">
+
+                                            <span class="rounded-full bg-emerald-50 px-2 py-1 text-[9px] font-semibold text-emerald-600">
+                                                Event
+                                            </span>
+
+                                        </div>
+
+
+                                        <h3 class="mt-2 text-sm font-bold text-slate-900">
+                                            Inter-House Sports Activities
+                                        </h3>
+
+
+                                        <p class="mt-2 text-xs leading-5 text-slate-500">
+                                            Inter-house sports practice begins next week.
+                                            Students participating in athletics and other
+                                            sporting activities should contact their house
+                                            coordinators.
+                                        </p>
+
+
+                                        <div class="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2">
+
+                                            <span class="text-[10px] text-slate-400">
+                                                📅 July 28, 2026
+                                            </span>
+
+                                            <span class="text-[10px] text-slate-400">
+                                                🏫 Sports Department
+                                            </span>
+
+                                        </div>
+
+
+                                        <button
+                                            onclick="viewAnnouncement(
+                                                'Inter-House Sports Activities',
+                                                'Event',
+                                                'Inter-house sports practice begins next week. Students participating in athletics and other sporting activities should contact their house coordinators.',
+                                                'July 28, 2026',
+                                                'Sports Department'
+                                            )"
+                                            class="mt-4 text-xs font-semibold text-blue-600 hover:text-blue-700"
+                                        >
+                                            Read announcement →
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
+                            </article>
+
+
+                            <!-- ==================================
+                                 ANNOUNCEMENT 4
+                            =================================== -->
+
+                            <article
+                                class="announcement-item border-b border-slate-100 p-5 sm:p-6"
+                                data-category="academic"
+                                data-title="continuous assessment test"
+                            >
+
+                                <div class="flex gap-4">
+
+                                    <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-orange-50 text-lg">
+                                        📝
+                                    </div>
+
+
+                                    <div class="min-w-0 flex-1">
+
+                                        <div class="flex flex-wrap items-center gap-2">
+
+                                            <span class="rounded-full bg-orange-50 px-2 py-1 text-[9px] font-semibold text-orange-600">
+                                                Academic
+                                            </span>
+
+                                        </div>
+
+
+                                        <h3 class="mt-2 text-sm font-bold text-slate-900">
+                                            Continuous Assessment Test
+                                        </h3>
+
+
+                                        <p class="mt-2 text-xs leading-5 text-slate-500">
+                                            Students are reminded that the continuous
+                                            assessment test will begin on Monday.
+                                            Please revise all topics covered during
+                                            the current term.
+                                        </p>
+
+
+                                        <div class="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2">
+
+                                            <span class="text-[10px] text-slate-400">
+                                                📅 July 25, 2026
+                                            </span>
+
+                                            <span class="text-[10px] text-slate-400">
+                                                👨‍🏫 Academic Department
+                                            </span>
+
+                                        </div>
+
+
+                                        <button
+                                            onclick="viewAnnouncement(
+                                                'Continuous Assessment Test',
+                                                'Academic',
+                                                'Students are reminded that the continuous assessment test will begin on Monday. Please revise all topics covered during the current term.',
+                                                'July 25, 2026',
+                                                'Academic Department'
+                                            )"
+                                            class="mt-4 text-xs font-semibold text-blue-600 hover:text-blue-700"
+                                        >
+                                            Read announcement →
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
+                            </article>
+
+
+                            <!-- ==================================
+                                 ANNOUNCEMENT 5
+                            =================================== -->
+
+                            <article
+                                class="announcement-item p-5 sm:p-6"
+                                data-category="event"
+                                data-title="career day programme"
+                            >
+
+                                <div class="flex gap-4">
+
+                                    <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-pink-50 text-lg">
+                                        🎓
+                                    </div>
+
+
+                                    <div class="min-w-0 flex-1">
+
+                                        <div class="flex flex-wrap items-center gap-2">
+
+                                            <span class="rounded-full bg-pink-50 px-2 py-1 text-[9px] font-semibold text-pink-600">
+                                                Event
+                                            </span>
+
+                                        </div>
+
+
+                                        <h3 class="mt-2 text-sm font-bold text-slate-900">
+                                            Career Day Programme
+                                        </h3>
+
+
+                                        <p class="mt-2 text-xs leading-5 text-slate-500">
+                                            The school will be hosting a career day
+                                            programme for students. More information
+                                            about the guest speakers and activities
+                                            will be provided shortly.
+                                        </p>
+
+
+                                        <div class="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2">
+
+                                            <span class="text-[10px] text-slate-400">
+                                                📅 July 22, 2026
+                                            </span>
+
+                                            <span class="text-[10px] text-slate-400">
+                                                🏫 School Administration
+                                            </span>
+
+                                        </div>
+
+
+                                        <button
+                                            onclick="viewAnnouncement(
+                                                'Career Day Programme',
+                                                'Event',
+                                                'The school will be hosting a career day programme for students. More information about the guest speakers and activities will be provided shortly.',
+                                                'July 22, 2026',
+                                                'School Administration'
+                                            )"
+                                            class="mt-4 text-xs font-semibold text-blue-600 hover:text-blue-700"
+                                        >
+                                            Read announcement →
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
+                            </article>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ======================================
+                         SIDEBAR
+                    ======================================= -->
+
+                    <div class="space-y-6">
+
+
+                        <!-- Important Notice -->
+
+                        <div class="rounded-xl border border-red-100 bg-white shadow-sm">
+
+                            <div class="border-b border-red-50 px-5 py-4">
+
+                                <div class="flex items-center gap-2">
+
+                                    <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-red-50">
+                                        ⚠️
+                                    </div>
+
+                                    <h3 class="text-sm font-bold text-slate-900">
+                                        Important Notice
+                                    </h3>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="p-5">
+
+                                <h4 class="text-xs font-bold text-slate-800">
+                                    Examination Preparation
+                                </h4>
+
+                                <p class="mt-2 text-xs leading-5 text-slate-500">
+                                    Students are encouraged to begin preparing
+                                    for the upcoming second term examinations.
+                                    Make sure all outstanding assignments are
+                                    completed.
+                                </p>
+
+                                <div class="mt-4 rounded-lg bg-red-50 p-3">
+
+                                    <p class="text-[10px] font-semibold text-red-700">
+                                        Examination starts
+                                    </p>
+
+                                    <p class="mt-1 text-sm font-bold text-red-900">
+                                        August 12, 2026
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Upcoming Events -->
+
+                        <div class="rounded-xl border border-slate-200 bg-white shadow-sm">
+
+                            <div class="border-b border-slate-100 px-5 py-4">
+
+                                <h3 class="text-sm font-bold text-slate-900">
+                                    Upcoming Events
+                                </h3>
+
+                            </div>
+
+
+                            <div class="divide-y divide-slate-100">
+
+
+                                <div class="flex gap-3 p-4">
+
+                                    <div class="flex h-10 w-10 shrink-0 flex-col items-center justify-center rounded-lg bg-blue-50">
+
+                                        <span class="text-[8px] font-bold uppercase text-blue-500">
+                                            Aug
+                                        </span>
+
+                                        <span class="text-sm font-bold text-blue-700">
+                                            7
+                                        </span>
+
+                                    </div>
+
+                                    <div>
+
+                                        <p class="text-xs font-semibold text-slate-800">
+                                            Assignment Deadline
+                                        </p>
+
+                                        <p class="mt-1 text-[10px] text-slate-400">
+                                            Mathematics
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="flex gap-3 p-4">
+
+                                    <div class="flex h-10 w-10 shrink-0 flex-col items-center justify-center rounded-lg bg-purple-50">
+
+                                        <span class="text-[8px] font-bold uppercase text-purple-500">
+                                            Aug
+                                        </span>
+
+                                        <span class="text-sm font-bold text-purple-700">
+                                            10
+                                        </span>
+
+                                    </div>
+
+                                    <div>
+
+                                        <p class="text-xs font-semibold text-slate-800">
+                                            Sports Practice
+                                        </p>
+
+                                        <p class="mt-1 text-[10px] text-slate-400">
+                                            School Field
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="flex gap-3 p-4">
+
+                                    <div class="flex h-10 w-10 shrink-0 flex-col items-center justify-center rounded-lg bg-red-50">
+
+                                        <span class="text-[8px] font-bold uppercase text-red-500">
+                                            Aug
+                                        </span>
+
+                                        <span class="text-sm font-bold text-red-700">
+                                            12
+                                        </span>
+
+                                    </div>
+
+                                    <div>
+
+                                        <p class="text-xs font-semibold text-slate-800">
+                                            Second Term Examination
+                                        </p>
+
+                                        <p class="mt-1 text-[10px] text-slate-400">
+                                            Examination Hall
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Contact -->
+
+                        <div class="rounded-xl bg-gradient-to-br from-[#0b2a4a] to-[#17619a] p-5 text-white shadow-sm">
+
+                            <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-white/10">
+                                💬
+                            </div>
+
+                            <h3 class="mt-4 text-sm font-bold">
+                                Need Help?
+                            </h3>
+
+                            <p class="mt-2 text-xs leading-5 text-blue-100">
+                                If you have questions about an announcement,
+                                contact your school administration.
+                            </p>
+
+                            <a
+                                href="/student/contact"
+                                class="mt-4 inline-flex rounded-lg bg-white px-4 py-2 text-xs font-semibold text-[#0b2a4a] hover:bg-blue-50"
+                            >
+                                Contact School
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- ==========================================
+         ANNOUNCEMENT MODAL
+    =========================================== -->
+
+    <div
+        id="announcementModal"
+        class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/50 p-4"
+    >
+
+        <div
+            class="max-h-[90vh] w-full max-w-xl overflow-y-auto rounded-2xl bg-white shadow-xl"
+        >
+
+            <!-- Modal Header -->
+
+            <div class="flex items-start justify-between border-b border-slate-100 px-5 py-4 sm:px-6">
+
+                <div class="pr-4">
+
+                    <p
+                        id="modalCategory"
+                        class="text-[10px] font-semibold uppercase tracking-wide text-blue-600"
+                    >
+                        Announcement
+                    </p>
+
+                    <h2
+                        id="modalTitle"
+                        class="mt-1 text-base font-bold text-slate-900"
+                    >
+                        Announcement
+                    </h2>
+
+                </div>
+
+
+                <button
+                    onclick="closeAnnouncement()"
+                    class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-lg text-slate-400 transition hover:bg-slate-100 hover:text-slate-700"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <!-- Modal Body -->
+
+            <div class="p-5 sm:p-6">
+
+                <div class="mb-5 flex flex-wrap gap-4">
+
+                    <span
+                        id="modalDate"
+                        class="text-[10px] text-slate-400"
+                    >
+                        📅 August 2, 2026
+                    </span>
+
+                    <span
+                        id="modalAuthor"
+                        class="text-[10px] text-slate-400"
+                    >
+                        👨‍💼 School Administration
+                    </span>
+
+                </div>
+
+
+                <div class="rounded-xl bg-slate-50 p-4 sm:p-5">
+
+                    <p
+                        id="modalDescription"
+                        class="text-sm leading-7 text-slate-600"
+                    >
+                        Announcement details will appear here.
+                    </p>
+
+                </div>
+
+
+                <!-- Optional attachment -->
+
+                <div class="mt-5 rounded-xl border border-slate-200 p-4">
+
+                    <div class="flex items-center justify-between gap-4">
+
+                        <div class="flex items-center gap-3">
+
+                            <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-red-50">
+                                📄
+                            </div>
+
+                            <div>
+
+                                <p class="text-xs font-semibold text-slate-700">
+                                    Announcement Document
+                                </p>
+
+                                <p class="mt-1 text-[10px] text-slate-400">
+                                    PDF document
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <button
+                            class="text-xs font-semibold text-blue-600 hover:text-blue-700"
+                        >
+                            Download
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Modal Footer -->
+
+            <div class="border-t border-slate-100 bg-slate-50 px-5 py-4 sm:px-6">
+
+                <button
+                    onclick="closeAnnouncement()"
+                    class="w-full rounded-lg bg-[#0b2a4a] px-4 py-2.5 text-xs font-semibold text-white transition hover:bg-[#17619a]"
+                >
+                    Close
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         JAVASCRIPT
+    =========================================== -->
+
+    <script>
+
+        const announcementModal =
+            document.getElementById("announcementModal");
+
+        const modalTitle =
+            document.getElementById("modalTitle");
+
+        const modalCategory =
+            document.getElementById("modalCategory");
+
+        const modalDescription =
+            document.getElementById("modalDescription");
+
+        const modalDate =
+            document.getElementById("modalDate");
+
+        const modalAuthor =
+            document.getElementById("modalAuthor");
+
+
+        /*
+        ==========================================
+        OPEN ANNOUNCEMENT
+        ==========================================
+        */
+
+        function viewAnnouncement(
+            title,
+            category,
+            description,
+            date,
+            author
+        ) {
+
+            modalTitle.textContent = title;
+
+            modalCategory.textContent = category;
+
+            modalDescription.textContent = description;
+
+            modalDate.textContent = "📅 " + date;
+
+            modalAuthor.textContent = "👨‍💼 " + author;
+
+
+            announcementModal.classList.remove("hidden");
+
+            announcementModal.classList.add("flex");
+
+            document.body.classList.add("overflow-hidden");
+
+        }
+
+
+        /*
+        ==========================================
+        CLOSE ANNOUNCEMENT
+        ==========================================
+        */
+
+        function closeAnnouncement() {
+
+            announcementModal.classList.add("hidden");
+
+            announcementModal.classList.remove("flex");
+
+            document.body.classList.remove("overflow-hidden");
+
+        }
+
+
+        /*
+        ==========================================
+        CLOSE WHEN CLICKING OUTSIDE
+        ==========================================
+        */
+
+        announcementModal.addEventListener(
+            "click",
+            function(event) {
+
+                if (event.target === announcementModal) {
+
+                    closeAnnouncement();
+
+                }
+
+            }
+        );
+
+
+        /*
+        ==========================================
+        ESC KEY
+        ==========================================
+        */
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (event.key === "Escape") {
+
+                    closeAnnouncement();
+
+                }
+
+            }
+        );
+
+
+        /*
+        ==========================================
+        SEARCH
+        ==========================================
+        */
+
+        const searchInput =
+            document.getElementById("announcementSearch");
+
+        const filterSelect =
+            document.getElementById("announcementFilter");
+
+        const announcements =
+            document.querySelectorAll(".announcement-item");
+
+
+        function filterAnnouncements() {
+
+            const search =
+                searchInput.value.toLowerCase().trim();
+
+            const category =
+                filterSelect.value;
+
+
+            announcements.forEach(function(item) {
+
+                const title =
+                    item.dataset.title.toLowerCase();
+
+                const itemCategory =
+                    item.dataset.category.toLowerCase();
+
+
+                const matchesSearch =
+                    title.includes(search);
+
+                const matchesCategory =
+                    category === "all" ||
+                    itemCategory === category;
+
+
+                if (matchesSearch && matchesCategory) {
+
+                    item.classList.remove("hidden");
+
+                } else {
+
+                    item.classList.add("hidden");
+
+                }
+
+            });
+
+        }
+
+
+        searchInput.addEventListener(
+            "input",
+            filterAnnouncements
+        );
+
+
+        filterSelect.addEventListener(
+            "change",
+            filterAnnouncements
+        );
+
+
+        /*
+        ==========================================
+        MARK ALL AS READ
+        ==========================================
+        */
+
+        function markAllRead() {
+
+            document
+                .querySelectorAll(".announcement-item .absolute")
+                .forEach(function(dot) {
+
+                    dot.classList.add("hidden");
+
+                });
+
+        }
+
+    </script>
+
+</body>
+
+</html>
+

@@ -61,6 +61,7 @@ router.post("/login", async (req, res) => {
 router.get("/login", (req, res) => {
   res.render("login");
 });
+
 //LOGOUT API
 router.get("/logout", (req, res) => {
   req.session.destroy();

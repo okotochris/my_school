@@ -1,13 +1,10 @@
 const express = require('express')
 const isAuthenticated = require('../utility/authenticated.js')
 const schoolPfofile = require("../schema/schoolProfile");
-const Blog = require("../schema/data.js"); //junior class
-const SBlog = require("../schema/datas.js"); // sinior class
 const ABlog = require("../schema/admin.js");
-const PBlog = require("../schema/primary.js"); //basic class
 const Blacklist = require("../schema/blacklist.js");
-const nuseryBlog = require("../schema/nursery.js"); // nursery
-const Studentpassport = require("../schema/goldenPassport.js");
+const StudentResult = require('../schema/studentResult.js')
+const StudentProfile = require('../schema/studentProfile.js')
 
 const router = express.Router()
 
@@ -21,102 +18,132 @@ router.get('/summary', isAuthenticated, async (req, res)=>{
     console.log(err)
   }
 })
+router.get("/api/analysis", isAuthenticated, async (req, res) => {
 
-router.get('/api/analysis', isAuthenticated, async (req, res) => {
-  try {
-    const school = req.session.school;
-    // Run all queries in parallel for better performance
-    const [
-      totalStaff,
-      totalStudent,
-      totalNursery,
-      totalBasic,
-      totalJss,
-      totalSS,
-      totalBlacklist,
-      gradeSummary
-    ] = await Promise.all([
-      ABlog.countDocuments({ school }),
-      Studentpassport.countDocuments({ schoolName: school }),
-      Studentpassport.countDocuments({ schoolName: school, class: { $regex: /^NURSERY/i } }),
-      Studentpassport.countDocuments({ schoolName: school, class: { $regex: /^BASIC/i } }),
-      Studentpassport.countDocuments({ schoolName: school, class: { $regex: /^JSS/i } }),
-      Studentpassport.countDocuments({
-        schoolName: school,
-        class: { $in: ["SS 1", "SS 2", "SS 3"] },
-      }),
-      Blacklist.countDocuments({ school }),
-      getAllClassGradePercentages(school), // your grade percentage helper
-    ]);
+    try {
+        const schoolName = req.session.school;
 
-    // Respond with everything together
-    res.status(200).json({
-      totalStaff,
-      totalStudent,
-      totalBlacklist,
-      totalNursery,
-      totalBasic,
-      totalJss,
-      totalSS,
-      gradeSummary, // includes totalGrades, counts, percentages
-    });
-  } catch (err) {
-    console.error("Error in /api/analysis:", err);
-    res.status(500).json({ msg: "Server error" });
-  }
+        const [
+            totalStaff,
+            totalStudents,
+            totalNursery,
+            totalBasic,
+            totalJunior,
+            totalSenior,
+            totalBlacklist,
+            gradeSummary
+        ] = await Promise.all([
+            ABlog.countDocuments({ school: schoolName }),
+
+            StudentProfile.countDocuments({
+                schoolName
+            }),
+
+            StudentProfile.countDocuments({
+                schoolName,
+                class: { $regex: /^NURSERY/i }
+            }),
+
+            StudentProfile.countDocuments({
+                schoolName,
+                class: { $regex: /^BASIC/i }
+            }),
+
+            StudentProfile.countDocuments({
+                schoolName,
+                class: { $regex: /^JSS/i }
+            }),
+
+            StudentProfile.countDocuments({
+                schoolName,
+                class: { $regex: /^SS/i }
+            }),
+
+            Blacklist.countDocuments({
+                school: schoolName
+            }),
+
+            getAllClassGradePercentages(schoolName)
+        ]);
+        return res.json({
+            totalStaff,
+            totalStudents,
+            totalBlacklist,
+            totalNursery,
+            totalBasic,
+            totalJunior,
+            totalSenior,
+            gradeSummary
+        });
+       
+    } catch (err) {
+        console.error(err);
+
+        return res.status(500).json({
+            message: "Server error"
+        });
+    }
 });
 
 
 async function getAllClassGradePercentages(schoolName) {
-  try {
-    // Combine all documents from each schema
-    const allDocs = [
-      ...(await Blog.find({ schoolName })),
-      ...(await nuseryBlog.find({ schoolName })),
-      ...(await SBlog.find({ schoolName })),
-      ...(await PBlog.find({ schoolName }))
-    ];
+    try {
+        const summary = await StudentResult.aggregate([
+            {
+                $match: { schoolName }
+            },
+            {
+                $unwind: "$subjects"
+            },
+            {
+                $group: {
+                    _id: {
+                        $toUpper: "$subjects.grade"
+                    },
+                    count: { $sum: 1 }
+                }
+            }
+        ]);
 
-    if (!allDocs.length) {
-      return { message: "No results found for this school" };
+        const counts = {
+            A: 0,
+            B: 0,
+            C: 0,
+            D: 0,
+            F: 0
+        };
+
+        let totalGrades = 0;
+
+        summary.forEach(item => {
+            if (counts.hasOwnProperty(item._id)) {
+                counts[item._id] = item.count;
+                totalGrades += item.count;
+            }
+        });
+
+        const percentages = {};
+
+        Object.keys(counts).forEach(grade => {
+            percentages[grade] = totalGrades
+                ? ((counts[grade] / totalGrades) * 100).toFixed(2)
+                : "0.00";
+        });
+
+        return {
+            totalGrades,
+            counts,
+            percentages
+        };
+
+    } catch (err) {
+        console.error(err);
+
+        return {
+            totalGrades: 0,
+            counts: { A: 0, B: 0, C: 0, D: 0, F: 0 },
+            percentages: { A: "0.00", B: "0.00", C: "0.00", D: "0.00", F: "0.00" }
+        };
     }
-
-    const counts = { A: 0, B: 0, C: 0, D: 0, F: 0 };
-    let totalGrades = 0;
-
-    // Loop through each document
-    for (const doc of allDocs) {
-      const obj = doc.toObject();
-
-      // Loop through fields and find grade keys
-      for (const [key, value] of Object.entries(obj)) {
-        if (key.endsWith("G") && value) {
-          const grade = value.toUpperCase().trim();
-          if (["A", "B", "C", "D", "F"].includes(grade)) {
-            counts[grade]++;
-            totalGrades++;
-          }
-        }
-      }
-    }
-
-    // Calculate percentages
-    const percentages = {};
-    for (const [grade, count] of Object.entries(counts)) {
-      percentages[grade] = totalGrades
-        ? ((count / totalGrades) * 100).toFixed(2)
-        : "0.00";
-    }
-
-    return {
-      totalGrades,
-      counts,
-      percentages
-    };
-  } catch (error) {
-    console.error("Error calculating grade percentages:", error);
-    return null;
-  }
 }
-
 module.exports = router

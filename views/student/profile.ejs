@@ -1,0 +1,653 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head') %>
+
+<body class="bg-slate-50 text-slate-800">
+
+    <div class="min-h-screen">
+
+        <!-- ==========================================
+             NAVIGATION
+        =========================================== -->
+
+        <%- include('./partials/navigation') %>
+
+
+        <!-- ==========================================
+             MAIN
+        =========================================== -->
+
+        <main class="lg:ml-64">
+
+            <!-- HEADER -->
+
+            <%- include('./partials/header') %>
+
+
+            <!-- ==========================================
+                 CONTENT
+            =========================================== -->
+
+            <section class="mx-auto max-w-[1500px] p-4 sm:p-6 lg:p-8">
+
+
+                <!-- PAGE HEADER -->
+
+                <div class="mb-6">
+
+                    <h1 class="text-xl font-bold text-slate-900 sm:text-2xl">
+                        My Profile
+                    </h1>
+
+                    <p class="mt-1 text-sm text-slate-500">
+                        View your personal and academic information.
+                    </p>
+
+                </div>
+
+
+                <!-- ==========================================
+                     PROFILE HEADER CARD
+                =========================================== -->
+
+                <div class="mb-6 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+
+                    <!-- Blue cover -->
+
+                    <div class="h-28 bg-gradient-to-r from-[#0b2a4a] to-[#17619a] sm:h-36">
+                    </div>
+
+
+                    <!-- Profile information -->
+
+                    <div class="px-5 pb-6 sm:px-7">
+
+                        <div class="-mt-12 flex flex-col gap-4 sm:-mt-14 sm:flex-row sm:items-end sm:justify-between">
+
+                            <div class="flex flex-col items-start gap-4 sm:flex-row sm:items-end">
+
+                                <!-- Passport -->
+
+                                <div class="relative">
+
+                                    <img
+                                        src="https://i.pravatar.cc/200?img=12"
+                                        alt="Christian Okotoaza"
+                                        class="h-24 w-24 rounded-2xl border-4 border-white object-cover shadow-md sm:h-28 sm:w-28"
+                                    >
+
+                                    <!-- Online indicator -->
+
+                                    <span class="absolute bottom-2 right-2 h-3.5 w-3.5 rounded-full border-2 border-white bg-emerald-500">
+                                    </span>
+
+                                </div>
+
+
+                                <!-- Name -->
+
+                                <div class="pb-1">
+
+                                    <h2 class="text-xl font-bold text-slate-900">
+                                        Christian Okotoaza
+                                    </h2>
+
+                                    <p class="mt-1 text-sm text-slate-500">
+                                        Student ID: MSR/2025/00245
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Status -->
+
+                            <div class="flex items-center gap-2 rounded-lg bg-emerald-50 px-3 py-2">
+
+                                <span class="h-2 w-2 rounded-full bg-emerald-500">
+                                </span>
+
+                                <span class="text-xs font-semibold text-emerald-700">
+                                    Active Student
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ==========================================
+                     INFORMATION GRID
+                =========================================== -->
+
+                <div class="grid gap-6 xl:grid-cols-3">
+
+
+                    <!-- ======================================
+                         PERSONAL INFORMATION
+                    ======================================= -->
+
+                    <div class="rounded-xl border border-slate-200 bg-white shadow-sm xl:col-span-2">
+
+                        <div class="border-b border-slate-100 px-5 py-4 sm:px-6">
+
+                            <h3 class="text-sm font-bold text-slate-900">
+                                Personal Information
+                            </h3>
+
+                            <p class="mt-1 text-xs text-slate-500">
+                                Your basic personal details.
+                            </p>
+
+                        </div>
+
+
+                        <div class="grid grid-cols-1 gap-x-8 gap-y-6 p-5 sm:grid-cols-2 sm:p-6">
+
+
+                            <!-- First Name -->
+
+                            <div>
+
+                                <p class="mb-1 text-[10px] font-semibold uppercase tracking-wide text-slate-400">
+                                    First Name
+                                </p>
+
+                                <p class="text-sm font-medium text-slate-700">
+                                    Christian
+                                </p>
+
+                            </div>
+
+
+                            <!-- Last Name -->
+
+                            <div>
+
+                                <p class="mb-1 text-[10px] font-semibold uppercase tracking-wide text-slate-400">
+                                    Last Name
+                                </p>
+
+                                <p class="text-sm font-medium text-slate-700">
+                                    Okotoaza
+                                </p>
+
+                            </div>
+
+
+                            <!-- Other Name -->
+
+                            <div>
+
+                                <p class="mb-1 text-[10px] font-semibold uppercase tracking-wide text-slate-400">
+                                    Other Name
+                                </p>
+
+                                <p class="text-sm font-medium text-slate-700">
+                                    Emmanuel
+                                </p>
+
+                            </div>
+
+
+                            <!-- Gender -->
+
+                            <div>
+
+                                <p class="mb-1 text-[10px] font-semibold uppercase tracking-wide text-slate-400">
+                                    Gender
+                                </p>
+
+                                <p class="text-sm font-medium text-slate-700">
+                                    Male
+                                </p>
+
+                            </div>
+
+
+                            <!-- Date of Birth -->
+
+                            <div>
+
+                                <p class="mb-1 text-[10px] font-semibold uppercase tracking-wide text-slate-400">
+                                    Date of Birth
+                                </p>
+
+                                <p class="text-sm font-medium text-slate-700">
+                                    15 March 2010
+                                </p>
+
+                            </div>
+
+
+                            <!-- Phone -->
+
+                            <div>
+
+                                <p class="mb-1 text-[10px] font-semibold uppercase tracking-wide text-slate-400">
+                                    Phone Number
+                                </p>
+
+                                <p class="text-sm font-medium text-slate-700">
+                                    0803 123 4567
+                                </p>
+
+                            </div>
+
+
+                            <!-- Email -->
+
+                            <div>
+
+                                <p class="mb-1 text-[10px] font-semibold uppercase tracking-wide text-slate-400">
+                                    Email Address
+                                </p>
+
+                                <p class="break-all text-sm font-medium text-slate-700">
+                                    christian@example.com
+                                </p>
+
+                            </div>
+
+
+                            <!-- Admission Number -->
+
+                            <div>
+
+                                <p class="mb-1 text-[10px] font-semibold uppercase tracking-wide text-slate-400">
+                                    Admission Number
+                                </p>
+
+                                <p class="text-sm font-medium text-slate-700">
+                                    MSR/2025/00245
+                                </p>
+
+                            </div>
+
+
+                            <!-- Address -->
+
+                            <div class="sm:col-span-2">
+
+                                <p class="mb-1 text-[10px] font-semibold uppercase tracking-wide text-slate-400">
+                                    Address
+                                </p>
+
+                                <p class="text-sm font-medium text-slate-700">
+                                    15 Airport Road, Benin City, Edo State
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ======================================
+                         ACADEMIC INFORMATION
+                    ======================================= -->
+
+                    <div class="rounded-xl border border-slate-200 bg-white shadow-sm">
+
+                        <div class="border-b border-slate-100 px-5 py-4">
+
+                            <h3 class="text-sm font-bold text-slate-900">
+                                Academic Information
+                            </h3>
+
+                            <p class="mt-1 text-xs text-slate-500">
+                                Current academic details.
+                            </p>
+
+                        </div>
+
+
+                        <div class="divide-y divide-slate-100">
+
+
+                            <!-- Class -->
+
+                            <div class="px-5 py-4">
+
+                                <p class="text-[10px] font-semibold uppercase tracking-wide text-slate-400">
+                                    Current Class
+                                </p>
+
+                                <p class="mt-1 text-sm font-semibold text-slate-700">
+                                    SS 2 Gold
+                                </p>
+
+                            </div>
+
+
+                            <!-- Session -->
+
+                            <div class="px-5 py-4">
+
+                                <p class="text-[10px] font-semibold uppercase tracking-wide text-slate-400">
+                                    Academic Session
+                                </p>
+
+                                <p class="mt-1 text-sm font-semibold text-slate-700">
+                                    2025/2026
+                                </p>
+
+                            </div>
+
+
+                            <!-- Term -->
+
+                            <div class="px-5 py-4">
+
+                                <p class="text-[10px] font-semibold uppercase tracking-wide text-slate-400">
+                                    Current Term
+                                </p>
+
+                                <p class="mt-1 text-sm font-semibold text-slate-700">
+                                    Second Term
+                                </p>
+
+                            </div>
+
+
+                            <!-- Department -->
+
+                            <div class="px-5 py-4">
+
+                                <p class="text-[10px] font-semibold uppercase tracking-wide text-slate-400">
+                                    Department
+                                </p>
+
+                                <p class="mt-1 text-sm font-semibold text-slate-700">
+                                    Science
+                                </p>
+
+                            </div>
+
+
+                            <!-- House -->
+
+                            <div class="px-5 py-4">
+
+                                <p class="text-[10px] font-semibold uppercase tracking-wide text-slate-400">
+                                    House
+                                </p>
+
+                                <p class="mt-1 text-sm font-semibold text-slate-700">
+                                    Blue House
+                                </p>
+
+                            </div>
+
+
+                            <!-- Enrollment -->
+
+                            <div class="px-5 py-4">
+
+                                <p class="text-[10px] font-semibold uppercase tracking-wide text-slate-400">
+                                    Enrollment Date
+                                </p>
+
+                                <p class="mt-1 text-sm font-semibold text-slate-700">
+                                    September 12, 2024
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ==========================================
+                     PARENT / GUARDIAN INFORMATION
+                =========================================== -->
+
+                <div class="mt-6 rounded-xl border border-slate-200 bg-white shadow-sm">
+
+                    <div class="border-b border-slate-100 px-5 py-4 sm:px-6">
+
+                        <h3 class="text-sm font-bold text-slate-900">
+                            Parent / Guardian Information
+                        </h3>
+
+                        <p class="mt-1 text-xs text-slate-500">
+                            Information about your parent or guardian.
+                        </p>
+
+                    </div>
+
+
+                    <div class="grid grid-cols-1 gap-6 p-5 sm:grid-cols-2 sm:p-6 lg:grid-cols-3">
+
+
+                        <!-- Name -->
+
+                        <div>
+
+                            <p class="mb-1 text-[10px] font-semibold uppercase tracking-wide text-slate-400">
+                                Full Name
+                            </p>
+
+                            <p class="text-sm font-medium text-slate-700">
+                                John Okotoaza
+                            </p>
+
+                        </div>
+
+
+                        <!-- Relationship -->
+
+                        <div>
+
+                            <p class="mb-1 text-[10px] font-semibold uppercase tracking-wide text-slate-400">
+                                Relationship
+                            </p>
+
+                            <p class="text-sm font-medium text-slate-700">
+                                Father
+                            </p>
+
+                        </div>
+
+
+                        <!-- Phone -->
+
+                        <div>
+
+                            <p class="mb-1 text-[10px] font-semibold uppercase tracking-wide text-slate-400">
+                                Phone Number
+                            </p>
+
+                            <p class="text-sm font-medium text-slate-700">
+                                0806 987 6543
+                            </p>
+
+                        </div>
+
+
+                        <!-- Email -->
+
+                        <div>
+
+                            <p class="mb-1 text-[10px] font-semibold uppercase tracking-wide text-slate-400">
+                                Email Address
+                            </p>
+
+                            <p class="break-all text-sm font-medium text-slate-700">
+                                parent@example.com
+                            </p>
+
+                        </div>
+
+
+                        <!-- Occupation -->
+
+                        <div>
+
+                            <p class="mb-1 text-[10px] font-semibold uppercase tracking-wide text-slate-400">
+                                Occupation
+                            </p>
+
+                            <p class="text-sm font-medium text-slate-700">
+                                Business Owner
+                            </p>
+
+                        </div>
+
+
+                        <!-- Address -->
+
+                        <div>
+
+                            <p class="mb-1 text-[10px] font-semibold uppercase tracking-wide text-slate-400">
+                                Address
+                            </p>
+
+                            <p class="text-sm font-medium text-slate-700">
+                                Benin City, Edo State
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ==========================================
+                     ACCOUNT INFORMATION
+                =========================================== -->
+
+                <div class="mt-6 rounded-xl border border-slate-200 bg-white shadow-sm">
+
+                    <div class="border-b border-slate-100 px-5 py-4 sm:px-6">
+
+                        <h3 class="text-sm font-bold text-slate-900">
+                            Account Information
+                        </h3>
+
+                        <p class="mt-1 text-xs text-slate-500">
+                            Information related to your student portal account.
+                        </p>
+
+                    </div>
+
+
+                    <div class="grid grid-cols-1 gap-6 p-5 sm:grid-cols-2 sm:p-6">
+
+
+                        <!-- Username -->
+
+                        <div>
+
+                            <p class="mb-1 text-[10px] font-semibold uppercase tracking-wide text-slate-400">
+                                Username
+                            </p>
+
+                            <p class="text-sm font-medium text-slate-700">
+                                MSR202500245
+                            </p>
+
+                        </div>
+
+
+                        <!-- Account Status -->
+
+                        <div>
+
+                            <p class="mb-1 text-[10px] font-semibold uppercase tracking-wide text-slate-400">
+                                Account Status
+                            </p>
+
+                            <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-semibold text-emerald-700">
+
+                                <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+
+                                Active
+
+                            </span>
+
+                        </div>
+
+
+                        <!-- Last Login -->
+
+                        <div>
+
+                            <p class="mb-1 text-[10px] font-semibold uppercase tracking-wide text-slate-400">
+                                Last Login
+                            </p>
+
+                            <p class="text-sm font-medium text-slate-700">
+                                August 4, 2026 at 10:42 AM
+                            </p>
+
+                        </div>
+
+
+                        <!-- Account Created -->
+
+                        <div>
+
+                            <p class="mb-1 text-[10px] font-semibold uppercase tracking-wide text-slate-400">
+                                Account Created
+                            </p>
+
+                            <p class="text-sm font-medium text-slate-700">
+                                September 12, 2024
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ==========================================
+                     NOTE
+                =========================================== -->
+
+                <div class="mt-6 flex gap-3 rounded-xl border border-blue-100 bg-blue-50 p-4">
+
+                    <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-100 text-sm">
+                        ℹ️
+                    </div>
+
+                    <div>
+
+                        <p class="text-xs font-semibold text-blue-900">
+                            Need to update your information?
+                        </p>
+
+                        <p class="mt-1 text-xs leading-5 text-blue-700">
+                            Some information on your profile can only be
+                            updated by your school administrator. Please
+                            contact your school if you notice any incorrect
+                            information.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+</body>
+</html>
+

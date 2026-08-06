@@ -23,7 +23,16 @@ let blogSchema = new Schema({
     role:{
         type:String
     },
-   
+    signature:{
+        type:String
+    },
+    profilePicture:{
+        type:String
+    },
+    classConrol:{
+        subject:String,
+        studentClass:String
+    }
    
 }, {timestamps: true})
 

@@ -1,0 +1,567 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Exam Instructions | MySchoolResult</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    >
+
+    <link
+        rel="icon"
+        href="myschoolresult.png"
+        type="image/png"
+    >
+
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        .start-btn {
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                background-color 0.2s ease;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(37, 99, 235, 0.25);
+        }
+
+        .start-btn:active {
+            transform: translateY(0);
+        }
+
+    </style>
+
+</head>
+
+
+<body class="min-h-screen bg-slate-50 text-slate-800">
+
+
+    <!-- ==========================================
+         HEADER
+    =========================================== -->
+
+    <header class="border-b border-slate-200 bg-white">
+
+        <div class="mx-auto flex h-16 max-w-5xl items-center justify-between px-4 sm:px-6">
+
+            <!-- Logo -->
+
+            <div class="flex items-center gap-3">
+
+                <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-600 text-white">
+
+                    <i class="fas fa-graduation-cap"></i>
+
+                </div>
+
+                <div>
+
+                    <p class="text-sm font-bold text-slate-900">
+                        MySchoolResult
+                    </p>
+
+                    <p class="hidden text-[10px] text-slate-400 sm:block">
+                        Online Examination
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Student -->
+
+            <div class="flex items-center gap-3">
+
+                <div class="hidden text-right sm:block">
+
+                    <p class="text-xs font-semibold text-slate-800">
+                        James11
+                    </p>
+
+                    <p class="text-[10px] text-slate-400">
+                        Student
+                    </p>
+
+                </div>
+
+
+                <div class="flex h-9 w-9 items-center justify-center rounded-full bg-blue-100 text-xs font-bold text-blue-700">
+
+                    J
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ==========================================
+         MAIN
+    =========================================== -->
+
+    <main class="mx-auto w-full max-w-4xl px-4 py-8 sm:px-6 sm:py-12">
+
+
+        <!-- Breadcrumb -->
+
+        <div class="mb-6 flex items-center gap-2 text-[11px] text-slate-400">
+
+            <span>
+                Examinations
+            </span>
+
+            <i class="fas fa-chevron-right text-[8px]"></i>
+
+            <span class="font-medium text-slate-600">
+                Exam Instructions
+            </span>
+
+        </div>
+
+
+
+        <!-- ==========================================
+             EXAM HEADER
+        =========================================== -->
+
+        <section class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+
+
+            <!-- Blue Header -->
+
+            <div class="bg-gradient-to-r from-blue-700 to-blue-600 px-5 py-7 text-white sm:px-8">
+
+                <div class="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+
+
+                    <div>
+
+                        <div class="mb-3 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 text-[10px] font-semibold text-blue-100">
+
+                            <i class="fas fa-file-pen"></i>
+
+                            Examination
+
+                        </div>
+
+
+                        <h1 class="text-2xl font-bold sm:text-3xl">
+
+                            Mathematics
+
+                        </h1>
+
+
+                        <p class="mt-2 text-xs text-blue-100 sm:text-sm">
+
+                            Second Term Examination • 2025/2026
+
+                        </p>
+
+                    </div>
+
+
+                    <div class="hidden h-16 w-16 items-center justify-center rounded-2xl bg-white/10 sm:flex">
+
+                        <i class="fas fa-calculator text-2xl"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ==========================================
+                 EXAM STATISTICS
+            =========================================== -->
+
+            <div class="grid grid-cols-3 divide-x divide-slate-200 border-b border-slate-200">
+
+
+                <div class="px-3 py-5 text-center sm:px-6">
+
+                    <p class="text-lg font-bold text-slate-900 sm:text-xl">
+                        50
+                    </p>
+
+                    <p class="mt-1 text-[9px] font-medium uppercase tracking-wide text-slate-400 sm:text-[10px]">
+                        Questions
+                    </p>
+
+                </div>
+
+
+                <div class="px-3 py-5 text-center sm:px-6">
+
+                    <p class="text-lg font-bold text-slate-900 sm:text-xl">
+                        60
+                    </p>
+
+                    <p class="mt-1 text-[9px] font-medium uppercase tracking-wide text-slate-400 sm:text-[10px]">
+                        Minutes
+                    </p>
+
+                </div>
+
+
+                <div class="px-3 py-5 text-center sm:px-6">
+
+                    <p class="text-lg font-bold text-slate-900 sm:text-xl">
+                        50
+                    </p>
+
+                    <p class="mt-1 text-[9px] font-medium uppercase tracking-wide text-slate-400 sm:text-[10px]">
+                        Total Marks
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ==========================================
+                 CONTENT
+            =========================================== -->
+
+            <div class="p-5 sm:p-8">
+
+
+                <!-- Important Notice -->
+
+                <div class="mb-8 flex gap-3 rounded-xl border border-amber-200 bg-amber-50 p-4">
+
+                    <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-amber-100 text-amber-600">
+
+                        <i class="fas fa-exclamation"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <p class="text-xs font-bold text-amber-900">
+                            Important
+                        </p>
+
+                        <p class="mt-1 text-[11px] leading-5 text-amber-800">
+
+                            Your examination timer will begin immediately
+                            after you click the Start Examination button.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ==========================================
+                     INSTRUCTIONS
+                =========================================== -->
+
+                <div>
+
+                    <h2 class="text-sm font-bold text-slate-900">
+
+                        Before you begin
+
+                    </h2>
+
+                    <p class="mt-1 text-[11px] text-slate-400">
+
+                        Please make sure you understand the following.
+
+                    </p>
+
+
+                    <div class="mt-5 grid gap-3 sm:grid-cols-2">
+
+
+                        <!-- Rule 1 -->
+
+                        <div class="flex gap-3 rounded-xl border border-slate-100 bg-slate-50 p-4">
+
+                            <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-100 text-blue-600">
+
+                                <i class="fas fa-clock text-xs"></i>
+
+                            </div>
+
+                            <div>
+
+                                <p class="text-xs font-semibold text-slate-800">
+                                    Time Limit
+                                </p>
+
+                                <p class="mt-1 text-[10px] leading-5 text-slate-500">
+
+                                    You have 60 minutes to complete this examination.
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- Rule 2 -->
+
+                        <div class="flex gap-3 rounded-xl border border-slate-100 bg-slate-50 p-4">
+
+                            <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-emerald-100 text-emerald-600">
+
+                                <i class="fas fa-check text-xs"></i>
+
+                            </div>
+
+                            <div>
+
+                                <p class="text-xs font-semibold text-slate-800">
+                                    Review Answers
+                                </p>
+
+                                <p class="mt-1 text-[10px] leading-5 text-slate-500">
+
+                                    You can review and change your answers before submission.
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- Rule 3 -->
+
+                        <div class="flex gap-3 rounded-xl border border-slate-100 bg-slate-50 p-4">
+
+                            <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-purple-100 text-purple-600">
+
+                                <i class="fas fa-rotate text-xs"></i>
+
+                            </div>
+
+                            <div>
+
+                                <p class="text-xs font-semibold text-slate-800">
+                                    Avoid Refreshing
+                                </p>
+
+                                <p class="mt-1 text-[10px] leading-5 text-slate-500">
+
+                                    Do not refresh or close the examination page while writing.
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- Rule 4 -->
+
+                        <div class="flex gap-3 rounded-xl border border-slate-100 bg-slate-50 p-4">
+
+                            <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-orange-100 text-orange-600">
+
+                                <i class="fas fa-paper-plane text-xs"></i>
+
+                            </div>
+
+                            <div>
+
+                                <p class="text-xs font-semibold text-slate-800">
+                                    Automatic Submission
+                                </p>
+
+                                <p class="mt-1 text-[10px] leading-5 text-slate-500">
+
+                                    The examination will be submitted automatically when the timer expires.
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ==========================================
+                     CONFIRMATION
+                =========================================== -->
+
+                <div class="mt-8 border-t border-slate-100 pt-7">
+
+                    <label class="flex cursor-pointer items-start gap-3">
+
+                        <input
+                            id="confirm"
+                            type="checkbox"
+                            class="mt-0.5 h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500"
+                        >
+
+                        <span class="text-[11px] leading-5 text-slate-500">
+
+                            I have read the examination instructions and
+                            I am ready to begin this examination.
+
+                        </span>
+
+                    </label>
+
+
+                    <button
+                        id="startButton"
+                        onclick="startExam()"
+                        disabled
+                        class="start-btn mt-5 flex w-full items-center justify-center gap-3 rounded-xl bg-slate-200 px-6 py-4 text-sm font-bold text-slate-400 transition disabled:cursor-not-allowed sm:text-base"
+                    >
+
+                        <i class="fas fa-play"></i>
+
+                        Start Examination
+
+                        <i class="fas fa-arrow-right text-xs"></i>
+
+                    </button>
+
+
+                    <p class="mt-3 text-center text-[10px] text-slate-400">
+
+                        Once started, your examination timer cannot be paused.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- Footer -->
+
+        <p class="mt-6 text-center text-[10px] text-slate-400">
+
+            MySchoolResult • Online Examination System
+
+        </p>
+
+    </main>
+
+
+
+    <script>
+
+        const checkbox =
+            document.getElementById("confirm");
+
+        const startButton =
+            document.getElementById("startButton");
+
+
+        checkbox.addEventListener("change", () => {
+
+            if (checkbox.checked) {
+
+                startButton.disabled = false;
+
+                startButton.classList.remove(
+                    "bg-slate-200",
+                    "text-slate-400"
+                );
+
+                startButton.classList.add(
+                    "bg-blue-600",
+                    "text-white",
+                    "hover:bg-blue-700",
+                    "shadow-lg",
+                    "shadow-blue-500/20"
+                );
+
+            } else {
+
+                startButton.disabled = true;
+
+                startButton.classList.add(
+                    "bg-slate-200",
+                    "text-slate-400"
+                );
+
+                startButton.classList.remove(
+                    "bg-blue-600",
+                    "text-white",
+                    "hover:bg-blue-700",
+                    "shadow-lg",
+                    "shadow-blue-500/20"
+                );
+
+            }
+
+        });
+
+
+        function startExam() {
+
+            if (!checkbox.checked) {
+                return;
+            }
+
+            /*
+             * The server should verify the exam again before
+             * actually starting it.
+             */
+
+            window.location.href =
+                "/myschool/quiz/exam";
+
+        }
+
+    </script>
+
+</body>
+
+</html>
