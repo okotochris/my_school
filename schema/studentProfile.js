@@ -13,7 +13,7 @@ const blogschema = new Schema({
     },
     schoolsession: {
         type: String,
-        required: true
+        
     },
     addmissionNo: {
         type: String

@@ -1,158 +1,174 @@
-<div id="tab-0" class="tab-content">
-  <div
-    class="bg-white rounded-3xl shadow-lg border border-slate-200 overflow-hidden"
-  >
-    <!-- Header -->
-    <div class="bg-gradient-to-r from-blue-600 to-indigo-600 p-8 text-white">
-      <div
-        class="flex flex-col md:flex-row md:items-center md:justify-between gap-6"
-      >
-        <div>
-          <h2 class="text-3xl font-bold">Subject Management</h2>
+<html lang="en">
 
-          <p class="text-blue-100 mt-2">
-            Manage subjects and assign teachers to each class.
-          </p>
-        </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/global.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Assign Class Teacher</title>
+</head>
 
-      </div>
-    </div>
+<body class="bg-slate-100">
+    <%- include("./partials/header.ejs") %>
 
-    <!-- CLASS SELECTOR -->
-
-    <div class="p-8 border-b">
-      <h3 class="font-semibold text-lg mb-4">Select a Class</h3>
-
-      <div
-        id="classLevelCards"
-        class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-4"
-      >
-        <!-- JS -->
-      </div>
-    </div>
-    <!-- Add Subject Modal -->
-    <div
-      id="subjectModal"
-      class="absolute hidden inset-5 bg-black/50 items-center justify-center z-50 p-4"
-    >
-      <div class="h-10"></div>
-      <div
-        class="bg-white rounded-3xl w-full max-w-5xl shadow-2xl overflow-hidden"
-      >
-        <!-- Header -->
-        <div class="bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-6">
-          <div class="flex justify-between items-center">
-            <div>
-              <h2 class="text-2xl font-bold text-white">Add Subjects</h2>
-
-              <p class="text-blue-100 mt-1">Add multiple subjects at once.</p>
-            </div>
-
-            <button
-              onclick="closeSubjectModal()"
-              class="text-white text-3xl hover:opacity-80"
+        <div class="flex">
+            <%- include("./partials/navigation.ejs") %>
+            <div id="tab-0" class="tab-content">
+            <div
+                class="bg-white rounded-3xl shadow-lg border border-slate-200 overflow-hidden"
             >
-              &times;
-            </button>
-          </div>
+                <!-- Header -->
+                <div class="bg-gradient-to-r from-blue-600 to-indigo-600 p-8 text-white">
+                <div
+                    class="flex flex-col md:flex-row md:items-center md:justify-between gap-6"
+                >
+                    <div>
+                    <h2 class="text-3xl font-bold">Subject Management</h2>
+
+                    <p class="text-blue-100 mt-2">
+                        Manage subjects and assign teachers to each class.
+                    </p>
+                    </div>
+
+                </div>
+                </div>
+
+                <!-- CLASS SELECTOR -->
+
+                <div class="p-8 border-b">
+                <h3 class="font-semibold text-lg mb-4">Select a Class</h3>
+
+                <div
+                    id="classLevelCards"
+                    class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-4"
+                >
+                    <!-- JS -->
+                </div>
+                </div>
+                <!-- Add Subject Modal -->
+                <div
+                id="subjectModal"
+                class="absolute hidden inset-5 bg-black/50 items-center justify-center z-50 p-4"
+                >
+                <div class="h-10"></div>
+                <div
+                    class="bg-white rounded-3xl w-full max-w-5xl shadow-2xl overflow-hidden"
+                >
+                    <!-- Header -->
+                    <div class="bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-6">
+                    <div class="flex justify-between items-center">
+                        <div>
+                        <h2 class="text-2xl font-bold text-white">Add Subjects</h2>
+
+                        <p class="text-blue-100 mt-1">Add multiple subjects at once.</p>
+                        </div>
+
+                        <button
+                        onclick="closeSubjectModal()"
+                        class="text-white text-3xl hover:opacity-80"
+                        >
+                        &times;
+                        </button>
+                    </div>
+                    </div>
+
+                    <!-- Body -->
+                    <div class="p-8">
+                    <!-- Table Header -->
+                    <div
+                        class="hidden md:grid grid-cols-12 gap-4 font-semibold text-slate-600 border-b pb-3 mb-4"
+                    >
+                        <div class="col-span-5">Subject</div>
+
+                        <div class="col-span-5">Teacher</div>
+
+                        <div class="col-span-2 text-center">Action</div>
+                    </div>
+
+                    <!-- Dynamic Rows -->
+                    <div id="subjectRows" class="space-y-4">
+                        <!-- Row -->
+
+                    
+
+                        <!-- JS adds 3 more rows initially -->
+                    </div>
+
+                    <!-- Add Row -->
+
+                    <button
+                        onclick="addRow()"
+                        id="addRowBtn"
+                        class="mt-6 flex items-center gap-2 rounded-xl border border-dashed border-blue-400 px-5 py-3 text-blue-600 hover:bg-blue-50 transition"
+                    >
+                        ➕ Add Row
+                    </button>
+                    </div>
+
+                    <!-- Footer -->
+
+                    <div class="bg-slate-50 px-8 py-5 flex justify-end gap-4">
+                    <button
+                        onclick="closeSubjectModal()"
+                        class="rounded-xl border px-6 py-3"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        class="rounded-xl bg-blue-600 hover:bg-blue-700 text-white px-8 py-3"
+                        id="save-subject"
+                        onclick="saveSubject()"
+                    >
+                        Save Subjects
+                    </button>
+                    </div>
+                </div>
+                </div>
+
+                <!-- CURRENT CLASS -->
+
+                <div id="selectedClassHeader" class="hidden p-8 bg-blue-50 border-b">
+                <div class="flex items-center justify-between">
+                    <div>
+                    <p class="text-sm text-slate-500">Current Class</p>
+
+                    <h2 id="selectedClassName" class="text-3xl font-bold text-slate-800">
+                        JSS1
+                    </h2>
+                    </div>
+
+                    <div class="text-right">
+                    <p class="text-sm text-slate-500">Total Subjects</p>
+
+                    <p id="subjectCount" class="text-3xl font-bold text-blue-600">0</p>
+                    </div>
+                </div>
+                <button
+                    onclick="addSubjectToCurrentClass()"
+                    id="add_subject"
+                    class="bg-white text-blue-700 hover:bg-slate-100 rounded-xl px-6 py-3 font-semibold shadow"
+                    >
+                    ➕ Add Subject
+                    </button>
+                </div>
+
+                <!-- SUBJECTS -->
+                
+                <div class="p-8">
+                <div
+                    id="subjectsTableBody"
+                    class="grid md:grid-cols-2 xl:grid-cols-3 gap-6"
+                >
+                    <!-- JS Generates Cards -->
+                </div>
+                </div>
+                
+            </div>
+            </div>
         </div>
 
-        <!-- Body -->
-        <div class="p-8">
-          <!-- Table Header -->
-          <div
-            class="hidden md:grid grid-cols-12 gap-4 font-semibold text-slate-600 border-b pb-3 mb-4"
-          >
-            <div class="col-span-5">Subject</div>
-
-            <div class="col-span-5">Teacher</div>
-
-            <div class="col-span-2 text-center">Action</div>
-          </div>
-
-          <!-- Dynamic Rows -->
-          <div id="subjectRows" class="space-y-4">
-            <!-- Row -->
-
-          
-
-            <!-- JS adds 3 more rows initially -->
-          </div>
-
-          <!-- Add Row -->
-
-          <button
-            onclick="addRow()"
-            id="addRowBtn"
-            class="mt-6 flex items-center gap-2 rounded-xl border border-dashed border-blue-400 px-5 py-3 text-blue-600 hover:bg-blue-50 transition"
-          >
-            ➕ Add Row
-          </button>
-        </div>
-
-        <!-- Footer -->
-
-        <div class="bg-slate-50 px-8 py-5 flex justify-end gap-4">
-          <button
-            onclick="closeSubjectModal()"
-            class="rounded-xl border px-6 py-3"
-          >
-            Cancel
-          </button>
-
-          <button
-            class="rounded-xl bg-blue-600 hover:bg-blue-700 text-white px-8 py-3"
-            id="save-subject"
-            onclick="saveSubject()"
-          >
-            Save Subjects
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- CURRENT CLASS -->
-
-    <div id="selectedClassHeader" class="hidden p-8 bg-blue-50 border-b">
-      <div class="flex items-center justify-between">
-        <div>
-          <p class="text-sm text-slate-500">Current Class</p>
-
-          <h2 id="selectedClassName" class="text-3xl font-bold text-slate-800">
-            JSS1
-          </h2>
-        </div>
-
-        <div class="text-right">
-          <p class="text-sm text-slate-500">Total Subjects</p>
-
-          <p id="subjectCount" class="text-3xl font-bold text-blue-600">12</p>
-        </div>
-      </div>
-       <button
-          onclick="addSubjectToCurrentClass()"
-          id="add_subject"
-          class="bg-white text-blue-700 hover:bg-slate-100 rounded-xl px-6 py-3 font-semibold shadow"
-        >
-          ➕ Add Subject
-        </button>
-    </div>
-
-    <!-- SUBJECTS -->
-    
-    <div class="p-8">
-      <div
-        id="subjectsTableBody"
-        class="grid md:grid-cols-2 xl:grid-cols-3 gap-6"
-      >
-        <!-- JS Generates Cards -->
-      </div>
-    </div>
-    
-  </div>
-</div>
-
-<!-- STUDENT SCRIPT -->
+        <!-- STUDENT SCRIPT -->
 <script>
    let allSubjects = []
   document.addEventListener("DOMContentLoaded", async() => {
@@ -162,63 +178,64 @@
             return
         }
         const {subject} =await result.json()
-       
+       console.log(subject)
         allSubjects = subject
         renderClassLevelCards(subject);
     
 });
  
 
-  let currentClassLevel = null;
+ 
 
   const classLevels = [
-    { name: "Nursery", icon: "🌱" },
-    { name: "Basic", icon: "📘" },
-    { name: "Junior", icon: "🏫" },
-    { name: "Senior", icon: "🎓" },
-  ];
-  let subjectClass = ''
-  function renderClassLevelCards(item) {
-    const container = document.getElementById("classLevelCards");
-    container.innerHTML = "";
-  
-    classLevels.forEach((level) => {
-      const count = item.filter(s=>(s.subjectClass === level.name))[0].subjects.length
-  
-      const card = document.createElement("button");
+  { name: "Nursery", icon: "🌱" },
+  { name: "Basic", icon: "📘" },
+  { name: "Junior", icon: "🏫" },
+  { name: "Senior", icon: "🎓" },
+];
 
-      card.className =
-        "rounded-2xl border bg-white p-6 shadow-sm hover:shadow-lg hover:border-blue-500 transition text-left";
+let subjectClass = '';
 
-      card.innerHTML = `
-            <div class="text-5xl">${level.icon}</div>
+function renderClassLevelCards(item = []) {
+  const container = document.getElementById("classLevelCards");
+  container.innerHTML = "";
 
-            <h3 class="text-xl font-bold mt-4">
-                ${level.name}
-            </h3>
+  classLevels.forEach((level) => {
+    // Find the first matching subjectClass
+    const match = item.find(s => s.subjectClass === level.name);
 
-            <p class="text-sm text-slate-500 mt-1">
-                ${count} Subject${count !== 1 ? "s" : ""}
-            </p>
-        `;
+    // Safely get count (0 if no match or no subjects)
+    const count = match?.subjects?.length || 0;
 
-      card.onclick = async() => {
-        selectClassLevel(level.name)
-        subjectClass = level.name
-       
-      };
+    const card = document.createElement("button");
+    card.className =
+      "rounded-2xl border bg-white p-6 shadow-sm hover:shadow-lg hover:border-blue-500 transition text-left";
 
-      container.appendChild(card);
-    });
-  }
+    card.innerHTML = `
+      <div class="text-5xl">${level.icon}</div>
+      <h3 class="text-xl font-bold mt-4">${level.name}</h3>
+      <p class="text-sm text-slate-500 mt-1">
+        ${count} Subject${count !== 1 ? "s" : ""}
+      </p>
+    `;
 
+    card.onclick = async () => {
+      selectClassLevel(level.name);
+      subjectClass = level.name;
+    };
+
+    container.appendChild(card);
+  });
+}
+
+ let currentClassLevel = null;
 
   function selectClassLevel(level) {
     currentClassLevel = level;
     document.getElementById("selectedClassHeader").classList.remove("hidden");
     document.getElementById("selectedClassName").innerText = `${level} Section`;
     const filtered = allSubjects.filter((s) => s.subjectClass === level)
-    document.getElementById("subjectCount").innerText = filtered[0].subjects.length;
+    document.getElementById("subjectCount").innerText = filtered[0]?.subjects?.length || 0;
     renderSubjects(filtered, level);
   }
 
@@ -356,7 +373,7 @@ var teachers = []
     selectClassLevel(currentClassLevel);
   }
 
-
+  //DELETE SUBJECT
   async function deleteSubject(subjectClass, id) {
     if (!confirm("Delete subject?")) return;
     const result =await fetch(`/api/subject/${subjectClass}/${id}`, {method:"Delete"})
@@ -369,7 +386,7 @@ var teachers = []
     allSubjects.find(item => item.subjectClass === subjectClass).subjects.filter(
         subject => subject._id.toString() !== id
     );
-    console.log(allSubjects)
+
     selectClassLevel(subjectClass);
   }
 
@@ -424,7 +441,7 @@ async function addRow() {
 
 }
    //GET ALL SUBJECT AND TEACHER 
-    function getSubjects() {
+function getSubjects() {
     const rows = document.querySelectorAll(".subject-row");
 
     const subjects = [];
@@ -441,8 +458,8 @@ async function addRow() {
     return subjects;
 
 }
- //Upload subject to backend
-   
+ 
+//Upload subject to backend
  async function saveSubject(){
        const subjectObj = getSubjects()
         
@@ -472,3 +489,6 @@ async function addRow() {
         }
     }
 </script>
+</body>
+
+</html>

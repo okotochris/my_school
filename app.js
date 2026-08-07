@@ -283,12 +283,3 @@ app.use((req, res) => {
   res.status(404).render("index");
 });
 
-
-
-const passportSchema = new mongoose.Schema({}, { strict: false });
-const Passport = mongoose.model('studentpassport', passportSchema, 'studentpassport');
-
-// Now you can query
-Passport.find().then(docs => {
-  console.log(docs);
-});

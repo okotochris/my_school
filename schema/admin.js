@@ -17,21 +17,23 @@ let blogSchema = new Schema({
     password:{
         type:String
     },
-    number:{
+    phoneContact:{
         type:String
     },
     role:{
         type:String
     },
     signature:{
-        type:String
+        image:String,
+        public_id:String
     },
-    profilePicture:{
-        type:String
+    passport:{
+        image:String,
+        public_id:String
     },
-    classConrol:{
+    classControl:{
         subject:String,
-        studentClass:String
+        studentClass:[String]
     }
    
 }, {timestamps: true})

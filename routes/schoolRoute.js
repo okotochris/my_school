@@ -7,6 +7,7 @@ const Blacklist = require('../schema/blacklist.js')
 const Attendance = require('../schema/attendance.js')
 const Subject = require('../schema/subject.js')
 const upload = require('../middleware/upload.js')
+const cloudinary = require('../middleware/cloudinary.js')
 const router = express.Router()
 const schoolSection = require('../utility/schoolSection.js')
 
@@ -17,7 +18,7 @@ async function schoolFees(school){
 }
 //BLACKLIST API
 router.get("/blacklist", isAuthenticated, async (req, res) => {
-   const role= req.session.role
+    const role= req.session.role
     const fees = await schoolFees(req.session.school)
   try {
     let school = req.session.school;
@@ -208,14 +209,6 @@ router.get("/student-profile/:studentId", async (req, res) => {
     }
 });
 
-
-router.get('/admin/school-setting', isAuthenticated, async(req, res)=>{
-    const role= req.session.role
-    const fees = await schoolFees(req.session.school)
-    res.render('school_settings', { school: req.session.school, fees, role, title: "School Management Settings"})
-        
-})
-
 router.get('/admin/exam-settings', isAuthenticated, async(req, res)=>{
   const role= req.session.role
   const fees = await schoolFees(req.session.school)
@@ -293,35 +286,99 @@ router.post("/admin/update_attendance", isAuthenticated, async (req, res) => {
 
 });
 
-//SET TEACHER TO CLASS AND ADD SIGNATURE AND PROFILE PICTURE
-router.patch('/api/assign-class-teacher',   upload.fields([
+router.patch(
+  '/api/assign-class-teacher',
+  upload.fields([
     { name: 'passport', maxCount: 1 },
     { name: 'signature', maxCount: 1 }
   ]),
   async (req, res) => {
     try {
-      console.log(req.body);
-      console.log(req.files);
+      const { classes, teacher, phoneContact } = req.body;
 
       const passport = req.files?.passport?.[0];
       const signature = req.files?.signature?.[0];
 
-      console.log("Passport:", passport);
-      console.log("Signature:", signature);
+      // Upload if present, otherwise null
+      const passportResult = passport
+        ? await cloudinary.uploader.upload(passport.path, { folder: 'passport' })
+        : null;
 
-      // Your database logic here
+      const signatureResult = signature
+        ? await cloudinary.uploader.upload(signature.path, { folder: 'signature' })
+        : null;
+
+      // Safely extract values (null if no upload)
+      const passportUrl = passportResult?.secure_url || null;
+      const passportPublicId = passportResult?.public_id || null;
+
+      const signatureUrl = signatureResult?.secure_url || null;
+      const signaturePublicId = signatureResult?.public_id || null;
+
+      // Update teacher record
+      const teacherInfo = await Teacher.findOneAndUpdate(
+        { user_name: teacher, school: req.session.school },
+        {
+          classControl: { studentClass: classes },
+          phoneContact,
+          passport: {
+            image: passportUrl,
+            public_id: passportPublicId
+          },
+          signature: {
+            image: signatureUrl,
+            public_id: signaturePublicId
+          }
+        },
+        { new: true } // return updated doc
+      );
 
       res.status(200).json({
-        message: "Teacher assigned successfully"
+        message: 'Teacher assigned successfully',
+        teacherInfo
       });
-
     } catch (err) {
-      console.log(err);
-
-      res.status(500).json({
-        message: "Server error"
-      });
+      console.error(err);
+      res.status(500).json({ message: 'Server error' });
     }
   }
 );
+
+router.get('/admin/assign-class-teacher', isAuthenticated, async (req, res) => {
+    const role= req.session.role
+    const fees = await schoolFees(req.session.school)
+     const teachers = await Teacher.find({ classControl: { $ne: null }, school: req.session.school }).sort({updatedAt: -1});
+    res.render('assign-class-teacher', {
+        school: req.session.school,
+        fees,
+        role,
+        teachers,
+        title: 'Assign Class Teacher'
+    });
+    });
+
+router.get('/admin/school-setting', isAuthenticated, async(req, res)=>{
+    const role= req.session.role
+    const fees = await schoolFees(req.session.school)
+    const teachers = await Teacher.find({ classControl: { $ne: null }, school: req.session.school }).sort({updatedAt: -1});
+  
+    res.render('school_settings', { school: req.session.school, fees, role, teachers, title: "School Management Settings"})
+        
+})
+router.get('/admin/subject-management', isAuthenticated, async(req, res)=>{
+    const role= req.session.role
+    const fees = await schoolFees(req.session.school)
+    const teachers = await Teacher.find({ classControl: { $ne: null }, school: req.session.school }).sort({updatedAt: -1});
+  
+    res.render('subject-management', { school: req.session.school, fees, role, teachers, title: "Subject Management Settings"})
+        
+})
+router.get('/admin/timetable', isAuthenticated, async(req, res)=>{
+    const role= req.session.role
+    const fees = await schoolFees(req.session.school)
+    const teachers = await Teacher.find({ classControl: { $ne: null }, school: req.session.school }).sort({updatedAt: -1});
+  
+    res.render('timetable', { school: req.session.school, fees, role, teachers, title: "Timetable Management"})
+        
+})
 module.exports = router;
