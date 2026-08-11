@@ -1,41 +1,53 @@
 const express = require('express')
-const ABlog = require("../schema/admin.js");
-const schoolPfofile = require('../schema/schoolProfile.js')
+const Staff = require("../schema/admin.js");
+const SchoolPfofile = require('../schema/schoolProfile.js')
+const upload = require("../middleware/upload.js");
+const cloudinary = require("../middleware/cloudinary.js");
+const bcrypt = require("bcrypt");
+
 
 const router = express.Router()
 //saving admin login
 
 
-router.post("/admin_form", async (req, res) => {
-  const { user_name, school } = req.body
-
-  const Ablog = new ABlog(req.body);
-  Ablog.save()
-    .then((result) => {
-       req.session.visited = true;
-       req.session.user = user_name;
-       req.session.school = school;
-        req.session.role = 'admin'
-       req.session.fees = 38000;
-       res.status(200).json("/admin")
-    })
-    .catch((err) => {
-      console.log(err);
+router.post("/admin_form", upload.single('school-logo'), async (req, res) => {
+  try{
+    const {public_id, secure_url} = await cloudinary.uploader.upload(req.file.path, {
+      folder: "school-logos"
     });
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    req.body.password = hashedPassword;
+    await Staff.create(req.body);
+    console.log(public_id, secure_url )
+    await SchoolPfofile.create({
+      schoolName: req.body.school,
+      schoolEmail: req.body.email,
+      address: req.body.address,
+      phone: req.body.phone,
+      image: {
+      logo: secure_url,
+      public_id: public_id
+    }
+    });
+    res.status(200).json({msg:"Admin created successfully"})
+  }catch(err){
+    console.log(err)
+    res.status(500).json({msg:"server error"})
+  }
  
 });
 router.post("/login", async (req, res) => {
   const user = req.body.user;
   const password = req.body.password;
   try {
-    let data = await ABlog.findOne({ email: user, password: password });
+    let data = await Staff.findOne({ email: user, password: password });
     if(!data){
      return res.status(404).json({msg:"Invalid login details"})
     }
     let schoolName = data.school 
     let role = data.role;
     let id = data._id
-    let schoolFee = await schoolPfofile.findOne({schoolName})
+    let schoolFee = await SchoolPfofile.findOne({schoolName})
     
     if (data && schoolFee) {
       req.session.visited = true;

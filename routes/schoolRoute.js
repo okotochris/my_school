@@ -355,7 +355,17 @@ router.get('/admin/assign-class-teacher', isAuthenticated, async (req, res) => {
         teachers,
         title: 'Assign Class Teacher'
     });
-    });
+});
+router.delete('/api/assign-class-teacher/:teacherId', async (req, res) => {
+    try {
+        const { teacherId } = req.params;
+        await Teacher.findByIdAndUpdate(teacherId, { classControl: null });
+        res.status(200).json({ message: 'Teacher unassigned successfully' });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
 
 router.get('/admin/school-setting', isAuthenticated, async(req, res)=>{
     const role= req.session.role

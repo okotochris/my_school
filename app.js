@@ -37,7 +37,7 @@ app.use(
 );
 
 //connecting to dateabase
-const dbURI =
+const dbURI = 
   "mongodb+srv://data:L6EwGXzqyzLHNFxn@school.vvirl2y.mongodb.net/school?retryWrites=true&w=majority";
 mongoose
   .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
