@@ -371,7 +371,7 @@ router.get('/admin/school-setting', isAuthenticated, async(req, res)=>{
     const role= req.session.role
     const fees = await schoolFees(req.session.school)
     const teachers = await Teacher.find({ classControl: { $ne: null }, school: req.session.school }).sort({updatedAt: -1});
-  
+    const numStudents = await StudentProfile.countDocuments({ school: req.session.school });
     res.render('school_settings', { school: req.session.school, fees, role, teachers, title: "School Management Settings"})
         
 })

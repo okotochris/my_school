@@ -20,6 +20,7 @@ const updateRoute = require('./routes/update.js')
 const  analysisRoute = require('./routes/analysis.js');
 const StudentResult = require("./schema/studentResult.js");
 const studentRoute = require('./routes/student.js')
+const checkResultRoute = require('./routes/checkresult.js')
 const app = express();
 
 // middleware
@@ -275,7 +276,7 @@ app.use(updateRoute)
 app.use(adminRoute)
 app.use(resultUpload)
 app.use(studentRoute)
-// app.use(checkResultRoute)
+app.use(checkResultRoute)
 // app.use(staticRoute)
 app.use(exam)
 

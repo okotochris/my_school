@@ -8,6 +8,8 @@ const Blacklist = require("../schema/blacklist.js");
 const schoolPfofile = require("../schema/schoolProfile");
 const router = express.Router()
 
+
+
 //view student result from home page
 router.post("/result", async (req, res) => {
   let clas = req.body.class;
