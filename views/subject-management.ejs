@@ -243,16 +243,20 @@
                         "rounded-2xl border bg-white p-6 shadow-sm hover:shadow-lg hover:border-blue-500 transition text-left";
 
                     card.innerHTML = `
-      <div class="text-5xl">${level.icon}</div>
-      <h3 class="text-xl font-bold mt-4">${level.name}</h3>
-      <p class="text-sm text-slate-500 mt-1">
-        ${count} Subject${count !== 1 ? "s" : ""}
-      </p>
-    `;
+                    <div class="text-5xl">${level.icon}</div>
+                    <h3 class="text-xl font-bold mt-4">${level.name}</h3>
+                    <p class="text-sm text-slate-500 mt-1">
+                        ${count} Subject${count !== 1 ? "s" : ""}
+                    </p>
+                    `;
 
                     card.onclick = async () => {
                         selectClassLevel(level.name);
                         subjectClass = level.name;
+                        window.scrollTo({
+                            top: document.body.scrollHeight,
+                            behavior: "smooth"
+                        });
                     };
 
                     container.appendChild(card);
@@ -552,21 +556,21 @@
                     const data = await result.json()
                     const subject = data.added
 
-                   const classData = allSubjects.find(
-                    item => item.subjectClass === subjectClass
-                );
+                    const classData = allSubjects.find(
+                        item => item.subjectClass === subjectClass
+                    );
 
-                if (classData) {
-                    classData.subjects.push(...subject);
-                } else {
-                    allSubjects.push({
-                        subjectClass: subjectClass,
-                        subjects: subject
-                    });
-                }
+                    if (classData) {
+                        classData.subjects.push(...subject);
+                    } else {
+                        allSubjects.push({
+                            subjectClass: subjectClass,
+                            subjects: subject
+                        });
+                    }
 
-                selectClassLevel(subjectClass);
-                closeSubjectModal();
+                    selectClassLevel(subjectClass);
+                    closeSubjectModal();
                 } catch (error) {
                     console.log(error)
                 } finally {
