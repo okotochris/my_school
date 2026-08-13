@@ -47,8 +47,8 @@ function tableDis(result) {
 
     if (!acc[student.userName]) {
       acc[student.userName] = {
-        userName: student.userName,
-        class: student.class || "Unknown",
+        userName: student.fullname,
+        class: student.studentClass || "Unknown",
         section: student.section || "Unknown",
         "FIRST TERM Average": 0,
         "SECOND TERM Average": 0,

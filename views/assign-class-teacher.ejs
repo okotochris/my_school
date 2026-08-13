@@ -1,0 +1,392 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/global.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Assign Class Teacher</title>
+</head>
+
+<body class="bg-slate-100">
+    <%- include("./partials/header.ejs") %>
+
+        <div class="flex">
+            <%- include("./partials/navigation.ejs") %>
+                <main class="flex-1 relative p-1">
+                    <!-- Header -->
+                    <div
+                        class="rounded-3xl bg-gradient-to-r from-blue-600 via-indigo-600 to-sky-500 text-white p-8 mb-8">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h1 class="text-4xl font-bold">🏫 Class Management</h1>
+                                <p class="text-blue-100 mt-2">
+                                    Assign teachers, upload documents and manage classes.
+                                </p>
+                            </div>
+
+                            <div class="hidden lg:flex gap-4">
+                                <div class="bg-white/20 px-5 py-3 rounded-2xl text-center">
+                                    <p class="text-sm">Classes</p>
+                                    <h2 class="text-2xl font-bold">16</h2>
+                                </div>
+                                <div class="bg-white/20 px-5 py-3 rounded-2xl text-center">
+                                    <p class="text-sm">Teachers</p>
+                                    <h2 class="text-2xl font-bold">
+                                        <%= teachers.length %>
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form -->
+                  
+                        <div class="grid lg:grid-cols-12 gap-8">
+
+                            <!-- Left -->
+                            <div class="lg:col-span-7">
+                                <form id="form" enctype="multipart/form-data">
+                                    <div class="bg-white rounded-3xl shadow-sm p-8 mb-8">
+                                        <h2 class="text-2xl font-bold mb-6">Assign Class Teacher</h2>
+
+                                        <div class="grid md:grid-cols-2 gap-6">
+                                            <!-- Class Select -->
+                                            <div class="space-y-2">
+                                                <label class="text-sm font-semibold text-slate-700">📚 Select Class</label>
+                                                <select multiple id="classSelect" name="classes"
+                                                    class="w-full rounded-2xl border border-slate-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-500 py-4 px-5">
+                                                    <option value="">Select Class</option>
+                                                    <option>PRE NURSERY</option>
+                                                    <option>NURSERY 1</option>
+                                                    <option>NURSERY 2</option>
+                                                    <option>NURSERY 3</option>
+                                                    <option>BASIC 1</option>
+                                                    <option>BASIC 2</option>
+                                                    <option>BASIC 3</option>
+                                                    <option>BASIC 4</option>
+                                                    <option>BASIC 5</option>
+                                                    <option>BASIC 6</option>
+                                                    <option>JSS 1</option>
+                                                    <option>JSS 2</option>
+                                                    <option>JSS 3</option>
+                                                    <option>SS 1</option>
+                                                    <option>SS 2</option>
+                                                    <option>SS 3</option>
+                                                </select>
+                                            </div>
+
+                                            <!-- Teacher Select -->
+                                            <div class="space-y-2">
+                                                <label class="text-sm font-semibold text-slate-700">👩‍🏫 Assign Teacher
+                                                    <span id="loading"></span></label>
+                                                <select id="teacherSelect" name="teacher"
+                                                    class="w-full rounded-2xl border border-slate-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-500 py-4 px-5">
+                                                </select>
+                                            </div>
+
+                                            <!-- Contact -->
+                                            <div class="space-y-2">
+                                                <label class="text-sm font-semibold text-slate-700">📞 Teacher
+                                                    Contact</label>
+                                                <input type="text" id="phoneContact" name="phoneContact"
+                                                    placeholder="Phone Number"
+                                                    class="w-full rounded-2xl border border-slate-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-500 py-4 px-5">
+                                            </div>
+                                        </div>
+
+                                        <div class="bg-white rounded-3xl shadow-sm p-8 sticky top-6">
+                                            <h2 class="text-2xl font-bold mb-6">Class Teacher Details</h2>
+
+                                            <div class="space-y-8">
+                                                <!-- Passport Upload -->
+                                                <div>
+                                                    <label class="block text-sm font-medium mb-3">Passport
+                                                        Photograph</label>
+                                                    <div
+                                                        class="border-2 border-dashed border-gray-300 rounded-2xl p-8 text-center hover:bg-slate-50 cursor-pointer">
+                                                        <input type="file" id="passport" name="passport" accept="image/*"
+                                                            class="hidden" onchange="previewImage(this, 'passportPreview')">
+                                                        <div onclick="document.getElementById('passport').click()"
+                                                            class="text-blue-600 hover:text-blue-700 font-medium">
+                                                            📷 Upload Passport
+                                                        </div>
+                                                        <img id="passportPreview"
+                                                            class="hidden mx-auto mt-4 w-28 h-28 object-cover rounded-2xl">
+                                                    </div>
+                                                </div>
+
+                                                <!-- Signature Upload -->
+                                                <div>
+                                                    <label class="block text-sm font-medium mb-3">Signature</label>
+                                                    <div
+                                                        class="border-2 border-dashed border-gray-300 rounded-2xl p-8 text-center hover:bg-slate-50 cursor-pointer">
+                                                        <input type="file" id="signature" name="signature" accept="image/*"
+                                                            class="hidden"
+                                                            onchange="previewImage(this, 'signaturePreview')">
+                                                        <div onclick="document.getElementById('signature').click()"
+                                                            class="text-blue-600 hover:text-blue-700 font-medium">
+                                                            ✍️ Upload Signature
+                                                        </div>
+                                                        <img id="signaturePreview"
+                                                            class="hidden mx-auto mt-4 h-20 object-contain">
+                                                    </div>
+                                                </div>
+
+                                                <!-- Save Button -->
+                                                <div class="pt-6 border-t">
+                                                    <button id="saveClassTeacherBtn" onclick="saveClassTeacher(event)"
+                                                        class="w-full bg-green-600 hover:bg-green-700 text-white py-5 rounded-2xl font-semibold text-lg transition">
+                                                        ✅ Save Class Teacher Information
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        
+                            <!-- Right Sidebar -->
+                           <div class="lg:col-span-5">
+                            <div
+                                id="teacherPreview"
+                                class="mt-8 bg-slate-50 rounded-2xl p-6 grid md:grid-cols-2 gap-6">
+
+                                <% if (teachers && teachers.length > 0) { %>
+
+                                    <% teachers.forEach(teacher => { %>
+
+                                        <div 
+                                            id="teacher-<%=teacher._id%>"
+                                            class="bg-white rounded-2xl shadow-sm p-4 flex flex-col items-center hover:shadow-md transition">
+
+                                            <div class="w-20 h-20 rounded-2xl overflow-hidden bg-slate-200">
+
+                                                <% if (teacher.passport) { %>
+
+                                                    <img
+                                                        src="<%= teacher.passport.image %>"
+                                                        class="w-full h-full object-cover">
+
+                                                <% } else { %>
+
+                                                    <div class="w-full h-full flex items-center justify-center text-3xl">
+                                                        👤
+                                                    </div>
+
+                                                <% } %>
+
+                                            </div>
+
+                                            <p class="font-semibold text-lg mt-3">
+                                                <%= teacher.user_name.split(' ')[0] %>
+                                            </p>
+
+                                            <p class="text-gray-500 text-sm text-center">
+                                                <strong>Class:</strong>
+                                                <%= teacher.classControl?.studentClass?.join(', ') || 'Not Assigned' %>
+                                            </p>
+
+                                            <p class="text-gray-500 text-sm">
+                                                <strong>Phone:</strong>
+                                                <%= teacher.phoneContact || 'N/A' %>
+                                            </p>
+                                           <button 
+                                            onclick="if(confirm('Are you sure you want to unassign this teacher?')) deleteAssignedTeacher('<%= teacher._id %>')"
+                                            id="deleteBtn-<%= teacher._id %>"
+                                            class=" bg-red-600 hover:bg-red-800 text-white px-4 rounded-lg">
+                                            🗑️ Delete
+                                            </button>
+
+                                        </div>
+
+                                    <% }) %>
+
+                                <% } else { %>
+
+                                    <div class="col-span-full text-center py-12">
+
+                                        <div class="text-6xl mb-4">
+                                            👨‍🏫
+                                        </div>
+
+                                        <h3 class="text-xl font-semibold">
+                                            No Teacher Assigned
+                                        </h3>
+
+                                        <p class="text-gray-500 mt-2">
+                                            Select a class and teacher above to get started.
+                                        </p>
+
+                                    </div>
+
+                                <% } %>
+
+                            </div>
+
+                        </div>
+
+                        </div>
+                   
+                </main>
+        </div>
+        
+        <script>
+            let allTeachers = [];
+            const loading = document.querySelector('#loading');
+            //FETCH TEACHERS AND POPULATE SELECT
+            (async () => {
+                loading.style.display = 'block'
+                try {
+                    const data = await fetch('/api/teachers')
+                    if (!data.ok) {
+                        alert("something went wrong")
+                        return
+                    }
+                    const { teachers } = await data.json()
+                    allTeachers = teachers; // Store the fetched teachers in the global variable
+                    document.getElementById('teacherSelect').innerHTML =
+                        `<option value="" disabled selected>Select Teacher</option>` +
+                        teachers.map(teacher =>
+                            `<option value="${teacher.user_name}">${teacher.user_name}</option>`
+                        ).join('');
+
+
+                } catch (err) {
+                    console.log(err)
+                } finally {
+                    loading.style.display = 'none'
+                }
+            })()
+            function previewImage(input, previewId) {
+                const file = input.files[0];
+
+                if (file) {
+                    const preview = document.getElementById(previewId);
+
+                    preview.src = URL.createObjectURL(file);
+                    preview.style.display = "block";
+                }
+            }
+
+            let isLoading = false;
+            async function saveClassTeacher(e) {
+                e.preventDefault();
+                if (isLoading) return; // Prevent multiple submissions
+                isLoading = true;
+                loading.style.display = 'block';
+                document.getElementById("saveClassTeacherBtn").disabled = true; // Disable the button to prevent multiple clicks
+                document.getElementById("saveClassTeacherBtn").innerHTML = "Saving..."; // Optionally change button text to indicate loading
+                const form = document.getElementById("form");
+                const data = new FormData(form);
+
+                try {
+                        const response = await fetch("/api/assign-class-teacher", {
+                        method: "PATCH",
+                        body: data,
+                    });
+                    if (!response.ok) {
+                        throw new Error("Failed to save class teacher information");
+                    }
+
+                    // Update the teacher preview with the uploaded images
+                    const { teacherInfo } = await response.json();
+
+                    const previewContainer = document.getElementById("teacherPreview");
+
+                    previewContainer.insertAdjacentHTML("beforeend", `
+                    <div class="bg-white rounded-2xl shadow-sm p-4 flex flex-col items-center hover:bg-slate-50 transition">
+                        <div class="w-20 h-20 bg-gray-200 rounded-2xl flex items-center justify-center text-3xl">👤</div>
+                        <p class="font-semibold text-lg mt-3">${teacherInfo.user_name}</p>
+                        <p class="text-gray-500 text-sm">Class: ${teacherInfo.classControl.studentClass.join(', ')}</p>
+                        <p class="text-gray-500 text-sm">Phone: ${teacherInfo.phoneContact || 'N/A'}</p>
+                    </div>
+                    `);
+
+                } catch (error) {
+                    console.error(error);
+                } finally {
+                    // Optionally, you can reset the form or provide feedback to the user here
+                    loading.style.display = 'none';
+                    document.getElementById("saveClassTeacherBtn").disabled = false; // Re-enable the button
+                    document.getElementById("saveClassTeacherBtn").innerHTML = "Save Class Teacher Information"; // Reset button text
+                    isLoading = false;
+                }
+            }   
+
+            //delete assigned teacher
+            async function deleteAssignedTeacher(teacherId) {
+                console.log(`Attempting to delete teacher with ID: ${teacherId}`);
+                //changing the innerText to deleting 
+                const deleteBtn = document.getElementById(`deleteBtn-${teacherId}`);
+                    deleteBtn.innerHTML = "Deleting...";
+                    deleteBtn.disabled = true;
+                
+                try {
+                    const response = await fetch(`/api/assign-class-teacher/${teacherId}`, {
+                        method: 'DELETE',
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Failed to delete assigned teacher');
+                    }
+
+                    // Remove the teacher preview from the DOM
+                    const teacherElement = document.getElementById(`teacher-${teacherId}`);
+                    if (teacherElement) {
+                        teacherElement.remove();
+                    }
+
+                } catch (error) {
+                    console.error(error);
+                    // Re-enable the delete button and reset its text in case of an error
+                    const deleteBtn = document.getElementById(`deleteBtn-${teacherId}`);
+                    if (deleteBtn) {
+                        deleteBtn.innerHTML = "Delete";
+                        deleteBtn.disabled = false;
+                    }
+                }finally {
+                    // Ensure the button is re-enabled and text reset in case of any outcome
+                    const deleteBtn = document.getElementById(`deleteBtn-${teacherId}`);
+                    if (deleteBtn) {
+                        deleteBtn.innerHTML = "Delete";
+                        deleteBtn.disabled = false;
+                    }
+                }
+            }
+            
+        //UPDATE TEACHER IMAGE, SIGNATURE AND CONTACT IN PREVIEW
+        document.getElementById('teacherSelect').onchange = (e) => {
+            const selectedTeacherName = e.target.value;
+            console.log(selectedTeacherName);
+            const selectedTeacher = allTeachers.find(teacher => teacher.user_name === selectedTeacherName);
+            console.log(selectedTeacher);
+            if (selectedTeacher) {
+                // Update the phone contact input
+                document.getElementById('phoneContact').value = selectedTeacher.phoneContact || '';
+
+                // Update the passport preview
+                const passportPreview = document.getElementById('passportPreview');
+                if (selectedTeacher.passport && selectedTeacher.passport.image) {
+                    passportPreview.src = selectedTeacher.passport.image;
+                    passportPreview.style.display = 'block';
+                } else {
+                    passportPreview.src = '';
+                    passportPreview.style.display = 'none';
+                }
+
+                // Update the signature preview
+                const signaturePreview = document.getElementById('signaturePreview');
+                if (selectedTeacher.signature && selectedTeacher.signature.image) {
+                    signaturePreview.src = selectedTeacher.signature.image;
+                    signaturePreview.style.display = 'block';
+                } else {
+                    signaturePreview.src = '';
+                    signaturePreview.style.display = 'none';
+                }
+            }
+        };
+        </script>
+</body>
+
+</html>

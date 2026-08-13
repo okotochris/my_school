@@ -1,37 +1,26 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const multer = require("multer");
-const Blog = require("./schema/data.js"); //junior class
-const SBlog = require("./schema/datas.js"); // sinior class
-const ABlog = require("./schema/admin.js");
-const PBlog = require("./schema/primary.js"); //basic class
-const Blacklist = require("./schema/blacklist.js");
-const nuseryBlog = require("./schema/nursery.js"); // nursery
-const nodemailer = require("nodemailer");
-const Studentpassport = require("./schema/goldenPassport.js");
 const path = require("path");
 const cors = require("cors");
 const session = require("express-session");
 require("dotenv").config();
-const schoolPfofile = require("./schema/schoolProfile");
 const MongoStore = require("connect-mongo");
-const { router: newsRouter} = require('./routes/news');
 const generateSitemap = require('./sitemap/sitemap.js')
-const resultGuide = require('./routes/resultCheckGuide.js')
-const authRoute = require('./routes/auth.js')
-const isAuthenticated = require('./utility/authenticated.js')
-const analysisRoute = require('./routes/analysis.js')
-const updateRoute = require('./routes/update.js')
-const payment = require('./routes/payment.js')
-const schoolRoute = require('./routes/schoolRoute.js')
-const apiCallsRoute = require('./routes/apiCalls.js')
-const checkResultRoute = require('./routes/checkresult.js')
-const staticRoute = require('./routes/staticRoute.js')
-const fetchNigerianSchoolNews = require('./utility/getNews.js')
-const cron = require("node-cron")
+const isAuthenticated = require("./utility/authenticated.js");
 const upload = require("./middleware/upload.js");
 const cloudinary = require("./middleware/cloudinary.js");
+const dashboardRoute = require("./routes/dashboardRoute.js");
+const adminRoute = require('./routes/schoolRoute.js')
 const exam = require('./routes/exam.js')
+const apiCallsRoute = require('./routes/apiCalls.js')
+const authRoute = require('./routes/auth.js')
+const resultUpload = require('./routes/uploadResult.js')
+const StudentProfile = require('./schema/studentProfile.js')
+const updateRoute = require('./routes/update.js')
+const  analysisRoute = require('./routes/analysis.js');
+const StudentResult = require("./schema/studentResult.js");
+const studentRoute = require('./routes/student.js')
+const checkResultRoute = require('./routes/checkresult.js')
 const app = express();
 
 // middleware
@@ -49,12 +38,13 @@ app.use(
 );
 
 //connecting to dateabase
-const dbURI =
+const dbURI = 
   "mongodb+srv://data:L6EwGXzqyzLHNFxn@school.vvirl2y.mongodb.net/school?retryWrites=true&w=majority";
 mongoose
   .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((result) => {
     console.log("Connected to MongoDB");
+   
       generateSitemap();
   })
   .catch((err) => {
@@ -77,25 +67,8 @@ app.use(
   })
 );
 
-// Schedule the task to run once a day at 2:00 AM
-cron.schedule("0 2 * * *", async () => {
-  console.log("🕑 Daily news fetch started:", new Date().toISOString());
 
-  try {
-    fetchNigerianSchoolNews();
-    generateSitemap();
-    console.log("✅ Daily news fetch completed:", new Date().toISOString());
-  } catch (err) {
-    console.error("❌ Daily news fetch failed:", err);
-  }
-});
-// Directory to store uploaded files
-const uploadDir = path.join(__dirname, "uploads");
 
-// // Check if directory exists and create it if it doesn't
-// if (!fs.existsSync(uploadDir)) {
-//   fs.mkdirSync(uploadDir, { recursive: true });
-// }
 
 //midle
 app.use(express.urlencoded({ extended: true }));
@@ -139,16 +112,6 @@ app.get("/admin", isAuthenticated, (req, res) => {
   res.render("admin", { school: req.session.school, fees: req.session.fees, role, title:"Upload Result"});
 });
 
-// API FOR SCHOOL MANAGEMENT SYSTEM
-app.get("/myschool", isAuthenticated, (req, res) => {
-  res.render("myschool");
-});
-app.get("/school", (req, res) => {
-  res.render("school");
-});
-app.get("/admin_form", (req, res) => {
-  res.render("admin_form");
-});
 
 //REMOVING NAME FROM BLACKLIST API CALL
 app.delete("/blacklist/:studentId", async (req, res) => {
@@ -184,140 +147,21 @@ app.post("/blacklist", async (req, res) => {
   }
 });
 
-//saving primary data to databse
-app.post("/primary", async (req, res) => {
-  req.body.schoolName = req.session.school;
-  try{
-    const Blog = new PBlog(req.body);
-    await Blog.save()
-    await updateFees(req.session.school, req)
-    res.render('primary')
-  }
-  catch(err){
-    console.log(err)
-  }
-    
-});
-
-//saving nursery database
-app.post("/nursery", async (req, res) => {
-  req.body.schoolName = req.session.school;
-  
-  try{
-    const Blog = new nuseryBlog(req.body);
-    await Blog.save()
-    await updateFees(req.session.school, req)
-    res.render('nursery')
-  }
-  catch(err){
-    console.log(err)
-  }
-});
-
-
-//saving junior data
-app.post("/adminJunior", async (req, res) => {
-  req.body.schoolName = req.session.school;
-  let schoolName = req.session.school;
-  try{
-    const blog = new Blog(req.body);
-    await blog.save()
-    await updateFees(schoolName, req)
-    res.render("adminJunior");
-  }
-  catch(err){
-    console.log(err)
-  }
-   
-});
-
-//saving senior data
-app.post("/adminSenior", async (req, res) => {
-  try {
-    const schoolName = req.session.school;
-    req.body.schoolName = schoolName; // Attach school name from session
-
-    // Save new senior blog entry
-    const Sblog = new SBlog(req.body);
-    await Sblog.save();
-
-    // Increment the school fee by 500 and update in MongoDB
-    await updateFees(schoolName, req)
-    res.render("adminSenior"); // Redirect after processing
- 
-  } catch (err) {
-    console.error(err);
-    res.status(500).send("Internal Server Error");
-  }
-});
-
-//LOGING IN TO ACCESSS SCHOOL RESULT PAGE
-app.get("/login", (req, res) => {
-  res.render("login");
-});
-
-//LOGING IN TO UPLOAD STUDENT RESULT
-app.post("/upload", isAuthenticated, (req, res) => {
-  let x = req.body.Sclass;
-
-  if (x == "senior") {
-    res.render("adminSenior");
-  } else if (x == "junior") {
-    res.render("adminJunior");
-  } else if (x == "primary") {
-    res.render("primary");
-  } else {
-    res.render("nursery");
-  }
-});
 
 //GET STUDENT INFORMATION BASE ON ID API CALL
 app.get("/studentinfomation", async (req, res) => {
 
   let studentId = req.query.studnetId;
+
   try {
-    let info = await Studentpassport.findOne({ studentId });
+    let info = await StudentProfile.findOne({ studentId });
   
     res.json(info);
   } catch (err) {
     console.log(err);
   }
 });
-//searching student ID base on student name API CALL
-app.get("/getstudentid", async (req, res) => {
-  try {
-    let student_name = req.query.student_name;
-    let school = req.session.school;
-    let studentId = await Studentpassport.find({
-      schoolName: school,
-      userName: { $regex: student_name, $options: "i" },
-    });
 
-    if (studentId) {
-      res.json(studentId);
-    } else {
-      res.status(404).json({ message: "Student not found" });
-    }
-  } catch (err) {
-    console.error("Server error:", err);
-    res.status(500).json({ message: "Server error" });
-  }
-});
-
-//getting student id by classname API CALL
-app.get("/getclassid", async (req, res) => {
-  let studentClass = req.query.class;
-  let schoolName = req.session.school;
-  try {
-    let studentId = await Studentpassport.find({
-      schoolName,
-      class: { $regex: studentClass, $options: "i" },
-    });
-    res.json(studentId);
-  } catch (err) {
-    console.log(err);
-  }
-});
 
 app.delete('/deletestaff', async (req, res)=>{
   let _id = req.query.id;
@@ -336,7 +180,7 @@ app.delete('/deletestaff', async (req, res)=>{
 })
 
 // saving student ID and passport
-app.post("/passport", upload.single("passport"), async (req, res) => {
+app.post("/create-studentProfile", upload.single("passport"), async (req, res) => {
   try {
     let image = null;
 
@@ -346,8 +190,8 @@ app.post("/passport", upload.single("passport"), async (req, res) => {
       image = result.secure_url;
     }
 
-    const newPassport = new Studentpassport({
-      userName: req.body.userName,
+    const studentProfile = new StudentProfile({
+      fullname: req.body.fullname,
       studentId: req.body.studentId,
       schoolsession: req.body.schoolsession,
       addmissionNo: req.body.addmissionNo,
@@ -358,9 +202,8 @@ app.post("/passport", upload.single("passport"), async (req, res) => {
       gender: req.body.gender
     });
 
-    await newPassport.save();
-    res.redirect("/generateid");
-
+    await studentProfile.save();
+    res.status(200).json({message:"Saved"})
   } catch (err) {
     console.error("Error saving passport:", err);
     res.status(500).send("Internal Server Error");
@@ -371,35 +214,7 @@ app.post("/myschool", (req, res) => {
   res.redirect("index");
 });
 
-// configuring nodemailer
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: "okotoazachristain@gmail.com",
-    pass: "bsnk bhyp bebw hwbt",
-  },
-});
-//contact us form API
-app.post("/contact", (req, res) => {
-  const { name, school, email, number, message } = req.body;
-  const mailOptions = {
-    from: email,
-    to: "okotoazachristain@gmail.com",
-    subject: "MY SCHOOL RESULT HELP",
-    text: `from\n Email: ${email} \n Name: ${name} \n School: ${school} \n Number: ${number}  \n ${message}`,
-    phone_number: number,
-  };
 
-  transporter.sendMail(mailOptions, (err, info) => {
-    if (err) {
-      console.log(err);
-      // Handle error, maybe send an error response to the client
-    } else {
-      // Redirect the client to the index page after sending the email
-      res.status(200).redirect("/");
-    }
-  });
-});
 //TESTING RESULT TEMPLATE
 app.get("/junior", (req, res) => {
   res.render("primary-result");
@@ -410,75 +225,6 @@ app.get("/schoolname", (req, res) => {
   res.json(school);
 });
 
-//LOGOUT API
-app.get("/logout", (req, res) => {
-  req.session.destroy();
-  //res.clearCookie('connect.sid'); 
-  res.redirect("login");
-});
-//STUDENT PERFOMANCE API CALL
-app.get("/studentperfomance", isAuthenticated, async (req, res) => {
-  try {
-    let studentClass = req.query.class;
-    let newClass = studentClass.split(" ");
-    let schoolName = req.session.school || "no school";
-    if (newClass[0] == "SS") {
-      result = await SBlog.find({
-        class: new RegExp("^" + req.query.class),
-        section: req.query.section,
-        schoolName: { $regex: schoolName, $options: "i" },
-      });
-    } else if (newClass[0] == "JSS") {
-      result = await Blog.find({
-        class: new RegExp("^" + req.query.class),
-        section: req.query.section,
-        schoolName: { $regex: schoolName, $options: "i" },
-      });
-    } else if (newClass[0] == "BASIC") {
-      result = await PBlog.find({
-        class: new RegExp("^" + req.query.class),
-        section: req.query.section,
-        schoolName: { $regex: schoolName, $options: "i" },
-      });
-    } else if (newClass[0] == "PRE") {
-      result = await nuseryBlog.find({
-        class: req.query.class,
-        section: req.query.section,
-        schoolName: { $regex: schoolName, $options: "i" },
-      });
-    } else if (newClass[0] == "NURSERY") {
-      result = await nuseryBlog.find({
-        class: new RegExp("^" + req.query.class),
-        section: req.query.section,
-        schoolName: { $regex: schoolName, $options: "i" },
-      });
-    }
-    if (result) {
-      res.json(result);
-    } else {
-      return res.status(404).json({ message: "Data not found" });
-    }
-  } catch (err) {
-    console.log(err);
-  }
-});
-
-//UPDATE SENIIOR RESULT
-app.get("/update-ss", isAuthenticated, (req, res) => {
-  res.render("update_ss");
-});
-//UPDATE JUNIOR RESULT
-app.get("/update-jss", isAuthenticated, (req, res) => {
-  res.render("update_jss");
-});
-//UPDATE  BASIC RESULT
-app.get("/update-basic", isAuthenticated, (req, res) => {
-  res.render("update_basic");
-});
-//UPDATE NURSERY RESULT
-app.get("/update-nursery", isAuthenticated, (req, res) => {
-  res.render("update_nursery");
-});
 //GETING RESULT FROM DATABASE
 app.get("/student-result", async (req, res) => {
   const { studentId, term, sClass } = req.query;
@@ -517,29 +263,24 @@ async function updateFees(schoolName, req){
   req.session.fees = updatedSchool.fees;
 }
 
-app.use(newsRouter)
-app.use(resultGuide)
-app.use(authRoute)
+
+
+app.use(dashboardRoute);
+// app.use(newsRouter)
+app.use(apiCallsRoute)
+//app.use(resultGuide)
+ app.use(authRoute)
 app.use(analysisRoute)
 app.use(updateRoute)
-app.use(payment)
-app.use(schoolRoute)
-app.use(apiCallsRoute)
+// app.use(payment)
+app.use(adminRoute)
+app.use(resultUpload)
+app.use(studentRoute)
 app.use(checkResultRoute)
-app.use(staticRoute)
+// app.use(staticRoute)
 app.use(exam)
+
 app.use((req, res) => {
   res.status(404).render("index");
 });
-
-const fs = require("fs");
-
-// CONFIGURE CLOUDINARY
-// DB MIGRATION FUNCTION
-
-// CONFIG
-
-
-
-
 

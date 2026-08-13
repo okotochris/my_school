@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Junior Secondary School Result Upload</title>
+    <Link rel="stylesheet" href="../styles/style.css" />
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="../admin">Back to Admin</a>
+        </nav>
+    </header>
+    <div class="platform">
+        <h2><%= subject.subjectClass.toUpperCase() %> SECONDARY SCHOOL FORM</h2>
+    </div>
+    <div class="upload_result">
+        <form onsubmit="submitResult(event)" id="form" >
+            <fieldset class="studentInfo">
+                <legend>STUDENT INFO:</legend>
+                <div class="student-info-grid">
+                    <input type="text" placeholder="First Name Middle Name Last Name" name="fullname" id="userName" required />
+                    <input type="text"  placeholder="ID eg JGE3853HTE" readonly name="studentId" id="studentId" required />
+                    <button type="button" style="width:100px; font-size:14px;" onclick="student()">Get ID</button>
+                </div>
+                <div id="respond" style="color:red; text-align: center; margin: 0.5rem 0;"></div>
+               <% const classOptions = {
+                    Senior: ["SS 1", "SS 2", "SS 3"],
+                    Junior: ["JSS 1", "JSS 2", "JSS 3"],
+                    Basic: ["BASIC 1", "BASIC 2", "BASIC 3", "BASIC 4", "BASIC 5", "BASIC 6"],
+                    Nursery: ["PRE NURSERY", "NURSERY 1", "NURSERY 2", "NURSERY 3"]
+                };
+
+                const options = classOptions[subject.subjectClass] || classOptions.Nursery;
+                %>
+
+            <div class="term-class-grid">
+
+                <label>CLASS</label>
+                <select id="Sclass" name="studentClass" required>
+                    <option value="" disabled selected>Select Class</option>
+                    <% options.forEach(item => { %>
+                        <option value="<%= item %>">
+                            <%= item %>
+                        </option>
+                    <% }) %>
+                </select>
+
+                <label>SCHOOL TERM</label>
+                <select id="Sterm" name="term" required>
+                    <option value="" disabled selected>Select Term</option>
+                    <option value="FIRST TERM">FIRST TERM</option>
+                    <option value="SECOND TERM">SECOND TERM</option>
+                    <option value="THIRD TERM">THIRD TERM</option>
+                </select>
+
+            </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>RESULT INFO:</legend>
+                <!-- SUBJECT -->
+                
+                <% subject.subjects.forEach(item => { %>
+                <div class="subject-row">
+                    <input type="text" class="subject-name"  value="<%= item.subjectName %>" readonly>
+                    <input type="number" placeholder="First Test" class="test1">
+                    <input type="number" placeholder="Second Test" class="test2">
+                    <input type="number" placeholder="CA" class="cca">
+                    <input type="number" placeholder="EXAM" class="exam">
+                    <input type="text" placeholder="Total" class="total"  readonly>
+                    <input type="text" placeholder="Grade" class="grade" readonly>
+                    <input type="text" placeholder="Remark" class="remark" readonly>
+                </div>
+                <% }) %>
+               
+            </fieldset>
+            <fieldset>
+                <legend>STUDENT PERFORMANCE</legend>
+                <div class="performance-grid">
+                    <div>
+                        <label>No. of subjects offered:</label>
+                        <input type="text" placeholder="No. of subjects offered" id="No_subj" name="No_subj" readonly />
+                    </div>
+                    <div>
+                        <label>Average score:</label>
+                        <input type="text" placeholder="Average score" id="average" name="average" required readonly />
+                    </div>
+                    <div>
+                        <label>Score obtainable:</label>
+                        <input type="text" placeholder="Score obtainable" id="score_obtainable" name="score_obtainable" readonly />
+                    </div>
+                    <div>
+                        <label>Total score obtained:</label>
+                        <input type="text" id="score_obtain" placeholder="Total score obtained" name="score_obtain" readonly />
+                    </div>
+                    <button type="button" style="width:150px; font-size:14px;" id="Calc">Compute Scores</button>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>CLASS TEACHER REPORT</legend>
+                <div class="other-info-grid">
+                    <select name="section" id="section" required>
+                        <option value="" disabled selected>Academic Section</option>
+                        <option value="2023 - 2024">2023 - 2024</option>
+                        <option value="2024 - 2025" >2024 - 2025</option>
+                        <option value="2025 - 2026" selected>2025 - 2026</option>
+                        <option value="2026 - 2027">2026 - 2027</option>
+                    </select>
+                    <input type="text" placeholder="Times present" name="present" />
+                    <input type="text" placeholder="Times absent" name="absent" />
+                    <input type="text" placeholder="Next term resume" name="nextterm"  />
+                    <%
+                        const promotionOptions = {
+                            Senior: ["SS 2", "SS 3"],
+                            Junior: ["JSS 2", "JSS 3", "SS 1"],
+                            Basic: ["BASIC 2", "BASIC 3", "BASIC 4", "BASIC 5", "BASIC 6"],
+                            Nursery: ["NURSERY 1", "NURSERY 2", "NURSERY 3"]
+                        };
+
+                        const promoteOptions = promotionOptions[subject.subjectClass] || [];
+                        %>
+
+                        <select id="promotedto" name="promote">
+
+                            <option value="" disabled selected>Promoted to</option>
+
+                            <% promoteOptions.forEach(item => { %>
+
+                                <option value="<%= item %>">
+                                    <%= item %>
+                                </option>
+
+                            <% }) %>
+
+                        </select>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>OTHER INFORMATION</legend>
+                <div class="other-info-grid">
+                    <input type="number" placeholder="Outstanding fees" name="fee" />
+                    <input type="text" placeholder="Class Teacher Report" id="report" name="tReport"  />
+                    <input type="text" placeholder="Head Teacher Report" name="Treport" id="Treport"  />
+                </div>
+            </fieldset>
+            <fieldset class="schoolInfo">
+                <legend>School Info:</legend>
+                <button id="upload-button">Upload Result</button>
+            </fieldset>
+            <p id="upload" style="color:red;"></p>
+        </form>
+    </div>
+    <%- include('./partials/popup') %>
+   
+    <script src="../js/fetch.js"></script>
+    <script src="../js/upDateStudentClass.js"></script>
+    <script src="../js/isResultUploaded.js"></script>
+    <script>
+        document.querySelectorAll(".subject-row").forEach(row => {
+            row.querySelectorAll("input[type='number']").forEach(input => {
+                input.addEventListener("input", () => {
+                    calculateRow(row);
+                });
+            });
+
+            });
+            function calculateRow(row) {
+                const test1 = Number(row.querySelector(".test1").value) || 0;
+                const test2 = Number(row.querySelector(".test2").value) || 0;
+                const cca = Number(row.querySelector(".cca").value) || 0;
+                const exam = Number(row.querySelector(".exam").value) || 0;
+                const remarkElement = row.querySelector(".remark")
+                const gradeElement = row.querySelector(".grade")
+                const total = test1 + test2 + cca + exam;
+                row.querySelector(".total").value = total;
+
+                // Calculate grade and remark...
+                const grades = [
+                    { min: 80, grade: "A+", remark: "Excellent" },
+                    { min: 70, grade: "A", remark: "Very Good" },
+                    { min: 60, grade: "B", remark: "Credit" },
+                    { min: 50, grade: "C", remark: "Merit" },
+                    { min: 40, grade: "D", remark: "Pass" },
+                    { min: 1,  grade: "F", remark: "Fail" }
+                ];
+
+                const result = grades.find(g => total >= g.min);
+
+                if (result) {
+                    gradeElement.value = result.grade;
+                    remarkElement.value = result.remark;
+                } else {
+                    gradeElement.value = "";
+                    remarkElement.value = "";
+                }
+            }
+
+            document.getElementById("Calc").addEventListener("click", function (e) {
+                e.preventDefault();
+
+                const totals = document.querySelectorAll(".total");
+
+                let total = 0;
+                let course = 0;
+
+                totals.forEach(input => {
+                    const score = Number(input.value) || 0;
+
+                    if (input.value !== "") {
+                        total += score;
+                        course++;
+                    }
+                });
+
+                const average = course ? (total / course).toFixed(2) : "";
+
+                document.getElementById("No_subj").value = course;
+                document.getElementById("average").value = average;
+                document.getElementById("score_obtain").value = total;
+                document.getElementById("score_obtainable").value = course * 100;
+
+                updatePerformance(average);
+        });
+        function updatePerformance(avg) {
+            let report = "";
+            if (avg >= 80)
+                report = "Excellent Performance. Keep It Up";
+            else if (avg >= 70)
+                report = "Very Good Performance. Keep It Up";
+            else if (avg >= 50)
+                report = "Good Performance";
+            else
+                report = "Poor Performance. Try Harder Next Term";
+
+           if (document.getElementById("Sterm").value === "THIRD TERM" && avg >= 50) {
+                const classOrder = [
+                    "PRE NURSERY", "NURSERY 1", "NURSERY 2", "NURSERY 3",
+                    "BASIC 1", "BASIC 2", "BASIC 3", "BASIC 4", "BASIC 5",
+                    "BASIC 6", "JSS 1", "JSS 2", "JSS 3", "SS 1", "SS 2",  "SS 3"
+                ];
+
+                const currentClass = document.getElementById("Sclass").value;
+                const currentIndex = classOrder.indexOf(currentClass);
+
+                if (currentIndex !== -1 && currentIndex < classOrder.length - 1) {
+                    report += ` Promoted to ${classOrder[currentIndex + 1]}`;
+                } else if (currentClass === "SS 3") {
+                    report += " Graduated";
+                }
+            }
+
+            document.getElementById("report").value = report;
+        }
+        
+        const submitResult = async(e)=>{
+            e.preventDefault()
+            const results = [];
+            document.querySelectorAll(".subject-row").forEach(row => {
+                results.push({
+                    subjectName: row.querySelector(".subject-name").value,
+                    firstTest: Number(row.querySelector(".test1").value),
+                    secondTest: Number(row.querySelector(".test2").value),
+                    cca: Number(row.querySelector(".cca").value),
+                    exam: Number(row.querySelector(".exam").value),
+                    total: Number(row.querySelector(".total").value),
+                    grade: row.querySelector(".grade").value,
+                    remark: row.querySelector(".remark").value
+                });
+            });
+            const form = document.getElementById('form')
+            const formData = Object.fromEntries(new FormData(form).entries());
+            formData.subjects= results;
+           try{
+                document.getElementById('upload-button').innerText = 'Uploading result....'
+                const result = await fetch('/upload-student-result', {
+                method:'POST',
+                 headers: {
+                        "Content-Type": "application/json"
+                    },
+                body: JSON.stringify(formData),
+            })
+                if(!result.ok){
+                    alert("unable to upload result try again")
+                    return
+                }
+                alert("result uploaded")
+                form.reset()
+            }catch(err){
+                console.log(err)
+                alert("server error")
+            }finally{
+                document.getElementById('upload-button').innerText = 'Upload Result'
+                
+            }
+        }
+</script>
+</body>
+</html>

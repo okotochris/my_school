@@ -21,7 +21,7 @@ function populateCards(dataArray) {
 
     dataArray.forEach((data) => {
 
-        const initials = data.userName
+        const initials = data.fullname
             .split(" ")
             .map(word => word[0])
             .join("")
@@ -47,7 +47,7 @@ function populateCards(dataArray) {
                     </div>
 
                     <div>
-                        <h3 class="font-semibold text-lg">${data.userName}</h3>
+                        <h3 class="font-semibold text-lg">${data.fullname}</h3>
                         <p class="text-gray-500">${data.class}</p>
                     </div>
 

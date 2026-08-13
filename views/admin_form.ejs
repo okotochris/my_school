@@ -23,7 +23,7 @@
 
 </head>
     <body>
-        <%-include('partials/header2') %>
+        <%-include('./partials/header2') %>
         <div style="height:100px"></div>
         <section id="result-checker" class="result-checker">
              <div class="container"></div>
@@ -34,7 +34,7 @@
                 </div>
                 <div class="form-group">
                     <label for="school">School Name</label>
-                    <input type="text" autocomplete="off" id="school" name="school"  placeholder="School Name" required/>
+                    <input type="text" autocomplete="off" id="school" name="school" placeholder="School Name" required/>
                 </div>
                 <div class="form-group">
                      <label for="email">Email</label>
@@ -43,6 +43,14 @@
                 <div class="form-group">
                      <label for="role">Role</label>
                      <input type="text" name="role" readonly value="admin" id="role" required />
+                </div>
+                 <div class="form-group">
+                     <label for="address">School Address</label>
+                     <input type="text" name="address" id="address" placeholder="Enter school address" required />
+                </div>
+                 <div class="form-group">
+                     <label for="role">School phone contact</label>
+                     <input type="text" name="phone" id="phone" placeholder="Enter school phone contact" required />
                 </div>
                  <div class="form-group">
                     <label for="Gender">Gender</label>
@@ -55,6 +63,10 @@
                  <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" autocomplete="off" placeholder="Password" name="password" id="password" required /></p>
+                 </div>
+                 <div class="form-group">
+                    <label for="school-logo">School Logo</label>
+                    <input type="file" accept="image/*" placeholder="School Logo" name="school-logo" id="school-logo" required />
                  </div>
                 
                 <p>
@@ -69,25 +81,18 @@
        
         form.addEventListener('submit', async (e) => {
         e.preventDefault(); // ✅ prevent default form submission
-
-        const user_name = document.getElementById("user_name").value
-        const email = document.getElementById('email').value;
-        const school = document.getElementById('school').value
-        const role = document.getElementById('role').value;
-        const password = document.getElementById('password').value
-        button.innerText = "loading..."
+        const formData = new FormData(form);
+       
+        button.innerText = "Creating Account....."
         button.disabled = true;
         try {
             const res = await fetch('/admin_form', {
                 method: "POST",
-                headers: {
-                    'Content-Type': "application/json"
-                },
-                body: JSON.stringify({user_name, email, school, role, password })
+                body: formData
             });
             const data = await res.json();
             if(res.ok){
-            return window.location.href = `${data}`;
+            return window.location.href = `/admin`;
             }
             button.style.backgroundColor = 'red'
             button.innerText = data.msg
@@ -102,7 +107,7 @@
         function reset(){
             button.style.backgroundColor = ' #0ea5e9'
             button.disabled = false;
-            button.innerText = "Login"
+            button.innerText = "signup"
         }
         document.getElementById('email').oninput=()=>{
             reset()

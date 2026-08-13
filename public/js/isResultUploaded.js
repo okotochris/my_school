@@ -25,7 +25,6 @@ async function isUploaded() {
     else{
          try {
         const res = await fetch(`/api/is_uploaded?sClass=${sClass}&sSection=${sSection}&id=${studentId}&term=${term}`);
-
         // RESULT EXISTS
         if (res.status === 200) {
             showPopup();

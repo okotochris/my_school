@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Management Dashboard</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+      <link rel="stylesheet" href="/styles/global.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <style>
+        body {
+            background: #f1f5f9;
+        }
+
+        .card {
+            transition: .35s;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+        }
+    </style>
+</head>
+
+<body>
+    <%- include("./partials/header.ejs") %>
+     <div class="flex">
+            <%- include("./partials/navigation.ejs") %>
+    <div class="flex-1 relative p-2">
+
+        <!-- ===================================================== -->
+        <!-- HEADER -->
+        <!-- ===================================================== -->
+
+        <div
+            class="rounded-3xl bg-gradient-to-r from-indigo-700 via-blue-600 to-cyan-500 text-white p-10 shadow-xl">
+
+            <div class="flex flex-col lg:flex-row justify-between gap-10">
+
+                <div>
+
+                    <span
+                        class="inline-flex items-center gap-2 bg-white/20 px-4 py-2 rounded-full text-sm">
+
+                        <i class="fa-solid fa-school"></i>
+
+                        School Administration
+
+                    </span>
+
+                    <h1 class="text-5xl font-bold mt-5">
+
+                        School Management
+
+                    </h1>
+
+                    <p class="mt-5 text-blue-100 max-w-2xl text-lg">
+
+                        Manage every aspect of your school from one dashboard.
+                        Students, Teachers, Subjects, Timetable, Results,
+                        Fees and School Settings.
+
+                    </p>
+
+                </div>
+
+                <div>
+
+                    <button
+                        class="bg-white text-blue-700 px-7 py-4 rounded-2xl font-semibold shadow-lg hover:bg-blue-50">
+
+                        <i class="fa-solid fa-gear mr-2"></i>
+
+                        School Settings
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+  
+        <!-- ===================================================== -->
+        <!-- SEARCH -->
+        <!-- ===================================================== -->
+
+        <div
+            class="bg-white rounded-3xl shadow-lg mt-8 p-6 border border-slate-200">
+
+            <div class="flex flex-col lg:flex-row gap-5">
+
+                <div class="flex-1 relative">
+
+                    <i
+                        class="fa-solid fa-magnifying-glass absolute left-5 top-5 text-gray-400"></i>
+
+                    <input
+                        type="text"
+                        placeholder="Search management modules..."
+                        class="w-full border rounded-2xl pl-14 pr-5 py-4 outline-none focus:ring-4 focus:ring-blue-100">
+
+                </div>
+
+                <button
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-8 rounded-2xl">
+
+                    Search
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- ===================================================== -->
+        <!-- QUICK ACTION -->
+        <!-- ===================================================== -->
+
+        <div class="mt-10">
+
+            <div class="flex justify-between items-center mb-6">
+
+                <div>
+
+                    <h2 class="text-3xl font-bold">
+
+                        Quick Actions
+
+                    </h2>
+
+                    <p class="text-gray-500">
+
+                        Frequently used modules.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-6">
+
+                <!-- STUDENTS -->
+
+                <a href="/generateid"
+                    class="card bg-white rounded-3xl p-7 shadow-lg border border-slate-200">
+
+                    <div
+                        class="w-16 h-16 rounded-2xl bg-blue-100 flex items-center justify-center">
+
+                        <i class="fa-solid fa-user-graduate text-blue-700 text-2xl"></i>
+
+                    </div>
+
+                    <h3 class="text-2xl font-bold mt-6">
+
+                        Students
+
+                    </h3>
+
+                    <p class="text-gray-500 mt-3">
+
+                        Register, update and manage student records.
+
+                    </p>
+
+                    <button
+                        class="mt-6 bg-blue-600 text-white px-5 py-3 rounded-xl">
+
+                        Open Module
+
+                    </button>
+
+                </a>
+
+                <!-- TEACHERS -->
+
+                <a href="/admin/assign-class-teacher"
+                    class="card bg-white rounded-3xl p-7 shadow-lg border border-slate-200">
+
+                    <div
+                        class="w-16 h-16 rounded-2xl bg-green-100 flex items-center justify-center">
+
+                        <i class="fa-solid fa-chalkboard-user text-green-700 text-2xl"></i>
+
+                    </div>
+
+                    <h3 class="text-2xl font-bold mt-6">
+
+                        Teachers
+
+                    </h3>
+
+                    <p class="text-gray-500 mt-3">
+
+                        Manage teachers and assign classes.
+
+                    </p>
+
+                    <button
+                        class="mt-6 bg-green-600 text-white px-5 py-3 rounded-xl">
+
+                        Open Module
+
+                    </button>
+
+                </a>
+
+                <!-- SUBJECTS -->
+
+                <a href="/admin/subject-management"
+                    class="card bg-white rounded-3xl p-7 shadow-lg border border-slate-200">
+
+                    <div
+                        class="w-16 h-16 rounded-2xl bg-red-100 flex items-center justify-center">
+
+                        <i class="fa-solid fa-book text-red-600 text-2xl"></i>
+
+                    </div>
+
+                    <h3 class="text-2xl font-bold mt-6">
+
+                        Subjects
+
+                    </h3>
+
+                    <p class="text-gray-500 mt-3">
+
+                        Create and manage school subjects.
+
+                    </p>
+
+                    <button
+                        class="mt-6 bg-red-600 text-white px-5 py-3 rounded-xl">
+
+                        Open Module
+
+                    </button>
+
+                </a>
+
+                <!-- CLASS -->
+
+                <a href="/admin/timetable"
+                    class="card bg-white rounded-3xl p-7 shadow-lg border border-slate-200">
+
+                   <div class="w-16 h-16 rounded-2xl bg-indigo-100 flex items-center justify-center">
+                        <i class="fa-solid fa-calendar-days text-indigo-700 text-2xl"></i>
+                    </div>
+
+                    <h3 class="text-2xl font-bold mt-6">
+
+                        Timetable
+
+                    </h3>
+
+                   <p class="text-slate-500 mt-3">
+                        Manage class and examination timetables.
+                    </p>
+
+
+                    <button
+                        class="mt-6 bg-purple-600 text-white px-5 py-3 rounded-xl">
+
+                        Open Module
+
+                    </button>
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- ===================================================== -->
+        <!-- PART 2 STARTS HERE -->
+        <!-- ===================================================== -->
+        <!-- ===================================================== -->
+        <!-- ACADEMIC MANAGEMENT -->
+        <!-- ===================================================== -->
+
+        <div class="mt-14">
+
+            <div class="flex items-center justify-between mb-8">
+
+                <div>
+                    <h2 class="text-3xl font-bold text-slate-800">
+                        📚 Academic Management
+                    </h2>
+
+                    <p class="text-slate-500 mt-2">
+                        Manage all academic activities within your school.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 gap-6">
+
+             
+
+                
+              
+                <!-- ATTENDANCE -->
+                <a href="/admin/attendance"
+                    class="card bg-white rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl p-7">
+
+                    <div class="w-16 h-16 rounded-2xl bg-green-100 flex items-center justify-center">
+                        <i class="fa-solid fa-user-check text-green-700 text-2xl"></i>
+                    </div>
+
+                    <h3 class="font-bold text-xl mt-6">
+                        Attendance
+                    </h3>
+
+                    <p class="text-slate-500 mt-3">
+                        Record and monitor daily attendance.
+                    </p>
+
+                    <div class="mt-6">
+                        <span class="text-green-600 font-semibold">
+                            Open Module →
+                        </span>
+                    </div>
+
+                </a>
+
+                <!-- ASSIGNMENTS -->
+                <a href="/admin/assignments"
+                    class="card bg-white rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl p-7">
+
+                    <div class="w-16 h-16 rounded-2xl bg-indigo-100 flex items-center justify-center">
+                        <i class="fa-solid fa-calendar-days text-indigo-700 text-2xl"></i>
+                    </div>
+
+                    <h3 class="font-bold text-xl mt-6">
+                        Assignments
+                    </h3>
+
+                    <p class="text-slate-500 mt-3">
+                        Create and manage assignments for students.
+                    </p>
+
+                    <div class="mt-6">
+                        <span class="text-orange-600 font-semibold">
+                            Open Module →
+                        </span>
+                    </div>
+
+                </a>
+
+                <!-- LESSON NOTES -->
+                <a href="/admin/lesson-notes"
+                    class="card bg-white rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl p-7">
+
+                    <div class="w-16 h-16 rounded-2xl bg-cyan-100 flex items-center justify-center">
+                        <i class="fa-solid fa-file-lines text-cyan-700 text-2xl"></i>
+                    </div>
+
+                    <h3 class="font-bold text-xl mt-6">
+                        Lesson Notes
+                    </h3>
+
+                    <p class="text-slate-500 mt-3">
+                        Upload and organize lesson plans.
+                    </p>
+
+                    <div class="mt-6">
+                        <span class="text-cyan-700 font-semibold">
+                            Open Module →
+                        </span>
+                    </div>
+
+                </a>
+
+             <!-- ID CARD -->
+                <a href="/admin/student-id"
+                    class="card bg-white rounded-3xl shadow-sm border border-slate-200 p-7">
+
+                    <div class="w-16 h-16 rounded-2xl bg-yellow-100 flex items-center justify-center">
+                        <i class="fa-solid fa-id-card text-yellow-700 text-2xl"></i>
+                    </div>
+
+                    <h3 class="font-bold text-xl mt-6">
+                        Student ID Cards
+                    </h3>
+
+                    <p class="text-slate-500 mt-3">
+                        Generate and print student identity cards.
+                    </p>
+
+                </a>
+             
+            </div>
+
+        </div>
+    </div>
+    </div>
+    
+</body>

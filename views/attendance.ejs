@@ -24,143 +24,220 @@
 
         <!-- Class & Date Selection -->
         <div class="bg-white rounded-2xl shadow-sm p-6 mb-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
                 <div>
-                    <label class="block text-sm font-medium mb-2">Select Class</label>
-                    <select id="classSelect" onchange="loadClassAttendance()" 
-                            class="w-full rounded-2xl border border-gray-300 px-5 py-4 text-lg">
-                        <option value="">-- Select Class --</option>
-                        <option value="JSS1">JSS1</option>
-                        <option value="JSS2" selected>JSS2</option>
-                        <option value="JSS3">JSS3</option>
-                        <option value="SSS1">SSS1</option>
-                        <option value="SSS2">SSS2</option>
-                        <option value="SSS3">SSS3</option>
+                    <label class="block text-sm font-medium mb-2" id="respond">Select Class</label>
+                    <select id="classSelect"
+                       required
+                        class="w-full rounded-2xl border border-gray-300 px-5 py-4 text-lg">
+
+                                <option value="">-- Select Class --</option>
+
+                                <% const classes = [
+                                'NURSERY', 'PRE-NURSERY', 'NURSERY 1', 'NURSERY 2', 'NURSERY 3', 
+                                'BASIC','BASIC 1', 'BASIC 2', 'BASIC 3', 'BASIC 4', 'BASIC 5', 'BASIC 6',
+                                'JSS', 'JSS 1', 'JSS 2', 'JSS 3', 'SS', 'SS 1', 'SS 2','SS 3',
+                                ]; %>
+
+                                <% classes.forEach(className => { %>
+                                    <option value="<%= className %>"><%= className %></option>
+                                <% }) %>
+
+                            </select> <div style="display:none;" id="loading"></div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium mb-2">Select School Term</label>
+                    <select id="term" class="w-full rounded-2xl border border-gray-300 px-5 py-4 text-lg" required>
+                        <option value="">-- Select Term --</option>
+                        <option value="First Term">First Term </option>
+                        <option value="Second Term">Second Term</option>
+                        <option value="Second Term">Third Term</option>
+                    </select>
+                </div>
+                 <div>
+                    <label class="block text-sm font-medium mb-2" >Select School Session</label>
+                    <select id="session" class="w-full rounded-2xl border border-gray-300 px-5 py-4 text-lg" required>
+                        <option value="">-- Select Session --</option>
+                        <% schoolSection.forEach(section=>{ %>
+                            <option ><%=section %></option>
+                        <%})%>
+                        
                     </select>
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium mb-2">Subject (Optional)</label>
-                    <input type="text" id="subject" placeholder="Mathematics" 
-                           class="w-full rounded-2xl border border-gray-300 px-5 py-4">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium mb-2">Date</label>
-                    <input type="date" id="attendanceDate" value="2025-07-15" 
+                    <label class="block text-sm font-medium mb-2" id="date">Date</label>
+                    <input
+                        type="date"
+                        required
+                        id="attendanceDate"
+                        value="<%= new Date().toISOString().split('T')[0] %>"
                            class="w-full rounded-2xl border border-gray-300 px-5 py-4">
                 </div>
             </div>
         </div>
 
         <!-- Stats -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
             <div class="bg-white rounded-2xl shadow-sm p-6">
                 <p class="text-gray-500 text-sm">Total Students</p>
-                <p class="text-4xl font-bold text-slate-800 mt-2" id="totalStudents">34</p>
+                <p class="text-4xl font-bold text-slate-800 mt-2" id="totalStudents">0</p>
             </div>
             <div class="bg-white rounded-2xl shadow-sm p-6">
                 <p class="text-gray-500 text-sm">Present</p>
-                <p class="text-4xl font-bold text-green-600 mt-2" id="presentCount">29</p>
+                <p class="text-4xl font-bold text-green-600 mt-2" id="presentCount">0</p>
             </div>
             <div class="bg-white rounded-2xl shadow-sm p-6">
                 <p class="text-gray-500 text-sm">Absent</p>
-                <p class="text-4xl font-bold text-red-600 mt-2" id="absentCount">5</p>
+                <p class="text-4xl font-bold text-red-600 mt-2" id="absentCount">0</p>
             </div>
             <div class="bg-white rounded-2xl shadow-sm p-6">
                 <p class="text-gray-500 text-sm">Attendance Rate</p>
-                <p class="text-4xl font-bold text-blue-600 mt-2" id="percentage">85%</p>
+                <p class="text-4xl font-bold text-blue-600 mt-2" id="percentage">0%</p>
             </div>
         </div>
 
         <!-- Attendance Table -->
-        <div class="bg-white rounded-3xl shadow-sm overflow-hidden">
-            <div class="p-6 border-b flex items-center justify-between bg-slate-50">
-                <h2 class="text-xl font-semibold" id="classTitle">JSS2 Students</h2>
-                <input type="text" id="searchInput" placeholder="Search student..." 
-                       class="border border-gray-300 rounded-xl px-5 py-3 w-80 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                       onkeyup="filterStudents()">
-            </div>
-
-            <table class="w-full">
-                <thead>
-                    <tr class="bg-slate-50 border-b">
-                        <th class="text-left py-5 px-8 font-medium text-gray-600">S/N</th>
-                        <th class="text-left py-5 px-8 font-medium text-gray-600">Student Name</th>
-                        <th class="text-left py-5 px-8 font-medium text-gray-600">Admission No.</th>
-                        <th class="text-center py-5 px-8 font-medium text-gray-600">Attendance</th>
-                    </tr>
-                </thead>
-                <tbody id="attendanceBody" class="divide-y">
-                    <!-- Populated by JavaScript -->
-                </tbody>
-            </table>
+        <div id="attendanceBody" class="grid gri-cols-1 md:grid-cols-2 gap-6">
+           
         </div>
 
         <div class="mt-8 flex justify-end">
-            <button onclick="saveAttendance()" 
+            <button id="saveAttendance" onclick="saveAttendance()" 
                     class="bg-green-600 text-white px-10 py-4 rounded-2xl font-semibold text-lg hover:bg-green-700">
                 Save Attendance
             </button>
         </div>
-
+        <p id="uploadRes"></p>
     </main>
 </div>
-
+  <script src="../js/menu.js"></script>
 <script>
 // Mock Data (Replace with real data from backend)
-let currentStudents = [
-    { id: 1, name: "John Okoro", admissionNo: "JSS2/015", status: "present" },
-    { id: 2, name: "Aisha Bello", admissionNo: "JSS2/016", status: "present" },
-    { id: 3, name: "Chukwudi Eze", admissionNo: "JSS2/017", status: "absent" },
-    { id: 4, name: "Fatima Yusuf", admissionNo: "JSS2/018", status: "present" },
-    { id: 5, name: "David Adebayo", admissionNo: "JSS2/019", status: "present" },
-    { id: 6, name: "Blessing Nwosu", admissionNo: "JSS2/020", status: "absent" },
-    // Add more as needed...
-];
+    let currentStudents = [];
+    let isLoading = false;
+    const seletButton = document.getElementById("classSelect")
+    seletButton.onchange = async ()=>{
+        try{
+        if(isLoading){
+            return
+        }
+        isLoading = true;
+        document.getElementById("loading").style.display = 'block'
+        const className = seletButton.value
+        const result = await fetch(`/get-attendance/${className}`)
+        if(!result.ok){
+             document.getElementById('respond').innerHTML ='<span style="color:red"> No student found <span>'
+             renderAttendance([]); 
+            return
+        }
+        const {students} = await result.json()
+                currentStudents = students.map(student => ({
+            ...student,
+            status: student.status || "present"
+        }));
 
-function loadClassAttendance() {
-    const selectedClass = document.getElementById("classSelect").value;
-    document.getElementById("classTitle").innerText = selectedClass ? `${selectedClass} Students` : "Students";
-    renderAttendance();
-}
+         renderAttendance(currentStudents); 
 
-function renderAttendance() {
-    const tbody = document.getElementById("attendanceBody");
-    tbody.innerHTML = "";
+         document.getElementById('respond').innerHTML ='<span style="color:green">Successful <span>'
+        }catch(err){
+            console.log(err)
+            document.getElementById('respond').innerHTML ='<span style="color:red"> Sever error <span>'
+            
+        }finally{
+            isLoading = false
+            document.getElementById("loading").style.display = 'none'
+        }
+    }
+   
+
+function renderAttendance(currentStudents) {
+    const container = document.getElementById("attendanceBody");
+    container.innerHTML = "";
 
     currentStudents.forEach((student, index) => {
-        const row = document.createElement("tr");
-        row.className = "hover:bg-slate-50 transition-colors";
-        row.innerHTML = `
-            <td class="py-6 px-8">${index + 1}</td>
-            <td class="py-6 px-8 font-medium">${student.name}</td>
-            <td class="py-6 px-8 text-gray-500">${student.admissionNo}</td>
-            <td class="py-6 px-8 text-center">
-                <select onchange="updateStudentStatus(${student.id}, this.value)" 
-                        class="rounded-2xl border px-8 py-3 text-sm font-medium cursor-pointer
-                        ${student.status === 'present' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}">
-                    <option value="present" ${student.status === 'present' ? 'selected' : ''}>Present</option>
-                    <option value="absent" ${student.status === 'absent' ? 'selected' : ''}>Absent</option>
-                </select>
-            </td>
+        const card = document.createElement("div");
+
+        card.className =
+            "bg-white rounded-2xl shadow-sm border p-5 mb-4";
+
+        card.innerHTML = `
+            <div class="flex justify-between items-start mb-4">
+                <div>
+                    <h3 class="text-lg font-semibold text-slate-800">
+                        ${student.fullname}
+                    </h3>
+
+                    <p class="text-sm text-gray-500">
+                        ${student.addmissionNo}
+                    </p>
+                </div>
+
+                <span class="bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-sm">
+                    #${index + 1}
+                </span>
+            </div>
+
+            <label class="block text-sm font-medium mb-2">
+                Attendance
+            </label>
+
+            <select
+                onchange="updateStudentStatus('${student._id}', this)"
+                class="w-full rounded-xl border px-4 py-3
+                ${
+                    student.status === "present"
+                        ? "bg-green-100 text-green-700"
+                        : "bg-red-100 text-red-700"
+                }">
+
+                <option value="present"
+                    ${student.status === "present" ? "selected" : ""}>
+                    Present
+                </option>
+
+                <option value="absent"
+                    ${student.status === "absent" ? "selected" : ""}>
+                    Absent
+                </option>
+
+            </select>
         `;
-        tbody.appendChild(row);
+
+        container.appendChild(card);
     });
 
-    updateSummary();
+    updateSummary(currentStudents);
 }
 
-function updateStudentStatus(id, status) {
-    const student = currentStudents.find(s => s.id === id);
-    if (student) student.status = status;
-    updateSummary();
+function updateStudentStatus(id, select) {
+    const student = currentStudents.find(s => s._id === id);
+
+    if (!student) return;
+
+    student.status = select.value;
+
+    select.classList.remove(
+        "bg-green-100",
+        "text-green-700",
+        "bg-red-100",
+        "text-red-700"
+    );
+
+    if (select.value === "present") {
+        select.classList.add("bg-green-100", "text-green-700");
+    } else {
+        select.classList.add("bg-red-100", "text-red-700");
+    }
+
+    updateSummary(currentStudents);
 }
 
-function updateSummary() {
+function updateSummary(currentStudents) {
     const present = currentStudents.filter(s => s.status === "present").length;
     const total = currentStudents.length;
-    const percentage = Math.round((present / total) * 100);
+    const percentage = Math.round((present / total) * 100) || 0;
 
     document.getElementById("totalStudents").innerText = total;
     document.getElementById("presentCount").innerText = present;
@@ -178,15 +255,44 @@ function filterStudents() {
     });
 }
 
-function saveAttendance() {
-    const selectedClass = document.getElementById("classSelect").value || "JSS2";
-    alert(`✅ Attendance for ${selectedClass} has been saved successfully!`);
-}
+   async function saveAttendance() {
 
-// Initialize on page load
-window.onload = () => {
-    loadClassAttendance();
-};
+    const attendance = currentStudents.reduce((obj, student) => {
+        obj[student.studentId] = student.status;   // or student._id
+        return obj;
+    }, {});
+        const session = document.getElementById('session').value
+        const term = document.getElementById('term').value
+        const studentClass = document.getElementById('classSelect').value
+        const date = document.getElementById('date').value || new Date().toISOString().split('T')[0];
+        const formData = {attendance, session, term, studentClass, date}
+
+        try {
+            if(isLoading){
+                return
+            }
+            document.getElementById('saveAttendance').innerText = 'Saving....'
+            const result = await fetch('/api/upload-attendace', {
+                method:"POST",
+                headers:{'Content-Type':'application/json'},
+                body: JSON.stringify(formData)
+            })
+            if(!result.ok){
+                 document.getElementById('uploadRes').innerHTML ='<span style="color:red"> Unable to Upload try letter <span>'
+                return
+            }
+                document.getElementById('uploadRes').innerHTML ='<span style="color:green"> Saved successfuly <span>'
+                renderAttendance([]); 
+        } catch (error) {
+             document.getElementById('uploadRes').innerHTML ='<span style="color:red"> Sever error <span>'
+        }finally{
+            document.getElementById('saveAttendance').innerText = 'Save Attendance'
+            isLoading = false
+        }
+        
+    }
+
+
 </script>
 
 </body>

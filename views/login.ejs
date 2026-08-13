@@ -72,13 +72,16 @@ form.addEventListener('submit', async (e) => {
         button.style.backgroundColor = 'red'
         button.innerText = 'server error'
         console.error(error);
+    } finally{
+         button.disabled = false;
     }
     });
     function reset(){
         button.style.backgroundColor = ' #0ea5e9'
-        button.disabled = false;
+       
         button.innerText = "Login"
     }
+
     document.getElementById('email').oninput=()=>{
         reset()
     }
