@@ -21,6 +21,8 @@ const  analysisRoute = require('./routes/analysis.js');
 const StudentResult = require("./schema/studentResult.js");
 const studentRoute = require('./routes/student.js')
 const checkResultRoute = require('./routes/checkresult.js')
+const Staff = require("./schema/admin.js");
+const bcrypt = require('bcrypt')
 const app = express();
 
 // middleware
@@ -37,6 +39,8 @@ app.use(
   })
 );
 
+
+
 //connecting to dateabase
 const dbURI = 
   "mongodb+srv://data:L6EwGXzqyzLHNFxn@school.vvirl2y.mongodb.net/school?retryWrites=true&w=majority";
@@ -46,6 +50,7 @@ mongoose
     console.log("Connected to MongoDB");
    
       generateSitemap();
+     
   })
   .catch((err) => {
     console.log("Error connecting to MongoDB:", err);

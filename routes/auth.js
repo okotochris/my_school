@@ -7,29 +7,45 @@ const bcrypt = require("bcrypt");
 
 
 const router = express.Router()
-//saving admin login
 
-
-router.post("/admin_form", upload.single('school-logo'), async (req, res) => {
+//ADD STAFF 
+router.post('/admin/add-staff', upload.single('school-logo'), async(req, res)=>{
+ 
   try{
-    const {public_id, secure_url} = await cloudinary.uploader.upload(req.file.path, {
-      folder: "school-logos"
-    });
+    req.body.school = req.session.school 
+    req.body.password = await bcrypt.hash(req.body.password, 10);
+    await Staff.create(req.body);
+    res.status(200).json({msg:"Admin created successfully"})
+  }catch(err){
+    console.log(err)
+    res.status(500).json({msg:"server error"})
+  }
+})
+//saving admin login
+router.post("/admin_form", upload.single('school-logo'), async (req, res) => {
+
+  try{
+    if(req.body.role == 'admin'){
+      const result = await cloudinary.uploader.upload(req.file.path, {
+          folder: "school-logos"
+        });
+        const public_id = result.public_id || null
+        const secure_url = result.secure_url || null
+        await SchoolPfofile.create({
+          schoolName: req.body.school,
+          schoolEmail: req.body.email,
+          address: req.body.address,
+          phone: req.body.phone,
+          image: {
+          logo: secure_url,
+          public_id: public_id
+        }
+        });
+      }
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     req.body.password = hashedPassword;
     await Staff.create(req.body);
-    console.log(public_id, secure_url )
-    await SchoolPfofile.create({
-      schoolName: req.body.school,
-      schoolEmail: req.body.email,
-      address: req.body.address,
-      phone: req.body.phone,
-      image: {
-      logo: secure_url,
-      public_id: public_id
-    }
-    });
-    res.status(200).json({msg:"Admin created successfully"})
+    res.render('login')
   }catch(err){
     console.log(err)
     res.status(500).json({msg:"server error"})
@@ -37,23 +53,26 @@ router.post("/admin_form", upload.single('school-logo'), async (req, res) => {
  
 });
 router.post("/login", async (req, res) => {
-  const user = req.body.user;
-  const password = req.body.password;
-  try {
-    let data = await Staff.findOne({ email: user, password: password });
-    if(!data){
+ 
+   try {
+    let user = await Staff.findOne({ email: req.body.user });
+    if(!user){
      return res.status(404).json({msg:"Invalid login details"})
     }
-    let schoolName = data.school 
-    let role = data.role;
-    let id = data._id
+    const isPasswordCorrect = await bcrypt.compare(req.body.password, user.password)
+    if(!isPasswordCorrect){
+      return res.status(403).json({message:'wrong email or password'})
+    }
+    let schoolName = user.school 
+    let role = user.role;
+    let id = user._id
     let schoolFee = await SchoolPfofile.findOne({schoolName})
     
-    if (data && schoolFee) {
+    if (user && schoolFee) {
       req.session.visited = true;
       req.session.user = user;
       req.session.role = role
-      const school = data.school;
+      const school = user.school;
       const fees = schoolFee.fees;
       req.session.school = school;
       req.session.fees = fees;
