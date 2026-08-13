@@ -45,7 +45,7 @@ router.post("/admin_form", upload.single('school-logo'), async (req, res) => {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     req.body.password = hashedPassword;
     await Staff.create(req.body);
-    res.render('login')
+    res.status(200).json({msg:'successful'})
   }catch(err){
     console.log(err)
     res.status(500).json({msg:"server error"})
@@ -61,7 +61,7 @@ router.post("/login", async (req, res) => {
     }
     const isPasswordCorrect = await bcrypt.compare(req.body.password, user.password)
     if(!isPasswordCorrect){
-      return res.status(403).json({message:'wrong email or password'})
+      return res.status(403).json({msg:'wrong email or password'})
     }
     let schoolName = user.school 
     let role = user.role;

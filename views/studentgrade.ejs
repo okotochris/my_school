@@ -2,84 +2,717 @@
 <html lang="en">
 <head>
   <%- include('./partials/adminhead.ejs') %>
+
   <link rel="stylesheet" href="/styles/global.css" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
   <title>Student Performance</title>
 </head>
-<body>
+
+<body class="bg-slate-50 text-slate-800">
+
   <%- include('./partials/header.ejs') %>
+
   <div class="admin-container">
     <%- include('./partials/navigation.ejs') %>
-    <main class="section">
-      <div class="container center-container">
-        <div class="table-container">
-          <div class="form-header">
-            <h2>Overall Student Performance</h2>
-          </div>
-          <div class="table-controls">
-            <div class="form-group">
-              <label for="class">Class</label>
-              <select id="class" aria-label="Select Class">
-                <option value="">Select Class</option>
-                <option value="SS 3">SS 3</option>
-                <option value="SS 2">SS 2</option>
-                <option value="SS 1">SS 1</option>
-                <option value="SS">SS</option>
-                <option value="JSS 3">JSS 3</option>
-                <option value="JSS 2">JSS 2</option>
-                <option value="JSS 1">JSS 1</option>
-                <option value="JSS">JSS</option>
-                <option value="BASIC 6">BASIC 6</option>
-                <option value="BASIC 5">BASIC 5</option>
-                <option value="BASIC 4">BASIC 4</option>
-                <option value="BASIC 3">BASIC 3</option>
-                <option value="BASIC 2">BASIC 2</option>
-                <option value="BASIC 1">BASIC 1</option>
-                <option value="BASIC" selected>BASIC</option>
-                <option value="NURSERY 3">NURSERY 3</option>
-                <option value="NURSERY 2">NURSERY 2</option>
-                <option value="NURSERY 1">NURSERY 1</option>
-                <option value="PRE NURSERY">PRE NURSERY</option>
-                <option value="NURSERY">NURSERY</option>
-              </select>
+
+    <main class="section min-h-screen">
+
+      <div class="container mx-auto px-4 py-6 max-w-7xl">
+
+        <!-- ================= HEADER ================= -->
+        <section
+          class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-blue-700 via-blue-600 to-indigo-700 text-white shadow-xl mb-6"
+        >
+
+          <!-- Decorative shapes -->
+          <div class="absolute -right-20 -top-20 w-64 h-64 rounded-full bg-white/10"></div>
+          <div class="absolute -right-10 -bottom-24 w-72 h-72 rounded-full bg-white/5"></div>
+
+          <div class="relative p-7 md:p-9">
+
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+
+              <div>
+                <div class="flex items-center gap-3 mb-3">
+
+                  <div
+                    class="w-11 h-11 rounded-xl bg-white/15 backdrop-blur flex items-center justify-center"
+                  >
+                    📊
+                  </div>
+
+                  <span class="text-blue-100 text-sm font-medium">
+                    Academic Performance
+                  </span>
+
+                </div>
+
+                <h1 class="text-2xl md:text-3xl font-bold tracking-tight">
+                  Overall Student Performance
+                </h1>
+
+                <p class="text-blue-100 mt-2 max-w-xl">
+                  Monitor student academic performance across classes,
+                  terms and academic sessions.
+                </p>
+              </div>
+
+              <button
+                type="button"
+                id="exportBtn"
+                class="inline-flex items-center justify-center gap-2
+                       rounded-xl bg-white px-5 py-3
+                       text-sm font-semibold text-blue-700
+                       shadow-sm hover:bg-blue-50 transition"
+              >
+                <span>↓</span>
+                Export Report
+              </button>
+
             </div>
-            <div class="form-group">
-              <label for="year">Academic Year</label>
-              <select id="year" aria-label="Select Academic Year">
-                <option value="2028 - 2029" >2028 - 2029</option>
-                <option value="2027 - 2028" >2027 - 2028</option>
-                <option value="2026 - 2027" >2026 - 2027</option>
-                <option value="2025 - 2026" selected>2025 - 2026</option>
-                <option value="2024 - 2025" >2024 - 2025</option>
-                <option value="2023 - 2024">2023 - 2024</option>
-              </select>
-            </div>
+
           </div>
-          <div class="table-wrapper">
-            <table id="table">
+        </section>
+
+
+        <!-- ================= FILTERS ================= -->
+        <section
+          class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 mb-6"
+        >
+
+          <div
+            class="flex flex-col lg:flex-row lg:items-end
+                   justify-between gap-5"
+          >
+
+            <div class="flex-1">
+
+              <div class="flex items-center gap-2 mb-4">
+
+                <div
+                  class="w-8 h-8 rounded-lg bg-blue-50
+                         text-blue-600 flex items-center justify-center"
+                >
+                  ⚙
+                </div>
+
+                <div>
+                  <h2 class="font-semibold text-slate-800">
+                    Performance Filters
+                  </h2>
+
+                  <p class="text-xs text-slate-500">
+                    Select a class and academic session
+                  </p>
+                </div>
+
+              </div>
+
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                <!-- CLASS -->
+                <div>
+
+                  <label
+                    for="class"
+                    class="block text-sm font-medium text-slate-700 mb-2"
+                  >
+                    Class
+                  </label>
+
+                  <div class="relative">
+
+                    <span
+                      class="absolute left-3 top-1/2 -translate-y-1/2
+                             text-slate-400"
+                    >
+                      🏫
+                    </span>
+
+                    <select
+                      id="class"
+                      aria-label="Select Class"
+                      class="w-full appearance-none rounded-xl
+                             border border-slate-200
+                             bg-slate-50
+                             py-3 pl-10 pr-10
+                             text-sm font-medium
+                             outline-none
+                             focus:border-blue-500
+                             focus:ring-4 focus:ring-blue-100
+                             transition"
+                    >
+
+                      <option value="">Select Class</option>
+
+                      <option value="SS 3">SS 3</option>
+                      <option value="SS 2">SS 2</option>
+                      <option value="SS 1">SS 1</option>
+                      <option value="SS">SS</option>
+
+                      <option value="JSS 3">JSS 3</option>
+                      <option value="JSS 2">JSS 2</option>
+                      <option value="JSS 1">JSS 1</option>
+                      <option value="JSS">JSS</option>
+
+                      <option value="BASIC 6">BASIC 6</option>
+                      <option value="BASIC 5">BASIC 5</option>
+                      <option value="BASIC 4">BASIC 4</option>
+                      <option value="BASIC 3">BASIC 3</option>
+                      <option value="BASIC 2">BASIC 2</option>
+                      <option value="BASIC 1">BASIC 1</option>
+                      <option value="BASIC" selected>BASIC</option>
+
+                      <option value="NURSERY 3">NURSERY 3</option>
+                      <option value="NURSERY 2">NURSERY 2</option>
+                      <option value="NURSERY 1">NURSERY 1</option>
+                      <option value="PRE NURSERY">PRE NURSERY</option>
+                      <option value="NURSERY">NURSERY</option>
+
+                    </select>
+
+                    <span
+                      class="absolute right-3 top-1/2
+                             -translate-y-1/2 text-slate-400
+                             pointer-events-none"
+                    >
+                      ▾
+                    </span>
+
+                  </div>
+
+                </div>
+
+
+                <!-- YEAR -->
+                <div>
+
+                  <label
+                    for="year"
+                    class="block text-sm font-medium text-slate-700 mb-2"
+                  >
+                    Academic Year
+                  </label>
+
+                  <div class="relative">
+
+                    <span
+                      class="absolute left-3 top-1/2
+                             -translate-y-1/2 text-slate-400"
+                    >
+                      📅
+                    </span>
+
+                    <select
+                      id="year"
+                      aria-label="Select Academic Year"
+                      class="w-full appearance-none rounded-xl
+                             border border-slate-200
+                             bg-slate-50
+                             py-3 pl-10 pr-10
+                             text-sm font-medium
+                             outline-none
+                             focus:border-blue-500
+                             focus:ring-4 focus:ring-blue-100
+                             transition"
+                    >
+
+                      <option value="2028 - 2029">
+                        2028 - 2029
+                      </option>
+
+                      <option value="2027 - 2028">
+                        2027 - 2028
+                      </option>
+
+                      <option value="2026 - 2027">
+                        2026 - 2027
+                      </option>
+
+                      <option value="2025 - 2026" selected>
+                        2025 - 2026
+                      </option>
+
+                      <option value="2024 - 2025">
+                        2024 - 2025
+                      </option>
+
+                      <option value="2023 - 2024">
+                        2023 - 2024
+                      </option>
+
+                    </select>
+
+                    <span
+                      class="absolute right-3 top-1/2
+                             -translate-y-1/2 text-slate-400
+                             pointer-events-none"
+                    >
+                      ▾
+                    </span>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- SEARCH -->
+            <div class="lg:w-72">
+
+              <label
+                for="studentSearch"
+                class="block text-sm font-medium text-slate-700 mb-2"
+              >
+                Search Student
+              </label>
+
+              <div class="relative">
+
+                <span
+                  class="absolute left-3 top-1/2
+                         -translate-y-1/2 text-slate-400"
+                >
+                  🔍
+                </span>
+
+                <input
+                  type="search"
+                  id="studentSearch"
+                  placeholder="Search by name..."
+                  class="w-full rounded-xl
+                         border border-slate-200
+                         bg-slate-50
+                         py-3 pl-10 pr-4
+                         text-sm
+                         outline-none
+                         focus:border-blue-500
+                         focus:ring-4 focus:ring-blue-100
+                         transition"
+                />
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- ================= SUMMARY ================= -->
+        <section
+          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6"
+        >
+
+          <!-- STUDENTS -->
+          <div
+            class="bg-white rounded-2xl border border-slate-200
+                   p-5 shadow-sm"
+          >
+
+            <div class="flex items-start justify-between">
+
+              <div>
+
+                <p class="text-sm text-slate-500">
+                  Students
+                </p>
+
+                <h3
+                  id="totalStudents"
+                  class="text-2xl font-bold mt-2"
+                >
+                  --
+                </h3>
+
+              </div>
+
+              <div
+                class="w-10 h-10 rounded-xl bg-blue-50
+                       flex items-center justify-center"
+              >
+                👨‍🎓
+              </div>
+
+            </div>
+
+            <p class="text-xs text-slate-400 mt-3">
+              Students in selected class
+            </p>
+
+          </div>
+
+
+          <!-- CLASS AVERAGE -->
+          <div
+            class="bg-white rounded-2xl border border-slate-200
+                   p-5 shadow-sm"
+          >
+
+            <div class="flex items-start justify-between">
+
+              <div>
+
+                <p class="text-sm text-slate-500">
+                  Class Average
+                </p>
+
+                <h3
+                  id="classAverage"
+                  class="text-2xl font-bold mt-2"
+                >
+                  --
+                </h3>
+
+              </div>
+
+              <div
+                class="w-10 h-10 rounded-xl bg-emerald-50
+                       flex items-center justify-center"
+              >
+                📈
+              </div>
+
+            </div>
+
+            <p class="text-xs text-slate-400 mt-3">
+              Overall class performance
+            </p>
+
+          </div>
+
+
+          <!-- TOP STUDENT -->
+          <div
+            class="bg-white rounded-2xl border border-slate-200
+                   p-5 shadow-sm"
+          >
+
+            <div class="flex items-start justify-between">
+
+              <div>
+
+                <p class="text-sm text-slate-500">
+                  Highest Average
+                </p>
+
+                <h3
+                  id="highestAverage"
+                  class="text-2xl font-bold mt-2"
+                >
+                  --
+                </h3>
+
+              </div>
+
+              <div
+                class="w-10 h-10 rounded-xl bg-amber-50
+                       flex items-center justify-center"
+              >
+                🏆
+              </div>
+
+            </div>
+
+            <p
+              id="topStudent"
+              class="text-xs text-slate-400 mt-3 truncate"
+            >
+              No data yet
+            </p>
+
+          </div>
+
+
+          <!-- PASS RATE -->
+          <div
+            class="bg-white rounded-2xl border border-slate-200
+                   p-5 shadow-sm"
+          >
+
+            <div class="flex items-start justify-between">
+
+              <div>
+
+                <p class="text-sm text-slate-500">
+                  Pass Rate
+                </p>
+
+                <h3
+                  id="passRate"
+                  class="text-2xl font-bold mt-2"
+                >
+                  --
+                </h3>
+
+              </div>
+
+              <div
+                class="w-10 h-10 rounded-xl bg-indigo-50
+                       flex items-center justify-center"
+              >
+                ✓
+              </div>
+
+            </div>
+
+            <p class="text-xs text-slate-400 mt-3">
+              Students meeting target
+            </p>
+
+          </div>
+
+        </section>
+
+
+        <!-- ================= TABLE ================= -->
+        <section
+          class="bg-white rounded-2xl border border-slate-200
+                 shadow-sm overflow-hidden"
+        >
+
+          <!-- TABLE HEADER -->
+          <div
+            class="px-6 py-5 border-b border-slate-200
+                   flex flex-col sm:flex-row
+                   sm:items-center sm:justify-between gap-3"
+          >
+
+            <div>
+
+              <h2 class="font-bold text-lg text-slate-800">
+                Student Results
+              </h2>
+
+              <p class="text-sm text-slate-500 mt-1">
+                Academic performance by term
+              </p>
+
+            </div>
+
+            <div
+              id="resultStatus"
+              class="inline-flex items-center gap-2
+                     text-xs font-medium
+                     text-slate-500"
+            >
+              <span
+                class="w-2 h-2 rounded-full bg-slate-300"
+              ></span>
+
+              Waiting for data
+            </div>
+
+          </div>
+
+
+          <!-- TABLE -->
+          <div class="overflow-x-auto">
+
+            <table
+              id="table"
+              class="w-full min-w-[900px] text-sm"
+            >
+
               <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Name</th>
-                  <th>Class</th>
-                  <th>Year</th>
-                  <th>1st Term</th>
-                  <th>2nd Term</th>
-                  <th>3rd Term</th>
-                  <th>Total Avg</th>
+
+                <tr
+                  class="bg-slate-50 border-b border-slate-200"
+                >
+
+                  <th
+                    class="px-5 py-4 text-left
+                           text-xs font-semibold
+                           uppercase tracking-wider
+                           text-slate-500"
+                  >
+                    #
+                  </th>
+
+                  <th
+                    class="px-5 py-4 text-left
+                           text-xs font-semibold
+                           uppercase tracking-wider
+                           text-slate-500"
+                  >
+                    Student
+                  </th>
+
+                  <th
+                    class="px-5 py-4 text-left
+                           text-xs font-semibold
+                           uppercase tracking-wider
+                           text-slate-500"
+                  >
+                    Class
+                  </th>
+
+                  <th
+                    class="px-5 py-4 text-left
+                           text-xs font-semibold
+                           uppercase tracking-wider
+                           text-slate-500"
+                  >
+                    Academic Year
+                  </th>
+
+                  <th
+                    class="px-5 py-4 text-center
+                           text-xs font-semibold
+                           uppercase tracking-wider
+                           text-slate-500"
+                  >
+                    1st Term
+                  </th>
+
+                  <th
+                    class="px-5 py-4 text-center
+                           text-xs font-semibold
+                           uppercase tracking-wider
+                           text-slate-500"
+                  >
+                    2nd Term
+                  </th>
+
+                  <th
+                    class="px-5 py-4 text-center
+                           text-xs font-semibold
+                           uppercase tracking-wider
+                           text-slate-500"
+                  >
+                    3rd Term
+                  </th>
+
+                  <th
+                    class="px-5 py-4 text-center
+                           text-xs font-semibold
+                           uppercase tracking-wider
+                           text-slate-500"
+                  >
+                    Overall Avg
+                  </th>
+
                 </tr>
+
               </thead>
+
               <tbody></tbody>
+
             </table>
-            <div class="table-empty" style="display: none;">No data available</div>
+
           </div>
-          <div class="loading">Loading...</div>
-        </div>
+
+
+          <!-- EMPTY STATE -->
+          <div
+            class="table-empty hidden text-center
+                   py-16 px-6"
+          >
+
+            <div
+              class="mx-auto w-16 h-16 rounded-2xl
+                     bg-slate-100
+                     flex items-center justify-center
+                     text-3xl mb-4"
+            >
+              📊
+            </div>
+
+            <h3
+              class="font-semibold text-lg text-slate-800"
+            >
+              No performance data
+            </h3>
+
+            <p
+              class="text-sm text-slate-500
+                     max-w-md mx-auto mt-2"
+            >
+              There are no student results available
+              for the selected class and academic year.
+            </p>
+
+          </div>
+
+
+          <!-- LOADING -->
+          <div
+            class="loading hidden p-6"
+          >
+
+            <div class="space-y-3">
+
+              <% for(let i = 0; i < 6; i++) { %>
+
+                <div
+                  class="animate-pulse
+                         grid grid-cols-8 gap-4
+                         items-center"
+                >
+
+                  <div class="h-4 bg-slate-200 rounded"></div>
+
+                  <div class="h-4 bg-slate-200 rounded col-span-2"></div>
+
+                  <div class="h-4 bg-slate-200 rounded"></div>
+
+                  <div class="h-4 bg-slate-200 rounded"></div>
+
+                  <div class="h-4 bg-slate-200 rounded"></div>
+
+                  <div class="h-4 bg-slate-200 rounded"></div>
+
+                  <div class="h-4 bg-slate-200 rounded"></div>
+
+                  <div class="h-5 bg-slate-200 rounded-full"></div>
+
+                </div>
+
+              <% } %>
+
+            </div>
+
+          </div>
+
+
+          <!-- FOOTER -->
+          <div
+            class="px-6 py-4 bg-slate-50
+                   border-t border-slate-200
+                   flex flex-col sm:flex-row
+                   sm:items-center sm:justify-between gap-2"
+          >
+
+            <p
+              id="tableSummary"
+              class="text-xs text-slate-500"
+            >
+              Showing performance data
+            </p>
+
+            <p class="text-xs text-slate-400">
+              MySchoolResult • Academic Performance
+            </p>
+
+          </div>
+
+        </section>
+
       </div>
+
     </main>
   </div>
 
-  <script src="/js/menu.js"></script>
+
+
   <script src="/js/studentGrade.js"></script>
+
 </body>
 </html>
-

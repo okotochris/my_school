@@ -44,13 +44,11 @@ app.use(
 //connecting to dateabase
 const dbURI = 
   "mongodb+srv://data:L6EwGXzqyzLHNFxn@school.vvirl2y.mongodb.net/school?retryWrites=true&w=majority";
+const local = 'mongodb://127.0.0.1:27017/school'
 mongoose
-  .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(local, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((result) => {
     console.log("Connected to MongoDB");
-   
-      generateSitemap();
-     
   })
   .catch((err) => {
     console.log("Error connecting to MongoDB:", err);
@@ -59,7 +57,7 @@ mongoose
 app.use(
   session({
     store: MongoStore.create({
-      mongoUrl: dbURI, // Use the same MongoDB connection URI for session storage
+      mongoUrl: local, // Use the same MongoDB connection URI for session storage
       collectionName: "sessions", // Store sessions in a collection named 'sessions'
       client: mongoose.connection.getClient(), // Use the same mongoose connection for the store
     }),
@@ -118,54 +116,6 @@ app.get("/admin", isAuthenticated, (req, res) => {
 });
 
 
-//REMOVING NAME FROM BLACKLIST API CALL
-app.delete("/blacklist/:studentId", async (req, res) => {
-  const { studentId } = req.params;
-
-  try {
-    const deletedStudent = await Blacklist.findOneAndDelete({ studentId });
-
-    if (deletedStudent) {
-      res.status(200).json({ message: "Student removed from blacklist" });
-    } else {
-      res.status(404).json({ message: "Student not found" });
-    }
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Failed to delete student" });
-  }
-});
-
-//SAVING DATA TO BLACK LIST API CALL
-app.post("/blacklist", async (req, res) => {
-  let studentName = req.body.userName;
-  let school = req.session.school;
-  let studentId = req.body.studentId;
-  const data = { studentName, studentId, school };
-
-  try {
-    const studnetInfo = new Blacklist(data);
-    await studnetInfo.save();
-    res.json("file added");
-  } catch (err) {
-    console.log(err);
-  }
-});
-
-
-//GET STUDENT INFORMATION BASE ON ID API CALL
-app.get("/studentinfomation", async (req, res) => {
-
-  let studentId = req.query.studnetId;
-
-  try {
-    let info = await StudentProfile.findOne({ studentId });
-  
-    res.json(info);
-  } catch (err) {
-    console.log(err);
-  }
-});
 
 
 app.delete('/deletestaff', async (req, res)=>{

@@ -266,7 +266,10 @@ function filterStudents() {
         const studentClass = document.getElementById('classSelect').value
         const date = document.getElementById('date').value || new Date().toISOString().split('T')[0];
         const formData = {attendance, session, term, studentClass, date}
-
+        if(!term || !studentClass ){
+             document.getElementById('uploadRes').innerHTML ='<span style="color:red"> Term and session can not be empty  <span>'
+            return
+        }
         try {
             if(isLoading){
                 return

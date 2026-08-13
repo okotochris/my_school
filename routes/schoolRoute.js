@@ -22,8 +22,9 @@ router.get("/blacklist", isAuthenticated, async (req, res) => {
     const fees = await schoolFees(req.session.school)
   try {
     let school = req.session.school;
-    const data = await Blacklist.find({ school: school });
-    res.render("blacklist", { data, school: req.session.school, fees, role, title:"Black List" });
+    const student = await Blacklist.find({ school: school });
+    console.log(student)
+    res.render("blacklist", { student, school: req.session.school, fees, role, title:"Black List" });
   } catch (err) {
     console.log(err);
   }

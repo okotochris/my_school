@@ -11,204 +11,238 @@
 <body class="bg-slate-100">
     <%- include("./partials/header.ejs") %>
 
-        <div class="flex">
+        <div class="admin-container">
             <%- include("./partials/navigation.ejs") %>
-            <div id="tab-0" class="tab-content">
-            <div
-                class="bg-white w-full rounded-3xl shadow-lg border border-slate-200 overflow-hidden"
-            >
-                <!-- Header -->
-                <div class=" bg-gradient-to-r from-blue-600 to-indigo-600 p-8 text-white"> 
-                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6" >  <div>
-                    <h2 class="text-3xl font-bold">Subject Management</h2>
+                <div id="tab-0" class="section">
+                    <div class="relative bg-white w-full rounded-3xl shadow-lg border border-slate-200 overflow-hidden">
+                        <!-- Header -->
+                        <div class=" bg-gradient-to-r from-blue-600 to-indigo-600 p-8 text-white">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                                <div>
+                                    <h2 class="text-3xl font-bold">Subject Management</h2>
 
-                    <p class="text-blue-100 mt-2">
-                        Manage subjects and assign teachers to each class.
-                    </p>
-                    </div>
+                                    <p class="text-blue-100 mt-2">
+                                        Manage subjects and assign teachers to each class.
+                                    </p>
+                                </div>
 
-                </div>
-                </div>
-
-                <!-- CLASS SELECTOR -->
-
-                <div class="p-8 border-b">
-                <h3 class="font-semibold text-lg mb-4">Select a Class</h3>
-
-                <div
-                    id="classLevelCards"
-                    class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-4"
-                >
-                    <!-- JS -->
-                </div>
-                </div>
-                <!-- Add Subject Modal -->
-                <div
-                id="subjectModal"
-                class="absolute hidden inset-5 bg-black/50 items-center justify-center z-50 p-4"
-                >
-                <div class="h-10"></div>
-                <div
-                    class="bg-white rounded-3xl w-full max-w-5xl shadow-2xl overflow-hidden"
-                >
-                    <!-- Header -->
-                    <div class="bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-6">
-                    <div class="flex justify-between items-center">
-                        <div>
-                        <h2 class="text-2xl font-bold text-white">Add Subjects</h2>
-
-                        <p class="text-blue-100 mt-1">Add multiple subjects at once.</p>
+                            </div>
                         </div>
 
-                        <button
-                        onclick="closeSubjectModal()"
-                        class="text-white text-3xl hover:opacity-80"
-                        >
-                        &times;
-                        </button>
-                    </div>
-                    </div>
+                        <!-- CLASS SELECTOR -->
 
-                    <!-- Body -->
-                    <div class="p-8">
-                    <!-- Table Header -->
-                    <div
-                        class="hidden md:grid grid-cols-12 gap-4 font-semibold text-slate-600 border-b pb-3 mb-4"
-                    >
-                        <div class="col-span-5">Subject</div>
+                        <div class="p-8 border-b">
+                            <h3 class="font-semibold text-lg mb-4">Select a Class</h3>
 
-                        <div class="col-span-5">Teacher</div>
+                            <div id="classLevelCards" class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-4">
+                                <!-- JS -->
+                            </div>
+                        </div>
+                        <!-- Add Subject Modal -->
+                        <!-- Add Subject Modal -->
+                        <div id="subjectModal"
+                            class="absolute inset-0 z-[100] hidden items-center justify-center bg-slate-950/50 p-4 backdrop-blur-sm">
+                            <div
+                                class="relative flex max-h-[92vh] w-full max-w-4xl flex-col overflow-hidden rounded-3xl bg-white shadow-2xl">
 
-                        <div class="col-span-2 text-center">Action</div>
-                    </div>
+                                <!-- Modal Header -->
+                                <div class="shrink-0 border-b border-slate-200 bg-white px-6 py-5 md:px-8">
+                                    <div class="flex items-start justify-between gap-4">
 
-                    <!-- Dynamic Rows -->
-                    <div id="subjectRows" class="space-y-4">
-                        <!-- Row -->
+                                        <div class="flex items-center gap-4">
+                                            <div
+                                                class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-blue-50 text-blue-600">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5s3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18s-3.332.477-4.5 1.253" />
+                                                </svg>
+                                            </div>
 
-                    
+                                            <div>
+                                                <h2 class="text-xl font-bold text-slate-900 md:text-2xl">
+                                                    Add Subjects
+                                                </h2>
 
-                        <!-- JS adds 3 more rows initially -->
-                    </div>
+                                                <p class="mt-1 text-sm text-slate-500">
+                                                    Add subjects and assign teachers to this class.
+                                                </p>
+                                            </div>
+                                        </div>
 
-                    <!-- Add Row -->
+                                        <button type="button" onclick="closeSubjectModal()"
+                                            class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-slate-400 transition hover:bg-slate-100 hover:text-slate-700"
+                                            aria-label="Close modal">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M6 18L18 6M6 6l12 12" />
+                                            </svg>
+                                        </button>
 
-                    <button
-                        onclick="addRow()"
-                        id="addRowBtn"
-                        class="mt-6 flex items-center gap-2 rounded-xl border border-dashed border-blue-400 px-5 py-3 text-blue-600 hover:bg-blue-50 transition"
-                    >
-                        ➕ Add Row
-                    </button>
-                    </div>
+                                    </div>
 
-                    <!-- Footer -->
+                                    <!-- Current class indicator -->
+                                    <div class="mt-5 flex items-center gap-2 rounded-xl bg-blue-50 px-4 py-3">
+                                        <span class="text-sm text-blue-600">Adding subjects to:</span>
+                                        <span id="modalClassName" class="text-sm font-semibold text-blue-800">
+                                            —
+                                        </span>
+                                    </div>
+                                </div>
 
-                    <div class="bg-slate-50 px-8 py-5 flex justify-end gap-4">
-                    <button
-                        onclick="closeSubjectModal()"
-                        class="rounded-xl border px-6 py-3"
-                    >
-                        Cancel
-                    </button>
 
-                    <button
-                        class="rounded-xl bg-blue-600 hover:bg-blue-700 text-white px-8 py-3"
-                        id="save-subject"
-                        onclick="saveSubject()"
-                    >
-                        Save Subjects
-                    </button>
+                                <!-- Modal Body -->
+                                <div class="min-h-0 flex-1 overflow-y-auto px-6 py-6 md:px-8">
+
+                                    <!-- Desktop labels -->
+                                    <div
+                                        class="mb-3 hidden grid-cols-12 gap-4 px-1 text-xs font-semibold uppercase tracking-wider text-slate-400 md:grid">
+                                        <div class="col-span-5">
+                                            Subject
+                                        </div>
+
+                                        <div class="col-span-5">
+                                            Teacher
+                                        </div>
+
+                                        <div class="col-span-2 text-center">
+                                            Action
+                                        </div>
+                                    </div>
+
+                                    <!-- Rows -->
+                                    <div id="subjectRows" class="space-y-3">
+                                    </div>
+
+                                    <!-- Add another -->
+                                    <button type="button" onclick="addRow()" id="addRowBtn"
+                                        class="mt-5 inline-flex items-center gap-2 rounded-xl border border-dashed border-blue-300 bg-blue-50/50 px-4 py-2.5 text-sm font-semibold text-blue-600 transition hover:border-blue-500 hover:bg-blue-50">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12h14" />
+                                        </svg>
+
+                                        Add another subject
+                                    </button>
+
+                                </div>
+
+
+                                <!-- Modal Footer -->
+                                <div class="shrink-0 border-t border-slate-200 bg-slate-50/80 px-6 py-4 md:px-8">
+                                    <div
+                                        class="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between">
+
+                                        <p class="text-xs text-slate-500">
+                                            You can add multiple subjects before saving.
+                                        </p>
+
+                                        <div class="flex gap-3">
+
+                                            <button type="button" onclick="closeSubjectModal()"
+                                                class="rounded-xl border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-100">
+                                                Cancel
+                                            </button>
+
+                                            <button type="button" id="save-subject" onclick="saveSubject()"
+                                                class="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 hover:shadow-md disabled:cursor-not-allowed disabled:opacity-60">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
+                                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M5 12l4 4L19 6" />
+                                                </svg>
+
+                                                Save Subjects
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- CURRENT CLASS -->
+
+                        <div id="selectedClassHeader" class="hidden p-8 bg-blue-50 border-b">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm text-slate-500">Current Class</p>
+
+                                    <h2 id="selectedClassName" class="text-3xl font-bold text-slate-800">
+                                        JSS1
+                                    </h2>
+                                </div>
+
+                                <div class="text-right">
+                                    <p class="text-sm text-slate-500">Total Subjects</p>
+
+                                    <p id="subjectCount" class="text-3xl font-bold text-blue-600">0</p>
+                                </div>
+                            </div>
+                            <button onclick="addSubjectToCurrentClass()" id="add_subject"
+                                class="bg-white text-blue-700 hover:bg-slate-100 rounded-xl px-6 py-3 font-semibold shadow">
+                                ➕ Add Subject
+                            </button>
+                        </div>
+
+                        <!-- SUBJECTS -->
+
+                        <div class="p-8">
+                            <div id="subjectsTableBody" class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+                                <!-- JS Generates Cards -->
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-                </div>
-
-                <!-- CURRENT CLASS -->
-
-                <div id="selectedClassHeader" class="hidden p-8 bg-blue-50 border-b">
-                <div class="flex items-center justify-between">
-                    <div>
-                    <p class="text-sm text-slate-500">Current Class</p>
-
-                    <h2 id="selectedClassName" class="text-3xl font-bold text-slate-800">
-                        JSS1
-                    </h2>
-                    </div>
-
-                    <div class="text-right">
-                    <p class="text-sm text-slate-500">Total Subjects</p>
-
-                    <p id="subjectCount" class="text-3xl font-bold text-blue-600">0</p>
-                    </div>
-                </div>
-                <button
-                    onclick="addSubjectToCurrentClass()"
-                    id="add_subject"
-                    class="bg-white text-blue-700 hover:bg-slate-100 rounded-xl px-6 py-3 font-semibold shadow"
-                    >
-                    ➕ Add Subject
-                    </button>
-                </div>
-
-                <!-- SUBJECTS -->
-                
-                <div class="p-8">
-                <div
-                    id="subjectsTableBody"
-                    class="grid md:grid-cols-2 xl:grid-cols-3 gap-6"
-                >
-                    <!-- JS Generates Cards -->
-                </div>
-                </div>
-                
-            </div>
-            </div>
         </div>
 
         <!-- STUDENT SCRIPT -->
-<script>
-   let allSubjects = []
-  document.addEventListener("DOMContentLoaded", async() => {
-       const result = await fetch(`/api/all_subject`)
-        if(!result){
-            alert('Server error')
-            return
-        }
-        const {subject} =await result.json()
-       console.log(subject)
-        allSubjects = subject
-        renderClassLevelCards(subject);
-    
-});
- 
+        <script>
+            let allSubjects = []
+            document.addEventListener("DOMContentLoaded", async () => {
+                const result = await fetch(`/api/all_subject`)
+                if (!result) {
+                    alert('Server error')
+                    return
+                }
+                const { subject } = await result.json()
+                console.log(subject)
+                allSubjects = subject
+                renderClassLevelCards(subject);
 
- 
+            });
 
-  const classLevels = [
-  { name: "Nursery", icon: "🌱" },
-  { name: "Basic", icon: "📘" },
-  { name: "Junior", icon: "🏫" },
-  { name: "Senior", icon: "🎓" },
-];
 
-let subjectClass = '';
 
-function renderClassLevelCards(item = []) {
-  const container = document.getElementById("classLevelCards");
-  container.innerHTML = "";
 
-  classLevels.forEach((level) => {
-    // Find the first matching subjectClass
-    const match = item.find(s => s.subjectClass === level.name);
+            const classLevels = [
+                { name: "Nursery", icon: "🌱" },
+                { name: "Basic", icon: "📘" },
+                { name: "Junior", icon: "🏫" },
+                { name: "Senior", icon: "🎓" },
+            ];
 
-    // Safely get count (0 if no match or no subjects)
-    const count = match?.subjects?.length || 0;
+            let subjectClass = '';
 
-    const card = document.createElement("button");
-    card.className =
-      "rounded-2xl border bg-white p-6 shadow-sm hover:shadow-lg hover:border-blue-500 transition text-left";
+            function renderClassLevelCards(item = []) {
+                const container = document.getElementById("classLevelCards");
+                container.innerHTML = "";
 
-    card.innerHTML = `
+                classLevels.forEach((level) => {
+                    // Find the first matching subjectClass
+                    const match = item.find(s => s.subjectClass === level.name);
+
+                    // Safely get count (0 if no match or no subjects)
+                    const count = match?.subjects?.length || 0;
+
+                    const card = document.createElement("button");
+                    card.className =
+                        "rounded-2xl border bg-white p-6 shadow-sm hover:shadow-lg hover:border-blue-500 transition text-left";
+
+                    card.innerHTML = `
       <div class="text-5xl">${level.icon}</div>
       <h3 class="text-xl font-bold mt-4">${level.name}</h3>
       <p class="text-sm text-slate-500 mt-1">
@@ -216,33 +250,33 @@ function renderClassLevelCards(item = []) {
       </p>
     `;
 
-    card.onclick = async () => {
-      selectClassLevel(level.name);
-      subjectClass = level.name;
-    };
+                    card.onclick = async () => {
+                        selectClassLevel(level.name);
+                        subjectClass = level.name;
+                    };
 
-    container.appendChild(card);
-  });
-}
+                    container.appendChild(card);
+                });
+            }
 
- let currentClassLevel = null;
+            let currentClassLevel = null;
 
-  function selectClassLevel(level) {
-    currentClassLevel = level;
-    document.getElementById("selectedClassHeader").classList.remove("hidden");
-    document.getElementById("selectedClassName").innerText = `${level} Section`;
-    const filtered = allSubjects.filter((s) => s.subjectClass === level)
-    document.getElementById("subjectCount").innerText = filtered[0]?.subjects?.length || 0;
-    renderSubjects(filtered, level);
-  }
+            function selectClassLevel(level) {
+                currentClassLevel = level;
+                document.getElementById("selectedClassHeader").classList.remove("hidden");
+                document.getElementById("selectedClassName").innerText = `${level} Section`;
+                const filtered = allSubjects.filter((s) => s.subjectClass === level)
+                document.getElementById("subjectCount").innerText = filtered[0]?.subjects?.length || 0;
+                renderSubjects(filtered, level);
+            }
 
-  function renderSubjects(items, studentClass) {
-    const container = document.getElementById("subjectsTableBody");
+            function renderSubjects(items, studentClass) {
+                const container = document.getElementById("subjectsTableBody");
 
-    container.innerHTML = "";
+                container.innerHTML = "";
 
-    if (items.length === 0) {
-      container.innerHTML = `
+                if (items.length === 0) {
+                    container.innerHTML = `
 
         <div class="col-span-full text-center py-20">
 
@@ -264,16 +298,16 @@ function renderClassLevelCards(item = []) {
 
         `;
 
-      return;
-    }
+                    return;
+                }
 
-    items[0].subjects.forEach((subject) => {
-      const card = document.createElement("div");
+                items[0].subjects.forEach((subject) => {
+                    const card = document.createElement("div");
 
-      card.className =
-        "bg-white rounded-2xl border p-6 shadow-sm hover:shadow-lg transition";
+                    card.className =
+                        "bg-white rounded-2xl border p-6 shadow-sm hover:shadow-lg transition";
 
-      card.innerHTML = `
+                    card.innerHTML = `
 
             <div class="flex justify-between items-start">
 
@@ -342,150 +376,223 @@ function renderClassLevelCards(item = []) {
 
         `;
 
-      container.appendChild(card);
-    });
-  }
-//add subject
-var teachers = []
-  async function addSubjectToCurrentClass() {
-    
-     if(teachers.length == 0){
-        document.getElementById('add_subject').innerText = "Loading...."
-        const result  = await fetch('/api/teachers')
-        document.getElementById('add_subject').innerText = "➕ Add Subject"
-        if(!result){
-            alert('Sever error')
-        }
-        const data = await result.json()
-        teachers = data.teachers
-        if(teachers.length == 0){
-            alert("No teachers registered")
-        }
-       
-    }
-    //call create row to add subject
-    addRow()
-    document.getElementById("subjectModal").style.display = "block";    
+                    container.appendChild(card);
+                });
+            }
+            //add subject
+            var teachers = []
+            async function addSubjectToCurrentClass() {
 
-    selectClassLevel(currentClassLevel);
-  }
+                if (teachers.length == 0) {
+                    document.getElementById('add_subject').innerText = "Loading...."
+                    const result = await fetch('/api/teachers')
+                    document.getElementById('add_subject').innerText = "➕ Add Subject"
+                    if (!result) {
+                        alert('Sever error')
+                    }
+                    const data = await result.json()
+                    teachers = data.teachers
+                    if (teachers.length == 0) {
+                        alert("No teachers registered")
+                    }
 
-  //DELETE SUBJECT
-  async function deleteSubject(subjectClass, id) {
-    if (!confirm("Delete subject?")) return;
-    const result =await fetch(`/api/subject/${subjectClass}/${id}`, {method:"Delete"})
-    if(!result.ok){
-      alert("unable to delete")
-      return
-    }
-    console.log('delted')
-    allSubjects.find(item => item.subjectClass === subjectClass).subjects =
-    allSubjects.find(item => item.subjectClass === subjectClass).subjects.filter(
-        subject => subject._id.toString() !== id
-    );
+                }
+                //call create row to add subject
+                addRow()
+                openSubjectModal();
 
-    selectClassLevel(subjectClass);
-  }
+                selectClassLevel(currentClassLevel);
+            }
+
+            //DELETE SUBJECT
+            async function deleteSubject(subjectClass, id) {
+                if (!confirm("Delete subject?")) return;
+                const result = await fetch(`/api/subject/${subjectClass}/${id}`, { method: "Delete" })
+                if (!result.ok) {
+                    alert("unable to delete")
+                    return
+                }
+                console.log('delted')
+                allSubjects.find(item => item.subjectClass === subjectClass).subjects =
+                    allSubjects.find(item => item.subjectClass === subjectClass).subjects.filter(
+                        subject => subject._id.toString() !== id
+                    );
+
+                selectClassLevel(subjectClass);
+            }
 
 
-  function closeSubjectModal() {
-    document.getElementById("subjectModal").style.display = "none";
-  }
 
- let rowNumber = 0;
-async function addRow() {
-    const teacherOptions = teachers.map(teacher => `
+            let rowNumber = 0;
+            function addRow() {
+
+                const teacherOptions = teachers.map(teacher => `
         <option value="${teacher._id}">
             ${teacher.user_name}
         </option>
     `).join("");
 
-    document.getElementById("subjectRows").insertAdjacentHTML(
-        "beforeend",
-        `
-        <div class="subject-row grid md:grid-cols-12 gap-4 items-center mb-4">
+                document.getElementById("subjectRows").insertAdjacentHTML(
+                    "beforeend",
+                    `
+        <div class="subject-row group rounded-2xl border border-slate-200 bg-white p-4 transition hover:border-blue-200 hover:shadow-sm">
 
-            <div class="md:col-span-5">
-                <input
-                    type="text"
-                    name="subject[]"
-                    placeholder="Subject Name"
-                    class="subject-name w-full rounded-xl border px-4 py-3 focus:ring-2 focus:ring-blue-500">
-            </div>
+            <div class="grid gap-3 md:grid-cols-12 md:items-center">
 
-            <div class=" md:col-span-5">
-                <select
-                    name="teacher[]"
-                    class="teacher-select w-full rounded-xl border px-4 py-3">
-                    <option value="">Select Teacher</option>
-                    ${teacherOptions}
-                </select>
-            </div>
+                <!-- Subject -->
+                <div class="md:col-span-5">
 
-            <div class="md:col-span-2 flex justify-center">
-                <button
-                    type="button"
-                    onclick="this.parentElement.parentElement.remove()"
-                    class="h-11 w-11 rounded-xl bg-red-50 text-red-600 hover:bg-red-100">
-                    🗑
-                </button>
+                    <label class="mb-1.5 block text-xs font-medium text-slate-500 md:hidden">
+                        Subject name
+                    </label>
+
+                    <input
+                        type="text"
+                        name="subject[]"
+                        placeholder="e.g. Mathematics"
+                        class="subject-name w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10"
+                    >
+
+                </div>
+
+
+                <!-- Teacher -->
+                <div class="md:col-span-5">
+
+                    <label class="mb-1.5 block text-xs font-medium text-slate-500 md:hidden">
+                        Assign teacher
+                    </label>
+
+                    <select
+                        name="teacher[]"
+                        class="teacher-select w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10"
+                    >
+                        <option value="">
+                            Select teacher
+                        </option>
+
+                        ${teacherOptions}
+                    </select>
+
+                </div>
+
+
+                <!-- Delete -->
+                <div class="flex justify-end md:col-span-2 md:justify-center">
+
+                    <button
+                        type="button"
+                        onclick="this.closest('.subject-row').remove()"
+                        class="inline-flex h-10 items-center gap-2 rounded-xl border border-red-100 bg-red-50 px-3 text-sm font-medium text-red-600 transition hover:border-red-200 hover:bg-red-100"
+                    >
+
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-4 w-4"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6M9 7V4a1 1 0 011-1h4a1 1 0 011 1v3m-7 0h10"
+                            />
+                        </svg>
+
+                        <span class="md:hidden">
+                            Remove
+                        </span>
+
+                    </button>
+
+                </div>
+
             </div>
 
         </div>
         `
-    );
-
-
-}
-   //GET ALL SUBJECT AND TEACHER 
-function getSubjects() {
-    const rows = document.querySelectorAll(".subject-row");
-
-    const subjects = [];
-    rows.forEach(row => {
-        const subjectName = row.querySelector(".subject-name").value.trim();
-        const teacherId = row.querySelector(".teacher-select").value;
-        if (!subjectName) return;
-        subjects.push({
-            subjectName,
-            teacherId
-        });
-
-    });
-    return subjects;
-
-}
- 
-//Upload subject to backend
- async function saveSubject(){
-       const subjectObj = getSubjects()
-        
-        try {
-            document.getElementById('save-subject').innerText = 'Saving.....'
-            const result = await fetch('/api/upload-subject', {
-              method:"POST",
-              headers:{"Content-Type":"application/json"},
-              body:JSON.stringify({subjectObj, subjectClass})
-            })
-            if(!result.ok){
-              alert("Something went wrong try agaion")
-              return
+                );
             }
-            const data = await result.json()
-            const subject = data.added
-            
-            allSubjects.filter(item=>(item.subjectClass === subjectClass)).forEach(item=>{
-              item.subjects.push(...subject)
-            })
-             selectClassLevel(subjectClass)
-            document.getElementById('subjectModal').style.display = 'none'
-        } catch (error) {
-            console.log(error)
-        }finally{
-           document.getElementById('save-subject').innerText = 'Save Subject'
-        }
-    }
-</script>
+            //GET ALL SUBJECT AND TEACHER 
+            function getSubjects() {
+                const rows = document.querySelectorAll(".subject-row");
+
+                const subjects = [];
+                rows.forEach(row => {
+                    const subjectName = row.querySelector(".subject-name").value.trim();
+                    const teacherId = row.querySelector(".teacher-select").value;
+                    if (!subjectName) return;
+                    subjects.push({
+                        subjectName,
+                        teacherId
+                    });
+
+                });
+                return subjects;
+
+            }
+
+            //Upload subject to backend
+            async function saveSubject() {
+                const subjectObj = getSubjects()
+
+                try {
+                    document.getElementById('save-subject').innerText = 'Saving.....'
+                    const result = await fetch('/api/upload-subject', {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ subjectObj, subjectClass })
+                    })
+                    if (!result.ok) {
+                        alert("Something went wrong try agaion")
+                        return
+                    }
+                    const data = await result.json()
+                    const subject = data.added
+
+                   const classData = allSubjects.find(
+                    item => item.subjectClass === subjectClass
+                );
+
+                if (classData) {
+                    classData.subjects.push(...subject);
+                } else {
+                    allSubjects.push({
+                        subjectClass: subjectClass,
+                        subjects: subject
+                    });
+                }
+
+                selectClassLevel(subjectClass);
+                closeSubjectModal();
+                } catch (error) {
+                    console.log(error)
+                } finally {
+                    document.getElementById('save-subject').innerText = 'Save Subject'
+                }
+            }
+            //open pop up
+            function openSubjectModal() {
+
+                const modal = document.getElementById("subjectModal");
+
+                modal.classList.remove("hidden");
+                modal.classList.add("flex");
+
+                document.getElementById("modalClassName").textContent =
+                    `${currentClassLevel} Section`;
+            }
+            //close pop up
+            function closeSubjectModal() {
+
+                const modal = document.getElementById("subjectModal");
+
+                modal.classList.add("hidden");
+                modal.classList.remove("flex");
+            }
+        </script>
 </body>
 
 </html>

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Junior Secondary School Result Upload</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <Link rel="stylesheet" href="../styles/style.css" />
 </head>
 <body>
@@ -12,146 +13,190 @@
             <a href="../admin">Back to Admin</a>
         </nav>
     </header>
-    <div class="platform">
-        <h2><%= subject.subjectClass.toUpperCase() %> SECONDARY SCHOOL FORM</h2>
-    </div>
-    <div class="upload_result">
-        <form onsubmit="submitResult(event)" id="form" >
-            <fieldset class="studentInfo">
-                <legend>STUDENT INFO:</legend>
-                <div class="student-info-grid">
-                    <input type="text" placeholder="First Name Middle Name Last Name" name="fullname" id="userName" required />
-                    <input type="text"  placeholder="ID eg JGE3853HTE" readonly name="studentId" id="studentId" required />
-                    <button type="button" style="width:100px; font-size:14px;" onclick="student()">Get ID</button>
-                </div>
-                <div id="respond" style="color:red; text-align: center; margin: 0.5rem 0;"></div>
-               <% const classOptions = {
-                    Senior: ["SS 1", "SS 2", "SS 3"],
-                    Junior: ["JSS 1", "JSS 2", "JSS 3"],
-                    Basic: ["BASIC 1", "BASIC 2", "BASIC 3", "BASIC 4", "BASIC 5", "BASIC 6"],
-                    Nursery: ["PRE NURSERY", "NURSERY 1", "NURSERY 2", "NURSERY 3"]
-                };
-
-                const options = classOptions[subject.subjectClass] || classOptions.Nursery;
-                %>
-
-            <div class="term-class-grid">
-
-                <label>CLASS</label>
-                <select id="Sclass" name="studentClass" required>
-                    <option value="" disabled selected>Select Class</option>
-                    <% options.forEach(item => { %>
-                        <option value="<%= item %>">
-                            <%= item %>
-                        </option>
-                    <% }) %>
-                </select>
-
-                <label>SCHOOL TERM</label>
-                <select id="Sterm" name="term" required>
-                    <option value="" disabled selected>Select Term</option>
-                    <option value="FIRST TERM">FIRST TERM</option>
-                    <option value="SECOND TERM">SECOND TERM</option>
-                    <option value="THIRD TERM">THIRD TERM</option>
-                </select>
-
-            </div>
-            </fieldset>
-
-            <fieldset>
-                <legend>RESULT INFO:</legend>
-                <!-- SUBJECT -->
-                
-                <% subject.subjects.forEach(item => { %>
-                <div class="subject-row">
-                    <input type="text" class="subject-name"  value="<%= item.subjectName %>" readonly>
-                    <input type="number" placeholder="First Test" class="test1">
-                    <input type="number" placeholder="Second Test" class="test2">
-                    <input type="number" placeholder="CA" class="cca">
-                    <input type="number" placeholder="EXAM" class="exam">
-                    <input type="text" placeholder="Total" class="total"  readonly>
-                    <input type="text" placeholder="Grade" class="grade" readonly>
-                    <input type="text" placeholder="Remark" class="remark" readonly>
-                </div>
-                <% }) %>
-               
-            </fieldset>
-            <fieldset>
-                <legend>STUDENT PERFORMANCE</legend>
-                <div class="performance-grid">
-                    <div>
-                        <label>No. of subjects offered:</label>
-                        <input type="text" placeholder="No. of subjects offered" id="No_subj" name="No_subj" readonly />
+     <% if (subject && subject.subjects && subject.subjects.length > 0) { %>
+        <div class="platform">
+            <h2><%= subject.subjectClass.toUpperCase() %> SECONDARY SCHOOL FORM</h2>
+        </div>
+        <div class="upload_result">
+            <form onsubmit="submitResult(event)" id="form" >
+                <fieldset class="studentInfo">
+                    <legend>STUDENT INFO:</legend>
+                    <div class="student-info-grid">
+                        <input type="text" placeholder="First Name Middle Name Last Name" name="fullname" id="userName" required />
+                        <input type="text"  placeholder="ID eg JGE3853HTE" readonly name="studentId" id="studentId" required />
+                        <button type="button" style="width:100px; font-size:14px;" onclick="student()">Get ID</button>
                     </div>
-                    <div>
-                        <label>Average score:</label>
-                        <input type="text" placeholder="Average score" id="average" name="average" required readonly />
-                    </div>
-                    <div>
-                        <label>Score obtainable:</label>
-                        <input type="text" placeholder="Score obtainable" id="score_obtainable" name="score_obtainable" readonly />
-                    </div>
-                    <div>
-                        <label>Total score obtained:</label>
-                        <input type="text" id="score_obtain" placeholder="Total score obtained" name="score_obtain" readonly />
-                    </div>
-                    <button type="button" style="width:150px; font-size:14px;" id="Calc">Compute Scores</button>
-                </div>
-            </fieldset>
-            <fieldset>
-                <legend>CLASS TEACHER REPORT</legend>
-                <div class="other-info-grid">
-                    <select name="section" id="section" required>
-                        <option value="" disabled selected>Academic Section</option>
-                        <option value="2023 - 2024">2023 - 2024</option>
-                        <option value="2024 - 2025" >2024 - 2025</option>
-                        <option value="2025 - 2026" selected>2025 - 2026</option>
-                        <option value="2026 - 2027">2026 - 2027</option>
+                    <div id="respond" style="color:red; text-align: center; margin: 0.5rem 0;"></div>
+                <% const classOptions = {
+                        Senior: ["SS 1", "SS 2", "SS 3"],
+                        Junior: ["JSS 1", "JSS 2", "JSS 3"],
+                        Basic: ["BASIC 1", "BASIC 2", "BASIC 3", "BASIC 4", "BASIC 5", "BASIC 6"],
+                        Nursery: ["PRE NURSERY", "NURSERY 1", "NURSERY 2", "NURSERY 3"]
+                    };
+
+                    const options = classOptions[subject.subjectClass] || classOptions.Nursery;
+                    %>
+
+                <div class="term-class-grid">
+
+                    <label>CLASS</label>
+                    <select id="Sclass" name="studentClass" required>
+                        <option value="" disabled selected>Select Class</option>
+                        <% options.forEach(item => { %>
+                            <option value="<%= item %>">
+                                <%= item %>
+                            </option>
+                        <% }) %>
                     </select>
-                    <input type="text" placeholder="Times present" name="present" />
-                    <input type="text" placeholder="Times absent" name="absent" />
-                    <input type="text" placeholder="Next term resume" name="nextterm"  />
-                    <%
-                        const promotionOptions = {
-                            Senior: ["SS 2", "SS 3"],
-                            Junior: ["JSS 2", "JSS 3", "SS 1"],
-                            Basic: ["BASIC 2", "BASIC 3", "BASIC 4", "BASIC 5", "BASIC 6"],
-                            Nursery: ["NURSERY 1", "NURSERY 2", "NURSERY 3"]
-                        };
 
-                        const promoteOptions = promotionOptions[subject.subjectClass] || [];
-                        %>
+                    <label>SCHOOL TERM</label>
+                    <select id="Sterm" name="term" required>
+                        <option value="" disabled selected>Select Term</option>
+                        <option value="FIRST TERM">FIRST TERM</option>
+                        <option value="SECOND TERM">SECOND TERM</option>
+                        <option value="THIRD TERM">THIRD TERM</option>
+                    </select>
 
-                        <select id="promotedto" name="promote">
+                </div>
+                </fieldset>
 
-                            <option value="" disabled selected>Promoted to</option>
+                <fieldset>
+                    <legend>RESULT INFO:</legend>
+                    <!-- SUBJECT -->
+                
 
-                            <% promoteOptions.forEach(item => { %>
+        <% subject.subjects.forEach(item => { %>
+            <div class="subject-row">
+                <input
+                    type="text"
+                    class="subject-name"
+                    value="<%= item.subjectName %>"
+                    readonly
+                >
 
-                                <option value="<%= item %>">
-                                    <%= item %>
-                                </option>
+                <input type="number" placeholder="First Test" class="test1">
+                <input type="number" placeholder="Second Test" class="test2">
+                <input type="number" placeholder="CA" class="cca">
+                <input type="number" placeholder="EXAM" class="exam">
 
-                            <% }) %>
+                <input type="text" placeholder="Total" class="total" readonly>
+                <input type="text" placeholder="Grade" class="grade" readonly>
+                <input type="text" placeholder="Remark" class="remark" readonly>
+            </div>
+        <% }) %>
 
+  
+                </fieldset>
+                <fieldset>
+                    <legend>STUDENT PERFORMANCE</legend>
+                    <div class="performance-grid">
+                        <div>
+                            <label>No. of subjects offered:</label>
+                            <input type="text" placeholder="No. of subjects offered" id="No_subj" name="No_subj" readonly />
+                        </div>
+                        <div>
+                            <label>Average score:</label>
+                            <input type="text" placeholder="Average score" id="average" name="average" required readonly />
+                        </div>
+                        <div>
+                            <label>Score obtainable:</label>
+                            <input type="text" placeholder="Score obtainable" id="score_obtainable" name="score_obtainable" readonly />
+                        </div>
+                        <div>
+                            <label>Total score obtained:</label>
+                            <input type="text" id="score_obtain" placeholder="Total score obtained" name="score_obtain" readonly />
+                        </div>
+                        <button type="button" style="width:150px; font-size:14px;" id="Calc">Compute Scores</button>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>CLASS TEACHER REPORT</legend>
+                    <div class="other-info-grid">
+                        <select name="section" id="section" required>
+                            <option value="" disabled selected>Academic Section</option>
+                            <option value="2023 - 2024">2023 - 2024</option>
+                            <option value="2024 - 2025" >2024 - 2025</option>
+                            <option value="2025 - 2026" selected>2025 - 2026</option>
+                            <option value="2026 - 2027">2026 - 2027</option>
                         </select>
-                </div>
-            </fieldset>
-            <fieldset>
-                <legend>OTHER INFORMATION</legend>
-                <div class="other-info-grid">
-                    <input type="number" placeholder="Outstanding fees" name="fee" />
-                    <input type="text" placeholder="Class Teacher Report" id="report" name="tReport"  />
-                    <input type="text" placeholder="Head Teacher Report" name="Treport" id="Treport"  />
-                </div>
-            </fieldset>
-            <fieldset class="schoolInfo">
-                <legend>School Info:</legend>
-                <button id="upload-button">Upload Result</button>
-            </fieldset>
-            <p id="upload" style="color:red;"></p>
-        </form>
+                        <input type="text" placeholder="Times present" name="present" />
+                        <input type="text" placeholder="Times absent" name="absent" />
+                        <input type="text" placeholder="Next term resume" name="nextterm"  />
+                        <%
+                            const promotionOptions = {
+                                Senior: ["SS 2", "SS 3"],
+                                Junior: ["JSS 2", "JSS 3", "SS 1"],
+                                Basic: ["BASIC 2", "BASIC 3", "BASIC 4", "BASIC 5", "BASIC 6"],
+                                Nursery: ["NURSERY 1", "NURSERY 2", "NURSERY 3"]
+                            };
+
+                            const promoteOptions = promotionOptions[subject.subjectClass] || [];
+                            %>
+
+                            <select id="promotedto" name="promote">
+
+                                <option value="" disabled selected>Promoted to</option>
+
+                                <% promoteOptions.forEach(item => { %>
+
+                                    <option value="<%= item %>">
+                                        <%= item %>
+                                    </option>
+
+                                <% }) %>
+
+                            </select>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>OTHER INFORMATION</legend>
+                    <div class="other-info-grid">
+                        <input type="number" placeholder="Outstanding fees" name="fee" />
+                        <input type="text" placeholder="Class Teacher Report" id="report" name="tReport"  />
+                        <input type="text" placeholder="Head Teacher Report" name="Treport" id="Treport"  />
+                    </div>
+                </fieldset>
+                <fieldset class="schoolInfo">
+                    <legend>School Info:</legend>
+                    <button id="upload-button">Upload Result</button>
+                </fieldset>
+                <p id="upload" style="color:red;"></p>
+            </form>
+        </div>
+          <% } else { %>
+
+        <div class="flex flex-col items-center justify-center rounded-2xl border border-dashed border-gray-200 bg-gray-50/50 px-6 py-14 text-center">
+
+        <div class="mb-5 flex h-14 w-14 items-center justify-center rounded-xl bg-blue-100 text-blue-600">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                class="h-7 w-7"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="1.8">
+                <path stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+            </svg>
+        </div>
+
+        <h3 class="text-base font-semibold text-gray-900">
+            No subjects for this class
+        </h3>
+
+        <p class="mt-2 max-w-md text-sm text-gray-500">
+            Subjects assigned to this class will appear here. Add subjects to begin managing student results.
+        </p>
+
+        <a href="/admin/subject-management"
+        class="mt-5 inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-blue-700">
+            <span class="text-lg leading-none">+</span>
+            Add Subject
+        </a>
+
     </div>
+
+    <% } %>
     <%- include('./partials/popup') %>
    
     <script src="../js/fetch.js"></script>

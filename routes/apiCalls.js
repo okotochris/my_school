@@ -3,6 +3,7 @@ const StudentProfile = require("../schema/studentProfile.js");
 const StudentResult = require("../schema/studentResult.js"); // nursery
 const isAuthenticated = require("../utility/authenticated.js");
 const Attendance = require("../schema/attendance.js");
+const Blacklist = require('../schema/blacklist.js')
 const router = express.Router();
 
 router.get("/api/is_uploaded", async (req, res) => {
@@ -47,6 +48,7 @@ router.get("/api/student", async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
+
 //STUDENT PERFOMANCE API CALL
 router.get("/studentperfomance", async (req, res) => {
   try {
@@ -80,12 +82,64 @@ router.get("/getstudentid", async (req, res) => {
       res.status(404).json({ message: "Student not found" });
       return;
     }
+
     res.status(200).json(studentId);
   } catch (err) {
     console.error("Server error:", err);
     res.status(500).json({ message: "Server error" });
   }
 });
+
+//REMOVING NAME FROM BLACKLIST API CALL
+router.delete("/blacklist/:studentId", async (req, res) => {
+  const { studentId } = req.params;
+
+  try {
+    const deletedStudent = await Blacklist.findOneAndDelete({ studentId });
+
+    if (deletedStudent) {
+      res.status(200).json({ message: "Student removed from blacklist" });
+    } else {
+      res.status(404).json({ message: "Student not found" });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to delete student" });
+  }
+});
+
+//ADD NAME TO BLACK LIST API CALL
+router.post("/blacklist", async (req, res) => {
+
+  let studentName = req.body.fullname;
+  let school = req.session.school;
+  let studentId = req.body.studentId;
+  const data = { studentName, studentId, school };
+
+  try {
+    const studnetInfo = new Blacklist(data);
+    await studnetInfo.save();
+    res.json("file added");
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+
+//GET STUDENT INFORMATION BASE ON ID API CALL
+router.get("/studentinfomation", async (req, res) => {
+
+  let studentId = req.query.studnetId;
+
+  try {
+    let info = await StudentProfile.findOne({ studentId });
+  
+    res.json(info);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 
 //getting student id by classname API CALL
 router.get("/getclassid", async (req, res) => {

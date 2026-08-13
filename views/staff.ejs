@@ -1,121 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZRDY8JQBQ7"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZRDY8JQBQ7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
 
-  gtag('config', 'G-ZRDY8JQBQ7');
-</script>
+    gtag('config', 'G-ZRDY8JQBQ7');
+  </script>
   <meta charset="UTF-8">
-   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/styles/global.css">
   <title>Staff Management</title>
 </head>
+
 <body>
   <%- include('./partials/header.ejs') %>
-  <div class="admin-container">
-    <%- include('./partials/navigation.ejs') %>
-    <main class="section">
-      <div class="container center-container">
-        <div class="bg-white rounded-3xl shadow-sm p-8">
-          <div class="form-header">
-            <h2>Create New Staff Account</h2>
-          </div>
-          <form id="staffForm">
-            <div class="form-controls">
-              <div class="form-group">
-                <label for="username">Name</label>
-                <input
-                  type="text"
-                  id="username"
-                  name="user_name"
-                  placeholder="Enter Name"
-                  required
-                  autocomplete="off"
-                  aria-label="Staff Name"
-                />
-                <span class="error-message"></span>
+    <div class="admin-container">
+      <%- include('./partials/navigation.ejs') %>
+        <main class="section">
+          <div class="container center-container">
+            <div class="bg-white rounded-3xl shadow-sm p-8">
+              <div class="form-header">
+                <h2>Create New Staff Account</h2>
               </div>
-              <div class="form-group">
-                <label for="email">Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="Enter Email"
-                  required
-                  autocomplete="off"
-                  aria-label="Staff Email"
-                />
-                <span class="error-message"></span>
+              <form id="staffForm">
+                <div class="form-controls">
+                  <div class="form-group">
+                    <label for="username">Name</label>
+                    <input type="text" id="username" name="user_name" placeholder="Enter Name" required
+                      autocomplete="off" aria-label="Staff Name" />
+                    <span class="error-message"></span>
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter Email" required autocomplete="off"
+                      aria-label="Staff Email" />
+                    <span class="error-message"></span>
+                  </div>
+                  <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="text" id="password" name="password" placeholder="Enter Password" required
+                      autocomplete="off" aria-label="Staff Password" />
+                    <span class="error-message"></span>
+                  </div>
+                  <button type="submit" class="button">Add Staff</button>
+                </div>
+              </form>
+              <div class="alert-dialog" style="display: none;">
+                <span class="cancel-btn" onclick="closeAlert()">×</span>
+                <div id="alertMessage"></div>
               </div>
-              <div class="form-group">
-                <label for="password">Password</label>
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  placeholder="Enter Password"
-                  required
-                  autocomplete="off"
-                  aria-label="Staff Password"
-                />
-                <span class="error-message"></span>
+              <div class="table-wrapper">
+                <div class="table-header">
+                  <h3>Staff List</h3>
+                  <span class="total-count">Total Staff: <%= staff.length %></span>
+                </div>
+                <% if (staff && staff.length> 0) { %>
+                  <table id="staffTable">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% staff.forEach((item, index)=> { %>
+                        <tr>
+                          <td>
+                            <%= index + 1 %>
+                          </td>
+                          <td>
+                            <%= item.user_name %>
+                          </td>
+                          <td>
+                            <%= item.email.length> 15 ? item.email.substring(0, 15) + '...' : item.email %>
+                          </td>
+                          <td>
+                            <span class="action delete-btn" data-id="<%= item._id %>"
+                              aria-label="Delete <%= item.user_name %>">
+                              <% if(item.role !=='admin' ){ %>
+                                <span class="icon-trash">🗑️</span>
+                                <% } %>
+                            </span>
+                          </td>
+                        </tr>
+                        <% }) %>
+                    </tbody>
+                  </table>
+                  <% } else { %>
+                    <div class="table-empty">No staff available</div>
+                    <% } %>
               </div>
-              <button type="submit" class="button">Add Staff</button>
             </div>
-          </form>
-          <div class="alert-dialog" style="display: none;">
-            <span class="cancel-btn" onclick="closeAlert()">×</span>
-            <div id="alertMessage"></div>
           </div>
-          <div class="table-wrapper">
-            <div class="table-header">
-              <h3>Staff List</h3>
-              <span class="total-count">Total Staff: <%= staff.length %></span>
-            </div>
-            <% if (staff && staff.length > 0) { %>
-              <table id="staffTable">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <% staff.forEach((item, index) => { %>
-                    <tr>
-                      <td><%= index + 1 %></td>
-                      <td><%= item.user_name %></td>
-                      <td><%= item.email.length > 15 ? item.email.substring(0, 15) + '...' : item.email %></td>
-                      <td>
-                        <span class="action delete-btn" data-id="<%= item._id %>" aria-label="Delete <%= item.user_name %>">
-                          <% if(item.role !== 'admin'){ %>
-                            <span class="icon-trash">🗑️</span>
-                         <% } %>
-                        </span>
-                      </td>
-                    </tr>
-                  <% }) %>
-                </tbody>
-              </table>
-            <% } else { %>
-              <div class="table-empty">No staff available</div>
-            <% } %>
-          </div>
-        </div>
-      </div>
-    </main>
-  </div>
+        </main>
+    </div>
 
-  <script src="/js/menu.js"></script>
-  <script src="/js/staff.js"></script>
+    <script src="/js/menu.js"></script>
+    <script>
+      const form = document.getElementById('staffForm');
+      const alertDialog = document.querySelector('.alert-dialog');
+      const alertMessage = document.getElementById('alertMessage');
+
+      // Show alert dialog with message
+      function showAlert(message) {
+        alertMessage.textContent = message;
+        alertDialog.style.display = 'block';
+      }
+
+      // Close alert dialog
+      function closeAlert() {
+        alertDialog.style.display = 'none';
+        alertMessage.textContent = '';
+      }
+
+      // Form submission
+      form.onsubmit = async (e) => {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        // Basic validation
+        if (!data.user_name || !data.email || !data.password) {
+          showAlert('Please fill in all fields');
+          return;
+        }
+
+        try {
+          document.querySelector('.button').innerText = 'Adding staff.....'
+          const response = await fetch('/admin/add-staff', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+          });
+          if (response.ok) {
+            showAlert('Staff added successfully');
+            form.reset();
+            setTimeout(() => location.reload(), 1500);
+          } else {
+            showAlert('Failed to add staff');
+          }
+        } catch (err) {
+          console.error(err);
+          showAlert('An error occurred');
+        } finally {
+          document.querySelector('.button').innerText = 'Add Staff'
+        }
+      };
+
+      // Delete staff
+      document.querySelectorAll('.delete-btn').forEach(item => {
+        item.addEventListener('click', async () => {
+          const id = item.dataset.id;
+          try {
+            const response = await fetch(`/deletestaff?id=${id}`, { method: 'DELETE' });
+            if (response.ok) {
+              showAlert('Staff deleted successfully');
+              item.closest('tr').remove();
+              const totalCount = document.querySelector('.total-count');
+              const currentCount = parseInt(totalCount.textContent.match(/\d+/)[0]) - 1;
+              totalCount.textContent = `Total Staff: ${currentCount}`;
+              if (currentCount === 0) {
+                document.querySelector('.table-wrapper').innerHTML = '<div class="table-empty">No staff available</div>';
+              }
+            } else {
+              showAlert('Failed to delete staff');
+            }
+          } catch (err) {
+            console.error(err);
+            showAlert('Error: ' + err.message);
+          }
+        });
+      });
+    </script>
 </body>
+
 </html>

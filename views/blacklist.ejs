@@ -1,97 +1,642 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZRDY8JQBQ7"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-ZRDY8JQBQ7');
-</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google tag -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZRDY8JQBQ7"></script>
+
   <link rel="stylesheet" href="/styles/global.css">
-  <title>Blacklist Management</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <title>Blacklist Management | MySchoolResult</title>
 </head>
-<body>
+
+<body class="bg-slate-50 text-slate-800">
+
   <%- include('./partials/header.ejs') %>
+
   <div class="admin-container">
     <%- include('./partials/navigation.ejs') %>
-    <main class="section">
-      <div class="container center-container">
-        <div class="form-container">
-          <div class="form-header">
-            <h2>Add Student to Blacklist</h2>
-          </div>
-          <div class="description">
-            <p>Students on the blacklist cannot access their results.</p>
-          </div>
-          <form id="blacklistForm">
-            <div class="form-controls">
-              <div class="form-group">
-                <label for="studentID">Student Name or ID</label>
-                <input
-                  type="text"
-                  id="studentID"
-                  name="studentID"
-                  placeholder="Enter Student Name or ID"
-                  required
-                  autocomplete="off"
-                  aria-label="Student Name or ID"
-                />
-                <span class="error-message"></span>
+
+    <main class="section min-h-screen px-4 py-6 md:px-8 lg:px-10">
+
+      <div class="max-w-7xl mx-auto">
+
+        <!-- PAGE HEADER -->
+        <div class="mb-8">
+
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-5">
+
+            <div>
+              <div class="flex items-center gap-3 mb-3">
+                <div class="w-11 h-11 rounded-xl bg-red-50 text-red-600 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg"
+                       class="w-6 h-6"
+                       fill="none"
+                       viewBox="0 0 24 24"
+                       stroke="currentColor">
+                    <path stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/>
+                  </svg>
+                </div>
+
+                <span class="text-sm font-semibold text-red-600">
+                  Student Access Control
+                </span>
               </div>
-              <button type="button" id="getStudent" class="button">Add to Blacklist</button>
+
+              <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
+                Blacklist Management
+              </h1>
+
+              <p class="mt-2 text-slate-500 max-w-2xl">
+                Manage students who are temporarily restricted from accessing
+                their academic results.
+              </p>
             </div>
-          </form>
-          <div class="blacklist" style="display: none;">
-            <span class="cancel-btn" onclick="cancel1()">×</span>
-            <div id="studentName"></div>
+
           </div>
-          <div class="alert-dialog" style="display: none;">
-            <span class="cancel-btn" onclick="closeAlert()">×</span>
-            <div id="alertMessage"></div>
-          </div>
-          <div class="table-wrapper">
-            <% if (data && data.length > 0) { %>
-              <table id="table">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Student ID</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <% data.forEach((student, index) => { %>
-                    <tr>
-                      <td><%= index + 1 %></td>
-                      <td><%= student.studentName %></td>
-                      <td><%= student.studentId %></td>
-                      <td>
-                        <span class="action remove-btn" data-id="<%= student.studentId %>" aria-label="Remove <%= student.studentName %> from blacklist">
-                          <span class="icon-trash">🗑️</span>
-                        </span>
-                      </td>
-                    </tr>
-                  <% }) %>
-                </tbody>
-              </table>
-            <% } else { %>
-              <div class="table-empty">No students in blacklist</div>
-            <% } %>
-          </div>
-          <div class="loading">Loading...</div>
         </div>
+
+
+        <!-- WARNING BANNER -->
+        <div class="mb-8 rounded-2xl border border-amber-200 bg-amber-50 p-5">
+
+          <div class="flex gap-4">
+
+            <div class="flex-shrink-0">
+              <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     class="w-5 h-5"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke="currentColor">
+                  <path stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 9v2m0 4h.01M10.29 3.86l-7.82 14a2 2 0 001.74 3h15.58a2 2 0 001.74-3l-7.82-14a2 2 0 00-3.42 0z"/>
+                </svg>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="font-semibold text-amber-900">
+                Important
+              </h3>
+
+              <p class="text-sm text-amber-800 mt-1">
+                Students added to the blacklist will not be able to access
+                their results until they are removed from the list.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- STATISTICS -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
+
+          <!-- Total -->
+          <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+
+            <div class="flex items-center justify-between">
+
+              <div>
+                <p class="text-sm font-medium text-slate-500">
+                  Blacklisted Students
+                </p>
+
+                <p class="text-3xl font-bold text-slate-900 mt-2">
+                  <%= student ? student.length : 0 %>
+                </p>
+              </div>
+
+              <div class="w-12 h-12 rounded-xl bg-red-50 text-red-600 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     class="w-6 h-6"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke="currentColor">
+                  <path stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636"/>
+                </svg>
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- Status -->
+          <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+
+            <div class="flex items-center justify-between">
+
+              <div>
+                <p class="text-sm font-medium text-slate-500">
+                  Access Status
+                </p>
+
+                <p class="text-xl font-bold text-red-600 mt-2">
+                  Restricted
+                </p>
+              </div>
+
+              <div class="w-12 h-12 rounded-xl bg-red-50 text-red-600 flex items-center justify-center">
+                🔒
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- Action -->
+          <div class="bg-gradient-to-br from-blue-600 to-indigo-600 rounded-2xl p-6 text-white shadow-sm">
+
+            <p class="text-sm text-blue-100">
+              Need to restrict a student?
+            </p>
+
+            <p class="text-xl font-bold mt-2">
+              Search their details below
+            </p>
+
+            <p class="text-sm text-blue-100 mt-2">
+              Use their name or student ID.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- ADD STUDENT CARD -->
+        <section class="bg-white border border-slate-200 rounded-3xl shadow-sm overflow-hidden mb-8">
+
+          <div class="px-6 py-6 md:px-8 border-b border-slate-100">
+
+            <div class="flex items-start gap-4">
+
+              <div class="w-11 h-11 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center flex-shrink-0">
+
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     class="w-6 h-6"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke="currentColor">
+                  <path stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M21 21l-4.35-4.35m2.35-5.65a8 8 0 11-16 0 8 8 0 0116 0z"/>
+                </svg>
+
+              </div>
+
+              <div>
+                <h2 class="text-xl font-bold text-slate-900">
+                  Add Student to Blacklist
+                </h2>
+
+                <p class="text-sm text-slate-500 mt-1">
+                  Search for a student using their name or student ID.
+                </p>
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="p-6 md:p-8">
+
+            <form id="blacklistForm">
+
+              <div class="flex flex-col lg:flex-row gap-4">
+
+                <div class="flex-1">
+
+                  <label
+                    for="studentID"
+                    class="block text-sm font-semibold text-slate-700 mb-2">
+                    Student Name 
+                  </label>
+
+                  <div class="relative">
+
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+
+                      <svg xmlns="http://www.w3.org/2000/svg"
+                           class="w-5 h-5 text-slate-400"
+                           fill="none"
+                           viewBox="0 0 24 24"
+                           stroke="currentColor">
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M21 21l-4.35-4.35m2.35-5.65a8 8 0 11-16 0 8 8 0 0116 0z"/>
+                      </svg>
+
+                    </div>
+
+                    <input
+                      type="text"
+                      id="studentID"
+                      name="studentID"
+                      placeholder="e.g. John Doe "
+                      required
+                      autocomplete="off"
+                      aria-label="Student Name or Student ID"
+                      class="w-full h-14 pl-12 pr-4 rounded-xl border border-slate-300 bg-slate-50
+                             text-slate-900 placeholder:text-slate-400
+                             focus:bg-white focus:border-blue-500 focus:ring-4
+                             focus:ring-blue-500/10 outline-none transition"
+                    />
+                     <span class="error-message"></span>
+                  </div>
+
+                  <span class="error-message block text-sm text-red-500 mt-2"></span>
+
+                </div>
+
+
+                <div class="lg:pt-7">
+
+                  <button
+                    type="button"
+                    id="getStudent"
+                    class="w-full lg:w-auto h-14 px-7 rounded-xl
+                           bg-blue-600 hover:bg-blue-700
+                           active:bg-blue-800
+                           text-white font-semibold
+                           shadow-sm hover:shadow-md
+                           transition flex items-center justify-center gap-2">
+
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="w-5 h-5"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke="currentColor">
+                      <path stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M12 4v16m8-8H4"/>
+                    </svg>
+
+                    Add to Blacklist
+
+                  </button>
+
+                </div>
+
+              </div>
+
+            </form>
+
+          </div>
+
+        </section>
+
+
+        <!-- BLACKLIST TABLE -->
+        <section class="bg-white border border-slate-200 rounded-3xl shadow-sm overflow-hidden">
+
+          <!-- Header -->
+          <div class="px-6 py-6 md:px-8 border-b border-slate-100">
+
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+
+              <div>
+
+                <h2 class="text-xl font-bold text-slate-900">
+                  Blacklisted Students
+                </h2>
+
+                <p class="text-sm text-slate-500 mt-1">
+                  Students currently restricted from accessing results.
+                </p>
+
+              </div>
+
+              <% if (student && student.length > 0) { %>
+
+                <span class="inline-flex items-center gap-2 px-3 py-1.5
+                             rounded-full bg-red-50 text-red-700
+                             text-sm font-semibold">
+
+                  <span class="w-2 h-2 rounded-full bg-red-500"></span>
+
+                  <%= student.length %> Student<%= student.length !== 1 ? 's' : '' %>
+
+                </span>
+
+              <% } %>
+
+            </div>
+
+          </div>
+
+
+          <!-- Table -->
+          <div class="overflow-x-auto">
+
+            <% if (student && student.length > 0) { %>
+
+              <table id="table" class="w-full">
+
+                <thead>
+
+                  <tr class="bg-slate-50 border-b border-slate-200">
+
+                    <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-slate-500">
+                      #
+                    </th>
+
+                    <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-slate-500">
+                      Student
+                    </th>
+
+                    <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-slate-500">
+                      Student ID
+                    </th>
+
+                    <th class="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-slate-500">
+                      Action
+                    </th>
+
+                  </tr>
+
+                </thead>
+
+
+                <tbody class="divide-y divide-slate-100">
+
+                  <% student.forEach((student, index) => { %>
+
+                    <tr class="hover:bg-slate-50/80 transition">
+
+                      <!-- Number -->
+                      <td class="px-6 py-5">
+
+                        <span class="text-sm font-medium text-slate-400">
+                          <%= String(index + 1).padStart(2, '0') %>
+                        </span>
+
+                      </td>
+
+
+                      <!-- Student -->
+                      <td class="px-6 py-5">
+
+                        <div class="flex items-center gap-3">
+
+                          <div class="w-10 h-10 rounded-full bg-blue-50 text-blue-700
+                                      flex items-center justify-center
+                                      font-bold text-sm">
+
+                            <%= student.studentName
+                                .split(' ')
+                                .map(n => n[0])
+                                .slice(0, 2)
+                                .join('')
+                                .toUpperCase() %>
+
+                          </div>
+
+                          <div>
+
+                            <p class="font-semibold text-slate-800">
+                              <%= student.studentName %>
+                            </p>
+
+                            <span class="text-xs text-red-500">
+                              Result access restricted
+                            </span>
+
+                          </div>
+
+                        </div>
+
+                      </td>
+
+
+                      <!-- ID -->
+                      <td class="px-6 py-5">
+
+                        <span class="inline-flex px-3 py-1.5 rounded-lg
+                                     bg-slate-100 text-slate-700
+                                     text-sm font-medium font-mono">
+
+                          <%= student.studentId %>
+
+                        </span>
+
+                      </td>
+
+
+                      <!-- Action -->
+                      <td class="px-6 py-5 text-right">
+
+                        <button
+                          type="button"
+                          class="remove-btn inline-flex items-center gap-2
+                                 px-4 py-2 rounded-lg
+                                 border border-red-200
+                                 text-red-600
+                                 hover:bg-red-50
+                                 hover:border-red-300
+                                 transition"
+                          data-id="<%= student.studentId %>"
+                          aria-label="Remove <%= student.fullname %> from blacklist">
+
+                          <svg xmlns="http://www.w3.org/2000/svg"
+                               class="w-4 h-4"
+                               fill="none"
+                               viewBox="0 0 24 24"
+                               stroke="currentColor">
+                            <path stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6M9 7V4a1 1 0 011-1h4a1 1 0 011 1v3m-9 0h12"/>
+                          </svg>
+
+                          Remove
+
+                        </button>
+
+                      </td>
+
+                    </tr>
+
+                  <% }) %>
+
+                </tbody>
+
+              </table>
+
+
+            <% } else { %>
+
+              <!-- EMPTY STATE -->
+
+              <div class="px-6 py-20 text-center">
+
+                <div class="mx-auto w-16 h-16 rounded-2xl bg-slate-100
+                            flex items-center justify-center text-slate-400">
+
+                  <svg xmlns="http://www.w3.org/2000/svg"
+                       class="w-8 h-8"
+                       fill="none"
+                       viewBox="0 0 24 24"
+                       stroke="currentColor">
+                    <path stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="1.8"
+                          d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636"/>
+                  </svg>
+
+                </div>
+
+                <h3 class="mt-5 text-lg font-bold text-slate-800">
+                  No blacklisted students
+                </h3>
+
+                <p class="mt-2 text-sm text-slate-500 max-w-md mx-auto">
+                  Students who are restricted from accessing their results
+                  will appear here.
+                </p>
+
+              </div>
+
+            <% } %>
+
+          </div>
+
+        </section>
+
+
+        <!-- ADD STUDENT RESULT -->
+        <div
+          class="blacklist hidden fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm
+                 items-center justify-center p-4">
+
+          <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden">
+
+            <div class="p-6">
+
+              <div class="flex items-start justify-between">
+
+                <div>
+                  <h3 class="text-xl font-bold text-slate-900">
+                    Confirm Student
+                  </h3>
+
+                  <p class="text-sm text-slate-500 mt-1">
+                    Review the student before adding them to the blacklist.
+                  </p>
+                </div>
+
+                <button
+                  type="button"
+                  onclick="cancel1()"
+                  class="w-9 h-9 rounded-lg hover:bg-slate-100
+                         text-slate-500 text-xl">
+                  &times;
+                </button>
+
+              </div>
+
+              <div
+                id="studentName"
+                class="mt-6 rounded-2xl bg-slate-50 border border-slate-200 p-5">
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- ALERT MODAL -->
+        <div
+          class="alert-dialog hidden fixed inset-0 z-[60]
+                 bg-slate-900/50 backdrop-blur-sm
+                 items-center justify-center p-4">
+
+          <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full p-6">
+
+            <div class="flex items-start gap-4">
+
+              <div class="w-11 h-11 rounded-xl bg-blue-50 text-blue-600
+                          flex items-center justify-center flex-shrink-0">
+                ℹ️
+              </div>
+
+              <div class="flex-1">
+
+                <h3 class="font-bold text-slate-900">
+                  Notice
+                </h3>
+
+                <div
+                  id="alertMessage"
+                  class="text-sm text-slate-500 mt-2">
+                </div>
+
+              </div>
+
+              <button
+                type="button"
+                onclick="closeAlert()"
+                class="text-slate-400 hover:text-slate-700 text-xl">
+                &times;
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- LOADING -->
+        <div
+          class="loading hidden fixed inset-0 z-[70]
+                 bg-slate-900/40 backdrop-blur-sm
+                 items-center justify-center">
+
+          <div class="bg-white rounded-2xl px-6 py-5 shadow-xl flex items-center gap-4">
+
+            <div class="w-6 h-6 border-3 border-blue-600
+                        border-t-transparent rounded-full animate-spin">
+            </div>
+
+            <span class="font-medium text-slate-700">
+              Loading...
+            </span>
+
+          </div>
+
+        </div>
+
       </div>
+
     </main>
   </div>
 
-  <script src="/js/menu.js"></script>
+
+
   <script src="/js/blacklist.js"></script>
   <script src="/js/remove.js"></script>
+
 </body>
 </html>
