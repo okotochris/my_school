@@ -477,13 +477,13 @@ function renderResults(data) {
                <div class="result-actions">
                     <button 
                         class="view-btn"
-                        onclick="viewResult('${item.studentId}', '${item.term}', '${item.class}', '${item.schoolName}')"
+                        onclick="viewResult('${item.studentId}', '${item.term}', '${item.studentClass}', '${item.schoolName}')"
                     >
                         View  Result →
                     </button>
                     <button 
                         class="del-btn"
-                        onclick="delAction('${item._id}', '${item.class}')"
+                        onclick="delAction('${item._id}', '${item.studentClass}')"
                     >
                         Delete Result X
                     </button>

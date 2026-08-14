@@ -1,110 +1,600 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZRDY8JQBQ7"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
 
-    gtag('config', 'G-ZRDY8JQBQ7');
-  </script>
+ 
+
   <meta charset="UTF-8">
-  <script src="https://cdn.tailwindcss.com"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/styles/global.css">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/styles/global.css">
+
   <title>Staff Management</title>
 </head>
 
-<body>
-  <%- include('./partials/header.ejs') %>
-    <div class="admin-container">
-      <%- include('./partials/navigation.ejs') %>
-        <main class="section">
-          <div class="container center-container">
-            <div class="bg-white rounded-3xl shadow-sm p-8">
-              <div class="form-header">
-                <h2>Create New Staff Account</h2>
-              </div>
-              <form id="staffForm">
-                <div class="form-controls">
-                  <div class="form-group">
-                    <label for="username">Name</label>
-                    <input type="text" id="username" name="user_name" placeholder="Enter Name" required
-                      autocomplete="off" aria-label="Staff Name" />
-                    <span class="error-message"></span>
-                  </div>
-                  <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="Enter Email" required autocomplete="off"
-                      aria-label="Staff Email" />
-                    <span class="error-message"></span>
-                  </div>
-                  <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="text" id="password" name="password" placeholder="Enter Password" required
-                      autocomplete="off" aria-label="Staff Password" />
-                    <span class="error-message"></span>
-                  </div>
-                  <button type="submit" class="button">Add Staff</button>
-                </div>
-              </form>
-              <div class="alert-dialog" style="display: none;">
-                <span class="cancel-btn" onclick="closeAlert()">×</span>
-                <div id="alertMessage"></div>
-              </div>
-              <div class="table-wrapper">
-                <div class="table-header">
-                  <h3>Staff List</h3>
-                  <span class="total-count">Total Staff: <%= staff.length %></span>
-                </div>
-                <% if (staff && staff.length> 0) { %>
-                  <table id="staffTable">
-                    <thead>
-                      <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <% staff.forEach((item, index)=> { %>
-                        <tr>
-                          <td>
-                            <%= index + 1 %>
-                          </td>
-                          <td>
-                            <%= item.user_name %>
-                          </td>
-                          <td>
-                            <%= item.email.length> 15 ? item.email.substring(0, 15) + '...' : item.email %>
-                          </td>
-                          <td>
-                            <span class="action delete-btn" data-id="<%= item._id %>"
-                              aria-label="Delete <%= item.user_name %>">
-                              <% if(item.role !=='admin' ){ %>
-                                <span class="icon-trash">🗑️</span>
-                                <% } %>
-                            </span>
-                          </td>
-                        </tr>
-                        <% }) %>
-                    </tbody>
-                  </table>
-                  <% } else { %>
-                    <div class="table-empty">No staff available</div>
-                    <% } %>
-              </div>
-            </div>
-          </div>
-        </main>
-    </div>
+<body class="bg-slate-50 text-slate-800">
 
-    <script src="/js/menu.js"></script>
-    <script>
+  <%- include('./partials/header.ejs') %>
+
+  <div class="admin-container">
+
+    <%- include('./partials/navigation.ejs') %>
+
+    <main class="section">
+
+      <div class="container center-container">
+
+        <!-- PAGE -->
+        <div class="max-w-7xl mx-auto space-y-6">
+
+          <!-- ================= PAGE HEADER ================= -->
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-5">
+
+            <div>
+              <div class="flex items-center gap-2 text-sm text-slate-500 mb-2">
+                <span>Administration</span>
+                <span>•</span>
+                <span>Staff</span>
+              </div>
+
+              <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
+                Staff Management
+              </h1>
+
+              <p class="mt-2 text-slate-500 max-w-2xl">
+                Create and manage staff accounts that can access your school's management system.
+              </p>
+            </div>
+
+            <!-- Staff count -->
+            <div class="flex items-center gap-3 bg-white border border-slate-200 rounded-2xl px-5 py-4 shadow-sm">
+
+              <div class="w-11 h-11 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-6 h-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M17 20h5v-2a4 4 0 00-4-4h-1M9 20H4v-2a4 4 0 014-4h1m4-8a4 4 0 110 8 4 4 0 010-8zm6 4a3 3 0 100-6"
+                  />
+                </svg>
+              </div>
+
+              <div>
+                <p class="text-xs font-medium text-slate-500 uppercase tracking-wide">
+                  Total Staff
+                </p>
+
+                <p class="text-xl font-bold text-slate-900">
+                  <%= staff.length %>
+                </p>
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- ================= CREATE STAFF ================= -->
+          <section class="bg-white border border-slate-200 rounded-3xl shadow-sm overflow-hidden">
+
+            <!-- Section header -->
+            <div class="px-6 md:px-8 py-6 border-b border-slate-100">
+
+              <div class="flex items-start gap-4">
+
+                <div class="w-11 h-11 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-6 h-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M12 4v16m8-8H4"
+                    />
+                  </svg>
+
+                </div>
+
+                <div>
+                  <h2 class="text-xl font-bold text-slate-900">
+                    Create Staff Account
+                  </h2>
+
+                  <p class="text-sm text-slate-500 mt-1">
+                    Add a new staff member and provide their login credentials.
+                  </p>
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- Form -->
+            <form id="staffForm" class="p-6 md:p-8">
+
+              <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+
+                <!-- NAME -->
+                <div class="form-group">
+
+                  <label
+                    for="username"
+                    class="block text-sm font-semibold text-slate-700 mb-2"
+                  >
+                    Staff Name
+                  </label>
+
+                  <div class="relative">
+
+                    <input
+                      type="text"
+                      id="username"
+                      name="user_name"
+                      placeholder="e.g. John Doe"
+                      required
+                      autocomplete="off"
+                      aria-label="Staff Name"
+                      class="w-full h-12 rounded-xl border border-slate-200 bg-slate-50 px-4
+                      text-slate-800 placeholder:text-slate-400
+                      outline-none transition
+                      focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10"
+                    />
+
+                  </div>
+
+                  <span class="error-message text-sm text-red-500 mt-1 block"></span>
+
+                </div>
+
+
+                <!-- EMAIL -->
+                <div class="form-group">
+
+                  <label
+                    for="email"
+                    class="block text-sm font-semibold text-slate-700 mb-2"
+                  >
+                    Email Address
+                  </label>
+
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="staff@example.com"
+                    required
+                    autocomplete="off"
+                    aria-label="Staff Email"
+                    class="w-full h-12 rounded-xl border border-slate-200 bg-slate-50 px-4
+                    text-slate-800 placeholder:text-slate-400
+                    outline-none transition
+                    focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10"
+                  />
+
+                  <span class="error-message text-sm text-red-500 mt-1 block"></span>
+
+                </div>
+
+
+                <!-- PASSWORD -->
+                <div class="form-group">
+
+                  <label
+                    for="password"
+                    class="block text-sm font-semibold text-slate-700 mb-2"
+                  >
+                    Temporary Password
+                  </label>
+
+                  <div class="relative">
+
+                    <input
+                      type="password"
+                      id="password"
+                      name="password"
+                      placeholder="Create a password"
+                      required
+                      autocomplete="new-password"
+                      aria-label="Staff Password"
+                      class="w-full h-12 rounded-xl border border-slate-200 bg-slate-50 px-4 pr-12
+                      text-slate-800 placeholder:text-slate-400
+                      outline-none transition
+                      focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10"
+                    />
+
+                    <button
+                      type="button"
+                      id="togglePassword"
+                      class="absolute right-3 top-1/2 -translate-y-1/2
+                      text-slate-400 hover:text-slate-700 transition"
+                      aria-label="Show password"
+                    >
+
+                      <svg
+                        id="eyeIcon"
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="w-5 h-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                        />
+
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                        />
+                      </svg>
+
+                    </button>
+
+                  </div>
+
+                  <span class="error-message text-sm text-red-500 mt-1 block"></span>
+
+                </div>
+
+              </div>
+
+
+              <!-- FORM FOOTER -->
+              <div class="mt-7 pt-6 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+
+                <p class="text-xs text-slate-500">
+                  Staff members can use these credentials to sign in to the school portal.
+                </p>
+
+                <button
+                  type="submit"
+                  id="addStaffBtn"
+                  class="inline-flex items-center justify-center gap-2
+                  h-12 px-7 rounded-xl
+                  bg-blue-600 hover:bg-blue-700
+                  text-white font-semibold
+                  shadow-sm hover:shadow-md
+                  transition-all duration-200"
+                >
+
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-5 h-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M12 4v16m8-8H4"
+                    />
+                  </svg>
+
+                  Add Staff
+
+                </button>
+
+              </div>
+
+            </form>
+
+          </section>
+
+
+          <!-- ================= ALERT ================= -->
+
+          <div
+            class="alert-dialog hidden fixed inset-0 z-50 items-center justify-center bg-slate-900/40 backdrop-blur-sm p-4"
+          >
+
+            <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6">
+
+              <div class="flex justify-between items-start gap-4">
+
+                <div
+                  id="alertMessage"
+                  class="text-sm font-medium text-slate-700"
+                ></div>
+
+                <button
+                  type="button"
+                  onclick="closeAlert()"
+                  class="text-slate-400 hover:text-slate-700 text-2xl leading-none"
+                >
+                  &times;
+                </button>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- ================= STAFF LIST ================= -->
+
+          <section class="bg-white border border-slate-200 rounded-3xl shadow-sm overflow-hidden">
+
+            <!-- Header -->
+            <div class="px-6 md:px-8 py-6 border-b border-slate-100">
+
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+
+                <div>
+
+                  <h2 class="text-xl font-bold text-slate-900">
+                    Staff Members
+                  </h2>
+
+                  <p class="text-sm text-slate-500 mt-1">
+                    View and manage staff accounts.
+                  </p>
+
+                </div>
+
+                <div class="inline-flex items-center gap-2 bg-slate-100 rounded-full px-4 py-2">
+
+                  <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+
+                  <span class="text-sm font-medium text-slate-600">
+                    <%= staff.length %> Staff
+                  </span>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- TABLE -->
+            <div class="overflow-x-auto">
+
+              <% if (staff && staff.length > 0) { %>
+
+                <table
+                  id="staffTable"
+                  class="w-full text-left"
+                >
+
+                  <tbody class="divide-y divide-slate-100">
+
+                    <% staff.forEach((item, index) => { %>
+
+                      <tr class="hover:bg-slate-50/70 transition">
+
+                        <!-- NUMBER -->
+                        <td class="px-3  md:px-8 py-5 text-sm text-slate-400">
+                          <%= index + 1 %>
+                        </td>
+
+
+                        <!-- NAME -->
+                        <td class="px-2 md:px-6 py-5">
+
+                          <div class="flex items-center gap-3">
+
+                            <div class="w-10 h-10 rounded-full bg-blue-50 text-blue-700 flex items-center justify-center font-bold text-sm">
+                              <%= item.user_name.charAt(0).toUpperCase() %>
+                            </div>
+
+                            <div>
+
+                              <p class="font-semibold text-slate-800">
+                                <%= item.user_name %>
+                              </p>
+
+                              <p class="text-xs text-slate-400">
+                                Staff member
+                              </p>
+
+                            </div>
+
+                          </div>
+
+                        </td>
+
+
+                        <!-- EMAIL -->
+                        <td class="px-6 py-5">
+
+                          <span
+                            class="text-sm text-slate-600"
+                            title="<%= item.email %>"
+                          >
+                            <%= item.email.length > 28
+                              ? item.email.substring(0, 28) + '...'
+                              : item.email
+                            %>
+                          </span>
+
+                        </td>
+
+
+                        <!-- ROLE -->
+                        <td class="px-6 py-5">
+
+                          <% if(item.role === 'admin'){ %>
+
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-purple-50 text-purple-700 text-xs font-semibold">
+
+                              <span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span>
+
+                              Administrator
+
+                            </span>
+
+                          <% } else { %>
+
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold">
+
+                              <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+
+                              Staff
+
+                            </span>
+
+                          <% } %>
+
+                        </td>
+
+
+                        <!-- ACTION -->
+                        <td class="px-6 md:px-8 py-5 text-right">
+
+                          <% if(item.role !== 'admin'){ %>
+
+                            <button
+                              type="button"
+                              class="delete-btn inline-flex items-center justify-center
+                              w-10 h-10 rounded-xl
+                              text-slate-400
+                              hover:text-red-600
+                              hover:bg-red-50
+                              transition"
+                              data-id="<%= item._id %>"
+                              aria-label="Delete <%= item.user_name %>"
+                              title="Delete staff"
+                            >
+
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="w-5 h-5"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                              >
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6M9 7V4a1 1 0 011-1h4a1 1 0 011 1v3m-8 0h10"
+                                />
+                              </svg>
+
+                            </button>
+
+                          <% } else { %>
+
+                            <span class="text-xs text-slate-400">
+                              Protected
+                            </span>
+
+                          <% } %>
+
+                        </td>
+
+                      </tr>
+
+                    <% }) %>
+
+                  </tbody>
+
+                </table>
+
+              <% } else{ %>
+
+                <!-- EMPTY STATE -->
+
+                <div class="px-6 py-20 text-center">
+
+                  <div class="mx-auto w-16 h-16 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-400">
+
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="w-8 h-8"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M17 20h5v-2a4 4 0 00-4-4h-1M9 20H4v-2a4 4 0 014-4h1m4-8a4 4 0 110 8 4 4 0 010-8z"
+                      />
+                    </svg>
+
+                  </div>
+
+                  <h3 class="mt-5 text-lg font-bold text-slate-800">
+                    No staff members yet
+                  </h3>
+
+                  <p class="mt-2 text-sm text-slate-500 max-w-sm mx-auto">
+                    Create your first staff account using the form above.
+                  </p>
+
+                </div>
+
+              <% } %>
+
+            </div>
+
+          </section>
+
+
+          <!-- LOADING -->
+
+          <div class="loading hidden text-center py-4 text-sm text-slate-500">
+            Loading...
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- Password Toggle -->
+  <script>
+
+    const passwordInput = document.getElementById("password");
+    const togglePassword = document.getElementById("togglePassword");
+
+    if (passwordInput && togglePassword) {
+
+      togglePassword.addEventListener("click", () => {
+
+        const isPassword = passwordInput.type === "password";
+
+        passwordInput.type = isPassword ? "text" : "password";
+
+        togglePassword.setAttribute(
+          "aria-label",
+          isPassword ? "Hide password" : "Show password"
+        );
+
+      });
+
+    }
+
+
       const form = document.getElementById('staffForm');
       const alertDialog = document.querySelector('.alert-dialog');
       const alertMessage = document.getElementById('alertMessage');
@@ -181,7 +671,7 @@
           }
         });
       });
-    </script>
-</body>
+  </script>
 
+</body>
 </html>
