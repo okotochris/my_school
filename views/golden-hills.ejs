@@ -1,0 +1,331 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GOLDEN HILLS</title>
+    <link rel="stylesheet" type="text/css" href="styles/golden-hills.css"/>
+    <link rel="stylesheet" type="text/css" href="styles/download_button.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+	<style>
+		.passport{
+			height:120px;
+			width:100px;
+			border:solid 1px black;
+			background: url('<%= student.passport %>');
+			background-repeat: no-repeat;
+			background-size:cover;
+			background-position: center;
+    
+		}		
+	</style>
+</head>
+	<body>
+		<div id="resultContainer">
+			<div class="school">
+				<div class="logo"></div>
+				<div class="school-info">
+					<div class="school-name">
+						<h1>GOLDEN HILLS</h1>
+						<h3>MONTESSORI SCHOOLS BENIN</h3>
+					</div>
+					<div class="address-info">
+						<div class="address">11, Irene Street Opp, Conoil Petrol Station, Off Ekehuan Road, Benin City.</div>
+						<div class="contact">Tel: 08036329540 08039700094</div>
+					</div>
+				</div>
+				<div class="passport"></div>
+			</div>	
+			
+			
+			<div class="sudent-info">
+				<div><%= result.class %> "Golden", <%= result.term %> RESULT <%= result.section %> ACADEMIC SESSION</div>
+				<p>NAME OF PUPIL : <u><span><%= result.fullname.toUpperCase() %></span></u> <!--SEX: <span><u>FEMALE</u></span> --> D.O.B: <span><u><%= result.dob %></u></span></p>
+				<P>TOTAL MARKS SCORE: <span><u> <%= result.score_obtain %></u></span> OUT OF: <span><u><%= result.score_obtainable %></u></span> AVERAGE: <span><u><%= result.average %></u></span> CLASS: <span><u><%= result.studentClass.toUpperCase() %></u></span></P>
+				<P>ADMISSSION NO.: <span><u><%= student.addmissionNo %></u></span> NO. OF TIMES PRESENT: <span><u><%= result.present %></u></span> NO OF TIMES ABSENT: <span><u><%= result.absent %></u></span></P>
+			</div>
+			
+			<div class="result">
+				<div class="score">
+					<div>ACADEMIC PROGRESS REPORT SUMMARIES AND TEST (COGNITIVE DOMAIN)</div>
+					<table style="font-family: arial; font-weight:bold;">
+                        <tr> 
+                            <th class="th" width="200">SUBJECT</th>
+                            <th class="th1">1st test 10%</th>
+                            <th class="th1">2nd test 10%</th>
+                            <th class="th1">project 10%</th>
+                            <th class="th1">Exam 70%</th>
+                            <th class="th1">Total 100%</th>
+                            <th class="th1" width="30">Grades</th>
+                            <th width="65">REMARKS</th>
+                        </tr>
+						<% if(result.subjects.length > 0){ %>
+                            <% result.subjects.forEach(subject=>{ %>
+                                <tr>
+                                    <td><%= subject.subjectName.toUpperCase() %></td>
+                                    <td><%= subject.firstTest %></td>
+                                    <td><%= subject.secondTest %></td>
+                                    <td><%= subject.cca %></td>
+                                    <td><%= subject.exam %></td>
+                                    <td><%= subject.total %></td>
+                                    <td><%= subject.grade %></td>
+                                    <td><%= subject.remark %></td>
+                                </tr>
+                            <%}) %>
+                        <%}%>
+						
+						
+						<%for(let i=0; i <=20; i++){ %>
+							
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						<%}%>
+
+						
+						
+					</table>
+				</div>
+				<div class="analysis">
+					<div class="analysis-div1">SOCIAL BEHAVIOURS & MANIPULATIVE SKILLS</div>
+					<div class="grade">
+						<div style="width:60%">
+							<div style="width:100%;">KEY TO GRADING</div>
+							<ol>
+								<li>80% - 100% = A+ = Exellent</li>
+								<li>70% - 79% = A = Very Good</li>
+								<li>60% - 69% = B = Credit</li>
+								<li>50% - 59% = C = Merit</li>
+								<li>40% - 49% = D = Pass</li>
+								<li>0%  - 39% = F = Fail</li>
+							</ol>
+						</div>
+						<div style="width:40%">
+							<div style="width:100%;">RATING</div>
+							<ul>
+								<li>A = 5 = Exellent</li>
+								<li>B = 4 = Very Good</li>
+								<li>C = 3 = Good</li>
+								<li>D = 2 = Fair</li>
+								<li>E = 1 = Poor</li>
+							</ul>
+						</div>
+					</div>
+					<div class="pesonality">
+						<table>
+							<tr>
+									<th width="200">AFFECTIVE DOMAIN</th>
+									<th width="30">5</th>
+									<th width="30">4</th>
+									<th width="30">3</th>
+									<th width="30">2</th>
+									<th width="30">1</th>
+									
+							</tr>
+							<tr>
+								<td>1. Puntuality</td>
+								<td>&#10003;</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>2. Attendance</td>
+								<td>&#10003;</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>3. Politeness</td>
+								<td>&#10003;</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>4. Attentiveness</td>
+								<td>&#10003;</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>5. Obedience</td>
+								<td>&#10003;</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>6. Neatness</td>
+								<td>&#10003;</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>7. Honesty</td>
+								<td>&#10003;</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>8. Self Confidence</td>
+								<td>&#10003;</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>9. Interaction</td>
+								<td></td>
+								<td>&#10003;</td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>10. Leadership role</td>
+								<td></td>
+								<td>&#10003;</td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							
+						</table>
+					</div>
+					<div class="rating">
+						<table>
+							<tr>
+								<th width="250">PSYCHOMOTOR DOMAIN</th>
+								<th width="30">5</th>
+								<th width="30">4</th>
+								<th width="30">3</th>
+								<th width="30">2</th>
+								<th width="30">1</th>
+							</tr>
+							<tr>
+								<td>1.Handling of Tools</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>2. Hand Writing</td>
+								
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								
+							</tr>
+							<tr>
+								<td>3. Flueency</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>4. Crafts</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>5. Sports/ Games</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>6. Painting & Drawing</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>6. Painting & Drawing</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>7. Musical Slills</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</table>
+					</div>
+
+					<div class="comment">
+						<p>Class Manager's Comment:<span> <%= result.tReport %></span></p>
+						<p>Class Manager's Name<span>Class managerName</span></p>
+						<!-- <p>Signature<span><img src="" height="20" width="50"/></span></p> -->
+						<p>Head of School Comment: <span><%= result.Treport %> </span></p>
+						
+						<p>Promoted To:<span> <%=result.promote %></span></p>
+						<p>An outstanding Fees: <span><%= result.fees %></span></p>
+						<p>Next Terms begins: <span><%= result.nextterm %></span></p>
+						<P>Head of School's Signature<span><img src="headTeacher.png" height="29" width="50"/></span></P>
+						<p>IDEHEN E.R (MRS.)</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="captureWrapper">
+			<div id="resultContainer">
+				<!-- Your content here -->
+			</div>
+		</div>
+		
+		<!-- 
+			<div class="button"><button class="download" onclick="downloadResult()">Download PDF</button></div> 
+		-->
+			<div class="button"><button class="download" onclick="downloadResultAsJPG()">Download RESULT</button></div>
+
+		<!-- JPEG-->
+		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.0.0-rc.5/html2canvas.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.3.2/dist/html2canvas.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+
+  		
+  		<script src="download.js"></script>
+		<script src="js/dwonloadJPEG.js"></script>
+	</body>
+
+</html>
