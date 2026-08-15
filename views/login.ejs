@@ -62,9 +62,11 @@ form.addEventListener('submit', async (e) => {
             },
             body: JSON.stringify({ user: email, password })
         });
-         const data = await res.json();
+        const {redirectTo, user, school} = await res.json();
         if(res.ok){
-           return window.location.href = `${data}`;
+            localStorage.setItem('user', JSON.stringify(user))
+            localStorage.setItem('school', JSON.stringify(school))
+           return window.location.href = `${redirectTo}`;
         }
         button.style.backgroundColor = 'red'
         button.innerText = data.msg

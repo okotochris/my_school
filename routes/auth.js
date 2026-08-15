@@ -66,20 +66,22 @@ router.post("/login", async (req, res) => {
     let schoolName = user.school 
     let role = user.role;
     let id = user._id
-    let schoolFee = await SchoolPfofile.findOne({schoolName})
+    let userSchool = await SchoolPfofile.findOne({schoolName})
     
-    if (user && schoolFee) {
+    if (user && userSchool) {
       req.session.visited = true;
       req.session.user = user;
       req.session.role = role
       const school = user.school;
-      const fees = schoolFee.fees;
+      const fees = userSchool.fees;
       req.session.school = school;
       req.session.fees = fees;
       req.session.userId = id
       const redirectTo = req.session.returnTo || "/admin";
       delete req.session.returnTo; // Clear returnTo after use
-      res.status(200).json(redirectTo);
+      user = user.toObject()
+      delete user.password
+      res.status(200).json({redirectTo, user, school:userSchool});
     } else {
       res.redirect("login");
     }

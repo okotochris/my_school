@@ -1,26 +1,134 @@
-<div class="header sticky">
-  <div class="menu" onclick="toggleNav()">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
+<header
+  class="sticky top-0 z-30 flex h-[72px] w-full items-center justify-between border-b border-slate-200 bg-white/95 px-4 shadow-sm backdrop-blur-md md:px-6"
+>
 
-  <div class="school-design">
-    <img src="IMAGE/<%= school.toLowerCase() %>.png" alt="School Logo" class="school-logo" />
-    <div class="school-info">
-      <h1 class="school-name"><%=school %></h1>
-      <p class="page-name"><%=title %></p>
+  <!-- Left -->
+  <div class="flex items-center gap-3">
+
+    <!-- Mobile Menu -->
+    <button
+      type="button"
+      onclick="toggleNav()"
+      aria-label="Open navigation"
+      class="group flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 shadow-sm transition hover:border-blue-200 hover:bg-blue-50 hover:text-blue-600 lg:hidden"
+    >
+      <div class="flex w-[18px] flex-col gap-[4px]">
+        <span class="h-[2px] w-full rounded-full bg-current transition"></span>
+        <span class="h-[2px] w-full rounded-full bg-current transition"></span>
+        <span class="h-[2px] w-3/4 rounded-full bg-current transition"></span>
+      </div>
+    </button>
+
+
+    <!-- Page information -->
+    <div class="hidden sm:block">
+      <p class="text-[11px] font-medium uppercase tracking-wider text-slate-400">
+        Dashboard
+      </p>
+
+      <h2 class="text-sm font-bold text-slate-800">
+        <%= title %>
+      </h2>
     </div>
+
   </div>
 
-  <div class="header-actions" onclick="clearStorage()">
-    <a href="/logout" class="logout-btn">Logout</a>
+
+  <!-- Right -->
+  <div class="flex items-center gap-3">
+
+    <!-- School -->
+    <div class="flex items-center gap-3">
+
+      <!-- School Logo -->
+      <div
+        class="flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl border border-slate-200 bg-slate-50 shadow-sm"
+      >
+        <img
+          src=""
+          alt="School Logo"
+          class="school-logo h-full w-full object-cover"
+        />
+      </div>
+
+
+      <!-- School Info -->
+      <div class="hidden text-right sm:block">
+
+        <h1
+          class="max-w-[220px] truncate text-sm font-bold text-slate-800"
+        >
+          <%= school %>
+        </h1>
+
+        <p
+          id="userName"
+          class="mt-0.5 text-xs font-medium text-slate-500"
+        >
+          Welcome
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- User indicator -->
+    <div
+      class="hidden h-9 w-px bg-slate-200 sm:block"
+    ></div>
+
+    <div
+      class="flex h-9 w-9 items-center justify-center rounded-full bg-blue-50 text-blue-600"
+    >
+      <i data-lucide="user" class="h-4 w-4"></i>
+    </div>
+
   </div>
-   <script src="/js/menu.js"></script>
-  <script>
-    function clearStorage(){
-      localStorage.clear()
-      console.log("cleared")
+
+</header>
+
+
+<script src="/js/menu.js"></script>
+
+<script>
+  function clearStorage() {
+    localStorage.clear();
+  }
+
+  (() => {
+    try {
+      const savedSchool = localStorage.getItem('school');
+      const savedUser = localStorage.getItem('user');
+
+      if (!savedSchool || !savedUser) {
+        window.location.href = '/login';
+        return;
+      }
+
+      const school = JSON.parse(savedSchool);
+      const user = JSON.parse(savedUser);
+
+      const logo = document.querySelector('.school-logo');
+      const userName = document.getElementById('userName');
+
+      if (school?.image?.logo) {
+        logo.src = school.image.logo;
+      } else {
+        logo.style.display = 'none';
+      }
+
+      if (user?.user_name) {
+        userName.innerText = `Welcome, ${user.user_name}`;
+      }
+
+    } catch (error) {
+      console.error('Failed to load user information:', error);
+
+      localStorage.clear();
+      window.location.href = '/login';
     }
-  </script>
-</div>
+  })();
+
+  lucide.createIcons();
+</script>

@@ -1,5 +1,6 @@
 <!-- Overlay for mobile -->
- <script src="https://unpkg.com/lucide@latest"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="https://cdn.tailwindcss.com"></script>
 <div id="navOverlay" class="nav-overlay" onclick="toggleNav()"></div>
 
 <nav class="navigation" id="sideNav">
@@ -19,90 +20,248 @@
       <li><a href="/admin/exam-settings"><span class="icon">🖊️</span> Set exam</a></li>
       <li><a href="/admin/upload-question"><span class="icon">📤</span>Upload questions</a></li>
       <li><a href="/blacklist"><span class="icon">🚫</span> Blacklist</a></li>
-      <% if(role == 'admin'){ %>
+      <% if(role=='admin' ){ %>
         <li><a href="/staffmanagement"><span class="icon">👩‍🏫</span> Staff Management</a></li>
         <li><a href="/admin/school-setting"><span class="icon">🏫</span> School Management</a></li>
-      <%} %>
+        <%} %>
     </ul>
 
-    <div class="dropdown">
-      <button class="dropdown-toggle" onclick="toggleUpdate()">
-        <span class="icon">⮟</span> Make Update
+  <!-- Make Update -->
+    <div class="mt-5">
+
+      <button
+        type="button"
+        onclick="toggleUpdate()"
+        class="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-medium text-slate-600 transition hover:bg-slate-50"
+      >
+
+        <span class="flex items-center gap-3">
+
+          <span
+            class="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-50 text-slate-500"
+          >
+            <i data-lucide="refresh-cw" class="h-[18px] w-[18px]"></i>
+          </span>
+
+          <span>Make Update</span>
+
+        </span>
+
+        <i
+          data-lucide="chevron-down"
+          id="updateArrow"
+          class="h-4 w-4 text-slate-400 transition-transform"
+        ></i>
+
       </button>
-      <ul class="dropdown-menu" id="updateMenu">
-        <li><a href="/update"><span class="sub-icon">✎</span> Update Student Info</a></li>
-        <li><a href="/update-ss"><span class="sub-icon">📊</span> Update Senior Result</a></li>
-        <li><a href="/update-jss"><span class="sub-icon">📊</span> Update Junior Result</a></li>
-        <li><a href="/update-basic"><span class="sub-icon">📊</span> Update Basic Result</a></li>
-        <li><a href="/update-nursery"><span class="sub-icon">📊</span> Update Nursery Result</a></li>
+
+
+      <ul
+        id="updateMenu"
+        class="mt-1 hidden space-y-1 border-l border-slate-200 ml-7 pl-2"
+      >
+
+        <li>
+          <a
+            href="/update"
+            class="flex items-center gap-2 rounded-lg px-3 py-2 text-xs text-slate-500 transition hover:bg-blue-50 hover:text-blue-600"
+          >
+            <i data-lucide="user-pen" class="h-4 w-4"></i>
+            Update Student Info
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="/update-ss"
+            class="flex items-center gap-2 rounded-lg px-3 py-2 text-xs text-slate-500 transition hover:bg-blue-50 hover:text-blue-600"
+          >
+            <i data-lucide="chart-column" class="h-4 w-4"></i>
+            Update Senior Result
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="/update-jss"
+            class="flex items-center gap-2 rounded-lg px-3 py-2 text-xs text-slate-500 transition hover:bg-blue-50 hover:text-blue-600"
+          >
+            <i data-lucide="chart-column" class="h-4 w-4"></i>
+            Update Junior Result
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="/update-basic"
+            class="flex items-center gap-2 rounded-lg px-3 py-2 text-xs text-slate-500 transition hover:bg-blue-50 hover:text-blue-600"
+          >
+            <i data-lucide="chart-column" class="h-4 w-4"></i>
+            Update Basic Result
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="/update-nursery"
+            class="flex items-center gap-2 rounded-lg px-3 py-2 text-xs text-slate-500 transition hover:bg-blue-50 hover:text-blue-600"
+          >
+            <i data-lucide="chart-column" class="h-4 w-4"></i>
+            Update Nursery Result
+          </a>
+        </li>
+
       </ul>
+
     </div>
 
-<div class="fees">
-    Fees: ₦<span id="fee"><%= fees %></span>
-</div>
-<button type="button" onclick="makePayment()" id="button" 
-style="padding:10px; font-size: 18px; background: #3535e0; color:white; border:0px">Make Payment</button>
 
-<script src="https://checkout.flutterwave.com/v3.js"></script>
+    <!-- Payment -->
+    <div
+      class="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-4"
+    >
+
+      <div class="mb-3 flex items-center justify-between">
+
+        <div class="flex items-center gap-2">
+
+          <div
+            class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-100 text-blue-600"
+          >
+            <i data-lucide="credit-card" class="h-4 w-4"></i>
+          </div>
+
+          <span class="text-xs font-semibold text-slate-600">
+            Fees
+          </span>
+
+        </div>
+
+        <span
+          class="rounded-full bg-orange-100 px-2 py-1 text-[9px] font-semibold text-orange-600"
+        >
+          PAYMENT
+        </span>
+
+      </div>
+
+
+      <div class="mb-3 text-2xl font-bold tracking-tight text-slate-900">
+        ₦<span id="fee"><%= fees.toLocaleString() %></span>
+      </div>
+
+
+      <button
+        type="button"
+        onclick="makePayment()"
+        id="button"
+        class="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 hover:shadow-md active:scale-[0.98]"
+      >
+        <i data-lucide="wallet" class="h-4 w-4"></i>
+        <span>Make Payment</span>
+      </button>
+
+    </div>
+
+
+    <!-- Logout -->
+    <div class="mt-auto pt-4">
+
+      <a
+        href="/logout"
+        onclick="clearStorage()"
+        class="group flex w-full items-center gap-3 rounded-xl border border-transparent px-3 py-2.5 text-sm font-semibold text-red-600 transition hover:border-red-100 hover:bg-red-50"
+      >
+
+        <span
+          class="flex h-9 w-9 items-center justify-center rounded-lg bg-red-50 text-red-500 transition group-hover:bg-red-100"
+        >
+          <i data-lucide="log-out" class="h-[18px] w-[18px]"></i>
+        </span>
+
+        <span>Logout</span>
+
+        <i
+          data-lucide="chevron-right"
+          class="ml-auto h-4 w-4 text-red-300 transition group-hover:translate-x-1 group-hover:text-red-500"
+        ></i>
+
+      </a>
+
+    </div>
+
+    <script src="https://checkout.flutterwave.com/v3.js"></script>
+
+    <script>
+      
+      const buttonId = document.getElementById('button')
+      async function makePayment() {
+        buttonId.innerText = "Loading.."
+        const res = await fetch('/payment/schoolinfo')
+        if (!res.ok) {
+          return;
+        }
+        const data = await res.json()
+        buttonId.innerText = "Make Payment"
+        const { email, school, user_name } = data.result;
+        const fee = data.fee
+        if (fee < 100) {
+          return
+        }
+        const amountInNumber = Number(fee);
+        const meta = {
+          schoolName: school,
+          amount: amountInNumber,
+          staffName: user_name,
+          refId: `${user_name}${Date.now()}`
+        }
+        FlutterwaveCheckout({
+          public_key: "FLWPUBK-f8514622db2e398152c1a94f24a478a5-X",
+          tx_ref: "SCHL-" + Date.now(), // better unique ref
+          amount: amountInNumber,      // use dynamic amount
+          currency: "NGN",
+          payment_options: "card,ussd,banktransfer",
+
+          customer: {
+            email: email,
+            name: user_name,
+          },
+
+          callback: function (data) {
+            fetch("/api/payment-callback", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                tx_ref: data.tx_ref,
+                meta
+              })
+            })
+              .then(res => res.json())
+              .then(result => {
+                document.getElementById('fee"').innerHTML = 0;
+              });
+          },
+
+          onclose: function () {
+            console.log("Payment closed");
+          }
+        });
+      }
+    </script>
+
+<script src="https://unpkg.com/lucide@latest"></script>
 
 <script>
-  const buttonId = document.getElementById('button')
-  async function makePayment() {
-    buttonId.innerText = "Loading.."
-    const res = await fetch('/payment/schoolinfo')
-    if(!res.ok){
-      return;
-    }
-     const data = await res.json()
-      buttonId.innerText = "Make Payment"
-    const {email, school, user_name } = data.result;
-    const fee = data.fee
-    if(fee < 100){
-      return 
-    }
-    const amountInNumber = Number(fee);
-    const meta = {
-        schoolName:  school,
-        amount: amountInNumber,
-        staffName:user_name,
-        refId: `${user_name}${Date.now()}`          
-      }
-    FlutterwaveCheckout({
-      public_key: "FLWPUBK-f8514622db2e398152c1a94f24a478a5-X",
-      tx_ref: "SCHL-" + Date.now(), // better unique ref
-      amount: amountInNumber,      // use dynamic amount
-      currency: "NGN",
-      payment_options: "card,ussd,banktransfer",
+  lucide.createIcons();
 
-      customer: {
-        email: email,   
-        name: user_name,
-      },
+  function toggleUpdate() {
+    const menu = document.getElementById("updateMenu");
+    const arrow = document.getElementById("updateArrow");
 
-      callback: function (data) {
-        fetch("/api/payment-callback", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            tx_ref: data.tx_ref,
-            meta
-          })
-        })
-        .then(res => res.json())
-        .then(result => {
-          document.getElementById('fee"').innerHTML = 0;
-        });
-      },
-
-      onclose: function() {
-        console.log("Payment closed");
-      }
-    });
+    menu.classList.toggle("hidden");
+    arrow.classList.toggle("rotate-180");
   }
 </script>
-
-
 
 
   </div>
