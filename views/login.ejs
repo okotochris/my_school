@@ -1,96 +1,194 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZRDY8JQBQ7"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-ZRDY8JQBQ7');
-</script>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="My School Result - Check academic results online instantly. Empowering students, parents, and schools with secure, reliable result management.">
-  <meta name="keywords" content="school results, academic results, online result checker, student portal, school management">
-  <meta name="author" content="My School Result">
-  <title>My School Result - Check Academic Results Online</title>
-  <link rel="stylesheet" href="/styles/index.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<head>
+   
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="My School Result - Check academic results online instantly. Empowering students, parents, and schools with secure, reliable result management.">
+    <meta name="keywords"
+        content="school results, academic results, online result checker, student portal, school management">
+    <meta name="author" content="My School Result">
+    <title>My School Result - Check Academic Results Online</title>
+    <link rel="stylesheet" href="/styles/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 
 </head>
-    <body>
-    
-        <%-include('partials/header2') %>
+
+<body>
+
+    <%-include('partials/header2') %>
         <div style="height:100px"></div>
-        <section id="result-checker" class="result-checker">
-            <div class="container">
-                <h2>WELCOME TO MYSCHOOLRESULT </h2>
-                <form id="login-form"  class="result-form">
-                <div class="form-group">
-                    <label for="email">Email</label>
-                        <p><input type="email" id="email" name="user"  placeholder="Enter your email" required/></p>
-                </div>
-                  <div class="form-group">
-                    <label for="user">Password</label>
-                        <p><input type="password" id="password" name="password" placeholder="Password" required/></p>
-        
+        <section id="result-checker" class="min-h-screen bg-slate-50 px-4 py-12 flex items-center justify-center">
+            <div class="w-full max-w-md">
+
+                <!-- Login Card -->
+                <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-200/50 sm:p-8">
+
+                    <!-- Header -->
+                    <div class="mb-8 text-center">
+
+                        <div
+                            class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-lg shadow-blue-600/20">
+                            <i data-lucide="graduation-cap" class="h-7 w-7"></i>
+                        </div>
+
+                        <h2 class="text-2xl font-bold tracking-tight text-slate-900">
+                            Welcome to MySchoolResult
+                        </h2>
+
+                        <p class="mt-2 text-sm text-slate-500">
+                            Sign in to access your school account
+                        </p>
+
                     </div>
-                        <button id="submit-button" class="form-button">Login</button>
-                </form>
+
+
+                    <!-- Login Form -->
+                    <form id="login-form" class="space-y-5">
+
+                        <!-- Email -->
+                        <div>
+                            <label for="email" class="mb-2 block text-sm font-semibold text-slate-700">
+                                Email Address
+                            </label>
+
+                            <div class="relative">
+
+                                <div
+                                    class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400">
+                                    <i data-lucide="mail" class="h-5 w-5"></i>
+                                </div>
+
+                                <input type="email" id="email" name="user" placeholder="Enter your email" required
+                                    autocomplete="email"
+                                    class="w-full rounded-xl border border-slate-200 bg-slate-50 py-3 pl-11 pr-4 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10" />
+
+                            </div>
+                        </div>
+
+
+                        <!-- Password -->
+                        <div>
+                            <div class="mb-2 flex items-center justify-between">
+
+                                <label for="password" class="block text-sm font-semibold text-slate-700">
+                                    Password
+                                </label>
+
+                            </div>
+
+                            <div class="relative">
+
+                                <div
+                                    class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400">
+                                    <i data-lucide="lock" class="h-5 w-5"></i>
+                                </div>
+
+                                <input type="password" id="password" name="password" placeholder="Enter your password"
+                                    required autocomplete="current-password"
+                                    class="w-full rounded-xl border border-slate-200 bg-slate-50 py-3 pl-11 pr-11 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10" />
+
+                                <button type="button" onclick="togglePassword()"
+                                    class="absolute inset-y-0 right-0 flex items-center pr-3.5 text-slate-400 transition hover:text-slate-600"
+                                    aria-label="Show password">
+                                    <i id="password-icon" data-lucide="eye" class="h-5 w-5"></i>
+                                </button>
+
+                            </div>
+                        </div>
+
+
+                        <!-- Login Button -->
+                        <button type="submit" id="submit-button"
+                            class="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-600/20 transition hover:bg-blue-700 hover:shadow-blue-600/30 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60">
+                            <i data-lucide="log-in" class="h-5 w-5"></i>
+                            <span>Login</span>
+                        </button>
+
+                    </form>
+
+
+                    <!-- Footer -->
+                    <div class="mt-7 border-t border-slate-100 pt-5 text-center">
+                        <p class="text-xs text-slate-400">
+                            Secure school management portal
+                        </p>
+                    </div>
+
+                </div>
+
             </div>
         </section>
-    <%-include('partials/footer') %>
-    </body>
-   <script>
-const form = document.getElementById('login-form');
-const button =document.getElementById('submit-button')
-form.addEventListener('submit', async (e) => {
-    e.preventDefault(); // ✅ prevent default form submission
 
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    button.innerText = "loading..."
-    button.disabled = true;
-    try {
-        const res = await fetch('/login', {
-            method: "POST",
-            headers: {
-                'Content-Type': "application/json"
-            },
-            body: JSON.stringify({ user: email, password })
-        });
-        const {redirectTo, user, school} = await res.json();
-        if(res.ok){
-            localStorage.setItem('user', JSON.stringify(user))
-            localStorage.setItem('school', JSON.stringify(school))
-           return window.location.href = `${redirectTo}`;
+
+        <%-include('partials/footer') %>
+</body>
+<script>
+    function togglePassword() {
+        const password = document.getElementById('password');
+        const icon = document.getElementById('password-icon');
+
+        if (password.type === 'password') {
+            password.type = 'text';
+            icon.setAttribute('data-lucide', 'eye-off');
+        } else {
+            password.type = 'password';
+            icon.setAttribute('data-lucide', 'eye');
         }
-        button.style.backgroundColor = 'red'
-        button.innerText = data.msg
-    } catch (error) {
-        button.style.backgroundColor = 'red'
-        button.innerText = 'server error'
-        console.error(error);
-    } finally{
-         button.disabled = false;
+
+        lucide.createIcons();
     }
+</script>
+<script>
+    const form = document.getElementById('login-form');
+    const button = document.getElementById('submit-button')
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault(); // ✅ prevent default form submission
+
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        button.innerText = "loading..."
+        button.disabled = true;
+        try {
+            const res = await fetch('/login', {
+                method: "POST",
+                headers: {
+                    'Content-Type': "application/json"
+                },
+                body: JSON.stringify({ user: email, password })
+            });
+            const { redirectTo, user, school } = await res.json();
+            if (res.ok) {
+                localStorage.setItem('user', JSON.stringify(user))
+                localStorage.setItem('school', JSON.stringify(school))
+                return window.location.href = `${redirectTo}`;
+            }
+            button.style.backgroundColor = 'red'
+            button.innerText = data.msg
+        } catch (error) {
+            button.style.backgroundColor = 'red'
+            button.innerText = 'server error'
+            console.error(error);
+        } finally {
+            button.disabled = false;
+        }
     });
-    function reset(){
+    function reset() {
         button.style.backgroundColor = ' #0ea5e9'
-       
+
         button.innerText = "Login"
     }
 
-    document.getElementById('email').oninput=()=>{
+    document.getElementById('email').oninput = () => {
         reset()
     }
-    document.getElementById('password').oninput=()=>{
+    document.getElementById('password').oninput = () => {
         reset()
     }
 </script>
-    <script src="js/navigation.js"></script>
-     <script src="js/menu2.js"></script>
+
+
 </html>

@@ -46,63 +46,203 @@
       </div>
     </section>
 
-    <section id="result-checker" class="result-checker">
-      <div class="container">
-        <h2>Check Your Results</h2>
+ <section
+  id="result-checker"
+  class="flex min-h-[calc(100vh-80px)] items-center justify-center bg-slate-50 px-4 py-12"
+>
+  <div class="w-full max-w-lg">
 
-        <form
-          action="/result"
-          method="post"
-          onsubmit="return check()"
-          class="result-form"
+    <!-- Card -->
+    <div
+      class="rounded-2xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-200/50 sm:p-8"
+    >
+
+      <!-- Header -->
+      <div class="mb-8 text-center">
+
+        <div
+          class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-lg shadow-blue-600/20"
         >
-          <div class="form-group">
-            <label for="student-id">Student ID</label>
+          <i data-lucide="graduation-cap" class="h-7 w-7"></i>
+        </div>
+
+        <h2 class="text-2xl font-bold tracking-tight text-slate-900">
+          Check Your Results
+        </h2>
+
+        <p class="mt-2 text-sm text-slate-500">
+          Enter your student details to view your academic result.
+        </p>
+
+      </div>
+
+
+      <!-- Form -->
+      <form
+        action="/result"
+        method="post"
+        onsubmit="return check()"
+        class="space-y-5"
+      >
+
+        <!-- Student ID -->
+        <div>
+
+          <label
+            for="student-id"
+            class="mb-2 block text-sm font-semibold text-slate-700"
+          >
+            Student ID
+          </label>
+
+          <div class="relative">
+
+            <div
+              class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400"
+            >
+              <i data-lucide="id-card" class="h-5 w-5"></i>
+            </div>
+
             <input
               type="text"
               id="student-id"
+              name="studentId"
               placeholder="Enter Student ID"
               required
               aria-label="Student ID"
-              name="studentId"
+              class="w-full rounded-xl border border-slate-200 bg-slate-50 py-3 pl-11 pr-4 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10"
             />
+
           </div>
-       
-          <div class="form-group">
-            <label for="session">Class</label>
-            <select id="Sclass" name="class">
+
+        </div>
+
+
+        <!-- Class -->
+        <div>
+
+          <label
+            for="Sclass"
+            class="mb-2 block text-sm font-semibold text-slate-700"
+          >
+            Class
+          </label>
+
+          <div class="relative">
+
+            <div
+              class="pointer-events-none absolute inset-y-0 left-0 z-10 flex items-center pl-3.5 text-slate-400"
+            >
+              <i data-lucide="school" class="h-5 w-5"></i>
+            </div>
+
+            <select
+              id="Sclass"
+              name="class"
+              class="w-full appearance-none rounded-xl border border-slate-200 bg-slate-50 py-3 pl-11 pr-10 text-sm text-slate-700 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10"
+            >
               <option value="">SELECT CLASS</option>
+
               <option value="SS 1">SS1</option>
               <option value="SS 2">SS2</option>
               <option value="SS 3">SS3</option>
+
               <option value="JSS 1">JSS1</option>
               <option value="JSS 2">JSS2</option>
               <option value="JSS 3">JSS3</option>
+
               <option value="BASIC 1">BASIC 1</option>
               <option value="BASIC 2">BASIC 2</option>
               <option value="BASIC 3">BASIC 3</option>
               <option value="BASIC 4">BASIC 4</option>
               <option value="BASIC 5">BASIC 5</option>
               <option value="BASIC 6">BASIC 6</option>
+
               <option value="NURSERY 1">NURSERY 1</option>
               <option value="NURSERY 2">NURSERY 2</option>
               <option value="NURSERY 3">NURSERY 3</option>
+
               <option value="PRE NURSERY">PRE-NURSERY</option>
             </select>
+
+            <div
+              class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400"
+            >
+              <i data-lucide="chevron-down" class="h-4 w-4"></i>
+            </div>
+
           </div>
-             <div class="form-group">
-            <label for="term">Term</label>
-            <select id="term" required aria-label="Select Term" name="term">
-               <option value="">SELECT TERM</option>
-                                        <option value="FIRST TERM">FIRST TERM</option>
-                                        <option value="SECOND TERM">SECOND TERM</option>
-                                        <option value="THIRD TERM">THIRD TERM</option>
+
+        </div>
+
+
+        <!-- Term -->
+        <div>
+
+          <label
+            for="term"
+            class="mb-2 block text-sm font-semibold text-slate-700"
+          >
+            Term
+          </label>
+
+          <div class="relative">
+
+            <div
+              class="pointer-events-none absolute inset-y-0 left-0 z-10 flex items-center pl-3.5 text-slate-400"
+            >
+              <i data-lucide="calendar-days" class="h-5 w-5"></i>
+            </div>
+
+            <select
+              id="term"
+              name="term"
+              required
+              aria-label="Select Term"
+              class="w-full appearance-none rounded-xl border border-slate-200 bg-slate-50 py-3 pl-11 pr-10 text-sm text-slate-700 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10"
+            >
+              <option value="">SELECT TERM</option>
+              <option value="FIRST TERM">FIRST TERM</option>
+              <option value="SECOND TERM">SECOND TERM</option>
+              <option value="THIRD TERM">THIRD TERM</option>
             </select>
+
+            <div
+              class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400"
+            >
+              <i data-lucide="chevron-down" class="h-4 w-4"></i>
+            </div>
+
           </div>
-          <button type="submit" class="form-button">View Result</button>
-        </form>
+
+        </div>
+
+
+        <!-- Submit -->
+        <button
+          type="submit"
+          class="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-600/20 transition hover:bg-blue-700 hover:shadow-blue-600/30 active:scale-[0.98]"
+        >
+          <i data-lucide="file-search" class="h-5 w-5"></i>
+          <span>View Result</span>
+        </button>
+
+      </form>
+
+
+      <!-- Footer -->
+      <div
+        class="mt-6 flex items-center justify-center gap-2 border-t border-slate-100 pt-5 text-xs text-slate-400"
+      >
+        <i data-lucide="shield-check" class="h-4 w-4"></i>
+        <span>Your result information is secure</span>
       </div>
-    </section>
+
+    </div>
+
+  </div>
+</section>
+
 
    <section id="news" class="news">
   <div class="container">

@@ -204,6 +204,7 @@
         const data = await res.json()
         buttonId.innerText = "Make Payment"
         const { email, school, user_name } = data.result;
+        console.log({ email, school, user_name })
         const fee = data.fee
         if (fee < 100) {
           return

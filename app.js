@@ -22,6 +22,9 @@ const StudentResult = require("./schema/studentResult.js");
 const studentRoute = require('./routes/student.js')
 const checkResultRoute = require('./routes/checkresult.js')
 const Staff = require("./schema/admin.js");
+const paymentRoute = require('./routes/payment.js')
+const newsRoute = require('./routes/news.js')
+const resultGuide = require('./routes/resultCheckGuide.js')
 const bcrypt = require('bcrypt')
 const app = express();
 
@@ -221,13 +224,13 @@ async function updateFees(schoolName, req){
 
 
 app.use(dashboardRoute);
-// app.use(newsRouter)
+// app.use(newsRoute)
 app.use(apiCallsRoute)
-//app.use(resultGuide)
+app.use(resultGuide)
  app.use(authRoute)
 app.use(analysisRoute)
 app.use(updateRoute)
-// app.use(payment)
+app.use(paymentRoute)
 app.use(adminRoute)
 app.use(resultUpload)
 app.use(studentRoute)
