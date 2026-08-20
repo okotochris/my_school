@@ -61,21 +61,17 @@ router.get('/api/all_subject', async(req, res)=>{
 })
 //UPLOAD SUBJECT
 router.post('/api/upload-subject', async (req, res) => {
-  
-    try {
 
+    try {
         const { subjectObj, subjectClass } = req.body;
 
         const schoolName = req.session.school;
-
         let subject = await Subject.findOne({
             schoolName,
             subjectClass
         });
-
         // First time for this class
         if (!subject) {
-
             subject = await Subject.create({
                 schoolName,
                 subjectClass,
@@ -86,7 +82,6 @@ router.post('/api/upload-subject', async (req, res) => {
                 message: "Subjects created successfully.",
                 data: subject
             });
-
         }
 
         // Existing subject names
@@ -133,20 +128,16 @@ router.post('/api/upload-subject', async (req, res) => {
 router.delete("/api/subject/:class/:subjectId", async (req, res) => {
     try {
         const { class: subjectClass, subjectId } = req.params;
-
         const schoolName = req.session.school;
-
         const subject = await Subject.findOne({
             schoolName,
             subjectClass
         });
-
         if (!subject) {
             return res.status(404).json({
                 message: "Class not found."
             });
         }
-
         subject.subjects = subject.subjects.filter(
             item => item._id.toString() !== subjectId
         );
@@ -179,17 +170,16 @@ router.get("/studentid", isAuthenticated, async(req, res) => {
 
 //STUDENT GRADING
 router.get("/studentgrade", async (req, res) => {
-   const role= req.session.role
-       const fees = await schoolFees(req.session.school)
-  res.render("studentgrade", { school: req.session.school, fees, role, title:"Student Grade" });
+    const role= req.session.role
+    const fees = await schoolFees(req.session.school)
+    res.render("studentgrade", { school: req.session.school, fees, role, title:"Student Grade" });
 });
 
 //UPDATING STUDENT RECORD PAGE
 router.get("/update", isAuthenticated, async(req, res) => {
-  const role= req.session.role
+    const role= req.session.role
     const fees = await schoolFees(req.session.school)
-  res.render("update", { school: req.session.school, fees, role, title:"Update Info" });
-  
+    res.render("update", { school: req.session.school, fees, role, title:"Update Info" });
 });
 //generating student id and passport page
 router.get("/generateid", isAuthenticated, async(req, res) => {
@@ -391,5 +381,21 @@ router.get('/admin/timetable', isAuthenticated, async(req, res)=>{
   
     res.render('timetable', { school: req.session.school, fees, role, teachers, title: "Timetable Management"})
         
+})
+
+router.delete('/deletestaff', async (req, res)=>{
+  let _id = req.query.id;
+  try{
+    const response = await Teacher.findOneAndDelete({_id});
+    if(response){
+      res.status(200).json("deleted")
+    }
+    else{
+      res.status(404).json("file not found")
+    }
+  }
+  catch(err){
+    console.log(err)
+  }
 })
 module.exports = router;

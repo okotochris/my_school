@@ -70,7 +70,7 @@
               </div>
 
               <div>
-                <p class="text-xs font-medium text-slate-500 uppercase tracking-wide">
+                <p class="total-count text-xs font-medium text-slate-500 uppercase tracking-wide">
                   Total Staff
                 </p>
 
@@ -602,7 +602,7 @@
       // Show alert dialog with message
       function showAlert(message) {
         alertMessage.textContent = message;
-        alertDialog.style.display = 'block';
+        alertDialog.style.display = 'flex';
       }
 
       // Close alert dialog
@@ -624,7 +624,7 @@
         }
 
         try {
-          document.querySelector('.button').innerText = 'Adding staff.....'
+          document.querySelector('#addStaffBtn').innerText = 'Adding staff.....'
           const response = await fetch('/admin/add-staff', {
             method: 'POST',
             headers: {
@@ -659,7 +659,7 @@
               const totalCount = document.querySelector('.total-count');
               const currentCount = parseInt(totalCount.textContent.match(/\d+/)[0]) - 1;
               totalCount.textContent = `Total Staff: ${currentCount}`;
-              if (currentCount === 0) {
+              if (Number(currentCount) === 0) {
                 document.querySelector('.table-wrapper').innerHTML = '<div class="table-empty">No staff available</div>';
               }
             } else {

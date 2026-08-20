@@ -436,10 +436,10 @@
         </option>
     `).join("");
 
-                document.getElementById("subjectRows").insertAdjacentHTML(
+        document.getElementById("subjectRows").insertAdjacentHTML(
                     "beforeend",
                     `
-        <div class="subject-row group rounded-2xl border border-slate-200 bg-white p-4 transition hover:border-blue-200 hover:shadow-sm">
+        <form class="form subject-row group rounded-2xl border border-slate-200 bg-white p-4 transition hover:border-blue-200 hover:shadow-sm">
 
             <div class="grid gap-3 md:grid-cols-12 md:items-center">
 
@@ -515,7 +515,7 @@
 
             </div>
 
-        </div>
+        </form>
         `
                 );
             }
@@ -568,9 +568,10 @@
                             subjects: subject
                         });
                     }
-
+                    document.querySelector('.form').reset()
                     selectClassLevel(subjectClass);
                     closeSubjectModal();
+
                 } catch (error) {
                     console.log(error)
                 } finally {

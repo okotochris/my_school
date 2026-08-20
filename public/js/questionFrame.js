@@ -9,208 +9,225 @@ let timeLeft = 30 * 60; // 30 minutes
 
 const questions = [
   // ==================== BASIC LEVEL (1-5) ====================
-  {
-    question: "Who is the current president of Nigeria?",
-    options: [
-      { text: "Muhammadu Buhari", image: '/image-url' },
-      { text: "Bola Ahmed Tinubu", image: '/image-url' },
-      { text: "Goodluck Jonathan", image: '/image-url' },
-      { text: "Atiku Abubakar", image: '/image-url' },
-    ],
-    answer: 'Bola Ahmed Tinubu'
-  },
-  {
-    question: "What is the capital city of Nigeria?",
-    options: [
-      { text: "Lagos", image: '/image-url' },
-      { text: "Abuja", image: '/image-url' },
-      { text: "Kano", image: '/image-url' },
-      { text: "Port Harcourt", image: '/image-url' },
-    ],
-    answer: 'Abuja'
-  },
-  {
-    question: "How many states are in Nigeria?",
-    options: [
-      { text: "30", image: '/image-url' },
-      { text: "36", image: '/image-url' },
-      { text: "42", image: '/image-url' },
-      { text: "25", image: '/image-url' },
-    ],
-    answer: '36'
-  },
-  {
-    question: "What is the official language of Nigeria?",
-    options: [
-      { text: "French", image: '/image-url' },
-      { text: "English", image: '/image-url' },
-      { text: "Arabic", image: '/image-url' },
-      { text: "Yoruba", image: '/image-url' },
-    ],
-    answer: 'English'
-  },
-  {
-    question: "Who is the first president of Nigeria?",
-    options: [
-      { text: "Nnamdi Azikiwe", image: '/image-url' },
-      { text: "Obafemi Awolowo", image: '/image-url' },
-      { text: "Tafawa Balewa", image: '/image-url' },
-      { text: "Yakubu Gowon", image: '/image-url' },
-    ],
-    answer: 'Nnamdi Azikiwe'
-  },
+ {
+  question: "What is 345 + 278?",
+  options: [
+    { text: "613", image: '/image-url' },
+    { text: "623", image: '/image-url' },
+    { text: "633", image: '/image-url' },
+    { text: "643", image: '/image-url' },
+  ],
+  answer: '623'
+},
 
-  // ==================== STANDARD LEVEL (6-20) ====================
-  {
-    question: "Nigeria gained independence in what year?",
-    options: [
-      { text: "1957", image: '/image-url' },
-      { text: "1960", image: '/image-url' },
-      { text: "1963", image: '/image-url' },
-      { text: "1970", image: '/image-url' },
-    ],
-    answer: '1960'
-  },
-  {
-    question: "What is the longest river in Nigeria?",
-    options: [
-      { text: "River Benue", image: '/image-url' },
-      { text: "River Niger", image: '/image-url' },
-      { text: "River Osun", image: '/image-url' },
-      { text: "River Kaduna", image: '/image-url' },
-    ],
-    answer: 'River Niger'
-  },
-  {
-    question: "Who was the first military head of state in Nigeria?",
-    options: [
-      { text: "Yakubu Gowon", image: '/image-url' },
-      { text: "Johnson Aguiyi-Ironsi", image: '/image-url' },
-      { text: "Murtala Muhammed", image: '/image-url' },
-      { text: "Olusegun Obasanjo", image: '/image-url' },
-    ],
-    answer: 'Johnson Aguiyi-Ironsi'
-  },
-  {
-    question: "What is the national anthem of Nigeria called?",
-    options: [
-      { text: "Arise, O Compatriots", image: '/image-url' },
-      { text: "Nigeria, We Hail Thee", image: '/image-url' },
-      { text: "God Bless Nigeria", image: '/image-url' },
-      { text: "One Nigeria", image: '/image-url' },
-    ],
-    answer: 'Arise, O Compatriots'
-  },
-  {
-    question: "Which is the most populated city in Nigeria?",
-    options: [
-      { text: "Abuja", image: '/image-url' },
-      { text: "Kano", image: '/image-url' },
-      { text: "Lagos", image: '/image-url' },
-      { text: "Ibadan", image: '/image-url' },
-    ],
-    answer: 'Lagos'
-  },
-  {
-    question: "The Nigerian flag has how many colours?",
-    options: [
-      { text: "One", image: '/image-url' },
-      { text: "Two", image: '/image-url' },
-      { text: "Three", image: '/image-url' },
-      { text: "Four", image: '/image-url' },
-    ],
-    answer: 'Two'
-  },
-  {
-    question: "What does the green colour on the Nigerian flag represent?",
-    options: [
-      { text: "Peace", image: '/image-url' },
-      { text: "Agriculture", image: '/image-url' },
-      { text: "Unity", image: '/image-url' },
-      { text: "Strength", image: '/image-url' },
-    ],
-    answer: 'Agriculture'
-  },
-  {
-    question: "Which of these is not one of the three major ethnic groups in Nigeria?",
-    options: [
-      { text: "Hausa", image: '/image-url' },
-      { text: "Igbo", image: '/image-url' },
-      { text: "Yoruba", image: '/image-url' },
-      { text: "Ijaw", image: '/image-url' },
-    ],
-    answer: 'Ijaw'
-  },
-  {
-    question: "The Central Bank of Nigeria was established in what year?",
-    options: [
-      { text: "1958", image: '/image-url' },
-      { text: "1960", image: '/image-url' },
-      { text: "1970", image: '/image-url' },
-      { text: "1980", image: '/image-url' },
-    ],
-    answer: '1958'
-  },
-  {
-    question: "What is the currency of Nigeria?",
-    options: [
-      { text: "Dollar", image: '/image-url' },
-      { text: "Cedi", image: '/image-url' },
-      { text: "Naira", image: '/image-url' },
-      { text: "Rand", image: '/image-url' },
-    ],
-    answer: 'Naira'
-  },
-  {
-    question: "Which state is known as the 'Centre of Excellence'?",
-    options: [
-      { text: "Abuja", image: '/image-url' },
-      { text: "Lagos", image: '/image-url' },
-      { text: "Kano", image: '/image-url' },
-      { text: "Enugu", image: '/image-url' },
-    ],
-    answer: 'Lagos'
-  },
-  {
-    question: "Nigeria is in which continent?",
-    options: [
-      { text: "Asia", image: '/image-url' },
-      { text: "Europe", image: '/image-url' },
-      { text: "Africa", image: '/image-url' },
-      { text: "South America", image: '/image-url' },
-    ],
-    answer: 'Africa'
-  },
-  {
-    question: "The Nigerian Civil War is also known as?",
-    options: [
-      { text: "Biafran War", image: '/image-url' },
-      { text: "Independence War", image: '/image-url' },
-      { text: "Oil War", image: '/image-url' },
-      { text: "Unity War", image: '/image-url' },
-    ],
-    answer: 'Biafran War'
-  },
-  {
-    question: "What is the highest mountain in Nigeria?",
-    options: [
-      { text: "Olumo Rock", image: '/image-url' },
-      { text: "Chappal Waddi", image: '/image-url' },
-      { text: "Idanre Hills", image: '/image-url' },
-      { text: "Zuma Rock", image: '/image-url' },
-    ],
-    answer: 'Chappal Waddi'
-  },
-  {
-    question: "Who wrote the book 'Things Fall Apart'?",
-    options: [
-      { text: "Chinua Achebe", image: '/image-url' },
-      { text: "Wole Soyinka", image: '/image-url' },
-      { text: "Chimamanda Adichie", image: '/image-url' },
-      { text: "Cyprian Ekwensi", image: '/image-url' },
-    ],
-    answer: 'Chinua Achebe'
-  }
+{
+  question: "What is 800 - 365?",
+  options: [
+    { text: "425", image: '/image-url' },
+    { text: "435", image: '/image-url' },
+    { text: "445", image: '/image-url' },
+    { text: "455", image: '/image-url' },
+  ],
+  answer: '435'
+},
+
+{
+  question: "What is 24 × 6?",
+  options: [
+    { text: "124", image: '/image-url' },
+    { text: "134", image: '/image-url' },
+    { text: "144", image: '/image-url' },
+    { text: "154", image: '/image-url' },
+  ],
+  answer: '144'
+},
+
+{
+  question: "What is 144 ÷ 12?",
+  options: [
+    { text: "10", image: '/image-url' },
+    { text: "11", image: '/image-url' },
+    { text: "12", image: '/image-url' },
+    { text: "13", image: '/image-url' },
+  ],
+  answer: '12'
+},
+
+{
+  question: "Which fraction is equal to 1/2?",
+  options: [
+    { text: "2/3", image: '/image-url' },
+    { text: "3/6", image: '/image-url' },
+    { text: "4/5", image: '/image-url' },
+    { text: "5/8", image: '/image-url' },
+  ],
+  answer: '3/6'
+},
+
+{
+  question: "What is 3/4 + 1/4?",
+  options: [
+    { text: "1/2", image: '/image-url' },
+    { text: "3/4", image: '/image-url' },
+    { text: "1", image: '/image-url' },
+    { text: "2", image: '/image-url' },
+  ],
+  answer: '1'
+},
+
+{
+  question: "What is 5/6 - 2/6?",
+  options: [
+    { text: "1/6", image: '/image-url' },
+    { text: "2/6", image: '/image-url' },
+    { text: "3/6", image: '/image-url' },
+    { text: "4/6", image: '/image-url' },
+  ],
+  answer: '3/6'
+},
+
+{
+  question: "What is 0.5 as a fraction?",
+  options: [
+    { text: "1/2", image: '/image-url' },
+    { text: "1/3", image: '/image-url' },
+    { text: "2/3", image: '/image-url' },
+    { text: "3/4", image: '/image-url' },
+  ],
+  answer: '1/2'
+},
+
+{
+  question: "What is 25% of 100?",
+  options: [
+    { text: "15", image: '/image-url' },
+    { text: "20", image: '/image-url' },
+    { text: "25", image: '/image-url' },
+    { text: "30", image: '/image-url' },
+  ],
+  answer: '25'
+},
+
+{
+  question: "How many centimetres are in 1 metre?",
+  options: [
+    { text: "10 cm", image: '/image-url' },
+    { text: "50 cm", image: '/image-url' },
+    { text: "100 cm", image: '/image-url' },
+    { text: "1,000 cm", image: '/image-url' },
+  ],
+  answer: '100 cm'
+},
+
+{
+  question: "How many sides does a pentagon have?",
+  options: [
+    { text: "4", image: '/image-url' },
+    { text: "5", image: '/image-url' },
+    { text: "6", image: '/image-url' },
+    { text: "7", image: '/image-url' },
+  ],
+  answer: '5'
+},
+
+{
+  question: "What is the perimeter of a square with each side measuring 6 cm?",
+  options: [
+    { text: "12 cm", image: '/image-url' },
+    { text: "18 cm", image: '/image-url' },
+    { text: "24 cm", image: '/image-url' },
+    { text: "36 cm", image: '/image-url' },
+  ],
+  answer: '24 cm'
+},
+
+{
+  question: "What is the area of a rectangle that is 8 cm long and 5 cm wide?",
+  options: [
+    { text: "13 cm²", image: '/image-url' },
+    { text: "26 cm²", image: '/image-url' },
+    { text: "40 cm²", image: '/image-url' },
+    { text: "45 cm²", image: '/image-url' },
+  ],
+  answer: '40 cm²'
+},
+
+{
+  question: "A right angle is equal to how many degrees?",
+  options: [
+    { text: "45°", image: '/image-url' },
+    { text: "90°", image: '/image-url' },
+    { text: "180°", image: '/image-url' },
+    { text: "360°", image: '/image-url' },
+  ],
+  answer: '90°'
+},
+
+{
+  question: "What is the place value of 7 in 5,742?",
+  options: [
+    { text: "Ones", image: '/image-url' },
+    { text: "Tens", image: '/image-url' },
+    { text: "Hundreds", image: '/image-url' },
+    { text: "Thousands", image: '/image-url' },
+  ],
+  answer: 'Hundreds'
+},
+
+{
+  question: "What is the next number in this sequence: 5, 10, 15, 20, ___?",
+  options: [
+    { text: "22", image: '/image-url' },
+    { text: "23", image: '/image-url' },
+    { text: "25", image: '/image-url' },
+    { text: "30", image: '/image-url' },
+  ],
+  answer: '25'
+},
+
+{
+  question: "A farmer has 48 oranges and shares them equally among 6 children. How many oranges does each child receive?",
+  options: [
+    { text: "6", image: '/image-url' },
+    { text: "7", image: '/image-url' },
+    { text: "8", image: '/image-url' },
+    { text: "9", image: '/image-url' },
+  ],
+  answer: '8'
+},
+
+{
+  question: "What is 2.5 + 1.5?",
+  options: [
+    { text: "3.0", image: '/image-url' },
+    { text: "3.5", image: '/image-url' },
+    { text: "4.0", image: '/image-url' },
+    { text: "4.5", image: '/image-url' },
+  ],
+  answer: '4.0'
+},
+
+{
+  question: "If a book costs ₦500, how much will 4 books cost?",
+  options: [
+    { text: "₦1,500", image: '/image-url' },
+    { text: "₦2,000", image: '/image-url' },
+    { text: "₦2,500", image: '/image-url' },
+    { text: "₦3,000", image: '/image-url' },
+  ],
+  answer: '₦2,000'
+},
+
+{
+  question: "What is the average of 10, 20 and 30?",
+  options: [
+    { text: "15", image: '/image-url' },
+    { text: "20", image: '/image-url' },
+    { text: "25", image: '/image-url' },
+    { text: "30", image: '/image-url' },
+  ],
+  answer: '20'
+}
 ];
 
 // Initialize userAnswers array

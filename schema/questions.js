@@ -1,3 +1,4 @@
+const mongoose = require('mongoose')
 const questionSchema = new mongoose.Schema({
     schoolName: String,
     subject: {
@@ -6,7 +7,7 @@ const questionSchema = new mongoose.Schema({
         index: true
     },
 
-    class: {
+    studentClass: {
         type: String,
         required: true,
         index: true
@@ -17,17 +18,12 @@ const questionSchema = new mongoose.Schema({
         required: true,
         index: true
     },
-    question: {
-        text:{
-            type: String,
-            required: true
-        },
-
-       image:{
-         type: String,
-            
-       }
-    },
+    question:[
+       {
+            text:String,
+            image:String
+        }
+    ],
 
     options: [{
          text:{
@@ -57,7 +53,6 @@ const questionSchema = new mongoose.Schema({
     term: String,
     session: String,
 
-    createdBy: String
 },{
     timestamps:true
 });
