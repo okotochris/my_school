@@ -9,7 +9,8 @@ const Subject = require('../schema/subject.js')
 const upload = require('../middleware/upload.js')
 const cloudinary = require('../middleware/cloudinary.js')
 const router = express.Router()
-const schoolSection = require('../utility/schoolSection.js')
+const {schoolSection} = require('../utility/schoolSection.js')
+
 
 
 async function schoolFees(school){
@@ -23,7 +24,7 @@ router.get("/blacklist", isAuthenticated, async (req, res) => {
   try {
     let school = req.session.school;
     const student = await Blacklist.find({ school: school });
-    console.log(student)
+
     res.render("blacklist", { student, school: req.session.school, fees, role, title:"Black List" });
   } catch (err) {
     console.log(err);
@@ -203,7 +204,7 @@ router.get("/student-profile/:studentId", async (req, res) => {
 router.get('/admin/exam-settings', isAuthenticated, async(req, res)=>{
   const role= req.session.role
   const fees = await schoolFees(req.session.school)
-    res.render('exam_settings', { school: req.session.school, fees, role, title: "Exam settings"})
+  res.render('exam_settings', { school: req.session.school, fees, role, schoolSection, title: "Exam settings"})
 })
 router.get('/admin/upload-question', isAuthenticated, async(req, res)=>{
   const role= req.session.role
@@ -397,5 +398,31 @@ router.delete('/deletestaff', async (req, res)=>{
   catch(err){
     console.log(err)
   }
+})
+
+//GET SUBJECT BASE ON CLASS
+router.get('/api/subject/:subjectClass', async(req, res)=>{
+    let examSubject = null
+    const subject = req.params.subjectClass.split(' ')[0]
+    if(subject == 'SS'){
+        examSubject = "Senior"
+    }else if(subject == 'JSS'){
+         examSubject = "Junior"
+    }else if(subject == 'Basic'){
+         examSubject = "Basic"
+    }else{
+        examSubject = "Nursery"
+    }
+
+    const schoolName = req.session.school
+    try{
+        const allSubject = await Subject.findOne({
+            subjectClass: {$regex:`^${examSubject}$`, $options:"i"}, 
+            schoolName:{$regex: `^${schoolName}$`, $options: "i",}
+            })
+        res.status(200).json({allSubject, message:'successful'})
+    }catch(err){
+        res.status(500).json({message:"server error"})
+    }
 })
 module.exports = router;
