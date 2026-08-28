@@ -49,7 +49,7 @@ const dbURI =
   "mongodb+srv://data:L6EwGXzqyzLHNFxn@school.vvirl2y.mongodb.net/school?retryWrites=true&w=majority";
 const local = 'mongodb://127.0.0.1:27017/school'
 mongoose
-  .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(local, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((result) => {
     console.log("Connected to MongoDB");
   })
@@ -60,7 +60,7 @@ mongoose
 app.use(
   session({
     store: MongoStore.create({
-      mongoUrl: dbURI, // Use the same MongoDB connection URI for session storage
+      mongoUrl: local, // Use the same MongoDB connection URI for session storage
       collectionName: "sessions", // Store sessions in a collection named 'sessions'
       client: mongoose.connection.getClient(), // Use the same mongoose connection for the store
     }),

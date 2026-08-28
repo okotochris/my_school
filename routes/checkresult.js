@@ -31,7 +31,7 @@ router.post("/result", async (req, res) => {
     const result = await StudentResult.findOne({ studentId: id, studentClass: clas, term })
     if(result){
       //check if school has made payment
-       let schoolName = student.schoolName.toLowerCase().trim();
+       let schoolName = student.schoolName.toLowerCase().toLocaleLowerCase().trim();
         const payment = await isOutStandingPayment(schoolName)
         if(!payment){
             return res.render('block_school', {school: schoolName})
