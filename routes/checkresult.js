@@ -37,7 +37,7 @@ router.post("/result", async (req, res) => {
             return res.render('block_school', {school: schoolName})
         }
       //CREATE SCHOOL TEMPLATE
-      const resultTemplate = schoolName.split(" ").join("-");
+      const resultTemplate = schoolName.toLocaleLowerCase().split(" ").join("-");
       return  res.render(resultTemplate, { result, student });
      
     }
