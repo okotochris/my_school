@@ -38,7 +38,6 @@ router.post("/result", async (req, res) => {
         }
       //CREATE SCHOOL TEMPLATE
       const resultTemplate = schoolName.split(" ").join("-");
-      console.log(resultTemplate)
       return  res.render(resultTemplate, { result, student });
      
     }
@@ -148,7 +147,6 @@ router.get('/view-student-result', async(req, res)=>{
     }
     const {term, sclass, school, studentId} = req.query
      const result = await StudentResult.findOne({studentId, studentClass: sclass, term, schoolName: school})
-     console.log(req.query)
      const student = await StudentProfile.findOne({studentId})
       //CREATE SCHOOL TEMPLATE
       const resultTemplate = school.split(" ").join("-");

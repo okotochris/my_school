@@ -107,7 +107,14 @@
                             <i data-lucide="log-in" class="h-5 w-5"></i>
                             <span>Login</span>
                         </button>
+                        <div id="errDiv" class="hidden mb-4 flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                            <svg class="h-5 w-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 9v4m0 4h.01M10.29 3.86l-8.18 14A2 2 0 003.82 21h16.36a2 2 0 001.71-3.14l-8.18-14a2 2 0 00-3.42 0z" />
+                            </svg>
 
+                            <span id="error"></span>
+                        </div>
                     </form>
 
 
@@ -145,6 +152,7 @@
 <script>
     const form = document.getElementById('login-form');
     const button = document.getElementById('submit-button')
+    const errMessage = document.getElementById('error')
     form.addEventListener('submit', async (e) => {
         e.preventDefault(); // ✅ prevent default form submission
 
@@ -166,11 +174,11 @@
                 localStorage.setItem('school', JSON.stringify(school))
                 return window.location.href = `${redirectTo}`;
             }
-            button.style.backgroundColor = 'red'
-            button.innerText = data.msg
+            document.getElementById('errDiv').style.display = 'block'
+            errMessage.innerText = 'incorrect email or password'
         } catch (error) {
-            button.style.backgroundColor = 'red'
-            button.innerText = 'server error'
+            document.getElementById('errDiv').style.display = 'block'
+            errMessage.innerText = 'server error'
             console.error(error);
         } finally {
             button.disabled = false;
