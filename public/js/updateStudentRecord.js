@@ -84,7 +84,7 @@ studentDetailsBtn.onclick = async (e) => {
     const student = await response.json();
     
     // Populate fields
-    username.value = student.userName || '';
+    username.value = student.fullname || '';
     addmissionNo.value = student.addmissionNo || '';
     dob.value = student.dob || '';
     classN.value = student.class || '';

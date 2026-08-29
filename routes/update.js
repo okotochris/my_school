@@ -3,6 +3,7 @@ const router = express.Router()
 const upload = require("../middleware/upload.js");
 const cloudinary = require("../middleware/cloudinary.js");
 const StudentResult = require('../schema/studentResult.js')
+const isAuthenticated = require('../utility/authenticated.js')
 const StudentProfile = require('../schema/studentProfile.js')
 const fs = require("fs");
 
@@ -21,7 +22,7 @@ router.patch("/update-student", upload.single("passport"), async (req, res) => {
   }
 
   const updateData = {};
-  if (userName) updateData.userName = userName;
+  if (userName) updateData.fullname = userName;
   if (addmissionNo) updateData.addmissionNo = addmissionNo;
   if (dobValue) updateData.dob = dobValue;
   if (gender) updateData.gender = gender;
@@ -84,6 +85,10 @@ router.patch("/updatestudentclass", async (req, res) => {
   } catch (err) {
     console.log(err);
   }
+});
+//UPDATE UPDATE STUDENT
+router.get("/update-result", isAuthenticated, (req, res) => {
+  res.render("update_result");
 });
 
 module.exports = router;
