@@ -37,7 +37,7 @@ router.post("/result", async (req, res) => {
             return res.render('block_school', {school: schoolName})
         }
       //CREATE SCHOOL TEMPLATE
-      const resultTemplate = schoolName.toLocaleLowerCase().split(" ").join("-");
+      const resultTemplate = schoolName.toLowerCase().split(" ").join("-");
       return  res.render(resultTemplate, { result, student });
      
     }
@@ -146,11 +146,11 @@ router.get('/view-student-result', async(req, res)=>{
       res.render('login')
     }
     const {term, sclass, school, studentId} = req.query
-     const result = await StudentResult.findOne({studentId, studentClass: sclass, term, schoolName: school})
-     const student = await StudentProfile.findOne({studentId})
-      //CREATE SCHOOL TEMPLATE
-      const resultTemplate = school.split(" ").join("-");
-      return  res.render(resultTemplate, { result, student });
+    const result = await StudentResult.findOne({studentId, studentClass: sclass, term, schoolName: school})
+    const student = await StudentProfile.findOne({studentId})
+    //CREATE SCHOOL TEMPLATE
+    const resultTemplate = school.toLowerCase().split(" ").join("-");
+    return  res.render(resultTemplate, { result, student });
 
 });
 
