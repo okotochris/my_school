@@ -22,7 +22,7 @@ const studentRoute = require('./routes/student.js')
 const checkResultRoute = require('./routes/checkresult.js')
 const paymentRoute = require('./routes/payment.js')
 const resultGuide = require('./routes/resultCheckGuide.js')
-const Teacher = require('./schema/admin.js')
+const downloadResult = require('./routes/downloadResult.js')
 
 const app = express();
 
@@ -47,12 +47,9 @@ const dbURI =
   "mongodb+srv://data:L6EwGXzqyzLHNFxn@school.vvirl2y.mongodb.net/school?retryWrites=true&w=majority";
 const local = 'mongodb://127.0.0.1:27017/school'
 mongoose
-  .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(dbURI , { useNewUrlParser: true, useUnifiedTopology: true })
   .then((result) => {
     console.log("Connected to MongoDB");
-    Teacher.find().then(result=>{
-      console.log(result)
-    })
   })
   .catch((err) => {
     console.log("Error connecting to MongoDB:", err);
@@ -208,7 +205,7 @@ app.use(adminRoute)
 app.use(resultUpload)
 app.use(studentRoute)
 app.use(checkResultRoute)
-
+app.use(downloadResult)
 app.use(exam)
 
 app.use((req, res) => {

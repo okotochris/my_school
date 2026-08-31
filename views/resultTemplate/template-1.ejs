@@ -19,30 +19,33 @@
 </head>
 
 <body>
-    <div class="no-print flex justify-center gap-2 p-4">
 
-        <a
-            href="/result/<%= result._id %>/pdf"
-            class="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-700"
-        >
-            Download PDF
-        </a>
+<div class="no-print flex justify-center gap-2 p-4 print:hidden">
 
-        <a
-            href="/result/<%= result._id %>/image"
-            class="rounded-lg bg-teal-600 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-700"
-        >
-            Download Image
-        </a>
+    <a
+        href="/result/<%= result._id %>/pdf"
+        class="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-700"
+    >
+        Download PDF
+    </a>
 
-        <button
-            onclick="window.print()"
-            class="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50"
-        >
-            Print
-        </button>
+    <a
+        href="/result/<%= result._id %>/image"
+        class="rounded-lg bg-teal-600 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-700"
+    >
+        Download Image
+    </a>
 
-    </div>
+    <button
+        onclick="window.print()"
+        class="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+    >
+        Print
+    </button>
+
+</div>
+
+
 <div class="result-page">
 
     <!-- HEADER -->
@@ -269,7 +272,7 @@
     </section>
 
     <!-- SIGNATURES -->
-    <section class="signatures">
+    <section class="signatures print:hidden">
 
         <div class="signature">
             <img src="<%=result.classTeacherSignature %>" height="20" width="40" />

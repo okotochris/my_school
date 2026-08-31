@@ -37,7 +37,6 @@ router.post("/result", async (req, res) => {
 
        //IF SCHOOL HAS OUTSTANDING PAYMENT RETURN FALSE ELSE RETURN THE SCHOOL DATA
         const school = await isOutStandingPayment(schoolName)
-        console.log(school)
         if(!school){
             return res.render('block_school', {school: schoolName})
         }
