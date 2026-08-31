@@ -37,11 +37,12 @@ router.post("/result", async (req, res) => {
 
        //IF SCHOOL HAS OUTSTANDING PAYMENT RETURN FALSE ELSE RETURN THE SCHOOL DATA
         const school = await isOutStandingPayment(schoolName)
+        console.log(school)
         if(!school){
             return res.render('block_school', {school: schoolName})
         }
       //CREATE SCHOOL TEMPLATE
-      const resultTemplate = school.resultTemplate;
+      const resultTemplate = `resultTemplate/${ school.resultTemplate}`;
       return  res.render(resultTemplate, { result, student, school });
      
     }
@@ -151,7 +152,6 @@ router.get('/view-student-result',isAuthenticated, async(req, res)=>{
     const student = await StudentProfile.findOne({studentId})
 
     const schoolData = await schoolPfofile.findOne({schoolName : school})
-    console.log(schoolData)
     //CREATE SCHOOL TEMPLATE
     const resultTemplate = `resultTemplate/${schoolData.resultTemplate}`;
     return  res.render(resultTemplate, { result, student, school:schoolData });

@@ -36,6 +36,7 @@ router.post("/admin_form", upload.single('school-logo'), async (req, res) => {
           schoolEmail: req.body.email,
           address: req.body.address,
           phone: req.body.phone,
+          motto: req.body.motto,
           image: {
           logo: secure_url,
           public_id: public_id

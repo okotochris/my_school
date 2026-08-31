@@ -36,7 +36,7 @@ const profile = new mongoose.Schema({
         signatrue:String,
         public_id:String,
     },
-    moto:String,
+    motto:String,
 }, {timestamp: true})
 
 
