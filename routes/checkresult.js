@@ -7,6 +7,8 @@ const StudentProfile = require('../schema/studentProfile.js')
 const Blacklist = require("../schema/blacklist.js");
 const StudentResult = require('../schema/studentResult.js')
 const schoolPfofile = require("../schema/schoolProfile");
+
+const isAuthenticated = require('../utility/authenticated.js');
 const router = express.Router()
 
 
@@ -32,13 +34,15 @@ router.post("/result", async (req, res) => {
     if(result){
       //check if school has made payment
        let schoolName = student.schoolName.toLowerCase().toLocaleLowerCase().trim();
-        const payment = await isOutStandingPayment(schoolName)
-        if(!payment){
+
+       //IF SCHOOL HAS OUTSTANDING PAYMENT RETURN FALSE ELSE RETURN THE SCHOOL DATA
+        const school = await isOutStandingPayment(schoolName)
+        if(!school){
             return res.render('block_school', {school: schoolName})
         }
       //CREATE SCHOOL TEMPLATE
-      const resultTemplate = schoolName.toLowerCase().split(" ").join("-");
-      return  res.render(resultTemplate, { result, student });
+      const resultTemplate = school.resultTemplate;
+      return  res.render(resultTemplate, { result, student, school });
      
     }
 
@@ -137,20 +141,20 @@ async function isOutStandingPayment(school){
      if(data && data.fees > 0){
         return 
      }
-     return true
+     return data
 }
 
 //view student result from student profile page
-router.get('/view-student-result', async(req, res)=>{
-    if(!req.session){
-      res.render('login')
-    }
+router.get('/view-student-result',isAuthenticated, async(req, res)=>{
     const {term, sclass, school, studentId} = req.query
     const result = await StudentResult.findOne({studentId, studentClass: sclass, term, schoolName: school})
     const student = await StudentProfile.findOne({studentId})
+
+    const schoolData = await schoolPfofile.findOne({schoolName : school})
+    console.log(schoolData)
     //CREATE SCHOOL TEMPLATE
-    const resultTemplate = school.toLowerCase().split(" ").join("-");
-    return  res.render(resultTemplate, { result, student });
+    const resultTemplate = `resultTemplate/${schoolData.resultTemplate}`;
+    return  res.render(resultTemplate, { result, student, school:schoolData });
 
 });
 

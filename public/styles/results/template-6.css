@@ -1,0 +1,879 @@
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #e5e7eb;
+
+    color: #1f2937;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    font-size: 10px;
+}
+
+
+/* =====================================================
+   REPORT SHEET
+===================================================== */
+
+.report-sheet {
+    width: 210mm;
+    min-height: 297mm;
+
+    margin: 20px auto;
+
+    padding: 9mm;
+
+    background: #ffffff;
+}
+
+
+/* =====================================================
+   SCHOOL HEADER
+===================================================== */
+
+.school-header {
+    border: 1px solid #cbd5e1;
+}
+
+.header-top {
+    display: flex;
+
+    align-items: center;
+
+    padding: 15px;
+
+    text-align: center;
+}
+
+.school-logo {
+    width: 72px;
+    height: 72px;
+
+    flex-shrink: 0;
+
+    margin-right: 18px;
+
+    padding: 4px;
+
+    border: 2px solid #334155;
+
+    border-radius: 50%;
+}
+
+.school-logo img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    border-radius: 50%;
+}
+
+.school-info {
+    flex: 1;
+}
+
+.school-info h1 {
+    margin: 0;
+
+    color: #1e293b;
+
+    font-size: 22px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+.school-info p {
+    margin: 3px 0;
+
+    color: #64748b;
+
+    font-size: 7px;
+}
+
+.school-info .motto {
+    margin: 5px 0;
+
+    color: #0f766e;
+
+    font-size: 8px;
+
+    font-weight: bold;
+
+    letter-spacing: .7px;
+}
+
+
+/* =====================================================
+   REPORT TITLE
+===================================================== */
+
+.report-title {
+    padding: 9px;
+
+    background: #1e293b;
+
+    color: white;
+
+    text-align: center;
+}
+
+.report-title span {
+    color: #fbbf24;
+
+    font-size: 6px;
+
+    font-weight: bold;
+
+    letter-spacing: 1.5px;
+}
+
+.report-title h2 {
+    margin: 3px 0;
+
+    font-size: 11px;
+
+    letter-spacing: .4px;
+}
+
+.report-title p {
+    margin: 0;
+
+    color: #cbd5e1;
+
+    font-size: 6px;
+}
+
+
+/* =====================================================
+   STUDENT INFORMATION
+===================================================== */
+
+.student-section {
+    display: grid;
+
+    grid-template-columns: 75px 1fr;
+
+    gap: 12px;
+
+    margin-top: 11px;
+
+    padding: 10px;
+
+    border: 1px solid #cbd5e1;
+}
+
+.student-photo {
+    width: 70px;
+    height: 82px;
+
+    padding: 3px;
+
+    border: 1px solid #94a3b8;
+
+    background: #f8fafc;
+}
+
+.student-photo img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.student-information {
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+}
+
+.info-row {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.info-row:first-child {
+    grid-template-columns: 2fr 1fr;
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.info-item {
+    min-height: 35px;
+
+    padding: 6px 8px;
+
+    border-right: 1px solid #e2e8f0;
+}
+
+.info-item:last-child {
+    border-right: none;
+}
+
+.info-item span {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #64748b;
+
+    font-size: 5.5px;
+
+    font-weight: bold;
+
+    letter-spacing: .4px;
+}
+
+.info-item strong {
+    color: #1e293b;
+
+    font-size: 7.5px;
+}
+
+
+/* =====================================================
+   SECTION TITLE
+===================================================== */
+
+.section-title {
+    display: flex;
+
+    align-items: center;
+
+    margin-top: 13px;
+
+    padding: 7px 9px;
+
+    background: #f1f5f9;
+
+    border-left: 4px solid #0f766e;
+}
+
+.section-title > span {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 22px;
+    height: 22px;
+
+    margin-right: 8px;
+
+    background: #0f766e;
+
+    color: white;
+
+    font-size: 7px;
+
+    font-weight: bold;
+}
+
+.section-title small {
+    display: block;
+
+    color: #64748b;
+
+    font-size: 5px;
+
+    font-weight: bold;
+
+    letter-spacing: .8px;
+}
+
+.section-title h3 {
+    margin: 2px 0 0;
+
+    color: #1e293b;
+
+    font-size: 9px;
+}
+
+
+/* =====================================================
+   RESULT TABLE
+===================================================== */
+
+.result-table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    table-layout: fixed;
+}
+
+.result-table th {
+    padding: 6px 3px;
+
+    background: #334155;
+
+    border: 1px solid #475569;
+
+    color: white;
+
+    font-size: 6px;
+
+    text-align: center;
+}
+
+.result-table th small {
+    color: #cbd5e1;
+
+    font-size: 4.5px;
+}
+
+.result-table td {
+    padding: 6px 3px;
+
+    border: 1px solid #cbd5e1;
+
+    color: #475569;
+
+    font-size: 7px;
+
+    text-align: center;
+}
+
+.result-table tbody tr:nth-child(even) {
+    background: #f8fafc;
+}
+
+.result-table .sn {
+    width: 27px;
+}
+
+.result-table .subject {
+    width: 150px;
+
+    text-align: left;
+
+    font-weight: 600;
+}
+
+.result-table .total {
+    color: #0f766e;
+
+    font-weight: bold;
+}
+
+.grade {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 22px;
+    height: 22px;
+
+    border-radius: 50%;
+
+    font-size: 7px;
+
+    font-weight: bold;
+}
+
+.grade.excellent {
+    background: #ccfbf1;
+
+    color: #115e59;
+}
+
+.grade.very-good {
+    background: #dbeafe;
+
+    color: #1e40af;
+}
+
+
+/* =====================================================
+   SUMMARY
+===================================================== */
+
+.summary-section {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 7px;
+
+    margin-top: 9px;
+}
+
+.summary-box {
+    padding: 8px;
+
+    border: 1px solid #cbd5e1;
+
+    background: #f8fafc;
+
+    text-align: center;
+}
+
+.summary-box span {
+    display: block;
+
+    color: #64748b;
+
+    font-size: 5.5px;
+
+    font-weight: bold;
+}
+
+.summary-box strong {
+    display: block;
+
+    margin: 3px 0;
+
+    color: #0f766e;
+
+    font-size: 15px;
+}
+
+.summary-box small {
+    color: #64748b;
+
+    font-size: 5px;
+}
+
+
+/* =====================================================
+   TWO COLUMN PANELS
+===================================================== */
+
+.two-column {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 9px;
+
+    margin-top: 10px;
+}
+
+.panel {
+    border: 1px solid #cbd5e1;
+}
+
+.panel-heading {
+    padding: 7px 9px;
+
+    background: #334155;
+
+    color: white;
+
+    font-size: 6px;
+
+    font-weight: bold;
+
+    letter-spacing: .4px;
+}
+
+.attendance-content {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+}
+
+.attendance-content div {
+    padding: 8px 3px;
+
+    border-right: 1px solid #e2e8f0;
+
+    text-align: center;
+}
+
+.attendance-content div:last-child {
+    border-right: none;
+}
+
+.attendance-content span {
+    display: block;
+
+    color: #64748b;
+
+    font-size: 5px;
+}
+
+.attendance-content strong {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #0f766e;
+
+    font-size: 12px;
+}
+
+.conduct-list {
+    padding: 4px 9px;
+}
+
+.conduct-list div {
+    display: flex;
+
+    justify-content: space-between;
+
+    padding: 5px 0;
+
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.conduct-list div:last-child {
+    border-bottom: none;
+}
+
+.conduct-list span {
+    color: #475569;
+
+    font-size: 6.5px;
+}
+
+.conduct-list strong {
+    color: #0f766e;
+
+    font-size: 6px;
+}
+
+
+/* =====================================================
+   COMMENTS
+===================================================== */
+
+.comments-section {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 9px;
+
+    margin-top: 10px;
+}
+
+.comment-box {
+    border: 1px solid #cbd5e1;
+}
+
+.comment-box p {
+    min-height: 58px;
+
+    margin: 0;
+
+    padding: 8px;
+
+    color: #475569;
+
+    font-size: 6.5px;
+
+    line-height: 1.55;
+}
+
+
+/* =====================================================
+   GRADING
+===================================================== */
+
+.grading-section {
+    margin-top: 10px;
+
+    border: 1px solid #cbd5e1;
+}
+
+.grading-heading {
+    padding: 6px 9px;
+
+    background: #0f766e;
+
+    color: white;
+
+    font-size: 6px;
+
+    font-weight: bold;
+}
+
+.grading-table {
+    display: grid;
+
+    grid-template-columns:
+        repeat(6, 1fr);
+}
+
+.grading-table div {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    padding: 6px 2px;
+
+    border-right: 1px solid #e2e8f0;
+}
+
+.grading-table div:last-child {
+    border-right: none;
+}
+
+.grading-table strong {
+    color: #1e293b;
+
+    font-size: 10px;
+}
+
+.grading-table span {
+    margin-top: 2px;
+
+    color: #475569;
+
+    font-size: 5px;
+}
+
+.grading-table small {
+    margin-top: 2px;
+
+    color: #64748b;
+
+    font-size: 4.5px;
+}
+
+
+/* =====================================================
+   SIGNATURES
+===================================================== */
+
+.signature-section {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 35px;
+
+    margin-top: 22px;
+}
+
+.signature {
+    text-align: center;
+}
+
+.signature-space {
+    height: 18px;
+}
+
+.signature-line {
+    border-top: 1px solid #475569;
+}
+
+.signature strong {
+    display: block;
+
+    margin-top: 4px;
+
+    color: #1e293b;
+
+    font-size: 6.5px;
+}
+
+.signature span {
+    display: block;
+
+    margin-top: 2px;
+
+    color: #64748b;
+
+    font-size: 5px;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.report-footer {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-top: 13px;
+
+    padding-top: 6px;
+
+    border-top: 2px solid #334155;
+
+    color: #64748b;
+
+    font-size: 5px;
+}
+
+.report-footer span:first-child {
+    color: #1e293b;
+
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media screen and (max-width: 700px) {
+
+    body {
+        background: white;
+    }
+
+    .report-sheet {
+        width: 100%;
+
+        min-height: auto;
+
+        margin: 0;
+
+        padding: 8px;
+    }
+
+    .header-top {
+        padding: 10px;
+    }
+
+    .school-logo {
+        width: 55px;
+        height: 55px;
+
+        margin-right: 10px;
+    }
+
+    .school-info h1 {
+        font-size: 14px;
+    }
+
+    .school-info p {
+        font-size: 5px;
+    }
+
+    .report-title h2 {
+        font-size: 8px;
+    }
+
+    .student-section {
+        grid-template-columns: 60px 1fr;
+
+        gap: 8px;
+    }
+
+    .student-photo {
+        width: 55px;
+        height: 68px;
+    }
+
+    .info-row {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .info-row:first-child {
+        grid-template-columns: 1fr;
+    }
+
+    .summary-section {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .two-column,
+    .comments-section {
+        grid-template-columns: 1fr;
+    }
+
+    .result-section {
+        overflow-x: auto;
+    }
+
+    .result-table {
+        min-width: 680px;
+    }
+
+    .grading-section {
+        overflow-x: auto;
+    }
+
+    .grading-table {
+        min-width: 500px;
+    }
+
+    .signature-section {
+        gap: 15px;
+    }
+
+    .report-footer {
+        flex-direction: column;
+
+        gap: 4px;
+
+        text-align: center;
+    }
+}
+
+
+/* =====================================================
+   PRINT / PUPPETEER
+===================================================== */
+
+@media print {
+
+    body {
+        background: white;
+    }
+
+    .report-sheet {
+        width: 210mm;
+
+        min-height: 297mm;
+
+        margin: 0;
+
+        padding: 9mm;
+    }
+
+    .result-table tr,
+    .student-section,
+    .summary-box,
+    .panel,
+    .comment-box,
+    .grading-section,
+    .signature {
+        page-break-inside: avoid;
+    }
+}
+
+
+/* =====================================================
+   A4 PAGE
+===================================================== */
+
+@page {
+    size: A4;
+
+    margin: 0;
+}

@@ -17,15 +17,13 @@ const authRoute = require('./routes/auth.js')
 const resultUpload = require('./routes/uploadResult.js')
 const StudentProfile = require('./schema/studentProfile.js')
 const updateRoute = require('./routes/update.js')
-const  analysisRoute = require('./routes/analysis.js');
-const StudentResult = require("./schema/studentResult.js");
+const analysisRoute = require('./routes/analysis.js');
 const studentRoute = require('./routes/student.js')
 const checkResultRoute = require('./routes/checkresult.js')
-const Staff = require("./schema/admin.js");
 const paymentRoute = require('./routes/payment.js')
-const newsRoute = require('./routes/news.js')
 const resultGuide = require('./routes/resultCheckGuide.js')
-const bcrypt = require('bcrypt')
+const Teacher = require('./schema/admin.js')
+
 const app = express();
 
 // middleware
@@ -52,6 +50,9 @@ mongoose
   .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((result) => {
     console.log("Connected to MongoDB");
+    Teacher.find().then(result=>{
+      console.log(result)
+    })
   })
   .catch((err) => {
     console.log("Error connecting to MongoDB:", err);
@@ -193,20 +194,10 @@ app.get("/student-result", async (req, res) => {
   }
 });
 
-//updating school fees
-async function updateFees(schoolName, req){
-  const updatedSchool = await schoolPfofile.findOneAndUpdate(
-    { schoolName },
-    { $inc: { fees: 500 } },
-    { new: true } // Return updated document
-  );
-  req.session.fees = updatedSchool.fees;
-}
-
 
 
 app.use(dashboardRoute);
-// app.use(newsRoute)
+
 app.use(apiCallsRoute)
 app.use(resultGuide)
  app.use(authRoute)
@@ -217,7 +208,7 @@ app.use(adminRoute)
 app.use(resultUpload)
 app.use(studentRoute)
 app.use(checkResultRoute)
-// app.use(staticRoute)
+
 app.use(exam)
 
 app.use((req, res) => {

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Result</title>
+
+    <link rel="stylesheet" href="/styles/results/template-1.css">
+
+    <!-- School customization -->
+    <style>
+        :root {
+            --primary-color: <%= school.primaryColor || '#1d4ed8' %>;
+            --secondary-color: <%= school.secondaryColor || '#f59e0b' %>;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="result-page">
+
+    <!-- HEADER -->
+    <header class="school-header">
+
+        <div class="school-logo">
+            <% if (school.image.logo) { %>
+                <img src="<%= school.image.logo %>" alt="School Logo">
+            <% } else { %>
+                <div class="logo-placeholder">LOGO</div>
+            <% } %>
+        </div>
+
+        <div class="school-details">
+            <h1><%= school.schoolName %></h1>
+
+            <% if (school.motto) { %>
+                <p class="motto"><%= school.motto || '' %></p>
+            <% } %>
+
+            <% if (school.address) { %>
+                <p><%= school.address %></p>
+            <% } %>
+
+            <% if (school.phone) { %>
+                <p>Tel: <%= school.phone %></p>
+            <% } %>
+        </div>
+
+    </header>
+
+    <!-- STUDENT INFORMATION -->
+    <section class="student-section">
+
+        <div class="student-photo">
+            <% if (student.passport) { %>
+                <img src="<%= student.passport %>" alt="Student Photo">
+            <% } else { %>
+                <div class="photo-placeholder">PHOTO</div>
+            <% } %>
+        </div>
+
+        <div class="student-info">
+
+            <div class="info-item">
+                <span>Name</span>
+                <strong><%= student.fullname %></strong>
+            </div>
+
+            <div class="info-item">
+                <span>Student ID</span>
+                <strong><%= student.studentId %></strong>
+            </div>
+
+            <div class="info-item">
+                <span>Class</span>
+                <strong><%= student.class %></strong>
+            </div>
+
+            <div class="info-item">
+                <span>Gender</span>
+                <strong><%= student.gender %></strong>
+            </div>
+
+            <div class="info-item">
+                <span>Term</span>
+                <strong>
+                  <%= result.term %>
+                </strong>
+            </div>
+
+            <div class="info-item">
+                <span>Accademic Session</span>
+                <strong><%= result.section %></strong>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- RESULT TABLE -->
+    <section class="result-section">
+
+        <h3>ACADEMIC PERFORMANCE</h3>
+
+        <table class="result-table">
+
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Subject</th>
+                    <th>First Test</th>
+                    <th>Second Test</th>
+                    <th>CA</th>
+                    <th>Exam</th>
+                    <th>Total</th>
+                    <th>Grade</th>
+                    <th>Remark</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <% result.subjects.forEach((subject, index) => { %>
+
+                    <tr>
+
+                        <td><%= index + 1 %></td>
+
+                        <td class="subject">
+                            <%= subject.subjectName %>
+                        </td>
+
+                        <td><%= subject.firstTest %></td>
+                        <td><%= subject.secondTest %></td>
+                        <td><%= subject.cca %></td>
+
+                        <td><%= subject.exam %></td>
+
+                        <td class="total">
+                            <%= subject.total %>
+                        </td>
+
+                        <td>
+                            <span class="grade">
+                                <%= subject.grade %>
+                            </span>
+                        </td>
+
+                        <td>
+                            <%= subject.remark %>
+                        </td>
+
+                    </tr>
+
+                <% }) %>
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+
+    <!-- SUMMARY -->
+    <section class="summary">
+
+        <div>
+            <span>Total Score</span>
+            <strong><%= result.score_obtainable %></strong>
+        </div>
+
+        <div>
+            <span>Average</span>
+            <strong><%= result.average %>%</strong>
+        </div>
+
+        <div>
+            <span>Grade</span>
+            <strong><%= result.score_obtain %></strong>
+        </div>
+
+        <div>
+            <span>Subj offered</span>
+            <strong>
+               <%= result.No_subj %>
+            </strong>
+        </div>
+
+    </section>
+
+
+    <section class="attendance-section">
+
+        <h3>ATTENDANCE</h3>
+
+        <div class="attendance">
+            <div>
+                <span>Present</span>
+                <strong><%= result.present %></strong>
+            </div>
+
+            <div>
+                <span>Absent</span>
+                <strong><%= result.absent %></strong>
+            </div>
+             <div>
+                <span>School Resuming</span>
+                <strong><%= result.nextTerm %></strong>
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+
+    <!-- COMMENTS -->
+    <section class="comments-section">
+
+        <div class="comment-box">
+
+            <h3>CLASS TEACHER'S COMMENT</h3>
+
+            <p>
+                <%= result.Treport || 'No comment available.' %>
+            </p>
+
+        </div>
+
+
+        <div class="comment-box">
+
+            <h3>PRINCIPAL'S COMMENT</h3>
+
+            <p>
+                <%= result.tReport || 'No comment available.' %>
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- SIGNATURES -->
+    <section class="signatures">
+
+        <div class="signature">
+            <img src="<%=result.classTeacherSignature %>" height="20" width="40" />
+            <div class="signature-line"></div>
+            <p>Class Teacher</p>
+        </div>
+
+        <div class="signature">
+            <img src="<%=school.headTeachersignature %>"  height="20" width="40"/>
+            <div class="signature-line"></div>
+            <p>Principal / Head Teacher</p>
+        </div>
+
+    </section>
+  <!-- GRADING SCALE -->
+    <section class="grading-section">
+
+        <h3>GRADING SCALE</h3>
+
+        <table class="grading-table">
+
+            <tr>
+                <th>Score</th>
+                <th>Grade</th>
+                <th>Remark</th>
+            </tr>
+
+            <tr>
+                <td>80 - 100</td>
+                <td>A</td>
+                <td>Excellent</td>
+            </tr>
+
+            <tr>
+                <td>70 - 79</td>
+                <td>B</td>
+                <td>Very Good</td>
+            </tr>
+
+            <tr>
+                <td>60 - 69</td>
+                <td>C</td>
+                <td>Good</td>
+            </tr>
+
+            <tr>
+                <td>50 - 59</td>
+                <td>D</td>
+                <td>Fair</td>
+            </tr>
+
+            <tr>
+                <td>40 - 49</td>
+                <td>E</td>
+                <td>Pass</td>
+            </tr>
+
+            <tr>
+                <td>0 - 39</td>
+                <td>F</td>
+                <td>Fail</td>
+            </tr>
+
+        </table>
+
+    </section>
+
+</div>
+
+</body>
+</html>

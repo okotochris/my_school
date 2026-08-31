@@ -1,0 +1,1054 @@
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #e9eef2;
+
+    color: var(--text);
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    font-size: 11px;
+}
+
+
+/* =====================================================
+   MAIN PAGE
+===================================================== */
+
+.result-page {
+    width: 210mm;
+    min-height: 297mm;
+
+    margin: 20px auto;
+
+    padding: 10mm;
+
+    background: white;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.top-header {
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    min-height: 90px;
+
+    padding: 12px 15px;
+
+    border: 1px solid var(--border);
+
+    background: #ffffff;
+}
+
+.header-accent {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 7px;
+    height: 100%;
+
+    background: var(--secondary);
+}
+
+.school-logo {
+    width: 70px;
+    height: 70px;
+
+    flex-shrink: 0;
+
+    margin-left: 8px;
+    margin-right: 16px;
+
+    padding: 5px;
+
+    border: 2px solid var(--accent);
+
+    border-radius: 50%;
+}
+
+.school-logo img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    border-radius: 50%;
+}
+
+.school-details {
+    flex: 1;
+}
+
+.school-details h1 {
+    margin: 0;
+
+    color: var(--primary);
+
+    font-size: 20px;
+
+    font-weight: 800;
+
+    letter-spacing: .5px;
+}
+
+.motto {
+    margin: 4px 0;
+
+    color: var(--secondary);
+
+    font-size: 8px;
+
+    font-weight: bold;
+
+    letter-spacing: .6px;
+}
+
+.address,
+.contact {
+    margin: 2px 0;
+
+    color: var(--muted);
+
+    font-size: 7px;
+}
+
+.report-tag {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 85px;
+    height: 70px;
+
+    margin-left: 10px;
+
+    background: var(--primary);
+
+    color: white;
+
+    text-align: center;
+}
+
+.report-tag span {
+    font-size: 6px;
+
+    letter-spacing: 1px;
+}
+
+.report-tag strong {
+    margin: 3px 0;
+
+    color: var(--accent);
+
+    font-size: 13px;
+}
+
+.report-tag small {
+    font-size: 6px;
+}
+
+
+/* =====================================================
+   SESSION BAR
+===================================================== */
+
+.session-bar {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    margin-top: 9px;
+
+    border: 1px solid var(--border);
+
+    background: var(--light);
+}
+
+.session-bar div {
+    padding: 8px;
+
+    border-right: 1px solid var(--border);
+
+    text-align: center;
+}
+
+.session-bar div:last-child {
+    border-right: none;
+}
+
+.session-bar span {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: var(--muted);
+
+    font-size: 6px;
+
+    font-weight: bold;
+}
+
+.session-bar strong {
+    color: var(--primary);
+
+    font-size: 8px;
+}
+
+
+/* =====================================================
+   STUDENT PROFILE
+===================================================== */
+
+.student-profile {
+    display: grid;
+
+    grid-template-columns:
+        70px
+        1fr
+        100px;
+
+    gap: 14px;
+
+    align-items: center;
+
+    margin-top: 11px;
+
+    padding: 10px;
+
+    border: 1px solid var(--border);
+
+    background: white;
+}
+
+.photo-container {
+    width: 65px;
+    height: 78px;
+
+    padding: 3px;
+
+    background: var(--light);
+
+    border: 1px solid var(--border);
+}
+
+.photo-container img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.profile-label {
+    color: var(--muted);
+
+    font-size: 6px;
+
+    font-weight: bold;
+
+    letter-spacing: .6px;
+}
+
+.profile-details h2 {
+    margin: 3px 0 8px;
+
+    color: var(--primary);
+
+    font-size: 15px;
+}
+
+.profile-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 10px;
+}
+
+.profile-grid span {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: var(--muted);
+
+    font-size: 6px;
+}
+
+.profile-grid strong {
+    font-size: 7.5px;
+}
+
+.academic-score {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    height: 75px;
+
+    background: var(--secondary);
+
+    color: white;
+
+    text-align: center;
+}
+
+.academic-score span {
+    font-size: 6px;
+
+    font-weight: bold;
+}
+
+.academic-score strong {
+    margin: 4px 0;
+
+    color: white;
+
+    font-size: 19px;
+}
+
+.academic-score small {
+    color: #d9f3f7;
+
+    font-size: 6px;
+}
+
+
+/* =====================================================
+   SECTION HEADER
+===================================================== */
+
+.section-header {
+    display: flex;
+
+    align-items: center;
+
+    margin-top: 14px;
+
+    padding: 7px 9px;
+
+    background: var(--primary);
+
+    color: white;
+}
+
+.section-number {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 22px;
+    height: 22px;
+
+    margin-right: 8px;
+
+    background: var(--accent);
+
+    color: var(--primary);
+
+    font-size: 7px;
+
+    font-weight: bold;
+}
+
+.section-header span {
+    display: block;
+
+    color: #cbd5e1;
+
+    font-size: 5.5px;
+
+    letter-spacing: .8px;
+}
+
+.section-header h2 {
+    margin: 2px 0 0;
+
+    font-size: 9px;
+
+    letter-spacing: .3px;
+}
+
+
+/* =====================================================
+   RESULT TABLE
+===================================================== */
+
+.result-table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    table-layout: fixed;
+}
+
+.result-table th {
+    padding: 7px 4px;
+
+    background: #eef2f5;
+
+    border: 1px solid var(--border);
+
+    color: var(--primary);
+
+    font-size: 6.5px;
+
+    text-align: center;
+}
+
+.result-table td {
+    padding: 6px 4px;
+
+    border: 1px solid var(--border);
+
+    color: #334155;
+
+    font-size: 7.5px;
+
+    text-align: center;
+}
+
+.result-table tbody tr:nth-child(even) {
+    background: #fafcfd;
+}
+
+.result-table .number {
+    width: 28px;
+}
+
+.result-table .subject {
+    width: 155px;
+
+    text-align: left;
+
+    font-weight: 600;
+}
+
+.result-table .total {
+    color: var(--primary);
+
+    font-weight: bold;
+}
+
+.grade {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 21px;
+    height: 21px;
+
+    border-radius: 50%;
+
+    font-size: 7px;
+
+    font-weight: bold;
+}
+
+.grade-a {
+    background: #dcfce7;
+
+    color: #166534;
+}
+
+.grade-b {
+    background: #dbeafe;
+
+    color: #1e40af;
+}
+
+
+/* =====================================================
+   PERFORMANCE CARDS
+===================================================== */
+
+.performance-cards {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 8px;
+
+    margin-top: 10px;
+}
+
+.performance-card {
+    display: flex;
+
+    align-items: center;
+
+    min-height: 50px;
+
+    padding: 7px;
+
+    border: 1px solid var(--border);
+
+    background: var(--light);
+}
+
+.card-icon {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 27px;
+    height: 27px;
+
+    margin-right: 7px;
+
+    background: var(--primary);
+
+    color: var(--accent);
+
+    font-size: 11px;
+
+    font-weight: bold;
+}
+
+.performance-card span {
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 5.5px;
+
+    font-weight: bold;
+}
+
+.performance-card strong {
+    display: block;
+
+    margin: 2px 0;
+
+    color: var(--primary);
+
+    font-size: 12px;
+}
+
+.performance-card small {
+    color: var(--muted);
+
+    font-size: 5px;
+}
+
+
+/* =====================================================
+   ATTENDANCE
+===================================================== */
+
+.attendance-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    border: 1px solid var(--border);
+
+    border-top: none;
+}
+
+.attendance-item {
+    padding: 8px;
+
+    border-right: 1px solid var(--border);
+
+    text-align: center;
+}
+
+.attendance-item:last-child {
+    border-right: none;
+}
+
+.attendance-item span {
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 5.5px;
+
+    font-weight: bold;
+}
+
+.attendance-item strong {
+    display: block;
+
+    margin-top: 4px;
+
+    color: var(--primary);
+
+    font-size: 14px;
+}
+
+.attendance-item.highlight {
+    background: #ecfeff;
+}
+
+.attendance-item.highlight strong {
+    color: var(--secondary);
+}
+
+
+/* =====================================================
+   DEVELOPMENT
+===================================================== */
+
+.development-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    border: 1px solid var(--border);
+
+    border-top: none;
+}
+
+.development-item {
+    display: flex;
+
+    justify-content: space-between;
+
+    padding: 7px 9px;
+
+    border-right: 1px solid var(--border);
+
+    border-bottom: 1px solid var(--border);
+}
+
+.development-item:nth-child(3n) {
+    border-right: none;
+}
+
+.development-item:nth-last-child(-n + 3) {
+    border-bottom: none;
+}
+
+.development-item span {
+    color: #475569;
+
+    font-size: 7px;
+}
+
+.development-item strong {
+    color: var(--secondary);
+
+    font-size: 6.5px;
+}
+
+
+/* =====================================================
+   COMMENTS
+===================================================== */
+
+.comment-section {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 10px;
+
+    margin-top: 12px;
+}
+
+.comment-card {
+    border: 1px solid var(--border);
+}
+
+.comment-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    padding: 7px 9px;
+
+    background: var(--primary);
+
+    color: white;
+}
+
+.comment-header span {
+    font-size: 5.5px;
+}
+
+.comment-header strong {
+    color: var(--accent);
+
+    font-size: 6px;
+}
+
+.comment-card p {
+    min-height: 55px;
+
+    margin: 0;
+
+    padding: 8px;
+
+    color: #475569;
+
+    font-size: 7px;
+
+    line-height: 1.5;
+}
+
+
+/* =====================================================
+   GRADING
+===================================================== */
+
+.grading-section {
+    margin-top: 10px;
+
+    border: 1px solid var(--border);
+}
+
+.grading-title {
+    padding: 6px 9px;
+
+    background: var(--secondary);
+
+    color: white;
+
+    font-size: 6px;
+
+    font-weight: bold;
+}
+
+.grading-items {
+    display: grid;
+
+    grid-template-columns:
+        repeat(6, 1fr);
+}
+
+.grading-items div {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    padding: 6px 2px;
+
+    border-right: 1px solid var(--border);
+
+    text-align: center;
+}
+
+.grading-items div:last-child {
+    border-right: none;
+}
+
+.grading-items strong {
+    color: var(--primary);
+
+    font-size: 10px;
+}
+
+.grading-items span {
+    margin-top: 2px;
+
+    color: var(--text);
+
+    font-size: 5.5px;
+}
+
+.grading-items small {
+    margin-top: 2px;
+
+    color: var(--muted);
+
+    font-size: 4.5px;
+}
+
+
+/* =====================================================
+   SIGNATURES
+===================================================== */
+
+.signatures {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 35px;
+
+    margin-top: 23px;
+}
+
+.signature {
+    text-align: center;
+}
+
+.signature-space {
+    height: 17px;
+}
+
+.signature-line {
+    border-top: 1px solid #475569;
+}
+
+.signature strong {
+    display: block;
+
+    margin-top: 4px;
+
+    font-size: 6.5px;
+}
+
+.signature span {
+    display: block;
+
+    margin-top: 2px;
+
+    color: var(--muted);
+
+    font-size: 5.5px;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.footer {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-top: 13px;
+
+    padding-top: 6px;
+
+    border-top: 2px solid var(--primary);
+
+    color: var(--muted);
+
+    font-size: 5px;
+}
+
+.footer div:first-child {
+    color: var(--primary);
+
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media screen and (max-width: 700px) {
+
+    body {
+        background: white;
+    }
+
+    .result-page {
+        width: 100%;
+
+        min-height: auto;
+
+        margin: 0;
+
+        padding: 10px;
+    }
+
+    .top-header {
+        min-height: auto;
+
+        padding: 10px;
+    }
+
+    .school-logo {
+        width: 55px;
+        height: 55px;
+
+        margin-right: 9px;
+    }
+
+    .school-details h1 {
+        font-size: 14px;
+    }
+
+    .motto {
+        font-size: 6px;
+    }
+
+    .address,
+    .contact {
+        font-size: 5px;
+    }
+
+    .report-tag {
+        display: none;
+    }
+
+    .session-bar {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .session-bar div:nth-child(2n) {
+        border-right: none;
+    }
+
+    .session-bar div:nth-child(n + 3) {
+        border-top: 1px solid var(--border);
+    }
+
+    .student-profile {
+        grid-template-columns: 60px 1fr;
+    }
+
+    .photo-container {
+        width: 55px;
+        height: 68px;
+    }
+
+    .profile-details h2 {
+        font-size: 13px;
+    }
+
+    .profile-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .academic-score {
+        grid-column: 1 / -1;
+
+        height: 55px;
+    }
+
+    .performance-cards {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .development-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .development-item:nth-child(3n) {
+        border-right: 1px solid var(--border);
+    }
+
+    .development-item:nth-child(2n) {
+        border-right: none;
+    }
+
+    .development-item:nth-last-child(-n + 3) {
+        border-bottom: 1px solid var(--border);
+    }
+
+    .development-item:nth-last-child(-n + 2) {
+        border-bottom: none;
+    }
+
+    .comment-section {
+        grid-template-columns: 1fr;
+    }
+
+    .result-table {
+        min-width: 700px;
+    }
+
+    .academic-section {
+        overflow-x: auto;
+    }
+
+    .grading-section {
+        overflow-x: auto;
+    }
+
+    .grading-items {
+        min-width: 500px;
+    }
+
+    .signatures {
+        gap: 15px;
+    }
+
+    .footer {
+        flex-direction: column;
+
+        gap: 4px;
+
+        text-align: center;
+    }
+}
+
+
+/* =====================================================
+   PRINT / PUPPETEER
+===================================================== */
+
+@media print {
+
+    body {
+        background: white;
+    }
+
+    .result-page {
+        width: 210mm;
+
+        min-height: 297mm;
+
+        margin: 0;
+
+        padding: 10mm;
+    }
+
+    .result-table tr,
+    .student-profile,
+    .performance-card,
+    .attendance-section,
+    .development-section,
+    .comment-card,
+    .grading-section,
+    .signature {
+        page-break-inside: avoid;
+    }
+}
+
+
+/* =====================================================
+   A4
+===================================================== */
+
+@page {
+    size: A4;
+
+    margin: 0;
+}

@@ -27,7 +27,16 @@ const profile = new mongoose.Schema({
         type: String,
         require: true,
     },
-    about:String
+    resultTemplate:{
+        type:String,
+        default:'template-1'
+    },
+    headTeacher:{
+        name:String,
+        signatrue:String,
+        public_id:String,
+    },
+    moto:String,
 }, {timestamp: true})
 
 

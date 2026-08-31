@@ -1,0 +1,940 @@
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #ececf3;
+    color: var(--text);
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 11px;
+}
+
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.result-page {
+    width: 210mm;
+    min-height: 297mm;
+
+    margin: 20px auto;
+
+    padding: 11mm;
+
+    background: white;
+}
+
+
+/* =====================================================
+   SCHOOL HEADER
+===================================================== */
+
+.school-header {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding-bottom: 12px;
+
+    border-bottom: 3px solid var(--primary);
+}
+
+.school-brand {
+    display: flex;
+
+    align-items: center;
+
+    flex: 1;
+}
+
+.logo-wrapper {
+    width: 78px;
+    height: 78px;
+
+    margin-right: 18px;
+
+    padding: 5px;
+
+    border: 2px solid var(--accent);
+
+    border-radius: 50%;
+}
+
+.logo-wrapper img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    border-radius: 50%;
+}
+
+.school-info {
+    flex: 1;
+}
+
+.school-info h1 {
+    margin: 0;
+
+    color: var(--primary);
+
+    font-size: 21px;
+
+    letter-spacing: .6px;
+}
+
+.motto {
+    margin: 4px 0;
+
+    color: var(--accent);
+
+    font-size: 9px;
+
+    font-weight: bold;
+}
+
+.address,
+.contact {
+    margin: 2px 0;
+
+    color: var(--muted);
+
+    font-size: 7px;
+}
+
+.academic-badge {
+    width: 90px;
+
+    padding: 10px;
+
+    background: var(--primary);
+
+    color: white;
+
+    text-align: center;
+}
+
+.academic-badge span {
+    display: block;
+
+    font-size: 7px;
+
+    letter-spacing: 1px;
+}
+
+.academic-badge strong {
+    display: block;
+
+    margin: 3px 0;
+
+    color: var(--accent);
+
+    font-size: 13px;
+}
+
+.academic-badge small {
+    font-size: 7px;
+}
+
+
+/* =====================================================
+   TERM BAR
+===================================================== */
+
+.term-bar {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    margin-top: 10px;
+
+    background: var(--light);
+
+    border: 1px solid var(--border);
+}
+
+.term-bar div {
+    padding: 7px;
+
+    border-right: 1px solid var(--border);
+
+    text-align: center;
+}
+
+.term-bar div:last-child {
+    border-right: none;
+}
+
+.term-bar span {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: var(--muted);
+
+    font-size: 6px;
+
+    font-weight: bold;
+}
+
+.term-bar strong {
+    color: var(--primary);
+
+    font-size: 8px;
+}
+
+
+/* =====================================================
+   STUDENT CARD
+===================================================== */
+
+.student-card {
+    display: grid;
+
+    grid-template-columns: 75px 1fr 100px;
+
+    gap: 15px;
+
+    align-items: center;
+
+    margin-top: 12px;
+
+    padding: 10px;
+
+    border: 1px solid var(--border);
+
+    background: white;
+}
+
+.student-photo {
+    width: 70px;
+    height: 82px;
+
+    padding: 3px;
+
+    border: 1px solid var(--border);
+
+    background: var(--light);
+}
+
+.student-photo img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.student-main .label {
+    color: var(--muted);
+
+    font-size: 7px;
+
+    font-weight: bold;
+}
+
+.student-main h2 {
+    margin: 3px 0 9px;
+
+    color: var(--primary);
+
+    font-size: 15px;
+}
+
+.student-meta {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 10px;
+}
+
+.student-meta span {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: var(--muted);
+
+    font-size: 6px;
+}
+
+.student-meta strong {
+    font-size: 8px;
+}
+
+.student-summary {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    height: 80px;
+
+    background: var(--primary);
+
+    color: white;
+
+    text-align: center;
+}
+
+.student-summary span {
+    font-size: 7px;
+}
+
+.student-summary strong {
+    margin: 3px 0;
+
+    color: var(--accent);
+
+    font-size: 20px;
+}
+
+.student-summary small {
+    font-size: 6px;
+}
+
+
+/* =====================================================
+   RESULT TITLE
+===================================================== */
+
+.result-title {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin-top: 16px;
+
+    padding: 8px 10px;
+
+    background: var(--primary);
+
+    color: white;
+}
+
+.result-title span {
+    font-size: 7px;
+
+    letter-spacing: 1px;
+}
+
+.result-title h2 {
+    margin: 0;
+
+    color: var(--accent);
+
+    font-size: 10px;
+}
+
+
+/* =====================================================
+   RESULT TABLE
+===================================================== */
+
+.result-table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    table-layout: fixed;
+}
+
+.result-table th {
+    padding: 7px 4px;
+
+    background: #eeeef7;
+
+    border: 1px solid var(--border);
+
+    color: var(--primary);
+
+    font-size: 7px;
+}
+
+.result-table td {
+    padding: 6px 4px;
+
+    border: 1px solid var(--border);
+
+    font-size: 8px;
+
+    text-align: center;
+}
+
+.result-table tbody tr:nth-child(even) {
+    background: #fafafe;
+}
+
+.result-table .sn {
+    width: 30px;
+}
+
+.result-table .subject {
+    width: 155px;
+
+    text-align: left;
+
+    font-weight: 600;
+}
+
+.result-table .total {
+    color: var(--primary);
+
+    font-weight: bold;
+}
+
+.grade {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 21px;
+    height: 21px;
+
+    border-radius: 50%;
+
+    font-size: 8px;
+
+    font-weight: bold;
+}
+
+.grade.a {
+    background: #e4f5eb;
+
+    color: #166534;
+}
+
+.grade.b {
+    background: #e8edff;
+
+    color: #3730a3;
+}
+
+
+/* =====================================================
+   SUMMARY
+===================================================== */
+
+.summary-grid {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    margin-top: 12px;
+
+    border: 1px solid var(--border);
+}
+
+.summary-box {
+    padding: 9px;
+
+    border-right: 1px solid var(--border);
+
+    text-align: center;
+}
+
+.summary-box:last-child {
+    border-right: none;
+}
+
+.summary-box span {
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 6px;
+
+    font-weight: bold;
+}
+
+.summary-box strong {
+    display: block;
+
+    margin: 4px 0;
+
+    color: var(--primary);
+
+    font-size: 17px;
+}
+
+.summary-box small {
+    color: var(--muted);
+
+    font-size: 6px;
+}
+
+.summary-box.featured {
+    background: var(--primary);
+}
+
+.summary-box.featured span,
+.summary-box.featured small {
+    color: white;
+}
+
+.summary-box.featured strong {
+    color: var(--accent);
+}
+
+
+/* =====================================================
+   TWO COLUMN PANELS
+===================================================== */
+
+.two-column {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 12px;
+
+    margin-top: 12px;
+}
+
+.panel {
+    border: 1px solid var(--border);
+}
+
+.panel-heading {
+    padding: 7px 9px;
+
+    background: var(--secondary);
+
+    color: white;
+
+    font-size: 7px;
+
+    font-weight: bold;
+}
+
+.attendance {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.attendance div {
+    padding: 8px 3px;
+
+    border-right: 1px solid var(--border);
+
+    text-align: center;
+}
+
+.attendance div:last-child {
+    border-right: none;
+}
+
+.attendance span {
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 6px;
+}
+
+.attendance strong {
+    display: block;
+
+    margin-top: 4px;
+
+    color: var(--primary);
+
+    font-size: 11px;
+}
+
+.development div {
+    display: flex;
+
+    justify-content: space-between;
+
+    padding: 6px 9px;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.development div:last-child {
+    border-bottom: none;
+}
+
+.development span {
+    font-size: 7px;
+}
+
+.development strong {
+    color: var(--secondary);
+
+    font-size: 7px;
+}
+
+
+/* =====================================================
+   COMMENTS
+===================================================== */
+
+.comments {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 12px;
+
+    margin-top: 12px;
+}
+
+.comment {
+    border: 1px solid var(--border);
+}
+
+.comment-label {
+    padding: 7px 9px;
+
+    background: var(--primary);
+
+    color: white;
+
+    font-size: 7px;
+
+    font-weight: bold;
+}
+
+.comment p {
+    min-height: 55px;
+
+    margin: 0;
+
+    padding: 8px;
+
+    color: #3f3f46;
+
+    font-size: 7px;
+
+    line-height: 1.5;
+}
+
+
+/* =====================================================
+   GRADING
+===================================================== */
+
+.grading {
+    margin-top: 12px;
+
+    border: 1px solid var(--border);
+}
+
+.grading-heading {
+    padding: 7px 9px;
+
+    background: var(--secondary);
+
+    color: white;
+
+    font-size: 7px;
+
+    font-weight: bold;
+}
+
+.grading-list {
+    display: grid;
+
+    grid-template-columns: repeat(6, 1fr);
+}
+
+.grading-list div {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    padding: 6px;
+
+    border-right: 1px solid var(--border);
+}
+
+.grading-list div:last-child {
+    border-right: none;
+}
+
+.grading-list strong {
+    color: var(--primary);
+
+    font-size: 11px;
+}
+
+.grading-list span {
+    margin-top: 2px;
+
+    font-size: 6px;
+}
+
+.grading-list small {
+    margin-top: 2px;
+
+    color: var(--muted);
+
+    font-size: 5px;
+}
+
+
+/* =====================================================
+   SIGNATURES
+===================================================== */
+
+.signature-section {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 35px;
+
+    margin-top: 25px;
+}
+
+.signature {
+    text-align: center;
+}
+
+.signature-space {
+    height: 20px;
+}
+
+.signature-line {
+    border-top: 1px solid #444;
+}
+
+.signature strong {
+    display: block;
+
+    margin-top: 4px;
+
+    font-size: 7px;
+}
+
+.signature span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--muted);
+
+    font-size: 6px;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.footer {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-top: 16px;
+
+    padding-top: 7px;
+
+    border-top: 2px solid var(--primary);
+
+    color: var(--muted);
+
+    font-size: 5.5px;
+}
+
+.footer span:first-child {
+    color: var(--primary);
+
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media screen and (max-width: 700px) {
+
+    body {
+        background: white;
+    }
+
+    .result-page {
+        width: 100%;
+
+        min-height: auto;
+
+        margin: 0;
+
+        padding: 10px;
+    }
+
+    .school-header {
+        align-items: flex-start;
+    }
+
+    .logo-wrapper {
+        width: 55px;
+        height: 55px;
+
+        margin-right: 9px;
+    }
+
+    .school-info h1 {
+        font-size: 14px;
+    }
+
+    .motto {
+        font-size: 7px;
+    }
+
+    .address,
+    .contact {
+        font-size: 5.5px;
+    }
+
+    .academic-badge {
+        display: none;
+    }
+
+    .term-bar {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .term-bar div:nth-child(2n) {
+        border-right: none;
+    }
+
+    .term-bar div:nth-child(n+3) {
+        border-top: 1px solid var(--border);
+    }
+
+    .student-card {
+        grid-template-columns: 60px 1fr;
+    }
+
+    .student-photo {
+        width: 55px;
+        height: 68px;
+    }
+
+    .student-main h2 {
+        font-size: 13px;
+    }
+
+    .student-meta {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .student-summary {
+        grid-column: 1 / -1;
+
+        height: 55px;
+    }
+
+    .result-section {
+        overflow-x: auto;
+    }
+
+    .result-table {
+        min-width: 700px;
+    }
+
+    .summary-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .summary-box {
+        border-bottom: 1px solid var(--border);
+    }
+
+    .two-column,
+    .comments {
+        grid-template-columns: 1fr;
+    }
+
+    .grading {
+        overflow-x: auto;
+    }
+
+    .grading-list {
+        min-width: 500px;
+    }
+
+    .signature-section {
+        gap: 15px;
+    }
+
+    .footer {
+        flex-direction: column;
+
+        gap: 4px;
+
+        text-align: center;
+    }
+}
+
+
+/* =====================================================
+   PRINT / PDF
+===================================================== */
+
+@media print {
+
+    body {
+        background: white;
+    }
+
+    .result-page {
+        width: 210mm;
+
+        min-height: 297mm;
+
+        margin: 0;
+
+        padding: 10mm;
+    }
+
+    .student-card,
+    .summary-box,
+    .panel,
+    .comment,
+    .grading {
+        page-break-inside: avoid;
+    }
+
+    .result-table tr {
+        page-break-inside: avoid;
+    }
+}
+
+
+/* =====================================================
+   A4
+===================================================== */
+
+@page {
+    size: A4;
+    margin: 0;
+}
+@media print {
+    .result-actions {
+        display: none !important;
+    }
+}

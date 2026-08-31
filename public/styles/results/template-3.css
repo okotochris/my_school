@@ -1,0 +1,909 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #e8eee9;
+    color: var(--text);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+}
+
+
+/* =====================================================
+   MAIN SHEET
+===================================================== */
+
+.result-sheet {
+    width: 210mm;
+    min-height: 297mm;
+
+    margin: 20px auto;
+
+    padding: 12mm;
+
+    background: #ffffff;
+}
+
+
+/* =====================================================
+   SCHOOL HEADER
+===================================================== */
+
+.school-header {
+    border: 1px solid var(--border);
+}
+
+.header-top {
+    display: flex;
+
+    align-items: center;
+
+    padding: 15px;
+}
+
+.logo {
+    width: 85px;
+    height: 85px;
+
+    flex-shrink: 0;
+
+    margin-right: 20px;
+
+    padding: 5px;
+
+    border: 2px solid var(--accent);
+
+    border-radius: 50%;
+}
+
+.logo img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    border-radius: 50%;
+}
+
+.school-information {
+    flex: 1;
+
+    text-align: center;
+}
+
+.school-name {
+    color: var(--primary);
+
+    font-size: 22px;
+
+    font-weight: 800;
+
+    letter-spacing: .8px;
+}
+
+.school-motto {
+    margin-top: 5px;
+
+    color: var(--accent);
+
+    font-size: 11px;
+
+    font-weight: bold;
+}
+
+.school-address {
+    margin-top: 7px;
+
+    font-size: 9px;
+
+    color: var(--muted);
+}
+
+.school-contact {
+    margin-top: 3px;
+
+    font-size: 8px;
+
+    color: var(--muted);
+}
+
+.header-line {
+    height: 4px;
+
+    background: var(--primary);
+}
+
+
+/* =====================================================
+   REPORT INFORMATION
+===================================================== */
+
+.report-information {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    background: var(--light);
+}
+
+.report-information div {
+    padding: 8px;
+
+    border-right: 1px solid var(--border);
+
+    text-align: center;
+}
+
+.report-information div:last-child {
+    border-right: none;
+}
+
+.report-information span {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: var(--muted);
+
+    font-size: 7px;
+
+    font-weight: bold;
+}
+
+.report-information strong {
+    color: var(--primary);
+
+    font-size: 9px;
+}
+
+
+/* =====================================================
+   REPORT TITLE
+===================================================== */
+
+.report-heading {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    margin: 20px 0 15px;
+}
+
+.report-heading h1 {
+    margin: 6px 0 2px;
+
+    color: var(--primary);
+
+    font-size: 17px;
+
+    letter-spacing: .5px;
+}
+
+.report-heading p {
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+}
+
+.heading-line {
+    width: 90px;
+
+    height: 2px;
+
+    background: var(--accent);
+}
+
+
+/* =====================================================
+   STUDENT INFORMATION
+===================================================== */
+
+.student-information {
+    display: grid;
+
+    grid-template-columns: 80px 1fr;
+
+    gap: 15px;
+
+    padding: 12px;
+
+    background: var(--light);
+
+    border: 1px solid var(--border);
+
+    border-left: 5px solid var(--primary);
+}
+
+.photo-box {
+    width: 75px;
+    height: 90px;
+
+    padding: 3px;
+
+    background: white;
+
+    border: 1px solid var(--border);
+}
+
+.photo-box img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.student-full-name {
+    margin-bottom: 12px;
+
+    color: var(--primary);
+
+    font-size: 17px;
+
+    font-weight: 800;
+
+    letter-spacing: .3px;
+}
+
+.details-row {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 15px;
+
+    margin-top: 8px;
+}
+
+.details-row span {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: var(--muted);
+
+    font-size: 7px;
+
+    font-weight: bold;
+}
+
+.details-row strong {
+    font-size: 9px;
+}
+
+
+/* =====================================================
+   SECTION TITLE
+===================================================== */
+
+.section-title {
+    display: flex;
+
+    align-items: center;
+
+    margin-top: 16px;
+
+    padding: 7px 10px;
+
+    background: var(--primary);
+
+    color: white;
+}
+
+.section-title span {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 20px;
+    height: 20px;
+
+    margin-right: 8px;
+
+    background: var(--accent);
+
+    color: var(--primary);
+
+    font-size: 8px;
+
+    font-weight: bold;
+}
+
+.section-title h2 {
+    margin: 0;
+
+    font-size: 10px;
+
+    letter-spacing: .5px;
+}
+
+
+/* =====================================================
+   ACADEMIC TABLE
+===================================================== */
+
+.academic-table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    table-layout: fixed;
+}
+
+.academic-table th {
+    padding: 7px 4px;
+
+    background: #edf3ee;
+
+    border: 1px solid var(--border);
+
+    color: var(--primary);
+
+    font-size: 7px;
+
+    text-align: center;
+}
+
+.academic-table th small {
+    color: var(--muted);
+
+    font-size: 6px;
+
+    font-weight: normal;
+}
+
+.academic-table td {
+    padding: 6px 4px;
+
+    border: 1px solid var(--border);
+
+    font-size: 8px;
+
+    text-align: center;
+}
+
+.academic-table tbody tr:nth-child(even) {
+    background: #fafcfb;
+}
+
+.academic-table .subject {
+    width: 155px;
+
+    text-align: left;
+
+    font-weight: bold;
+}
+
+.academic-table .total {
+    color: var(--primary);
+
+    font-weight: bold;
+}
+
+.grade-a {
+    color: #15803d;
+}
+
+.grade-b {
+    color: #2563eb;
+}
+
+.grade-c {
+    color: #ca8a04;
+}
+
+
+/* =====================================================
+   PERFORMANCE SUMMARY
+===================================================== */
+
+.performance-summary {
+    margin-top: 15px;
+
+    border: 1px solid var(--border);
+}
+
+.summary-heading {
+    padding: 7px 10px;
+
+    background: var(--secondary);
+
+    color: white;
+
+    font-size: 8px;
+
+    font-weight: bold;
+}
+
+.summary-content {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.summary-item {
+    padding: 10px;
+
+    border-right: 1px solid var(--border);
+
+    text-align: center;
+}
+
+.summary-item:last-child {
+    border-right: none;
+}
+
+.summary-item span {
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 7px;
+
+    font-weight: bold;
+}
+
+.summary-item strong {
+    display: block;
+
+    margin: 4px 0;
+
+    color: var(--primary);
+
+    font-size: 18px;
+}
+
+.summary-item small {
+    color: var(--muted);
+
+    font-size: 6px;
+}
+
+
+/* =====================================================
+   ATTENDANCE
+===================================================== */
+
+.attendance-content {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    border: 1px solid var(--border);
+
+    border-top: none;
+}
+
+.attendance-stat {
+    padding: 10px;
+
+    border-right: 1px solid var(--border);
+
+    text-align: center;
+}
+
+.attendance-stat:last-child {
+    border-right: none;
+}
+
+.attendance-stat span {
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 7px;
+}
+
+.attendance-stat strong {
+    display: block;
+
+    margin-top: 4px;
+
+    color: var(--primary);
+
+    font-size: 15px;
+}
+
+
+/* =====================================================
+   CONDUCT
+===================================================== */
+
+.conduct-table {
+    width: 100%;
+
+    border-collapse: collapse;
+}
+
+.conduct-table th {
+    padding: 6px;
+
+    background: #edf3ee;
+
+    color: var(--primary);
+
+    border: 1px solid var(--border);
+
+    font-size: 7px;
+}
+
+.conduct-table td {
+    padding: 6px;
+
+    border: 1px solid var(--border);
+
+    font-size: 8px;
+}
+
+.conduct-table td:nth-child(2),
+.conduct-table td:nth-child(4) {
+    color: var(--secondary);
+
+    font-weight: bold;
+
+    text-align: center;
+}
+
+
+/* =====================================================
+   COMMENTS
+===================================================== */
+
+.comments-section {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 12px;
+
+    margin-top: 16px;
+}
+
+.comment-box {
+    border: 1px solid var(--border);
+}
+
+.comment-title {
+    padding: 7px 9px;
+
+    background: var(--primary);
+
+    color: white;
+
+    font-size: 7px;
+
+    font-weight: bold;
+}
+
+.comment-box p {
+    min-height: 60px;
+
+    margin: 0;
+
+    padding: 9px;
+
+    color: #374151;
+
+    font-size: 8px;
+
+    line-height: 1.5;
+}
+
+
+/* =====================================================
+   GRADING
+===================================================== */
+
+.grading-section {
+    margin-top: 15px;
+
+    border: 1px solid var(--border);
+}
+
+.grading-title {
+    padding: 7px 10px;
+
+    background: var(--secondary);
+
+    color: white;
+
+    font-size: 8px;
+
+    font-weight: bold;
+}
+
+.grading-grid {
+    display: grid;
+
+    grid-template-columns: repeat(6, 1fr);
+}
+
+.grading-grid div {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    padding: 7px 2px;
+
+    border-right: 1px solid var(--border);
+
+    text-align: center;
+}
+
+.grading-grid div:last-child {
+    border-right: none;
+}
+
+.grading-grid strong {
+    color: var(--primary);
+
+    font-size: 12px;
+}
+
+.grading-grid span {
+    margin-top: 2px;
+
+    font-size: 7px;
+}
+
+.grading-grid small {
+    margin-top: 2px;
+
+    color: var(--muted);
+
+    font-size: 6px;
+}
+
+
+/* =====================================================
+   SIGNATURES
+===================================================== */
+
+.signatures {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 35px;
+
+    margin-top: 30px;
+}
+
+.signature {
+    text-align: center;
+}
+
+.signature-space {
+    height: 20px;
+}
+
+.signature-line {
+    border-top: 1px solid #374151;
+}
+
+.signature strong {
+    display: block;
+
+    margin-top: 5px;
+
+    font-size: 8px;
+}
+
+.signature span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--muted);
+
+    font-size: 7px;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.result-footer {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-top: 20px;
+
+    padding-top: 8px;
+
+    border-top: 2px solid var(--primary);
+
+    color: var(--muted);
+
+    font-size: 6px;
+}
+
+.result-footer div:first-child {
+    color: var(--primary);
+
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media screen and (max-width: 700px) {
+
+    body {
+        background: white;
+    }
+
+    .result-sheet {
+        width: 100%;
+
+        min-height: auto;
+
+        margin: 0;
+
+        padding: 10px;
+    }
+
+    .header-top {
+        padding: 10px;
+    }
+
+    .logo {
+        width: 60px;
+        height: 60px;
+
+        margin-right: 10px;
+    }
+
+    .school-name {
+        font-size: 15px;
+    }
+
+    .school-motto {
+        font-size: 8px;
+    }
+
+    .school-address,
+    .school-contact {
+        font-size: 6px;
+    }
+
+    .report-information {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .report-information div:last-child {
+        grid-column: 1 / -1;
+
+        border-top: 1px solid var(--border);
+    }
+
+    .student-information {
+        grid-template-columns: 65px 1fr;
+    }
+
+    .photo-box {
+        width: 60px;
+        height: 75px;
+    }
+
+    .student-full-name {
+        font-size: 14px;
+    }
+
+    .details-row {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .academic-record {
+        overflow-x: auto;
+    }
+
+    .academic-table {
+        min-width: 700px;
+    }
+
+    .summary-content {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .summary-item {
+        border-bottom: 1px solid var(--border);
+    }
+
+    .attendance-content {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .attendance-stat {
+        border-bottom: 1px solid var(--border);
+    }
+
+    .comments-section {
+        grid-template-columns: 1fr;
+    }
+
+    .grading-section {
+        overflow-x: auto;
+    }
+
+    .grading-grid {
+        min-width: 500px;
+    }
+
+    .signatures {
+        gap: 15px;
+    }
+
+    .result-footer {
+        flex-direction: column;
+
+        gap: 4px;
+
+        text-align: center;
+    }
+}
+
+
+/* =====================================================
+   PRINT / PDF
+===================================================== */
+
+@media print {
+
+    body {
+        background: white;
+    }
+
+    .result-sheet {
+        width: 210mm;
+
+        min-height: 297mm;
+
+        margin: 0;
+
+        padding: 10mm;
+    }
+
+    .academic-table tr,
+    .conduct-table tr {
+        page-break-inside: avoid;
+    }
+
+    .student-information,
+    .performance-summary,
+    .attendance-section,
+    .conduct-section,
+    .comments-section,
+    .grading-section {
+        page-break-inside: avoid;
+    }
+}
+
+
+/* =====================================================
+   A4
+===================================================== */
+
+@page {
+    size: A4;
+    margin: 0;
+}

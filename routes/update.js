@@ -3,8 +3,10 @@ const router = express.Router()
 const upload = require("../middleware/upload.js");
 const cloudinary = require("../middleware/cloudinary.js");
 const StudentResult = require('../schema/studentResult.js')
+const Teacher = require('../schema/admin.js')
 const isAuthenticated = require('../utility/authenticated.js')
 const StudentProfile = require('../schema/studentProfile.js')
+const bcrypt = require('bcrypt')
 const fs = require("fs");
 
 //UPDATE STUDENT PROFILE
@@ -90,5 +92,43 @@ router.patch("/updatestudentclass", async (req, res) => {
 router.get("/update-result", isAuthenticated, (req, res) => {
   res.render("update_result");
 });
+router.patch('/myschool/reset-password', async (req, res) => {
 
+    try {
+
+        const { email, password } = req.body;
+
+        const isRegistered = await Teacher.findOne({ email });
+
+        if (!isRegistered) {
+            return res.status(404).json({
+                message: "Email not registered"
+            });
+        }
+
+        const newPassword = await bcrypt.hash(password, 10);
+
+        await Teacher.findOneAndUpdate(
+            { email },
+            { password: newPassword }
+        );
+
+        res.status(200).json({
+            message: "Password has been updated"
+        });
+
+    } catch (err) {
+
+        console.log(err);
+
+        res.status(500).json({
+            message: "Server error"
+        });
+    }
+
+});
+
+router.get('/myschool/reset-password', (req, res)=>{
+  res.render('passwordReset')
+})
 module.exports = router;

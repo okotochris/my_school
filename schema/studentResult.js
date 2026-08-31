@@ -33,7 +33,9 @@ const studentResultSchema = new Schema({
 
 
     Treport: String,
-    tReport: String
+    tReport: String,
+    classTeacherSignatre:String,
+    classTeacherName:String,
   
 }, { timestamps: true });
 

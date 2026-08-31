@@ -1,0 +1,111 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+    <link rel="stylesheet" href="/styles/results/template-10.css">
+    <title>Document</title>
+</head>
+<body>
+   <div class="container" id="resultContainer">
+    <div class="header">
+       <div class="title">
+        <img src='<%=school.image.log %>' alt="Royal Crest College Logo" > 
+        <span><%=school.schoolName %></span></div>
+        <P style="font-size:18px;"><%=school.address %></P>
+        <p style="color:red;">Tell: <%=school.phone %></p>
+    </div>
+    <div class="studentId">
+        <div>
+            <p style="color:red;">ADMISSION NO</p>
+            <div class="box"><%=student.addmissionNo %></div>
+        </div>
+        <div>
+            <p style="color:red;">STUDENT ID</p>
+            <div class="box"><%= result.studentId %></div>
+        </div>
+    </div>
+    <div class="studentInfo">
+        <div> <p>Name: <%= result.fullname.toUpperCase() %></p> </div>
+        <div><p>Senior Secondary Attendance: <%= result.present %></p>  <p>Absent: <%= result.absent %></p></div> 
+        <div> <p>Class: <%= result.class %></p><p>Year: 2023-2024</p><p>Term: <%= result.term %></p></div>
+    </div>
+
+    <div>
+        <table>
+            <tr>
+                <th style="width:150px;">SUBJECT</th>
+                <th>1st Test</th>
+                <th>2nd Test</th>
+                <th>C.A</th>
+                <th>Exam</th>
+                <th>Grade Total</th>
+                <th>Grade</th>
+                <th>Signature</th>
+            </tr>
+           
+          
+            	<% if(result.subjects.length > 0){ %>
+                            <% result.subjects.forEach(subject=>{ %>
+                                <tr>
+                                    <td><%= subject.subjectName.toUpperCase() %></td>
+                                    <td><%= subject.firstTest %></td>
+                                    <td><%= subject.secondTest %></td>
+                                    <td><%= subject.cca %></td>
+                                    <td><%= subject.exam %></td>
+                                    <td><%= subject.total %></td>
+                                    <td><%= subject.grade %></td>
+                                    <td><%= subject.remark %></td>
+                                </tr>
+                            <%}) %>
+                        <%}%>
+						
+						
+						<%for(let i=0; i <=2; i++){ %>
+							
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						<%}%>
+
+            
+            <tr>
+                <td>Total</td>
+                <td>10%</td>
+                <td>10%</td>
+                <td>10%</td>
+                <td>70%</td>
+                <td>100%</td>
+                <td></td>
+                <td></td>
+            </tr>
+        
+        </table>
+    </div>
+
+    <div class="studentInfo" style="color:blue; position:relative">
+        <div>
+            <p>Pass Grade: </p><p>Average:  <%= result.average %> </p><p>Total score: <%= result.score_obtain %></p><p>Out of: <%= result.score_obtainable %></p>
+        </div>
+        
+        <p>From Master' Report</p>
+        <div><p>Next term begins: <%= result.nextterm %></p></div>
+        <div>
+            <p>SESSION: <%= result.section %></p>         
+        </div>
+       <div style="color:red; display: flex; justify-content: flex-end; border:none"> <p>Proprietor's sign.</p> </div> 
+    </div>
+   </div>
+
+ 
+   		
+		
+</body>
+</html>
