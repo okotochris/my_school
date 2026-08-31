@@ -106,7 +106,7 @@ router.patch('/myschool/reset-password', async (req, res) => {
             });
         }
 
-        const newPassword = await bcrypt.hash(password, 10);
+        const newPassword = await bcrypt.hash(password.trim(), 10);
 
         await Teacher.findOneAndUpdate(
             { email },

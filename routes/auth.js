@@ -43,7 +43,7 @@ router.post("/admin_form", upload.single('school-logo'), async (req, res) => {
         }
         });
       }
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const hashedPassword = await bcrypt.hash(req.body.password.trim(), 10);
     req.body.password = hashedPassword;
     await Staff.create(req.body);
     res.status(200).json({msg:'successful'})
@@ -60,7 +60,7 @@ router.post("/login", async (req, res) => {
     if(!user){
      return res.status(404).json({msg:"Invalid login details"})
     }
-    const isPasswordCorrect = await bcrypt.compare(req.body.password, user.password)
+    const isPasswordCorrect = await bcrypt.compare(req.body.password.trim(), user.password)
     if(!isPasswordCorrect){
       return res.status(403).json({msg:'wrong email or password'})
     }
