@@ -359,55 +359,117 @@ body {
    MOBILE
 ========================= */
 
-@media (max-width: 600px) {
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
 
     body {
-        padding: 0;
-        background: white;
+        padding: 10px;
     }
 
     .result-page {
-        padding: 15px;
-        border-top-width: 5px;
+        padding: 20px;
     }
 
     .school-header {
-        flex-direction: column;
-        gap: 10px;
+        gap: 15px;
+    }
+
+    .school-logo img,
+    .logo-placeholder {
+        width: 75px;
+        height: 75px;
     }
 
     .school-details h1 {
-        font-size: 21px;
+        font-size: 24px;
+    }
+
+    .school-details p {
+        font-size: 12px;
+    }
+
+    .result-title {
+        margin: 18px 0;
+    }
+
+    .result-title h2 {
+        font-size: 18px;
     }
 
     .student-section {
-        flex-direction: column;
-        align-items: center;
+        gap: 15px;
+        padding: 12px;
     }
 
-    .student-info {
-        width: 100%;
-        grid-template-columns: 1fr 1fr;
+    .student-photo img,
+    .photo-placeholder {
+        width: 85px;
+        height: 95px;
     }
 
-    .result-section {
-        overflow-x: auto;
+    .info-item span {
+        font-size: 10px;
     }
 
-    .result-table {
-        min-width: 650px;
+    .info-item strong {
+        font-size: 12px;
     }
 
-    .summary {
-        grid-template-columns: 1fr 1fr;
+    .result-table th {
+        font-size: 11px;
+        padding: 7px 5px;
+    }
+
+    .result-table td {
+        font-size: 11px;
+        padding: 6px 5px;
+    }
+
+    .summary > div {
+        padding: 9px;
+    }
+
+    .summary span {
+        font-size: 10px;
+    }
+
+    .summary strong {
+        font-size: 15px;
+    }
+
+    .attendance div {
+        padding: 8px;
+    }
+
+    .attendance span {
+        font-size: 10px;
     }
 
     .comments-section {
-        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .comment-box p {
+        font-size: 11px;
+        padding: 10px;
+    }
+
+    .grading-table th,
+    .grading-table td {
+        font-size: 10px;
+        padding: 5px;
     }
 
     .signatures {
-        gap: 30px;
+        gap: 60px;
+        margin-top: 45px;
+    }
+
+    .signature p {
+        font-size: 11px;
     }
 }
 
