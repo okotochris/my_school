@@ -1,1021 +1,646 @@
-
-<!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>
-        <%= student.fullname %> - Result
-    </title>
-
-    <!-- Tailwind CSS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= school.fullname %> - Result</title>
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <style>
-        @page {
-            size: A4;
-            margin: 0;
-        }
-
-        @media print {
-
-            body {
-                background: white !important;
-            }
-
-            .no-print {
-                display: none !important;
-            }
-
-            .report-sheet {
-                margin: 0 !important;
-                box-shadow: none !important;
-            }
-        }
-
-        @media screen and (max-width: 700px) {
-
-            .report-wrapper {
-                padding: 0 !important;
-            }
-
-            .report-sheet {
-                width: 100% !important;
-                min-height: auto !important;
-            }
-        }
-    </style>
-
+    <link rel="stylesheet" href="/styles/results/template-7.css">
 </head>
 
+<body>
+    
+<div class="no-print flex justify-center gap-2 p-4 print:hidden">
 
-<body class="bg-slate-200 text-slate-800">
+    <a
+        href="/result/<%= result._id %>/pdf"
+        class="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-700"
+    >
+        Download PDF
+    </a>
+
+    <a
+        href="/result/<%= result._id %>/image"
+        class="rounded-lg bg-teal-600 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-700"
+    >
+        Download Image
+    </a>
+
+    <button
+        onclick="window.print()"
+        class="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+    >
+        Print
+    </button>
+
+</div>
+<div class="report-sheet">
 
     <!-- =====================================================
-         DOWNLOAD / PRINT BUTTONS
+         SCHOOL HEADER
     ====================================================== -->
 
-    <div class="no-print flex justify-center gap-2 p-4 print:hidden">
+    <header class="school-header">
 
-        <a
-            href="/result/<%= result._id %>/pdf"
-            class="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-700"
-        >
-            Download PDF
-        </a>
+        <div class="school-brand">
 
-        <a
-            href="/result/<%= result._id %>/image"
-            class="rounded-lg bg-teal-600 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-700"
-        >
-            Download Image
-        </a>
+            <div class="logo-container">
+                <img
+                      src="<%= school.image.logo %>"
+                    alt="School Logo"
+                >
+            </div>
 
-        <button
-            onclick="window.print()"
-            class="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50"
-        >
-            Print
-        </button>
+            <div class="school-details">
+
+                <div class="school-label">
+                    OFFICIAL ACADEMIC RECORD
+                </div>
+
+                <h1>
+                    <%= school.name %>
+                </h1>
+
+                <p>
+                    <%= school.address %>
+                </p>
+
+                <p>
+                    <%= school.phone %> · <%= school.email %>
+                </p>
+
+                <div class="school-motto">
+                    <%= school.motto %>
+                </div>
+
+            </div>
+
+            <div class="report-badge">
+
+                <span>STUDENT</span>
+
+                <strong>REPORT</strong>
+
+                <small>CARD</small>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         ACADEMIC SESSION
+    ====================================================== -->
+
+    <div class="academic-bar">
+
+        <div>
+            <span>SESSION</span>
+            <strong><%= result.session %></strong>
+        </div>
+
+        <div>
+            <span>TERM</span>
+            <strong><%= result.term %></strong>
+        </div>
+
+        <div>
+            <span>CLASS</span>
+             <strong><%= result.studentClass %></strong>
+        </div>
+
+        <div>
+            <span>STATUS</span>
+            <strong>COMPLETED</strong>
+        </div>
 
     </div>
 
 
     <!-- =====================================================
-         A4 REPORT
+         STUDENT PROFILE
     ====================================================== -->
 
-    <main class="report-wrapper flex justify-center px-2 pb-10">
+    <section class="student-profile">
 
-        <div
-            class="report-sheet w-[210mm] min-h-[297mm] bg-white p-[9mm] shadow-xl"
-        >
+        <div class="profile-photo">
 
-
-            <!-- =================================================
-                 SCHOOL HEADER
-            ================================================== -->
-
-            <header class="border border-slate-300">
-
-                <div class="flex items-center gap-5 px-5 py-4">
-
-                    <!-- SCHOOL LOGO -->
-
-                    <div
-                        class="flex h-[72px] w-[72px] shrink-0 items-center justify-center overflow-hidden rounded-full border-2 border-slate-700 p-1"
-                    >
-
-                        <img
-                            src="<%= school.logo %>"
-                            alt="School Logo"
-                            class="h-full w-full object-contain"
-                        >
-
-                    </div>
-
-
-                    <!-- SCHOOL INFORMATION -->
-
-                    <div class="flex-1 text-center">
-
-                        <h1
-                            class="text-[20px] font-extrabold tracking-wide text-slate-900"
-                        >
-                            <%= school.schoolName %>
-                        </h1>
-
-                        <% if (school.motto) { %>
-
-                            <p
-                                class="mt-1 text-[8px] font-bold uppercase tracking-widest text-teal-700"
-                            >
-                                <%= school.motto %>
-                            </p>
-
-                        <% } %>
-
-
-                        <% if (school.address) { %>
-
-                            <p class="mt-1 text-[7px] text-slate-500">
-                                <%= school.address %>
-                            </p>
-
-                        <% } %>
-
-
-                        <div class="mt-1 flex justify-center gap-3 text-[6px] text-slate-500">
-
-                            <% if (school.phone) { %>
-                                <span><%= school.phone %></span>
-                            <% } %>
-
-                            <% if (school.email) { %>
-                                <span><%= school.email %></span>
-                            <% } %>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- REPORT TITLE -->
-
-                <div class="bg-slate-900 px-4 py-2.5 text-center">
-
-                    <p
-                        class="text-[6px] font-bold uppercase tracking-[3px] text-teal-300"
-                    >
-                        Academic Performance Report
-                    </p>
-
-                    <h2
-                        class="mt-1 text-[11px] font-bold uppercase tracking-wide text-white"
-                    >
-                        <%= result.term %> RESULT
-                    </h2>
-
-                    <p class="mt-0.5 text-[6px] text-slate-300">
-                        <%= result.section %> Academic Session
-                    </p>
-
-                </div>
-
-            </header>
-
-
-            <!-- =================================================
-                 STUDENT INFORMATION
-            ================================================== -->
-
-            <section class="mt-3 grid grid-cols-[72px_1fr] gap-3 border border-slate-300 p-2.5">
-
-
-                <!-- PHOTO -->
-
-                <div
-                    class="h-[84px] w-[72px] overflow-hidden border border-slate-300 bg-slate-50 p-1"
-                >
-
-                    <img
-                        src="<%= student.passport %>"
-                        alt="Student Photo"
-                        class="h-full w-full object-cover"
-                    >
-
-                </div>
-
-
-                <!-- DETAILS -->
-
-                <div class="flex flex-col justify-center">
-
-                    <div class="border-b border-slate-200 pb-2">
-
-                        <span
-                            class="text-[5px] font-bold uppercase tracking-wider text-slate-500"
-                        >
-                            Student Name
-                        </span>
-
-                        <h2
-                            class="mt-0.5 text-[13px] font-extrabold uppercase text-slate-900"
-                        >
-                            <%= student.fullname %>
-                        </h2>
-
-                    </div>
-
-
-                    <div class="mt-2 grid grid-cols-4">
-
-                        <div class="border-r border-slate-200 px-2 first:pl-0">
-
-                            <span class="block text-[5px] font-bold uppercase text-slate-500">
-                                Student ID
-                            </span>
-
-                            <strong class="text-[7px] text-slate-800">
-                                <%= student.studentId %>
-                            </strong>
-
-                        </div>
-
-
-                        <div class="border-r border-slate-200 px-2">
-
-                            <span class="block text-[5px] font-bold uppercase text-slate-500">
-                                Class
-                            </span>
-
-                            <strong class="text-[7px] text-slate-800">
-                                <%= student.class %>
-                            </strong>
-
-                        </div>
-
-
-                        <div class="border-r border-slate-200 px-2">
-
-                            <span class="block text-[5px] font-bold uppercase text-slate-500">
-                                Gender
-                            </span>
-
-                            <strong class="text-[7px] uppercase text-slate-800">
-                                <%= student.gender %>
-                            </strong>
-
-                        </div>
-
-
-                        <div class="px-2">
-
-                            <span class="block text-[5px] font-bold uppercase text-slate-500">
-                                D.O.B
-                            </span>
-
-                            <strong class="text-[7px] text-slate-800">
-                                <%= student.dob %>
-                            </strong>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- =================================================
-                 PERFORMANCE SUMMARY
-            ================================================== -->
-
-            <section class="mt-3 grid grid-cols-4 gap-2">
-
-
-                <!-- AVERAGE -->
-
-                <div class="border border-slate-300 bg-slate-50 px-2 py-2 text-center">
-
-                    <span class="block text-[5px] font-bold uppercase tracking-wide text-slate-500">
-                        Average
-                    </span>
-
-                    <strong class="mt-1 block text-[15px] font-extrabold text-teal-700">
-                        <%= result.average %>%
-                    </strong>
-
-                </div>
-
-
-                <!-- TOTAL -->
-
-                <div class="border border-slate-300 bg-slate-50 px-2 py-2 text-center">
-
-                    <span class="block text-[5px] font-bold uppercase tracking-wide text-slate-500">
-                        Total Score
-                    </span>
-
-                    <strong class="mt-1 block text-[15px] font-extrabold text-slate-800">
-                        <%= result.score_obtainable %>
-                    </strong>
-
-                </div>
-
-
-                <!-- SUBJECTS -->
-
-                <div class="border border-slate-300 bg-slate-50 px-2 py-2 text-center">
-
-                    <span class="block text-[5px] font-bold uppercase tracking-wide text-slate-500">
-                        Subjects Offered
-                    </span>
-
-                    <strong class="mt-1 block text-[15px] font-extrabold text-slate-800">
-                        <%= result.No_subj %>
-                    </strong>
-
-                </div>
-
-
-                <!-- GRADE -->
-
-                <div class="border border-teal-700 bg-teal-700 px-2 py-2 text-center">
-
-                    <span class="block text-[5px] font-bold uppercase tracking-wide text-teal-100">
-                        Overall Grade
-                    </span>
-
-
-                    <% if (result.average >= 80) { %>
-
-                        <strong class="mt-0.5 block text-[17px] font-extrabold text-white">
-                            A
-                        </strong>
-
-                        <small class="text-[5px] font-bold uppercase text-teal-100">
-                            Excellent
-                        </small>
-
-
-                    <% } else if (result.average >= 70) { %>
-
-                        <strong class="mt-0.5 block text-[17px] font-extrabold text-white">
-                            B
-                        </strong>
-
-                        <small class="text-[5px] font-bold uppercase text-teal-100">
-                            Very Good
-                        </small>
-
-
-                    <% } else if (result.average >= 60) { %>
-
-                        <strong class="mt-0.5 block text-[17px] font-extrabold text-white">
-                            C
-                        </strong>
-
-                        <small class="text-[5px] font-bold uppercase text-teal-100">
-                            Good
-                        </small>
-
-
-                    <% } else if (result.average >= 50) { %>
-
-                        <strong class="mt-0.5 block text-[17px] font-extrabold text-white">
-                            D
-                        </strong>
-
-                        <small class="text-[5px] font-bold uppercase text-teal-100">
-                            Fair
-                        </small>
-
-
-                    <% } else if (result.average >= 40) { %>
-
-                        <strong class="mt-0.5 block text-[17px] font-extrabold text-white">
-                            E
-                        </strong>
-
-                        <small class="text-[5px] font-bold uppercase text-teal-100">
-                            Pass
-                        </small>
-
-
-                    <% } else { %>
-
-                        <strong class="mt-0.5 block text-[17px] font-extrabold text-white">
-                            F
-                        </strong>
-
-                        <small class="text-[5px] font-bold uppercase text-teal-100">
-                            Fail
-                        </small>
-
-                    <% } %>
-
-                </div>
-
-            </section>
-
-
-            <!-- =================================================
-                 ACADEMIC PERFORMANCE
-            ================================================== -->
-
-            <section class="mt-3">
-
-
-                <div class="flex items-center justify-between border-l-4 border-teal-700 bg-slate-100 px-3 py-2">
-
-                    <h3
-                        class="text-[9px] font-extrabold uppercase tracking-wide text-slate-900"
-                    >
-                        Academic Performance
-                    </h3>
-
-                    <span
-                        class="text-[6px] font-bold uppercase text-slate-500"
-                    >
-                        <%= result.term %>
-                    </span>
-
-                </div>
-
-
-                <table class="w-full table-fixed border-collapse">
-
-                    <thead>
-
-                        <tr class="bg-slate-800 text-white">
-
-                            <th class="w-[25px] border border-slate-600 px-1 py-1.5 text-[5px]">
-                                #
-                            </th>
-
-                            <th class="w-[145px] border border-slate-600 px-2 py-1.5 text-left text-[5px]">
-                                SUBJECT
-                            </th>
-
-                            <th class="border border-slate-600 px-1 py-1.5 text-[5px]">
-                                CA 1
-                            </th>
-
-                            <th class="border border-slate-600 px-1 py-1.5 text-[5px]">
-                                CA 2
-                            </th>
-
-                            <th class="border border-slate-600 px-1 py-1.5 text-[5px]">
-                                EXAM
-                            </th>
-
-                            <th class="border border-slate-600 px-1 py-1.5 text-[5px]">
-                                TOTAL
-                            </th>
-
-                            <th class="border border-slate-600 px-1 py-1.5 text-[5px]">
-                                GRADE
-                            </th>
-
-                            <th class="border border-slate-600 px-1 py-1.5 text-[5px]">
-                                REMARK
-                            </th>
-
-                        </tr>
-
-                    </thead>
-
-
-                    <tbody>
-
-                        <% result.subjects.forEach((subject, index) => { %>
-
-                            <tr class="<%= index % 2 === 0 ? 'bg-white' : 'bg-slate-50' %>">
-
-                                <td class="border border-slate-200 px-1 py-1.5 text-center text-[6px]">
-                                    <%= index + 1 %>
-                                </td>
-
-
-                                <td class="border border-slate-200 px-2 py-1.5 text-left text-[6.5px] font-semibold">
-                                    <%= subject.subject %>
-                                </td>
-
-
-                                <td class="border border-slate-200 px-1 py-1.5 text-center text-[6px]">
-                                    <%= subject.ca1 %>
-                                </td>
-
-
-                                <td class="border border-slate-200 px-1 py-1.5 text-center text-[6px]">
-                                    <%= subject.ca2 %>
-                                </td>
-
-
-                                <td class="border border-slate-200 px-1 py-1.5 text-center text-[6px]">
-                                    <%= subject.exam %>
-                                </td>
-
-
-                                <td class="border border-slate-200 px-1 py-1.5 text-center text-[6px] font-bold text-teal-700">
-                                    <%= subject.total %>
-                                </td>
-
-
-                                <td class="border border-slate-200 px-1 py-1.5 text-center">
-
-                                    <span
-                                        class="inline-flex h-[18px] w-[18px] items-center justify-center rounded-full bg-slate-100 text-[6px] font-bold text-slate-800"
-                                    >
-                                        <%= subject.grade %>
-                                    </span>
-
-                                </td>
-
-
-                                <td class="border border-slate-200 px-1 py-1.5 text-center text-[5.5px]">
-                                    <%= subject.remark %>
-                                </td>
-
-                            </tr>
-
-                        <% }) %>
-
-                    </tbody>
-
-                </table>
-
-            </section>
-
-
-            <!-- =================================================
-                 ATTENDANCE + CONDUCT
-            ================================================== -->
-
-            <section class="mt-3 grid grid-cols-2 gap-3">
-
-
-                <!-- ATTENDANCE -->
-
-                <div class="border border-slate-300">
-
-                    <div class="bg-slate-800 px-3 py-2">
-
-                        <h3 class="text-[6px] font-bold uppercase tracking-wider text-white">
-                            Attendance
-                        </h3>
-
-                    </div>
-
-
-                    <div class="grid grid-cols-4">
-
-                        <div class="border-r border-slate-200 px-1 py-2 text-center">
-
-                            <span class="block text-[5px] text-slate-500">
-                                School Days
-                            </span>
-
-                            <strong class="mt-1 block text-[10px] text-slate-800">
-                                <%= result.present + result.absent %>
-                            </strong>
-
-                        </div>
-
-
-                        <div class="border-r border-slate-200 px-1 py-2 text-center">
-
-                            <span class="block text-[5px] text-slate-500">
-                                Present
-                            </span>
-
-                            <strong class="mt-1 block text-[10px] text-teal-700">
-                                <%= result.present %>
-                            </strong>
-
-                        </div>
-
-
-                        <div class="border-r border-slate-200 px-1 py-2 text-center">
-
-                            <span class="block text-[5px] text-slate-500">
-                                Absent
-                            </span>
-
-                            <strong class="mt-1 block text-[10px] text-red-600">
-                                <%= result.absent %>
-                            </strong>
-
-                        </div>
-
-
-                        <div class="px-1 py-2 text-center">
-
-                            <span class="block text-[5px] text-slate-500">
-                                Attendance
-                            </span>
-
-                            <strong class="mt-1 block text-[10px] text-teal-700">
-
-                                <%= (result.present + result.absent) > 0
-                                    ? ((result.present / (result.present + result.absent)) * 100).toFixed(1)
-                                    : 0
-                                %>%
-
-                            </strong>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- CONDUCT -->
-
-                <div class="border border-slate-300">
-
-                    <div class="bg-slate-800 px-3 py-2">
-
-                        <h3 class="text-[6px] font-bold uppercase tracking-wider text-white">
-                            Student Conduct
-                        </h3>
-
-                    </div>
-
-
-                    <div class="divide-y divide-slate-200">
-
-                        <div class="flex justify-between px-3 py-1.5">
-
-                            <span class="text-[5.5px] text-slate-600">
-                                Attitude to Work
-                            </span>
-
-                            <strong class="text-[5.5px] text-teal-700">
-                                Very Good
-                            </strong>
-
-                        </div>
-
-
-                        <div class="flex justify-between px-3 py-1.5">
-
-                            <span class="text-[5.5px] text-slate-600">
-                                Neatness
-                            </span>
-
-                            <strong class="text-[5.5px] text-teal-700">
-                                Excellent
-                            </strong>
-
-                        </div>
-
-
-                        <div class="flex justify-between px-3 py-1.5">
-
-                            <span class="text-[5.5px] text-slate-600">
-                                Punctuality
-                            </span>
-
-                            <strong class="text-[5.5px] text-teal-700">
-                                Good
-                            </strong>
-
-                        </div>
-
-
-                        <div class="flex justify-between px-3 py-1.5">
-
-                            <span class="text-[5.5px] text-slate-600">
-                                Relationship with Others
-                            </span>
-
-                            <strong class="text-[5.5px] text-teal-700">
-                                Excellent
-                            </strong>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- =================================================
-                 COMMENTS
-            ================================================== -->
-
-            <section class="mt-3 grid grid-cols-2 gap-3">
-
-
-                <!-- CLASS TEACHER -->
-
-                <div class="border border-slate-300">
-
-                    <div class="border-l-4 border-teal-700 bg-slate-100 px-3 py-2">
-
-                        <h3 class="text-[6px] font-bold uppercase tracking-wide text-slate-800">
-                            Class Teacher's Comment
-                        </h3>
-
-                    </div>
-
-
-                    <p class="min-h-[55px] px-3 py-2 text-[6px] leading-relaxed text-slate-600">
-
-                        <%= result.tReport %>
-
-                    </p>
-
-                </div>
-
-
-                <!-- PRINCIPAL -->
-
-                <div class="border border-slate-300">
-
-                    <div class="border-l-4 border-teal-700 bg-slate-100 px-3 py-2">
-
-                        <h3 class="text-[6px] font-bold uppercase tracking-wide text-slate-800">
-                            Principal's Comment
-                        </h3>
-
-                    </div>
-
-
-                    <p class="min-h-[55px] px-3 py-2 text-[6px] leading-relaxed text-slate-600">
-
-                        <%= result.Treport %>
-
-                    </p>
-
-                </div>
-
-            </section>
-
-
-            <!-- =================================================
-                 GRADING SCALE
-            ================================================== -->
-
-            <section class="mt-3 border border-slate-300">
-
-                <div class="bg-teal-700 px-3 py-1.5">
-
-                    <h3 class="text-[6px] font-bold uppercase tracking-wider text-white">
-                        Grading Scale
-                    </h3>
-
-                </div>
-
-
-                <div class="grid grid-cols-6">
-
-                    <div class="border-r border-slate-200 py-2 text-center">
-
-                        <strong class="block text-[9px] text-slate-800">
-                            A
-                        </strong>
-
-                        <span class="block text-[5px]">
-                            80 - 100
-                        </span>
-
-                        <small class="text-[4.5px] text-slate-500">
-                            Excellent
-                        </small>
-
-                    </div>
-
-
-                    <div class="border-r border-slate-200 py-2 text-center">
-
-                        <strong class="block text-[9px] text-slate-800">
-                            B
-                        </strong>
-
-                        <span class="block text-[5px]">
-                            70 - 79
-                        </span>
-
-                        <small class="text-[4.5px] text-slate-500">
-                            Very Good
-                        </small>
-
-                    </div>
-
-
-                    <div class="border-r border-slate-200 py-2 text-center">
-
-                        <strong class="block text-[9px] text-slate-800">
-                            C
-                        </strong>
-
-                        <span class="block text-[5px]">
-                            60 - 69
-                        </span>
-
-                        <small class="text-[4.5px] text-slate-500">
-                            Good
-                        </small>
-
-                    </div>
-
-
-                    <div class="border-r border-slate-200 py-2 text-center">
-
-                        <strong class="block text-[9px] text-slate-800">
-                            D
-                        </strong>
-
-                        <span class="block text-[5px]">
-                            50 - 59
-                        </span>
-
-                        <small class="text-[4.5px] text-slate-500">
-                            Fair
-                        </small>
-
-                    </div>
-
-
-                    <div class="border-r border-slate-200 py-2 text-center">
-
-                        <strong class="block text-[9px] text-slate-800">
-                            E
-                        </strong>
-
-                        <span class="block text-[5px]">
-                            40 - 49
-                        </span>
-
-                        <small class="text-[4.5px] text-slate-500">
-                            Pass
-                        </small>
-
-                    </div>
-
-
-                    <div class="py-2 text-center">
-
-                        <strong class="block text-[9px] text-slate-800">
-                            F
-                        </strong>
-
-                        <span class="block text-[5px]">
-                            0 - 39
-                        </span>
-
-                        <small class="text-[4.5px] text-slate-500">
-                            Fail
-                        </small>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- =================================================
-                 SIGNATURES
-            ================================================== -->
-
-            <section class="mt-8 grid grid-cols-3 gap-8">
-
-
-                <!-- CLASS TEACHER -->
-
-                <div class="text-center">
-
-                    <div class="flex h-[30px] items-end justify-center">
-
-                        <% if (result.classTeacherSign) { %>
-
-                            <img
-                                src="<%= result.classTeacherSign %>"
-                                alt="Class Teacher Signature"
-                                class="max-h-[28px] max-w-[80px] object-contain"
-                            >
-
-                        <% } %>
-
-                    </div>
-
-
-                    <div class="border-t border-slate-700"></div>
-
-                    <strong class="mt-1 block text-[6px]">
-                        Class Teacher
-                    </strong>
-
-                    <span class="mt-0.5 block text-[5px] text-slate-500">
-
-                        Date:
-                        <%= new Date(result.createdAt).toLocaleDateString('en-GB') %>
-
-                    </span>
-
-                </div>
-
-
-                <!-- PRINCIPAL -->
-
-                <div class="text-center">
-
-                    <div class="flex h-[30px] items-end justify-center">
-
-                        <% if (school.headTeacherSign) { %>
-
-                            <img
-                                src="<%= school.headTeacherSign %>"
-                                alt="Head Teacher Signature"
-                                class="max-h-[28px] max-w-[80px] object-contain"
-                            >
-
-                        <% } %>
-
-                    </div>
-
-
-                    <div class="border-t border-slate-700"></div>
-
-                    <strong class="mt-1 block text-[6px]">
-                        Principal / Head Teacher
-                    </strong>
-
-                    <span class="mt-0.5 block text-[5px] text-slate-500">
-
-                        Date:
-                        <%= new Date(result.createdAt).toLocaleDateString('en-GB') %>
-
-                    </span>
-
-                </div>
-
-
-                <!-- PARENT -->
-
-                <div class="text-center">
-
-                    <div class="h-[30px]"></div>
-
-                    <div class="border-t border-slate-700"></div>
-
-                    <strong class="mt-1 block text-[6px]">
-                        Parent / Guardian
-                    </strong>
-
-                    <span class="mt-0.5 block text-[5px] text-slate-500">
-                        Date: __________________
-                    </span>
-
-                </div>
-
-            </section>
-
-
-            <!-- =================================================
-                 FOOTER
-            ================================================== -->
-
-            <footer
-                class="mt-5 flex justify-between border-t-2 border-slate-800 pt-2 text-[5px] text-slate-500"
+            <img
+                src="<%= student.passport %>"
+                alt="Student Photo"
             >
-
-                <span class="font-bold text-slate-700">
-                    <%= school.schoolName %>
-                </span>
-
-                <span>
-                    <%= result.term %> • <%= result.section %>
-                </span>
-
-                <span>
-                    Powered by MySchoolResult
-                </span>
-
-            </footer>
-
 
         </div>
 
-    </main>
+
+        <div class="student-details">
+
+            <span class="section-label">
+                STUDENT INFORMATION
+            </span>
+
+            <h2>
+                <%= result.studentName %>
+            </h2>
+
+            <div class="student-grid">
+
+                <div>
+                    <span>STUDENT ID</span>
+                    <strong><%= result.studentId %></strong>
+                </div>
+
+                <div>
+                    <span>CLASS</span>
+                    <strong><%= result.className %></strong>
+                </div>
+
+                <div>
+                    <span>GENDER</span>
+                    <strong><%= result.gender %></strong>
+                </div>
+
+                <div>
+                    <span>TERM</span>
+                    <strong><%= result.term %></strong>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="overall-score">
+
+            <span>AVERAGE SCORE</span>
+
+            <strong>
+                <%= result.average %>
+            </strong>
+
+            <small>
+                OUT OF 100
+            </small>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         RESULTS HEADER
+    ====================================================== -->
+
+    <div class="section-heading">
+
+        <div class="heading-number">
+            01
+        </div>
+
+        <div>
+            <span>ACADEMIC PERFORMANCE</span>
+            <h3>SUBJECT RESULTS</h3>
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         RESULT TABLE
+    ====================================================== -->
+
+    <section class="result-table-wrapper">
+
+        <table class="result-table">
+
+            <thead>
+
+                <tr>
+
+                    <th class="sn">NO.</th>
+
+                    <th class="subject">
+                        SUBJECT
+                    </th>
+
+                    <th>
+                        FIRST TEST
+                       
+                    </th>
+                    <th>
+                        SECONDT TEST
+                       
+                    </th>
+                     <th>
+                        C.A TEST
+                       
+                    </th>
+
+                    <th>
+                        EXAM
+                        
+                    </th>
+
+                    <th>
+                        TOTAL
+                       
+                    </th>
+
+                    <th>
+                        GRADE
+                    </th>
+
+                    <th>
+                        REMARK
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <% result.subjects.forEach((subject, index) => { %>
+
+                    <tr>
+
+                        <td>
+                            <%= String(index + 1).padStart(2, '0') %>
+                        </td>
+
+                        <td class="subject">
+                            <%= subject.subjectName %>
+                        </td>
+
+                        <td>
+                            <%= subject.firstTest %>
+                        </td>
+
+                        <td>
+                            <%= subject.secondTest %>
+                        </td>
+
+                        <td>
+                            <%= subject.cca %>
+                        </td>
+
+                        <td>
+                            <%= subject.exam %>
+                        </td>
+
+                        <td class="total">
+                            <%= subject.total %>
+                        </td>
+
+                        <td>
+
+                            <span class="grade <%= subject.gradeClass %>">
+                                <%= subject.grade %>
+                            </span>
+
+                        </td>
+
+                        <td class="remark">
+                            <%= subject.remark %>
+                        </td>
+
+                    </tr>
+
+                <% }) %>
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+
+    <!-- =====================================================
+         PERFORMANCE SUMMARY
+    ====================================================== -->
+
+    <section class="performance-summary">
+
+        <div class="summary-card">
+
+            <span>TOTAL SCORE</span>
+
+            <strong>
+               <%= result.score_obtainable %>
+            </strong>
+
+            <small>
+                CUMULATIVE
+            </small>
+
+        </div>
+        <div class="summary-card">
+
+            <span>SCORE OBTAINED</span>
+
+            <strong>
+               <%= result.score_obtain %>
+            </strong>
+
+            <small>
+                CUMULATIVE
+            </small>
+
+        </div>
+
+        <div class="summary-card">
+
+            <span>AVERAGE</span>
+
+            <strong>
+                <%= result.average %>
+            </strong>
+
+            <small>
+                PERCENT
+            </small>
+
+        </div>
+
+        <div class="summary-card">
+
+            <span>SUBJECTS</span>
+
+            <strong>
+                <%= result.subjects.length %>
+            </strong>
+
+            <small>
+                OFFERED
+            </small>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         ATTENDANCE + CONDUCT
+    ====================================================== -->
+
+    <section class="information-panels">
+
+
+        <!-- ATTENDANCE -->
+
+        <div class="information-panel">
+
+            <div class="panel-heading">
+
+                <span>02</span>
+
+                <strong>ATTENDANCE RECORD</strong>
+
+            </div>
+
+            <div class="attendance-grid">
+
+                <div>
+                    <span>SCHOOL DAYS</span>
+                    <strong><%= result.present + result.absent %></strong>
+                </div>
+
+                <div>
+                    <span>PRESENT</span>
+                    <strong><%= result.present %></strong>
+                </div>
+
+                <div>
+                    <span>ABSENT</span>
+                    <strong><%= result.absent %></strong>
+                </div>
+
+                <div>
+                    <span>PERCENTAGE</span>
+                    <strong><%= (result.present + result.absent) > 0
+                            ? ((result.present / (result.present + result.absent)) * 100).toFixed(1)
+                            : 0
+                        %>%</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- CONDUCT -->
+
+        <div class="information-panel">
+
+            <div class="panel-heading">
+
+                <span>03</span>
+
+                <strong>STUDENT DEVELOPMENT</strong>
+
+            </div>
+
+            <div class="conduct-list">
+
+                <div>
+                    <span>Punctuality</span>
+                    <strong><%= student.punctuality %></strong>
+                </div>
+
+                <div>
+                    <span>Neatness</span>
+                    <strong><%= student.neatness %></strong>
+                </div>
+
+                <div>
+                    <span>Class Participation</span>
+                    <strong><%= student.participation %></strong>
+                </div>
+
+                <div>
+                    <span>Relationship With Others</span>
+                    <strong><%= student.relationship %></strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         COMMENTS
+    ====================================================== -->
+
+    <section class="comments-section">
+
+        <div class="comment-box">
+
+            <div class="comment-heading">
+
+                <span>04</span>
+
+                <strong>CLASS TEACHER'S COMMENT</strong>
+
+            </div>
+
+            <p>
+                <%= result.tReport %>
+            </p>
+
+        </div>
+
+
+        <div class="comment-box">
+
+            <div class="comment-heading">
+
+                <span>05</span>
+
+                <strong>HEAD TEACHER'S COMMENT</strong>
+
+            </div>
+
+            <p>
+                <%= result.Treport %>
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         GRADING SCALE
+    ====================================================== -->
+
+    <section class="grading-section">
+
+        <div class="grading-heading">
+            GRADING SCALE
+        </div>
+
+        <div class="grading-table">
+
+            <div>
+                <strong>A</strong>
+                <span>Excellent</span>
+                <small>80 - 100</small>
+            </div>
+
+            <div>
+                <strong>B</strong>
+                <span>Very Good</span>
+                <small>70 - 79</small>
+            </div>
+
+            <div>
+                <strong>C</strong>
+                <span>Good</span>
+                <small>60 - 69</small>
+            </div>
+
+            <div>
+                <strong>D</strong>
+                <span>Fair</span>
+                <small>50 - 59</small>
+            </div>
+
+            <div>
+                <strong>E</strong>
+                <span>Pass</span>
+                <small>40 - 49</small>
+            </div>
+
+            <div>
+                <strong>F</strong>
+                <span>Fail</span>
+                <small>0 - 39</small>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         SIGNATURES
+    ====================================================== -->
+
+    <section class="signature-section">
+
+        <div class="signature">
+
+            <div class="signature-space">
+                <% if (result.teacherSignature) { %>
+                    <img src="<%= result.teacherSignature %>" alt="Teacher Signature">
+                <% } %>
+            </div>
+
+            <div class="signature-line"></div>
+
+            <strong>CLASS TEACHER</strong>
+
+            <span>Signature</span>
+
+        </div>
+
+
+        <div class="signature">
+
+            <div class="signature-space">
+                <% if (result.principalSignature) { %>
+                    <img src="<%= result.principalSignature %>" alt="Principal Signature">
+                <% } %>
+            </div>
+
+            <div class="signature-line"></div>
+
+            <strong>HEAD TEACHER</strong>
+
+            <span>Signature</span>
+
+        </div>
+
+
+        <div class="signature">
+
+            <div class="signature-space"></div>
+
+            <div class="signature-line"></div>
+
+            <strong>PARENT / GUARDIAN</strong>
+
+            <span>Signature</span>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="report-footer">
+
+        <span>
+            OFFICIAL SCHOOL REPORT
+        </span>
+
+        <span>
+            Generated by MySchoolResult
+        </span>
+
+        <span>
+            <%= result.session %>
+        </span>
+
+    </footer>
+
+</div>
 
 </body>
-
 </html>
-

@@ -26,7 +26,30 @@
 <body>
 
 <div class="result-sheet">
+<div class="no-print flex justify-center gap-2 p-4 print:hidden">
 
+    <a
+        href="/result/<%= result._id %>/pdf"
+        class="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-700"
+    >
+        Download PDF
+    </a>
+
+    <a
+        href="/result/<%= result._id %>/image"
+        class="rounded-lg bg-teal-600 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-700"
+    >
+        Download Image
+    </a>
+
+    <button
+        onclick="window.print()"
+        class="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+    >
+        Print
+    </button>
+
+</div>
 
     <!-- =====================================================
          SCHOOL HEADER
@@ -102,7 +125,7 @@
 
                 <div>
                     <span>CLASS</span>
-                    <strong><%= student.class %></strong>
+                      <strong><%= result.studentClass %></strong>
                 </div>
 
                 <div>
@@ -374,88 +397,6 @@
 
     </section>
 
-
-    <!-- =====================================================
-         AFFECTIVE / CONDUCT
-    ====================================================== -->
-
-    <section class="conduct-section">
-
-        <div class="section-title">
-
-            <span>03</span>
-
-            <h2>AFFECTIVE DEVELOPMENT</h2>
-
-        </div>
-
-<!-- 
-        <table class="conduct-table">
-
-            <thead>
-
-                <tr>
-                    <th>AREA</th>
-                    <th>RATING</th>
-                    <th>AREA</th>
-                    <th>RATING</th>
-                </tr>
-
-            </thead>
-
-
-            <tbody>
-
-                <tr>
-
-                    <td>Attitude to Work</td>
-                    <td><strong>Excellent</strong></td>
-
-                    <td>Neatness</td>
-                    <td><strong>Very Good</strong></td>
-
-                </tr>
-
-
-                <tr>
-
-                    <td>Punctuality</td>
-                    <td><strong>Very Good</strong></td>
-
-                    <td>Self Control</td>
-                    <td><strong>Excellent</strong></td>
-
-                </tr>
-
-
-                <tr>
-
-                    <td>Teamwork</td>
-                    <td><strong>Excellent</strong></td>
-
-                    <td>Leadership</td>
-                    <td><strong>Good</strong></td>
-
-                </tr>
-
-
-                <tr>
-
-                    <td>Relationship with Others</td>
-                    <td><strong>Excellent</strong></td>
-
-                    <td>Responsibility</td>
-                    <td><strong>Very Good</strong></td>
-
-                </tr>
-
-            </tbody>
-
-        </table> -->
-
-    </section>
-
-
     <!-- =====================================================
          COMMENTS
     ====================================================== -->
@@ -612,40 +553,6 @@
     </footer>
 
 <script src="https://cdn.tailwindcss.com"></script>
-<div class="flex flex-wrap items-center justify-center gap-3 my-6">
-
-    <a
-        href="/result/<%= result.id %>/jpg"
-        class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg
-               bg-blue-600 text-white text-sm font-medium
-               hover:bg-blue-700 transition"
-    >
-        📷
-        Download Image
-    </a>
-
-    <a
-        href="/result/<%= result.id %>/pdf"
-        class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg
-               bg-red-600 text-white text-sm font-medium
-               hover:bg-red-700 transition"
-    >
-        📄
-        Download PDF
-    </a>
-
-    <button
-        type="button"
-        onclick="window.print()"
-        class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg
-               bg-gray-800 text-white text-sm font-medium
-               hover:bg-gray-900 transition"
-    >
-        🖨️
-        Print Result
-    </button>
-
-</div>
 
 
 </div>

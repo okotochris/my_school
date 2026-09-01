@@ -7,6 +7,7 @@
     <title>Student Result - Bright Future Academy</title>
 
     <link rel="stylesheet" href="/styles/results/template-2.css">
+     <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
         :root {
@@ -21,9 +22,33 @@
 </head>
 
 <body>
+    <div class="no-print flex justify-center gap-2 p-4 print:hidden">
+
+        <a
+            href="/result/<%= result._id %>/pdf"
+            class="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-700"
+        >
+            Download PDF
+        </a>
+
+        <a
+            href="/result/<%= result._id %>/image"
+            class="rounded-lg bg-teal-600 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-700"
+        >
+            Download Image
+        </a>
+
+        <button
+            onclick="window.print()"
+            class="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+        >
+            Print
+        </button>
+
+    </div>
 
 <div class="result-container">
-
+    
     <!-- =====================================================
          TOP HEADER
     ====================================================== -->
@@ -72,7 +97,6 @@
 
     </header>
 
-
     <!-- =====================================================
          TITLE
     ====================================================== -->
@@ -89,7 +113,6 @@
         </div>
 
     </div>
-
 
     <!-- =====================================================
          STUDENT PROFILE
@@ -119,7 +142,7 @@
 
                 <div>
                     <span>Class</span>
-                    <strong><%= student.class %></strong>
+                    <strong><%= result.studentClass %></strong>
                 </div>
 
                 <div>
@@ -141,41 +164,28 @@
 
             <span>OVERALL GRADE</span>
                 <% if (result.average >= 80) { %>
-
                     <strong>A</strong>
                     <small>EXCELLENT</small>
-
                 <% } else if (result.average >= 70) { %>
-
                     <strong>B</strong>
                     <small>VERY GOOD</small>
-
                 <% } else if (result.average >= 60) { %>
-
                     <strong>C</strong>
                     <small>GOOD</small>
-
                 <% } else if (result.average >= 50) { %>
-
                     <strong>D</strong>
                     <small>FAIR</small>
-
                 <% } else if (result.average >= 40) { %>
-
                     <strong>E</strong>
                     <small>PASS</small>
-
                 <% } else { %>
-
                     <strong>F</strong>
                     <small>FAILED</small>
-
                 <% } %>
 
         </div>
 
     </section>
-
 
     <!-- =====================================================
          RESULT TABLE
@@ -266,7 +276,6 @@
 
     </section>
 
-
     <!-- =====================================================
          PERFORMANCE SUMMARY
     ====================================================== -->
@@ -310,7 +319,6 @@
         </div>
 
     </section>
-
 
     <!-- =====================================================
          ATTENDANCE + CONDUCT
@@ -370,22 +378,22 @@
 
                 <div>
                     <span>Attitude to Work</span>
-                    <strong>Very Good</strong>
+                    <strong><%= result.attitude %></strong>
                 </div>
 
                 <div>
                     <span>Neatness</span>
-                    <strong>Excellent</strong>
+                    <strong><%= result.neatness %></strong>
                 </div>
 
                 <div>
                     <span>Punctuality</span>
-                    <strong>Good</strong>
+                    <strong><%= result.punctuality %></strong>
                 </div>
 
                 <div>
                     <span>Relationship with Others</span>
-                    <strong>Excellent</strong>
+                    <strong><%= result.relationship %></strong>
                 </div>
 
             </div>
@@ -393,7 +401,6 @@
         </div>
 
     </section>
-
 
     <!-- =====================================================
          COMMENTS
@@ -428,7 +435,6 @@
         </div>
 
     </section>
-
 
     <!-- =====================================================
          GRADING SCALE
@@ -482,11 +488,9 @@
 
     </section>
 
-
     <!-- =====================================================
          SIGNATURES
     ====================================================== -->
-
 
     <section class="signature-section">
 
@@ -553,9 +557,6 @@
 
     </section>
 
-
-
-
     <!-- =====================================================
          FOOTER
     ====================================================== -->
@@ -571,7 +572,7 @@
         </div>
 
         <div>
-            2025 / 2026 • First Term
+            <%= result.section %> • First Term
         </div>
 
     </footer>

@@ -23,7 +23,30 @@
 </head>
 
 <body>
+<div class="no-print flex justify-center gap-2 p-4 print:hidden">
 
+    <a
+        href="/result/<%= result._id %>/pdf"
+        class="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-700"
+    >
+        Download PDF
+    </a>
+
+    <a
+        href="/result/<%= result._id %>/image"
+        class="rounded-lg bg-teal-600 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-700"
+    >
+        Download Image
+    </a>
+
+    <button
+        onclick="window.print()"
+        class="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+    >
+        Print
+    </button>
+
+</div>
 <div class="result-page">
 
     <!-- =====================================================
@@ -37,8 +60,8 @@
             <div class="logo-wrapper">
 
                 <img
-                    src="/images/school-logo.png"
-                    alt="Royal Crest College Logo"
+                    src="<%= school.image.logo %> "
+                    alt="<%= school.schoolName %> Logo"
                 >
 
             </div>
@@ -46,19 +69,19 @@
 
             <div class="school-info">
 
-                <h1>ROYAL CREST COLLEGE</h1>
+                <h1><%= school.schoolName %></h1>
 
                 <p class="motto">
-                    Wisdom • Excellence • Leadership
+                    <%= school.motto %>
                 </p>
 
                 <p class="address">
-                    18 College Avenue, Benin City, Edo State, Nigeria
+                    <%= school.address %>
                 </p>
 
                 <p class="contact">
-                    Tel: 0805 222 3344 &nbsp; | &nbsp;
-                    admin@royalcrestcollege.edu.ng
+                    Tel: <%= school.phone %> &nbsp; | &nbsp;
+                    <%= school.schoolEmail %>
                 </p>
 
             </div>
@@ -72,7 +95,7 @@
 
             <strong>REPORT</strong>
 
-            <small>2025 / 2026</small>
+            <small><%= result.section %></small>
 
         </div>
 
@@ -87,17 +110,17 @@
 
         <div>
             <span>SESSION</span>
-            <strong>2025 / 2026</strong>
+            <strong><%= result.section %></strong>
         </div>
 
         <div>
             <span>TERM</span>
-            <strong>FIRST TERM</strong>
+            <strong><%= result.term %></strong>
         </div>
 
         <div>
             <span>CLASS</span>
-            <strong>SS 2</strong>
+            <strong><%= result.studentClass %></strong>
         </div>
 
         <div>
@@ -117,8 +140,8 @@
         <div class="student-photo">
 
             <img
-                src="/images/student.jpg"
-                alt="Student Photo"
+                src="<%= student.passport %>"
+                alt="<%= student.fullname?.toUpperCase() %> Photo"
             >
 
         </div>
@@ -131,7 +154,7 @@
             </span>
 
             <h2>
-                EMMA DANIEL WILLIAMS
+                <%= student.fullname %>
             </h2>
 
 
@@ -139,22 +162,22 @@
 
                 <div>
                     <span>Student ID</span>
-                    <strong>RCC/25/0341</strong>
+                    <strong><%= student.studentId %></strong>
                 </div>
 
                 <div>
                     <span>Class</span>
-                    <strong>SS 2</strong>
+                    <strong><%= student.class %></strong>
                 </div>
 
                 <div>
                     <span>Gender</span>
-                    <strong>Female</strong>
+                    <strong><%= student.gender %></strong>
                 </div>
 
                 <div>
                     <span>House</span>
-                    <strong>Queen's House</strong>
+                    <strong><%= student.house %></strong>
                 </div>
 
             </div>
@@ -166,10 +189,20 @@
 
             <span>AVERAGE</span>
 
-            <strong>82.4%</strong>
-
-            <small>VERY GOOD</small>
-
+            <strong><%= result.average %>%</strong>
+                 <% if (result.average >= 80) { %>
+                    <small>EXCELLENT</small>
+                <% } else if (result.average >= 70) { %>
+                    <small>VERY GOOD</small>
+                <% } else if (result.average >= 60) { %>
+                    <small>GOOD</small>
+                <% } else if (result.average >= 50) { %>
+                    <small>FAIR</small>
+                <% } else if (result.average >= 40) { %>
+                    <small>PASS</small>
+                <% } else { %>
+                    <small>FAILED</small>
+                <% } %>
         </div>
 
     </section>
@@ -183,7 +216,7 @@
 
         <span>ACADEMIC ASSESSMENT</span>
 
-        <h2>FIRST TERM RESULT</h2>
+        <h2><%= result.term %> RESULT</h2>
 
     </div>
 
@@ -206,9 +239,10 @@
                         SUBJECT
                     </th>
 
-                    <th>CA 1</th>
+                    <th>1st Test</th>
 
-                    <th>CA 2</th>
+                    <th>2nd Test</th>
+                    <th>C.A</th>
 
                     <th>EXAM</th>
 
@@ -225,115 +259,29 @@
 
             <tbody>
 
-                <tr>
-                    <td>01</td>
-                    <td class="subject">Mathematics</td>
-                    <td>19</td>
-                    <td>18</td>
-                    <td>57</td>
-                    <td class="total">94</td>
-                    <td><span class="grade a">A</span></td>
-                    <td>Excellent</td>
-                </tr>
+                <% result.subjects.forEach((subject, i)=>{  %>
+                    <tr>
 
-                <tr>
-                    <td>02</td>
-                    <td class="subject">English Language</td>
-                    <td>18</td>
-                    <td>17</td>
-                    <td>53</td>
-                    <td class="total">88</td>
-                    <td><span class="grade a">A</span></td>
-                    <td>Excellent</td>
-                </tr>
+                    <td><%= i + 1 %></td>
 
-                <tr>
-                    <td>03</td>
-                    <td class="subject">Physics</td>
-                    <td>17</td>
-                    <td>16</td>
-                    <td>51</td>
-                    <td class="total">84</td>
-                    <td><span class="grade a">A</span></td>
-                    <td>Excellent</td>
-                </tr>
+                    <td class="subject-name">
+                        <%= subject.subjectName %>
+                    </td>
+                    <td> <%= subject.firstTest %></td>
+                    <td> <%= subject.secondTest %></td>
+                    <td> <%= subject.cca %></td>
+                    <td> <%= subject.exam %></td>
 
-                <tr>
-                    <td>04</td>
-                    <td class="subject">Chemistry</td>
-                    <td>16</td>
-                    <td>15</td>
-                    <td>47</td>
-                    <td class="total">78</td>
-                    <td><span class="grade b">B</span></td>
-                    <td>Very Good</td>
-                </tr>
+                    <td class="total-score"> <%= subject.total %></td>
 
-                <tr>
-                    <td>05</td>
-                    <td class="subject">Biology</td>
-                    <td>18</td>
-                    <td>17</td>
-                    <td>49</td>
-                    <td class="total">84</td>
-                    <td><span class="grade a">A</span></td>
-                    <td>Excellent</td>
-                </tr>
+                    <td>
+                        <span class="grade grade-a"> <%= subject.grade %></span>
+                    </td>
 
-                <tr>
-                    <td>06</td>
-                    <td class="subject">Economics</td>
-                    <td>15</td>
-                    <td>15</td>
-                    <td>44</td>
-                    <td class="total">74</td>
-                    <td><span class="grade b">B</span></td>
-                    <td>Very Good</td>
-                </tr>
+                    <td> <%= subject.remark %></td>
 
-                <tr>
-                    <td>07</td>
-                    <td class="subject">Government</td>
-                    <td>14</td>
-                    <td>15</td>
-                    <td>42</td>
-                    <td class="total">71</td>
-                    <td><span class="grade b">B</span></td>
-                    <td>Good</td>
                 </tr>
-
-                <tr>
-                    <td>08</td>
-                    <td class="subject">Computer Science</td>
-                    <td>20</td>
-                    <td>18</td>
-                    <td>58</td>
-                    <td class="total">96</td>
-                    <td><span class="grade a">A</span></td>
-                    <td>Excellent</td>
-                </tr>
-
-                <tr>
-                    <td>09</td>
-                    <td class="subject">Civic Education</td>
-                    <td>17</td>
-                    <td>16</td>
-                    <td>45</td>
-                    <td class="total">78</td>
-                    <td><span class="grade b">B</span></td>
-                    <td>Very Good</td>
-                </tr>
-
-                <tr>
-                    <td>10</td>
-                    <td class="subject">Data Processing</td>
-                    <td>18</td>
-                    <td>18</td>
-                    <td>52</td>
-                    <td class="total">88</td>
-                    <td><span class="grade a">A</span></td>
-                    <td>Excellent</td>
-                </tr>
+                <% }) %>
 
             </tbody>
 
@@ -352,31 +300,29 @@
 
             <span>TOTAL SCORE</span>
 
-            <strong>835</strong>
+            <strong> <%= result.score_obtain %></strong>
 
-            <small>OUT OF 1000</small>
+            <small>OUT OF <%= result.score_obtainable %></small>
 
         </div>
 
 
         <div class="summary-box">
-
             <span>AVERAGE SCORE</span>
-
-            <strong>83.5%</strong>
-
-            <small>VERY GOOD</small>
-
+            <strong>
+                 <%= (result.present + result.absent) > 0
+                            ? ((result.present / (result.present + result.absent)) * 100).toFixed(1)
+                            : 0
+                        %>%
+            </strong>
         </div>
 
 
         <div class="summary-box">
 
-            <span>SUBJECTS PASSED</span>
+            <span>SUBJECTS OFFERED</span>
 
-            <strong>10</strong>
-
-            <small>OUT OF 10</small>
+            <strong><%= result.subjects.length %></strong>
 
         </div>
 
@@ -384,10 +330,38 @@
         <div class="summary-box featured">
 
             <span>OVERALL GRADE</span>
+                <% if (result.average >= 80) { %>
 
-            <strong>A</strong>
+                    <strong>A</strong>
+                    <small>EXCELLENT</small>
 
-            <small>EXCELLENT</small>
+                <% } else if (result.average >= 70) { %>
+
+                    <strong>B</strong>
+                    <small>VERY GOOD</small>
+
+                <% } else if (result.average >= 60) { %>
+
+                    <strong>C</strong>
+                    <small>GOOD</small>
+
+                <% } else if (result.average >= 50) { %>
+
+                    <strong>D</strong>
+                    <small>FAIR</small>
+
+                <% } else if (result.average >= 40) { %>
+
+                    <strong>E</strong>
+                    <small>PASS</small>
+
+                <% } else { %>
+
+                    <strong>F</strong>
+                    <small>FAILED</small>
+
+                <% } %>
+
 
         </div>
 
@@ -411,22 +385,27 @@
 
                 <div>
                     <span>School Days</span>
-                    <strong>65</strong>
+                    <strong><%= result.present + result.absent %></strong>
                 </div>
 
                 <div>
                     <span>Present</span>
-                    <strong>63</strong>
+                    <strong><%= result.present %></strong>
                 </div>
 
                 <div>
                     <span>Absent</span>
-                    <strong>2</strong>
+                    <strong><%= result.absent %></strong>
                 </div>
 
                 <div>
                     <span>Rate</span>
-                    <strong>96.9%</strong>
+                    <strong>
+                        <%= (result.present + result.absent) > 0
+                            ? ((result.present / (result.present + result.absent)) * 100).toFixed(1)
+                            : 0
+                        %>%
+                    </strong>
                 </div>
 
             </div>
@@ -445,22 +424,22 @@
 
                 <div>
                     <span>Attitude</span>
-                    <strong>Excellent</strong>
+                    <strong><%= student.attitude %></strong>
                 </div>
 
                 <div>
                     <span>Neatness</span>
-                    <strong>Very Good</strong>
+                    <strong><%= student.neatness %></strong>
                 </div>
 
                 <div>
                     <span>Punctuality</span>
-                    <strong>Excellent</strong>
+                    <strong><%= student.punctuality %></strong>
                 </div>
 
                 <div>
                     <span>Responsibility</span>
-                    <strong>Very Good</strong>
+                    <strong><%= student.responsibility %></strong>
                 </div>
 
             </div>
@@ -483,10 +462,7 @@
             </div>
 
             <p>
-                Emma has performed exceptionally well this term.
-                She demonstrates a strong understanding of her
-                subjects and maintains a positive attitude towards
-                learning. She is encouraged to remain consistent.
+                <%= student.tReport %>
             </p>
 
         </div>
@@ -499,9 +475,7 @@
             </div>
 
             <p>
-                An excellent academic performance. Keep up the
-                dedication and continue to demonstrate good character
-                and responsibility.
+                <%= student.Treport %>
             </p>
 
         </div>
@@ -577,7 +551,7 @@
 
             <strong>Class Teacher</strong>
 
-            <span>18 December 2025</span>
+            <span>  Date: <%= new Date(result.createdAt).toLocaleDateString('en-GB') %></span>
 
         </div>
 
@@ -590,7 +564,7 @@
 
             <strong>Principal</strong>
 
-            <span>18 December 2025</span>
+            <span>  Date: <%= new Date(result.createdAt).toLocaleDateString('en-GB') %></span>
 
         </div>
 
@@ -632,40 +606,7 @@
 
 </div>
 <script src="https://cdn.tailwindcss.com"></script>
-<div class="result-actions flex flex-wrap items-center justify-center gap-3 my-6">
 
-    <a
-        href="/result/jpg"
-        class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg
-               bg-blue-600 text-white text-sm font-medium
-               hover:bg-blue-700 transition"
-    >
-        📷
-        Download Image
-    </a>
-
-    <a
-        href="/result/pdf"
-        class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg
-               bg-red-600 text-white text-sm font-medium
-               hover:bg-red-700 transition"
-    >
-        📄
-        Download PDF
-    </a>
-
-    <button
-        type="button"
-        onclick="window.print()"
-        class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg
-               bg-gray-800 text-white text-sm font-medium
-               hover:bg-gray-900 transition"
-    >
-        🖨️
-        Print Result
-    </button>
-
-</div>
 
 
 </body>

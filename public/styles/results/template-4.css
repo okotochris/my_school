@@ -32,6 +32,13 @@ body {
     padding: 11mm;
 
     background: white;
+
+    /*
+        Keep the original desktop layout.
+        On smaller screens the entire page
+        will be scaled down.
+    */
+    transform-origin: top center;
 }
 
 
@@ -62,6 +69,8 @@ body {
     width: 78px;
     height: 78px;
 
+    flex-shrink: 0;
+
     margin-right: 18px;
 
     padding: 5px;
@@ -82,6 +91,8 @@ body {
 
 .school-info {
     flex: 1;
+
+    min-width: 0;
 }
 
 .school-info h1 {
@@ -92,6 +103,12 @@ body {
     font-size: 21px;
 
     letter-spacing: .6px;
+
+    /*
+        Prevent the school name from
+        changing the desktop layout.
+    */
+    white-space: nowrap;
 }
 
 .motto {
@@ -115,6 +132,8 @@ body {
 
 .academic-badge {
     width: 90px;
+
+    flex-shrink: 0;
 
     padding: 10px;
 
@@ -170,6 +189,8 @@ body {
     border-right: 1px solid var(--border);
 
     text-align: center;
+
+    min-width: 0;
 }
 
 .term-bar div:last-child {
@@ -192,6 +213,8 @@ body {
     color: var(--primary);
 
     font-size: 8px;
+
+    white-space: nowrap;
 }
 
 
@@ -235,6 +258,10 @@ body {
     object-fit: cover;
 }
 
+.student-main {
+    min-width: 0;
+}
+
 .student-main .label {
     color: var(--muted);
 
@@ -249,6 +276,8 @@ body {
     color: var(--primary);
 
     font-size: 15px;
+
+    white-space: nowrap;
 }
 
 .student-meta {
@@ -271,6 +300,8 @@ body {
 
 .student-meta strong {
     font-size: 8px;
+
+    white-space: nowrap;
 }
 
 .student-summary {
@@ -363,6 +394,8 @@ body {
     color: var(--primary);
 
     font-size: 7px;
+
+    white-space: nowrap;
 }
 
 .result-table td {
@@ -389,6 +422,8 @@ body {
     text-align: left;
 
     font-weight: 600;
+
+    white-space: nowrap;
 }
 
 .result-table .total {
@@ -508,6 +543,8 @@ body {
 
 .panel {
     border: 1px solid var(--border);
+
+    min-width: 0;
 }
 
 .panel-heading {
@@ -534,6 +571,8 @@ body {
     border-right: 1px solid var(--border);
 
     text-align: center;
+
+    min-width: 0;
 }
 
 .attendance div:last-child {
@@ -546,6 +585,8 @@ body {
     color: var(--muted);
 
     font-size: 6px;
+
+    white-space: nowrap;
 }
 
 .attendance strong {
@@ -574,12 +615,16 @@ body {
 
 .development span {
     font-size: 7px;
+
+    white-space: nowrap;
 }
 
 .development strong {
     color: var(--secondary);
 
     font-size: 7px;
+
+    white-space: nowrap;
 }
 
 
@@ -599,6 +644,8 @@ body {
 
 .comment {
     border: 1px solid var(--border);
+
+    min-width: 0;
 }
 
 .comment-label {
@@ -666,6 +713,10 @@ body {
     padding: 6px;
 
     border-right: 1px solid var(--border);
+
+    text-align: center;
+
+    min-width: 0;
 }
 
 .grading-list div:last-child {
@@ -766,6 +817,73 @@ body {
 
 
 /* =====================================================
+   RESPONSIVE SCALING
+   DO NOT CHANGE THE LAYOUT
+===================================================== */
+
+/*
+    IMPORTANT:
+
+    The desktop layout remains the source of truth.
+
+    On smaller screens we DO NOT:
+
+    - hide the academic badge
+    - stack the school header
+    - change the term bar from 4 columns
+    - move the student summary below the student card
+    - change the student metadata
+    - make the result table scroll
+    - change summary from 4 columns to 2
+    - stack the two panels
+    - stack comments
+    - change grading from 6 columns
+    - rearrange signatures
+
+    The complete result simply becomes smaller.
+*/
+
+
+/* =====================================================
+   TABLET / SMALL LAPTOP
+===================================================== */
+
+@media screen and (max-width: 1000px) {
+
+    body {
+        background: white;
+
+        overflow-x: hidden;
+    }
+
+    .result-page {
+
+        /*
+            Keep the original A4 width.
+        */
+        width: 210mm;
+
+        max-width: none;
+
+        /*
+            Slightly scale the complete
+            result sheet.
+        */
+        transform: scale(0.90);
+
+        transform-origin: top center;
+
+        margin-top: 10px;
+
+        /*
+            Compensate for scaled height.
+        */
+        margin-bottom: -80px;
+    }
+}
+
+
+/* =====================================================
    MOBILE
 ===================================================== */
 
@@ -773,120 +891,61 @@ body {
 
     body {
         background: white;
+
+        overflow-x: hidden;
     }
 
     .result-page {
-        width: 100%;
 
-        min-height: auto;
+        /*
+            Keep the original A4 document.
+        */
+        width: 210mm;
+
+        max-width: none;
+
+        /*
+            Scale the entire result to fit
+            the phone width.
+
+            A4 width ≈ 793.7px.
+
+            Example:
+
+            390px phone
+            390 / 793.7
+            ≈ 0.49
+
+            Therefore the whole result
+            becomes approximately 49% of
+            its original size.
+        */
+        transform: scale(
+            calc(100vw / 793.7px)
+        );
+
+        transform-origin: top left;
 
         margin: 0;
-
-        padding: 10px;
     }
+}
 
-    .school-header {
-        align-items: flex-start;
-    }
 
-    .logo-wrapper {
-        width: 55px;
-        height: 55px;
+/* =====================================================
+   VERY SMALL PHONES
+===================================================== */
 
-        margin-right: 9px;
-    }
+@media screen and (max-width: 400px) {
 
-    .school-info h1 {
-        font-size: 14px;
-    }
+    .result-page {
 
-    .motto {
-        font-size: 7px;
-    }
+        width: 210mm;
 
-    .address,
-    .contact {
-        font-size: 5.5px;
-    }
+        transform: scale(
+            calc(100vw / 793.7px)
+        );
 
-    .academic-badge {
-        display: none;
-    }
-
-    .term-bar {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .term-bar div:nth-child(2n) {
-        border-right: none;
-    }
-
-    .term-bar div:nth-child(n+3) {
-        border-top: 1px solid var(--border);
-    }
-
-    .student-card {
-        grid-template-columns: 60px 1fr;
-    }
-
-    .student-photo {
-        width: 55px;
-        height: 68px;
-    }
-
-    .student-main h2 {
-        font-size: 13px;
-    }
-
-    .student-meta {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .student-summary {
-        grid-column: 1 / -1;
-
-        height: 55px;
-    }
-
-    .result-section {
-        overflow-x: auto;
-    }
-
-    .result-table {
-        min-width: 700px;
-    }
-
-    .summary-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .summary-box {
-        border-bottom: 1px solid var(--border);
-    }
-
-    .two-column,
-    .comments {
-        grid-template-columns: 1fr;
-    }
-
-    .grading {
-        overflow-x: auto;
-    }
-
-    .grading-list {
-        min-width: 500px;
-    }
-
-    .signature-section {
-        gap: 15px;
-    }
-
-    .footer {
-        flex-direction: column;
-
-        gap: 4px;
-
-        text-align: center;
+        transform-origin: top left;
     }
 }
 
@@ -897,11 +956,24 @@ body {
 
 @media print {
 
+    html,
     body {
+        margin: 0;
+
+        padding: 0;
+
         background: white;
     }
 
     .result-page {
+
+        /*
+            Remove all screen scaling.
+        */
+        transform: none;
+
+        transform-origin: initial;
+
         width: 210mm;
 
         min-height: 297mm;
@@ -909,6 +981,15 @@ body {
         margin: 0;
 
         padding: 10mm;
+    }
+
+
+    /* ---------------------------------------------
+       PREVENT UNNECESSARY PAGE BREAKS
+    --------------------------------------------- */
+
+    .result-table tr {
+        page-break-inside: avoid;
     }
 
     .student-card,
@@ -919,22 +1000,26 @@ body {
         page-break-inside: avoid;
     }
 
-    .result-table tr {
-        page-break-inside: avoid;
+
+    /* ---------------------------------------------
+       HIDE ACTION BUTTONS
+    --------------------------------------------- */
+
+    .no-print,
+    .result-actions,
+    .print-hidden,
+    .print\:hidden {
+        display: none !important;
     }
 }
 
 
 /* =====================================================
-   A4
+   A4 PAGE
 ===================================================== */
 
 @page {
     size: A4;
+
     margin: 0;
-}
-@media print {
-    .result-actions {
-        display: none !important;
-    }
 }

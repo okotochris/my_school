@@ -1,0 +1,1817 @@
+
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #e9eeea;
+
+    color: #26332c;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   REPORT SHEET
+========================================================= */
+
+.report-sheet {
+    width: 210mm;
+
+    min-height: 297mm;
+
+    margin: 20px auto;
+
+    padding: 8mm;
+
+    background: #fffef9;
+
+    overflow: hidden;
+
+    border: 1px solid #d7ddd7;
+}
+
+
+/* =========================================================
+   SCHOOL HEADER
+========================================================= */
+
+.school-header {
+    border: 1px solid #1f4d3a;
+
+    background: #fffef9;
+
+    overflow: hidden;
+}
+
+.header-line {
+    height: 6px;
+
+    background: #1f4d3a;
+}
+
+.school-header-content {
+    display: flex;
+
+    align-items: center;
+
+    min-height: 86px;
+
+    padding: 9px 11px;
+}
+
+.school-logo {
+    width: 68px;
+
+    height: 68px;
+
+    flex-shrink: 0;
+
+    padding: 4px;
+
+    margin-right: 14px;
+
+    border: 2px solid #b38a32;
+
+    border-radius: 50%;
+
+    background: #fffef9;
+
+    overflow: hidden;
+}
+
+.school-logo img {
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: contain;
+
+    border-radius: 50%;
+}
+
+.school-info {
+    flex: 1;
+
+    min-width: 0;
+
+    overflow: hidden;
+
+    text-align: center;
+}
+
+.official-text {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    margin-bottom: 3px;
+}
+
+.official-text span {
+    color: #b38a32;
+
+    font-size: 4.8px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+
+    white-space: nowrap;
+}
+
+.school-info h1 {
+    margin: 0;
+
+    color: #1f4d3a;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    letter-spacing: .4px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+.school-info p {
+    margin: 2px 0;
+
+    color: #65716a;
+
+    font-size: 6px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+.motto {
+    margin-top: 4px;
+
+    color: #7a5a1c;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 6.5px;
+
+    font-style: italic;
+
+    font-weight: bold;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+.report-stamp {
+    width: 72px;
+
+    height: 72px;
+
+    flex-shrink: 0;
+
+    margin-left: 12px;
+
+    padding: 4px;
+
+    border: 2px solid #1f4d3a;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+.stamp-inner {
+    width: 100%;
+
+    height: 100%;
+
+    border: 1px solid #b38a32;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+}
+
+.stamp-inner span {
+    color: #1f4d3a;
+
+    font-size: 4.5px;
+
+    letter-spacing: .8px;
+}
+
+.stamp-inner strong {
+    margin: 2px 0;
+
+    color: #b38a32;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 10px;
+
+    letter-spacing: .5px;
+}
+
+.header-bottom {
+    height: 3px;
+
+    background: #b38a32;
+}
+
+
+/* =========================================================
+   SESSION INFORMATION
+========================================================= */
+
+.session-information {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    margin-top: 8px;
+
+    border: 1px solid #bfc9c1;
+
+    background: #f4f6f1;
+}
+
+.session-item {
+    min-width: 0;
+
+    padding: 7px;
+
+    border-right: 1px solid #cdd5ce;
+
+    text-align: center;
+}
+
+.session-item:last-child {
+    border-right: none;
+}
+
+.session-item span {
+    display: block;
+
+    margin-bottom: 2px;
+
+    color: #718078;
+
+    font-size: 4.8px;
+
+    font-weight: bold;
+
+    letter-spacing: .6px;
+}
+
+.session-item strong {
+    display: block;
+
+    color: #1f4d3a;
+
+    font-size: 7px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   STUDENT CARD
+========================================================= */
+
+.student-card {
+    display: grid;
+
+    grid-template-columns: 64px minmax(0, 1fr) 82px;
+
+    gap: 12px;
+
+    align-items: center;
+
+    margin-top: 9px;
+
+    padding: 8px;
+
+    border: 1px solid #bfc9c1;
+
+    background: #fffef9;
+}
+
+.student-photo {
+    width: 60px;
+
+    height: 72px;
+
+    padding: 3px;
+
+    border: 1px solid #1f4d3a;
+
+    background: #f4f6f1;
+
+    overflow: hidden;
+}
+
+.student-photo img {
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.student-main {
+    min-width: 0;
+
+    overflow: hidden;
+}
+
+.student-label {
+    color: #b38a32;
+
+    font-size: 4.8px;
+
+    font-weight: bold;
+
+    letter-spacing: .8px;
+}
+
+.student-main h2 {
+    margin: 3px 0 6px;
+
+    color: #1f4d3a;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 14px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+.student-details {
+    display: grid;
+
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    gap: 7px;
+}
+
+.student-details div {
+    min-width: 0;
+}
+
+.student-details span {
+    display: block;
+
+    margin-bottom: 2px;
+
+    color: #7b8780;
+
+    font-size: 4.5px;
+
+    white-space: nowrap;
+}
+
+.student-details strong {
+    display: block;
+
+    color: #37453d;
+
+    font-size: 6.5px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+.position-card {
+    height: 70px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #1f4d3a;
+
+    color: white;
+
+    text-align: center;
+}
+
+.position-card span {
+    font-size: 4.5px;
+
+    letter-spacing: .5px;
+}
+
+.position-card strong {
+    margin: 3px 0;
+
+    color: #e4c36a;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 18px;
+}
+
+.position-card small {
+    color: #d8e2dc;
+
+    font-size: 4px;
+}
+
+
+/* =========================================================
+   RESULT TITLE
+========================================================= */
+
+.result-title {
+    display: flex;
+
+    align-items: center;
+
+    margin-top: 11px;
+
+    padding: 6px 8px;
+
+    border-top: 2px solid #1f4d3a;
+
+    border-bottom: 1px solid #bfc9c1;
+
+    background: #f4f6f1;
+}
+
+.title-number {
+    width: 23px;
+
+    height: 23px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-right: 8px;
+
+    border: 1px solid #b38a32;
+
+    color: #1f4d3a;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 9px;
+
+    font-weight: bold;
+}
+
+.result-title span {
+    display: block;
+
+    color: #b38a32;
+
+    font-size: 4.5px;
+
+    letter-spacing: .8px;
+}
+
+.result-title h3 {
+    margin: 2px 0 0;
+
+    color: #1f4d3a;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 8px;
+
+    letter-spacing: .2px;
+}
+
+
+/* =========================================================
+   RESULTS TABLE
+========================================================= */
+
+.results-container {
+    width: 100%;
+
+    overflow: hidden;
+}
+
+.result-table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    table-layout: fixed;
+}
+
+.result-table th {
+    padding: 6px 3px;
+
+    background: #1f4d3a;
+
+    border: 1px solid #173b2c;
+
+    color: white;
+
+    font-size: 5.5px;
+
+    text-align: center;
+
+    white-space: nowrap;
+}
+
+.result-table th small {
+    margin-left: 1px;
+
+    color: #d9e4dc;
+
+    font-size: 3.8px;
+}
+
+.result-table td {
+    padding: 5px 3px;
+
+    border: 1px solid #cbd3cd;
+
+    color: #46534c;
+
+    font-size: 6.8px;
+
+    text-align: center;
+
+    vertical-align: middle;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+.result-table tbody tr:nth-child(even) {
+    background: #f5f7f3;
+}
+
+.number-column {
+    width: 25px;
+}
+
+.subject-column {
+    width: 150px;
+
+    text-align: left !important;
+
+    font-weight: bold;
+
+    color: #293d32 !important;
+}
+
+.total-score {
+    color: #1f4d3a !important;
+
+    font-weight: bold;
+}
+
+.grade {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 21px;
+
+    height: 20px;
+
+    padding: 0 4px;
+
+    border: 1px solid #b38a32;
+
+    background: #fff9e8;
+
+    color: #765718;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 7px;
+
+    font-weight: bold;
+}
+
+.remark {
+    font-size: 5.8px !important;
+}
+
+
+/* =========================================================
+   PERFORMANCE SUMMARY
+========================================================= */
+
+.result-summary {
+    margin-top: 9px;
+
+    border: 1px solid #bfc9c1;
+
+    overflow: hidden;
+}
+
+.summary-heading {
+    padding: 5px 7px;
+
+    background: #e9eee9;
+
+    border-bottom: 1px solid #cbd3cd;
+
+    color: #1f4d3a;
+
+    font-size: 5px;
+
+    font-weight: bold;
+
+    letter-spacing: .6px;
+}
+
+.summary-items {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.summary-item {
+    min-width: 0;
+
+    padding: 6px;
+
+    border-right: 1px solid #d6ddd7;
+
+    text-align: center;
+}
+
+.summary-item:last-child {
+    border-right: none;
+}
+
+.summary-item span {
+    display: block;
+
+    color: #758079;
+
+    font-size: 4.5px;
+}
+
+.summary-item strong {
+    display: inline-block;
+
+    margin-top: 2px;
+
+    color: #1f4d3a;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 12px;
+}
+
+.summary-item small {
+    color: #758079;
+
+    font-size: 5px;
+}
+
+
+/* =========================================================
+   SECTION BAR
+========================================================= */
+
+.section-bar {
+    display: flex;
+
+    align-items: center;
+
+    padding: 5px 7px;
+
+    background: #1f4d3a;
+
+    color: white;
+}
+
+.section-bar span {
+    width: 18px;
+
+    height: 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-right: 6px;
+
+    border: 1px solid #d8bd65;
+
+    color: #e4c36a;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 5.5px;
+
+    font-weight: bold;
+}
+
+.section-bar strong {
+    font-size: 5.5px;
+
+    letter-spacing: .5px;
+}
+
+
+/* =========================================================
+   ATTENDANCE
+========================================================= */
+
+.attendance-section {
+    margin-top: 9px;
+
+    border: 1px solid #bfc9c1;
+
+    overflow: hidden;
+}
+
+.attendance-grid {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.attendance-grid div {
+    padding: 7px 4px;
+
+    border-right: 1px solid #d6ddd7;
+
+    text-align: center;
+}
+
+.attendance-grid div:last-child {
+    border-right: none;
+}
+
+.attendance-grid span {
+    display: block;
+
+    color: #748078;
+
+    font-size: 4.5px;
+}
+
+.attendance-grid strong {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #1f4d3a;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   DEVELOPMENT
+========================================================= */
+
+.development-section {
+    margin-top: 9px;
+
+    border: 1px solid #bfc9c1;
+
+    overflow: hidden;
+}
+
+.development-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.development-item {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 5px;
+
+    min-width: 0;
+
+    padding: 6px 8px;
+
+    border-right: 1px solid #d6ddd7;
+
+    border-bottom: 1px solid #d6ddd7;
+}
+
+.development-item:nth-child(3n) {
+    border-right: none;
+}
+
+.development-item:nth-last-child(-n + 3) {
+    border-bottom: none;
+}
+
+.development-item span {
+    min-width: 0;
+
+    color: #536159;
+
+    font-size: 5.5px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+.development-item strong {
+    flex-shrink: 0;
+
+    color: #1f4d3a;
+
+    font-size: 5.5px;
+}
+
+
+/* =========================================================
+   COMMENTS
+========================================================= */
+
+.comments-section {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(0, 1fr);
+
+    gap: 8px;
+
+    margin-top: 9px;
+}
+
+.comment-box {
+    min-width: 0;
+
+    border: 1px solid #bfc9c1;
+
+    overflow: hidden;
+}
+
+.comment-title {
+    display: flex;
+
+    align-items: center;
+
+    padding: 5px 7px;
+
+    background: #f0f3ee;
+
+    border-bottom: 1px solid #d0d7d1;
+}
+
+.comment-title span {
+    width: 18px;
+
+    height: 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-right: 6px;
+
+    background: #1f4d3a;
+
+    color: #e4c36a;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 5px;
+}
+
+.comment-title strong {
+    color: #1f4d3a;
+
+    font-size: 5px;
+
+    letter-spacing: .3px;
+
+    white-space: nowrap;
+}
+
+.comment-box p {
+    min-height: 31px;
+
+    margin: 0;
+
+    padding: 7px;
+
+    color: #536159;
+
+    font-size: 6.3px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   GRADING
+========================================================= */
+
+.grading-section {
+    margin-top: 9px;
+
+    border: 1px solid #bfc9c1;
+
+    overflow: hidden;
+}
+
+.grading-title {
+    padding: 5px 7px;
+
+    background: #b38a32;
+
+    color: #fffef9;
+
+    font-size: 5px;
+
+    font-weight: bold;
+
+    letter-spacing: .6px;
+}
+
+.grading-grid {
+    display: grid;
+
+    grid-template-columns: repeat(6, 1fr);
+}
+
+.grading-grid div {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 0;
+
+    padding: 5px 2px;
+
+    border-right: 1px solid #d6ddd7;
+
+    text-align: center;
+}
+
+.grading-grid div:last-child {
+    border-right: none;
+}
+
+.grading-grid strong {
+    color: #1f4d3a;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 9px;
+}
+
+.grading-grid span {
+    margin-top: 1px;
+
+    color: #536159;
+
+    font-size: 4.5px;
+}
+
+.grading-grid small {
+    margin-top: 1px;
+
+    color: #87918b;
+
+    font-size: 4px;
+}
+
+
+/* =========================================================
+   SIGNATURES
+========================================================= */
+
+.signature-section {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 30px;
+
+    margin-top: 18px;
+}
+
+.signature {
+    min-width: 0;
+
+    text-align: center;
+}
+
+.signature-space {
+    height: 20px;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: center;
+}
+
+.signature-space img {
+    max-width: 75px;
+
+    max-height: 26px;
+
+    object-fit: contain;
+}
+
+.signature-line {
+    border-top: 1px solid #536159;
+}
+
+.signature strong {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #1f4d3a;
+
+    font-size: 5.5px;
+
+    white-space: nowrap;
+}
+
+.signature span {
+    display: block;
+
+    margin-top: 1px;
+
+    color: #7b8780;
+
+    font-size: 4.5px;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.report-footer {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr 1fr;
+
+    align-items: center;
+
+    margin-top: 11px;
+
+    padding-top: 5px;
+
+    border-top: 2px solid #1f4d3a;
+
+    color: #78847d;
+
+    font-size: 4.5px;
+}
+
+.footer-left {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+}
+
+.footer-left strong {
+    color: #1f4d3a;
+}
+
+.footer-center {
+    text-align: center;
+}
+
+.footer-center strong {
+    color: #b38a32;
+}
+
+.footer-right {
+    text-align: right;
+
+    color: #1f4d3a;
+
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   PRINT BUTTON
+========================================================= */
+
+.result-actions {
+    display: flex;
+
+    justify-content: center;
+
+    margin: 20px auto;
+}
+
+.result-actions button {
+    padding: 9px 18px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    background: #1f4d3a;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   MOBILE RESPONSIVE
+========================================================= */
+
+@media screen and (max-width: 700px) {
+
+    html,
+    body {
+        width: 100%;
+
+        overflow-x: hidden;
+    }
+
+    body {
+        background: white;
+
+        font-size: 7px;
+    }
+
+    .report-sheet {
+        width: 100%;
+
+        min-width: 0;
+
+        min-height: auto;
+
+        margin: 0;
+
+        padding: 5px;
+
+        border: none;
+    }
+
+
+    /* HEADER */
+
+    .header-line {
+        height: 3px;
+    }
+
+    .school-header-content {
+        min-height: 57px;
+
+        padding: 6px 7px;
+    }
+
+    .school-logo {
+        width: 45px;
+
+        height: 45px;
+
+        padding: 2px;
+
+        margin-right: 7px;
+
+        border-width: 1px;
+    }
+
+    .official-text {
+        gap: 4px;
+
+        margin-bottom: 1px;
+    }
+
+    .official-text span {
+        font-size: clamp(2.5px, 1vw, 3.5px);
+
+        letter-spacing: .4px;
+    }
+
+    .school-info h1 {
+        font-size: clamp(8px, 3.5vw, 14px);
+    }
+
+    .school-info p {
+        font-size: clamp(2.8px, 1.2vw, 4.5px);
+
+        margin: 1px 0;
+    }
+
+    .motto {
+        margin-top: 2px;
+
+        font-size: clamp(2.8px, 1.3vw, 5px);
+    }
+
+    .report-stamp {
+        width: 48px;
+
+        height: 48px;
+
+        margin-left: 5px;
+
+        padding: 2px;
+
+        border-width: 1px;
+    }
+
+    .stamp-inner {
+        border-width: 1px;
+    }
+
+    .stamp-inner span {
+        font-size: 2.5px;
+    }
+
+    .stamp-inner strong {
+        margin: 1px 0;
+
+        font-size: 6px;
+    }
+
+    .header-bottom {
+        height: 2px;
+    }
+
+
+    /* SESSION */
+
+    .session-item {
+        padding: 4px 2px;
+    }
+
+    .session-item span {
+        font-size: clamp(2.5px, .9vw, 3.5px);
+    }
+
+    .session-item strong {
+        font-size: clamp(3.2px, 1.3vw, 5.5px);
+    }
+
+
+    /* STUDENT */
+
+    .student-card {
+        grid-template-columns: 45px minmax(0, 1fr) 57px;
+
+        gap: 6px;
+
+        margin-top: 6px;
+
+        padding: 5px;
+    }
+
+    .student-photo {
+        width: 42px;
+
+        height: 53px;
+
+        padding: 2px;
+    }
+
+    .student-label {
+        font-size: clamp(2.7px, .9vw, 3.8px);
+    }
+
+    .student-main h2 {
+        margin: 2px 0 4px;
+
+        font-size: clamp(6px, 2.5vw, 10px);
+    }
+
+    .student-details {
+        gap: 3px;
+    }
+
+    .student-details span {
+        margin-bottom: 1px;
+
+        font-size: clamp(2.5px, .9vw, 3.5px);
+    }
+
+    .student-details strong {
+        font-size: clamp(2.8px, 1.1vw, 4.8px);
+    }
+
+    .position-card {
+        height: 51px;
+    }
+
+    .position-card span {
+        font-size: clamp(2.5px, .9vw, 3.5px);
+    }
+
+    .position-card strong {
+        margin: 2px 0;
+
+        font-size: 12px;
+    }
+
+    .position-card small {
+        font-size: 2.8px;
+    }
+
+
+    /* RESULT TITLE */
+
+    .result-title {
+        margin-top: 7px;
+
+        padding: 4px 5px;
+    }
+
+    .title-number {
+        width: 16px;
+
+        height: 16px;
+
+        margin-right: 5px;
+
+        font-size: 6px;
+    }
+
+    .result-title span {
+        font-size: clamp(2.5px, .9vw, 3.5px);
+    }
+
+    .result-title h3 {
+        margin-top: 1px;
+
+        font-size: clamp(4px, 1.5vw, 5.5px);
+    }
+
+
+    /* RESULTS TABLE */
+
+    .result-table th {
+        padding: 4px 2px;
+
+        font-size: clamp(2.7px, 1vw, 4px);
+    }
+
+    .result-table th small {
+        font-size: clamp(2px, .7vw, 3px);
+    }
+
+    .result-table td {
+        padding: 3.5px 2px;
+
+        font-size: clamp(2.8px, 1.05vw, 4.8px);
+    }
+
+    .number-column {
+        width: 20px;
+    }
+
+    .subject-column {
+        width: 95px;
+    }
+
+    .remark {
+        font-size: clamp(2.5px, .9vw, 4px) !important;
+    }
+
+    .grade {
+        min-width: 16px;
+
+        height: 16px;
+
+        padding: 0 3px;
+
+        font-size: 4.8px;
+    }
+
+
+    /* SUMMARY */
+
+    .result-summary {
+        margin-top: 5px;
+    }
+
+    .summary-heading {
+        padding: 4px 5px;
+
+        font-size: clamp(2.7px, .9vw, 3.8px);
+    }
+
+    .summary-item {
+        padding: 4px 2px;
+    }
+
+    .summary-item span {
+        font-size: clamp(2.4px, .8vw, 3.4px);
+    }
+
+    .summary-item strong {
+        margin-top: 1px;
+
+        font-size: clamp(6px, 2.4vw, 9px);
+    }
+
+    .summary-item small {
+        font-size: 3px;
+    }
+
+
+    /* SECTION BAR */
+
+    .section-bar {
+        padding: 4px 5px;
+    }
+
+    .section-bar span {
+        width: 14px;
+
+        height: 14px;
+
+        margin-right: 4px;
+
+        font-size: 4px;
+    }
+
+    .section-bar strong {
+        font-size: clamp(2.8px, 1vw, 4px);
+    }
+
+
+    /* ATTENDANCE */
+
+    .attendance-section,
+    .development-section {
+        margin-top: 6px;
+    }
+
+    .attendance-grid div {
+        padding: 5px 2px;
+    }
+
+    .attendance-grid span {
+        font-size: clamp(2.4px, .85vw, 3.3px);
+    }
+
+    .attendance-grid strong {
+        margin-top: 2px;
+
+        font-size: clamp(6px, 2.3vw, 8px);
+    }
+
+
+    /* DEVELOPMENT */
+
+    .development-item {
+        padding: 4px 5px;
+
+        gap: 3px;
+    }
+
+    .development-item span {
+        font-size: clamp(2.7px, .95vw, 4px);
+    }
+
+    .development-item strong {
+        font-size: clamp(2.6px, .9vw, 3.8px);
+    }
+
+
+    /* COMMENTS */
+
+    .comments-section {
+        gap: 5px;
+
+        margin-top: 6px;
+    }
+
+    .comment-title {
+        padding: 4px 5px;
+    }
+
+    .comment-title span {
+        width: 14px;
+
+        height: 14px;
+
+        margin-right: 4px;
+
+        font-size: 4px;
+    }
+
+    .comment-title strong {
+        font-size: clamp(2.6px, .9vw, 3.8px);
+    }
+
+    .comment-box p {
+        min-height: 27px;
+
+        padding: 5px;
+
+        font-size: clamp(2.8px, 1vw, 4.2px);
+
+        line-height: 1.4;
+    }
+
+
+    /* GRADING */
+
+    .grading-section {
+        margin-top: 6px;
+    }
+
+    .grading-title {
+        padding: 4px 5px;
+
+        font-size: clamp(2.8px, .9vw, 3.8px);
+    }
+
+    .grading-grid div {
+        padding: 4px 1px;
+    }
+
+    .grading-grid strong {
+        font-size: clamp(6px, 2vw, 8px);
+    }
+
+    .grading-grid span {
+        font-size: clamp(2.4px, .8vw, 3.4px);
+    }
+
+    .grading-grid small {
+        font-size: clamp(2.2px, .7vw, 3px);
+    }
+
+
+    /* SIGNATURE */
+
+    .signature-section {
+        gap: 10px;
+
+        margin-top: 12px;
+    }
+
+    .signature-space {
+        height: 13px;
+    }
+
+    .signature-space img {
+        max-width: 52px;
+
+        max-height: 18px;
+    }
+
+    .signature strong {
+        margin-top: 2px;
+
+        font-size: clamp(2.8px, .9vw, 4px);
+    }
+
+    .signature span {
+        font-size: clamp(2.5px, .8vw, 3.3px);
+    }
+
+
+    /* FOOTER */
+
+    .report-footer {
+        gap: 5px;
+
+        margin-top: 7px;
+
+        padding-top: 4px;
+
+        font-size: clamp(2.4px, .8vw, 3.3px);
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media screen and (max-width: 400px) {
+
+    .report-sheet {
+        padding: 3px;
+    }
+
+    .school-header-content {
+        padding: 5px;
+    }
+
+    .school-logo {
+        width: 38px;
+
+        height: 38px;
+
+        margin-right: 5px;
+    }
+
+    .report-stamp {
+        width: 41px;
+
+        height: 41px;
+    }
+
+    .student-card {
+        grid-template-columns: 40px minmax(0, 1fr) 51px;
+
+        gap: 4px;
+
+        padding: 4px;
+    }
+
+    .student-photo {
+        width: 37px;
+
+        height: 47px;
+    }
+
+    .student-details {
+        gap: 2px;
+    }
+
+    .result-table th,
+    .result-table td {
+        padding: 3px 1px;
+    }
+
+    .subject-column {
+        width: 85px;
+    }
+
+    .comments-section {
+        gap: 3px;
+    }
+
+    .signature-section {
+        gap: 6px;
+    }
+}
+
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+@media print {
+
+    html,
+    body {
+        width: 100%;
+
+        margin: 0;
+
+        padding: 0;
+
+        background: white !important;
+
+        -webkit-print-color-adjust: exact;
+
+        print-color-adjust: exact;
+    }
+
+    .result-actions,
+    .no-print {
+        display: none !important;
+    }
+
+    .report-sheet {
+        width: 210mm;
+
+        min-height: 297mm;
+
+        margin: 0;
+
+        padding: 8mm;
+
+        border: none;
+
+        background: #fffef9;
+
+        overflow: visible;
+    }
+
+    .school-header,
+    .session-information,
+    .student-card,
+    .result-summary,
+    .attendance-section,
+    .development-section,
+    .comment-box,
+    .grading-section,
+    .signature-section {
+        break-inside: avoid;
+
+        page-break-inside: avoid;
+    }
+
+    .result-table tr {
+        break-inside: avoid;
+
+        page-break-inside: avoid;
+    }
+
+    .result-table thead {
+        display: table-header-group;
+    }
+}
+
+
+/* =========================================================
+   A4
+========================================================= */
+
+@page {
+    size: A4;
+
+    margin: 0;
+}

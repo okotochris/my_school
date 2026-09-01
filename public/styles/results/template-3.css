@@ -578,7 +578,7 @@ body {
 
     gap: 12px;
 
-    margin-top: 16px;
+    margin-top: 6px;
 }
 
 .comment-box {
@@ -586,7 +586,7 @@ body {
 }
 
 .comment-title {
-    padding: 7px 9px;
+    padding: 2px 9px;
 
     background: var(--primary);
 
@@ -598,7 +598,7 @@ body {
 }
 
 .comment-box p {
-    min-height: 60px;
+    min-height: 10px;
 
     margin: 0;
 
@@ -617,7 +617,7 @@ body {
 ===================================================== */
 
 .grading-section {
-    margin-top: 15px;
+    margin-top:7px;
 
     border: 1px solid var(--border);
 }
