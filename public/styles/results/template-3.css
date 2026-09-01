@@ -1,3 +1,4 @@
+
 * {
     box-sizing: border-box;
 }
@@ -29,6 +30,8 @@ body {
     padding: 12mm;
 
     background: #ffffff;
+
+    transform-origin: top center;
 }
 
 
@@ -355,6 +358,8 @@ body {
     font-size: 7px;
 
     text-align: center;
+
+    white-space: nowrap;
 }
 
 .academic-table th small {
@@ -526,6 +531,8 @@ body {
     width: 100%;
 
     border-collapse: collapse;
+
+    table-layout: fixed;
 }
 
 .conduct-table th {
@@ -538,6 +545,8 @@ body {
     border: 1px solid var(--border);
 
     font-size: 7px;
+
+    white-space: nowrap;
 }
 
 .conduct-table td {
@@ -743,122 +752,125 @@ body {
 
 
 /* =====================================================
+   RESPONSIVE SCALING
+   KEEP THE EXACT DESKTOP STRUCTURE
+===================================================== */
+
+/*
+    IMPORTANT:
+
+    The layout is intentionally NOT changed on mobile.
+
+    We do not:
+    - stack the header
+    - hide the report information
+    - change 3 columns to 2 columns
+    - change 2 columns to 1 column
+    - make the academic table scroll horizontally
+    - change the grading layout
+    - rearrange the signatures
+    - remove any information
+
+    Instead, the entire A4 sheet is scaled down.
+*/
+
+
+/* =====================================================
+   TABLET / SMALL LAPTOP
+===================================================== */
+
+@media screen and (max-width: 1000px) {
+
+    body {
+        background: #ffffff;
+
+        overflow-x: hidden;
+    }
+
+    .result-sheet {
+
+        /*
+            Keep the original A4 width.
+        */
+        width: 210mm;
+
+        max-width: none;
+
+        /*
+            Slightly reduce the entire sheet.
+        */
+        transform: scale(0.90);
+
+        transform-origin: top center;
+
+        margin-top: 10px;
+
+        /*
+            Compensate for scaling.
+        */
+        margin-bottom: -80px;
+    }
+}
+
+
+/* =====================================================
    MOBILE
 ===================================================== */
 
 @media screen and (max-width: 700px) {
 
     body {
-        background: white;
+        background: #ffffff;
+
+        overflow-x: hidden;
     }
 
     .result-sheet {
-        width: 100%;
 
-        min-height: auto;
+        /*
+            Keep the complete original
+            A4 layout.
+        */
+        width: 210mm;
+
+        max-width: none;
+
+        /*
+            A4 width is approximately
+            793.7 CSS pixels.
+
+            Scale the entire sheet to
+            the available viewport width.
+
+            Nothing inside the result
+            is rearranged.
+        */
+        transform: scale(
+            calc(100vw / 793.7px)
+        );
+
+        transform-origin: top left;
 
         margin: 0;
-
-        padding: 10px;
     }
+}
 
-    .header-top {
-        padding: 10px;
-    }
 
-    .logo {
-        width: 60px;
-        height: 60px;
+/* =====================================================
+   VERY SMALL PHONES
+===================================================== */
 
-        margin-right: 10px;
-    }
+@media screen and (max-width: 400px) {
 
-    .school-name {
-        font-size: 15px;
-    }
+    .result-sheet {
 
-    .school-motto {
-        font-size: 8px;
-    }
+        width: 210mm;
 
-    .school-address,
-    .school-contact {
-        font-size: 6px;
-    }
+        transform: scale(
+            calc(100vw / 793.7px)
+        );
 
-    .report-information {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .report-information div:last-child {
-        grid-column: 1 / -1;
-
-        border-top: 1px solid var(--border);
-    }
-
-    .student-information {
-        grid-template-columns: 65px 1fr;
-    }
-
-    .photo-box {
-        width: 60px;
-        height: 75px;
-    }
-
-    .student-full-name {
-        font-size: 14px;
-    }
-
-    .details-row {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .academic-record {
-        overflow-x: auto;
-    }
-
-    .academic-table {
-        min-width: 700px;
-    }
-
-    .summary-content {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .summary-item {
-        border-bottom: 1px solid var(--border);
-    }
-
-    .attendance-content {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .attendance-stat {
-        border-bottom: 1px solid var(--border);
-    }
-
-    .comments-section {
-        grid-template-columns: 1fr;
-    }
-
-    .grading-section {
-        overflow-x: auto;
-    }
-
-    .grading-grid {
-        min-width: 500px;
-    }
-
-    .signatures {
-        gap: 15px;
-    }
-
-    .result-footer {
-        flex-direction: column;
-
-        gap: 4px;
-
-        text-align: center;
+        transform-origin: top left;
     }
 }
 
@@ -869,11 +881,24 @@ body {
 
 @media print {
 
+    html,
     body {
+        margin: 0;
+
+        padding: 0;
+
         background: white;
     }
 
     .result-sheet {
+
+        /*
+            Remove mobile/tablet scaling.
+        */
+        transform: none;
+
+        transform-origin: initial;
+
         width: 210mm;
 
         min-height: 297mm;
@@ -883,10 +908,20 @@ body {
         padding: 10mm;
     }
 
+
+    /* ---------------------------------------------
+       KEEP TABLE ROWS TOGETHER
+    --------------------------------------------- */
+
     .academic-table tr,
     .conduct-table tr {
         page-break-inside: avoid;
     }
+
+
+    /* ---------------------------------------------
+       KEEP MAJOR SECTIONS TOGETHER
+    --------------------------------------------- */
 
     .student-information,
     .performance-summary,
@@ -896,14 +931,26 @@ body {
     .grading-section {
         page-break-inside: avoid;
     }
+
+
+    /* ---------------------------------------------
+       HIDE BUTTONS / CONTROLS
+    --------------------------------------------- */
+
+    .no-print,
+    .print-hidden,
+    .print\:hidden {
+        display: none !important;
+    }
 }
 
 
 /* =====================================================
-   A4
+   A4 PAGE
 ===================================================== */
 
 @page {
     size: A4;
+
     margin: 0;
 }

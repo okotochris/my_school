@@ -1,4 +1,3 @@
-
 * {
     box-sizing: border-box;
 }
@@ -18,15 +17,19 @@ body {
 
 
 /* =====================================================
-   MAIN CONTAINER
+   MAIN A4 CONTAINER
 ===================================================== */
 
 .result-container {
     width: 210mm;
     min-height: 297mm;
+
     margin: 20px auto;
     padding: 12mm;
+
     background: #ffffff;
+
+    transform-origin: top center;
 }
 
 
@@ -37,6 +40,7 @@ body {
 .top-header {
     display: grid;
     grid-template-columns: 85px 1fr 120px;
+
     align-items: center;
 
     min-height: 105px;
@@ -44,7 +48,6 @@ body {
     padding: 15px;
 
     background: var(--primary);
-
     color: white;
 
     border-bottom: 5px solid var(--accent);
@@ -118,20 +121,18 @@ body {
 
     height: 70px;
 
-    border-left: 1px solid rgba(255,255,255,.4);
+    border-left: 1px solid rgba(255, 255, 255, .4);
 
     text-align: center;
 }
 
 .session-box span {
     font-size: 8px;
-
     opacity: .8;
 }
 
 .session-box strong {
     margin: 5px 0;
-
     font-size: 13px;
 }
 
@@ -365,6 +366,8 @@ body {
     font-size: 8px;
 
     text-align: center;
+
+    white-space: nowrap;
 }
 
 .result-table td {
@@ -762,8 +765,6 @@ body {
 }
 
 
-
-
 /* =====================================================
    FOOTER
 ===================================================== */
@@ -790,105 +791,90 @@ body {
 
 
 /* =====================================================
+   SCREEN RESPONSIVENESS
+   KEEP EXACT SAME LAYOUT
+===================================================== */
+
+/*
+   IMPORTANT:
+   We do NOT change the grids, flex directions,
+   table widths, session box, comments, etc.
+
+   The complete A4 document is scaled down instead.
+*/
+
+
+/* Small laptops / tablets */
+@media screen and (max-width: 950px) {
+
+    body {
+        background: #ffffff;
+
+        overflow-x: hidden;
+    }
+
+    .result-container {
+        /*
+         * 90% scale
+         */
+        transform: scale(0.90);
+
+        margin-top: 10px;
+        margin-bottom: -30px;
+    }
+}
+
+
+/* =====================================================
    MOBILE
 ===================================================== */
 
 @media screen and (max-width: 700px) {
 
     body {
-        background: white;
+        background: #ffffff;
+
+        overflow-x: hidden;
     }
 
     .result-container {
-        width: 100%;
 
-        min-height: auto;
+        /*
+         * A4 width is approximately 793.7px.
+         *
+         * Example:
+         * 390px phone
+         *
+         * 390 / 793.7 = 0.491
+         *
+         * So the entire result becomes approximately
+         * 49% of its original size.
+         */
+
+        transform: scale(
+            calc(100vw / 793.7px)
+        );
+
+        transform-origin: top left;
 
         margin: 0;
-
-        padding: 10px;
     }
+}
 
-    .top-header {
-        grid-template-columns: 60px 1fr;
 
-        padding: 10px;
-    }
+/* =====================================================
+   VERY SMALL MOBILE
+===================================================== */
 
-    .school-logo {
-        width: 50px;
-        height: 50px;
-    }
+@media screen and (max-width: 400px) {
 
-    .school-heading h1 {
-        font-size: 15px;
-    }
+    .result-container {
 
-    .school-address,
-    .school-contact {
-        font-size: 7px;
-    }
+        transform: scale(
+            calc(100vw / 793.7px)
+        );
 
-    .session-box {
-        display: none;
-    }
-
-    .student-profile {
-        grid-template-columns: 65px 1fr;
-
-        gap: 10px;
-    }
-
-    .student-photo {
-        width: 60px;
-        height: 70px;
-    }
-
-    .performance-card {
-        grid-column: 1 / -1;
-
-        height: 60px;
-    }
-
-    .details-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .result-table {
-        min-width: 700px;
-    }
-
-    .academic-section {
-        overflow-x: auto;
-    }
-
-    .summary-section {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .lower-grid,
-    .comments-section {
-        grid-template-columns: 1fr;
-    }
-
-    .grading-section {
-        overflow-x: auto;
-    }
-
-    .grading-items {
-        min-width: 500px;
-    }
-
-    .signature-section {
-        gap: 15px;
-    }
-
-    .footer {
-        flex-direction: column;
-
-        gap: 4px;
-
-        text-align: center;
+        transform-origin: top left;
     }
 }
 
@@ -899,11 +885,16 @@ body {
 
 @media print {
 
+    html,
     body {
+        margin: 0;
+        padding: 0;
+
         background: white;
     }
 
     .result-container {
+
         width: 210mm;
 
         min-height: 297mm;
@@ -911,7 +902,14 @@ body {
         margin: 0;
 
         padding: 10mm;
+
+        transform: none;
     }
+
+    /*
+       Prevent individual sections from being
+       split across pages.
+    */
 
     .result-table tr {
         page-break-inside: avoid;
@@ -922,6 +920,16 @@ body {
     .student-profile,
     .summary-card {
         page-break-inside: avoid;
+    }
+
+    /*
+       Hide buttons and controls during printing.
+    */
+
+    .print-hidden,
+    .print\:hidden,
+    .no-print {
+        display: none !important;
     }
 }
 
