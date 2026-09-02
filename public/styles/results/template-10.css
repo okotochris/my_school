@@ -1,79 +1,950 @@
-*{
-    padding:0px;
-    margin: 0px;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-.container{
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    background: #eeeeee;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #111;
+}
+
+/* =========================================================
+   MAIN RESULT CONTAINER
+========================================================= */
+
+.container {
     width: 700px;
-    overflow:hidden;
-    margin:0px auto;    
+    max-width: calc(100% - 20px);
+    margin: 15px auto;
+    padding: 10px;
+    background: #fff;
+    overflow: hidden;
 }
-.title{
-    display:flex;
-    flex-direction: row;
+.attendanceSection {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 7px;
+    background:rgb(88, 2, 248);
+}
+
+.attendanceItem {
+    flex: 1;
+    display: flex;
+    gap:6px;
+    align-items: center;
+    border-bottom: 1px solid blue;
+    padding: 4px 5px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.attendanceItem span {
+    color: rgb(255, 253, 253);
+}
+
+.attendanceItem strong {
+    color: #f8f4f4;
+}
+/* =========================================================
+   SCHOOL HEADER
+========================================================= */
+
+.header {
+    width: 100%;
+    border-bottom: 2px solid blue;
+    padding-bottom: 8px;
+}
+
+.schoolHeader {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    min-height: 85px;
+}
+
+/* School logo */
+
+.schoolLogo {
+    width: 75px;
+    height: 75px;
+    flex: 0 0 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-right: 10px;
+}
+
+.schoolLogo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+/* School details */
+
+.schoolDetails {
+    flex: 1;
+    text-align: center;
+    min-width: 0;
+}
+
+.schoolDetails h1 {
+    color: blue;
+    font-size: 30px;
+    line-height: 1.1;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.schoolAddress {
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 1.25;
+}
+
+.schoolPhone {
+    color: red;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 3px;
+}
+
+/* =========================================================
+   STUDENT ID + PASSPORT SECTION
+========================================================= */
+
+.studentSection {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 10px;
+    gap: 15px;
+}
+
+
+.studentIds {
+    width: 100%;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.studentDetails {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border: 1.5px solid blue;
+}
+
+.detailItem {
+    min-height: 30px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid blue;
+    border-right: 1px solid blue;
+    padding: 3px 6px;
+    gap: 5px;
+    min-width: 0;
+}
+
+.detailItem:nth-last-child(-n + 2) {
+    border-bottom: none;
+}
+
+.detailItem:nth-child(even) {
+    border-right: none;
+}
+
+.detailLabel {
+    color: red;
+    font-size: 9px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.detailValue {
+    color: #111;
+    font-size: 10px;
+    font-weight: bold;
+    overflow-wrap: anywhere;
+}
+
+.studentPassport {
+    width: 80px;
+    height: 96px;
+    flex: 0 0 80px;
+    border: 2px solid #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #fff;
+}
+
+.studentPassport img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.passportPlaceholder {
+    font-size: 8px;
+    font-weight: bold;
+    color: #777;
+    text-align: center;
+}
+
+.idBox {
+    width: 150px;
+    max-width: 100%;
+    min-height: 25px;
+    border: 2px solid #111;
+    padding: 3px 5px;
+    font-size: 13px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   STUDENT PASSPORT
+========================================================= */
+
+.passport {
+    width: 75px;
+    height: 90px;
+    flex: 0 0 75px;
+    border: 2px solid #111;
+    background: #fff;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.passport img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* =========================================================
+   STUDENT INFORMATION
+========================================================= */
+
+.studentInfo {
+    width: 100%;
+    font-weight: bold;
+    font-size: 15px;
+    margin-top: 8px;
+}
+
+.infoRow {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    border-bottom: 1.5px solid #111;
+    padding: 5px 2px;
+    min-width: 0;
+}
+
+.infoRow span,
+.infoRow strong {
+    line-height: 1.25;
+}
+
+.nameRow {
+    justify-content: flex-start;
+    gap: 8px;
+}
+
+.nameRow strong {
+    text-transform: uppercase;
+}
+
+/* =========================================================
+   RESULT TABLE
+========================================================= */
+
+.resultTableWrapper {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.resultTable {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    margin: 0;
+}
+
+.resultTable th,
+.resultTable td {
+    border: 2px solid blue;
+    padding: 4px 3px;
+    height: 29px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 12px;
+    font-weight: bold;
+    overflow: hidden;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.resultTable th {
+    color: red;
+    font-size: 12px;
+    background: #fff;
+}
+
+/* Subject */
+
+.resultTable .subjectColumn {
+    width: 25%;
+    text-align: left;
+    padding-left: 5px;
+}
+
+/* 1st test */
+
+.resultTable th:nth-child(2),
+.resultTable td:nth-child(2) {
+    width: 10%;
+}
+
+/* 2nd test */
+
+.resultTable th:nth-child(3),
+.resultTable td:nth-child(3) {
+    width: 10%;
+}
+
+/* CA */
+
+.resultTable th:nth-child(4),
+.resultTable td:nth-child(4) {
+    width: 8%;
+}
+
+/* Exam */
+
+.resultTable th:nth-child(5),
+.resultTable td:nth-child(5) {
+    width: 9%;
+}
+
+/* Total */
+
+.resultTable th:nth-child(6),
+.resultTable td:nth-child(6) {
+    width: 11%;
+}
+
+/* Grade */
+
+.resultTable th:nth-child(7),
+.resultTable td:nth-child(7) {
+    width: 8%;
+}
+
+/* Remark */
+
+.resultTable th:nth-child(8),
+.resultTable td:nth-child(8) {
+    width: 19%;
+}
+
+/* Empty rows */
+
+.resultTable .emptyRow td {
+    height: 25px;
+}
+
+/* Percentage row */
+
+.resultTable .percentageRow td {
+    height: 27px;
+    font-weight: bold;
+}
+
+/* =========================================================
+   RESULT FOOTER
+========================================================= */
+
+.resultFooter {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1.3fr 1.3fr 0.8fr;
+    gap: 8px;
+    margin-top: 10px;
+    border-top: 2px solid blue;
+    padding-top: 7px;
+}
+
+/* =========================================================
+   FOOTER TITLE
+========================================================= */
+
+.footerTitle {
+    color: red;
+    font-size: 11px;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 1px solid blue;
+    padding-bottom: 4px;
+    margin-bottom: 5px;
+}
+
+/* =========================================================
+   SCORE SUMMARY
+========================================================= */
+
+.scoreSummary {
+    min-width: 0;
+}
+
+.summaryGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+}
+
+.summaryGrid div {
+    border: 1px solid blue;
+    padding: 5px 3px;
+    text-align: center;
+    min-width: 0;
+}
+
+.summaryGrid span {
+    display: block;
+    color: blue;
+    font-size: 9px;
+    font-weight: bold;
+    line-height: 1.1;
+}
+
+.summaryGrid strong {
+    display: block;
+    color: #111;
+    font-size: 12px;
+    margin-top: 3px;
+}
+
+/* =========================================================
+   MASTER REPORT
+========================================================= */
+
+.masterReport {
+    min-width: 0;
+    border-left: 1px solid #ddd;
+    padding-left: 7px;
+}
+
+.masterReport p {
+    color: blue;
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 1.4;
+    margin-bottom: 5px;
+}
+
+.masterReport strong {
+    color: #111;
+}
+
+/* =========================================================
+   SIGNATURE
+========================================================= */
+
+.signatureArea {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding-bottom: 2px;
+}
+
+.signatureLine {
+    width: 100%;
+    border-bottom: 1px solid #111;
+    height: 28px;
+    margin-bottom: 4px;
+}
+
+.signatureArea p {
+    color: red;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* =========================================================
+   BOTTOM FOOTER
+========================================================= */
+
+.bottomFooter {
+    width: 100%;
+    margin-top: 8px;
+    padding-top: 5px;
+    border-top: 1px solid blue;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    color: blue;
+    font-size: 9px;
+    font-weight: bold;
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media screen and (max-width: 500px) {
+
+    .container {
+        padding: 4px;
+    }
+
+    .header {
+        padding-bottom: 5px;
+    }
+
+    .schoolHeader {
+        min-height: 55px;
+    }
+
+    .schoolLogo {
+        width: 43px;
+        height: 43px;
+        flex-basis: 43px;
+        margin-right: 4px;
+    }
+
+    .schoolDetails h1 {
+        font-size: 17px;
+        margin-bottom: 2px;
+    }
+
+    .schoolAddress {
+        font-size: 8px;
+    }
+
+    .schoolPhone {
+        font-size: 8px;
+        margin-top: 1px;
+    }
+
+    .studentSection {
+        margin-top: 6px;
+        gap: 5px;
+    }
+
+    .studentIds {
+        gap: 5px;
+        padding-top: 2px;
+    }
+
+    .studentIdItem p {
+        font-size: 7px;
+        margin-bottom: 2px;
+    }
+
+    .idBox {
+        width: 100%;
+        min-height: 18px;
+        padding: 2px;
+        font-size: 7px;
+        border-width: 1px;
+    }
+
+    .passport {
+        width: 48px;
+        height: 58px;
+        flex-basis: 48px;
+        border-width: 1px;
+    }
+
+    .studentInfo {
+        font-size: 8px;
+        margin-top: 4px;
+    }
+
+    .infoRow {
+        gap: 4px;
+        padding: 3px 1px;
+        border-bottom-width: 1px;
+    }
+
+    .resultTableWrapper {
+        margin-top: 5px;
+    }
+
+    .resultTable th,
+    .resultTable td {
+        font-size: 7px;
+        height: 20px;
+        padding: 1px;
+        border-width: 1px;
+    }
+
+    .resultTable .emptyRow td {
+        height: 18px;
+    }
+
+    .resultTable .percentageRow td {
+        height: 19px;
+    }
+
+    .resultFooter {
+        grid-template-columns: 1.25fr 1.25fr 0.7fr;
+        gap: 3px;
+        margin-top: 5px;
+        padding-top: 4px;
+        border-top-width: 1px;
+    }
+
+    .footerTitle {
+        font-size: 6px;
+        padding-bottom: 2px;
+        margin-bottom: 3px;
+    }
+
+    .summaryGrid {
+        gap: 1px;
+    }
+
+    .summaryGrid div {
+        padding: 2px 1px;
+        border-width: 1px;
+    }
+
+    .summaryGrid span {
+        font-size: 5px;
+    }
+
+    .summaryGrid strong {
+        font-size: 7px;
+        margin-top: 1px;
+    }
+
+    .masterReport {
+        padding-left: 3px;
+    }
+
+    .masterReport p {
+        font-size: 6px;
+        margin-bottom: 3px;
+    }
+
+    .signatureLine {
+        height: 20px;
+    }
+
+    .signatureArea p {
+        font-size: 6px;
+    }
+
+    .bottomFooter {
+        margin-top: 4px;
+        padding-top: 3px;
+        font-size: 5px;
+    }
+}
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media screen and (max-width: 380px) {
+
+    .schoolLogo {
+        width: 38px;
+        height: 38px;
+        flex-basis: 38px;
+    }
+
+    .schoolDetails h1 {
+        font-size: 14px;
+    }
+
+    .schoolAddress,
+    .schoolPhone {
+        font-size: 7px;
+    }
+
+    .passport {
+        width: 42px;
+        height: 51px;
+        flex-basis: 42px;
+    }
+
+    .studentIdItem p {
+        font-size: 6px;
+    }
+
+    .idBox {
+        font-size: 6px;
+        min-height: 16px;
+    }
+
+    .studentInfo {
+        font-size: 7px;
+    }
+
+    .resultTable th,
+    .resultTable td {
+        font-size: 6px;
+        height: 18px;
+    }
+
+    .resultTable .emptyRow td {
+        height: 16px;
+    }
+
+    .resultTable .percentageRow td {
+        height: 17px;
+    }
+}
+
+/* =========================================================
+   PRINT - A4
+========================================================= */
+
+@page {
+    size: A4 portrait;
+    margin: 0;
+}
+
+@media print {
+
+    html,
+    body {
+        width: 210mm;
+        min-height: 297mm;
+        background: #fff;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        width: 700px;
+        max-width: none;
+        margin: 0 auto;
+        padding: 10px;
+        background: #fff;
+        overflow: hidden;
+    }
+
+    .schoolHeader {
+        min-height: 85px;
+    }
+
+    .schoolLogo {
+        width: 75px;
+        height: 75px;
+        flex-basis: 75px;
+    }
+
+    .schoolDetails h1 {
+        font-size: 30px;
+    }
+
+    .schoolAddress {
+        font-size: 15px;
+    }
+
+    .schoolPhone {
+        font-size: 14px;
+    }
+
+    .studentSection {
+        margin-top: 10px;
+    }
+
+    .passport {
+        width: 75px;
+        height: 90px;
+        flex-basis: 75px;
+    }
+
+    .studentInfo {
+        font-size: 15px;
+    }
+
+    .resultTable th,
+    .resultTable td {
+        font-size: 12px;
+        height: 29px;
+        border-width: 2px;
+    }
+
+    .resultTable .emptyRow td {
+        height: 25px;
+    }
+
+    .resultFooter {
+        margin-top: 10px;
+        padding-top: 7px;
+    }
+
+    .footerTitle {
+        font-size: 11px;
+    }
+
+    .summaryGrid span {
+        font-size: 9px;
+    }
+
+    .summaryGrid strong {
+        font-size: 12px;
+    }
+
+    .masterReport p {
+        font-size: 11px;
+    }
+
+    .signatureArea p {
+        font-size: 10px;
+    }
+
+    .bottomFooter {
+        font-size: 9px;
+    }
+}
+
+
+.result-actions {
+    display: flex;
     justify-content: center;
     align-items: center;
+    gap: 8px;
+    padding: 16px;
 }
-.header{
-    width: 690px;
-    text-align:center;
-    font-weight: bold;
-    margin:0px auto;
-}
-.header span{
-    font-size: 30px;
-    color:blue;
 
-}
-.title div{
-   height:70px;
-   width:70px;
-   background:url("/IMAGE/blixx international.png");
-   background-size: contain;
-   margin-right:5px;
-   background-repeat:no-repeat;
-}
-.studentId{
-    display: flex;
-    justify-content:space-between;
-    width:650px;
-    margin:0px auto;
+.action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
+    padding: 8px 16px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
 }
-.box{
-    height:20px;
-    width: 150px;
-    border: solid 2px black;
-    margin: 5px 0px;
+
+/* Download PDF */
+
+.pdf-btn {
+    background: #0f172a;
+    color: #ffffff;
+    border: 1px solid #0f172a;
 }
-.studentInfo{
-    width:650px;
-    display:flex;
-    flex-direction:column;
-    font-weight: bold;
-    font-size: 18px;
-    margin: 0px auto;
+
+.pdf-btn:hover {
+    background: #334155;
+    border-color: #334155;
 }
-.studentInfo div{
-    display:flex;
-    justify-content: space-between;
-    margin-top: 10px;
-    border-bottom: solid 2px black;
+
+
+/* Download Image */
+
+.image-btn {
+    background: #0d9488;
+    color: #ffffff;
+    border: 1px solid #0d9488;
 }
-table{
-    margin-top:15px;
-    width:650px;
-    border-collapse: collapse;
-    margin:5px auto;
+
+.image-btn:hover {
+    background: #0f766e;
+    border-color: #0f766e;
 }
-table th{
-    color:red;
+
+
+/* Print */
+
+.print-btn {
+    background: #ffffff;
+    color: #334155;
+    border: 1px solid #cbd5e1;
 }
-table th, table td{
-   
-    font-size:18px;
-    width:18px;
-    height:30px;
+
+.print-btn:hover {
+    background: #f8fafc;
 }
-table, th, td{
-    border: 2px solid blue;
+
+
+/* ================================
+   HIDE WHEN PRINTING
+================================ */
+
+@media print {
+    .no-print {
+        display: none !important;
+    }
 }
+
+
+/* ================================
+   MOBILE
+================================ */
+
+@media screen and (max-width: 500px) {
+
+    .result-actions {
+        flex-wrap: wrap;
+        padding: 12px;
+        gap: 6px;
+    }
+
+    .action-btn {
+        padding: 7px 12px;
+        font-size: 12px;
+    }
+}
+

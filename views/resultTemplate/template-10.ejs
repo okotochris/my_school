@@ -1,111 +1,563 @@
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
     <link rel="stylesheet" href="/styles/results/template-10.css">
-    <title>Document</title>
+    
+    <title><%= school.schoolName %> - Result</title>
+
 </head>
+
 <body>
-   <div class="container" id="resultContainer">
-    <div class="header">
-       <div class="title">
-        <img src='<%=school.image.log %>' alt="Royal Crest College Logo" > 
-        <span><%=school.schoolName %></span></div>
-        <P style="font-size:18px;"><%=school.address %></P>
-        <p style="color:red;">Tell: <%=school.phone %></p>
-    </div>
-    <div class="studentId">
-        <div>
-            <p style="color:red;">ADMISSION NO</p>
-            <div class="box"><%=student.addmissionNo %></div>
+    	<div class="result-actions no-print">
+
+    <a
+        href="/result/<%= result._id %>/pdf"
+        class="action-btn pdf-btn"
+    >
+        Download PDF
+    </a>
+
+    <a
+        href="/result/<%= result._id %>/image"
+        class="action-btn image-btn"
+    >
+        Download Image
+    </a>
+
+    <button
+        onclick="window.print()"
+        class="action-btn print-btn"
+    >
+        Print
+    </button>
+
+</div>
+
+    <div class="container" id="resultContainer">
+
+
+        <!-- =====================================
+             SCHOOL HEADER
+        ====================================== -->
+
+        <div class="header">
+
+            <div class="schoolHeader">
+
+                <div class="schoolLogo">
+
+                    <% if (school.image?.logo) { %>
+
+                        <img
+                            src="<%= school.image.logo %>"
+                            alt="<%= school.schoolName %> Logo"
+                        >
+
+                    <% } %>
+
+                </div>
+
+
+                <div class="schoolDetails">
+
+                    <h1>
+                        <%= school.schoolName?.toUpperCase() %>
+                    </h1>
+
+                    <p class="schoolAddress">
+                        <%= school.address %>
+                    </p>
+
+                    <p class="schoolPhone">
+                        Tel: <%= school.phone %>
+                    </p>
+
+                </div>
+
+            </div>
+
         </div>
-        <div>
-            <p style="color:red;">STUDENT ID</p>
-            <div class="box"><%= result.studentId %></div>
+
+
+        <!-- =====================================
+             STUDENT BIODATA + PASSPORT
+        ====================================== -->
+
+        <div class="studentIds">
+
+
+            <!-- STUDENT DETAILS -->
+
+            <div class="studentDetails">
+
+
+                <!-- STUDENT NAME -->
+
+                <div class="detailItem">
+
+                    <span class="detailLabel">
+                        STUDENT NAME
+                    </span>
+
+                    <span class="detailValue">
+                        <%= result.fullname?.toUpperCase() || '-' %>
+                    </span>
+
+                </div>
+
+
+                <!-- ADMISSION NUMBER -->
+
+                <div class="detailItem">
+
+                    <span class="detailLabel">
+                        ADMISSION NO
+                    </span>
+
+                    <span class="detailValue">
+                        <%= student.addmissionNo || '-' %>
+                    </span>
+
+                </div>
+
+
+                <!-- STUDENT ID -->
+
+                <div class="detailItem">
+
+                    <span class="detailLabel">
+                        STUDENT ID
+                    </span>
+
+                    <span class="detailValue">
+                        <%= result.studentId || '-' %>
+                    </span>
+
+                </div>
+
+
+                <!-- DATE OF BIRTH -->
+
+                <div class="detailItem">
+
+                    <span class="detailLabel">
+                        DATE OF BIRTH
+                    </span>
+
+                    <span class="detailValue">
+                        <%= result.dob || student.dob || '-' %>
+                    </span>
+
+                </div>
+
+
+                <!-- CLASS -->
+
+                <div class="detailItem">
+
+                    <span class="detailLabel">
+                        CLASS
+                    </span>
+
+                    <span class="detailValue">
+                        <%= result.studentClass || result.class || '-' %>
+                    </span>
+
+                </div>
+
+
+                <!-- HOUSE -->
+
+                <div class="detailItem">
+
+                    <span class="detailLabel">
+                        HOUSE
+                    </span>
+
+                    <span class="detailValue">
+                        <%= student.house || '-' %>
+                    </span>
+
+                </div>
+
+
+                <!-- TERM -->
+
+                <div class="detailItem">
+
+                    <span class="detailLabel">
+                        TERM
+                    </span>
+
+                    <span class="detailValue">
+                        <%= result.term || '-' %>
+                    </span>
+
+                </div>
+
+
+                <!-- ACADEMIC SESSION -->
+
+                <div class="detailItem">
+
+                    <span class="detailLabel">
+                        ACADEMIC SESSION
+                    </span>
+
+                    <span class="detailValue">
+                        <%= result.section || '-' %>
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================
+                 STUDENT PASSPORT
+            ================================== -->
+
+            <div class="studentPassport">
+
+                <% if (student.passport) { %>
+
+                    <img
+                        src="<%= student.passport %>"
+                        alt="Student Passport"
+                    >
+
+                <% } else { %>
+
+                    <div class="passportPlaceholder">
+                        PASSPORT
+                    </div>
+
+                <% } %>
+
+            </div>
+
         </div>
-    </div>
-    <div class="studentInfo">
-        <div> <p>Name: <%= result.fullname.toUpperCase() %></p> </div>
-        <div><p>Senior Secondary Attendance: <%= result.present %></p>  <p>Absent: <%= result.absent %></p></div> 
-        <div> <p>Class: <%= result.class %></p><p>Year: 2023-2024</p><p>Term: <%= result.term %></p></div>
+
+
+        <!-- =====================================
+             ATTENDANCE
+        ====================================== -->
+
+        <div class="attendanceSection">
+
+            <div class="attendanceItem">
+
+                <span>
+                    NUMBER OF TIMES PRESENT
+                </span>
+
+                <strong>
+                    <%= result.present || 0 %>
+                </strong>
+
+            </div>
+
+
+            <div class="attendanceItem">
+
+                <span>
+                    NUMBER OF TIMES ABSENT
+                </span>
+
+                <strong>
+                    <%= result.absent || 0 %>
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================
+             ACADEMIC RESULT
+        ====================================== -->
+
+        <div class="resultTableWrapper">
+
+            <table class="resultTable">
+
+                <thead>
+
+                    <tr>
+
+                        <th class="subjectColumn">
+                            SUBJECT
+                        </th>
+
+                        <th>
+                            1st Test
+                        </th>
+
+                        <th>
+                            2nd Test
+                        </th>
+
+                        <th>
+                            C.A
+                        </th>
+
+                        <th>
+                            Exam
+                        </th>
+
+                        <th>
+                            Total
+                        </th>
+
+                        <th>
+                            Grade
+                        </th>
+
+                        <th>
+                            Remark
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    <% if (result.subjects && result.subjects.length > 0) { %>
+
+                        <% result.subjects.forEach(subject => { %>
+
+                            <tr>
+
+                                <td class="subjectColumn">
+                                    <%= subject.subjectName?.toUpperCase() %>
+                                </td>
+
+                                <td>
+                                    <%= subject.firstTest %>
+                                </td>
+
+                                <td>
+                                    <%= subject.secondTest %>
+                                </td>
+
+                                <td>
+                                    <%= subject.cca %>
+                                </td>
+
+                                <td>
+                                    <%= subject.exam %>
+                                </td>
+
+                                <td>
+                                    <%= subject.total %>
+                                </td>
+
+                                <td>
+                                    <%= subject.grade %>
+                                </td>
+
+                                <td>
+                                    <%= subject.remark %>
+                                </td>
+
+                            </tr>
+
+                        <% }) %>
+
+                    <% } %>
+
+
+                    <!-- EMPTY ROWS -->
+
+                    <% for (let i = 0; i < 2; i++) { %>
+
+                        <tr class="emptyRow">
+
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                        </tr>
+
+                    <% } %>
+
+
+                    <!-- TOTAL -->
+
+                    <tr class="percentageRow">
+
+                        <td>
+                            TOTAL
+                        </td>
+
+                        <td>
+                            10%
+                        </td>
+
+                        <td>
+                            10%
+                        </td>
+
+                        <td>
+                            10%
+                        </td>
+
+                        <td>
+                            70%
+                        </td>
+
+                        <td>
+                            100%
+                        </td>
+
+                        <td></td>
+
+                        <td></td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <!-- =====================================
+             RESULT SUMMARY / FOOTER
+        ====================================== -->
+
+        <div class="resultFooter">
+
+
+            <!-- RESULT SUMMARY -->
+
+            <div class="scoreSummary">
+
+                <div class="footerTitle">
+                    RESULT SUMMARY
+                </div>
+
+                <div class="summaryGrid">
+
+                    <div>
+
+                        <span>
+                            AVERAGE
+                        </span>
+
+                        <strong>
+                            <%= result.average || '-' %>
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            TOTAL SCORE
+                        </span>
+
+                        <strong>
+                            <%= result.score_obtain || '-' %>
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            SCORE OBTAINABLE
+                        </span>
+
+                        <strong>
+                            <%= result.score_obtainable || '-' %>
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- MASTER'S REPORT -->
+
+            <div class="masterReport">
+
+                <div class="footerTitle">
+                    MASTER'S REPORT
+                </div>
+
+                <p>
+                    Next Term Begins:
+                    <strong>
+                        <%= result.nextterm || '-' %>
+                    </strong>
+                </p>
+
+                <p>
+                    Session:
+                    <strong>
+                        <%= result.section || '-' %>
+                    </strong>
+                </p>
+
+            </div>
+
+
+            <!-- PROPRIETOR SIGNATURE -->
+
+            <div class="signatureArea">
+
+                <div class="signatureLine"></div>
+
+                <p>
+                    Proprietor's Signature
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================
+             FOOTER
+        ====================================== -->
+
+        <div class="bottomFooter">
+
+            <span>
+                <%= school.schoolName %>
+            </span>
+
+            <span>
+                OFFICIAL SCHOOL RESULT
+            </span>
+
+        </div>
+
+
     </div>
 
-    <div>
-        <table>
-            <tr>
-                <th style="width:150px;">SUBJECT</th>
-                <th>1st Test</th>
-                <th>2nd Test</th>
-                <th>C.A</th>
-                <th>Exam</th>
-                <th>Grade Total</th>
-                <th>Grade</th>
-                <th>Signature</th>
-            </tr>
-           
-          
-            	<% if(result.subjects.length > 0){ %>
-                            <% result.subjects.forEach(subject=>{ %>
-                                <tr>
-                                    <td><%= subject.subjectName.toUpperCase() %></td>
-                                    <td><%= subject.firstTest %></td>
-                                    <td><%= subject.secondTest %></td>
-                                    <td><%= subject.cca %></td>
-                                    <td><%= subject.exam %></td>
-                                    <td><%= subject.total %></td>
-                                    <td><%= subject.grade %></td>
-                                    <td><%= subject.remark %></td>
-                                </tr>
-                            <%}) %>
-                        <%}%>
-						
-						
-						<%for(let i=0; i <=2; i++){ %>
-							
-							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-						<%}%>
-
-            
-            <tr>
-                <td>Total</td>
-                <td>10%</td>
-                <td>10%</td>
-                <td>10%</td>
-                <td>70%</td>
-                <td>100%</td>
-                <td></td>
-                <td></td>
-            </tr>
-        
-        </table>
-    </div>
-
-    <div class="studentInfo" style="color:blue; position:relative">
-        <div>
-            <p>Pass Grade: </p><p>Average:  <%= result.average %> </p><p>Total score: <%= result.score_obtain %></p><p>Out of: <%= result.score_obtainable %></p>
-        </div>
-        
-        <p>From Master' Report</p>
-        <div><p>Next term begins: <%= result.nextterm %></p></div>
-        <div>
-            <p>SESSION: <%= result.section %></p>         
-        </div>
-       <div style="color:red; display: flex; justify-content: flex-end; border:none"> <p>Proprietor's sign.</p> </div> 
-    </div>
-   </div>
-
- 
-   		
-		
 </body>
+
 </html>
+
