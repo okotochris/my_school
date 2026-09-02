@@ -425,4 +425,44 @@ router.get('/api/subject/:subjectClass', async(req, res)=>{
         res.status(500).json({message:"server error"})
     }
 })
+
+router.get('/select-result-template', isAuthenticated, async(req, res)=>{
+    const role= req.session.role
+    const fees = await schoolFees(req.session.school)
+    res.render('select-result-template', { school: req.session.school, fees, role, title: "Select Result Template"})
+
+})
+
+router.get('/admin/result-template/:template', isAuthenticated, async(req, res)=>{
+    const { result, student } = require('../utility/resultData.js')
+    const resultTemplate =`resultTemplate/${req.params.template}`
+    try{
+        const schoolName = req.session.school
+        const school = await schoolPfofile.findOne({schoolName})
+        res.render(resultTemplate, { result, student , school })
+    }catch(err){
+        console.log(err)
+        res.status(500).json({message:"server error"})
+    }
+        
+})
+//UPDATE SCHOOL RESULT TEMPLATE
+router.post('/school/result-template', isAuthenticated, async(req, res)=>{
+    const { templateName } = req.body
+    console.log(templateName)
+    try{
+        const schoolName = req.session.school
+        const school = await schoolPfofile.findOne({schoolName})
+        if(!school){
+            return res.status(404).json({message:"School not found"})
+        }
+        school.resultTemplate = templateName
+        await school.save()
+        res.status(200).json({message:"Result template updated successfully"})
+    }catch(err){
+        console.error('Error updating result template:', err)
+        res.status(500).json({message:"Server error"})
+    }
+})
+
 module.exports = router;

@@ -10,9 +10,7 @@
 
 	<style>
 		.passport{
-			height:120px;
-			width:100px;
-			border:solid 1px black;
+			
 			background: url('<%= student.passport %>');
 			background-repeat: no-repeat;
 			background-size:cover;
@@ -48,25 +46,36 @@
 		</div>
 		<div id="resultContainer">
 			<div class="school">
-				<div class="logo"></div>
-				<div class="school-info">
-					<div class="school-name">
-						<h1><%= school.schoolName?.toUpperCase() %></h1>
-					</div>
-					<div class="address-info">
-						<div class="address"><%=school.address %></div>
-						<div class="contact">Tel: <%=school.phone%></div>
-					</div>
-				</div>
-				<div class="passport"></div>
-			</div>	
+    <div class="logo">
+        <% if (school.image?.logo) { %>
+            <img
+                src="<%= school.image.logo %>"
+                alt="<%= school.schoolName %> Logo"
+            >
+        <% } %>
+    </div>
+
+    <div class="school-info">
+        <div class="school-name">
+            <h1><%= school.schoolName?.toUpperCase() %></h1>
+			<h2><%= school.motto %></h2>
+        </div>
+
+        <div class="address-info">
+            <div class="address"><%= school.address %></div>
+            <div class="contact">Tel: <%= school.phone %></div>
+        </div>
+    </div>
+
+    <div class="passport"></div>
+</div>
 			
 			
 			<div class="sudent-info">
 				<div><%= result.class %> <%=student.house %>, <%= result.term %> RESULT <%= result.section %> ACADEMIC SESSION</div>
-				<p>NAME OF PUPIL : <u><span><%= result.fullname.toUpperCase() %></span></u> <!--SEX: <span><u>FEMALE</u></span> --> D.O.B: <span><u><%= result.dob %></u></span></p>
+				<p>NAME OF PUPIL : <u><span><%= student.fullname.toUpperCase() %></span></u> <!--SEX: <span><u>FEMALE</u></span> --> D.O.B: <span><u><%= student.dob %></u></span></p>
 				<P>TOTAL MARKS SCORE: <span><u> <%= result.score_obtain %></u></span> OUT OF: <span><u><%= result.score_obtainable %></u></span> AVERAGE: <span><u><%= result.average %></u></span> CLASS: <span><u><%= result.studentClass.toUpperCase() %></u></span></P>
-				<P>ADMISSSION NO.: <span><u><%= student.addmissionNo %></u></span> NO. OF TIMES PRESENT: <span><u><%= result.present %></u></span> NO OF TIMES ABSENT: <span><u><%= result.absent %></u></span></P>
+				<P>STUDENT ID: <span><u><%= student.studentId %></u></span> ADMISSION NO.: <span><u><%= student.addmissionNo %></u></span> NO. OF TIMES PRESENT: <span><u><%= result.present %></u></span> NO OF TIMES ABSENT: <span><u><%= result.absent %></u></span></P>
 			</div>
 			
 			<div class="result">
@@ -75,11 +84,11 @@
 					<table style="font-family: arial; font-weight:bold;">
                         <tr> 
                             <th class="th" width="200">SUBJECT</th>
-                            <th class="th1">1st test 10%</th>
-                            <th class="th1">2nd test 10%</th>
-                            <th class="th1">project 10%</th>
-                            <th class="th1">Exam 70%</th>
-                            <th class="th1">Total 100%</th>
+                            <th class="th1">1st test </th>
+                            <th class="th1">2nd test </th>
+                            <th class="th1">project </th>
+                            <th class="th1">Exam </th>
+                            <th class="th1">Total</th>
                             <th class="th1" width="30">Grades</th>
                             <th width="65">REMARKS</th>
                         </tr>
@@ -99,7 +108,7 @@
                         <%}%>
 						
 						
-						<%for(let i=0; i <=28; i++){ %>
+						<%for(let i=0; i <=15; i++){ %>
 							
 							<tr>
 								<td></td>
@@ -323,8 +332,12 @@
 						<p>Promoted To:<span> <%=result.promote %></span></p>
 						<p>An outstanding Fees: <span><%= result.fees %></span></p>
 						<p>Next Terms begins: <span><%= result.nextterm %></span></p>
-						<P>Head of School's Signature<span><img src="headTeacher.png" height="29" width="50"/></span></P>
-						<p>IDEHEN E.R (MRS.)</p>
+						<P>Head of School's Signature<span>
+							<%if(school.headTeacher.signature){ %>
+								<img src="<%= school.headTeacher.signature %>" height="20" width="50"/>
+							<% } %>
+						</span></P>
+						<p><%=school.headTeacher.name %></p>
 					</div>
 				</div>
 			</div>
