@@ -15,15 +15,15 @@
       </h2>
     </div>
 
-
-    <!-- Desktop Install App Button -->
+    <!-- Desktop Install Button -->
     <button
-      id="installAppBtn"
-      class="install-app-btn"
-      aria-label="Install MySchoolResult"
+        id="installAppBtn"
+        class="install-app-btn"
+        aria-label="Install MySchoolResult"
+        style="display: none;"
     >
-      <i class="fas fa-mobile-alt"></i>
-      <span>Install App</span>
+        <i class="fas fa-download"></i>
+        <span>Install App</span>
     </button>
 
 
@@ -113,17 +113,15 @@
 
 
     <!-- Mobile Install -->
-    <div class="item install-mobile-item">
-
-      <button
-        id="installAppBtnMobile"
-        class="install-mobile-btn"
-      >
-        <i class="fas fa-mobile-alt"></i>
-        <span>Install MySchoolResult</span>
-      </button>
-
-    </div>
+      <div class="item install-mobile-item" id="installMobileContainer" style="display: none;">
+          <button
+              id="installAppBtnMobile"
+              class="install-mobile-btn"
+          >
+              <i class="fas fa-download"></i>
+              <span>Install MySchoolResult</span>
+          </button>
+      </div>
 
 
     <div class="item">
@@ -146,52 +144,316 @@
 <script>
     let deferredPrompt = null;
 
-    const installAppBtn =
-        document.getElementById("installAppBtn");
+    const installAppBtn = document.getElementById("installAppBtn");
+    const installAppBtnMobile = document.getElementById("installAppBtnMobile");
+    const installMobileContainer = document.getElementById("installMobileContainer");
 
-    const installAppBtnMobile =
-        document.getElementById("installAppBtnMobile");
+    /*
+    ==========================================
+    DEVICE DETECTION
+    ==========================================
+    */
+
+    function getDeviceType() {
+
+        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+        if (
+            /iPad|iPhone|iPod/.test(userAgent) ||
+            (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)
+        ) {
+            return "ios";
+        }
+
+        if (/android/i.test(userAgent)) {
+            return "android";
+        }
+
+        return "desktop";
+    }
 
 
     /*
-     * Browser provides the installation prompt
-     */
+    ==========================================
+    CHECK IF APP IS INSTALLED
+    ==========================================
+    */
+
+    function isAppInstalled() {
+
+        // Our own installation flag
+        if (localStorage.getItem("myschoolresult_installed") === "true") {
+            return true;
+        }
+
+        // Android / Desktop PWA
+        if (
+            window.matchMedia("(display-mode: standalone)").matches ||
+            window.matchMedia("(display-mode: fullscreen)").matches
+        ) {
+            return true;
+        }
+        if (
+            window.matchMedia("(display-mode: standalone)").matches ||
+            window.navigator.standalone === true
+        ) {
+            return true;
+        }
+        // iPhone / iPad
+        if (window.navigator.standalone === true) {
+            return true;
+        }
+
+        return false;
+    }
+
+
+    /*
+    ==========================================
+    HIDE INSTALL BUTTONS
+    ==========================================
+    */
+
+    function hideInstallButtons() {
+
+        if (installAppBtn) {
+            installAppBtn.style.display = "none";
+        }
+
+        if (installMobileContainer) {
+            installMobileContainer.style.display = "none";
+        }
+    }
+
+
+    /*
+    ==========================================
+    SHOW INSTALL BUTTONS
+    ==========================================
+    */
+
+    function showInstallButton() {
+
+        // NEVER show if already installed
+        if (isAppInstalled()) {
+            hideInstallButtons();
+            return;
+        }
+
+        const device = getDeviceType();
+
+        console.log("Device:", device);
+
+
+        /*
+        ======================================
+        iPHONE / iPAD
+        ======================================
+        */
+
+        if (device === "ios") {
+
+            if (installAppBtn) {
+                installAppBtn.style.display = "flex";
+            }
+
+            if (installMobileContainer) {
+                installMobileContainer.style.display = "block";
+            }
+
+            updateButtonText(
+                "Add to Home Screen",
+                "Add to Home Screen"
+            );
+
+            return;
+        }
+
+
+        /*
+        ======================================
+        ANDROID
+        ======================================
+        */
+
+        if (device === "android") {
+
+            if (installAppBtn) {
+                installAppBtn.style.display = "flex";
+            }
+
+            if (installMobileContainer) {
+                installMobileContainer.style.display = "block";
+            }
+
+            updateButtonText(
+                "Install App",
+                "Install MySchoolResult"
+            );
+
+            return;
+        }
+
+
+        /*
+        ======================================
+        DESKTOP
+        ======================================
+        */
+
+        if (installAppBtn) {
+            installAppBtn.style.display = "flex";
+        }
+
+        updateButtonText(
+            "Install App",
+            "Install MySchoolResult"
+        );
+    }
+
+
+    /*
+    ==========================================
+    UPDATE BUTTON TEXT
+    ==========================================
+    */
+
+    function updateButtonText(desktopText, mobileText) {
+
+        if (installAppBtn) {
+
+            const span = installAppBtn.querySelector("span");
+
+            if (span) {
+                span.textContent = desktopText;
+            }
+        }
+
+
+        if (installAppBtnMobile) {
+
+            const span = installAppBtnMobile.querySelector("span");
+
+            if (span) {
+                span.textContent = mobileText;
+            }
+        }
+    }
+
+
+    /*
+    ==========================================
+    NATIVE INSTALL PROMPT
+    ==========================================
+    */
+
     window.addEventListener("beforeinstallprompt", (event) => {
 
-        console.log("MySchoolResult can be installed.");
+        console.log("Native installation available.");
 
-        // Prevent Chrome from showing its own prompt automatically
         event.preventDefault();
 
-        // Save the installation event
         deferredPrompt = event;
 
+        // Only show if NOT already installed
+        if (!isAppInstalled()) {
+            showInstallButton();
+        }
     });
 
 
     /*
-     * Install function
-     */
+    ==========================================
+    INSTALL APP
+    ==========================================
+    */
+
     async function installMySchoolResult() {
 
         /*
-         * If browser installation prompt is available
-         */
-        if (deferredPrompt) {
+        Already installed?
+        */
 
-            deferredPrompt.prompt();
+        if (isAppInstalled()) {
+            hideInstallButtons();
+            return;
+        }
 
-            const { outcome } =
-                await deferredPrompt.userChoice;
 
-            console.log(
-                "Installation result:",
-                outcome
+        const device = getDeviceType();
+
+
+        /*
+        ======================================
+        iOS
+        ======================================
+        */
+
+        if (device === "ios") {
+
+            alert(
+                "Install MySchoolResult on your iPhone:\n\n" +
+                "1. Open this website in Safari.\n\n" +
+                "2. Tap the Share button.\n\n" +
+                "3. Select \"Add to Home Screen\".\n\n" +
+                "4. Tap \"Add\"."
             );
 
-            /*
-             * The browser prompt can only be used once.
-             */
+            return;
+        }
+
+
+        /*
+        ======================================
+        ANDROID / DESKTOP
+        ======================================
+        */
+
+        if (deferredPrompt) {
+
+            try {
+
+                deferredPrompt.prompt();
+
+                const { outcome } =
+                    await deferredPrompt.userChoice;
+
+                console.log(
+                    "Installation result:",
+                    outcome
+                );
+
+
+                /*
+                ==================================
+                USER ACCEPTED INSTALLATION
+                ==================================
+                */
+
+                if (outcome === "accepted") {
+
+                    // Save installation status
+                    localStorage.setItem(
+                        "myschoolresult_installed",
+                        "true"
+                    );
+
+                    // Hide immediately
+                    hideInstallButtons();
+
+                }
+
+
+            } catch (error) {
+
+                console.error(
+                    "Installation error:",
+                    error
+                );
+
+            }
+
+            // Prompt can only be used once
             deferredPrompt = null;
 
             return;
@@ -199,53 +461,132 @@
 
 
         /*
-         * If the browser doesn't currently
-         * provide the native installation prompt
-         */
-        alert(
-            "To install MySchoolResult, open your browser menu and select \"Install app\" or \"Add to Home screen\"."
-        );
+        ======================================
+        NO NATIVE PROMPT
+        ======================================
+        */
 
+        showManualInstallInstructions();
     }
 
 
     /*
-     * Desktop button
-     */
+    ==========================================
+    MANUAL INSTALL INSTRUCTIONS
+    ==========================================
+    */
+
+    function showManualInstallInstructions() {
+
+        const device = getDeviceType();
+
+        if (device === "android") {
+
+            alert(
+                "To install MySchoolResult:\n\n" +
+                "Open your browser menu (⋮).\n\n" +
+                "Select \"Install app\" or " +
+                "\"Add to Home screen\"."
+            );
+
+            return;
+        }
+
+
+        alert(
+            "To install MySchoolResult:\n\n" +
+            "Open your browser menu and select " +
+            "\"Install MySchoolResult\" or \"Install app\"."
+        );
+    }
+
+
+    /*
+    ==========================================
+    BUTTON EVENTS
+    ==========================================
+    */
+
     if (installAppBtn) {
 
         installAppBtn.addEventListener(
             "click",
             installMySchoolResult
         );
-
     }
 
 
-    /*
-     * Mobile button
-     */
     if (installAppBtnMobile) {
 
         installAppBtnMobile.addEventListener(
             "click",
             installMySchoolResult
         );
-
     }
 
 
     /*
-     * App successfully installed
-     */
+    ==========================================
+    APP INSTALLED EVENT
+    ==========================================
+    */
+
     window.addEventListener("appinstalled", () => {
 
-        console.log(
-            "MySchoolResult has been installed."
+        console.log("MySchoolResult was installed.");
+
+        // Save installation permanently
+        localStorage.setItem(
+            "myschoolresult_installed",
+            "true"
         );
 
+        // Remove install button
+        hideInstallButtons();
+
+        // Remove saved prompt
         deferredPrompt = null;
-
     });
-</script>
 
+
+    /*
+    ==========================================
+    PAGE LOAD
+    ==========================================
+    */
+
+    window.addEventListener("load", () => {
+
+        // Hide immediately if already installed
+        if (isAppInstalled()) {
+
+            hideInstallButtons();
+
+            return;
+        }
+
+
+        setTimeout(() => {
+
+            if (!isAppInstalled()) {
+                showInstallButton();
+            }
+
+        }, 1000);
+    });
+
+
+    /*
+    ==========================================
+    PAGE SHOW
+    ==========================================
+    */
+
+    window.addEventListener("pageshow", () => {
+
+        if (isAppInstalled()) {
+            hideInstallButtons();
+        }
+    });
+
+</script>
