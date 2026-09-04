@@ -1,37 +1,134 @@
-  <header class="header">
-    <nav class="nav">
-      <div class="nav-logo">
-        <img src="/IMAGE/myschoolresult.png" alt="My School Result Logo" class="logo">
-        <h2><span>Myschool</span>Result</h2>
-      </div>
-      <div class="nav-links">
-        <a href="/"  id="home" class="nav-link">Home</a>
-        <a href="/#result-checker" id="result"  class="nav-link">Check Result</a>
-        <a href="/news" class="nav-link">News</a>
-        <a href="/about" class="nav-link">About</a>
-        <a href="/result_check_guide" class="nav-link">SSCE</a>
-        <a href="/admin" class="nav-cta">Login</a>
-      </div>
-      <button class="hamburger" aria-label="Toggle Menu">
-        <i class="fas fa-bars"></i>
-      </button>
-    </nav>
-    <div class="mobile-menu">
-      <button class="close-menu" aria-label="Close Menu">
-        <i class="fas fa-times"></i>
-      </button>
-      <div class="item"><a  id="home" href="/" class="mobile-nav-link">Home</a></div>
-      <div class="item"><a id="result" href="#result-checker" class="mobile-nav-link">Check Result</a></div>
-      <div class="item"><a href="/news" class="mobile-nav-link">News</a></div>
-      <div class="item"><a href="/about" class="mobile-nav-link">About</a></div>
-      <div class="item"><a href="/result_check_guide" class="mobile-nav-link">Contact</a></div>
-      <div class="item"><a href="/admin" class="mobile-nav-cta">Login</a></div>
+
+<header class="header">
+  <nav class="nav">
+
+    <!-- Logo -->
+    <div class="nav-logo">
+      <img 
+        src="/IMAGE/myschoolresult.png" 
+        alt="My School Result Logo" 
+        class="logo"
+      >
+
+      <h2>
+        <span>Myschool</span>Result
+      </h2>
     </div>
-    
-  </header>
+
+    <!-- Install App Button -->
+    <button
+      id="installAppBtn"
+      class="install-app-btn"
+      style="display: none;"
+      aria-label="Install MySchoolResult"
+    >
+      <i class="fas fa-mobile-alt"></i>
+      <span>Install App</span>
+    </button>
+
+    <!-- Desktop Navigation -->
+    <div class="nav-links">
+      <a href="/" id="home" class="nav-link">Home</a>
+      <a href="/#result-checker" id="result" class="nav-link">Check Result</a>
+      <a href="/news" class="nav-link">News</a>
+      <a href="/about" class="nav-link">About</a>
+      <a href="/result_check_guide" class="nav-link">SSCE</a>
+      <a href="/admin" class="nav-cta">Login</a>
+    </div>
+
+    <!-- Hamburger -->
+    <button class="hamburger" aria-label="Toggle Menu">
+      <i class="fas fa-bars"></i>
+    </button>
+
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu">
+
+    <button class="close-menu" aria-label="Close Menu">
+      <i class="fas fa-times"></i>
+    </button>
+
+    <div class="item">
+      <a href="/" class="mobile-nav-link">Home</a>
+    </div>
+
+    <div class="item">
+      <a href="/#result-checker" class="mobile-nav-link">Check Result</a>
+    </div>
+
+    <div class="item">
+      <a href="/news" class="mobile-nav-link">News</a>
+    </div>
+
+    <div class="item">
+      <a href="/about" class="mobile-nav-link">About</a>
+    </div>
+
+    <div class="item">
+      <a href="/result_check_guide" class="mobile-nav-link">SSCE</a>
+    </div>
+
+    <!-- Mobile Install -->
+    <div class="item install-mobile-item">
+      <button
+        id="installAppBtnMobile"
+        class="install-mobile-btn"
+        style="display: none;"
+      >
+        <i class="fas fa-mobile-alt"></i>
+        Install MySchoolResult
+      </button>
+    </div>
+
+    <div class="item">
+      <a href="/admin" class="mobile-nav-cta">Login</a>
+    </div>
+
+  </div>
+</header>
+
+
 
 <script src="https://unpkg.com/lucide@latest"></script>
 <script>
   lucide.createIcons();
 </script>
  <script src="https://cdn.tailwindcss.com"></script>
+ <script>
+    let deferredPrompt;
+
+    const installAppBtn = document.getElementById("installAppBtn");
+
+    window.addEventListener("beforeinstallprompt", (event) => {
+        event.preventDefault();
+
+        deferredPrompt = event;
+
+        installAppBtn.style.display = "block";
+    });
+
+    installAppBtn.addEventListener("click", async () => {
+
+        if (!deferredPrompt) {
+            return;
+        }
+
+        deferredPrompt.prompt();
+
+        const { outcome } = await deferredPrompt.userChoice;
+
+        console.log("Install result:", outcome);
+
+        deferredPrompt = null;
+
+        installAppBtn.style.display = "none";
+    });
+
+    window.addEventListener("appinstalled", () => {
+        console.log("MySchoolResult was installed.");
+
+        installAppBtn.style.display = "none";
+    });
+</script>

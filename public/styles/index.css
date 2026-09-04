@@ -577,3 +577,110 @@ body {
     font-size: 1.4rem;
   }
 }
+
+/* =========================
+   INSTALL APP BUTTON
+========================= */
+
+.install-app-btn {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    padding: 8px 12px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #0f4c3a;
+    color: #fff;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+    transition: all 0.2s ease;
+}
+
+.install-app-btn:hover {
+    background: #0b3d2f;
+    transform: translateY(-1px);
+}
+
+.install-app-btn i {
+    font-size: 14px;
+}
+
+
+/* =========================
+   MOBILE INSTALL BUTTON
+========================= */
+
+.install-mobile-item {
+    padding: 10px 20px;
+}
+
+.install-mobile-btn {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    padding: 12px 16px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #0f4c3a;
+    color: white;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.install-mobile-btn i {
+    font-size: 16px;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 1000px) {
+
+    .install-app-btn {
+        padding: 7px 10px;
+        font-size: 12px;
+    }
+
+    .install-app-btn span {
+        display: none;
+    }
+
+    .install-app-btn i {
+        font-size: 16px;
+    }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+
+    .install-app-btn {
+        display: none !important;
+    }
+
+}
