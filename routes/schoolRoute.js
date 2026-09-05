@@ -359,12 +359,18 @@ router.delete('/api/assign-class-teacher/:teacherId', async (req, res) => {
     }
 });
 
-router.get('/admin/school-setting', isAuthenticated, async(req, res)=>{
+router.get('/admin/school-settings', isAuthenticated, async(req, res)=>{
     const role= req.session.role
     const fees = await schoolFees(req.session.school)
     const teachers = await Teacher.find({ classControl: { $ne: null }, school: req.session.school }).sort({updatedAt: -1});
-    const numStudents = await StudentProfile.countDocuments({ school: req.session.school });
-    res.render('school_settings', { school: req.session.school, fees, role, teachers, title: "School Management Settings"})
+    res.render('school-settings', { school: req.session.school, fees, role, teachers, title: "School Management Settings"})
+        
+})
+router.get('/admin/school-management', isAuthenticated, async(req, res)=>{
+    const role= req.session.role
+    const fees = await schoolFees(req.session.school)
+    const teachers = await Teacher.find({ classControl: { $ne: null }, school: req.session.school }).sort({updatedAt: -1});
+    res.render('school-management', { school: req.session.school, fees, role, teachers, title: "School Management Settings"})
         
 })
 router.get('/admin/subject-management', isAuthenticated, async(req, res)=>{
@@ -464,5 +470,7 @@ router.post('/school/result-template', isAuthenticated, async(req, res)=>{
         res.status(500).json({message:"Server error"})
     }
 })
-
+router.get('/myschool/reset-password', (req, res)=>{
+  res.render('passwordReset')
+})
 module.exports = router;

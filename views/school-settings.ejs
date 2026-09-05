@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>School Settings | MySchoolResult</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/styles/global.css" />
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+</head>
+
+
+<body class="bg-slate-50 text-slate-800">
+   <%- include('./partials/header.ejs') %>
+    <div class="admin-container">
+      <%- include('./partials/navigation.ejs') %>
+    <!-- Main Content -->
+    <main class=" w-full bg-slate-50">
+
+        <!-- Page Header -->
+        <div class="bg-white border-b border-slate-200">
+
+            <div class="max-w-6xl mx-auto px-5 py-6">
+
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+
+                    <div>
+
+                        <div class="flex items-center gap-3">
+
+                            <div class="w-11 h-11 rounded-xl
+                                        bg-emerald-100
+                                        text-emerald-700
+                                        flex items-center justify-center">
+
+                                <i class="fa-solid fa-school text-lg"></i>
+
+                            </div>
+
+                            <div>
+
+                                <h1 class="text-xl sm:text-2xl font-bold">
+                                    School Settings
+                                </h1>
+
+                                <p class="text-sm text-slate-500 mt-1">
+                                    Manage your school's information and branding
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Save Button -->
+                    <button
+                        type="submit"
+                        form="schoolSettingsForm"
+                        class="inline-flex items-center justify-center gap-2
+                               px-5 py-2.5
+                               rounded-lg
+                               bg-emerald-700
+                               hover:bg-emerald-800
+                               text-white
+                               text-sm font-semibold
+                               transition"
+                    >
+
+                        <i class="fa-solid fa-check"></i>
+
+                        Save Changes
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Content -->
+        <div class="max-w-6xl mx-auto px-5 py-8">
+
+
+            <form
+                id="schoolSettingsForm"
+                onsubmit="handleSubmit(event)"
+                enctype="multipart/form-data"
+                class="space-y-6"
+            >
+
+
+                <!-- =====================================
+                     SCHOOL BRANDING
+                ====================================== -->
+
+                <section class="bg-white rounded-2xl border border-slate-200 shadow-sm">
+
+                    <div class="px-6 py-5 border-b border-slate-200">
+
+                        <h2 class="font-bold text-lg">
+                            School Branding
+                        </h2>
+
+                        <p class="text-sm text-slate-500 mt-1">
+                            Update your school's logo and basic identity.
+                        </p>
+
+                    </div>
+
+
+                    <div class="p-6">
+
+                        <div class="flex flex-col sm:flex-row gap-6 sm:items-center">
+
+                            <!-- Logo Preview -->
+                            <div class="relative">
+
+                                <div
+                                    id="logoPreview"
+                                    class="w-32 h-32 rounded-2xl
+                                           border-2 border-dashed border-slate-300
+                                           bg-slate-50
+                                           flex items-center justify-center
+                                           overflow-hidden"
+                                >
+                                        <div class="text-center text-slate-400">
+
+                                            <i class="fa-solid fa-school text-3xl"></i>
+
+                                            <p class="text-xs mt-2">
+                                                No Logo
+                                            </p>
+
+                                        </div>
+
+                                   
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Upload Area -->
+                            <div class="flex-1">
+
+                                <h3 class="font-semibold text-slate-800">
+                                    School Logo
+                                </h3>
+
+                                <p class="text-sm text-slate-500 mt-1">
+                                    Upload your official school logo.
+                                </p>
+
+                                <p class="text-xs text-slate-400 mt-1">
+                                    Recommended: PNG or JPG, square image,
+                                    at least 512 × 512 pixels.
+                                </p>
+
+
+                                <div class="flex flex-wrap gap-3 mt-4">
+
+                                    <label
+                                        for="schoolLogo"
+                                        class="cursor-pointer inline-flex
+                                               items-center gap-2
+                                               px-4 py-2.5
+                                               rounded-lg
+                                               border border-slate-300
+                                               bg-white
+                                               hover:bg-slate-50
+                                               text-sm font-medium
+                                               transition"
+                                    >
+
+                                        <i class="fa-solid fa-upload"></i>
+
+                                        Choose Logo
+
+                                    </label>
+
+                                    <input
+                                        type="file"
+                                        id="schoolLogo"
+                                        name="logo"
+                                        accept="image/png,image/jpeg,image/webp"
+                                        class="hidden"
+                                    >
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- =====================================
+                     BASIC INFORMATION
+                ====================================== -->
+
+                <section class="bg-white rounded-2xl border border-slate-200 shadow-sm">
+
+                    <div class="px-6 py-5 border-b border-slate-200">
+
+                        <h2 class="font-bold text-lg">
+                            Basic Information
+                        </h2>
+
+                        <p class="text-sm text-slate-500 mt-1">
+                            Information displayed on your school profile and result sheets.
+                        </p>
+
+                    </div>
+
+
+                    <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-5">
+
+
+                        <!-- School Name -->
+                        <div class="md:col-span-2">
+
+                            <label class="block text-sm font-semibold mb-2">
+                                School Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="schoolName"
+                                name="schoolName"
+                                placeholder="Enter school name"
+                                class="w-full px-4 py-3 rounded-lg
+                                       border border-slate-300
+                                       focus:outline-none
+                                       focus:ring-2
+                                       focus:ring-emerald-500
+                                       focus:border-transparent"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- Motto -->
+                        <div class="md:col-span-2">
+
+                            <label class="block text-sm font-semibold mb-2">
+                                School Motto
+                            </label>
+
+                            <input
+                                type="text"
+                                name="motto"
+                                id="motto"
+                                placeholder="e.g. Knowledge is Power"
+                                class="w-full px-4 py-3 rounded-lg
+                                       border border-slate-300
+                                       focus:outline-none
+                                       focus:ring-2
+                                       focus:ring-emerald-500
+                                       focus:border-transparent"
+                            >
+
+                        </div>
+
+
+                        <!-- School Type -->
+                        <div>
+
+                            <label class="block text-sm font-semibold mb-2">
+                                School Type
+                            </label>
+
+                            <select
+                                name="schoolType"
+                                class="w-full px-4 py-3 rounded-lg
+                                       border border-slate-300
+                                       bg-white
+                                       focus:outline-none
+                                       focus:ring-2
+                                       focus:ring-emerald-500"
+                            >
+
+                                <option value="">
+                                    Select school type
+                                </option>
+
+                                <option
+                                    value="Private"
+                                  
+                                >
+                                    Private School
+                                </option>
+
+                                <option
+                                    value="Public"
+                                 
+                                >
+                                    Public School
+                                </option>
+
+                                <option
+                                    value="Mission"
+                                
+                                >
+                                    Mission School
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- Registration Number -->
+                        <div>
+
+                            <label class="block text-sm font-semibold mb-2">
+                                Registration Number
+                            </label>
+
+                            <input
+                                type="text"
+                                name="registrationNumber"
+                                value="<%= school?.registrationNumber || '' %>"
+                                placeholder="School registration number"
+                                class="w-full px-4 py-3 rounded-lg
+                                       border border-slate-300
+                                       focus:outline-none
+                                       focus:ring-2
+                                       focus:ring-emerald-500"
+                            >
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- =====================================
+                     CONTACT INFORMATION
+                ====================================== -->
+
+                <section class="bg-white rounded-2xl border border-slate-200 shadow-sm">
+
+                    <div class="px-6 py-5 border-b border-slate-200">
+
+                        <h2 class="font-bold text-lg">
+                            Contact Information
+                        </h2>
+
+                        <p class="text-sm text-slate-500 mt-1">
+                            Keep your school's contact details up to date.
+                        </p>
+
+                    </div>
+
+
+                    <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-5">
+
+
+                        <!-- Email -->
+                        <div>
+
+                            <label class="block text-sm font-semibold mb-2">
+                                School Email
+                            </label>
+
+                            <div class="relative">
+
+                                <i class="fa-solid fa-envelope
+                                          absolute left-4 top-1/2
+                                          -translate-y-1/2
+                                          text-slate-400">
+                                </i>
+
+                                <input
+                                    type="email"
+                                    name="schoolEmail"
+                                    placeholder="school@example.com"
+                                    class="w-full pl-11 pr-4 py-3
+                                           rounded-lg
+                                           border border-slate-300
+                                           focus:outline-none
+                                           focus:ring-2
+                                           focus:ring-emerald-500"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Phone -->
+                        <div>
+
+                            <label class="block text-sm font-semibold mb-2">
+                                Phone Number
+                            </label>
+
+                            <div class="relative">
+
+                                <i class="fa-solid fa-phone
+                                          absolute left-4 top-1/2
+                                          -translate-y-1/2
+                                          text-slate-400">
+                                </i>
+
+                                <input
+                                    type="tel"
+                                    name="phone"
+                                    value="<%= school?.phone || '' %>"
+                                    placeholder="08012345678"
+                                    class="w-full pl-11 pr-4 py-3
+                                           rounded-lg
+                                           border border-slate-300
+                                           focus:outline-none
+                                           focus:ring-2
+                                           focus:ring-emerald-500"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Second Phone -->
+                        <div>
+
+                            <label class="block text-sm font-semibold mb-2">
+                                Alternative Phone
+                            </label>
+
+                            <input
+                                type="tel"
+                                name="phone2"
+                                placeholder="Alternative phone number"
+                                class="w-full px-4 py-3
+                                       rounded-lg
+                                       border border-slate-300
+                                       focus:outline-none
+                                       focus:ring-2
+                                       focus:ring-emerald-500"
+                            >
+
+                        </div>
+
+
+                        <!-- Website -->
+                        <div>
+
+                            <label class="block text-sm font-semibold mb-2">
+                                Website
+                            </label>
+
+                            <div class="relative">
+
+                                <i class="fa-solid fa-globe
+                                          absolute left-4 top-1/2
+                                          -translate-y-1/2
+                                          text-slate-400">
+                                </i>
+
+                                <input
+                                    type="url"
+                                    name="website"
+                                    class="w-full pl-11 pr-4 py-3
+                                           rounded-lg
+                                           border border-slate-300
+                                           focus:outline-none
+                                           focus:ring-2
+                                           focus:ring-emerald-500"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Address -->
+                        <div class="md:col-span-2">
+
+                            <label class="block text-sm font-semibold mb-2">
+                                School Address
+                            </label>
+
+                            <textarea
+                                name="address"
+                                rows="3"
+                                placeholder="Enter your school's full address"
+                                class="w-full px-4 py-3 rounded-lg
+                                       border border-slate-300
+                                       resize-none
+                                       focus:outline-none
+                                       focus:ring-2
+                                       focus:ring-emerald-500"
+                            ></textarea>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- =====================================
+                     LOCATION
+                ====================================== -->
+
+                <section class="bg-white rounded-2xl border border-slate-200 shadow-sm">
+
+                    <div class="px-6 py-5 border-b border-slate-200">
+
+                        <h2 class="font-bold text-lg">
+                            School Location
+                        </h2>
+
+                        <p class="text-sm text-slate-500 mt-1">
+                            Select your school's location.
+                        </p>
+
+                    </div>
+
+
+                    <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-5">
+
+
+                        <!-- State -->
+                        <div>
+
+                            <label class="block text-sm font-semibold mb-2">
+                                State
+                            </label>
+
+                            <input
+                                type="text"
+                                name="state"
+                                placeholder="e.g. Edo State"
+                                class="w-full px-4 py-3 rounded-lg
+                                       border border-slate-300
+                                       focus:outline-none
+                                       focus:ring-2
+                                       focus:ring-emerald-500"
+                            >
+
+                        </div>
+
+
+                        <!-- LGA -->
+                        <div>
+
+                            <label class="block text-sm font-semibold mb-2">
+                                Local Government Area
+                            </label>
+
+                            <input
+                                type="text"
+                                name="lga"
+                                value="<%= school?.lga || '' %>"
+                                placeholder="e.g. Oredo"
+                                class="w-full px-4 py-3 rounded-lg
+                                       border border-slate-300
+                                       focus:outline-none
+                                       focus:ring-2
+                                       focus:ring-emerald-500"
+                            >
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- =====================================
+                     SCHOOL HEAD
+                ====================================== -->
+
+                <section class="bg-white rounded-2xl border border-slate-200 shadow-sm">
+
+                    <div class="px-6 py-5 border-b border-slate-200">
+
+                        <h2 class="font-bold text-lg">
+                            School Management
+                        </h2>
+
+                        <p class="text-sm text-slate-500 mt-1">
+                            Information about the head of the school.
+                        </p>
+
+                    </div>
+
+
+                    <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-5">
+
+
+                        <!-- Head Teacher -->
+                        <div>
+
+                            <label class="block text-sm font-semibold mb-2">
+                                Principal / Head Teacher
+                            </label>
+
+                            <input
+                                type="text"
+                                name="headTeacher"
+                                placeholder="Full name"
+                                class="w-full px-4 py-3 rounded-lg
+                                       border border-slate-300
+                                       focus:outline-none
+                                       focus:ring-2
+                                       focus:ring-emerald-500"
+                            >
+
+                        </div>
+
+
+                        <!-- Position -->
+                        <div>
+
+                            <label class="block text-sm font-semibold mb-2">
+                               Signature
+                            </label>
+
+                            <input
+                                type="file"
+                                accept="image/png,image/jpeg,image/webp"
+                                name="headTeacherSign"
+                                class="w-full px-4 py-3 rounded-lg
+                                       border border-slate-300
+                                       bg-white
+                                       focus:outline-none
+                                       focus:ring-2
+                                       focus:ring-emerald-500"
+                            >
+
+                               
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- Bottom Save -->
+                <div class="flex justify-end pt-2">
+
+                    <button
+                        id="submit"
+                        class="inline-flex items-center justify-center gap-2
+                               px-6 py-3
+                               rounded-lg
+                               bg-emerald-700
+                               hover:bg-emerald-800
+                               text-white
+                               font-semibold
+                               transition"
+                    >
+
+                        <i class="fa-solid fa-floppy-disk"></i>
+
+                        Save School Information
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+    </div>
+
+
+    <!-- Logo Preview Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const school = localStorage.getItem("school");
+            if(school) {
+                    const schoolData = JSON.parse(school);
+                    if (schoolData.image.logo) {
+                        const logoPreview = document.getElementById("logoPreview");
+                        logoPreview.innerHTML = `
+                            <img
+                                src="${schoolData.image.logo}"
+                                alt="School Logo Preview"
+                                class="w-full h-full object-contain"
+                            >
+                        `;
+                    }
+                document.querySelector('[name="schoolName"]').value = schoolData.schoolName
+                document.querySelector('[name="schoolEmail"]').value = schoolData.schoolEmail
+                document.querySelector('[name="motto"]').value = schoolData.motto || ''
+                document.querySelector('[name="phone"]').value = schoolData.phone
+                document.querySelector('[name="website"]').value = `https://www.myschoolresult.com/myschool/${schoolData.schoolName.split(" ").join("-").toLowerCase() + ".com"}`
+                document.querySelector('[name="address"]').value = schoolData.address
+                document.querySelector('[name="state"]').value = schoolData.state || ''
+                document.querySelector('[name="headTeacher"]').value = schoolData.headTeacher.name || ''
+
+            }
+        });
+        const logoInput =
+                document.getElementById("schoolLogo");
+
+        const logoPreview =
+                document.getElementById("logoPreview");
+
+
+        logoInput.addEventListener("change", function () {
+
+                const file = this.files[0];
+
+                if (!file) return;
+
+
+                if (!file.type.startsWith("image/")) {
+
+                    alert("Please select a valid image.");
+
+                    this.value = "";
+
+                    return;
+                }
+
+
+                const reader = new FileReader();
+
+
+                reader.onload = function (event) {
+
+                    logoPreview.innerHTML = `
+                        <img
+                            src="${event.target.result}"
+                            alt="School Logo Preview"
+                            class="w-full h-full object-contain"
+                        >
+                    `;
+
+                };
+
+
+                reader.readAsDataURL(file);
+
+            });
+
+        let loading = false;
+        async function handleSubmit(event) {
+            event.preventDefault();
+            if(loading) return;
+            loading = true;
+             document.getElementById("submit").innerHTML=` <i class="fa-solid fa-floppy-disk"></i> Saving...`;
+            const form = document.getElementById("schoolSettingsForm");
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch("/admin/school-settings", {
+                    method: "PATCH",
+                    body: formData,
+                });
+
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+
+                const result = await response.json();
+                alert("School settings updated successfully!");
+                localStorage.setItem("school", JSON.stringify(result.updatedSchool));
+
+            } catch (error) {
+                console.error("Error submitting form:", error);
+                alert("An error occurred while updating school settings.");
+            }finally {
+                loading = false;
+               document.getElementById("submit").innerHTML = ` <i class="fa-solid fa-floppy-disk"></i> Save School Information`;
+            }
+        }
+    </script>
+
+</body>
+
+</html>
+

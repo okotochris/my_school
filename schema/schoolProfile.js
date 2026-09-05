@@ -33,9 +33,10 @@ const profile = new mongoose.Schema({
     },
     headTeacher:{
         name:String,
-        signatrue:String,
+        signature:String,
         public_id:String,
     },
+    state:String,
     motto:String,
 }, {timestamp: true})
 

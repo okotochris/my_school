@@ -3,6 +3,7 @@ const router = express.Router()
 const upload = require("../middleware/upload.js");
 const cloudinary = require("../middleware/cloudinary.js");
 const StudentResult = require('../schema/studentResult.js')
+const SchoolProfile = require('../schema/schoolProfile.js');
 const Teacher = require('../schema/admin.js')
 const isAuthenticated = require('../utility/authenticated.js')
 const StudentProfile = require('../schema/studentProfile.js')
@@ -128,7 +129,242 @@ router.patch('/myschool/reset-password', async (req, res) => {
 
 });
 
-router.get('/myschool/reset-password', (req, res)=>{
-  res.render('passwordReset')
-})
+router.patch(
+    '/admin/school-settings',
+
+    upload.fields([
+        { name: 'logo', maxCount: 1 },
+        { name: 'headTeacherSign', maxCount: 1 }
+    ]),
+
+    async (req, res) => {
+
+        const {
+            schoolName,
+            schoolEmail,
+            fees,
+            address,
+            phone,
+            resultTemplate,
+            headTeacher,
+            headTeacherSignature,
+            state,
+            motto
+        } = req.body;
+
+        try {
+
+            // ==========================================
+            // FIND SCHOOL
+            // ==========================================
+
+            const schoolInfo = await SchoolProfile.findOne({
+                schoolName: req.session.school
+            });
+
+
+            // ==========================================
+            // CHECK IF SCHOOL EXISTS
+            // ==========================================
+
+            if (!schoolInfo) {
+
+                return res.status(404).json({
+                    message: "School not found"
+                });
+
+            }
+
+
+            // ==========================================
+            // STORE OLD SCHOOL NAME
+            // ==========================================
+
+            const oldSchoolName = schoolInfo.schoolName;
+
+
+            // ==========================================
+            // UPDATE SCHOOL INFORMATION
+            // ==========================================
+
+            schoolInfo.schoolName = schoolName;
+            schoolInfo.schoolEmail = schoolEmail;
+            schoolInfo.fees = fees;
+            schoolInfo.address = address;
+            schoolInfo.phone = phone;
+            schoolInfo.resultTemplate = resultTemplate;
+            schoolInfo.headTeacher.name =  headTeacher;
+            schoolInfo.headTeacher.signature = headTeacherSignature;
+            schoolInfo.state = state;
+            schoolInfo.motto = motto;
+
+
+            // ==========================================
+            // UPDATE SCHOOL LOGO
+            // ==========================================
+
+            const schoolLogo = req.files?.logo?.[0];
+
+
+            if (schoolLogo) {
+
+                // Get old Cloudinary public ID
+                const publicId = schoolInfo.image?.public_id;
+
+
+                // Delete old logo
+                if (publicId) {
+
+                    await cloudinary.uploader.destroy(publicId);
+
+                }
+
+
+                // Upload new logo
+                const uploadedLogo =
+                    await cloudinary.uploader.upload(
+                        schoolLogo.path
+                    );
+
+
+                // Save new logo information
+                schoolInfo.image.logo =
+                    uploadedLogo.secure_url;
+
+                schoolInfo.image.public_id =
+                    uploadedLogo.public_id;
+
+            }
+
+
+            // ==========================================
+            // UPDATE HEAD TEACHER SIGNATURE
+            // ==========================================
+
+            const headTeacherSignFile =
+                req.files?.headTeacherSign?.[0];
+
+
+            if (headTeacherSignFile) {
+
+                // Get old signature public ID
+                const publicId =
+                    schoolInfo.headTeacher?.public_id;
+
+
+                // Delete old signature
+                if (publicId) {
+
+                    await cloudinary.uploader.destroy(publicId);
+
+                }
+
+
+                // Upload new signature
+                const uploadedHeadTeacherSign =
+                    await cloudinary.uploader.upload(
+                        headTeacherSignFile.path
+                    );
+
+
+                // Save new signature information
+                schoolInfo.headTeacher.signature =
+                    uploadedHeadTeacherSign.secure_url;
+
+                schoolInfo.headTeacher.public_id =
+                    uploadedHeadTeacherSign.public_id;
+
+            }
+
+
+            // ==========================================
+            // CHECK IF SCHOOL NAME HAS CHANGED
+            // ==========================================
+
+            if (schoolName !== oldSchoolName) {
+
+
+                // ==========================================
+                // UPDATE ALL TEACHERS
+                // ==========================================
+
+                await Teacher.updateMany(
+
+                    {
+                        
+                          school: oldSchoolName
+                    },
+
+                    {
+                        $set: {                
+                          school: schoolName
+                        }
+                    }
+
+                );
+
+
+                // ==========================================
+                // UPDATE ALL STUDENTS
+                // ==========================================
+
+                await StudentProfile.updateMany(
+
+                    {
+                        schoolName: oldSchoolName
+                    },
+
+                    {
+                        $set: {
+                            schoolName: schoolName
+                        }
+                    }
+
+                );
+
+
+                // ==========================================
+                // UPDATE SESSION SCHOOL NAME
+                // ==========================================
+
+                req.session.school = schoolName;
+
+            }
+
+
+            // ==========================================
+            // SAVE SCHOOL
+            // ==========================================
+
+            await schoolInfo.save();
+
+
+            // ==========================================
+            // RESPONSE
+            // ==========================================
+
+            return res.status(200).json({
+
+                message: "School settings updated successfully",
+
+                school: schoolInfo
+
+            });
+
+
+        } catch (err) {
+
+            console.error("School settings update error:", err);
+
+
+            return res.status(500).json({
+
+                message: "Server error"
+
+            });
+
+        }
+
+    }
+);
 module.exports = router;
