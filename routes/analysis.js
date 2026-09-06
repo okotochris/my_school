@@ -85,25 +85,95 @@ router.get("/api/analysis", isAuthenticated, async (req, res) => {
     }
 });
 
-
 async function getAllClassGradePercentages(schoolName) {
     try {
+
         const summary = await StudentResult.aggregate([
+
             {
-                $match: { schoolName }
+                $match: {
+                    schoolName
+                }
             },
+
             {
                 $unwind: "$subjects"
             },
+
+            // Convert A+ to A, B+ to B, C+ to C, etc.
+            {
+                $project: {
+                    grade: {
+                        $toUpper: {
+                            $ifNull: ["$subjects.grade", ""]
+                        }
+                    }
+                }
+            },
+
+            {
+                $project: {
+                    grade: {
+                        $switch: {
+                            branches: [
+                                {
+                                    case: {
+                                        $in: ["$grade", ["A", "A+"]]
+                                    },
+                                    then: "A"
+                                },
+                                {
+                                    case: {
+                                        $in: ["$grade", ["B", "B+"]]
+                                    },
+                                    then: "B"
+                                },
+                                {
+                                    case: {
+                                        $in: ["$grade", ["C", "C+"]]
+                                    },
+                                    then: "C"
+                                },
+                                {
+                                    case: {
+                                        $eq: ["$grade", "D"]
+                                    },
+                                    then: "D"
+                                },
+                                {
+                                    case: {
+                                        $eq: ["$grade", "F"]
+                                    },
+                                    then: "F"
+                                }
+                            ],
+                            default: null
+                        }
+                    }
+                }
+            },
+
+            // Remove grades that aren't A-F
+            {
+                $match: {
+                    grade: {
+                        $ne: null
+                    }
+                }
+            },
+
+            // Count grades
             {
                 $group: {
-                    _id: {
-                        $toUpper: "$subjects.grade"
-                    },
-                    count: { $sum: 1 }
+                    _id: "$grade",
+                    count: {
+                        $sum: 1
+                    }
                 }
             }
+
         ]);
+
 
         const counts = {
             A: 0,
@@ -113,22 +183,39 @@ async function getAllClassGradePercentages(schoolName) {
             F: 0
         };
 
+
         let totalGrades = 0;
 
+
         summary.forEach(item => {
-            if (counts.hasOwnProperty(item._id)) {
+
+            if (
+                Object.prototype.hasOwnProperty.call(
+                    counts,
+                    item._id
+                )
+            ) {
+
                 counts[item._id] = item.count;
+
                 totalGrades += item.count;
+
             }
+
         });
+
 
         const percentages = {};
 
+
         Object.keys(counts).forEach(grade => {
+
             percentages[grade] = totalGrades
                 ? ((counts[grade] / totalGrades) * 100).toFixed(2)
                 : "0.00";
+
         });
+
 
         return {
             totalGrades,
@@ -136,13 +223,32 @@ async function getAllClassGradePercentages(schoolName) {
             percentages
         };
 
+
     } catch (err) {
-        console.error(err);
+
+        console.error(
+            "Error getting class grade percentages:",
+            err
+        );
 
         return {
             totalGrades: 0,
-            counts: { A: 0, B: 0, C: 0, D: 0, F: 0 },
-            percentages: { A: "0.00", B: "0.00", C: "0.00", D: "0.00", F: "0.00" }
+
+            counts: {
+                A: 0,
+                B: 0,
+                C: 0,
+                D: 0,
+                F: 0
+            },
+
+            percentages: {
+                A: "0.00",
+                B: "0.00",
+                C: "0.00",
+                D: "0.00",
+                F: "0.00"
+            }
         };
     }
 }

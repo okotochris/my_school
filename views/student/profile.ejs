@@ -21,17 +21,15 @@
 
         <main class="lg:ml-64">
 
-            <!-- HEADER -->
-
-            <%- include('./partials/header') %>
-
 
             <!-- ==========================================
                  CONTENT
             =========================================== -->
 
-            <section class="mx-auto max-w-[1500px] p-4 sm:p-6 lg:p-8">
+            <section class="mx-auto max-w-[1300px] p-4 sm:p-6 lg:p-8">
+                   <!-- HEADER -->
 
+            <%- include('./partials/header') %>
 
                 <!-- PAGE HEADER -->
 
@@ -249,8 +247,8 @@
                                     Email Address
                                 </p>
 
-                                <p class="break-all text-sm font-medium text-slate-700">
-                                    christian@example.com
+                                <p class="email break-all text-sm font-medium text-slate-700">
+                                    
                                 </p>
 
                             </div>
@@ -264,8 +262,8 @@
                                     Admission Number
                                 </p>
 
-                                <p class="text-sm font-medium text-slate-700">
-                                    MSR/2025/00245
+                                <p class="addmissionNo text-sm font-medium text-slate-700">
+                                   
                                 </p>
 
                             </div>
@@ -280,7 +278,7 @@
                                 </p>
 
                                 <p class="text-sm font-medium text-slate-700">
-                                    15 Airport Road, Benin City, Edo State
+                                  
                                 </p>
 
                             </div>
@@ -653,7 +651,7 @@
         window.location.href = '/student/student-login'
     }
     const student = JSON.parse(savedStudent)
-   
+   console.log(student)
     document.querySelectorAll('.fullname').forEach(item=>{
         item.innerText = student.fullname
     })
@@ -663,7 +661,14 @@
     document.querySelectorAll('.term').forEach(item=>{
         item.innerText = `${student.class} • ${student.session || ''}`
     })
-    document.querySelector('.schoolSection').innerText = student.session || ''
+    //document.querySelector('.schoolSection').innerText = student.session || ''
+    document.querySelector('.dob').innerText = student.dob || ''
+    document.querySelector('.gender').innerText = student.gender || ''
+    document.querySelector('.schoolName').innerText = student?.schoolName || ''
+    document.querySelector('.addmissionNo').innerText = student?.addmissionNo || ''
+    document.querySelector('.email').innerText = student.email || ''
+    document.querySelector('.address').innerText = student.address || ''
+
    
 </script>
 </body>

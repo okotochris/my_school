@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <%- include('./partials/head') %>
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <body class="bg-slate-50 text-slate-800">
 
 <div class="min-h-screen">
@@ -24,15 +24,15 @@
              TOP BAR
         =========================================== -->
 
-        <%- include('./partials/header') %>
+   
 
 
         <!-- ==========================================
              CONTENT
         =========================================== -->
 
-        <section class="mx-auto max-w-[1500px] p-4 sm:p-6 lg:p-8">
-
+        <section class="mx-auto max-w-[1300px] p-4 sm:p-6 lg:p-8">
+             <%- include('./partials/header') %>
 
             <!-- ==========================================
                  WELCOME CARD
@@ -204,190 +204,11 @@
             <div class="grid gap-6 xl:grid-cols-[1.5fr_1fr]">
 
 
-                <!-- ======================================
-                     RECENT RESULTS
-                ======================================= -->
-
-                <div class="rounded-xl border border-slate-200 bg-white shadow-sm">
-
-                    <div class="flex items-center justify-between border-b border-slate-100 px-5 py-4">
-
-                        <h3 class="text-sm font-bold text-slate-900">
-                            Recent Results
-                        </h3>
-
-                        <a
-                            href="/student/results"
-                            class="text-xs font-medium text-blue-600 hover:text-blue-700"
-                        >
-                            View all →
-                        </a>
-
-                    </div>
-
-
-                    <div class="overflow-x-auto">
-
-                        <table class="w-full min-w-[550px]">
-
-                            <thead>
-
-                                <tr class="border-b border-slate-100">
-
-                                    <th class="px-5 py-3 text-left text-[11px] font-medium text-slate-500">
-                                        Subject
-                                    </th>
-
-                                    <th class="px-5 py-3 text-left text-[11px] font-medium text-slate-500">
-                                        Score
-                                    </th>
-
-                                    <th class="px-5 py-3 text-left text-[11px] font-medium text-slate-500">
-                                        Grade
-                                    </th>
-
-                                    <th class="px-5 py-3 text-left text-[11px] font-medium text-slate-500">
-                                        Remark
-                                    </th>
-
-                                </tr>
-
-                            </thead>
-
-
-                            <tbody>
-
-
-                                <tr class="border-b border-slate-50">
-
-                                    <td class="px-5 py-3 text-xs font-medium text-slate-700">
-                                        Mathematics
-                                    </td>
-
-                                    <td class="px-5 py-3 text-xs text-slate-600">
-                                        82
-                                    </td>
-
-                                    <td class="px-5 py-3">
-
-                                        <span class="rounded-md bg-emerald-50 px-2 py-1 text-[10px] font-semibold text-emerald-600">
-                                            A
-                                        </span>
-
-                                    </td>
-
-                                    <td class="px-5 py-3 text-xs text-slate-500">
-                                        Excellent
-                                    </td>
-
-                                </tr>
-
-
-                                <tr class="border-b border-slate-50">
-
-                                    <td class="px-5 py-3 text-xs font-medium text-slate-700">
-                                        English Language
-                                    </td>
-
-                                    <td class="px-5 py-3 text-xs text-slate-600">
-                                        76
-                                    </td>
-
-                                    <td class="px-5 py-3">
-
-                                        <span class="rounded-md bg-blue-50 px-2 py-1 text-[10px] font-semibold text-blue-600">
-                                            B
-                                        </span>
-
-                                    </td>
-
-                                    <td class="px-5 py-3 text-xs text-slate-500">
-                                        Very Good
-                                    </td>
-
-                                </tr>
-
-
-                                <tr class="border-b border-slate-50">
-
-                                    <td class="px-5 py-3 text-xs font-medium text-slate-700">
-                                        Biology
-                                    </td>
-
-                                    <td class="px-5 py-3 text-xs text-slate-600">
-                                        81
-                                    </td>
-
-                                    <td class="px-5 py-3">
-
-                                        <span class="rounded-md bg-emerald-50 px-2 py-1 text-[10px] font-semibold text-emerald-600">
-                                            A
-                                        </span>
-
-                                    </td>
-
-                                    <td class="px-5 py-3 text-xs text-slate-500">
-                                        Excellent
-                                    </td>
-
-                                </tr>
-
-
-                                <tr class="border-b border-slate-50">
-
-                                    <td class="px-5 py-3 text-xs font-medium text-slate-700">
-                                        Physics
-                                    </td>
-
-                                    <td class="px-5 py-3 text-xs text-slate-600">
-                                        73
-                                    </td>
-
-                                    <td class="px-5 py-3">
-
-                                        <span class="rounded-md bg-blue-50 px-2 py-1 text-[10px] font-semibold text-blue-600">
-                                            B
-                                        </span>
-
-                                    </td>
-
-                                    <td class="px-5 py-3 text-xs text-slate-500">
-                                        Very Good
-                                    </td>
-
-                                </tr>
-
-
-                                <tr>
-
-                                    <td class="px-5 py-3 text-xs font-medium text-slate-700">
-                                        Chemistry
-                                    </td>
-
-                                    <td class="px-5 py-3 text-xs text-slate-600">
-                                        79
-                                    </td>
-
-                                    <td class="px-5 py-3">
-
-                                        <span class="rounded-md bg-blue-50 px-2 py-1 text-[10px] font-semibold text-blue-600">
-                                            B
-                                        </span>
-
-                                    </td>
-
-                                    <td class="px-5 py-3 text-xs text-slate-500">
-                                        Very Good
-                                    </td>
-
-                                </tr>
-
-                            </tbody>
-
-                        </table>
-
-                    </div>
-
+               
+
+                <div class="chart-container">
+                    <h3>📈 Performance</h3>
+                    <canvas id="performanceChart"></canvas>
                 </div>
 
 
@@ -605,6 +426,55 @@
     })
     document.querySelector('.schoolSection').innerText = student.session || ''
    
+
+
+   let resultDetails = null;
+window.onload = async function resultAnalysisA() {
+    const savedStudent = localStorage.getItem('student')
+    if(!savedStudent){
+        return
+    }
+    const student = JSON.parse(savedStudent)
+    const response = await fetch(`/api/get_result?studentId=${student.studentId}`);
+    const data = await response.json();
+    const labels = [];
+    const scores = [];
+
+    data.forEach(res => {
+        labels.push(res.term);
+        scores.push(res.average);
+    });
+
+    const ctx = document.getElementById('performanceChart').getContext('2d');
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels,
+            datasets: [{
+                label: 'Average Score',
+                data: scores,
+                borderColor: '#0ea5e9',
+                backgroundColor: 'rgba(14, 165, 233, 0.1)',
+                fill: true,
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { labels: { color: "#1f2937" } }
+            },
+            scales: {
+                x: { ticks: { color: "#6b7280" } },
+                y: { ticks: { color: "#6b7280" }, beginAtZero: true }
+            }
+        }
+    });
+
+    renderResults(data);
+}
+
 </script>
 
 </body>

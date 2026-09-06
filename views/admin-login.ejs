@@ -172,6 +172,7 @@
             if (res.ok) {
                 localStorage.setItem('user', JSON.stringify(user))
                 localStorage.setItem('school', JSON.stringify(school))
+                localStorage.setItem('isStudent', 'admin')
                 return window.location.href = `${redirectTo}`;
             }
             document.getElementById('errDiv').style.display = 'block'
