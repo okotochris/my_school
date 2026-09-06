@@ -34,7 +34,8 @@ const blogschema = new Schema({
     schoolName:{
         type: String,
         required: true
-    }
+    },
+    house:String
 }, { timestamps: true });
 
 const Studentpassport = mongoose.model('StudentProfile', blogschema);

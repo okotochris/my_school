@@ -73,9 +73,8 @@
                                 <div class="relative">
 
                                     <img
-                                        src="https://i.pravatar.cc/200?img=12"
-                                        alt="Christian Okotoaza"
-                                        class="h-24 w-24 rounded-2xl border-4 border-white object-cover shadow-md sm:h-28 sm:w-28"
+                                        id="profileImage"
+                                       class="h-24 w-24 rounded-2xl border-4 border-white object-cover shadow-md sm:h-28 sm:w-28"
                                     >
 
                                     <!-- Online indicator -->
@@ -90,12 +89,12 @@
 
                                 <div class="pb-1">
 
-                                    <h2 class="text-xl font-bold text-slate-900">
-                                        Christian Okotoaza
+                                    <h2 class="fullname text-xl font-bold text-slate-900">
+                                        
                                     </h2>
 
                                     <p class="mt-1 text-sm text-slate-500">
-                                        Student ID: MSR/2025/00245
+                                        Student ID: <span class="studentId"></span>
                                     </p>
 
                                 </div>
@@ -160,8 +159,8 @@
                                     First Name
                                 </p>
 
-                                <p class="text-sm font-medium text-slate-700">
-                                    Christian
+                                <p class="fullname text-sm font-medium text-slate-700">
+                                   
                                 </p>
 
                             </div>
@@ -172,17 +171,17 @@
                             <div>
 
                                 <p class="mb-1 text-[10px] font-semibold uppercase tracking-wide text-slate-400">
-                                    Last Name
+                                   school name
                                 </p>
 
-                                <p class="text-sm font-medium text-slate-700">
-                                    Okotoaza
+                                <p class="schoolName text-sm font-medium text-slate-700">
+                                    
                                 </p>
 
                             </div>
 
 
-                            <!-- Other Name -->
+                          
 
                             <div>
 
@@ -197,7 +196,7 @@
                             </div>
 
 
-                            <!-- Gender -->
+                          
 
                             <div>
 
@@ -205,14 +204,14 @@
                                     Gender
                                 </p>
 
-                                <p class="text-sm font-medium text-slate-700">
-                                    Male
+                                <p class="gender text-sm font-medium text-slate-700">
+                                   
                                 </p>
 
                             </div>
 
 
-                            <!-- Date of Birth -->
+                            
 
                             <div>
 
@@ -220,11 +219,11 @@
                                     Date of Birth
                                 </p>
 
-                                <p class="text-sm font-medium text-slate-700">
-                                    15 March 2010
+                                <p class="dob text-sm font-medium text-slate-700">
+                                   
                                 </p>
 
-                            </div>
+                            </div> 
 
 
                             <!-- Phone -->
@@ -647,7 +646,26 @@
         </main>
 
     </div>
+<script>
 
+    const savedStudent = localStorage.getItem('student')
+    if(!savedStudent){
+        window.location.href = '/student/student-login'
+    }
+    const student = JSON.parse(savedStudent)
+   
+    document.querySelectorAll('.fullname').forEach(item=>{
+        item.innerText = student.fullname
+    })
+    document.querySelector('#profileImage').src = student.passport
+    document.querySelector('.studentId').innerHTML = student.studentId
+    document.querySelector('.house').innerText = ` ${student.house || ''}`
+    document.querySelectorAll('.term').forEach(item=>{
+        item.innerText = `${student.class} • ${student.session || ''}`
+    })
+    document.querySelector('.schoolSection').innerText = student.session || ''
+   
+</script>
 </body>
 </html>
 

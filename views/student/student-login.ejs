@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Login | MySchoolResult</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+</head>
+
+<body class="min-h-screen bg-slate-50">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-slate-200">
+
+        <div class="max-w-6xl mx-auto px-5 py-4">
+
+            <a href="/" class="flex items-center gap-3 w-fit">
+
+                <img
+                    src="/IMAGE/myschoolresult.png"
+                    alt="MySchoolResult"
+                    class="w-11 h-11 object-contain"
+                >
+
+                <div>
+                    <h1 class="text-xl font-bold text-slate-800">
+                        <span class="text-blue-500">Myschool</span>Result
+                    </h1>
+
+                    <p class="text-xs text-slate-500">
+                        Student Portal
+                    </p>
+                </div>
+
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- Main -->
+    <main class="min-h-[calc(100vh-73px)] flex items-center justify-center px-5 py-10">
+
+        <div class="w-full max-w-md">
+
+            <!-- Login Card -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8">
+
+                <!-- Icon -->
+                <div class="flex justify-center mb-5">
+
+                    <div class="w-16 h-16 rounded-2xl
+                                bg-blue-100
+                                text-blue-500
+                                flex items-center justify-center">
+
+                        <i class="fa-solid fa-graduation-cap text-2xl"></i>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Heading -->
+                <div class="text-center mb-8">
+
+                    <h2 class="text-2xl sm:text-3xl font-bold text-slate-800">
+                        Student Login
+                    </h2>
+
+                    <p class="text-sm text-slate-500 mt-2">
+                        Enter your details to access your student portal.
+                    </p>
+
+                </div>
+
+
+                <!-- Error Message -->
+                <div
+                    id="errorMessage"
+                    class="hidden mb-5 rounded-lg
+                           bg-red-50 border border-red-200
+                           text-red-700 text-sm
+                           px-4 py-3"
+                >
+                </div>
+
+
+                <!-- Login Form -->
+                <form id="studentLoginForm" class="space-y-5">
+
+
+                    <!-- Student ID -->
+                    <div>
+
+                        <label
+                            for="studentId"
+                            class="block text-sm font-semibold text-slate-700 mb-2"
+                        >
+                            Student ID
+                        </label>
+
+                        <div class="relative">
+
+                            <i class="fa-solid fa-id-card
+                                      absolute left-4 top-1/2
+                                      -translate-y-1/2
+                                      text-slate-400">
+                            </i>
+
+                            <input
+                                type="text"
+                                id="studentId"
+                                name="studentId"
+                                placeholder="Enter your student ID"
+                                autocomplete="username"
+                                required
+                                class="w-full pl-11 pr-4 py-3
+                                       rounded-lg
+                                       border border-slate-300
+                                       bg-white
+                                       text-slate-800
+                                       placeholder-slate-400
+                                       focus:outline-none
+                                       focus:ring-2
+                                       focus:ring-blue-200
+                                       focus:border-transparent"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- First Name -->
+                    <div>
+
+                        <label
+                            for="firstName"
+                            class="block text-sm font-semibold text-slate-700 mb-2"
+                        >
+                            First Name
+                        </label>
+
+                        <div class="relative">
+
+                            <i class="fa-solid fa-user
+                                      absolute left-4 top-1/2
+                                      -translate-y-1/2
+                                      text-slate-400">
+                            </i>
+
+                            <input
+                                type="text"
+                                id="firstName"
+                                name="firstName"
+                                placeholder="Enter your first name"
+                                autocomplete="given-name"
+                                required
+                                class="w-full pl-11 pr-4 py-3
+                                       rounded-lg
+                                       border border-slate-300
+                                       bg-white
+                                       text-slate-800
+                                       placeholder-slate-400
+                                       focus:outline-none
+                                       focus:ring-2
+                                       focus:ring-blue-200
+                                       focus:border-transparent"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Login Button -->
+                    <button
+                        type="submit"
+                        id="loginBtn"
+                        class="w-full flex items-center justify-center gap-2
+                               py-3.5
+                               rounded-lg
+                               bg-blue-500
+                               hover:bg-blue-800
+                               text-white
+                               font-semibold
+                               transition
+                               disabled:opacity-60
+                               disabled:cursor-not-allowed"
+                    >
+
+                        <i class="fa-solid fa-right-to-bracket"></i>
+
+                        <span id="loginBtnText">
+                            Login
+                        </span>
+
+                    </button>
+
+                </form>
+
+
+                <!-- Help -->
+                <div class="mt-7 text-center">
+
+                    <p class="text-sm text-slate-500">
+                        Don't know your Student ID?
+                    </p>
+
+                    <p class="text-sm text-slate-600 mt-1">
+                        Please contact your school administrator.
+                    </p>
+
+                </div>
+
+
+                <!-- Admin Login -->
+                <div class="border-t border-slate-200 mt-7 pt-6 text-center">
+
+                    <p class="text-sm text-slate-500">
+                        Are you a school administrator?
+                    </p>
+
+                    <a
+                        href="/admin-login"
+                        class="inline-flex items-center gap-2
+                               mt-2
+                               text-sm
+                               font-semibold
+                               text-blue-700
+                               hover:text-blue-800"
+                    >
+
+                        <i class="fa-solid fa-user-tie"></i>
+
+                        Admin Login
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- Back Home -->
+            <div class="text-center mt-6">
+
+                <a
+                    href="/"
+                    class="inline-flex items-center gap-2
+                           text-sm text-slate-500
+                           hover:text-blue-700"
+                >
+
+                    <i class="fa-solid fa-arrow-left text-xs"></i>
+
+                    Back to Home
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <script>
+
+        const form =
+            document.getElementById("studentLoginForm");
+
+        const loginBtn =
+            document.getElementById("loginBtn");
+
+        const loginBtnText =
+            document.getElementById("loginBtnText");
+
+        const errorMessage =
+            document.getElementById("errorMessage");
+
+
+        form.addEventListener("submit", async (e) => {
+
+            e.preventDefault();
+
+
+            const studentId =
+                document.getElementById("studentId").value.trim();
+
+            const firstName =
+                document.getElementById("firstName").value.trim();
+
+
+            // Clear previous error
+            errorMessage.classList.add("hidden");
+            errorMessage.textContent = "";
+
+
+            if (!studentId || !firstName) {
+                return;
+            }
+
+
+            // Loading state
+            loginBtn.disabled = true;
+
+            loginBtnText.textContent = "Logging in...";
+
+
+            try {
+
+                const response = await fetch(
+                    "/student/login",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            studentId,
+                            firstName
+                        })
+                    }
+                );
+
+
+                const data = await response.json();
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.message || "Invalid login details"
+                    );
+
+                }
+
+
+                // Save student information if required
+                if (data.student) {
+
+                    localStorage.setItem(
+                        "student",
+                        JSON.stringify(data.student)
+                    );
+
+                }
+
+
+                localStorage.setItem(
+                    "isStudent",
+                    "student"
+                );
+
+
+                // Redirect
+                window.location.href =
+                    "/student/dashboard";
+
+
+            } catch (error) {
+
+                errorMessage.textContent =
+                    error.message;
+
+                errorMessage.classList.remove("hidden");
+
+            } finally {
+
+                loginBtn.disabled = false;
+
+                loginBtnText.textContent = "Login";
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>
+

@@ -1,6 +1,7 @@
 const express = require('express')
 const Staff = require("../schema/admin.js");
 const SchoolPfofile = require('../schema/schoolProfile.js')
+const StudentProfile = require('../schema/studentProfile.js')
 const upload = require("../middleware/upload.js");
 const cloudinary = require("../middleware/cloudinary.js");
 const bcrypt = require("bcrypt");
@@ -95,11 +96,56 @@ router.post("/login", async (req, res) => {
 router.get("/login", (req, res) => {
   res.render("login");
 });
-
+//ADMIN LOGIN
+router.get('/admin-login', (req, res)=>{
+  res.render('admin-login')
+})
+router.get('/student/student-login', (req, res)=>{
+  res.render('student/student-login')
+})
 //LOGOUT API
 router.get("/logout", (req, res) => {
   req.session.destroy();
   //res.clearCookie('connect.sid'); 
   res.redirect("login");
+});
+
+//STUDENT LOGIN
+router.post('/student/login', async (req, res) => {
+
+    const { studentId, firstName } = req.body;
+
+    try {
+
+       const student = await StudentProfile.findOne({
+          studentId: studentId,
+          fullname: {
+              $regex: firstName,
+              $options: "i"
+          }
+      });
+
+        if (!student) {
+            return res.status(401).json({
+                message: "Invalid Student ID or First Name"
+            });
+        }
+
+        req.session.studentId = student.studentId;
+        req.session.student = student;
+
+        res.status(200).json({
+            message: "Login successful",
+            student
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+            message: "Server error"
+        });
+    }
 });
 module.exports = router;

@@ -48,7 +48,7 @@
         SSCE
       </a>
 
-      <a href="/admin" class="nav-cta">
+      <a href="/admin" class="loginLink nav-cta">
         Login
       </a>
 
@@ -125,9 +125,12 @@
 
 
     <div class="item">
-      <a href="/admin" class="mobile-nav-cta">
+    <a
+    href="/login"
+    class="loginLink mobile-nav-cta"
+    >
         Login
-      </a>
+    </a>
     </div>
 
   </div>
@@ -589,4 +592,20 @@
         }
     });
 
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const isStudent = localStorage.getItem("isStudent");
+        const loginLink = document.querySelector(".loginLink");
+        if (isStudent === "student") {
+            loginLink.href = "/student/dashboard";
+          
+        } else if(isStudent === "admin") {
+            loginLink.href = "/admin";
+           
+        }else{
+            loginLink.href = "/login";
+        }
+         
+    });
 </script>

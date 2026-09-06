@@ -10,10 +10,7 @@
                     Student Dashboard
                 </h1>
 
-                <p class="hidden text-xs text-slate-500 sm:block">
-                    Tuesday, 4 August 2026
-                </p>
-
+             
             </div>
 
 
@@ -24,17 +21,17 @@
                 <img
                     src="https://i.pravatar.cc/100?img=12"
                     alt="Student"
-                    class="h-10 w-10 rounded-full border-2 border-slate-100 object-cover"
+                    class="profileImage h-10 w-10 rounded-full border-2 border-slate-100 object-cover"
                 >
 
                 <div>
 
-                    <p class="text-sm font-semibold text-slate-900">
-                        Christian Okotoaza
+                    <p class="userName text-sm font-semibold text-slate-900">
+                       
                     </p>
 
-                    <p class="text-[11px] text-slate-500">
-                        SS 2 • Gold
+                    <p class="house text-[11px] text-slate-500">
+                       
                     </p>
 
                 </div>
@@ -165,4 +162,17 @@
 
     });
 
+</script>
+<script>
+   window.onload= ()=>{
+    const savedStudent = localStorage.getItem('student')
+    if(!savedStudent){
+        window.location.href = '/student/student-login'
+    }
+    const student = JSON.parse(savedStudent)
+    document.querySelector('.profileImage').src = student.passport
+    document.querySelector('.userName').innerText = student.fullname
+    document.querySelector('.house').innerText = `${student.class} • ${student.house || ''}`
+    
+   }
 </script>

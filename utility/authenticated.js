@@ -7,7 +7,7 @@ function isAuthenticated(req, res, next) {
     if (req.originalUrl == "/myschool") {
       res.redirect("school");
     }
-    res.redirect("login");
+    res.redirect('admin-login');
   }
 }
 
