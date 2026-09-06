@@ -35,6 +35,8 @@ const blogschema = new Schema({
         type: String,
         required: true
     },
+    address:String,
+    email:String,
     house:String
 }, { timestamps: true });
 

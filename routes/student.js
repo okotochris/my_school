@@ -1,10 +1,11 @@
 const express = require('express');
-const News = require('../schema/news')
 
 const router = express.Router();
 
 router.get('/student/dashboard', (req, res) => {
-    
+    res.render('student/dashboard', {
+        title: 'Student Page'
+    });
 });
 
 router.get('/student/profile', (req, res) => {
@@ -58,27 +59,4 @@ router.get('/student/results', (req, res) => {
         title: 'Student Result'
     });
 });
-
-//GET NEWS
-router.get('/student/news/:studentClass/:schoolName', async(req, res)=>{
-    try {
-       const news = await News.find({studentClass, schoolName})
-       res.status(200).json({message:'ok', news})
-    } catch (error) {
-        console.log(error)
-        res.status(500).json({message: 'server error'})
-    }
-
-})
-//GET ASSIGNMENT
-router.get('/student/assignment/:studentClass/:schoolName', async(req, res)=>{
-    try {
-       const news = await News.find({studentClass, schoolName})
-       res.status(200).json({message:'ok', news})
-    } catch (error) {
-        console.log(error)
-        res.status(500).json({message: 'server error'})
-    }
-
-})
 module.exports = router;
