@@ -84,10 +84,12 @@
                  STATISTICS
             =========================================== -->
 
+            <!-- 
             <div class="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-4 xl:grid-cols-4">
 
 
-                <!-- Average -->
+             
+                
 
                 <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
 
@@ -114,34 +116,6 @@
                 </div>
 
 
-                <!-- Position -->
-
-                <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
-
-                    <div class="mb-4 flex items-center justify-between">
-
-                        <p class="text-xs font-medium text-slate-500">
-                            Class Position
-                        </p>
-
-                        <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-50 text-sm font-bold text-emerald-600">
-                            #
-                        </div>
-
-                    </div>
-
-                    <p class="text-2xl font-bold text-slate-900">
-                        5th
-                    </p>
-
-                    <p class="mt-1 text-[11px] text-slate-400">
-                        Out of 42 students
-                    </p>
-
-                </div>
-
-
-                <!-- Subjects -->
 
                 <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
 
@@ -168,8 +142,7 @@
                 </div>
 
 
-                <!-- Assignments -->
-
+             
                 <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
 
                     <div class="mb-4 flex items-center justify-between">
@@ -185,7 +158,7 @@
                     </div>
 
                     <p class="text-2xl font-bold text-slate-900">
-                        3
+                        <%= announcement.length || 0 %>
                     </p>
 
                     <p class="mt-1 text-[11px] text-slate-400">
@@ -195,6 +168,7 @@
                 </div>
 
             </div>
+         -->
 
 
             <!-- ==========================================
@@ -236,59 +210,51 @@
 
                     <div class="divide-y divide-slate-100 px-5">
 
+                        <%if(announcement && announcement.length > 0){ %>
+                            <%announcement.forEach(item=>{  %>
+                                <div class="py-4">
 
-                        <div class="py-4">
+                                    <h4 class="text-xs font-semibold text-slate-800">
+                                       <%= item.title %>
+                                    </h4>
 
-                            <h4 class="text-xs font-semibold text-slate-800">
-                                Second Term Examination
-                            </h4>
+                                    <p class="mt-1 text-xs leading-5 text-slate-500">
+                                        <%=item.content %>
+                                    </p>
 
-                            <p class="mt-1 text-xs leading-5 text-slate-500">
-                                The second term examination timetable
-                                has been released.
-                            </p>
+                                    <p class="mt-2 text-[10px] text-slate-400">
+                                        <%= new Date(result.createdAt).toLocaleDateString('en-GB') %>
+                                    </p>
 
-                            <p class="mt-2 text-[10px] text-slate-400">
-                                August 2, 2026
-                            </p>
+                                </div>
 
-                        </div>
+                           <% }) %>
+                        <%}else{ %>
+                            <div class="flex flex-col items-center justify-center py-12 px-6 text-center">
+                                <div class="w-16 h-16 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 mb-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                        class="w-8 h-8"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor">
+                                        <path stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                                    </svg>
+                                </div>
 
+                                <h3 class="text-lg font-semibold text-gray-800">
+                                    No Announcements
+                                </h3>
 
-                        <div class="py-4">
-
-                            <h4 class="text-xs font-semibold text-slate-800">
-                                School Assembly
-                            </h4>
-
-                            <p class="mt-1 text-xs leading-5 text-slate-500">
-                                All students are expected to attend
-                                Monday morning assembly.
-                            </p>
-
-                            <p class="mt-2 text-[10px] text-slate-400">
-                                July 30, 2026
-                            </p>
-
-                        </div>
-
-
-                        <div class="py-4">
-
-                            <h4 class="text-xs font-semibold text-slate-800">
-                                Sports Activities
-                            </h4>
-
-                            <p class="mt-1 text-xs leading-5 text-slate-500">
-                                Inter-house sports practice begins
-                                next week.
-                            </p>
-
-                            <p class="mt-2 text-[10px] text-slate-400">
-                                July 28, 2026
-                            </p>
-
-                        </div>
+                                <p class="mt-1 text-sm text-gray-500 max-w-sm">
+                                    There are no announcements available at the moment.
+                                    Check back later for updates from your school.
+                                </p>
+                            </div>
+                       <% } %>
+                       
 
                     </div>
 

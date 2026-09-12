@@ -1,10 +1,14 @@
 const express = require('express');
-
+const News = require('../schema/news')
 const router = express.Router();
 
 router.get('/student/dashboard', (req, res) => {
+    const announcement = News.find().sort({createdAt:-1})
+    .limit(4)
+     console.log( announcement)
     res.render('student/dashboard', {
-        title: 'Student Page'
+        title: 'Student dashboard',
+        announcement
     });
 });
 
