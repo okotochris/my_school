@@ -393,16 +393,12 @@ router.get('/admin/timetable', isAuthenticated, async(req, res)=>{
 router.delete('/deletestaff', async (req, res)=>{
   let _id = req.query.id;
   try{
-    const response = await Teacher.findOneAndDelete({_id});
-    if(response){
-      res.status(200).json("deleted")
-    }
-    else{
-      res.status(404).json("file not found")
-    }
+    await Teacher.findOneAndDelete({_id});
+    res.status(200).json("deleted")
   }
   catch(err){
     console.log(err)
+    res.status(500).json("Error deleting staff")
   }
 })
 
