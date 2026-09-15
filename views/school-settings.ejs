@@ -783,8 +783,8 @@
 
                 const result = await response.json();
                 alert("School settings updated successfully!");
-                localStorage.setItem("school", JSON.stringify(result.updatedSchool));
-
+                localStorage.setItem("school", JSON.stringify(result.school));
+               
             } catch (error) {
                 console.error("Error submitting form:", error);
                 alert("An error occurred while updating school settings.");

@@ -7,7 +7,7 @@ const SchoolProfile = require('../schema/schoolProfile.js');
 const Teacher = require('../schema/admin.js')
 const isAuthenticated = require('../utility/authenticated.js')
 const StudentProfile = require('../schema/studentProfile.js')
-const bcrypt = require('bcrypt')
+const Subject = require('../schema/subject.js')
 const fs = require("fs");
 
 //UPDATE STUDENT PROFILE
@@ -204,21 +204,13 @@ router.patch(
             // ==========================================
 
             const schoolLogo = req.files?.logo?.[0];
-
-
             if (schoolLogo) {
-
                 // Get old Cloudinary public ID
                 const publicId = schoolInfo.image?.public_id;
-
-
                 // Delete old logo
                 if (publicId) {
-
                     await cloudinary.uploader.destroy(publicId);
-
                 }
-
 
                 // Upload new logo
                 const uploadedLogo =
@@ -236,22 +228,16 @@ router.patch(
 
             }
 
-
             // ==========================================
             // UPDATE HEAD TEACHER SIGNATURE
             // ==========================================
-
             const headTeacherSignFile =
                 req.files?.headTeacherSign?.[0];
 
-
             if (headTeacherSignFile) {
-
                 // Get old signature public ID
                 const publicId =
                     schoolInfo.headTeacher?.public_id;
-
-
                 // Delete old signature
                 if (publicId) {
 
@@ -259,14 +245,11 @@ router.patch(
 
                 }
 
-
                 // Upload new signature
                 const uploadedHeadTeacherSign =
                     await cloudinary.uploader.upload(
                         headTeacherSignFile.path
                     );
-
-
                 // Save new signature information
                 schoolInfo.headTeacher.signature =
                     uploadedHeadTeacherSign.secure_url;
@@ -276,13 +259,11 @@ router.patch(
 
             }
 
-
             // ==========================================
             // CHECK IF SCHOOL NAME HAS CHANGED
             // ==========================================
 
             if (schoolName !== oldSchoolName) {
-
 
                 // ==========================================
                 // UPDATE ALL TEACHERS
@@ -318,35 +299,45 @@ router.patch(
                         $set: {
                             schoolName: schoolName
                         }
+                    },
+                 
+                );
+
+                // ==========================================
+                // UPDATE ALL STUDENT RESULTS
+                // ==========================================
+                await Subject.updateMany(
+
+                    {
+                        schoolName: oldSchoolName
+                    },
+
+                    {
+                        $set: {
+                            schoolName: schoolName
+                        }
                     }
 
                 );
 
-
                 // ==========================================
-                // UPDATE SESSION SCHOOL NAME
+                //logout user if school name is changed
                 // ==========================================
 
-                req.session.school = schoolName;
-
+               req.session.school = schoolName;
             }
-
 
             // ==========================================
             // SAVE SCHOOL
             // ==========================================
-
             await schoolInfo.save();
-
 
             // ==========================================
             // RESPONSE
             // ==========================================
 
             return res.status(200).json({
-
                 message: "School settings updated successfully",
-
                 school: schoolInfo
 
             });
