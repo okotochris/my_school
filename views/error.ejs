@@ -167,9 +167,18 @@
                     <div><i class="fas fa-check-circle" style="color:#16a34a"></i> CBT Exams & Timetable</div>
                     <div><i class="fas fa-check-circle" style="color:#16a34a"></i> SMS & Email Notifications</div>
                 </div>
-                <a href="https://wa.me/2349157303724" class="btn" target="_blank">
+                <!-- <a href="https://wa.me/2349157303724" class="btn" target="_blank">
                     <i class="fab fa-whatsapp"></i> Chat with Us on WhatsApp
-                </a>
+                </a> -->
+                  <button
+                        type="button"
+                        onclick="makePayment()"
+                        id="button"
+                        class="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 hover:shadow-md active:scale-[0.98]"
+                    >
+                        <i data-lucide="wallet" class="h-4 w-4"></i>
+                        <span>Make Payment to download result</span>
+                    </button>
             </div>
 
             <p style="margin-top: 2rem; color:#64748b;">
@@ -219,6 +228,59 @@
     }
   });
 </script>
+<script>
+      
+      const buttonId = document.getElementById('button')
+      async function makePayment() {
 
+        buttonId.innerText = "Make Payment"
+        const email = 'okotoazachristain@gmail'
+        const school = 'myschoolresult';
+        const user_name = 'student'
+        console.log({ email, school, user_name })
+        const fee = 1000
+        if (fee < 100) {
+          return
+        }
+        const amountInNumber = Number(fee);
+        const meta = {
+          schoolName: school,
+          amount: amountInNumber,
+          staffName: user_name,
+          refId: `${user_name}${Date.now()}`
+        }
+        FlutterwaveCheckout({
+          public_key: "FLWPUBK-f8514622db2e398152c1a94f24a478a5-X",
+          tx_ref: "SCHL-" + Date.now(), // better unique ref
+          amount: amountInNumber,      // use dynamic amount
+          currency: "NGN",
+          payment_options: "card,ussd,banktransfer",
+
+          customer: {
+            email: email,
+            name: user_name,
+          },
+
+          callback: function (data) {
+            fetch("/api/payment-callback", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                tx_ref: data.tx_ref,
+                meta
+              })
+            })
+              .then(res => res.json())
+              .then(result => {
+                document.getElementById('fee"').innerHTML = 0;
+              });
+          },
+
+          onclose: function () {
+            console.log("Payment closed");
+          }
+        });
+      }
+    </script>
 </body>
 </html>
