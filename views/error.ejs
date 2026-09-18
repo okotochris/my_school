@@ -228,6 +228,94 @@
     }
   });
 </script>
+<script src="https://checkout.flutterwave.com/v3.js"></script>
+<script>
+    async function makePayment() {
+
+        const email = 'okotoazachristain@gmail.com';
+        const school = 'myschoolresult';
+        const user_name = 'student';
+        const fee = 1000;
+
+        if (fee < 100) {
+            alert('Invalid payment amount');
+            return;
+        }
+
+        const amountInNumber = Number(fee);
+
+        const meta = {
+            schoolName: school,
+            amount: amountInNumber,
+            staffName: user_name,
+            refId: `${user_name}${Date.now()}`
+        };
+
+        FlutterwaveCheckout({
+            public_key: "FLWPUBK-f8514622db2e398152c1a94f24a478a5-X",
+
+            tx_ref: "SCHL-" + Date.now(),
+
+            amount: amountInNumber,
+
+            currency: "NGN",
+
+            payment_options: "card,ussd,banktransfer",
+
+            customer: {
+                email: email,
+                name: user_name
+            },
+
+            callback: function (data) {
+
+                console.log("Flutterwave response:", data);
+
+                fetch("/api/payment-callback", {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        tx_ref: data.tx_ref,
+                        meta: meta
+                    })
+                })
+                .then(res => res.json())
+                .then(result => {
+
+                    console.log("Backend response:", result);
+
+                    if (result.success) {
+                        const feeElement = document.getElementById('fee');
+
+                        if (feeElement) {
+                            feeElement.innerHTML = '₦0';
+                        }
+
+                        alert('Payment successful');
+                    } else {
+                        alert(result.message || 'Payment verification failed');
+                    }
+
+                })
+                .catch(error => {
+                    console.error("Payment callback error:", error);
+                    alert("Something went wrong while processing the payment.");
+                });
+            },
+
+            onclose: function () {
+                console.log("Payment window closed");
+            }
+        });
+    }
+</script>
+
+
+
 
 </body>
 </html>
