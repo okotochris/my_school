@@ -36,5 +36,19 @@ router.post('/upload-student-result', isAuthenticated, async(req, res)=>{
     }
 })
 
-
+//UPDATE SCHOOL FEES FROM SUPER ADMIN DASHBOARD
+router.patch('/update-school-fees', isAuthenticated, async(req, res)=>{
+    try{
+        const { _id, fees } = req.body;
+        const updatedSchool = await SchoolPfofile.findOneAndUpdate(
+            { _id },
+            { fees },
+            { new: true } // Return the updated document
+        );
+        res.status(200).json({ message: "School fees updated successfully", school: updatedSchool });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Error updating school fees" });
+    }
+});
 module.exports = router

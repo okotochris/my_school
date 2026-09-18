@@ -2,7 +2,7 @@ const express = require('express');
 const Blog = require("../schema/data.js"); //junior class
 const SBlog = require("../schema/datas.js"); // sinior class
 const PBlog = require("../schema/primary.js"); //basic class
-const nuseryBlog = require("../schema/nursery.js"); // nursery
+const NuseryBlog = require("../schema/nursery.js"); // nursery
 const StudentProfile = require('../schema/studentProfile.js')
 const Blacklist = require("../schema/blacklist.js");
 const StudentResult = require('../schema/studentResult.js')
@@ -110,11 +110,8 @@ router.post("/result", async (req, res) => {
         res.render("error", { name: name });
       }
     } else if (studentClass[0] === "NURSERY" || studentClass[1] === "NURSERY") {
-      let details = await nuseryBlog
-        .find({ studentId: id, class: clas, term: term })
-        .sort({ createdAt: -1 })
-        .limit(1);
-      details = details[0];
+      let details = await NuseryBlog.findOne({ studentId: id, class: clas, term: term })
+
       if (details != null) {
         let schoolName = details.schoolName.toLowerCase().trim();
         const payment = await isOutStandingPayment(schoolName)
@@ -168,9 +165,13 @@ router.delete('/api/delete_result', async(req, res)=>{
     } else if(sclass.toLowerCase().includes('ss')){     
         deletedResult = await SBlog.findByIdAndDelete(dataId);
     } else if(sclass.toLowerCase().includes('nursery')){
-        deletedResult = await nuseryBlog.findByIdAndDelete(dataId);
+        deletedResult = await NuseryBlog.findByIdAndDelete(dataId);
     }
     if(deletedResult){
+        return res.json({message: "Result deleted successfully"})
+    }
+    const deleteNewResultUpdate = await StudentResult.findByIdAndDelete(dataId)
+    if(deleteNewResultUpdate){
         return res.json({message: "Result deleted successfully"})
     }
     res.status(404).json({message: "Result not found"})

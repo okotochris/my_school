@@ -2,6 +2,8 @@ const express = require('express');
 const News = require('../schema/news')
 const Assignment = require('../schema/assignment');
 const { Page } = require('openai/pagination.js');
+const upload = require('../middleware/upload')
+const cloudinary = require('../middleware/cloudinary')
 const router = express.Router();
 
 router.get('/student/dashboard', (req, res) => {
@@ -117,4 +119,102 @@ router.get('/api/student/assignment/:studentClass/:school', async (req, res) => 
         });
     }
 });
+
+// ==========================================
+// UPDATE STUDENT PROFILE
+// ==========================================
+
+
+router.patch(
+    '/api/student/update-profile',
+    upload.single('passport'),
+    async (req, res) => {
+        try {
+            const { studentId } = req.body;
+
+            if (!studentId) {
+                return res.status(400).json({
+                    success: false,
+                    message: 'Student ID is required.'
+                });
+            }
+
+            // Find student first
+            const student = await StudentProfile.findOne({ studentId });
+
+            if (!student) {
+                return res.status(404).json({
+                    success: false,
+                    message: 'Student not found.'
+                });
+            }
+
+            // Only allow students to update these fields
+            const allowedUpdates = {
+                fullname: req.body.fullname,
+                dob: req.body.dob,
+                gender: req.body.gender,
+                email: req.body.email,
+                address: req.body.address,
+                house: req.body.house,
+
+                // Guardian information
+                'guardian.name': req.body.guardianName,
+                'guardian.relationship': req.body.relationship,
+                'guardian.phone': req.body.guardianPhone,
+                'guardian.email': req.body.guardianEmail,
+                'guardian.address': req.body.guardianAddress,
+                'guardian.state': req.body.guardianState,
+                'guardian.lga': req.body.guardianLga,
+
+                // Emergency contact
+                'emergencyContact.name': req.body.emergencyName,
+                'emergencyContact.phone': req.body.emergencyPhone
+            };
+
+            // Remove undefined fields
+            Object.keys(allowedUpdates).forEach(key => {
+                if (allowedUpdates[key] === undefined) {
+                    delete allowedUpdates[key];
+                }
+            });
+
+            // Upload new passport if selected
+            if (req.file) {
+                const result = await cloudinary.uploader.upload(req.file.path);
+
+                allowedUpdates.passport = result.secure_url;
+            }
+
+            // Update student
+            const updatedStudent = await StudentProfile.findOneAndUpdate(
+                { studentId },
+                { $set: allowedUpdates },
+                {
+                    new: true,
+                    runValidators: true
+                }
+            );
+
+            return res.status(200).json({
+                success: true,
+                message: 'Student profile updated successfully.',
+                student: updatedStudent
+            });
+
+        } catch (error) {
+            console.error('Student profile update error:', error);
+
+            return res.status(500).json({
+                success: false,
+                message: 'Unable to update student profile.'
+            });
+        }
+    }
+);
+
+
+
+
+
 module.exports = router;

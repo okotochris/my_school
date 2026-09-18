@@ -58,7 +58,7 @@
     <div class="school-info">
         <div class="school-name">
             <h1><%= school.schoolName?.toUpperCase() %></h1>
-			<h2><%= school.motto %></h2>
+			<h3 class="text-red-500"><%= school.motto %></h3>
         </div>
 
         <div class="address-info">
@@ -73,7 +73,7 @@
 			
 			<div class="sudent-info">
 				<div><%= result.class %> <%=student.house %>, <%= result.term %> RESULT <%= result.section %> ACADEMIC SESSION</div>
-				<p>NAME OF PUPIL : <u><span><%= student.fullname.toUpperCase() %></span></u> <!--SEX: <span><u>FEMALE</u></span> --> D.O.B: <span><u><%= student.dob %></u></span></p>
+				<p>NAME OF PUPIL : <u><span><%= student.fullname.toUpperCase() %></span></u> SEX: <span><u><%= student.gender %></u></span> D.O.B: <span><u><%= student.dob %></u></span></p>
 				<P>TOTAL MARKS SCORE: <span><u> <%= result.score_obtain %></u></span> OUT OF: <span><u><%= result.score_obtainable %></u></span> AVERAGE: <span><u><%= result.average %></u></span> CLASS: <span><u><%= result.studentClass.toUpperCase() %></u></span></P>
 				<P>STUDENT ID: <span><u><%= student.studentId %></u></span> ADMISSION NO.: <span><u><%= student.addmissionNo %></u></span> NO. OF TIMES PRESENT: <span><u><%= result.present %></u></span> NO OF TIMES ABSENT: <span><u><%= result.absent %></u></span></P>
 			</div>
@@ -84,11 +84,11 @@
 					<table style="font-family: arial; font-weight:bold;">
                         <tr> 
                             <th class="th" width="200">SUBJECT</th>
-                            <th class="th1">1st test </th>
-                            <th class="th1">2nd test </th>
-                            <th class="th1">project </th>
-                            <th class="th1">Exam </th>
-                            <th class="th1">Total</th>
+                            <th class="th1">1st test <br/> 10% </th>
+                            <th class="th1">2nd test <br/> 10%</th>
+                            <th class="th1">project <br/> 20%</th>
+                            <th class="th1">Exam <br/> 60%</th>
+                            <th class="th1">Total <br/> 100%</th>
                             <th class="th1" width="30">Grades</th>
                             <th width="65">REMARKS</th>
                         </tr>

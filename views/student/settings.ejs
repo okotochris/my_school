@@ -1,183 +1,703 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <%- include('./partials/head') %>
 
-<body class="bg-slate-50 text-slate-800">
+    <body class="bg-slate-50 text-slate-800">
 
-    <div class="min-h-screen">
+        <div class="min-h-screen">
 
-        <!-- ==========================================
+            <!-- ==========================================
              NAVIGATION
         =========================================== -->
 
-        <%- include('./partials/navigation') %>
+            <%- include('./partials/navigation') %>
 
 
-        <!-- ==========================================
+                <!-- ==========================================
              MAIN
         =========================================== -->
 
-        <main class="lg:ml-64">
-
-            <!-- HEADER -->
-
-            <%- include('./partials/header') %>
-
-
-            <!-- ==========================================
+                <main class="lg:ml-64">
+                    <!-- ==========================================
                  CONTENT
             =========================================== -->
 
-            <section class="mx-auto max-w-[1200px] p-4 sm:p-6 lg:p-8">
+                    <section class="mx-auto max-w-[1300px] p-4 sm:p-6 lg:p-8">
+                        <!-- HEADER -->
+
+                        <%- include('./partials/header') %>
 
 
-                <!-- ==========================================
+                            <!-- ==========================================
                      PAGE HEADER
                 =========================================== -->
 
-                <div class="mb-6">
+                            <div class="mb-6">
 
-                    <h1 class="text-xl font-bold text-slate-900 sm:text-2xl">
-                        Settings
-                    </h1>
+                                <h1 class="text-xl font-bold text-slate-900 sm:text-2xl">
+                                    Settings
+                                </h1>
 
-                    <p class="mt-1 text-sm text-slate-500">
-                        Manage your account and guardian information.
-                    </p>
+                                <p class="mt-1 text-sm text-slate-500">
+                                    Manage your account and guardian information.
+                                </p>
 
-                </div>
+                            </div>
 
 
-                <!-- ==========================================
+                            <!-- ==========================================
                      SETTINGS GRID
                 =========================================== -->
 
-                <div class="grid gap-6 lg:grid-cols-[220px_1fr]">
-
-
-                    <!-- ======================================
-                         SETTINGS NAVIGATION
-                    ======================================= -->
-
-                    <aside>
-
-                        <div class="rounded-xl border border-slate-200 bg-white p-2 shadow-sm">
-
-
-                            <button
-                                onclick="showSection('guardian')"
-                                id="guardianTab"
-                                class="settings-tab flex w-full items-center gap-3 rounded-lg bg-blue-50 px-3 py-3 text-left text-xs font-semibold text-blue-700"
-                            >
-
-                                <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-100">
-                                    👨‍👩‍👦
-                                </span>
-
-                                <span>
-                                    Guardian Information
-                                </span>
-
-                            </button>
-
-
-                            <button
-                                onclick="showSection('account')"
-                                id="accountTab"
-                                class="settings-tab mt-1 flex w-full items-center gap-3 rounded-lg px-3 py-3 text-left text-xs font-medium text-slate-600 hover:bg-slate-50"
-                            >
-
-                                <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100">
-                                    👤
-                                </span>
-
-                                <span>
-                                    Account Information
-                                </span>
-
-                            </button>
-
-
-                            <button
-                                onclick="showSection('security')"
-                                id="securityTab"
-                                class="settings-tab mt-1 flex w-full items-center gap-3 rounded-lg px-3 py-3 text-left text-xs font-medium text-slate-600 hover:bg-slate-50"
-                            >
-
-                                <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100">
-                                    🔒
-                                </span>
-
-                                <span>
-                                    Password & Security
-                                </span>
-
-                            </button>
-
-
-                            <button
-                                onclick="showSection('notifications')"
-                                id="notificationsTab"
-                                class="settings-tab mt-1 flex w-full items-center gap-3 rounded-lg px-3 py-3 text-left text-xs font-medium text-slate-600 hover:bg-slate-50"
-                            >
-
-                                <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100">
-                                    🔔
-                                </span>
-
-                                <span>
-                                    Notifications
-                                </span>
-
-                            </button>
-
-                        </div>
-
-                    </aside>
-
-
-                    <!-- ======================================
+                            <div>
+                                <!-- ======================================
                          SETTINGS CONTENT
                     ======================================= -->
 
-                    <div>
+                                <div>
+                                    <div id="studentBasicInfoSection" class="settings-section">
+
+                                        <div class="rounded-xl border border-slate-200 bg-white shadow-sm">
+
+                                            <!-- Header -->
+                                            <div class="border-b border-slate-100 px-5 py-5 sm:px-6">
+
+                                                <div class="flex items-start gap-3">
+
+                                                    <div
+                                                        class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-lg">
+                                                        👤
+                                                    </div>
+
+                                                    <div>
+
+                                                        <h2 class="text-sm font-bold text-slate-900">
+                                                            Student Information
+                                                        </h2>
+
+                                                        <p class="mt-1 text-xs leading-5 text-slate-500">
+                                                            Keep your personal information up to date.
+                                                            Some information may require approval from your school.
+                                                        </p>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
 
 
-                        <!-- ==================================
-                             GUARDIAN INFORMATION
-                        =================================== -->
+                                            <!-- Form -->
+                                            <form id="studentBasicInfoForm" class="p-5 sm:p-6">
 
-                        <div
-                            id="guardianSection"
-                            class="settings-section"
-                        >
-
-                            <div class="rounded-xl border border-slate-200 bg-white shadow-sm">
+                                                <!-- ==================================
+                                                PASSPORT PHOTO
+                                            =================================== -->
 
 
-                                <!-- Header -->
+                                                <!-- ==================================
+     PASSPORT PHOTOGRAPH
+=================================== -->
 
-                                <div class="border-b border-slate-100 px-5 py-5 sm:px-6">
+                                                <div class="mb-7">
 
-                                    <div class="flex items-start gap-3">
+                                                    <div class="mb-5">
 
-                                        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-lg">
-                                            👨‍👩‍👦
+                                                        <h3 class="text-xs font-bold text-slate-800">
+                                                            Passport Photograph
+                                                        </h3>
+
+                                                        <p class="mt-1 text-[10px] text-slate-400">
+                                                            You can update your passport photograph.
+                                                        </p>
+
+                                                    </div>
+
+
+                                                    <div class="flex flex-col gap-4 sm:flex-row sm:items-center">
+
+                                                        <!-- Passport Preview -->
+
+                                                        <div
+                                                            class="h-28 w-24 shrink-0 overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+
+                                                            <img id="studentPassportPreview"
+                                                                src="/IMAGE/default-student.png" alt="Student Passport"
+                                                                class="h-full w-full object-cover">
+
+                                                        </div>
+
+
+                                                        <div class="flex-1">
+
+                                                            <label for="studentPassport"
+                                                                class="mb-2 block text-xs font-medium text-slate-600">
+                                                                Change Passport
+                                                            </label>
+
+                                                            <input id="studentPassport" name="passport" type="file"
+                                                                accept="image/jpeg,image/png,image/webp"
+                                                                class="block w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-xs text-slate-600 outline-none transition file:mr-3 file:rounded-md file:border-0 file:bg-blue-50 file:px-3 file:py-1.5 file:text-xs file:font-medium file:text-blue-700 hover:file:bg-blue-100 focus:border-blue-400 focus:ring-2 focus:ring-blue-100">
+
+                                                            <p class="mt-1.5 text-[10px] text-slate-400">
+                                                                JPG, PNG or WEBP. Choose a clear recent passport
+                                                                photograph.
+                                                            </p>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+
+
+
+                                                <div class="border-t border-slate-100 pt-7">
+
+                                                    <!-- ==================================
+                                                    BASIC INFORMATION
+                                                =================================== -->
+
+                                                    <div class="mb-5">
+
+                                                        <h3 class="text-xs font-bold text-slate-800">
+                                                            Basic Information
+                                                        </h3>
+
+                                                        <p class="mt-1 text-[10px] text-slate-400">
+                                                            Update your personal information below.
+                                                        </p>
+
+                                                    </div>
+
+
+                                                    <div class="grid gap-5 sm:grid-cols-2">
+
+                                                        <!-- Full Name -->
+
+                                                        <div>
+
+                                                            <label for="studentFullname"
+                                                                class="mb-1.5 block text-xs font-medium text-slate-600">
+                                                                Full Name
+                                                            </label>
+
+                                                            <input id="studentFullname" name="fullname" type="text"
+                                                                placeholder="Enter your full name"
+                                                                class="w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-xs text-slate-700 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-100">
+
+                                                        </div>
+
+
+                                                        <!-- Date of Birth -->
+
+                                                        <div>
+
+                                                            <label for="studentDob"
+                                                                class="mb-1.5 block text-xs font-medium text-slate-600">
+                                                                Date of Birth
+                                                            </label>
+
+                                                            <input id="studentDob" name="dob" type="date"
+                                                                class="w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-xs text-slate-700 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-100">
+
+                                                        </div>
+
+
+                                                        <!-- Gender -->
+
+                                                        <div>
+
+                                                            <label for="studentGender"
+                                                                class="mb-1.5 block text-xs font-medium text-slate-600">
+                                                                Gender
+                                                            </label>
+
+                                                            <select id="studentGender" name="gender"
+                                                                class="w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-xs text-slate-700 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-100">
+
+                                                                <option value="">
+                                                                    Select Gender
+                                                                </option>
+
+                                                                <option value="MALE">
+                                                                    Male
+                                                                </option>
+
+                                                                <option value="FEMALE">
+                                                                    Female
+                                                                </option>
+
+                                                            </select>
+
+                                                        </div>
+
+
+                                                        <!-- Email -->
+
+                                                        <div>
+
+                                                            <label for="studentEmail"
+                                                                class="mb-1.5 block text-xs font-medium text-slate-600">
+                                                                Email Address
+                                                            </label>
+
+                                                            <input id="studentEmail" name="email" type="email"
+                                                                placeholder="Enter your email address"
+                                                                class="w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-xs text-slate-700 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-100">
+
+                                                        </div>
+
+
+                                                        <!-- Address -->
+
+                                                        <div class="sm:col-span-2">
+
+                                                            <label for="studentAddress"
+                                                                class="mb-1.5 block text-xs font-medium text-slate-600">
+                                                                Residential Address
+                                                            </label>
+
+                                                            <textarea id="studentAddress" name="address" rows="3"
+                                                                placeholder="Enter your residential address"
+                                                                class="w-full resize-none rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-xs text-slate-700 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-100"></textarea>
+
+                                                        </div>
+
+
+                                                        <!-- House -->
+
+                                                        <div>
+
+                                                            <label for="studentHouse"
+                                                                class="mb-1.5 block text-xs font-medium text-slate-600">
+                                                                House
+                                                            </label>
+
+                                                            <input id="studentHouse" name="house" type="text"
+                                                                placeholder="Enter your house"
+                                                                class="w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-xs text-slate-700 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-100">
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+
+                                                <!-- ==================================
+                                                SAVE AREA
+                                            =================================== -->
+
+                                                <div
+                                                    class="mt-8 flex flex-col-reverse gap-3 border-t border-slate-100 pt-5 sm:flex-row sm:items-center sm:justify-between">
+
+                                                    <p class="text-[10px] leading-5 text-slate-400">
+                                                        Make sure the information provided is accurate.
+                                                    </p>
+
+
+                                                    <div class="flex gap-2">
+
+                                                        <button type="button" id="cancelStudentBasicInfo"
+                                                            class="rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-50">
+                                                            Cancel
+                                                        </button>
+
+                                                        <button type="submit"
+                                                            class="rounded-lg bg-[#0b2a4a] px-5 py-2.5 text-xs font-semibold text-white transition hover:bg-[#17619a]">
+                                                            Save Changes
+                                                        </button>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </form>
+
                                         </div>
 
-                                        <div>
+                                    </div>
+                                </div>
 
-                                            <h2 class="text-sm font-bold text-slate-900">
-                                                Guardian Information
-                                            </h2>
 
-                                            <p class="mt-1 text-xs leading-5 text-slate-500">
-                                                Keep your parent or guardian information
-                                                up to date so the school can contact
-                                                them when necessary.
-                                            </p>
+                            </div>
+                            <div>
+                                <!-- ======================================
+                         SETTINGS CONTENT
+                    ======================================= -->
+
+                                <div>
+
+                                    <!-- ==================================
+         GUARDIAN INFORMATION
+    =================================== -->
+
+                                    <div id="guardianInformationSection" class="settings-section">
+
+                                        <div class="rounded-xl border border-slate-200 bg-white shadow-sm">
+
+
+                                            <!-- Header -->
+
+                                            <div class="border-b border-slate-100 px-5 py-5 sm:px-6">
+
+                                                <div class="flex items-start gap-3">
+
+                                                    <div
+                                                        class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-lg">
+                                                        👨‍👩‍👦
+                                                    </div>
+
+                                                    <div>
+
+                                                        <h2 class="text-sm font-bold text-slate-900">
+                                                            Guardian Information
+                                                        </h2>
+
+                                                        <p class="mt-1 text-xs leading-5 text-slate-500">
+                                                            Keep your parent or guardian information
+                                                            up to date so the school can contact
+                                                            them when necessary.
+                                                        </p>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+
+                                            <!-- Form -->
+
+                                            <form id="guardianForm" class="p-5 sm:p-6">
+
+
+                                                <!-- ==================================
+                                                    PRIMARY GUARDIAN
+                                                =================================== -->
+
+                                                <div>
+
+                                                    <div class="mb-5">
+
+                                                        <h3 class="text-xs font-bold text-slate-800">
+                                                            Primary Guardian
+                                                        </h3>
+
+                                                        <p class="mt-1 text-[10px] text-slate-400">
+                                                            This should be the parent or guardian
+                                                            the school should contact first.
+                                                        </p>
+
+                                                    </div>
+
+
+                                                    <div class="grid gap-5 sm:grid-cols-2">
+
+
+                                                        <!-- Full Name -->
+
+                                                        <div>
+
+                                                            <label for="guardianName"
+                                                                class="mb-1.5 block text-xs font-medium text-slate-600">
+                                                                Full Name
+                                                            </label>
+
+                                                            <input id="guardianName" name="guardianName" type="text"
+                                                                placeholder="Enter guardian's full name"
+                                                                class="w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-xs text-slate-700 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-100">
+
+                                                        </div>
+
+
+                                                        <!-- Relationship -->
+
+                                                        <div>
+
+                                                            <label for="relationship"
+                                                                class="mb-1.5 block text-xs font-medium text-slate-600">
+                                                                Relationship
+                                                            </label>
+
+                                                            <select id="relationship" name="relationship"
+                                                                class="w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-xs text-slate-700 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-100">
+
+                                                                <option value="">
+                                                                    Select Relationship
+                                                                </option>
+
+                                                                <option value="father">
+                                                                    Father
+                                                                </option>
+
+                                                                <option value="mother">
+                                                                    Mother
+                                                                </option>
+
+                                                                <option value="guardian">
+                                                                    Guardian
+                                                                </option>
+
+                                                                <option value="uncle">
+                                                                    Uncle
+                                                                </option>
+
+                                                                <option value="aunt">
+                                                                    Aunt
+                                                                </option>
+
+                                                                <option value="grandparent">
+                                                                    Grandparent
+                                                                </option>
+
+                                                                <option value="other">
+                                                                    Other
+                                                                </option>
+
+                                                            </select>
+
+                                                        </div>
+
+
+                                                        <!-- Phone -->
+
+                                                        <div>
+
+                                                            <label for="guardianPhone"
+                                                                class="mb-1.5 block text-xs font-medium text-slate-600">
+                                                                Phone Number
+                                                            </label>
+
+                                                            <input id="guardianPhone" name="guardianPhone" type="tel"
+                                                                placeholder="Guardian's phone number"
+                                                                class="w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-xs text-slate-700 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-100">
+
+                                                        </div>
+
+
+                                                        <!-- Email -->
+
+                                                        <div>
+
+                                                            <label for="guardianEmail"
+                                                                class="mb-1.5 block text-xs font-medium text-slate-600">
+                                                                Email Address
+                                                            </label>
+
+                                                            <input id="guardianEmail" name="guardianEmail" type="email"
+                                                                placeholder="Guardian's email address"
+                                                                class="w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-xs text-slate-700 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-100">
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+
+                                                <!-- Divider -->
+
+                                                <div class="my-7 border-t border-slate-100"></div>
+
+
+                                                <!-- ==================================
+                                                    ADDRESS
+                                                =================================== -->
+
+                                                <div>
+
+                                                    <div class="mb-5">
+
+                                                        <h3 class="text-xs font-bold text-slate-800">
+                                                            Contact Address
+                                                        </h3>
+
+                                                        <p class="mt-1 text-[10px] text-slate-400">
+                                                            Provide the current residential address
+                                                            of the guardian.
+                                                        </p>
+
+                                                    </div>
+
+
+                                                    <div class="grid gap-5 sm:grid-cols-2">
+
+
+                                                        <!-- Address -->
+
+                                                        <div class="sm:col-span-2">
+
+                                                            <label for="guardianAddress"
+                                                                class="mb-1.5 block text-xs font-medium text-slate-600">
+                                                                Residential Address
+                                                            </label>
+
+                                                            <textarea id="guardianAddress" name="guardianAddress"
+                                                                rows="3" placeholder="Enter residential address"
+                                                                class="w-full resize-none rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-xs text-slate-700 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100"></textarea>
+
+                                                        </div>
+
+
+                                                        <!-- State -->
+
+                                                        <div>
+
+                                                            <label for="guardianState"
+                                                                class="mb-1.5 block text-xs font-medium text-slate-600">
+                                                                State
+                                                            </label>
+
+                                                            <select id="guardianState" name="guardianState"
+                                                                class="w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-xs text-slate-700 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100">
+
+                                                                <option value="">
+                                                                    Select State
+                                                                </option>
+
+                                                                <option value="Edo">
+                                                                    Edo
+                                                                </option>
+
+                                                                <option value="Lagos">
+                                                                    Lagos
+                                                                </option>
+
+                                                                <option value="Abuja">
+                                                                    Abuja
+                                                                </option>
+
+                                                                <option value="Delta">
+                                                                    Delta
+                                                                </option>
+
+                                                                <option value="Rivers">
+                                                                    Rivers
+                                                                </option>
+
+                                                            </select>
+
+                                                        </div>
+
+
+                                                        <!-- LGA -->
+
+                                                        <div>
+
+                                                            <label for="guardianLga"
+                                                                class="mb-1.5 block text-xs font-medium text-slate-600">
+                                                                Local Government Area
+                                                            </label>
+
+                                                            <input id="guardianLga" name="guardianLga" type="text"
+                                                                placeholder="Enter LGA"
+                                                                class="w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-xs text-slate-700 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100">
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+
+                                                <!-- Divider -->
+
+                                                <div class="my-7 border-t border-slate-100"></div>
+
+
+                                                <!-- ==================================
+                                                    EMERGENCY CONTACT
+                                                =================================== -->
+
+                                                <div>
+
+                                                    <div class="mb-5">
+
+                                                        <h3 class="text-xs font-bold text-slate-800">
+                                                            Emergency Contact
+                                                        </h3>
+
+                                                        <p class="mt-1 text-[10px] text-slate-400">
+                                                            Someone the school can contact in
+                                                            an emergency if your primary guardian
+                                                            is unavailable.
+                                                        </p>
+
+                                                    </div>
+
+
+                                                    <div class="grid gap-5 sm:grid-cols-2">
+
+
+                                                        <!-- Name -->
+
+                                                        <div>
+
+                                                            <label for="emergencyName"
+                                                                class="mb-1.5 block text-xs font-medium text-slate-600">
+                                                                Full Name
+                                                            </label>
+
+                                                            <input id="emergencyName" name="emergencyName" type="text"
+                                                                placeholder="Emergency contact name"
+                                                                class="w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-xs text-slate-700 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100">
+
+                                                        </div>
+
+
+                                                        <!-- Phone -->
+
+                                                        <div>
+
+                                                            <label for="emergencyPhone"
+                                                                class="mb-1.5 block text-xs font-medium text-slate-600">
+                                                                Phone Number
+                                                            </label>
+
+                                                            <input id="emergencyPhone" name="emergencyPhone" type="tel"
+                                                                placeholder="Emergency contact phone"
+                                                                class="w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-xs text-slate-700 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100">
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+
+                                                <!-- ==================================
+                                                    SAVE AREA
+                                                =================================== -->
+
+                                                <div
+                                                    class="mt-8 flex flex-col-reverse gap-3 border-t border-slate-100 pt-5 sm:flex-row sm:items-center sm:justify-between">
+
+                                                    <p class="text-[10px] leading-5 text-slate-400">
+                                                        Make sure the information provided is accurate.
+                                                    </p>
+
+
+                                                    <div class="flex gap-2">
+
+                                                        <button type="button" id="cancelGuardianForm"
+                                                            class="rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-50">
+                                                            Cancel
+                                                        </button>
+
+                                                        <button type="submit"
+                                                            class="rounded-lg bg-[#0b2a4a] px-5 py-2.5 text-xs font-semibold text-white transition hover:bg-[#17619a]">
+                                                            Save Changes
+                                                        </button>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </form>
 
                                         </div>
 
@@ -186,945 +706,343 @@
                                 </div>
 
 
-                                <!-- Form -->
-
-                                <form
-                                    id="guardianForm"
-                                    class="p-5 sm:p-6"
-                                >
-
-
-                                    <!-- ==================================
-                                         PRIMARY GUARDIAN
-                                    =================================== -->
-
-                                    <div>
-
-                                        <div class="mb-5">
-
-                                            <h3 class="text-xs font-bold text-slate-800">
-                                                Primary Guardian
-                                            </h3>
-
-                                            <p class="mt-1 text-[10px] text-slate-400">
-                                                This should be the parent or guardian
-                                                the school should contact first.
-                                            </p>
-
-                                        </div>
-
-
-                                        <div class="grid gap-5 sm:grid-cols-2">
-
-
-                                            <!-- Full Name -->
-
-                                            <div>
-
-                                                <label
-                                                    for="guardianName"
-                                                    class="mb-1.5 block text-xs font-medium text-slate-600"
-                                                >
-                                                    Full Name
-                                                </label>
-
-                                                <input
-                                                    id="guardianName"
-                                                    name="guardianName"
-                                                    type="text"
-                                                    value="Mr. John Okotoaza"
-                                                    placeholder="Enter guardian's full name"
-                                                    class="w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-xs text-slate-700 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
-                                                >
-
-                                            </div>
-
-
-                                            <!-- Relationship -->
-
-                                            <div>
-
-                                                <label
-                                                    for="relationship"
-                                                    class="mb-1.5 block text-xs font-medium text-slate-600"
-                                                >
-                                                    Relationship
-                                                </label>
-
-                                                <select
-                                                    id="relationship"
-                                                    name="relationship"
-                                                    class="w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-xs text-slate-700 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
-                                                >
-
-                                                    <option value="father" selected>
-                                                        Father
-                                                    </option>
-
-                                                    <option value="mother">
-                                                        Mother
-                                                    </option>
-
-                                                    <option value="guardian">
-                                                        Guardian
-                                                    </option>
-
-                                                    <option value="uncle">
-                                                        Uncle
-                                                    </option>
-
-                                                    <option value="aunt">
-                                                        Aunt
-                                                    </option>
-
-                                                    <option value="grandparent">
-                                                        Grandparent
-                                                    </option>
-
-                                                    <option value="other">
-                                                        Other
-                                                    </option>
-
-                                                </select>
-
-                                            </div>
-
-
-                                            <!-- Phone -->
-
-                                            <div>
-
-                                                <label
-                                                    for="guardianPhone"
-                                                    class="mb-1.5 block text-xs font-medium text-slate-600"
-                                                >
-                                                    Phone Number
-                                                </label>
-
-                                                <input
-                                                    id="guardianPhone"
-                                                    name="guardianPhone"
-                                                    type="tel"
-                                                    value="+234 803 123 4567"
-                                                    placeholder="Guardian's phone number"
-                                                    class="w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-xs text-slate-700 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
-                                                >
-
-                                            </div>
-
-
-                                            <!-- Email -->
-
-                                            <div>
-
-                                                <label
-                                                    for="guardianEmail"
-                                                    class="mb-1.5 block text-xs font-medium text-slate-600"
-                                                >
-                                                    Email Address
-                                                </label>
-
-                                                <input
-                                                    id="guardianEmail"
-                                                    name="guardianEmail"
-                                                    type="email"
-                                                    value="john@example.com"
-                                                    placeholder="Guardian's email address"
-                                                    class="w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-xs text-slate-700 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
-                                                >
-
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-
-                                    <!-- Divider -->
-
-                                    <div class="my-7 border-t border-slate-100"></div>
-
-
-                                    <!-- ==================================
-                                         ADDRESS
-                                    =================================== -->
-
-                                    <div>
-
-                                        <div class="mb-5">
-
-                                            <h3 class="text-xs font-bold text-slate-800">
-                                                Contact Address
-                                            </h3>
-
-                                            <p class="mt-1 text-[10px] text-slate-400">
-                                                Provide the current residential address
-                                                of the guardian.
-                                            </p>
-
-                                        </div>
-
-
-                                        <div class="grid gap-5 sm:grid-cols-2">
-
-
-                                            <!-- Address -->
-
-                                            <div class="sm:col-span-2">
-
-                                                <label
-                                                    for="guardianAddress"
-                                                    class="mb-1.5 block text-xs font-medium text-slate-600"
-                                                >
-                                                    Residential Address
-                                                </label>
-
-                                                <textarea
-                                                    id="guardianAddress"
-                                                    name="guardianAddress"
-                                                    rows="3"
-                                                    placeholder="Enter residential address"
-                                                    class="w-full resize-none rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-xs text-slate-700 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
-                                                >12 Airport Road, Benin City, Edo State</textarea>
-
-                                            </div>
-
-
-                                            <!-- State -->
-
-                                            <div>
-
-                                                <label
-                                                    for="guardianState"
-                                                    class="mb-1.5 block text-xs font-medium text-slate-600"
-                                                >
-                                                    State
-                                                </label>
-
-                                                <select
-                                                    id="guardianState"
-                                                    name="guardianState"
-                                                    class="w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-xs text-slate-700 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
-                                                >
-
-                                                    <option selected>
-                                                        Edo
-                                                    </option>
-
-                                                    <option>
-                                                        Lagos
-                                                    </option>
-
-                                                    <option>
-                                                        Abuja
-                                                    </option>
-
-                                                    <option>
-                                                        Delta
-                                                    </option>
-
-                                                    <option>
-                                                        Rivers
-                                                    </option>
-
-                                                </select>
-
-                                            </div>
-
-
-                                            <!-- LGA -->
-
-                                            <div>
-
-                                                <label
-                                                    for="guardianLga"
-                                                    class="mb-1.5 block text-xs font-medium text-slate-600"
-                                                >
-                                                    Local Government Area
-                                                </label>
-
-                                                <input
-                                                    id="guardianLga"
-                                                    name="guardianLga"
-                                                    type="text"
-                                                    value="Oredo"
-                                                    placeholder="Enter LGA"
-                                                    class="w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-xs text-slate-700 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
-                                                >
-
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-
-                                    <!-- Divider -->
-
-                                    <div class="my-7 border-t border-slate-100"></div>
-
-
-                                    <!-- ==================================
-                                         EMERGENCY CONTACT
-                                    =================================== -->
-
-                                    <div>
-
-                                        <div class="mb-5">
-
-                                            <h3 class="text-xs font-bold text-slate-800">
-                                                Emergency Contact
-                                            </h3>
-
-                                            <p class="mt-1 text-[10px] text-slate-400">
-                                                Someone the school can contact in
-                                                an emergency if your primary guardian
-                                                is unavailable.
-                                            </p>
-
-                                        </div>
-
-
-                                        <div class="grid gap-5 sm:grid-cols-2">
-
-
-                                            <!-- Name -->
-
-                                            <div>
-
-                                                <label
-                                                    for="emergencyName"
-                                                    class="mb-1.5 block text-xs font-medium text-slate-600"
-                                                >
-                                                    Full Name
-                                                </label>
-
-                                                <input
-                                                    id="emergencyName"
-                                                    name="emergencyName"
-                                                    type="text"
-                                                    value="Mrs. Grace Okotoaza"
-                                                    placeholder="Emergency contact name"
-                                                    class="w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-xs text-slate-700 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
-                                                >
-
-                                            </div>
-
-
-                                            <!-- Phone -->
-
-                                            <div>
-
-                                                <label
-                                                    for="emergencyPhone"
-                                                    class="mb-1.5 block text-xs font-medium text-slate-600"
-                                                >
-                                                    Phone Number
-                                                </label>
-
-                                                <input
-                                                    id="emergencyPhone"
-                                                    name="emergencyPhone"
-                                                    type="tel"
-                                                    value="+234 806 987 6543"
-                                                    placeholder="Emergency contact phone"
-                                                    class="w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-xs text-slate-700 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
-                                                >
-
-                                            </div>
-
-
-                                            <!-- Relationship -->
-
-                                            <div class="sm:col-span-2">
-
-                                                <label
-                                                    for="emergencyRelationship"
-                                                    class="mb-1.5 block text-xs font-medium text-slate-600"
-                                                >
-                                                    Relationship
-                                                </label>
-
-                                                <select
-                                                    id="emergencyRelationship"
-                                                    name="emergencyRelationship"
-                                                    class="w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-xs text-slate-700 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 sm:max-w-[50%]"
-                                                >
-
-                                                    <option selected>
-                                                        Mother
-                                                    </option>
-
-                                                    <option>
-                                                        Father
-                                                    </option>
-
-                                                    <option>
-                                                        Guardian
-                                                    </option>
-
-                                                    <option>
-                                                        Sibling
-                                                    </option>
-
-                                                    <option>
-                                                        Relative
-                                                    </option>
-
-                                                    <option>
-                                                        Other
-                                                    </option>
-
-                                                </select>
-
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-
-                                    <!-- ==================================
-                                         SAVE AREA
-                                    =================================== -->
-
-                                    <div class="mt-8 flex flex-col-reverse gap-3 border-t border-slate-100 pt-5 sm:flex-row sm:items-center sm:justify-between">
-
-                                        <p class="text-[10px] leading-5 text-slate-400">
-                                            Make sure the information provided is accurate.
-                                        </p>
-
-
-                                        <div class="flex gap-2">
-
-                                            <button
-                                                type="button"
-                                                class="rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-50"
-                                            >
-                                                Cancel
-                                            </button>
-
-                                            <button
-                                                type="submit"
-                                                class="rounded-lg bg-[#0b2a4a] px-5 py-2.5 text-xs font-semibold text-white transition hover:bg-[#17619a]"
-                                            >
-                                                Save Changes
-                                            </button>
-
-                                        </div>
-
-                                    </div>
-
-                                </form>
 
                             </div>
 
-                        </div>
+                    </section>
 
+                </main>
 
-                        <!-- ==================================
-                             ACCOUNT INFORMATION
-                        =================================== -->
+        </div>
 
-                        <div
-                            id="accountSection"
-                            class="settings-section hidden"
-                        >
 
-                            <div class="rounded-xl border border-slate-200 bg-white shadow-sm">
+        <!-- ==========================================
+            JAVASCRIPT
+        =========================================== -->
 
-                                <div class="border-b border-slate-100 px-5 py-5 sm:px-6">
+        <script>
 
-                                    <h2 class="text-sm font-bold text-slate-900">
-                                        Account Information
-                                    </h2>
+            document.addEventListener('DOMContentLoaded', () => {
 
-                                    <p class="mt-1 text-xs text-slate-500">
-                                        Information associated with your student account.
-                                    </p>
+                const savedStudent = localStorage.getItem('student');
 
-                                </div>
+                if (!savedStudent) {
+                    console.log('No student found in localStorage');
+                    return;
+                }
 
+                let student;
 
-                                <div class="p-5 sm:p-6">
+                try {
+                    student = JSON.parse(savedStudent);
+                } catch (error) {
+                    console.error('Invalid student data:', error);
+                    return;
+                }
 
-                                    <div class="grid gap-5 sm:grid-cols-2">
 
+                // ==========================================
+                // STUDENT BASIC INFORMATION
+                // ==========================================
 
-                                        <div>
+                const studentFullname =
+                    document.getElementById('studentFullname');
 
-                                            <p class="text-[10px] font-medium uppercase tracking-wide text-slate-400">
-                                                Full Name
-                                            </p>
+                if (studentFullname) {
+                    studentFullname.value = student.fullname || '';
+                }
 
-                                            <p class="mt-1 text-xs font-semibold text-slate-700">
-                                                Christian Okotoaza
-                                            </p>
 
-                                        </div>
+                const studentDob =
+                    document.getElementById('studentDob');
 
+                if (studentDob) {
+                    studentDob.value = student.dob || '';
+                }
 
-                                        <div>
 
-                                            <p class="text-[10px] font-medium uppercase tracking-wide text-slate-400">
-                                                Student ID
-                                            </p>
+                const studentGender =
+                    document.getElementById('studentGender');
 
-                                            <p class="mt-1 text-xs font-semibold text-slate-700">
-                                                MSR/2025/00245
-                                            </p>
+                if (studentGender) {
+                    studentGender.value = student.gender || '';
+                }
 
-                                        </div>
 
+                const studentEmail =
+                    document.getElementById('studentEmail');
 
-                                        <div>
+                if (studentEmail) {
+                    studentEmail.value = student.email || '';
+                }
 
-                                            <p class="text-[10px] font-medium uppercase tracking-wide text-slate-400">
-                                                Class
-                                            </p>
 
-                                            <p class="mt-1 text-xs font-semibold text-slate-700">
-                                                SS 2 Gold
-                                            </p>
+                const studentAddress =
+                    document.getElementById('studentAddress');
 
-                                        </div>
+                if (studentAddress) {
+                    studentAddress.value = student.address || '';
+                }
 
 
-                                        <div>
+                const studentHouse =
+                    document.getElementById('studentHouse');
 
-                                            <p class="text-[10px] font-medium uppercase tracking-wide text-slate-400">
-                                                Session
-                                            </p>
+                if (studentHouse) {
+                    studentHouse.value = student.house || '';
+                }
 
-                                            <p class="mt-1 text-xs font-semibold text-slate-700">
-                                                2025/2026
-                                            </p>
 
-                                        </div>
+                // ==========================================
+                // STUDENT PASSPORT
+                // ==========================================
 
+                const studentPassport =
+                    document.getElementById('studentPassport');
 
-                                        <div>
+                const studentPassportPreview =
+                    document.getElementById('studentPassportPreview');
 
-                                            <p class="text-[10px] font-medium uppercase tracking-wide text-slate-400">
-                                                Email
-                                            </p>
 
-                                            <p class="mt-1 text-xs font-semibold text-slate-700">
-                                                christian@example.com
-                                            </p>
+                // Load existing passport
 
-                                        </div>
+                if (studentPassportPreview) {
 
+                    if (student.passport) {
 
-                                        <div>
+                        studentPassportPreview.src = student.passport;
 
-                                            <p class="text-[10px] font-medium uppercase tracking-wide text-slate-400">
-                                                Account Status
-                                            </p>
+                    } else {
 
-                                            <span class="mt-1 inline-flex rounded-full bg-emerald-50 px-2 py-1 text-[9px] font-semibold text-emerald-600">
-                                                Active
-                                            </span>
+                        studentPassportPreview.src =
+                            '/IMAGE/default-student.png';
 
-                                        </div>
+                    }
 
-                                    </div>
+                }
 
 
-                                    <div class="mt-7 rounded-lg bg-blue-50 p-4">
+                // Preview newly selected passport
 
-                                        <p class="text-xs font-semibold text-blue-900">
-                                            Account information is managed by the school.
-                                        </p>
+                if (studentPassport) {
 
-                                        <p class="mt-1 text-[10px] leading-5 text-blue-700">
-                                            If any of your personal information is
-                                            incorrect, please contact your school
-                                            administrator.
-                                        </p>
+                    studentPassport.addEventListener('change', function () {
 
-                                    </div>
+                        const file = this.files[0];
 
-                                </div>
+                        if (!file) {
+                            return;
+                        }
 
-                            </div>
 
-                        </div>
+                        // Make sure it is an image
 
+                        if (!file.type.startsWith('image/')) {
 
-                        <!-- ==================================
-                             SECURITY
-                        =================================== -->
+                            alert('Please select an image file.');
 
-                        <div
-                            id="securitySection"
-                            class="settings-section hidden"
-                        >
+                            this.value = '';
 
-                            <div class="rounded-xl border border-slate-200 bg-white shadow-sm">
+                            return;
+                        }
 
-                                <div class="border-b border-slate-100 px-5 py-5 sm:px-6">
 
-                                    <div class="flex items-start gap-3">
+                        // Preview image
 
-                                        <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-red-50 text-lg">
-                                            🔒
-                                        </div>
+                        const imageURL =
+                            URL.createObjectURL(file);
 
-                                        <div>
+                        studentPassportPreview.src = imageURL;
 
-                                            <h2 class="text-sm font-bold text-slate-900">
-                                                Password & Security
-                                            </h2>
+                    });
 
-                                            <p class="mt-1 text-xs text-slate-500">
-                                                Keep your student account secure.
-                                            </p>
+                }
 
-                                        </div>
 
-                                    </div>
+                // ==========================================
+                // GUARDIAN INFORMATION
+                // KEEP YOUR EXISTING GUARDIAN LOGIC
+                // ==========================================
 
-                                </div>
+                const guardianName =
+                    document.getElementById('guardianName');
 
+                if (guardianName) {
+                    guardianName.value =
+                        student.guardian?.name || '';
+                }
 
-                                <form class="p-5 sm:p-6">
 
-                                    <div class="space-y-5">
+                const relationship =
+                    document.getElementById('relationship');
 
+                if (relationship) {
+                    relationship.value =
+                        student.guardian?.relationship || '';
+                }
 
-                                        <div>
 
-                                            <label
-                                                class="mb-1.5 block text-xs font-medium text-slate-600"
-                                            >
-                                                Current Password
-                                            </label>
+                const guardianPhone =
+                    document.getElementById('guardianPhone');
 
-                                            <input
-                                                type="password"
-                                                placeholder="Enter current password"
-                                                class="w-full rounded-lg border border-slate-200 px-3 py-2.5 text-xs outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
-                                            >
+                if (guardianPhone) {
+                    guardianPhone.value =
+                        student.guardian?.phone || '';
+                }
 
-                                        </div>
 
+                const guardianEmail =
+                    document.getElementById('guardianEmail');
 
-                                        <div>
+                if (guardianEmail) {
+                    guardianEmail.value =
+                        student.guardian?.email || '';
+                }
 
-                                            <label
-                                                class="mb-1.5 block text-xs font-medium text-slate-600"
-                                            >
-                                                New Password
-                                            </label>
 
-                                            <input
-                                                type="password"
-                                                placeholder="Enter new password"
-                                                class="w-full rounded-lg border border-slate-200 px-3 py-2.5 text-xs outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
-                                            >
+                const guardianAddress =
+                    document.getElementById('guardianAddress');
 
-                                        </div>
+                if (guardianAddress) {
+                    guardianAddress.value =
+                        student.guardian?.address || '';
+                }
 
 
-                                        <div>
+                const guardianState =
+                    document.getElementById('guardianState');
 
-                                            <label
-                                                class="mb-1.5 block text-xs font-medium text-slate-600"
-                                            >
-                                                Confirm New Password
-                                            </label>
+                if (guardianState) {
+                    guardianState.value =
+                        student.guardian?.state || '';
+                }
 
-                                            <input
-                                                type="password"
-                                                placeholder="Confirm new password"
-                                                class="w-full rounded-lg border border-slate-200 px-3 py-2.5 text-xs outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
-                                            >
 
-                                        </div>
+                const guardianLga =
+                    document.getElementById('guardianLga');
 
-                                    </div>
+                if (guardianLga) {
+                    guardianLga.value =
+                        student.guardian?.lga || '';
+                }
 
 
-                                    <div class="mt-7 border-t border-slate-100 pt-5">
+                // ==========================================
+                // EMERGENCY CONTACT
+                // ==========================================
 
-                                        <button
-                                            type="submit"
-                                            class="rounded-lg bg-[#0b2a4a] px-5 py-2.5 text-xs font-semibold text-white hover:bg-[#17619a]"
-                                        >
-                                            Update Password
-                                        </button>
+                const emergencyName =
+                    document.getElementById('emergencyName');
 
-                                    </div>
+                if (emergencyName) {
+                    emergencyName.value =
+                        student.emergencyContact?.name || '';
+                }
 
-                                </form>
 
-                            </div>
+                const emergencyPhone =
+                    document.getElementById('emergencyPhone');
 
-                        </div>
+                if (emergencyPhone) {
+                    emergencyPhone.value =
+                        student.emergencyContact?.phone || '';
+                }
 
 
-                        <!-- ==================================
-                             NOTIFICATIONS
-                        =================================== -->
+                // ==========================================
+                // STUDENT BASIC INFORMATION FORM
+                // ==========================================
 
-                        <div
-                            id="notificationsSection"
-                            class="settings-section hidden"
-                        >
+                const studentBasicInfoForm =
+                    document.getElementById('studentBasicInfoForm');
 
-                            <div class="rounded-xl border border-slate-200 bg-white shadow-sm">
 
-                                <div class="border-b border-slate-100 px-5 py-5 sm:px-6">
+                if (studentBasicInfoForm) {
 
-                                    <h2 class="text-sm font-bold text-slate-900">
-                                        Notification Preferences
-                                    </h2>
+                    studentBasicInfoForm.addEventListener(
+                        'submit',
+                        function (event) {
 
-                                    <p class="mt-1 text-xs text-slate-500">
-                                        Choose the notifications you would like to receive.
-                                    </p>
+                            event.preventDefault();
 
-                                </div>
 
+                            const formData =
+                                new FormData();
 
-                                <div class="divide-y divide-slate-100">
 
+                            // Basic information
 
-                                    <!-- Announcement -->
+                            formData.append(
+                                'fullname',
+                                studentFullname?.value.trim() || ''
+                            );
 
-                                    <label class="flex cursor-pointer items-center justify-between gap-4 p-5">
+                            formData.append(
+                                'dob',
+                                studentDob?.value || ''
+                            );
 
-                                        <div>
+                            formData.append(
+                                'gender',
+                                studentGender?.value || ''
+                            );
 
-                                            <p class="text-xs font-semibold text-slate-800">
-                                                School Announcements
-                                            </p>
+                            formData.append(
+                                'email',
+                                studentEmail?.value.trim() || ''
+                            );
 
-                                            <p class="mt-1 text-[10px] leading-5 text-slate-400">
-                                                Receive notifications when the school
-                                                publishes an announcement.
-                                            </p>
+                            formData.append(
+                                'address',
+                                studentAddress?.value.trim() || ''
+                            );
 
-                                        </div>
+                            formData.append(
+                                'house',
+                                studentHouse?.value.trim() || ''
+                            );
 
 
-                                        <input
-                                            type="checkbox"
-                                            checked
-                                            class="h-4 w-4 accent-blue-600"
-                                        >
+                            // Passport
 
-                                    </label>
+                            if (
+                                studentPassport &&
+                                studentPassport.files.length > 0
+                            ) {
 
+                                formData.append(
+                                    'passport',
+                                    studentPassport.files[0]
+                                );
 
-                                    <!-- Assignment -->
+                            }
+            
+                                fetch('/api/student/update-profile', {
+                                    method: 'PATCH',
+                                    body: formData
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    console.log(data);
+                                });
+                        
 
-                                    <label class="flex cursor-pointer items-center justify-between gap-4 p-5">
+                            alert(
+                                'Student information updated successfully.'
+                            );
 
-                                        <div>
-
-                                            <p class="text-xs font-semibold text-slate-800">
-                                                Assignment Notifications
-                                            </p>
-
-                                            <p class="mt-1 text-[10px] leading-5 text-slate-400">
-                                                Get notified about new assignments
-                                                and approaching deadlines.
-                                            </p>
-
-                                        </div>
-
-
-                                        <input
-                                            type="checkbox"
-                                            checked
-                                            class="h-4 w-4 accent-blue-600"
-                                        >
-
-                                    </label>
-
-
-                                    <!-- Results -->
-
-                                    <label class="flex cursor-pointer items-center justify-between gap-4 p-5">
-
-                                        <div>
-
-                                            <p class="text-xs font-semibold text-slate-800">
-                                                Result Notifications
-                                            </p>
-
-                                            <p class="mt-1 text-[10px] leading-5 text-slate-400">
-                                                Receive a notification when new
-                                                results are published.
-                                            </p>
-
-                                        </div>
-
-
-                                        <input
-                                            type="checkbox"
-                                            checked
-                                            class="h-4 w-4 accent-blue-600"
-                                        >
-
-                                    </label>
-
-
-                                    <!-- Email -->
-
-                                    <label class="flex cursor-pointer items-center justify-between gap-4 p-5">
-
-                                        <div>
-
-                                            <p class="text-xs font-semibold text-slate-800">
-                                                Email Notifications
-                                            </p>
-
-                                            <p class="mt-1 text-[10px] leading-5 text-slate-400">
-                                                Receive important school updates
-                                                through email.
-                                            </p>
-
-                                        </div>
-
-
-                                        <input
-                                            type="checkbox"
-                                            class="h-4 w-4 accent-blue-600"
-                                        >
-
-                                    </label>
-
-                                </div>
-
-
-                                <div class="border-t border-slate-100 p-5 sm:px-6">
-
-                                    <button
-                                        class="rounded-lg bg-[#0b2a4a] px-5 py-2.5 text-xs font-semibold text-white hover:bg-[#17619a]"
-                                    >
-                                        Save Preferences
-                                    </button>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-        </main>
-
-    </div>
-
-
-    <!-- ==========================================
-         JAVASCRIPT
-    =========================================== -->
-
-    <script>
-
-        function showSection(section) {
-
-            /*
-            Hide all sections
-            */
-
-            document
-                .querySelectorAll(".settings-section")
-                .forEach(function(item) {
-
-                    item.classList.add("hidden");
-
-                });
-
-
-            /*
-            Remove active state from tabs
-            */
-
-            document
-                .querySelectorAll(".settings-tab")
-                .forEach(function(tab) {
-
-                    tab.classList.remove(
-                        "bg-blue-50",
-                        "text-blue-700"
+                        }
                     );
 
-                    tab.classList.add(
-                        "text-slate-600"
-                    );
-
-                });
-
-
-            /*
-            Show selected section
-            */
-
-            document
-                .getElementById(section + "Section")
-                .classList.remove("hidden");
-
-
-            /*
-            Activate selected tab
-            */
-
-            const activeTab =
-                document.getElementById(section + "Tab");
-
-
-            activeTab.classList.add(
-                "bg-blue-50",
-                "text-blue-700"
-            );
-
-            activeTab.classList.remove(
-                "text-slate-600"
-            );
-
-        }
-
-
-        /*
-        ==========================================
-        GUARDIAN FORM
-        ==========================================
-        */
-
-        document
-            .getElementById("guardianForm")
-            .addEventListener("submit", function(event) {
-
-                event.preventDefault();
-
-                /*
-                Later you can replace this with:
-
-                const formData = new FormData(this);
-
-                fetch('/student/settings/guardian', {
-                    method: 'PATCH',
-                    body: formData
-                });
-                */
-
-                alert("Guardian information updated successfully.");
+                }
 
             });
 
-    </script>
+        </script>
 
-</body>
+
+
+
+    </body>
 
 </html>
-

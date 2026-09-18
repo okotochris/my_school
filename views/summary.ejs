@@ -70,19 +70,30 @@
                 <th>S/N</th>
                 <th>School Name</th>
                 <th>Adress</th>
+                <th>School Email</th>
                 <th>Phone Number</th>
                 <th>₦ Fees </th>
             </tr>
-          <% school.forEach((items, index)=>{ %>
-            <% total += items.fees %>
-            <tr>
-                <td><%= index + 1 %></td>
-                <td><%= items.schoolName %></td>
-                <td><%= items.address %></td>
-                <td><%= items.phone %></td>
-                <td><%= items.fees %></td>
-            </tr>
-          <% }) %>
+         <% school.forEach((items, index) => { %>
+
+    <% total += items.fees %>
+
+    <tr>
+        <td><%= index + 1 %></td>
+        <td><%= items.schoolName %></td>
+        <td><%= items.address %></td>
+        <td><%= items.schoolEmail %></td>
+        <td><%= items.phone %></td>
+
+        <td
+            contenteditable="true"
+            onblur="updateFees('<%= items._id %>', this)"
+        >
+            <%= items.fees %>
+        </td>
+    </tr>
+
+<% }) %>
         </table>
         <p> Total Fees ₦<%= total %></p>
       <% }else{ %>
@@ -92,5 +103,36 @@
     <div>
         <h2>Good Luck !</h2>
     </div>
+    
+   <script>
+    // CHECK IF IT IS A NUMBER BEFORE SENDING A PATCH REQUEST TO SERVER
+   async function updateFees(_id, element) {
+    let feesText = element.textContent.trim();
+
+    console.log("ID:", _id);
+    console.log("Entered:", feesText);
+
+    // Remove commas
+    feesText = feesText.replace(/,/g, '');
+
+    // Check if number
+    if (feesText === '' || isNaN(feesText)) {
+        alert('Please enter a valid number');
+        return;
+    }
+
+    const fees = Number(feesText);
+
+    // PATCH request here
+    const result = await fetch('/update-school-fees', {
+        method:'PATCH',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({_id, fees})
+    })
+    if(result.ok){
+        alert('updated')
+    }
+}
+</script>
 </body>
 </html>
