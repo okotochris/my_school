@@ -25,7 +25,6 @@
   .logo{
     height: 100px;
     width: 100px;
-    background:url('/IMAGE/nuel.png');
     background-size: contain;
   }
   .avatar{
