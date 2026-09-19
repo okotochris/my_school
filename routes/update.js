@@ -8,6 +8,7 @@ const Teacher = require('../schema/admin.js')
 const isAuthenticated = require('../utility/authenticated.js')
 const StudentProfile = require('../schema/studentProfile.js')
 const Subject = require('../schema/subject.js')
+const bcrypt = require('bcrypt')
 const fs = require("fs");
 
 //UPDATE STUDENT PROFILE
