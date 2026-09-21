@@ -1,0 +1,756 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Lesson Notes | MySchoolResult</title>
+    <link rel="stylesheet" href="/styles/global.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#096CCE'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-slate-50 text-slate-800">
+        <%- include('./partials/header.ejs') %>
+    <div class="admin-container">
+       <%- include('./partials/navigation.ejs') %>
+        <div class="min-h-screen">
+            <!-- ==========================================
+                MAIN
+            =========================================== -->
+
+            <main class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+
+                <form id="lessonNoteForm">
+
+                    <div class="grid gap-6 lg:grid-cols-3">
+
+
+                        <!-- ==========================================
+                            LEFT / MAIN CONTENT
+                        =========================================== -->
+
+                        <div class="space-y-6 lg:col-span-2">
+
+
+                            <!-- BASIC INFORMATION -->
+
+                            <section class="rounded-xl border border-slate-200 bg-white shadow-sm">
+
+                                <div class="border-b border-slate-100 px-5 py-5 sm:px-6">
+
+                                    <div class="flex items-start gap-3">
+
+                                        <div
+                                            class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-[#096CCE]"
+                                        >
+                                            📘
+                                        </div>
+
+                                        <div>
+
+                                            <h2 class="text-sm font-bold text-slate-900">
+                                                Lesson Information
+                                            </h2>
+
+                                            <p class="mt-1 text-xs text-slate-500">
+                                                Provide the basic information about this lesson.
+                                            </p>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="p-5 sm:p-6">
+
+                                    <div class="grid gap-5 sm:grid-cols-2">
+
+
+                                        <!-- CLASS -->
+
+                                        <div>
+
+                                            <label
+                                                for="class"
+                                                class="mb-1.5 block text-xs font-medium text-slate-600"
+                                            >
+                                                Class
+                                            </label>
+
+                                            <select
+                                                id="class"
+                                                name="class"
+                                                required
+                                                class="w-full rounded-lg border border-slate-200 bg-white px-3 py-3 text-sm text-slate-700 outline-none transition focus:border-[#096CCE] focus:ring-2 focus:ring-blue-100"
+                                            >
+
+                                                <option value="" selected disabled>
+                                                    Select class
+                                                </option>
+
+                                                <option>JSS 1</option>
+                                                <option>JSS 2</option>
+                                                <option>JSS 3</option>
+
+                                                <option>SS 1</option>
+                                                <option>SS 2</option>
+                                                <option>SS 3</option>
+
+                                            </select>
+
+                                        </div>
+
+
+                                        <!-- SUBJECT -->
+
+                                        <div>
+
+                                            <label
+                                                for="subject"
+                                                class="mb-1.5 block text-xs font-medium text-slate-600"
+                                            >
+                                                Subject
+                                            </label>
+
+                                            <select
+                                                id="subject"
+                                                name="subject"
+                                                required
+                                                class="w-full rounded-lg border border-slate-200 bg-white px-3 py-3 text-sm text-slate-700 outline-none transition focus:border-[#096CCE] focus:ring-2 focus:ring-blue-100"
+                                            >
+
+                                                <option value="" selected disabled>
+                                                    Select subject
+                                                </option>
+
+                                                <option>Mathematics</option>
+                                                <option>English Language</option>
+                                                <option>Basic Science</option>
+                                                <option>Basic Technology</option>
+                                                <option>Computer Studies</option>
+                                                <option>Physics</option>
+                                                <option>Chemistry</option>
+                                                <option>Biology</option>
+
+                                            </select>
+
+                                        </div>
+
+
+                                        <!-- TERM -->
+
+                                        <div>
+
+                                            <label
+                                                for="term"
+                                                class="mb-1.5 block text-xs font-medium text-slate-600"
+                                            >
+                                                Term
+                                            </label>
+
+                                            <select
+                                                id="term"
+                                                name="term"
+                                                required
+                                                class="w-full rounded-lg border border-slate-200 bg-white px-3 py-3 text-sm text-slate-700 outline-none transition focus:border-[#096CCE] focus:ring-2 focus:ring-blue-100"
+                                            >
+
+                                                <option value="" selected disabled>
+                                                    Select term
+                                                </option>
+
+                                                <option value="FIRST TERM">
+                                                    First Term
+                                                </option>
+
+                                                <option value="SECOND TERM">
+                                                    Second Term
+                                                </option>
+
+                                                <option value="THIRD TERM">
+                                                    Third Term
+                                                </option>
+
+                                            </select>
+
+                                        </div>
+
+
+                                        <!-- WEEK -->
+
+                                        <div>
+
+                                            <label
+                                                for="week"
+                                                class="mb-1.5 block text-xs font-medium text-slate-600"
+                                            >
+                                                Week
+                                            </label>
+
+                                            <input
+                                                id="week"
+                                                name="week"
+                                                type="number"
+                                                min="1"
+                                                max="20"
+                                                placeholder="e.g. 3"
+                                                required
+                                                class="w-full rounded-lg border border-slate-200 bg-white px-3 py-3 text-sm text-slate-700 outline-none transition focus:border-[#096CCE] focus:ring-2 focus:ring-blue-100"
+                                            >
+
+                                        </div>
+
+
+                                        <!-- TOPIC -->
+
+                                        <div class="sm:col-span-2">
+
+                                            <label
+                                                for="topic"
+                                                class="mb-1.5 block text-xs font-medium text-slate-600"
+                                            >
+                                                Topic
+                                            </label>
+
+                                            <input
+                                                id="topic"
+                                                name="topic"
+                                                type="text"
+                                                placeholder="Enter lesson topic"
+                                                required
+                                                class="w-full rounded-lg border border-slate-200 bg-white px-3 py-3 text-sm text-slate-700 outline-none transition focus:border-[#096CCE] focus:ring-2 focus:ring-blue-100"
+                                            >
+
+                                        </div>
+
+
+                                        <!-- SUB TOPIC -->
+
+                                        <div class="sm:col-span-2">
+
+                                            <label
+                                                for="subtopic"
+                                                class="mb-1.5 block text-xs font-medium text-slate-600"
+                                            >
+                                                Sub-topic
+                                                <span class="font-normal text-slate-400">
+                                                    (Optional)
+                                                </span>
+                                            </label>
+
+                                            <input
+                                                id="subtopic"
+                                                name="subtopic"
+                                                type="text"
+                                                placeholder="Enter sub-topic"
+                                                class="w-full rounded-lg border border-slate-200 bg-white px-3 py-3 text-sm text-slate-700 outline-none transition focus:border-[#096CCE] focus:ring-2 focus:ring-blue-100"
+                                            >
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </section>
+
+
+
+                            <!-- LEARNING OBJECTIVES -->
+
+                            <section class="rounded-xl border border-slate-200 bg-white shadow-sm">
+
+                                <div class="border-b border-slate-100 px-5 py-5 sm:px-6">
+
+                                    <h2 class="text-sm font-bold text-slate-900">
+                                        Learning Objectives
+                                    </h2>
+
+                                    <p class="mt-1 text-xs text-slate-500">
+                                        What should students be able to do after the lesson?
+                                    </p>
+
+                                </div>
+
+
+                                <div class="p-5 sm:p-6">
+
+                                    <textarea
+                                        id="objectives"
+                                        name="objectives"
+                                        rows="5"
+                                        placeholder="By the end of the lesson, students should be able to..."
+                                        class="w-full resize-y rounded-lg border border-slate-200 px-3 py-3 text-sm text-slate-700 outline-none transition focus:border-[#096CCE] focus:ring-2 focus:ring-blue-100"
+                                    ></textarea>
+
+                                    <p class="mt-2 text-[11px] text-slate-400">
+                                        You can enter each objective on a new line.
+                                    </p>
+
+                                </div>
+
+                            </section>
+
+
+
+                            <!-- LESSON CONTENT -->
+
+                            <section class="rounded-xl border border-slate-200 bg-white shadow-sm">
+
+                                <div class="border-b border-slate-100 px-5 py-5 sm:px-6">
+
+                                    <div class="flex items-center justify-between">
+
+                                        <div>
+
+                                            <h2 class="text-sm font-bold text-slate-900">
+                                                Lesson Content
+                                            </h2>
+
+                                            <p class="mt-1 text-xs text-slate-500">
+                                                Write the main content students will learn.
+                                            </p>
+
+                                        </div>
+
+                                        <span
+                                            class="hidden rounded-full bg-blue-50 px-3 py-1 text-[10px] font-semibold text-[#096CCE] sm:inline-flex"
+                                        >
+                                            Main Note
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="p-5 sm:p-6">
+
+                                    <textarea
+                                        id="content"
+                                        name="content"
+                                        rows="14"
+                                        required
+                                        placeholder="Write your lesson note here...
+
+    Example:
+
+    Introduction ...
+
+    Explanation ...
+
+    Examples ...
+
+    Summary ..."
+                                        class="w-full resize-y rounded-lg border border-slate-200 px-3 py-3 text-sm leading-6 text-slate-700 outline-none transition focus:border-[#096CCE] focus:ring-2 focus:ring-blue-100"
+                                    ></textarea>
+
+                                    <div class="mt-2 flex justify-between text-[11px] text-slate-400">
+
+                                        <span>
+                                            You can format your note using paragraphs.
+                                        </span>
+
+                                        <span id="wordCount">
+                                            0 words
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </section>
+
+
+
+                            <!-- TEACHING ACTIVITIES -->
+
+                            <section class="rounded-xl border border-slate-200 bg-white shadow-sm">
+
+                                <div class="border-b border-slate-100 px-5 py-5 sm:px-6">
+
+                                    <h2 class="text-sm font-bold text-slate-900">
+                                        Teaching & Learning Activities
+                                    </h2>
+
+                                    <p class="mt-1 text-xs text-slate-500">
+                                        Describe the activities students will participate in.
+                                    </p>
+
+                                </div>
+
+
+                                <div class="p-5 sm:p-6">
+
+                                    <textarea
+                                        id="activities"
+                                        name="activities"
+                                        rows="7"
+                                        placeholder="Teacher's activities... Students' activities..."
+                                        class="w-full resize-y rounded-lg border border-slate-200 px-3 py-3 text-sm text-slate-700 outline-none transition focus:border-[#096CCE] focus:ring-2 focus:ring-blue-100"
+                                    ></textarea>
+
+                                </div>
+
+                            </section>
+
+
+
+                            <!-- EVALUATION -->
+
+                            <section class="rounded-xl border border-slate-200 bg-white shadow-sm">
+
+                                <div class="border-b border-slate-100 px-5 py-5 sm:px-6">
+
+                                    <h2 class="text-sm font-bold text-slate-900">
+                                        Evaluation
+                                    </h2>
+
+                                    <p class="mt-1 text-xs text-slate-500">
+                                        Add questions or activities to assess students.
+                                    </p>
+
+                                </div>
+
+
+                                <div class="p-5 sm:p-6">
+
+                                    <textarea
+                                        id="evaluation"
+                                        name="evaluation"
+                                        rows="6"
+                                        placeholder="1. Define... 
+
+    2. Explain...
+
+    3. Give two examples..."
+                                        class="w-full resize-y rounded-lg border border-slate-200 px-3 py-3 text-sm text-slate-700 outline-none transition focus:border-[#096CCE] focus:ring-2 focus:ring-blue-100"
+                                    ></textarea>
+
+                                </div>
+
+                            </section>
+
+
+
+                            <!-- ASSIGNMENT -->
+
+                            <section class="rounded-xl border border-slate-200 bg-white shadow-sm">
+
+                                <div class="border-b border-slate-100 px-5 py-5 sm:px-6">
+
+                                    <h2 class="text-sm font-bold text-slate-900">
+                                        Assignment
+                                    </h2>
+
+                                    <p class="mt-1 text-xs text-slate-500">
+                                        Give students an assignment related to the lesson.
+                                    </p>
+
+                                </div>
+
+
+                                <div class="p-5 sm:p-6">
+
+                                    <textarea
+                                        id="assignment"
+                                        name="assignment"
+                                        rows="5"
+                                        placeholder="Enter assignment..."
+                                        class="w-full resize-y rounded-lg border border-slate-200 px-3 py-3 text-sm text-slate-700 outline-none transition focus:border-[#096CCE] focus:ring-2 focus:ring-blue-100"
+                                    ></textarea>
+
+                                </div>
+
+                            </section>
+
+
+                        </div>
+
+
+
+                        <!-- ==========================================
+                            RIGHT SIDEBAR
+                        =========================================== -->
+
+                        <aside class="space-y-6">
+
+
+                            <!-- LESSON SUMMARY -->
+
+                            <div class="rounded-xl border border-slate-200 bg-white shadow-sm">
+
+                                <div class="border-b border-slate-100 px-5 py-5">
+
+                                    <h2 class="text-sm font-bold text-slate-900">
+                                        Lesson Summary
+                                    </h2>
+
+                                </div>
+
+
+                                <div class="space-y-4 p-5">
+
+                                    <div>
+
+                                        <p class="text-[10px] font-medium uppercase tracking-wide text-slate-400">
+                                            Class
+                                        </p>
+
+                                        <p
+                                            id="previewClass"
+                                            class="mt-1 text-sm font-semibold text-slate-800"
+                                        >
+                                            Not selected
+                                        </p>
+
+                                    </div>
+
+
+                                    <div>
+
+                                        <p class="text-[10px] font-medium uppercase tracking-wide text-slate-400">
+                                            Subject
+                                        </p>
+
+                                        <p
+                                            id="previewSubject"
+                                            class="mt-1 text-sm font-semibold text-slate-800"
+                                        >
+                                            Not selected
+                                        </p>
+
+                                    </div>
+
+
+                                    <div>
+
+                                        <p class="text-[10px] font-medium uppercase tracking-wide text-slate-400">
+                                            Term
+                                        </p>
+
+                                        <p
+                                            id="previewTerm"
+                                            class="mt-1 text-sm font-semibold text-slate-800"
+                                        >
+                                            Not selected
+                                        </p>
+
+                                    </div>
+
+
+                                    <div>
+
+                                        <p class="text-[10px] font-medium uppercase tracking-wide text-slate-400">
+                                            Week
+                                        </p>
+
+                                        <p
+                                            id="previewWeek"
+                                            class="mt-1 text-sm font-semibold text-slate-800"
+                                        >
+                                            Not selected
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <!-- SAVE OPTIONS -->
+
+                            <div class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+
+                                <h2 class="text-sm font-bold text-slate-900">
+                                    Save Lesson Note
+                                </h2>
+
+                                <p class="mt-1 text-xs leading-5 text-slate-500">
+                                    Save this lesson as a draft or publish it for students to access.
+                                </p>
+
+
+                                <div class="mt-5 space-y-2">
+
+                                    <button
+                                        type="button"
+                                        id="draftBtn"
+                                        class="w-full rounded-lg border border-slate-200 bg-white px-4 py-3 text-xs font-semibold text-slate-700 transition hover:bg-slate-50"
+                                    >
+                                        Save as Draft
+                                    </button>
+
+                                    <button
+                                        type="submit"
+                                        class="w-full rounded-lg bg-[#096CCE] px-4 py-3 text-xs font-semibold text-white shadow-sm transition hover:bg-blue-700"
+                                    >
+                                        Publish Lesson Note
+                                    </button>
+
+                                </div>
+
+                            </div>
+                            <!-- TIP -->
+                            <div class="rounded-xl border border-blue-100 bg-blue-50 p-5">
+
+                                <div class="flex gap-3">
+
+                                    <div class="text-lg">
+                                        💡
+                                    </div>
+
+                                    <div>
+
+                                        <h3 class="text-xs font-bold text-[#096CCE]">
+                                            Teaching Tip
+                                        </h3>
+
+                                        <p class="mt-1 text-[11px] leading-5 text-blue-700">
+                                            Keep your lesson objectives clear and make sure
+                                            your evaluation questions match what students
+                                            learned during the lesson.
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </aside>
+
+                    </div>
+
+                </form>
+
+            </main>
+
+        </div>
+    </div>
+
+
+    <!-- ==========================================
+         JAVASCRIPT
+    =========================================== -->
+
+    <script>
+
+        // ==========================================
+        // WORD COUNT
+        // ==========================================
+
+        const content = document.getElementById('content');
+        const wordCount = document.getElementById('wordCount');
+
+        content.addEventListener('input', () => {
+
+            const words = content.value
+                .trim()
+                .split(/\s+/)
+                .filter(Boolean);
+
+            wordCount.textContent =
+                `${words.length} ${words.length === 1 ? 'word' : 'words'}`;
+
+        });
+
+
+        // ==========================================
+        // LIVE SUMMARY
+        // ==========================================
+
+        const classInput = document.getElementById('class');
+        const subjectInput = document.getElementById('subject');
+        const termInput = document.getElementById('term');
+        const weekInput = document.getElementById('week');
+
+
+        classInput.addEventListener('change', () => {
+            document.getElementById('previewClass').textContent =
+                classInput.value || 'Not selected';
+        });
+
+
+        subjectInput.addEventListener('change', () => {
+            document.getElementById('previewSubject').textContent =
+                subjectInput.value || 'Not selected';
+        });
+
+
+        termInput.addEventListener('change', () => {
+            document.getElementById('previewTerm').textContent =
+                termInput.options[termInput.selectedIndex]?.text || 'Not selected';
+        });
+
+
+        weekInput.addEventListener('input', () => {
+            document.getElementById('previewWeek').textContent =
+                weekInput.value ? `Week ${weekInput.value}` : 'Not selected';
+        });
+
+
+        // ==========================================
+        // FORM SUBMIT
+        // ==========================================
+
+        document
+            .getElementById('lessonNoteForm')
+            .addEventListener('submit', (event) => {
+
+                event.preventDefault();
+
+                const formData = new FormData(event.target);
+
+                const lessonNote = Object.fromEntries(formData.entries());
+
+                console.log('Lesson Note:', lessonNote);
+
+                alert('Lesson note ready to publish.');
+
+            });
+
+
+        // ==========================================
+        // DRAFT
+        // ==========================================
+
+        document
+            .getElementById('draftBtn')
+            .addEventListener('click', () => {
+
+                const formData =
+                    new FormData(document.getElementById('lessonNoteForm'));
+
+                const lessonNote =
+                    Object.fromEntries(formData.entries());
+
+                console.log('Draft:', lessonNote);
+
+                alert('Lesson note saved as draft.');
+
+            });
+
+    </script>
+
+</body>
+
+</html>
