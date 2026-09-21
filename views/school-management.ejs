@@ -8,7 +8,7 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
       <link rel="stylesheet" href="/styles/global.css">
-
+    
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
@@ -32,6 +32,62 @@
      <div class="admin-container">
             <%- include("./partials/navigation.ejs") %>
     <div class="section">
+
+        <!-- ===================================================== -->
+        <!-- HEADER -->
+        <!-- ===================================================== -->
+
+        <div
+            class="w-full rounded-3xl bg-gradient-to-r from-indigo-700 via-blue-600 to-cyan-500 text-white p-10 shadow-xl">
+
+            <div class="flex flex-col lg:flex-row justify-between gap-10">
+
+                <div>
+
+                    <span
+                        class="inline-flex items-center gap-2 bg-white/20 px-4 py-2 rounded-full text-sm">
+
+                        <i class="fa-solid fa-school"></i>
+
+                        School Administration
+
+                    </span>
+
+                    <h1 class="text-5xl font-bold mt-5">
+
+                        School Management
+
+                    </h1>
+
+                    <p class="mt-5 text-blue-100 max-w-2xl text-lg">
+
+                        Manage every aspect of your school from one dashboard.
+                        Students, Teachers, Subjects, Timetable, Results,
+                        Fees and School Settings.
+
+                    </p>
+
+                </div>
+
+                <div>
+
+                    <a href="/admin/school-settings">
+                        <button
+                        class="bg-white text-blue-700 px-7 py-4 rounded-2xl font-semibold shadow-lg hover:bg-blue-50">
+
+                        <i class="fa-solid fa-gear mr-2"></i>
+
+                        School Settings
+
+                    </button>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
 
         <!-- ===================================================== -->
         <!-- QUICK ACTION -->
