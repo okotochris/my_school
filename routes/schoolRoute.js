@@ -471,12 +471,23 @@ router.get('/myschool/reset-password', (req, res)=>{
 })
 
 router.get('/admin/assignment', isAuthenticated, async(req, res)=>{
-    res.render('assignment')
+    const role= req.session.role
+    const fees = await schoolFees(req.session.school)
+    res.render('assignment', {school: req.session.school, role, fees, title:'Assignment'})
 })
 router.get('/admin/scheme-of-work', isAuthenticated, async(req, res)=>{
-    res.render('scheme-of-work')
+    const role= req.session.role
+    const fees = await schoolFees(req.session.school)
+    res.render('scheme-of-work', {fees, role, school: req.session.school, title:'Scheme of work'})
 })
 router.get('/admin/loan', isAuthenticated, async(req, res)=>{
-    res.render('loan')
+    const role= req.session.role
+    const fees = await schoolFees(req.session.school)
+    res.render('loan', {school: req.session.school, role, fees, title:"Loan"})
+})
+router.get('/admin/lesson-note', isAuthenticated, async(req, res)=>{
+    const role= req.session.role
+    const fees = await schoolFees(req.session.school)
+    res.render('lesson-note', { school: req.session.school,  fees, role, title:'Lesson Note'})
 })
 module.exports = router;
