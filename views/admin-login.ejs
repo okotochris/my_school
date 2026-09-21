@@ -94,7 +94,7 @@
                                 <button type="button" onclick="togglePassword()"
                                     class="absolute inset-y-0 right-0 flex items-center pr-3.5 text-slate-400 transition hover:text-slate-600"
                                     aria-label="Show password">
-                                    <i id="password-icon" data-lucide="eye" class="h-5 w-5"></i>
+                                    <i id="password-icon" data-lucide="eye" class="h-5 w-5 text-black"></i>
                                 </button>
 
                             </div>
@@ -134,6 +134,9 @@
         <%-include('partials/footer') %>
 </body>
 <script>
+    (()=>{
+          lucide.createIcons();
+    })()
     function togglePassword() {
         const password = document.getElementById('password');
         const icon = document.getElementById('password-icon');
@@ -145,8 +148,6 @@
             password.type = 'password';
             icon.setAttribute('data-lucide', 'eye');
         }
-
-        lucide.createIcons();
     }
 </script>
 <script>

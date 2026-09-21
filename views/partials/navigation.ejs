@@ -170,7 +170,10 @@ lesson-note
     <script src="https://checkout.flutterwave.com/v3.js"></script>
 
     <script>
-      
+      (()=>{
+          lucide.createIcons();
+      })()
+
       const buttonId = document.getElementById('button')
       async function makePayment() {
         buttonId.innerText = "Loading.."
