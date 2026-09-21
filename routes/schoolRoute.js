@@ -469,4 +469,14 @@ router.post('/school/result-template', isAuthenticated, async(req, res)=>{
 router.get('/myschool/reset-password', (req, res)=>{
   res.render('passwordReset')
 })
+
+router.get('/admin/assignment', isAuthenticated, async(req, res)=>{
+    res.render('assignment')
+})
+router.get('/admin/scheme-of-work', isAuthenticated, async(req, res)=>{
+    res.render('scheme-of-work')
+})
+router.get('/admin/loan', isAuthenticated, async(req, res)=>{
+    res.render('loan')
+})
 module.exports = router;
