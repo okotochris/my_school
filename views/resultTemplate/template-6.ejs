@@ -113,7 +113,7 @@
 
                     <span>STUDENT NAME</span>
 
-                    <strong>
+                    <strong >
                         <%= student.fullname %> 
                     </strong>
 
@@ -184,19 +184,6 @@
     ====================================================== -->
 
     <section class="result-section">
-
-        <div class="section-title">
-
-            <span>01</span>
-
-            <div>
-                <small>ACADEMIC PERFORMANCE</small>
-                <h3>SUBJECT RESULTS</h3>
-            </div>
-
-        </div>
-
-
         <table class="result-table">
 
             <thead>
@@ -279,25 +266,7 @@
 
             <span>AVERAGE</span>
 
-              <% if (result.average >= 80) { %>
-                    <strong>A</strong>
-                    <small>EXCELLENT</small>
-                <% } else if (result.average >= 70) { %>
-                    <strong>B</strong>
-                    <small>VERY GOOD</small>
-                <% } else if (result.average >= 60) { %>
-                    <strong>C</strong>
-                    <small>GOOD</small>
-                <% } else if (result.average >= 50) { %>
-                    <strong>D</strong>
-                    <small>FAIR</small>
-                <% } else if (result.average >= 40) { %>
-                    <strong>E</strong>
-                    <small>PASS</small>
-                <% } else { %>
-                    <strong>F</strong>
-                    <small>FAILED</small>
-                <% } %>
+             <strong><%= result.average %></strong>
 
 
         </div>

@@ -84,10 +84,10 @@ body {
 .school-name {
     color: var(--primary);
 
-    font-size: 22px;
+    font-size: 25px;
 
     font-weight: 800;
-
+   
     letter-spacing: .8px;
 }
 
@@ -96,7 +96,7 @@ body {
 
     color: var(--accent);
 
-    font-size: 11px;
+    font-size: 18px;
 
     font-weight: bold;
 }
@@ -104,7 +104,7 @@ body {
 .school-address {
     margin-top: 7px;
 
-    font-size: 9px;
+    font-size: 15px;
 
     color: var(--muted);
 }

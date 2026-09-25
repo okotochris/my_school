@@ -116,7 +116,7 @@ body {
 
     color: var(--accent);
 
-    font-size: 9px;
+    font-size: 12px;
 
     font-weight: bold;
 }
@@ -127,7 +127,7 @@ body {
 
     color: var(--muted);
 
-    font-size: 7px;
+    font-size: 11px;
 }
 
 .academic-badge {

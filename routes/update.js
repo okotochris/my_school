@@ -146,7 +146,6 @@ router.patch(
             fees,
             address,
             phone,
-            resultTemplate,
             headTeacher,
             headTeacherSignature,
             state,
@@ -193,7 +192,6 @@ router.patch(
             schoolInfo.fees = fees;
             schoolInfo.address = address;
             schoolInfo.phone = phone;
-            schoolInfo.resultTemplate = resultTemplate;
             schoolInfo.headTeacher.name =  headTeacher;
             schoolInfo.headTeacher.signature = headTeacherSignature;
             schoolInfo.state = state;
@@ -303,7 +301,18 @@ router.patch(
                     },
                  
                 );
+                // UPDATE ALL STUDENT RESULT
+                await StudentResult.updateMany(
+                    {
+                        schoolName: oldSchoolName
+                    },
 
+                    {
+                        $set: {
+                            schoolName: schoolName
+                        }
+                    },
+                )
                 // ==========================================
                 // UPDATE ALL STUDENT RESULTS
                 // ==========================================

@@ -34,11 +34,11 @@
                 </div>
                 <div class="form-group">
                     <label for="school">School Name</label>
-                    <input type="text" autocomplete="off" id="school" name="school" placeholder="School Name" required/>
+                    <input type="text" autocomplete="off" id="school" name="school" placeholder="School Name" onblur="isRegister(event, 'schoolName')" required/>
                 </div>
                 <div class="form-group">
                      <label for="email">Email</label>
-                     <input type="email" placeholder="Enter your email" name="email" id="email" autocomplete="off" required />
+                     <input type="email" placeholder="Enter your email" name="email" id="email" onblur="isRegister(event, 'email')" autocomplete="off" required />
                 </div>
                 <div class="form-group">
                      <label for="role">Role</label>
@@ -76,6 +76,7 @@
                 <p>
                 <button  class="form-button" id="submit-button" >Create Account</button>
             </form>
+            <ul style="color:red;" id="respond"></ul>
         </div>
         </section>
     <%-include("partials/footer") %>
@@ -118,6 +119,32 @@
         }
         document.getElementById('password').oninput=()=>{
             reset()
+        }
+
+        async function isRegister(e, inputField){
+            e.preventDefault()
+           try{   
+                let itemName = null
+                if(inputField == 'schoolName'){
+                    return itemName == document.getElementById('school').value
+                    itemName = document.getElementById('school').value
+                }else{
+                    itemName = document.getElementById('email').value
+                }
+                const res = await fetch(`/api/school-name/${itemName}/${inputField}`)
+            
+            if(!res.ok){
+                return;
+            }
+            const {message, response} = await res.json()
+            if(response){
+                return document.getElementById('respond').innerHTML += `<li>${message} has already been registerd</li>`
+            }
+            return document.getElementById('respond').innerText = ''
+           }catch(err){
+
+           }
+           
         }
     </script>
     <script src="js/navigation.js"></script>

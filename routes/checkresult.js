@@ -144,6 +144,7 @@ async function isOutStandingPayment(school){
 //view student result from student profile page
 router.get('/view-student-result', async(req, res)=>{
     const {term, sclass, school, studentId} = req.query
+    console.log(req.session.school)
     const result = await StudentResult.findOne({studentId, studentClass: sclass, term, schoolName: school})
     const student = await StudentProfile.findOne({studentId})
 

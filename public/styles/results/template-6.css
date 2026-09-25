@@ -112,11 +112,11 @@ body {
 }
 
 .school-info p {
-    margin: 3px 0;
+    margin: 0px 0;
 
     color: #64748b;
 
-    font-size: 7px;
+    font-size: 12px;
 
     white-space: nowrap;
 
@@ -126,11 +126,11 @@ body {
 }
 
 .school-info .motto {
-    margin: 5px 0;
+    margin: 0px 0;
 
     color: #0f766e;
 
-    font-size: 8px;
+    font-size: 12px;
 
     font-weight: bold;
 
@@ -163,7 +163,7 @@ body {
 .report-title span {
     color: #fbbf24;
 
-    font-size: 6px;
+    font-size: 10px;
 
     font-weight: bold;
 
@@ -187,7 +187,7 @@ body {
 
     color: #cbd5e1;
 
-    font-size: 6px;
+    font-size: 8px;
 
     white-space: nowrap;
 
@@ -291,7 +291,7 @@ body {
 
     color: #64748b;
 
-    font-size: 5.5px;
+    font-size: 8px;
 
     font-weight: bold;
 
@@ -309,7 +309,7 @@ body {
 
     color: #1e293b;
 
-    font-size: 7.5px;
+    font-size: 12px;
 
     white-space: nowrap;
 
@@ -366,7 +366,7 @@ body {
 
     color: #64748b;
 
-    font-size: 5px;
+    font-size: 8px;
 
     font-weight: bold;
 
@@ -439,7 +439,7 @@ body {
 
     color: #475569;
 
-    font-size: 7px;
+    font-size: 10px;
 
     text-align: center;
 
@@ -742,7 +742,7 @@ body {
 
     color: #475569;
 
-    font-size: 6.5px;
+    font-size: 8px;
 
     line-height: 1.55;
 
@@ -1198,7 +1198,7 @@ body {
     }
 
     .summary-box span {
-        font-size: clamp(3px, 1.1vw, 4.5px);
+        font-size: clamp(8px, 3vw, 12px);
     }
 
     .summary-box strong {

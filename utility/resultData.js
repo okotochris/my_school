@@ -130,7 +130,7 @@ const student = {
     class : "JSS 3",
     gender : "Male",
     house : "Golden",
-    passport : "https://res.cloudinary.com/quizup/image/upload/v1786652759/school-logos/vmtxuarnixbregsssjiq.png",
+    passport : "https://res.cloudinary.com/quizup/image/upload/v1774964708/passports/batypge4ctryd9kbvnoa.jpg",
     schoolName :"Khrystal tech",
 }
 module.exports = { result, student };

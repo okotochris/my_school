@@ -4,7 +4,9 @@ const StudentResult = require("../schema/studentResult.js"); // nursery
 const isAuthenticated = require("../utility/authenticated.js");
 const Attendance = require("../schema/attendance.js");
 const Blacklist = require('../schema/blacklist.js')
+const SchoolProfile = require('../schema/schoolProfile.js')
 const router = express.Router();
+
 
 router.get("/api/is_uploaded", async (req, res) => {
   try {
@@ -110,7 +112,6 @@ router.delete("/blacklist/:studentId", async (req, res) => {
 
 //ADD NAME TO BLACK LIST API CALL
 router.post("/blacklist", async (req, res) => {
-
   let studentName = req.body.fullname;
   let school = req.session.school;
   let studentId = req.body.studentId;
@@ -200,5 +201,25 @@ router.post('/api/upload-attendace', isAuthenticated, async(req, res)=>{
       res.status(500).json({message:"Server error"})
       console.log(err)
     }
+})
+
+router.get('/api/school-name/:itemName/:inputField', async(req, res)=>{
+  try{
+    const {itemName, inputField} = req.params
+    let isRegister = null
+    if(inputField == 'schoolName'){
+       isRegister = await SchoolProfile.findOne({schoolName:{$regex:itemName, $options:'i'}})
+    }else{
+       isRegister = await SchoolProfile.findOne({schoolEmail:{$regex:itemName, $options:'i'}})
+    }
+    
+    if(!isRegister){
+      return res.status(200).json({response:false})
+    }
+  
+    res.status(200).json({message:inputField, response:true})
+  }catch(err){
+    res.status(500).json({message:'server error'})
+  }
 })
 module.exports = router;
