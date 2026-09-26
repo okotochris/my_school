@@ -108,7 +108,7 @@ function populateCards(dataArray) {
             const response = await fetch(url);
             const datas = await response.json();
             if(datas.length === 0) {
-                alert("No students found");
+                showMessagePopup("No students found");
                
                 document.getElementById('notFound').style.display = 'block'
             } else {
@@ -119,7 +119,7 @@ function populateCards(dataArray) {
             }
         } catch (err) {
             console.error(err);
-            alert("Error fetching students");
+            showMessagePopup("Error fetching students");
         } finally {
             loadingIndicator.style.display = 'none';
         }
@@ -130,7 +130,7 @@ function populateCards(dataArray) {
         getId.onclick = (e) => {
             e.preventDefault();
             const student_name = document.getElementById('student_name').value.trim();
-            if (!student_name) return alert('Field cannot be empty');
+            if (!student_name) return showMessagePopup('Field cannot be empty');
             fetchStudents(`/getstudentid?student_name=${encodeURIComponent(student_name)}`);
         };
     }
@@ -140,7 +140,7 @@ function populateCards(dataArray) {
         classId.onclick = (e) => {
             e.preventDefault();
             const studnetClass = document.getElementById('class').value.trim();
-            if (!studnetClass) return alert('Select a class');
+            if (!studnetClass) return showMessagePopup('Select a class');
             fetchStudents(`/getclassid?class=${encodeURIComponent(studnetClass)}`);
         };
     }

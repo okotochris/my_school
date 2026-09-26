@@ -101,7 +101,7 @@ async function studentPerformance(studentClassValue, academicYear) {
 ========================================= */
 
 function tableDis(result) {
-
+   
     if (!tableBody) {
         console.error(
             '<tbody> not found!'
@@ -133,15 +133,15 @@ function tableDis(result) {
 
     const aggregated = result.reduce((acc, student) => {
 
-        const nameKey = student.userName;
+        const nameKey = student.fullname;
 
         if (!acc[nameKey]) {
 
             acc[nameKey] = {
 
-                userName:
+                fullname:
                     student.fullname ||
-                    student.userName ||
+                    student.fullname ||
                     'Unknown Student',
 
                 class:
@@ -315,13 +315,13 @@ function renderTable(students) {
                                flex items-center justify-center
                                font-bold text-sm"
                     >
-                        ${getInitials(student.userName)}
+                        ${getInitials(student.fullname)}
                     </div>
 
                     <div>
 
                         <p class="font-semibold text-slate-800">
-                            ${escapeHTML(student.userName)}
+                            ${escapeHTML(student.fullname)}
                         </p>
 
                         <p class="text-xs text-slate-400">
@@ -526,7 +526,7 @@ function updateStatistics(students) {
     if (topStudent) {
 
         topStudent.textContent =
-            highest.userName;
+            highest.fullname;
 
     }
 
@@ -597,7 +597,7 @@ searchInput?.addEventListener(
         const filtered =
             currentStudents.filter(
                 student =>
-                    student.userName
+                    student.fullname
                         .toLowerCase()
                         .includes(search)
             );
