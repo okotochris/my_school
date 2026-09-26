@@ -1116,17 +1116,17 @@ async function selectTemplate(id, name) {
             })
         });
         if(!result.ok){
-            alert(
+            showMessagePopup(
                 `${name} failed to be selected.`
             );
             return;
         }
-         alert(
+         showMessagePopup(
         `${name} selected as your result template.`
     ); 
     }catch(error){
         console.error('Error selecting template:', error);
-        alert(
+        showMessagePopup(
             `An error occurred while selecting ${name}.`
         );
     }finally{

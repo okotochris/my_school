@@ -327,14 +327,14 @@
                 body: JSON.stringify(formData),
             })
                 if(!result.ok){
-                    alert("unable to upload result try again")
+                    showMessagePopup("unable to upload result try again")
                     return
                 }
-                alert("result uploaded")
+                showMessagePopup("result uploaded")
                 form.reset()
             }catch(err){
                 console.log(err)
-                alert("server error")
+                showMessagePopup("server error")
             }finally{
                 document.getElementById('upload-button').innerText = 'Upload Result'
                 

@@ -205,7 +205,7 @@
             document.addEventListener("DOMContentLoaded", async () => {
                 const result = await fetch(`/api/all_subject`)
                 if (!result) {
-                    alert('Server error')
+                    showMessagePopup('Server error')
                     return
                 }
                 const { subject } = await result.json()
@@ -392,12 +392,12 @@
                     const result = await fetch('/api/teachers')
                     document.getElementById('add_subject').innerText = "➕ Add Subject"
                     if (!result) {
-                        alert('Sever error')
+                        showMessagePopup('Sever error')
                     }
                     const data = await result.json()
                     teachers = data.teachers
                     if (teachers.length == 0) {
-                        alert("No teachers registered")
+                        showMessagePopup("No teachers registered")
                     }
 
                 }
@@ -413,7 +413,7 @@
                 if (!confirm("Delete subject?")) return;
                 const result = await fetch(`/api/subject/${subjectClass}/${id}`, { method: "Delete" })
                 if (!result.ok) {
-                    alert("unable to delete")
+                    showMessagePopup("unable to delete")
                     return
                 }
                 console.log('delted')
@@ -550,7 +550,7 @@
                         body: JSON.stringify({ subjectObj, subjectClass })
                     })
                     if (!result.ok) {
-                        alert("Something went wrong try agaion")
+                        showMessagePopup("Something went wrong try agaion")
                         return
                     }
                     const data = await result.json()

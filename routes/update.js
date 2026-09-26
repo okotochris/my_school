@@ -143,7 +143,6 @@ router.patch(
         const {
             schoolName,
             schoolEmail,
-            fees,
             address,
             phone,
             headTeacher,
@@ -189,7 +188,6 @@ router.patch(
 
             schoolInfo.schoolName = schoolName;
             schoolInfo.schoolEmail = schoolEmail;
-            schoolInfo.fees = fees;
             schoolInfo.address = address;
             schoolInfo.phone = phone;
             schoolInfo.headTeacher.name =  headTeacher;

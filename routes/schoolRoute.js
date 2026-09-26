@@ -8,6 +8,9 @@ const Attendance = require('../schema/attendance.js')
 const Subject = require('../schema/subject.js')
 const upload = require('../middleware/upload.js')
 const cloudinary = require('../middleware/cloudinary.js')
+const LessonNote = require('../schema/lessonNote.js')
+const SchemeOfWork = require('../schema/schemeOfWork.js')
+const Assignment = require('../schema/assignment.js')
 const router = express.Router()
 const {schoolSection} = require('../utility/schoolSection.js')
 
@@ -490,4 +493,114 @@ router.get('/admin/lesson-note', isAuthenticated, async(req, res)=>{
     const fees = await schoolFees(req.session.school)
     res.render('lesson-note', { school: req.session.school,  fees, role, title:'Lesson Note'})
 })
+
+router.post('/api/teacher/lesson-note', async (req, res) => {
+
+    try {
+        const {
+            teacherId,
+            teacherName,
+            session,
+            term,
+            class: studentClass,
+            subject,
+            week,
+            topic,
+            subTopic,
+            learningObjectives,
+            lessonContent,
+            teachingActivities,
+            evaluation,
+            assignment,
+            status
+        } = req.body;
+
+
+        // Required fields
+        if (
+            !term ||
+            !studentClass ||
+            !subject ||
+            !week ||
+            !topic
+        ) {
+            return res.status(400).json({
+                success: false,
+                message: 'Please fill all required fields.'
+            });
+        }
+
+
+        // Check if lesson note already exists
+        const existingLesson = await LessonNote.findOne({
+            schoolName : req.session.school,
+            session,
+            term,
+            class: studentClass,
+            subject,
+            week
+        });
+
+
+        if (existingLesson) {
+            return res.status(409).json({
+                success: false,
+                message: `A lesson note for ${subject}, ${studentClass}, Week ${week} already exists.`
+            });
+        }
+
+
+        // Create lesson note
+        const lessonNote = new LessonNote({
+
+            schoolName:req.session.school,
+            teacherId,
+            teacherName,
+
+            session,
+            term,
+
+            class: studentClass,
+            subject,
+
+            week: Number(week),
+
+            topic,
+            subTopic: subTopic || '',
+
+            learningObjectives: learningObjectives || '',
+            lessonContent: lessonContent || '',
+            teachingActivities: teachingActivities || '',
+            evaluation: evaluation || '',
+            assignment: assignment || '',
+
+            status: status === 'published'
+                ? 'published'
+                : 'draft'
+        });
+
+
+        await lessonNote.save();
+
+
+        return res.status(201).json({
+            success: true,
+            message: 'Lesson note saved successfully.',
+            lessonNote
+        });
+
+
+    } catch (error) {
+
+        console.error('Create lesson note error:', error);
+
+        return res.status(500).json({
+            success: false,
+            message: 'Unable to save lesson note.',
+            error: error.message
+        });
+
+    }
+
+});
 module.exports = router;

@@ -103,35 +103,6 @@
 
 
     <!-- =====================================================
-         SESSION INFORMATION
-    ====================================================== -->
-
-    <section class="session-bar">
-
-        <div>
-            <span>ACADEMIC SESSION</span>
-            <strong><%= result.section %></strong>
-        </div>
-
-        <div>
-            <span>TERM</span>
-            <strong><%= result.term %></strong>
-        </div>
-
-        <div>
-            <span>CLASS</span>
-            <strong><%= result.class %></strong>
-        </div>
-
-        <div>
-            <span>REPORT DATE</span>
-            <strong><%= new Date(result.createdAt).toLocaleDateString('en-GB') %></strong>
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
          STUDENT PROFILE
     ====================================================== -->
 
@@ -171,8 +142,8 @@
                 </div>
 
                 <div>
-                    <span>GENDER</span>
-                    <strong><%= student.gender %></strong>
+                    <span>TERM</span>
+                    <strong><%= result.term %></strong>
                 </div>
 
                 <div>
@@ -393,20 +364,6 @@
 
     <section class="attendance-section">
 
-        <div class="section-header">
-
-            <div class="section-number">
-                02
-            </div>
-
-            <div>
-                <span>STUDENT ATTENDANCE</span>
-                <h2>ATTENDANCE RECORD</h2>
-            </div>
-
-        </div>
-
-
         <div class="attendance-grid">
 
             <div class="attendance-item">
@@ -455,21 +412,7 @@
 
     <section class="development-section">
 
-        <div class="section-header">
-
-            <div class="section-number">
-                03
-            </div>
-
-            <div>
-                <span>PERSONAL DEVELOPMENT</span>
-                <h2>STUDENT DEVELOPMENT</h2>
-            </div>
-
-        </div>
-
-
-        <div class="development-grid">
+   <div class="development-grid">
 
             <div class="development-item">
 
@@ -667,27 +610,6 @@
         </div>
 
     </section>
-
-
-    <!-- =====================================================
-         FOOTER
-    ====================================================== -->
-
-    <footer class="footer">
-
-        <div>
-            HERITAGE MODEL COLLEGE
-        </div>
-
-        <div>
-            Official Academic Report • 2025 / 2026
-        </div>
-
-        <div>
-            Powered by MySchoolResult
-        </div>
-
-    </footer>
 
 </div>
 

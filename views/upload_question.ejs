@@ -144,12 +144,12 @@
 
     function addManualQuestion() {
         const question = document.getElementById("questionText").value.trim();
-        if (!question) return alert("Please enter a question");
+        if (!question) return showMessagePopup("Please enter a question");
 
         totalCount++;
         document.getElementById("totalQuestions").innerText = totalCount;
 
-        alert("Question added successfully!");
+        showMessagePopup("Question added successfully!");
         clearForm();
     }
 
@@ -166,14 +166,14 @@
         const file = e.target.files[0];
         if (!file) return;
 
-        alert(`CSV file "${file.name}" uploaded successfully!\n\nQuestions will be processed and added to the bank.`);
+        showMessagePopup(`CSV file "${file.name}" uploaded successfully!\n\nQuestions will be processed and added to the bank.`);
         totalCount += 15; // Simulated
         document.getElementById("totalQuestions").innerText = totalCount;
     }
 
     function finishUpload() {
         if (totalCount === 0) {
-            alert("Please add at least one question.");
+            showMessagePopup("Please add at least one question.");
             return;
         }
         window.location.href = "/teacher/set-exam";

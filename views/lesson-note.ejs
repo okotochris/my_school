@@ -592,23 +592,31 @@
                                 <div class="mt-5 space-y-2">
 
                                     <button
-                                        type="button"
-                                        id="draftBtn"
+                                        onclick=" saveLessonNote('draft', event)"
+                                        id="draft"
                                         class="w-full rounded-lg border border-slate-200 bg-white px-4 py-3 text-xs font-semibold text-slate-700 transition hover:bg-slate-50"
                                     >
-                                        Save as Draft
+                                        Save as raft
                                     </button>
 
                                     <button
-                                        type="submit"
+                                        onclick=" saveLessonNote('published', event)"
+                                        id="published"
                                         class="w-full rounded-lg bg-[#096CCE] px-4 py-3 text-xs font-semibold text-white shadow-sm transition hover:bg-blue-700"
                                     >
                                         Publish Lesson Note
                                     </button>
 
                                 </div>
-
+                                 
                             </div>
+                            <button
+                                        type="button"
+                                        id="draftBtn"
+                                        class="w-full rounded-lg border border-slate-200 bg-white px-4 py-3 text-xs font-semibold text-slate-700 transition hover:bg-slate-50"
+                                    >
+                                        View all lesson note
+                            </button>
                             <!-- TIP -->
                             <div class="rounded-xl border border-blue-100 bg-blue-50 p-5">
 
@@ -708,49 +716,63 @@
         });
 
 
-        // ==========================================
-        // FORM SUBMIT
-        // ==========================================
+       
+let isLoading = false
+async function saveLessonNote(status, e) {
+    e.preventDefault()
+    if(isLoading){
+        return
+    }
+    isLoading= true
+    const form = document.getElementById('lessonNoteForm');
 
-        document
-            .getElementById('lessonNoteForm')
-            .addEventListener('submit', (event) => {
+    const formData = new FormData(form);
 
-                event.preventDefault();
+    const lessonNote = Object.fromEntries(formData.entries());
 
-                const formData = new FormData(event.target);
+    // Set status from the button clicked
+    lessonNote.status = status;
 
-                const lessonNote = Object.fromEntries(formData.entries());
+    try {
+        document.getElementById(status).innerHTML = 'saving ......'
+        const response = await fetch('/api/teacher/lesson-note', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(lessonNote)
+        });
 
-                console.log('Lesson Note:', lessonNote);
+        const result = await response.json();
 
-                alert('Lesson note ready to publish.');
+        if (!response.ok) {
+            showMessagePopup(result.message || 'Unable to save lesson note.');
+            return;
+        }
 
-            });
+        console.log('Lesson note:', result.lessonNote);
 
+        if (status === 'draft') {
+            showMessagePopup('Lesson note saved as draft.');
+        } else {
+            showMessagePopup('Lesson note published successfully.');
+        }
+        form.clear()
 
-        // ==========================================
-        // DRAFT
-        // ==========================================
+    } catch (error) {
 
-        document
-            .getElementById('draftBtn')
-            .addEventListener('click', () => {
+        console.error('Save lesson note error:', error);
 
-                const formData =
-                    new FormData(document.getElementById('lessonNoteForm'));
+        showMessagePopup('Something went wrong. Please try again.');
 
-                const lessonNote =
-                    Object.fromEntries(formData.entries());
-
-                console.log('Draft:', lessonNote);
-
-                alert('Lesson note saved as draft.');
-
-            });
-
+    }finally{
+        document.getElementById(status).innerHTML = status
+        isLoading = false
+    }
+}
     </script>
 
 </body>
 
 </html>
+ 
