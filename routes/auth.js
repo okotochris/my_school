@@ -24,35 +24,56 @@ router.post('/admin/add-staff', upload.single('school-logo'), async(req, res)=>{
 })
 //saving admin login
 router.post("/admin_form", upload.single('school-logo'), async (req, res) => {
+  try {
 
-  try{
-    if(req.body.role == 'admin'){
-      const result = await cloudinary.uploader.upload(req.file.path, {
+    if (req.body.role === 'admin') {
+
+      let logo = null;
+      let public_id = null;
+
+      // Upload logo only if one was provided
+      if (req.file) {
+        const result = await cloudinary.uploader.upload(req.file.path, {
           folder: "school-logos"
         });
-        const public_id = result.public_id || null
-        const secure_url = result.secure_url || null
-        await SchoolPfofile.create({
-          schoolName: req.body.school,
-          schoolEmail: req.body.email,
-          address: req.body.address,
-          phone: req.body.phone,
-          motto: req.body.motto,
-          image: {
-          logo: secure_url,
-          public_id: public_id
-        }
-        });
+
+        logo = result.secure_url;
+        public_id = result.public_id;
       }
-    const hashedPassword = await bcrypt.hash(req.body.password.trim(), 10);
+
+      await SchoolPfofile.create({
+        schoolName: req.body.school,
+        schoolEmail: req.body.email,
+        address: req.body.address,
+        phone: req.body.phone,
+        motto: req.body.motto,
+        image: {
+          logo,
+          public_id
+        }
+      });
+    }
+
+    const hashedPassword = await bcrypt.hash(
+      req.body.password.trim(),
+      10
+    );
+
     req.body.password = hashedPassword;
+
     await Staff.create(req.body);
-    res.status(200).json({msg:'successful'})
-  }catch(err){
-    console.log(err)
-    res.status(500).json({msg:"server error"})
+
+    res.status(200).json({
+      msg: "successful"
+    });
+
+  } catch (err) {
+    console.log(err);
+
+    res.status(500).json({
+      msg: "server error"
+    });
   }
- 
 });
 router.post("/login", async (req, res) => {
  
