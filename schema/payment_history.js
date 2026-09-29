@@ -13,6 +13,9 @@ const paymentSchema = new mongoose.Schema({
     staffName:{
         type:String,
     },
+    email:{
+        type:String,
+    },
     refId:{
         type:String
     },

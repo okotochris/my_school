@@ -20,6 +20,13 @@ async function schoolFees(school){
     const data  = await schoolPfofile.findOne({schoolName:school})
     return data.fees;
 }
+//adimin page to loging to result upload portal
+router.get("/admin", isAuthenticated, async (req, res) => {
+   const role= req.session.role
+   const fees = await schoolFees(req.session.school)
+  res.render("admin", { school: req.session.school, fees, role, title:"Upload Result"});
+});
+
 //BLACKLIST API
 router.get("/blacklist", isAuthenticated, async (req, res) => {
     const role= req.session.role

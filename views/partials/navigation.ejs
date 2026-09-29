@@ -179,22 +179,21 @@ lesson-note
         buttonId.innerText = "Loading.."
         const res = await fetch('/payment/schoolinfo')
         if (!res.ok) {
+          buttonId.innerText = "Make Payment"
           return;
         }
-        const data = await res.json()
-        buttonId.innerText = "Make Payment"
-        const { email, school, user_name } = data.result;
-        console.log({ email, school, user_name })
-        const fee = data.fee
-        if (fee < 100) {
+        const schoolDetails = await res.json()
+        const {  schoolEmail,  schoolName, headTeacher,  fees } = schoolDetails;
+        if (fees < 70) {
+          buttonId.innerText = "Make Payment"
           return
         }
-        const amountInNumber = Number(fee);
+        const amountInNumber = Number(fees);
         const meta = {
-          schoolName: school,
+          schoolName,
           amount: amountInNumber,
-          staffName: user_name,
-          refId: `${user_name}${Date.now()}`
+          staffName: headTeacher.name,
+          refId: `${headTeacher.name}${Date.now()}`
         }
         FlutterwaveCheckout({
           public_key: "FLWPUBK-f8514622db2e398152c1a94f24a478a5-X",
@@ -204,23 +203,31 @@ lesson-note
           payment_options: "card,ussd,banktransfer",
 
           customer: {
-            email: email,
-            name: user_name,
+            email: schoolEmail,
+            name: headTeacher.name,
           },
 
-          callback: function (data) {
+          callback: function updateDashboard() {
+            schoolDetails.meta = meta
+            
+          buttonId.innerText = "Loading.."
+           try{
             fetch("/api/payment-callback", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                tx_ref: data.tx_ref,
-                meta
-              })
+              body: JSON.stringify(schoolDetails)
             })
               .then(res => res.json())
               .then(result => {
-                document.getElementById('fee"').innerHTML = 0;
+                document.getElementById('fee').innerText = 0;
+                 alert("Payment successful!");
               });
+           }catch(err){
+            console.log(err)
+            alert("Payment was received, but we could not update the dashboard.");
+           }finally{
+             buttonId.innerText = "Make Payment"
+           }
           },
 
           onclose: function () {
@@ -228,6 +235,7 @@ lesson-note
           }
         });
       }
+      
     </script>
 
 <script src="https://unpkg.com/lucide@latest"></script>
