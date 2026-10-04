@@ -34,7 +34,6 @@ const assignmentSchema = new mongoose.Schema(
 
         teacher: {
             type: String,
-            required: true,
             trim: true
         },
 
@@ -43,16 +42,16 @@ const assignmentSchema = new mongoose.Schema(
             required: true
         },
 
+        dueTime: {
+            type: String
+        },
+
         attachment: {
             url: {
                 type: String,
                 default: ''
             },
             public_id: {
-                type: String,
-                default: ''
-            },
-            originalName: {
                 type: String,
                 default: ''
             }
@@ -76,6 +75,19 @@ const assignmentSchema = new mongoose.Schema(
     },
     {
         timestamps: true
+    }
+);
+
+// Unique assignment per school + class + subject + title
+assignmentSchema.index(
+    {
+        school: 1,
+        studentClass: 1,
+        subject: 1,
+        title: 1
+    },
+    {
+        unique: true
     }
 );
 

@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,306 +18,335 @@
 
 <body class="bg-slate-50 min-h-screen">
     <%- include('./partials/header.ejs') %>
-    <div class="admin-container">
-        <%- include('./partials/navigation.ejs') %>
-         <!-- Main -->
-        <main class="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="admin-container">
+            <%- include('./partials/navigation.ejs') %>
+                <!-- Main -->
+                <main class="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
 
-            <!-- Form Card -->
-            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <!-- Form Card -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
 
-                <!-- Form Header -->
-                <div class="px-6 sm:px-8 py-6 border-b border-slate-100">
+                        <!-- Form Header -->
+                        <div class="px-6 sm:px-8 py-6 border-b border-slate-100">
 
-                    <h2 class="text-xl font-bold text-slate-800">
-                        Create New Assignment
-                    </h2>
+                            <h2 class="text-xl font-bold text-slate-800">
+                                Create New Assignment
+                            </h2>
 
-                    <p class="text-sm text-slate-500 mt-1">
-                        Fill in the details below to give an assignment to your class.
-                    </p>
-
-                </div>
-
-
-                <!-- Form -->
-                <form class="p-6 sm:p-8 space-y-7">
-
-
-                    <!-- Class & Subject -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-                        <!-- Class -->
-                        <div>
-
-                            <label
-                                for="studentClass"
-                                class="block text-sm font-semibold text-slate-700 mb-2">
-                                Class
-                            </label>
-
-                            <select
-                                id="studentClass"
-                                name="studentClass"
-                                required
-                                class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
-
-                                <option value="">Select class</option>
-                                <option value="JSS 1">JSS 1</option>
-                                <option value="JSS 2">JSS 2</option>
-                                <option value="JSS 3">JSS 3</option>
-                                <option value="SS 1">SS 1</option>
-                                <option value="SS 2">SS 2</option>
-                                <option value="SS 3">SS 3</option>
-
-                            </select>
+                            <p class="text-sm text-slate-500 mt-1">
+                                Fill in the details below to give an assignment to your class.
+                            </p>
 
                         </div>
 
 
-                        <!-- Subject -->
-                        <div>
-
-                            <label
-                                for="subject"
-                                class="block text-sm font-semibold text-slate-700 mb-2">
-                                Subject
-                            </label>
-
-                            <select
-                                id="subject"
-                                name="subject"
-                                required
-                                class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
-
-                                <option value="">Select subject</option>
-                                <option value="Mathematics">Mathematics</option>
-                                <option value="English Language">English Language</option>
-                                <option value="Biology">Biology</option>
-                                <option value="Physics">Physics</option>
-                                <option value="Chemistry">Chemistry</option>
-                                <option value="Government">Government</option>
-                                <option value="Economics">Economics</option>
-                                <option value="Computer Studies">Computer Studies</option>
-
-                            </select>
-
-                        </div>
-
-                    </div>
+                        <!-- Form -->
+                        <form id="form" class="p-6 sm:p-8 space-y-7">
 
 
-                    <!-- Assignment Title -->
-                    <div>
+                            <!-- Class & Subject -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-                        <label
-                            for="title"
-                            class="block text-sm font-semibold text-slate-700 mb-2">
-                            Assignment Title
-                        </label>
+                                <!-- Class -->
+                                <div>
 
-                        <input
-                            type="text"
-                            id="title"
-                            name="title"
-                            required
-                            placeholder="e.g. Algebra Exercise"
-                            class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <label for="studentClass" class="block text-sm font-semibold text-slate-700 mb-2">
+                                        Class
+                                    </label>
 
-                    </div>
+                                    <select id="studentClass" name="studentClass" onchange="getSubject(this.value)"
+                                        required
+                                        class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
 
+                                        <option value="">Select class</option>
+                                        <option value="SS 1">SS 1</option>
+                                        <option value="SS 2">SS 2</option>
+                                        <option value="SS 3">SS 3</option>
 
-                    <!-- Instructions -->
-                    <div>
+                                        <option value="JSS 1">JSS 1</option>
+                                        <option value="JSS 2">JSS 2</option>
+                                        <option value="JSS 3">JSS 3</option>
 
-                        <label
-                            for="description"
-                            class="block text-sm font-semibold text-slate-700 mb-2">
-                            Assignment Instructions
-                        </label>
+                                        <option value="BASIC 1">BASIC 1</option>
+                                        <option value="BASIC 2">BASIC 2</option>
+                                        <option value="BASIC 3">BASIC 3</option>
+                                        <option value="BASIC 4">BASIC 4</option>
+                                        <option value="BASIC 5">BASIC 5</option>
+                                        <option value="BASIC 6">BASIC 6</option>
 
-                        <textarea
-                            id="description"
-                            name="description"
-                            rows="7"
-                            required
-                            placeholder="Write the assignment questions or instructions here..."
-                            class="w-full px-4 py-3 rounded-xl border border-slate-200 resize-y focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-
-                        <p class="text-xs text-slate-400 mt-2">
-                            Clearly explain what students are expected to do.
-                        </p>
-
-                    </div>
+                                        <option value="NURSERY 1">NURSERY 1</option>
+                                        <option value="NURSERY 2">NURSERY 1</option>
+                                        <option value="NURSERY 3">NURSERY 1</option>
 
 
-                    <!-- Deadline -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    </select>
 
-                        <div>
-
-                            <label
-                                for="dueDate"
-                                class="block text-sm font-semibold text-slate-700 mb-2">
-                                Due Date
-                            </label>
-
-                            <input
-                                type="date"
-                                id="dueDate"
-                                name="dueDate"
-                                required
-                                class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
-
-                        </div>
+                                </div>
 
 
-                        <div>
+                                <!-- Subject -->
+                                <div>
 
-                            <label
-                                for="dueTime"
-                                class="block text-sm font-semibold text-slate-700 mb-2">
-                                Due Time
-                            </label>
+                                    <label for="subject" class="block text-sm font-semibold text-slate-700 mb-2">
+                                        Subject
+                                    </label>
 
-                            <input
-                                type="time"
-                                id="dueTime"
-                                name="dueTime"
-                                class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <select id="subject" name="subject" required
+                                        class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
 
-                        </div>
+                                    </select>
 
-                    </div>
+                                </div>
+
+                            </div>
 
 
-                    <!-- Attachment -->
-                    <div>
+                            <!-- Assignment Title -->
+                            <div>
 
-                        <label
-                            for="attachment"
-                            class="block text-sm font-semibold text-slate-700 mb-2">
-                            Attachment
-                            <span class="font-normal text-slate-400">
-                                (Optional)
-                            </span>
-                        </label>
+                                <label for="title" class="block text-sm font-semibold text-slate-700 mb-2">
+                                    Assignment Title
+                                </label>
 
-                        <div class="border-2 border-dashed border-slate-200 rounded-xl p-6 text-center hover:border-blue-400 transition">
+                                <input type="text" id="title" name="title" required placeholder="e.g. Algebra Exercise"
+                                    class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
 
-                            <input
-                                type="file"
-                                id="attachment"
-                                name="attachment"
-                                class="block w-full text-sm text-slate-500
+                            </div>
+
+
+                            <!-- Instructions -->
+                            <div>
+
+                                <label for="description" class="block text-sm font-semibold text-slate-700 mb-2">
+                                    Assignment Instructions
+                                </label>
+
+                                <textarea id="description" name="description" rows="7" required
+                                    placeholder="Write the assignment questions or instructions here..."
+                                    class="w-full px-4 py-3 rounded-xl border border-slate-200 resize-y focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+
+                                <p class="text-xs text-slate-400 mt-2">
+                                    Clearly explain what students are expected to do.
+                                </p>
+
+                            </div>
+
+
+                            <!-- Deadline -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                                <div>
+
+                                    <label for="dueDate" class="block text-sm font-semibold text-slate-700 mb-2">
+                                        Due Date
+                                    </label>
+
+                                    <input type="date" id="dueDate" name="dueDate" required
+                                        class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+                                </div>
+
+
+                                <div>
+
+                                    <label for="dueTime" class="block text-sm font-semibold text-slate-700 mb-2">
+                                        Due Time
+                                    </label>
+
+                                    <input type="time" id="dueTime" name="dueTime"
+                                        class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Attachment -->
+                            <div>
+
+                                <label for="attachment" class="block text-sm font-semibold text-slate-700 mb-2">
+                                    Attachment
+                                    <span class="font-normal text-slate-400">
+                                        (Optional)
+                                    </span>
+                                </label>
+
+                                <div
+                                    class="border-2 border-dashed border-slate-200 rounded-xl p-6 text-center hover:border-blue-400 transition">
+
+                                    <input type="file" id="attachment"  accept=".jpg,.jpeg,.png,.webp" name="attachment" class="block w-full text-sm text-slate-500
                                     file:mr-4 file:py-2 file:px-4
                                     file:rounded-lg file:border-0
                                     file:bg-blue-50 file:text-blue-600
                                     file:font-semibold">
 
-                            <p class="text-xs text-slate-400 mt-3">
-                                You can attach a PDF, Word document or image.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- Assignment Options -->
-                    <div class="bg-slate-50 rounded-xl p-5">
-
-                        <h3 class="font-semibold text-slate-800">
-                            Assignment Options
-                        </h3>
-
-                        <div class="mt-4 space-y-4">
-
-                            <label class="flex items-start gap-3 cursor-pointer">
-
-                                <input
-                                    type="checkbox"
-                                    name="allowSubmission"
-                                    checked
-                                    class="mt-1 w-4 h-4 accent-blue-600">
-
-                                <div>
-                                    <p class="text-sm font-medium text-slate-700">
-                                        Allow online submission
+                                    <p class="text-xs text-slate-400 mt-3">
+                                        You can attach a PDF, Word document or image.
                                     </p>
 
-                                    <p class="text-xs text-slate-400 mt-1">
-                                        Students can submit their assignment through
-                                        their dashboard.
-                                    </p>
                                 </div>
 
-                            </label>
+                            </div>
 
 
-                            <label class="flex items-start gap-3 cursor-pointer">
+                            <!-- Assignment Options -->
+                            <div class="bg-slate-50 rounded-xl p-5">
 
-                                <input
-                                    type="checkbox"
-                                    name="notifyStudents"
-                                    checked
-                                    class="mt-1 w-4 h-4 accent-blue-600">
+                                <h3 class="font-semibold text-slate-800">
+                                    Assignment Options
+                                </h3>
 
-                                <div>
-                                    <p class="text-sm font-medium text-slate-700">
-                                        Notify students
-                                    </p>
+                                <div class="mt-4 space-y-4">
 
-                                    <p class="text-xs text-slate-400 mt-1">
-                                        Make the assignment visible to students
-                                        immediately after publishing.
-                                    </p>
+                                    <label class="flex items-start gap-3 cursor-pointer">
+
+                                        <input type="checkbox" value="true" name="allowSubmission" checked
+                                            class="mt-1 w-4 h-4 accent-blue-600">
+
+                                        <div>
+                                            <p class="text-sm font-medium text-slate-700">
+                                                Allow online submission
+                                            </p>
+
+                                            <p class="text-xs text-slate-400 mt-1">
+                                                Students can submit their assignment through
+                                                their dashboard.
+                                            </p>
+                                        </div>
+
+                                    </label>
+
+
+                                    <label class="flex items-start gap-3 cursor-pointer">
+
+                                        <input type="checkbox" value="true" name="notifyStudents" checked
+                                            class="mt-1 w-4 h-4 accent-blue-600">
+
+                                        <div>
+                                            <p class="text-sm font-medium text-slate-700">
+                                                Notify students
+                                            </p>
+
+                                            <p class="text-xs text-slate-400 mt-1">
+                                                Make the assignment visible to students
+                                                immediately after publishing.
+                                            </p>
+                                        </div>
+
+                                    </label>
+
                                 </div>
 
-                            </label>
-
-                        </div>
-
-                    </div>
+                            </div>
 
 
-                    <!-- Buttons -->
-                    <div class="pt-5 border-t border-slate-100 flex flex-col-reverse sm:flex-row sm:justify-end gap-3">
+                            <!-- Buttons -->
+                            <div
+                                class="pt-5 border-t border-slate-100 flex flex-col-reverse sm:flex-row sm:justify-end gap-3">
 
-                        <button
-                            type="button"
-                            onclick="history.back()"
-                            class="px-6 py-3 rounded-xl border border-slate-200 bg-white text-slate-600 font-semibold hover:bg-slate-50">
-                            Cancel
-                        </button>
+                                <button type="button" onclick="history.back()"
+                                    class="px-6 py-3 rounded-xl border border-slate-200 bg-white text-slate-600 font-semibold hover:bg-slate-50">
+                                    Cancel
+                                </button>
 
-                        <button
-                            type="submit"
-                            class="px-7 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold transition">
-                            Give Assignment
-                        </button>
+                                <button id='save' onclick="handleSubmit(event)"
+                                    class="px-7 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold transition">
+                                    Give Assignment
+                                </button>
+
+                            </div>
+
+                        </form>
 
                     </div>
 
-                </form>
 
-            </div>
+                    <!-- Bottom Note -->
+                    <div class="mt-5 text-center">
+
+                        <p class="text-xs text-slate-400">
+                            Students in the selected class will be able to view this assignment
+                            from their MySchoolResult dashboard.
+                        </p>
+
+                    </div>
+
+                </main>
+        </div>
+
+        //GET SUBJECTS BASED ON CLASS
+        <script>
+            async function getSubject(studentClass) {
+                let subjectClass = studentClass.replace(/[0-9]/g, '').trim();
+
+                if (subjectClass === 'SS') {
+                    subjectClass = 'Senior';
+                } else if (subjectClass === 'JS') {
+                    subjectClass = 'Junior';
+                } else if (subjectClass === 'BASIC') {
+                    subjectClass = 'Basic';
+                } else {
+                    subjectClass = 'Nursery';
+                }
+
+                try {
+                    const result = await fetch(`/admin/get-subject/${subjectClass}`);
+
+                    if (!result.ok) {
+                        console.log('Something went wrong:', result.status);
+                        return;
+                    }
+                    const { subject } = await result.json()
+                    renderSubject(subject)
+                } catch (err) {
+                    console.log(err);
+                }
+            }
 
 
-            <!-- Bottom Note -->
-            <div class="mt-5 text-center">
+            function renderSubject(data) {
+                const subject = document.getElementById('subject');
+                subject.innerHTML = `<option value="">Select subject</option>`
+                data.subjects.forEach(element => {
+                    subject.innerHTML += `
+                    <option value="${element.subjectName}">
+                        ${element.subjectName}
+                    </option>
+                `;
+                });
+            }
 
-                <p class="text-xs text-slate-400">
-                    Students in the selected class will be able to view this assignment
-                    from their MySchoolResult dashboard.
-                </p>
+            async function handleSubmit(e) {
+                e.preventDefault();
 
-            </div>
+                const form = document.getElementById("form");
+                document.getElementById('save').innerText = 'Saving......'
+                try {
+                    const formData = new FormData(form);
 
-        </main>
-    </div>
+                    const result = await fetch("/admin/assignment", {
+                        method: "POST",
+                        body: formData
+                    });
 
+                    const data = await result.json();
+
+                    if (!result.ok) {
+                       
+                         showMessagePopup("Somthing went wrong try again")
+                        throw new Error(data.message || "Something went wrong");
+                    }
+                    showMessagePopup('Uploaded')
+                    form.reset()
+                } catch (error) {
+                    console.error(error);
+                    showMessagePopup('assignment has already been uploaded')
+                }finally{
+                   document.getElementById('save').innerText=  'Give Assignment'
+                }
+            }
+        </script>
 </body>
-</html>
 
+</html>

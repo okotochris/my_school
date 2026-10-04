@@ -6,6 +6,10 @@ const StudentResult = require('../schema/studentResult.js')
 const SchoolProfile = require('../schema/schoolProfile.js');
 const Teacher = require('../schema/admin.js')
 const isAuthenticated = require('../utility/authenticated.js')
+const LessonNote = require('../schema/lessonNote.js')
+const Assignment = require('../schema/assignment.js')
+const SchemeOfWork = require('../schema/schemeOfWork.js')
+const Attendance = require('../schema/attendance.js')
 const StudentProfile = require('../schema/studentProfile.js')
 const Subject = require('../schema/subject.js')
 const bcrypt = require('bcrypt')
@@ -312,9 +316,66 @@ router.patch(
                     },
                 )
                 // ==========================================
-                // UPDATE ALL STUDENT RESULTS
+                // UPDATE ALL Subject RESULTS
                 // ==========================================
                 await Subject.updateMany(
+
+                    {
+                        schoolName: oldSchoolName
+                    },
+
+                    {
+                        $set: {
+                            schoolName: schoolName
+                        }
+                    }
+
+                );
+                // ==========================================
+                //UPDATE ALL LESSON NOTE
+                // ==========================================
+                await LessonNote.updateMany(
+
+                    {
+                        schoolName: oldSchoolName
+                    },
+
+                    {
+                        $set: {
+                            schoolName: schoolName
+                        }
+                    }
+
+                );
+                //ATTENDANCE
+                await Attendance.updateMany(
+
+                    {
+                        schoolName: oldSchoolName
+                    },
+
+                    {
+                        $set: {
+                            schoolName: schoolName
+                        }
+                    }
+
+                );
+                //SCHEME OF WORK 
+                await SchemeOfWork.updateMany(
+                    {
+                        schoolName: oldSchoolName
+                    },
+
+                    {
+                        $set: {
+                            schoolName: schoolName
+                        }
+                    }
+
+                );
+                //Assignment
+                await Assignment.updateMany(
 
                     {
                         schoolName: oldSchoolName

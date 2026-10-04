@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        <%= lessonNote.topic || "Lesson Note" %> | Lesson Note
+    </title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+
+            body {
+                background: white !important;
+            }
+
+            .print-card {
+                border: none !important;
+                box-shadow: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800">
+
+    <%- include('./partials/navigation') %>
+    <!-- MAIN -->
+    <main class="lg:ml-64">
+         <%- include('./partials/header') %>
+        <!-- LESSON -->
+        <div class="mx-auto max-w-250 p-4 sm:p-6 lg:p-8">
+            
+            <!-- LESSON HEADER -->
+            <section
+                class="mb-6 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm print-card"
+            >
+
+                <!-- Header -->
+                <div class="bg-[#0b2a4a] px-5 py-7 text-white sm:px-8">
+
+                    <div class="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+
+                        <div>
+
+                            <!-- School -->
+                            <p class="mb-2 text-sm font-medium text-blue-200">
+                                <%= lessonNote.schoolName || "" %>
+                            </p>
+
+                            <!-- Topic -->
+                            <h1 class="text-2xl font-bold sm:text-3xl">
+                                <%= lessonNote.topic || "Untitled Lesson" %>
+                            </h1>
+
+                            <!-- Sub Topic -->
+                            <% if (lessonNote.subTopic) { %>
+                                <p class="mt-2 text-sm text-blue-100">
+                                    <%= lessonNote.subTopic %>
+                                </p>
+                            <% } %>
+
+                        </div>
+
+
+                        <!-- STATUS -->
+                        <div>
+
+                            <% if (lessonNote.status === "published") { %>
+
+                               <div class="flex gap-2">
+                                 <span
+                                    class="inline-flex items-center gap-2 rounded-full border border-emerald-300/20 bg-emerald-500/20 px-3 py-1.5 text-xs font-semibold text-emerald-100"
+                                >
+                                    <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+                                    Published
+                                </span>
+                                 <button
+                                    onclick="window.print()"
+                                    class="flex items-center gap-2 rounded-lg border border-white/20 bg-white/10 px-4 py-2 text-sm transition hover:bg-white/20"
+                                >
+                                    <i data-lucide="printer" class="h-4 w-4"></i>
+                                    Print
+                                </button>
+                               </div>
+
+                            <% } else { %>
+
+                                <span
+                                    class="inline-flex items-center gap-2 rounded-full border border-amber-300/20 bg-amber-500/20 px-3 py-1.5 text-xs font-semibold text-amber-100"
+                                >
+                                    <span class="h-1.5 w-1.5 rounded-full bg-amber-400"></span>
+                                    Draft
+                                </span>
+
+                            <% } %>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LESSON META -->
+                <div
+                    class="grid grid-cols-2 divide-x divide-y divide-slate-200 md:grid-cols-4 md:divide-y-0"
+                >
+
+                    <!-- Subject -->
+                    <div class="p-4 sm:p-5">
+
+                        <div class="mb-1 flex items-center gap-2 text-slate-400">
+                            <i data-lucide="book-open" class="h-4 w-4"></i>
+
+                            <span class="text-xs">
+                                Subject
+                            </span>
+                        </div>
+
+                        <p class="text-sm font-semibold text-slate-800">
+                            <%= lessonNote.subject || "—" %>
+                        </p>
+
+                    </div>
+
+
+                    <!-- Class -->
+                    <div class="p-4 sm:p-5">
+
+                        <div class="mb-1 flex items-center gap-2 text-slate-400">
+                            <i data-lucide="users" class="h-4 w-4"></i>
+
+                            <span class="text-xs">
+                                Class
+                            </span>
+                        </div>
+
+                        <p class="text-sm font-semibold text-slate-800">
+                            <%= lessonNote.class || "—" %>
+                        </p>
+
+                    </div>
+
+
+                    <!-- Term -->
+                    <div class="p-4 sm:p-5">
+
+                        <div class="mb-1 flex items-center gap-2 text-slate-400">
+                            <i data-lucide="calendar" class="h-4 w-4"></i>
+
+                            <span class="text-xs">
+                                Term
+                            </span>
+                        </div>
+
+                        <p class="text-sm font-semibold text-slate-800">
+                            <%= lessonNote.term || "—" %>
+                        </p>
+
+                    </div>
+
+
+                    <!-- Week -->
+                    <div class="p-4 sm:p-5">
+
+                        <div class="mb-1 flex items-center gap-2 text-slate-400">
+                            <i data-lucide="calendar-days" class="h-4 w-4"></i>
+
+                            <span class="text-xs">
+                                Week
+                            </span>
+                        </div>
+
+                        <p class="text-sm font-semibold text-slate-800">
+                            <%= lessonNote.week ? `Week ${lessonNote.week}` : "—" %>
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- CONTENT -->
+            <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
+
+                <!-- MAIN CONTENT -->
+                <div class="space-y-6 lg:col-span-2">
+
+
+                    <!-- LEARNING OBJECTIVES -->
+                    <section
+                        class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm print-card"
+                    >
+
+                        <div class="flex items-center gap-3 border-b border-slate-200 px-5 py-4 sm:px-6">
+
+                            <div
+                                class="flex h-9 w-9 items-center justify-center rounded-lg bg-[#0b2a4a]/10 text-[#0b2a4a]"
+                            >
+                                <i data-lucide="target" class="h-5 w-5"></i>
+                            </div>
+
+                            <h2 class="font-semibold text-slate-900">
+                                Learning Objectives
+                            </h2>
+
+                        </div>
+
+                        <div class="px-5 py-5 sm:px-6">
+
+                            <div
+                                class="whitespace-pre-line text-[15px] leading-7 text-slate-700"
+                            >
+                                <%= lessonNote.learningObjectives || "No learning objectives provided." %>
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- LESSON CONTENT -->
+                    <section
+                        class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm print-card"
+                    >
+
+                        <div class="flex items-center gap-3 border-b border-slate-200 px-5 py-4 sm:px-6">
+
+                            <div
+                                class="flex h-9 w-9 items-center justify-center rounded-lg bg-[#0b2a4a]/10 text-[#0b2a4a]"
+                            >
+                                <i data-lucide="book-open" class="h-5 w-5"></i>
+                            </div>
+
+                            <h2 class="font-semibold text-slate-900">
+                                Lesson Content
+                            </h2>
+
+                        </div>
+
+                        <div class="px-5 py-6 sm:px-6">
+
+                            <div
+                                class="whitespace-pre-line text-[15px] leading-8 text-slate-700"
+                            >
+                                <%= lessonNote.lessonContent || "No lesson content provided." %>
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- TEACHING ACTIVITIES -->
+                    <section
+                        class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm print-card"
+                    >
+
+                        <div class="flex items-center gap-3 border-b border-slate-200 px-5 py-4 sm:px-6">
+
+                            <div
+                                class="flex h-9 w-9 items-center justify-center rounded-lg bg-[#0b2a4a]/10 text-[#0b2a4a]"
+                            >
+                                <i data-lucide="graduation-cap" class="h-5 w-5"></i>
+                            </div>
+
+                            <h2 class="font-semibold text-slate-900">
+                                Teaching Activities
+                            </h2>
+
+                        </div>
+
+                        <div class="px-5 py-5 sm:px-6">
+
+                            <div
+                                class="whitespace-pre-line text-[15px] leading-7 text-slate-700"
+                            >
+                                <%= lessonNote.teachingActivities || "No teaching activities provided." %>
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                </div>
+
+
+                <!-- SIDEBAR -->
+                <div class="space-y-6">
+
+
+                    <!-- EVALUATION -->
+                    <section
+                        class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm print-card"
+                    >
+
+                        <div class="flex items-center gap-3 border-b border-slate-200 px-5 py-4">
+
+                            <div
+                                class="flex h-9 w-9 items-center justify-center rounded-lg bg-[#0b2a4a]/10 text-[#0b2a4a]"
+                            >
+                                <i data-lucide="clipboard-check" class="h-5 w-5"></i>
+                            </div>
+
+                            <h2 class="font-semibold text-slate-900">
+                                Evaluation
+                            </h2>
+
+                        </div>
+
+                        <div class="px-5 py-5">
+
+                            <div
+                                class="whitespace-pre-line text-[15px] leading-7 text-slate-700"
+                            >
+                                <%= lessonNote.evaluation || "No evaluation provided." %>
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- ASSIGNMENT -->
+                    <section
+                        class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm print-card"
+                    >
+
+                        <div class="flex items-center gap-3 border-b border-slate-200 px-5 py-4">
+
+                            <div
+                                class="flex h-9 w-9 items-center justify-center rounded-lg bg-[#0b2a4a]/10 text-[#0b2a4a]"
+                            >
+                                <i data-lucide="list-checks" class="h-5 w-5"></i>
+                            </div>
+
+                            <h2 class="font-semibold text-slate-900">
+                                Assignment
+                            </h2>
+
+                        </div>
+
+                        <div class="px-5 py-5">
+
+                            <div
+                                class="whitespace-pre-line text-[15px] leading-7 text-slate-700"
+                            >
+                                <%= lessonNote.assignment || "No assignment provided." %>
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- TEACHER -->
+                    <section
+                        class="rounded-2xl bg-[#0b2a4a] p-5 text-white print-card"
+                    >
+
+                        <div class="flex items-center gap-3">
+
+                            <div
+                                class="flex h-10 w-10 items-center justify-center rounded-full bg-white/10"
+                            >
+                                <i data-lucide="user" class="h-5 w-5"></i>
+                            </div>
+
+                            <div>
+
+                                <p class="text-xs text-blue-200">
+                                    Prepared by
+                                </p>
+
+                                <p class="mt-0.5 font-semibold">
+                                    <%= lessonNote.teacherName || "Teacher" %>
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <script>
+        lucide.createIcons();
+    </script>
+
+</body>
+
+</html>

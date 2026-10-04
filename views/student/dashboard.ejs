@@ -18,21 +18,14 @@
     =========================================== -->
 
     <main class="lg:ml-64">
-
-
-        <!-- ==========================================
-             TOP BAR
-        =========================================== -->
-
-   
-
+         <%- include('./partials/header') %>
 
         <!-- ==========================================
              CONTENT
         =========================================== -->
 
         <section class="mx-auto max-w-[1000px] p-4 sm:p-6 lg:p-8">
-             <%- include('./partials/header') %>
+
 
             <!-- ==========================================
                  WELCOME CARD
@@ -291,7 +284,7 @@
 
                     <img
                        
-                        class=" h-16 w-16 rounded-xl object-cover"
+                        class="h-16 w-16 rounded-xl object-cover"
                         id="profileImage"
                     >
 
@@ -375,13 +368,9 @@
 
 <script>
 
-    const savedStudent = localStorage.getItem('student')
-    if(!savedStudent){
-        window.location.href = '/student/student-login'
-    }
-    const student = JSON.parse(savedStudent)
-   
-    document.querySelectorAll('.fullname').forEach(item=>{
+    const student = JSON.parse(localStorage.getItem('student'))
+    console.log(student)
+     document.querySelectorAll('.fullname').forEach(item=>{
         item.innerText = student.fullname
     })
     document.querySelector('#profileImage').src = student.passport
@@ -438,7 +427,7 @@ window.onload = async function resultAnalysisA() {
         }
     });
 
-    renderResults(data);
+
 }
 
 </script>

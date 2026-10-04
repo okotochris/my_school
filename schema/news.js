@@ -1,20 +1,72 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-const newsSchema = new mongoose.Schema(
-  {
-    title: {type: String, unique:true},
-    url: { type: String, unique: true }, // ensures no duplicates
-    pubDate: String,
-    description: String,
-    body: String, // original article content
-    aiSummary: String, // new field for AI-generated summary
-    aiAnalysis: String, // new field for AI-generated analysis
-    image: String,
-    author: String,
-    category: String,
-    fetchedAt: String,
-  },
-  { timestamps: true }
+const announcementSchema = new mongoose.Schema(
+    {
+        title: {
+            type: String,
+            required: true,
+            trim: true
+        },
+
+        content: {
+            type: String,
+            required: true,
+            trim: true
+        },
+
+        school: {
+            type: String,
+            required: true,
+            trim: true,
+            index: true
+        },
+
+        visibility: {
+            type: String,
+            enum: ['public', 'private'],
+            default: 'private',
+            index: true
+        },
+
+        author: {
+            type: String,
+            trim: true
+        },
+
+        status: {
+            type: String,
+            enum: ['published', 'draft'],
+            default: 'published',
+            index: true
+        },
+
+        image: {
+            url: {
+                type: String,
+                default: ''
+            },
+            public_id: {
+                type: String,
+                default: ''
+            }
+        },
+
+        publishedAt: {
+            type: Date,
+            default: Date.now
+        }
+    },
+    {
+        timestamps: true
+    }
 );
 
-module.exports = mongoose.model("News", newsSchema);
+// Useful for fetching a school's announcements
+announcementSchema.index({
+    school: 1,
+    visibility: 1,
+    status: 1,
+    publishedAt: -1
+});
+
+module.exports = mongoose.model('Announcement', announcementSchema);

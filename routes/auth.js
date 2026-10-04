@@ -169,4 +169,10 @@ router.post('/student/login', async (req, res) => {
         });
     }
 });
+
+//RESET PASSWORD
+router.get('/myschool/reset-password', (req, res)=>{
+  res.render('passwordReset')
+})
+
 module.exports = router;

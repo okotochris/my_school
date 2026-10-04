@@ -1,0 +1,499 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title><%= studentClass %> Timetable</title>
+    <link rel="stylesheet" href="/styles/global.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="bg-slate-50">
+     <%- include('./partials/header') %>
+     <div class="admin-container">
+          <%- include('./partials/navigation.ejs') %>
+        <div class="w-full mx-auto px-4 sm:px-6  py-6">
+            
+            <!-- HEADER -->
+
+            <div class="flex flex-col sm:flex-row sm:items-center
+                        justify-between gap-4 mb-6">
+
+                <div>
+                    <div class="flex items-center gap-3">
+
+                        <div
+                            class="w-12 h-12 rounded-xl bg-blue-50
+                                flex items-center justify-center"
+                        >
+                            <i
+                                data-lucide="calendar-days"
+                                class="w-6 h-6 text-[#17619a]"
+                            ></i>
+                        </div>
+
+                        <div>
+
+                            <h1 class="text-2xl font-bold text-[#0b2a4a]">
+                                <%= studentClass %>
+                            </h1>
+
+                            <p class="text-sm text-slate-500 mt-1">
+                                Weekly class timetable
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- STATUS -->
+
+                <span
+                    class="inline-flex items-center gap-2
+                        px-3 py-2 rounded-full
+                        bg-emerald-50 text-emerald-700
+                        text-sm font-semibold w-fit"
+                >
+                    <span
+                        class="w-2 h-2 rounded-full bg-emerald-500"
+                    ></span>
+
+                    Active Timetable
+                </span>
+
+            </div>
+
+
+            <!-- SUMMARY -->
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+
+                <div
+                    class="bg-white border border-slate-200
+                        rounded-2xl p-4"
+                >
+
+                    <p class="text-xs text-slate-400">
+                        Class
+                    </p>
+
+                    <p class="text-lg font-bold text-[#0b2a4a] mt-1">
+                        <%= studentClass %>
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="bg-white border border-slate-200
+                        rounded-2xl p-4"
+                >
+
+                    <p class="text-xs text-slate-400">
+                        Periods
+                    </p>
+
+                    <p class="text-lg font-bold text-[#0b2a4a] mt-1">
+                        <%= timetable.length %>
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="bg-white border border-slate-200
+                        rounded-2xl p-4"
+                >
+
+                    <p class="text-xs text-slate-400">
+                        School Days
+                    </p>
+
+                    <p class="text-lg font-bold text-[#0b2a4a] mt-1">
+                        <%= new Set(timetable.map(item => item.day)).size %>
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="bg-white border border-slate-200
+                        rounded-2xl p-4"
+                >
+
+                    <p class="text-xs text-slate-400">
+                        Status
+                    </p>
+
+                    <p class="text-lg font-bold text-emerald-600 mt-1">
+                        Active
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- TIMETABLE -->
+
+            <div
+                class="bg-white border border-slate-200
+                    rounded-2xl overflow-hidden"
+            >
+
+                <!-- TABLE TITLE -->
+
+                <div
+                    class="px-5 sm:px-6 py-4
+                        border-b border-slate-200
+                        flex items-center justify-between"
+                >
+
+                    <div>
+
+                        <h2 class="font-semibold text-[#0b2a4a]">
+                            Weekly Timetable
+                        </h2>
+
+                        <p class="text-xs text-slate-400 mt-1">
+                            <%= studentClass %> class schedule
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- HORIZONTAL SCROLL -->
+
+                <div class="overflow-x-auto">
+
+                    <div class="min-w-[1000px]">
+
+                        <!-- DAYS HEADER -->
+
+                        <div
+                            class="grid grid-cols-[120px_repeat(5,1fr)]
+                                bg-slate-50
+                                border-b border-slate-200"
+                        >
+
+                            <div
+                                class="px-4 py-4
+                                    text-xs font-semibold
+                                    text-slate-500 uppercase"
+                            >
+                                Time
+                            </div>
+
+
+                            <% ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].forEach(day => { %>
+
+                                <div
+                                    class="px-4 py-4 text-center
+                                        text-xs font-semibold
+                                        text-[#0b2a4a] uppercase"
+                                >
+                                    <%= day %>
+                                </div>
+
+                            <% }) %>
+
+                        </div>
+
+
+                        <!-- PERIODS -->
+
+                        <%
+                            const periods = [...new Set(
+                                timetable.map(item => item.period)
+                            )].sort((a, b) => a - b);
+                        %>
+
+
+                        <% if (periods.length > 0) { %>
+
+                            <% periods.forEach(period => {
+
+                                const periodItems =
+                                    timetable.filter(item => item.period === period);
+
+                                const firstItem = periodItems[0];
+
+                            %>
+
+                                <div
+                                    class="grid grid-cols-[120px_repeat(5,1fr)]
+                                        border-b border-slate-100
+                                        last:border-b-0"
+                                >
+
+                                    <!-- TIME -->
+
+                                    <div
+                                        class="px-4 py-4
+                                            bg-slate-50/60
+                                            border-r border-slate-100
+                                            flex flex-col justify-center"
+                                    >
+
+                                        <span
+                                            class="text-sm font-semibold
+                                                text-[#0b2a4a]"
+                                        >
+                                            <%= firstItem.startTime %>
+                                        </span>
+
+                                        <span
+                                            class="text-xs text-slate-400 mt-1"
+                                        >
+                                            <%= firstItem.endTime %>
+                                        </span>
+
+                                        <span
+                                            class="text-[10px] text-slate-400
+                                                mt-2 uppercase"
+                                        >
+                                            Period <%= period %>
+                                        </span>
+
+                                    </div>
+
+
+                                    <!-- DAYS -->
+
+                                    <% ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].forEach(day => {
+
+                                        const item = timetable.find(
+                                            timetableItem =>
+                                                timetableItem.day === day &&
+                                                timetableItem.period === period
+                                        );
+
+                                    %>
+
+                                        <div
+                                            class="p-2 border-r border-slate-100
+                                                last:border-r-0 min-h-[115px]"
+                                        >
+
+                                            <% if (item) { %>
+
+                                                <% if (item.type === 'break') { %>
+
+                                                    <!-- BREAK -->
+
+                                                    <div
+                                                        class="h-full min-h-[95px]
+                                                            rounded-xl
+                                                            bg-slate-50
+                                                            border border-dashed
+                                                            border-slate-200
+                                                            flex flex-col
+                                                            items-center
+                                                            justify-center"
+                                                    >
+
+                                                        <i
+                                                            data-lucide="coffee"
+                                                            class="w-5 h-5 text-slate-400"
+                                                        ></i>
+
+                                                        <span
+                                                            class="text-xs
+                                                                font-semibold
+                                                                text-slate-500 mt-2"
+                                                        >
+                                                            Break
+                                                        </span>
+
+                                                    </div>
+
+                                                <% } else { %>
+
+                                                    <!-- LESSON -->
+
+                                                    <div
+                                                        class="h-full min-h-[95px]
+                                                            rounded-xl
+                                                            bg-blue-50
+                                                            border border-blue-100
+                                                            p-3"
+                                                    >
+
+                                                        <div
+                                                            class="flex items-start
+                                                                justify-between
+                                                                gap-2"
+                                                        >
+
+                                                            <h3
+                                                                class="text-sm
+                                                                    font-semibold
+                                                                    text-[#0b2a4a]"
+                                                            >
+                                                                <%= item.subject %>
+                                                            </h3>
+
+
+                                                            <% if (item.type === 'exam') { %>
+
+                                                                <span
+                                                                    class="text-[9px]
+                                                                        px-1.5 py-0.5
+                                                                        rounded-full
+                                                                        bg-amber-100
+                                                                        text-amber-700
+                                                                        font-semibold"
+                                                                >
+                                                                    Exam
+                                                                </span>
+
+                                                            <% } %>
+
+                                                        </div>
+
+
+                                                        <% if (item.teacher) { %>
+
+                                                            <div
+                                                                class="flex items-center
+                                                                    gap-1.5 mt-3"
+                                                            >
+
+                                                                <i
+                                                                    data-lucide="user"
+                                                                    class="w-3.5 h-3.5
+                                                                        text-[#17619a]"
+                                                                ></i>
+
+                                                                <span
+                                                                    class="text-xs
+                                                                        text-slate-600"
+                                                                >
+                                                                    <%= item.teacher %>
+                                                                </span>
+
+                                                            </div>
+
+                                                        <% } %>
+
+
+                                                        <% if (item.room) { %>
+
+                                                            <div
+                                                                class="flex items-center
+                                                                    gap-1.5 mt-1.5"
+                                                            >
+
+                                                                <i
+                                                                    data-lucide="map-pin"
+                                                                    class="w-3.5 h-3.5
+                                                                        text-[#17619a]"
+                                                                ></i>
+
+                                                                <span
+                                                                    class="text-xs
+                                                                        text-slate-500"
+                                                                >
+                                                                    <%= item.room %>
+                                                                </span>
+
+                                                            </div>
+
+                                                        <% } %>
+
+                                                    </div>
+
+                                                <% } %>
+
+                                            <% } else { %>
+
+                                                <!-- EMPTY PERIOD -->
+
+                                                <div
+                                                    class="h-full min-h-[95px]
+                                                        flex items-center
+                                                        justify-center"
+                                                >
+
+                                                    <span
+                                                        class="text-xs text-slate-300"
+                                                    >
+                                                        —
+                                                    </span>
+
+                                                </div>
+
+                                            <% } %>
+
+                                        </div>
+
+                                    <% }) %>
+
+                                </div>
+
+                            <% }) %>
+
+                        <% } else { %>
+
+                            <!-- EMPTY TIMETABLE -->
+
+                            <div class="py-16 text-center">
+
+                                <div
+                                    class="w-14 h-14 mx-auto rounded-xl
+                                        bg-blue-50
+                                        flex items-center justify-center"
+                                >
+
+                                    <i
+                                        data-lucide="calendar-x"
+                                        class="w-7 h-7 text-[#17619a]"
+                                    ></i>
+
+                                </div>
+
+                                <h3
+                                    class="text-lg font-semibold
+                                        text-[#0b2a4a] mt-4"
+                                >
+                                    No timetable available
+                                </h3>
+
+                                <p class="text-sm text-slate-500 mt-1">
+                                    No timetable has been created for
+                                    <%= studentClass %> yet.
+                                </p>
+
+                            </div>
+
+                        <% } %>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <script>
+        if (window.lucide) {
+            lucide.createIcons();
+        }
+    </script>
+
+</body>
+
+</html>
+

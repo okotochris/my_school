@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/global.css">
+    <title>Give Assignment - MySchoolResult</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 min-h-screen">
+    <%- include('./partials/header.ejs') %>
+        <div class="admin-container">
+            <%- include('./partials/navigation.ejs') %>
+                <!-- Main -->
+
+            <div class="w-full min-h-screen bg-slate-50 py-8">
+
+                <div class="max-w-4xl mx-auto px-4 sm:px-6">
+
+                    <!-- PAGE HEADER -->
+                    <div class="mb-8">
+
+                        <div class="flex items-center gap-3 mb-3">
+
+                            <div>
+                                <p class="text-sm text-slate-500">
+                                    Announcements
+                                </p>
+
+                                <h1 class="text-2xl sm:text-3xl font-bold text-[#0b2a4a]">
+                                    Create Announcement
+                                </h1>
+                            </div>
+
+                        </div>
+
+                        <p class="text-slate-500 text-sm sm:text-base">
+                            Share important information with your students or publish it
+                            on your school's public website.
+                        </p>
+                        <button 
+                            
+                        >View All Announcement</button>
+                    </div>
+
+
+                    <!-- FORM -->
+                    <form
+                        id="announcementForm"
+                        enctype="multipart/form-data"
+                        class="space-y-6"
+                    >
+
+                        <!-- MAIN CARD -->
+                        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm">
+
+                            <div class="px-6 py-5 border-b border-slate-100">
+
+                                <h2 class="font-semibold text-[#0b2a4a]">
+                                    Announcement Details
+                                </h2>
+
+                                <p class="text-sm text-slate-500 mt-1">
+                                    Enter the information you want to share.
+                                </p>
+
+                            </div>
+
+
+                            <div class="p-6 space-y-6">
+
+                                <!-- TITLE -->
+                                <div>
+
+                                    <label
+                                        for="title"
+                                        class="block text-sm font-medium text-slate-700 mb-2"
+                                    >
+                                        Announcement Title
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        id="title"
+                                        name="title"
+                                        required
+                                        maxlength="150"
+                                        placeholder="e.g. School Resumption Date"
+                                        class="w-full px-4 py-3 rounded-xl border border-slate-200
+                                            bg-white text-slate-800 outline-none
+                                            focus:border-[#17619a] focus:ring-2
+                                            focus:ring-[#17619a]/10 transition"
+                                    >
+
+                                    <p class="text-xs text-slate-400 mt-2">
+                                        Keep the title short and clear.
+                                    </p>
+
+                                </div>
+
+
+                                <!-- CONTENT -->
+                                <div>
+
+                                    <label
+                                        for="content"
+                                        class="block text-sm font-medium text-slate-700 mb-2"
+                                    >
+                                        Announcement
+                                    </label>
+
+                                    <textarea
+                                        id="content"
+                                        name="content"
+                                        rows="8"
+                                        required
+                                        placeholder="Write your announcement here..."
+                                        class="w-full px-4 py-3 rounded-xl border border-slate-200
+                                            bg-white text-slate-800 outline-none resize-y
+                                            focus:border-[#17619a] focus:ring-2
+                                            focus:ring-[#17619a]/10 transition"
+                                    ></textarea>
+
+                                    <div class="flex justify-between mt-2">
+
+                                        <p class="text-xs text-slate-400">
+                                            Write clearly so students and parents can easily understand.
+                                        </p>
+
+                                        <span
+                                            id="characterCount"
+                                            class="text-xs text-slate-400"
+                                        >
+                                            0 characters
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- IMAGE -->
+                                <div>
+
+                                    <label
+                                        for="image"
+                                        class="block text-sm font-medium text-slate-700 mb-2"
+                                    >
+                                        Image
+                                        <span class="font-normal text-slate-400">
+                                            (Optional)
+                                        </span>
+                                    </label>
+
+                                    <label
+                                        for="image"
+                                        class="relative flex flex-col items-center justify-center
+                                            min-h-40 rounded-xl border-2 border-dashed
+                                            border-slate-200 bg-slate-50
+                                            hover:border-[#17619a]/40 hover:bg-blue-50/30
+                                            cursor-pointer transition"
+                                    >
+
+                                        <div
+                                            id="uploadPlaceholder"
+                                            class="text-center"
+                                        >
+
+                                            <div class="w-12 h-12 mx-auto rounded-xl
+                                                        bg-[#17619a]/10 text-[#17619a]
+                                                        flex items-center justify-center mb-3">
+
+                                                <i data-lucide="image-plus" class="w-6 h-6"></i>
+
+                                            </div>
+
+                                            <p class="text-sm font-medium text-slate-700">
+                                                Click to upload an image
+                                            </p>
+
+                                            <p class="text-xs text-slate-400 mt-1">
+                                                PNG, JPG or WEBP
+                                            </p>
+
+                                        </div>
+
+
+                                        <img
+                                            id="imagePreview"
+                                            class="hidden max-h-52 max-w-full rounded-lg object-contain"
+                                            alt="Image preview"
+                                        >
+
+                                        <input
+                                            type="file"
+                                            id="image"
+                                            name="image"
+                                            accept="image/png,image/jpeg,image/webp"
+                                            class="hidden"
+                                        >
+
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- VISIBILITY CARD -->
+                        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm">
+
+                            <div class="px-6 py-5 border-b border-slate-100">
+
+                                <h2 class="font-semibold text-[#0b2a4a]">
+                                    Who should see this?
+                                </h2>
+
+                                <p class="text-sm text-slate-500 mt-1">
+                                    Choose where this announcement should appear.
+                                </p>
+
+                            </div>
+
+
+                            <div class="p-6">
+
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+                                    <!-- PUBLIC -->
+                                    <label
+                                        class="visibility-option cursor-pointer"
+                                    >
+
+                                        <input
+                                            type="radio"
+                                            name="visibility"
+                                            value="public"
+                                            class="peer sr-only"
+                                        >
+
+                                        <div
+                                            class="h-full rounded-xl border-2 border-slate-200
+                                                p-5 transition
+                                                peer-checked:border-[#17619a]
+                                                peer-checked:bg-blue-50/50"
+                                        >
+
+                                            <div class="flex items-start gap-4">
+
+                                                <div class="w-11 h-11 rounded-xl
+                                                            bg-[#17619a]/10 text-[#17619a]
+                                                            flex items-center justify-center shrink-0">
+
+                                                    <i data-lucide="globe" class="w-5 h-5"></i>
+
+                                                </div>
+
+                                                <div>
+
+                                                    <p class="font-semibold text-slate-800">
+                                                        Public
+                                                    </p>
+
+                                                    <p class="text-sm text-slate-500 mt-1">
+                                                        Visible on your school's public website
+                                                        news section.
+                                                    </p>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </label>
+
+
+                                    <!-- PRIVATE -->
+                                    <label
+                                        class="visibility-option cursor-pointer"
+                                    >
+
+                                        <input
+                                            type="radio"
+                                            name="visibility"
+                                            value="private"
+                                            checked
+                                            class="peer sr-only"
+                                        >
+
+                                        <div
+                                            class="h-full rounded-xl border-2 border-slate-200
+                                                p-5 transition
+                                                peer-checked:border-[#17619a]
+                                                peer-checked:bg-blue-50/50"
+                                        >
+
+                                            <div class="flex items-start gap-4">
+
+                                                <div class="w-11 h-11 rounded-xl
+                                                            bg-[#0b2a4a]/10 text-[#0b2a4a]
+                                                            flex items-center justify-center shrink-0">
+
+                                                    <i data-lucide="lock" class="w-5 h-5"></i>
+
+                                                </div>
+
+                                                <div>
+
+                                                    <p class="font-semibold text-slate-800">
+                                                        Private
+                                                    </p>
+
+                                                    <p class="text-sm text-slate-500 mt-1">
+                                                        This announcement will be visible everyone on the internent
+                                                    </p>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </label>
+
+                                </div>
+
+
+                                <!-- VISIBILITY INFO -->
+                                <div
+                                    id="visibilityInfo"
+                                    class="mt-5 flex items-start gap-3 p-4 rounded-xl
+                                        bg-blue-50 border border-blue-100"
+                                >
+
+                                    <i
+                                        data-lucide="info"
+                                        class="w-5 h-5 text-[#17619a] shrink-0 mt-0.5"
+                                    ></i>
+
+                                    <p
+                                        id="visibilityText"
+                                        class="text-sm text-blue-900"
+                                    >
+                                        This announcement will only be visible to students
+                                        of your school.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- PUBLISH CARD -->
+                        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm">
+
+                            <div class="px-6 py-5 border-b border-slate-100">
+
+                                <h2 class="font-semibold text-[#0b2a4a]">
+                                    Publishing
+                                </h2>
+
+                            </div>
+
+                            <div class="p-6">
+
+                                <div class="flex flex-col sm:flex-row sm:items-center
+                                            justify-between gap-5">
+
+                                    <div class="flex items-start gap-3">
+
+                                        <div class="w-10 h-10 rounded-lg bg-[#17619a]/10
+                                                    text-[#17619a] flex items-center justify-center">
+
+                                            <i data-lucide="send" class="w-5 h-5"></i>
+
+                                        </div>
+
+                                        <div>
+
+                                            <p class="font-medium text-slate-800">
+                                                Publish immediately
+                                            </p>
+
+                                            <p class="text-sm text-slate-500">
+                                                Make the announcement visible as soon as it is posted.
+                                            </p>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <label class="relative inline-flex items-center cursor-pointer">
+
+                                        <input
+                                            type="checkbox"
+                                            id="publishNow"
+                                            name="status"
+                                            value="published"
+                                            checked
+                                            class="sr-only peer"
+                                        >
+
+                                        <div
+                                            class="w-11 h-6 bg-slate-200 rounded-full
+                                                peer peer-checked:bg-[#17619a]
+                                                after:content-['']
+                                                after:absolute after:top-[2px] after:left-[2px]
+                                                after:bg-white after:border-slate-300
+                                                after:border after:rounded-full
+                                                after:h-5 after:w-5 after:transition-all
+                                                peer-checked:after:translate-x-full
+                                                peer-checked:after:border-white"
+                                        ></div>
+
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ACTIONS -->
+                        <div class="flex flex-col-reverse sm:flex-row sm:justify-end gap-3">
+
+                            <a
+                                href="/admin/announcements"
+                                class="inline-flex justify-center items-center px-5 py-3
+                                    rounded-xl border border-slate-200 bg-white
+                                    text-slate-600 font-medium hover:bg-slate-50 transition"
+                            >
+                                Cancel
+                            </a>
+
+                            <button
+                                type="submit"
+                                id="submitBtn"
+                                class="inline-flex justify-center items-center gap-2
+                                    px-6 py-3 rounded-xl bg-[#17619a] text-white
+                                    font-medium hover:bg-[#0b2a4a]
+                                    disabled:opacity-60 disabled:cursor-not-allowed
+                                    transition"
+                            >
+                                <i data-lucide="send" class="w-4 h-4"></i>
+                                Post Announcement
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+      
+
+<script>
+
+    lucide.createIcons();
+
+
+    // CHARACTER COUNT
+    const content = document.getElementById('content');
+    const characterCount = document.getElementById('characterCount');
+
+    content.addEventListener('input', () => {
+
+        const count = content.value.length;
+
+        characterCount.textContent =
+            `${count} character${count === 1 ? '' : 's'}`;
+
+    });
+
+
+    // IMAGE PREVIEW
+    const imageInput = document.getElementById('image');
+    const imagePreview = document.getElementById('imagePreview');
+    const uploadPlaceholder = document.getElementById('uploadPlaceholder');
+
+    imageInput.addEventListener('change', () => {
+
+        const file = imageInput.files[0];
+
+        if (!file) return;
+
+        if (!file.type.startsWith('image/')) {
+            alert('Please select an image file.');
+            imageInput.value = '';
+            return;
+        }
+
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+
+            imagePreview.src = e.target.result;
+
+            imagePreview.classList.remove('hidden');
+            uploadPlaceholder.classList.add('hidden');
+
+        };
+
+        reader.readAsDataURL(file);
+
+    });
+
+
+    // VISIBILITY DESCRIPTION
+    const visibilityInputs =
+        document.querySelectorAll('input[name="visibility"]');
+
+    const visibilityText =
+        document.getElementById('visibilityText');
+
+    visibilityInputs.forEach(input => {
+
+        input.addEventListener('change', () => {
+
+            if (input.value === 'public') {
+
+                visibilityText.textContent =
+                    "This announcement will be visible on your school's public website news section and can also be shown to your students.";
+
+            } else {
+
+                visibilityText.textContent =
+                    "This announcement will only be visible to students of your school.";
+
+            }
+
+        });
+
+    });
+
+
+    // SUBMIT
+    document
+        .getElementById('announcementForm')
+        .addEventListener('submit', async (e) => {
+
+            e.preventDefault();
+
+            const form = e.target;
+            const submitBtn = document.getElementById('submitBtn');
+
+            submitBtn.disabled = true;
+
+            submitBtn.innerHTML = `
+                <i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i>
+                Posting...
+            `;
+
+            lucide.createIcons();
+
+            try {
+
+                const formData = new FormData(form);
+
+                // Convert checkbox to proper status
+                if (!document.getElementById('publishNow').checked) {
+                    formData.set('status', 'draft');
+                }
+
+                const result = await fetch('/admin/announcement',{
+                        method: 'POST',
+                        body: formData
+                    }
+                );
+
+                const data = await result.json();
+
+                if (!result.ok) {
+                    throw new Error(
+                        data.message || 'Unable to post announcement'
+                    );
+                }
+
+                showMessagePopup('uploaded successfully')
+
+            } catch (error) {
+
+                console.error(error);
+
+                 showMessagePopup(error.message);
+
+
+            }finally{
+                  submitBtn.disabled = false;
+                                  submitBtn.innerHTML = `
+                    <i data-lucide="send" class="w-4 h-4"></i>
+                    Post Announcement
+                `;
+
+                lucide.createIcons();
+
+            }
+
+        });
+
+</script>
+</body>
+
+</html>

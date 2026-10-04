@@ -5,12 +5,14 @@ const StudentProfile = require('../schema/studentProfile.js')
 const Teacher = require('../schema/admin.js')
 const Blacklist = require('../schema/blacklist.js')
 const Attendance = require('../schema/attendance.js')
-const Subject = require('../schema/subject.js')
 const upload = require('../middleware/upload.js')
 const cloudinary = require('../middleware/cloudinary.js')
 const LessonNote = require('../schema/lessonNote.js')
 const SchemeOfWork = require('../schema/schemeOfWork.js')
+const Timetable = require('../schema/timeTable.js')
 const Assignment = require('../schema/assignment.js')
+const News = require('../schema/news.js')
+const Subject = require('../schema/subject.js')
 const router = express.Router()
 const {schoolSection} = require('../utility/schoolSection.js')
 
@@ -391,15 +393,111 @@ router.get('/admin/subject-management', isAuthenticated, async(req, res)=>{
     res.render('subject-management', { school: req.session.school, fees, role, teachers, title: "Subject Management Settings"})
         
 })
-router.get('/admin/timetable', isAuthenticated, async(req, res)=>{
-    const role= req.session.role
-    const fees = await schoolFees(req.session.school)
-    const teachers = await Teacher.find({ classControl: { $ne: null }, school: req.session.school }).sort({updatedAt: -1});
-  
-    res.render('timetable', { school: req.session.school, fees, role, teachers, title: "Timetable Management"})
-        
-})
+router.get('/admin/timetable', isAuthenticated, async (req, res) => {
+    try {
+        const role = req.session.role;
+        const school = req.session.school;
 
+        const fees = await schoolFees(school);
+
+        const timetables = await Timetable.find({
+            schoolName: school
+        }).sort({
+            updatedAt: -1
+        });
+
+        const teachers = await Teacher.find({
+            classControl: { $ne: null },
+            school: school
+        }).sort({
+            updatedAt: -1
+        });
+
+        const classes = [
+            ...new Set(
+                timetables.map(item => item.studentClass)
+            )
+        ];
+        
+
+        res.render('timetable', {
+            school,
+            fees,
+            role,
+            teachers,
+            timetables,
+            classes,
+            title: 'Timetable Management'
+        });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server error');
+    }
+});
+
+
+router.post('/admin/timetable', upload.single('image'), async(req, res)=>{
+    try{
+        await Timetable.create({
+            schoolName: req.session.school,
+            day: req.body.day,
+            subject: req.body.subject,
+            teacher: req.body.teacher,
+            room: req.body.room,
+            startTime: req.body.startTime,
+            endTime: req.body.endTime,
+            period: req.body.period,
+            type: req.body.type,
+            status: req.body.status,
+            studentClass: req.body.studentClass
+        })
+        res.status(200).json({message:'successful'})
+    }catch(err){
+        console.log(err)
+        res.status(500).json({message:'server error'})
+    }
+})
+router.get('/admin/timetable/:class', isAuthenticated, async (req, res) => {
+    try {
+        const school = req.session.school;
+        const studentClass = req.params.class;
+
+        const timetable = await Timetable.find({
+            schoolName: school,
+            studentClass: studentClass,
+            status: 'active'
+        })
+        .sort({
+            period: 1,
+            startTime: 1
+        })
+        .lean();
+        const fees = await schoolFees(school);
+        const role = req.session.role;
+        res.render('timetable-detail', {
+            school,
+            fees,
+            role,
+            timetable,
+            studentClass,
+            title: `${studentClass} Timetable`
+        });
+
+    } catch (err) {
+        console.error('Timetable detail error:', err);
+        res.status(500).send('Server error');
+    }
+});
+router.delete('/admin/timetalbe-delete/:_id', async(req, res)=>{
+    try{
+        await Timetable.findOneAndDelete({_id:req.params._id})
+        res.status(200).json({message:'ok'})
+    }catch(err){
+        res.status(500).json({message:'server error'})
+        console.log(err)
+    }
+})
 router.delete('/deletestaff', async (req, res)=>{
   let _id = req.query.id;
   try{
@@ -461,7 +559,6 @@ router.get('/admin/result-template/:template', isAuthenticated, async(req, res)=
 //UPDATE SCHOOL RESULT TEMPLATE
 router.post('/school/result-template', isAuthenticated, async(req, res)=>{
     const { templateName } = req.body
-    console.log(templateName)
     try{
         const schoolName = req.session.school
         const school = await schoolPfofile.findOne({schoolName})
@@ -476,15 +573,140 @@ router.post('/school/result-template', isAuthenticated, async(req, res)=>{
         res.status(500).json({message:"Server error"})
     }
 })
-router.get('/myschool/reset-password', (req, res)=>{
-  res.render('passwordReset')
+
+router.get('/admin/announcement', isAuthenticated, async(req, res)=>{
+    const role= req.session.role
+    const fees = await schoolFees(req.session.school)
+    res.render('announcement', {school: req.session.school, role, fees, title:'Assignment'})
 })
+router.post('/admin/announcement', upload.single('image'), async (req, res) => {
+    try {
+        const school = req.session.school;
+
+        const {title, content, visibility, status } = req.body;
+
+        // Basic validation
+        if (!title || !content || !visibility) {
+            return res.status(400).json({
+                message: 'Title, content and visibility are required'
+            });
+        }
+
+        let image = {
+            url: '',
+            public_id: ''
+        };
+
+        // Upload image to Cloudinary if provided
+        if (req.file) {
+            const result = await cloudinary.uploader.upload(req.file.path, {
+                folder: 'school-news'
+            });
+
+            image = {
+                url: result.secure_url,
+                public_id: result.public_id
+            };
+        }
+
+        // Save news
+        const news = await News.create({
+            title,
+            content,
+            school,
+            visibility,
+            status: status || 'published',
+            image,
+            publishedAt: status === 'draft' ? null : new Date()
+        });
+
+        res.status(201).json({
+            message: 'Announcement posted successfully',
+            news
+        });
+
+    } catch (err) {
+        console.error('Announcement error:', err);
+
+        res.status(500).json({
+            message: 'Server error'
+        });
+    }
+});
+
 
 router.get('/admin/assignment', isAuthenticated, async(req, res)=>{
     const role= req.session.role
     const fees = await schoolFees(req.session.school)
     res.render('assignment', {school: req.session.school, role, fees, title:'Assignment'})
 })
+
+router.post('/admin/assignment', upload.single('attachment'), async (req, res) => {
+    try {
+        const school = req.session.school;
+
+        const {
+            studentClass,
+            subject,
+            description,
+            title,
+            dueDate,
+            dueTime,
+            allowSubmission,
+            notifyStudents
+        } = req.body;
+
+        let url = null;
+        let public_id = null;
+
+        if (req.file) {
+            const result = await cloudinary.uploader.upload(req.file.path);
+            url = result.secure_url;
+            public_id = result.public_id;
+        }
+
+        const attachment = {
+            url,
+            public_id
+        };
+
+        await Assignment.create({
+            studentClass,
+            subject,
+            description,
+            title,
+            dueDate,
+            dueTime,
+            allowSubmission,
+            notifyStudents,
+            attachment,
+            school
+        });
+
+        res.status(200).json({
+            message: 'Assignment added successfully'
+        });
+
+    } catch (err) {
+        console.error(err);
+
+        res.status(500).json({
+            message: 'Server error'
+        });
+    }
+});
+//GET SUBJECT 
+router.get('/admin/get-subject/:studentClass', async(req, res)=>{
+    try{
+        const schoolName = req.session.school
+        const subjectClass = req.params.studentClass
+        const subject = await Subject.findOne({schoolName, subjectClass})
+        res.status(200).json({message:'successful', subject})
+    }catch(err){
+        console.log(err)
+    }
+})
+
 router.get('/admin/scheme-of-work', isAuthenticated, async(req, res)=>{
     const role= req.session.role
     const fees = await schoolFees(req.session.school)

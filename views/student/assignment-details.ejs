@@ -1,0 +1,436 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('./partials/head') %>
+    <title><%= title %></title>
+</head>
+<body>
+    
+<div class="min-h-screen bg-slate-50">
+
+    <!-- HEADER -->
+    <div class="bg-[#0b2a4a] text-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+
+            <a
+                href="/admin/assignments"
+                class="inline-flex items-center gap-2 text-sm text-blue-100 hover:text-white mb-6 transition"
+            >
+                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                Back to Assignments
+            </a>
+
+            <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+
+                <div>
+                    <div class="flex flex-wrap items-center gap-2 mb-3">
+
+                        <span class="px-3 py-1 rounded-full text-xs font-semibold bg-[#17619a]">
+                            <%= assignment.subject %>
+                        </span>
+
+                        <span class="px-3 py-1 rounded-full text-xs font-semibold
+                            <%= assignment.status === 'active'
+                                ? 'bg-green-500/20 text-green-200'
+                                : 'bg-slate-500/30 text-slate-200'
+                            %>"
+                        >
+                            <%= assignment.status.charAt(0).toUpperCase() + assignment.status.slice(1) %>
+                        </span>
+
+                    </div>
+
+                    <h1 class="text-3xl sm:text-4xl font-bold tracking-tight">
+                        <%= assignment.title %>
+                    </h1>
+
+                    <p class="mt-2 text-blue-100">
+                        <%= assignment.studentClass %> • <%= assignment.subject %>
+                    </p>
+                </div>
+
+               
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- CONTENT -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+            <!-- MAIN CONTENT -->
+            <div class="lg:col-span-2 space-y-6">
+
+                <!-- DESCRIPTION -->
+                <section class="bg-white rounded-2xl border border-slate-200 shadow-sm">
+
+                    <div class="px-6 py-5 border-b border-slate-100">
+                        <h2 class="text-lg font-semibold text-[#0b2a4a]">
+                            Assignment Description
+                        </h2>
+                    </div>
+
+                    <div class="p-6">
+
+                        <p class="text-slate-600 leading-7 whitespace-pre-line">
+                            <%= assignment.description %>
+                        </p>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ATTACHMENT -->
+                <% if (assignment.attachment && assignment.attachment.url) { %>
+
+                    <section class="bg-white rounded-2xl border border-slate-200 shadow-sm">
+
+                        <div class="px-6 py-5 border-b border-slate-100">
+                            <h2 class="text-lg font-semibold text-[#0b2a4a]">
+                                Attachment
+                            </h2>
+                        </div>
+
+                        <div class="p-6">
+
+                            <div class="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+
+                                <div class="p-4 flex items-center justify-between gap-4">
+
+                                    <div class="flex items-center gap-4 min-w-0">
+
+                                        <div class="w-12 h-12 rounded-xl bg-[#17619a]/10 text-[#17619a] flex items-center justify-center shrink-0">
+                                            <i data-lucide="image" class="w-6 h-6"></i>
+                                        </div>
+
+                                        <div class="min-w-0">
+
+                                            <p class="font-medium text-slate-800">
+                                                Assignment Attachment
+                                            </p>
+
+                                            <p class="text-sm text-slate-500">
+                                                Image attachment
+                                            </p>
+
+                                        </div>
+
+                                    </div>
+
+                                    <a
+                                        href="<%= assignment.attachment.url %>"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#17619a] text-white hover:bg-[#0b2a4a] transition shrink-0"
+                                    >
+                                        <i data-lucide="external-link" class="w-4 h-4"></i>
+                                        View
+                                    </a>
+
+                                </div>
+
+                                <div class="border-t border-slate-200 bg-white p-4">
+
+                                    <img
+                                        src="<%= assignment.attachment.url %>"
+                                        alt="Assignment attachment"
+                                        class="w-full max-h-[500px] object-contain rounded-lg"
+                                    >
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                <% } else { %>
+
+                    <section class="bg-white rounded-2xl border border-slate-200 shadow-sm">
+
+                        <div class="p-8 text-center">
+
+                            <div class="w-14 h-14 mx-auto rounded-full bg-slate-100 flex items-center justify-center text-slate-400">
+                                <i data-lucide="image-off" class="w-6 h-6"></i>
+                            </div>
+
+                            <h3 class="mt-4 font-medium text-slate-800">
+                                No Attachment
+                            </h3>
+
+                            <p class="mt-1 text-sm text-slate-500">
+                                This assignment does not have an attachment.
+                            </p>
+
+                        </div>
+
+                    </section>
+
+                <% } %>
+
+
+                <!-- ASSIGNMENT INFORMATION -->
+                <section class="bg-white rounded-2xl border border-slate-200 shadow-sm">
+
+                    <div class="px-6 py-5 border-b border-slate-100">
+
+                        <h2 class="text-lg font-semibold text-[#0b2a4a]">
+                            Assignment Information
+                        </h2>
+
+                    </div>
+
+                    <div class="p-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
+
+                        <div>
+                            <p class="text-xs uppercase tracking-wide text-slate-400">
+                                Teacher
+                            </p>
+
+                            <p class="mt-1 font-medium text-slate-800">
+                                <%= assignment.teacher || 'Not specified' %>
+                            </p>
+                        </div>
+
+
+                        <div>
+                            <p class="text-xs uppercase tracking-wide text-slate-400">
+                                Class
+                            </p>
+
+                            <p class="mt-1 font-medium text-slate-800">
+                                <%= assignment.studentClass %>
+                            </p>
+                        </div>
+
+
+                        <div>
+                            <p class="text-xs uppercase tracking-wide text-slate-400">
+                                Subject
+                            </p>
+
+                            <p class="mt-1 font-medium text-slate-800">
+                                <%= assignment.subject %>
+                            </p>
+                        </div>
+
+
+                        <div>
+                            <p class="text-xs uppercase tracking-wide text-slate-400">
+                                Created
+                            </p>
+
+                            <p class="mt-1 font-medium text-slate-800">
+                                <%= new Date(assignment.createdAt).toLocaleDateString('en-GB', {
+                                    day: '2-digit',
+                                    month: 'short',
+                                    year: 'numeric'
+                                }) %>
+                            </p>
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+
+            <!-- SIDEBAR -->
+            <aside class="space-y-6">
+
+                <!-- DEADLINE -->
+                <section class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+
+                    <div class="bg-[#17619a] text-white px-6 py-5">
+
+                        <div class="flex items-center gap-3">
+
+                            <div class="w-10 h-10 rounded-lg bg-white/15 flex items-center justify-center">
+                                <i data-lucide="calendar-clock" class="w-5 h-5"></i>
+                            </div>
+
+                            <div>
+
+                                <p class="text-sm text-blue-100">
+                                    Due Date
+                                </p>
+
+                                <p class="font-semibold">
+                                    <%= new Date(assignment.dueDate).toLocaleDateString('en-GB', {
+                                        day: '2-digit',
+                                        month: 'short',
+                                        year: 'numeric'
+                                    }) %>
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="p-6">
+
+                        <div class="flex items-center gap-3 text-slate-600">
+
+                            <i data-lucide="clock" class="w-5 h-5 text-[#17619a]"></i>
+
+                            <div>
+
+                                <p class="text-xs text-slate-400">
+                                    Due Time
+                                </p>
+
+                                <p class="font-medium text-slate-800">
+                                    <%= assignment.dueTime || 'No specific time' %>
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- SUBMISSION -->
+                <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+
+                    <h3 class="font-semibold text-[#0b2a4a]">
+                        Submission
+                    </h3>
+
+                    <div class="mt-5">
+
+                        <div class="flex items-center justify-between">
+
+                            <div class="flex items-center gap-3">
+
+                                <div class="w-10 h-10 rounded-lg bg-[#17619a]/10 text-[#17619a] flex items-center justify-center">
+                                    <i data-lucide="upload" class="w-5 h-5"></i>
+                                </div>
+
+                                <div>
+
+                                    <p class="text-sm text-slate-500">
+                                        Student submissions
+                                    </p>
+
+                                    <p class="font-semibold text-slate-800">
+                                        View Submissions
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            <i data-lucide="chevron-right" class="w-5 h-5 text-slate-400"></i>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- SETTINGS -->
+                <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+
+                    <h3 class="font-semibold text-[#0b2a4a]">
+                        Assignment Settings
+                    </h3>
+
+                    <div class="mt-5 space-y-4">
+
+                        <!-- ALLOW SUBMISSION -->
+                        <div class="flex items-center justify-between gap-4">
+
+                            <div class="flex items-center gap-3">
+
+                                <i
+                                    data-lucide="upload"
+                                    class="w-5 h-5 text-[#17619a]"
+                                ></i>
+
+                                <span class="text-sm text-slate-600">
+                                    Allow submissions
+                                </span>
+
+                            </div>
+
+                            <% if (assignment.allowSubmission) { %>
+
+                                <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-green-50 text-green-700">
+                                    Enabled
+                                </span>
+
+                            <% } else { %>
+
+                                <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-red-50 text-red-700">
+                                    Disabled
+                                </span>
+
+                            <% } %>
+
+                        </div>
+
+
+                        <!-- NOTIFICATIONS -->
+                        <div class="flex items-center justify-between gap-4">
+
+                            <div class="flex items-center gap-3">
+
+                                <i
+                                    data-lucide="bell"
+                                    class="w-5 h-5 text-[#17619a]"
+                                ></i>
+
+                                <span class="text-sm text-slate-600">
+                                    Notifications
+                                </span>
+
+                            </div>
+
+                            <% if (assignment.notifyStudents) { %>
+
+                                <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-green-50 text-green-700">
+                                    Enabled
+                                </span>
+
+                            <% } else { %>
+
+                                <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-red-50 text-red-700">
+                                    Disabled
+                                </span>
+
+                            <% } %>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </aside>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<script>
+    lucide.createIcons();
+</script>
+
+</body>
+</html>

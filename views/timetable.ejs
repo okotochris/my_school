@@ -1,390 +1,665 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styles/global.css">
-        <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-    <title>Time Table</title>
+    <title>Timetables</title>
+    <link rel="stylesheet" href="/styles/global.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        .primary-bg {
+            background-color: #0b2a4a;
+        }
+
+        .secondary-bg {
+            background-color: #17619a;
+        }
+
+        .primary-text {
+            color: #0b2a4a;
+        }
+
+        .secondary-text {
+            color: #17619a;
+        }
+    </style>
 </head>
 
-<body>
+<body class="bg-slate-50 text-slate-800">
 
-    <div id="tab-2" class="tab-content">
-        <div class="bg-white rounded-3xl shadow-sm p-8">
-            <div class="flex justify-between items-center mb-8">
-                <h2 class="text-2xl font-bold">Academic Session Management</h2>
-                <button onclick="addNewSession()"
-                    class="bg-blue-600 text-white px-6 py-3 rounded-2xl font-semibold hover:bg-blue-700 flex items-center gap-2">
-                    <span>+</span> New Session
-                </button>
-            </div>
+    <!-- Your shared header can go here -->
+    <%- include('./partials/header') %>
+        <div class="admin-container">
+            <%- include('./partials/navigation.ejs') %>
+                <main class="w-full ">
 
-            <!-- Current Session -->
-            <div class="border border-blue-200 bg-blue-50 rounded-3xl p-8 mb-10">
-                <div class="flex items-center gap-3 mb-4">
-                    <span class="px-4 py-1 bg-blue-600 text-white text-sm font-medium rounded-full">ACTIVE</span>
-                    <h3 class="text-xl font-semibold">Current Academic Session</h3>
-                </div>
-                <p class="text-4xl font-bold text-slate-800" id="currentSession">2025-2026</p>
-                <p class="text-gray-500 mt-1">Started: January 2025 • Ends: December 2025</p>
-            </div>
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
 
-            <!-- All Sessions -->
-            <h3 class="text-lg font-semibold mb-5">All Academic Sessions</h3>
+                        <!-- PAGE HEADER -->
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
 
-            <div class="space-y-4" id="sessionsList">
-                <!-- Populated by JavaScript -->
-            </div>
+                            <div>
+                                <div class="flex items-center gap-2 mb-2">
+                                    <div class="w-9 h-9 rounded-xl primary-bg flex items-center justify-center">
+                                        <i data-lucide="calendar-days" class="w-5 h-5 text-white"></i>
+                                    </div>
 
-            <!-- Add New Session Modal Form -->
-            <div id="newSessionForm" class=" mt-10 border-t pt-8">
-                <h3 class="font-semibold mb-6">Add New Academic Session</h3>
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Session Name</label>
-                        <input type="text" id="newSessionName" placeholder="2026-2027"
-                            class="w-full rounded-2xl border border-gray-300 px-5 py-4">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Start Date</label>
-                        <input type="date" id="startDate" class="w-full rounded-2xl border border-gray-300 px-5 py-4">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-2">End Date</label>
-                        <input type="date" id="endDate" class="w-full rounded-2xl border border-gray-300 px-5 py-4">
-                    </div>
-                </div>
-                <div class="flex gap-4 mt-8">
-                    <button onclick="saveNewSession()"
-                        class="flex-1 bg-green-600 text-white py-4 rounded-2xl font-semibold">
-                        Save Session
-                    </button>
-                    <button onclick="cancelNewSession()"
-                        class="flex-1 bg-gray-200 text-gray-700 py-4 rounded-2xl font-semibold">
-                        Cancel
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="tab-3" class="tab-content">
-        <div class="bg-white rounded-3xl shadow-sm p-8">
-            <div class="flex justify-between items-center mb-8">
-                <h2 class="text-2xl font-bold">Grading System</h2>
-                <button onclick="addNewGrade()"
-                    class="bg-blue-600 text-white px-6 py-3 rounded-2xl font-semibold hover:bg-blue-700">
-                    + Add Grade
-                </button>
-            </div>
+                                    <span class="text-sm font-medium secondary-text">
+                                        School Management
+                                    </span>
+                                </div>
 
-            <!-- Grading Scale Table -->
-            <div class="overflow-x-auto">
-                <table class="w-full">
-                    <thead>
-                        <tr class="bg-slate-50 border-b">
-                            <th class="text-left py-5 px-6 font-medium">Grade</th>
-                            <th class="text-left py-5 px-6 font-medium">Score Range</th>
-                            <th class="text-left py-5 px-6 font-medium">Remark</th>
-                            <th class="text-center py-5 px-6 font-medium">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody id="gradingTable" class="divide-y">
-                        <!-- Populated by JavaScript -->
-                    </tbody>
-                </table>
-            </div>
+                                <h1 class="text-2xl sm:text-3xl font-bold primary-text">
+                                    Timetables
+                                </h1>
 
-            <!-- Grading Settings -->
-            <div class="mt-12 grid md:grid-cols-2 gap-8">
-                <div>
-                    <h3 class="font-semibold mb-4">Grading Configuration</h3>
-                    <div class="space-y-6">
-                        <div>
-                            <label class="block text-sm font-medium mb-2">Total Marks</label>
-                            <input type="number" value="100"
-                                class="w-full rounded-2xl border border-gray-300 px-5 py-4">
+                                <p class="text-sm text-slate-500 mt-1">
+                                    Manage class timetables and weekly schedules.
+                                </p>
+                            </div>
+
+
+                            <!-- ADD BUTTON -->
+                            <button type="button" onclick="openTimetableModal()" class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#17619a] hover:bg-[#0b2a4a] text-white font-semibold text-sm transition shadow-sm">
+                                <i data-lucide="plus" class="w-5 h-5"></i>
+                                Add Timetable
+                            </button>
+
                         </div>
-                        <div>
-                            <label class="block text-sm font-medium mb-2">Passing Score (%)</label>
-                            <input type="number" value="50" class="w-full rounded-2xl border border-gray-300 px-5 py-4">
+                        <div class="bg-white border border-slate-200 rounded-2xl p-5 my-5">
+
+                            <div class="mb-5">
+                                <h2 class="text-lg font-semibold text-[#0b2a4a]">
+                                    Select Class
+                                </h2>
+
+                                <p class="text-sm text-slate-500 mt-1">
+                                    Select a class to view its timetable.
+                                </p>
+                            </div>
+
+                            <div class="flex flex-wrap gap-3">
+
+                                <% classes.forEach(studentClass => { %>
+
+                                    <a
+                                        href="/admin/timetable/<%= encodeURIComponent(studentClass) %>"
+                                        class="inline-flex items-center gap-2
+                                            px-5 py-3 rounded-xl
+                                            border border-slate-200
+                                            bg-white text-slate-700
+                                            text-sm font-semibold
+                                            hover:border-[#17619a]
+                                            hover:bg-[#17619a]
+                                            hover:text-white
+                                            transition"
+                                    >
+
+                                        <i data-lucide="calendar-days" class="w-4 h-4"></i>
+
+                                        <%= studentClass %>
+
+                                    </a>
+
+                                <% }) %>
+
+                            </div>
+
                         </div>
+                        <!-- CLASS TIMETABLE CARDS -->
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+
+                            <% if (timetables && timetables.length> 0) { %>
+
+                                <% timetables.forEach((item)=> { %>
+
+                                    <div  class="group bg-white border border-slate-200 rounded-2xl p-5
+                                        hover:border-[#17619a] hover:shadow-md
+                                        transition-all duration-200">
+
+                                        <!-- TOP -->
+                                        <div class="flex items-start justify-between gap-3">
+
+                                            <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center shrink-0 group-hover:bg-[#17619a] transition">
+                                                <i data-lucide="calendar-days" class="w-6 h-6 text-[#17619a]group-hover:text-white transition"></i>
+                                            </div>
+
+                                            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold">
+                                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                                Active
+                                            </span>
+
+                                        </div>
+
+
+                                        <!-- CLASS NAME -->
+                                        <div class="mt-5">
+
+                                            <h3 class="text-lg font-bold text-[#0b2a4a]group-hover:text-[#17619a] transition">
+                                                <%= item.studentClass %>
+                                            </h3>
+
+                                            <p class="text-sm text-slate-500 mt-1">
+                                                Weekly class timetable
+                                            </p>
+
+                                        </div>
+
+
+                                        <!-- STATS -->
+                                        <div class="mt-5 pt-4 border-t border-slate-100 grid grid-cols-2 gap-4">
+
+                                            <div>
+                                                <p class="text-xs text-slate-400">
+                                                    Periods
+                                                </p>
+
+                                                <p class="text-sm font-semibold text-slate-700 mt-1">
+                                                    <%= item.period || 0 %>
+                                                </p>
+                                            </div>
+
+
+                                            <div>
+                                                <p class="text-xs text-slate-400">
+                                                    School Days
+                                                </p>
+
+                                                <p class="text-sm font-semibold text-slate-700 mt-1">
+                                                    <%= item.day || 0 %>
+                                                </p>
+                                            </div>
+
+                                        </div>
+
+
+                                        <!-- VIEW -->
+                                        <div 
+                                            onclick="handleDelete('<%= item._id %>')"
+                                            class="mt-5 flex items-center justify-between text-sm font-medium text-[#17619a]">
+                                            <span>
+                                                Delete
+                                            </span>
+
+                                            <span class="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center group-hover:bg-red-500                                transition">
+                                                <i data-lucide="trash" class="w-4 h-4 text-red-800 group-hover:text-white transition"></i>
+                                            </span>
+                                        
+                                        </div>
+
+                                    </div>
+
+                                    <% }) %>
+
+                                        <% } else { %>
+
+                                            <!-- EMPTY STATE -->
+
+                                            <div class="col-span-full bg-white border border-slate-200rounded-2xl py-16 px-6 text-center">
+
+                                                <div class="w-16 h-16 mx-auto rounded-2xl bg-blue-50 flex items-center justify-center mb-4">
+                                                    <i data-lucide="calendar-days" class="w-8 h-8 text-[#17619a]"></i>
+                                                </div>
+
+                                                <h3 class="text-lg font-semibold text-[#0b2a4a]">
+                                                    No timetables found
+                                                </h3>
+
+                                                <p class="text-sm text-slate-500 mt-1 max-w-sm mx-auto">
+                                                    Create a timetable for a class to get started.
+                                                </p>
+
+                                            </div>
+
+                                            <% } %>
+
+                        </div>
+
+                        <script>
+                            if (window.lucide) {
+                                lucide.createIcons();
+                            }
+                        </script>
+
+
+
+
                     </div>
-                </div>
 
-                <div>
-                    <h3 class="font-semibold mb-4">Grading Type</h3>
-                    <div class="space-y-3">
-                        <label class="flex items-center gap-3 cursor-pointer">
-                            <input type="radio" name="gradingType" checked class="accent-blue-600">
-                            <span>Percentage Based (A - F)</span>
-                        </label>
-                        <label class="flex items-center gap-3 cursor-pointer">
-                            <input type="radio" name="gradingType" class="accent-blue-600">
-                            <span>Point Based (4.0 Scale)</span>
-                        </label>
-                        <label class="flex items-center gap-3 cursor-pointer">
-                            <input type="radio" name="gradingType" class="accent-blue-600">
-                            <span>Custom Grading</span>
-                        </label>
+                </main>
+                <!-- TIMETABLE MODAL -->
+                <div id="timetableModal" class="fixed inset-0 z-50 hidden">
+
+                    <!-- BACKDROP -->
+                    <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onclick="closeTimetableModal()">
                     </div>
-                </div>
-            </div>
 
-            <div class="mt-10 flex justify-end">
-                <button onclick="saveGradingSystem()"
-                    class="bg-green-600 text-white px-10 py-4 rounded-2xl font-semibold hover:bg-green-700">
-                    Save Grading System
-                </button>
-            </div>
+
+                    <!-- MODAL -->
+                    <div class="relative h-full flex items-center justify-center px-4">
+
+                        <div class="w-full max-w-2xl bg-white rounded-2xl shadow-2xl
+                   overflow-hidden max-h-[90vh] overflow-y-auto">
+
+                            <!-- HEADER -->
+                            <div class="px-6 py-5 border-b border-slate-100
+                       flex items-center justify-between sticky top-0
+                       bg-white z-10">
+
+                                <div>
+                                    <h2 class="text-lg font-bold text-[#0b2a4a]">
+                                        Add Timetable
+                                    </h2>
+
+                                    <p class="text-sm text-slate-500 mt-1">
+                                        Add a class timetable period.
+                                    </p>
+                                </div>
+
+                                <button type="button" onclick="closeTimetableModal()" class="w-9 h-9 rounded-lg flex items-center justify-center
+                           text-slate-400 hover:text-slate-700
+                           hover:bg-slate-100 transition">
+                                    <i data-lucide="x" class="w-5 h-5"></i>
+                                </button>
+
+                            </div>
+
+
+                            <!-- FORM -->
+                            <form id="timetableForm" class="p-6 space-y-5">
+
+                                <!-- CLASS + DAY -->
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+                                    <div>
+                                        <label class="block text-sm font-medium text-slate-700 mb-2">
+                                            Class
+                                        </label>
+
+                                        <select onchange="getSubject(this.value)" name="studentClass" required class="w-full px-4 py-3 rounded-xl border border-slate-200
+                                   bg-white text-sm focus:outline-none
+                                   focus:ring-2 focus:ring-[#17619a]/20
+                                   focus:border-[#17619a]">
+                                            <option value="">Select class</option>
+                                            <option value="NURSERY 1">Nursery 1</option>
+                                            <option value="NURSERY 2">Nursery 2</option>
+                                            <option value="BASIC 1">Basic 1</option>
+                                            <option value="BASIC 2">Basic 2</option>
+                                            <option value="BASIC 3">Basic 3</option>
+                                            <option value="BASIC 4">Basic 4</option>
+                                            <option value="BASIC 5">Basic 5</option>
+                                            <option value="BASIC 6">Basic 6</option>
+                                            <option value="JSS 1">JSS 1</option>
+                                            <option value="JSS 2">JSS 2</option>
+                                            <option value="JSS 3">JSS 3</option>
+                                            <option value="SS 1">SS 1</option>
+                                            <option value="SS 2">SS 2</option>
+                                            <option value="SS 3">SS 3</option>
+                                        </select>
+                                    </div>
+
+
+                                    <div>
+                                        <label class="block text-sm font-medium text-slate-700 mb-2">
+                                            Day
+                                        </label>
+
+                                        <select name="day" required class="w-full px-4 py-3 rounded-xl border border-slate-200
+                                   bg-white text-sm focus:outline-none
+                                   focus:ring-2 focus:ring-[#17619a]/20
+                                   focus:border-[#17619a]">
+                                            <option value="">Select day</option>
+                                            <option value="Monday">Monday</option>
+                                            <option value="Tuesday">Tuesday</option>
+                                            <option value="Wednesday">Wednesday</option>
+                                            <option value="Thursday">Thursday</option>
+                                            <option value="Friday">Friday</option>
+                                            <option value="Saturday">Saturday</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+
+                                <!-- SUBJECT + TEACHER -->
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+                                    <div>
+                                        <label class="block text-sm font-medium text-slate-700 mb-2">
+                                            Subject
+                                        </label>
+
+                                        <select id="subject" name="subject" required class="w-full px-4 py-3 rounded-xl border border-slate-200
+                                   text-sm focus:outline-none
+                                   focus:ring-2 focus:ring-[#17619a]/20
+                                   focus:border-[#17619a]">
+                                            <option value="">Select subject</option>
+                                        </select>
+                                    </div>
+
+
+                                    <div>
+                                        <label class="block text-sm font-medium text-slate-700 mb-2">
+                                            Teacher
+                                        </label>
+
+                                        <input type="text" name="teacher" placeholder="Teacher's name" class="w-full px-4 py-3 rounded-xl border border-slate-200
+                                   text-sm focus:outline-none
+                                   focus:ring-2 focus:ring-[#17619a]/20
+                                   focus:border-[#17619a]">
+                                    </div>
+
+                                </div>
+
+
+                                <!-- START + END TIME -->
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+                                    <div>
+                                        <label class="block text-sm font-medium text-slate-700 mb-2">
+                                            Start Time
+                                        </label>
+
+                                        <input type="time" name="startTime" required class="w-full px-4 py-3 rounded-xl border border-slate-200
+                                   text-sm focus:outline-none
+                                   focus:ring-2 focus:ring-[#17619a]/20
+                                   focus:border-[#17619a]">
+                                    </div>
+
+
+                                    <div>
+                                        <label class="block text-sm font-medium text-slate-700 mb-2">
+                                            End Time
+                                        </label>
+
+                                        <input type="time" name="endTime" required class="w-full px-4 py-3 rounded-xl border border-slate-200
+                                   text-sm focus:outline-none
+                                   focus:ring-2 focus:ring-[#17619a]/20
+                                   focus:border-[#17619a]">
+                                    </div>
+
+                                </div>
+
+
+                                <!-- PERIOD + ROOM -->
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+                                    <div>
+                                        <label class="block text-sm font-medium text-slate-700 mb-2">
+                                            Period
+                                        </label>
+
+                                        <input type="number" name="period" min="1" required placeholder="e.g. 1" class="w-full px-4 py-3 rounded-xl border border-slate-200
+                                   text-sm focus:outline-none
+                                   focus:ring-2 focus:ring-[#17619a]/20
+                                   focus:border-[#17619a]">
+                                    </div>
+
+
+                                    <div>
+                                        <label class="block text-sm font-medium text-slate-700 mb-2">
+                                            Room
+                                        </label>
+
+                                        <input type="text" name="room" placeholder="e.g. Room 5" class="w-full px-4 py-3 rounded-xl border border-slate-200
+                                   text-sm focus:outline-none
+                                   focus:ring-2 focus:ring-[#17619a]/20
+                                   focus:border-[#17619a]">
+                                    </div>
+
+                                </div>
+
+
+                                <!-- TYPE -->
+                                <div>
+
+                                    <label class="block text-sm font-medium text-slate-700 mb-2">
+                                        Timetable Type
+                                    </label>
+
+                                    <select name="type" class="w-full px-4 py-3 rounded-xl border border-slate-200
+                               bg-white text-sm focus:outline-none
+                               focus:ring-2 focus:ring-[#17619a]/20
+                               focus:border-[#17619a]">
+                                        <option value="lesson">Lesson</option>
+                                        <option value="break">Break</option>
+                                        <option value="assembly">Assembly</option>
+                                        <option value="exam">Exam</option>
+                                        <option value="other">Other</option>
+                                    </select>
+
+                                </div>
+
+
+                                <!-- ACTIONS -->
+                                <div class="flex flex-col-reverse sm:flex-row sm:justify-end
+                           gap-3 pt-4 border-t border-slate-100">
+
+                                    <button type="button" onclick="closeTimetableModal()" class="px-5 py-3 rounded-xl border border-slate-200
+                               text-slate-600 hover:bg-slate-50
+                               text-sm font-medium transition">
+                                        Cancel
+                                    </button>
+
+                                    <button type="submit" id="saveTimetableBtn" class="px-5 py-3 rounded-xl bg-[#17619a]
+                               hover:bg-[#0b2a4a] text-white
+                               text-sm font-semibold transition
+                               inline-flex items-center justify-center gap-2">
+                                        <i data-lucide="save" class="w-4 h-4"></i>
+                                        Save Timetable
+                                    </button>
+
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
         </div>
-    </div>
+        <script>
+            //GET SUBJECTS BASED ON CLASS
+            async function getSubject(studentClass) {
+                let subjectClass = studentClass.replace(/[0-9]/g, '').trim();
 
-    <!-- ==================== STUDENT RATING TAB ==================== -->
-    <div id="tab-4" class="tab-content">
-        <div class="bg-white rounded-3xl shadow-sm p-8">
-            <div class="flex justify-between items-center mb-8">
-                <h2 class="text-2xl font-bold">Student Rating & Conduct</h2>
-            </div>
+                if (subjectClass === 'SS') {
+                    subjectClass = 'Senior';
+                } else if (subjectClass === 'JS') {
+                    subjectClass = 'Junior';
+                } else if (subjectClass === 'BASIC') {
+                    subjectClass = 'Basic';
+                } else {
+                    subjectClass = 'Nursery';
+                }
 
-            <!-- Class Selector -->
-            <div class="max-w-md mb-8">
-                <label class="block text-sm font-medium mb-2">Select Class</label>
-                <select id="ratingClassSelect" onchange="loadStudentsForRating()"
-                    class="w-full rounded-2xl border border-gray-300 px-5 py-4 text-lg">
-                    <option value="">-- Select Class --</option>
-                    <option value="JSS1">JSS1</option>
-                    <option value="JSS2">JSS2</option>
-                    <option value="JSS3">JSS3</option>
-                    <option value="SS1">SS1</option>
-                    <option value="SS2">SS2</option>
-                    <option value="SS3">SS3</option>
-                </select>
-            </div>
+                try {
+                    const result = await fetch(`/admin/get-subject/${subjectClass}`);
 
-            <!-- Students Rating List -->
-            <div class="max-h-[650px] overflow-y-auto border border-gray-200 rounded-2xl" id="ratingStudentsList">
-                <!-- Populated dynamically by JavaScript -->
-                <p class="text-center text-gray-500 py-20">Please select a class to load students
-                </p>
-            </div>
-
-            <div class="mt-8 flex justify-end">
-                <button onclick="saveAllRatings()"
-                    class="bg-green-600 text-white px-10 py-4 rounded-2xl font-semibold hover:bg-green-700">
-                    Save All Ratings
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        let gradingSystem = [
-            { grade: "A", min: 80, max: 100, remark: "Excellent" },
-            { grade: "B", min: 70, max: 79, remark: "Very Good" },
-            { grade: "C", min: 60, max: 69, remark: "Good" },
-            { grade: "D", min: 50, max: 59, remark: "Pass" },
-            { grade: "F", min: 0, max: 49, remark: "Fail" },
-        ];
-
-        function renderGradingTable() {
-            const tbody = document.getElementById("gradingTable");
-            tbody.innerHTML = "";
-
-            gradingSystem.forEach((item, index) => {
-                const row = document.createElement("tr");
-                row.className = "hover:bg-slate-50 transition";
-                row.innerHTML = `
-                <td class="py-6 px-6 font-bold text-lg">${item.grade}</td>
-                <td class="py-6 px-6">${item.min} - ${item.max}</td>
-                <td class="py-6 px-6">${item.remark}</td>
-                <td class="py-6 px-6 text-center">
-                    <button onclick="deleteGrade(${index})" 
-                            class="text-red-500 hover:text-red-700 text-xl">×</button>
-                </td>
-            `;
-                tbody.appendChild(row);
-            });
-        }
-
-        function addNewGrade() {
-            const grade = prompt("Enter Grade (e.g., A+):");
-            if (!grade) return;
-
-            const min = parseInt(prompt("Minimum Score:"));
-            const max = parseInt(prompt("Maximum Score:"));
-            const remark = prompt("Remark (e.g., Excellent):");
-
-            if (min !== null && max !== null) {
-                gradingSystem.unshift({ grade, min, max, remark });
-                renderGradingTable();
+                    if (!result.ok) {
+                        console.log('Something went wrong:', result.status);
+                        return;
+                    }
+                    const { subject } = await result.json()
+                    renderSubject(subject)
+                } catch (err) {
+                    console.log(err);
+                }
             }
-        }
-
-        function deleteGrade(index) {
-            if (confirm("Delete this grade?")) {
-                gradingSystem.splice(index, 1);
-                renderGradingTable();
-            }
-        }
-
-        function saveGradingSystem() {
-            alert("✅ Grading System saved successfully!");
-        }
-
-        // Initialize when tab is shown
-        function initGradingTab() {
-            renderGradingTable();
-        }
-    </script>
-    <script>
-        let sessions = [
-            { name: "2025-2026", start: "2025-01-10", end: "2025-12-20", active: true },
-            { name: "2024-2025", start: "2024-01-08", end: "2024-12-15", active: false },
-            { name: "2023-2024", start: "2023-01-09", end: "2023-12-18", active: false },
-        ];
-
-        function renderSessions() {
-            const container = document.getElementById("sessionsList");
-            container.innerHTML = "";
-
-            sessions.forEach((session, index) => {
-                const div = document.createElement("div");
-                div.className = `flex items-center justify-between p-6 rounded-2xl border ${session.active ? 'border-blue-500 bg-blue-50' : 'border-gray-200'}`;
-                div.innerHTML = `
-                <div>
-                    <p class="font-semibold text-lg">${session.name}</p>
-                    <p class="text-sm text-gray-500">${session.start} — ${session.end}</p>
-                </div>
-                <div class="text-right">
-                    ${session.active ?
-                        '<span class="px-5 py-2 bg-blue-600 text-white text-sm rounded-full">Active</span>' :
-                        `<button onclick="activateSession(${index})" class="text-blue-600 hover:underline text-sm">Make Active</button>`}
-                </div>
-            `;
-                container.appendChild(div);
-            });
-        }
-
-        function addNewSession() {
-            document.getElementById("newSessionForm").classList.remove("hidden");
-        }
-
-        function cancelNewSession() {
-            document.getElementById("newSessionForm").classList.add("hidden");
-        }
-
-        function saveNewSession() {
-            const name = document.getElementById("newSessionName").value;
-            if (name) {
-                sessions.unshift({
-                    name: name,
-                    start: document.getElementById("startDate").value || "2026-01-01",
-                    end: document.getElementById("endDate").value || "2026-12-31",
-                    active: false
+            function renderSubject(data) {
+                const subject = document.getElementById('subject');
+                subject.innerHTML = `<option value="">Select subject</option>`
+                data.subjects.forEach(element => {
+                    subject.innerHTML += `
+                    <option value="${element.subjectName}">
+                        ${element.subjectName}
+                    </option>
+                `;
                 });
-                renderSessions();
-                cancelNewSession();
-                alert("New academic session added successfully!");
-            }
-        }
-
-        function activateSession(index) {
-            sessions.forEach(s => s.active = false);
-            sessions[index].active = true;
-            document.getElementById("currentSession").innerText = sessions[index].name;
-            renderSessions();
-        }
-
-        // Initialize
-        renderSessions();
-    </script>
-    <script>
-        let studentsForRating = [];
-
-        const mockStudents = {
-            "JSS2": [
-                { id: 1, name: "Adebayo Samuel", admissionNo: "JSS2/015", rating: "Good", comment: "" },
-                { id: 2, name: "Chinonso Okoro", admissionNo: "JSS2/016", rating: "Excellent", comment: "" },
-                { id: 3, name: "Fatima Yusuf", admissionNo: "JSS2/017", rating: "Fair", comment: "" },
-                { id: 4, name: "David Okafor", admissionNo: "JSS2/018", rating: "Good", comment: "" },
-            ]
-        };
-
-        function loadStudentsForRating() {
-            const selectedClass = document.getElementById("ratingClassSelect").value;
-            const container = document.getElementById("ratingStudentsList");
-
-            if (!selectedClass) {
-                container.innerHTML = `<p class="text-center text-gray-500 py-20">Please select a class to load students</p>`;
-                return;
             }
 
-            studentsForRating = mockStudents[selectedClass] || [];
+        </script>
+        <script>
 
-            let html = `<h3 class="font-semibold px-6 py-5 bg-slate-50 border-b">${selectedClass} Students</h3>`;
+            lucide.createIcons();
+            // SEARCH
+            const searchInput = document.getElementById('searchInput');
+            const classFilter = document.getElementById('classFilter');
 
-            studentsForRating.forEach(student => {
-                html += `
-                <div class="p-6 border-b last:border-none hover:bg-slate-50 transition">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="font-medium">${student.name}</p>
-                            <p class="text-sm text-gray-500">${student.admissionNo}</p>
-                        </div>
+            function filterTimetables() {
 
-                        <div class="flex items-center gap-6">
-                            <!-- Rating Select -->
-                            <select onchange="updateStudentRating(${student.id}, this.value)" 
-                                    class="rounded-2xl border border-gray-300 px-5 py-3 text-sm font-medium">
-                                <option value="Excellent" ${student.rating === 'Excellent' ? 'selected' : ''}>Excellent</option>
-                                <option value="Very Good" ${student.rating === 'Very Good' ? 'selected' : ''}>Very Good</option>
-                                <option value="Good" ${student.rating === 'Good' ? 'selected' : ''}>Good</option>
-                                <option value="Fair" ${student.rating === 'Fair' ? 'selected' : ''}>Fair</option>
-                                <option value="Poor" ${student.rating === 'Poor' ? 'selected' : ''}>Poor</option>
-                            </select>
+                const search =
+                    searchInput.value.toLowerCase().trim();
 
-                            <!-- Comment -->
-                            <input type="text" value="${student.comment}" 
-                                   placeholder="Add comment..."
-                                   onchange="updateStudentComment(${student.id}, this.value)"
-                                   class="w-80 rounded-2xl border border-gray-300 px-5 py-3 text-sm focus:ring-2 focus:ring-blue-500">
-                        </div>
-                    </div>
-                </div>
-            `;
+                const selectedClass =
+                    classFilter.value.toLowerCase();
+
+                document.querySelectorAll('.timetable-item')
+                    .forEach(item => {
+
+                        const className =
+                            item.dataset.class;
+
+                        const matchesSearch =
+                            className.includes(search);
+
+                        const matchesClass =
+                            !selectedClass ||
+                            className === selectedClass;
+
+                        item.style.display =
+                            matchesSearch && matchesClass
+                                ? ''
+                                : 'none';
+                    });
+            }
+
+
+            searchInput.addEventListener(
+                'input',
+                filterTimetables
+            );
+
+            classFilter.addEventListener(
+                'change',
+                filterTimetables
+            );
+
+        </script>
+        <script>
+
+            function openTimetableModal() {
+                document
+                    .getElementById('timetableModal')
+                    .classList.remove('hidden');
+
+                document.body.classList.add('overflow-hidden');
+            }
+
+
+            function closeTimetableModal() {
+                document
+                    .getElementById('timetableModal')
+                    .classList.add('hidden');
+
+                document.body.classList.remove('overflow-hidden');
+            }
+
+
+            // Close with Escape
+            document.addEventListener('keydown', (e) => {
+
+                if (e.key === 'Escape') {
+                    closeTimetableModal();
+                }
+
             });
 
-            container.innerHTML = html;
-        }
 
-        function updateStudentRating(id, rating) {
-            const student = studentsForRating.find(s => s.id === id);
-            if (student) student.rating = rating;
-        }
+            // Submit
+            document
+                .getElementById('timetableForm')
+                .addEventListener('submit', async function (e) {
 
-        function updateStudentComment(id, comment) {
-            const student = studentsForRating.find(s => s.id === id);
-            if (student) student.comment = comment;
-        }
+                    e.preventDefault();
 
-        function saveAllRatings() {
-            if (studentsForRating.length === 0) {
-                alert("No students loaded. Please select a class.");
-                return;
+                    const formData = new FormData(this);
+
+                    const button =
+                        document.getElementById('saveTimetableBtn');
+
+                    button.disabled = true;
+
+                    button.innerHTML = `
+                    <span class="w-4 h-4 border-2 border-white/40
+                                border-t-white rounded-full animate-spin"></span>
+                    Saving...
+                `;
+
+                    try {
+
+                        const response = await fetch('/admin/timetable', {
+                            method: 'POST',
+                            body: formData
+                        });
+
+                        const data = await response.json();
+
+                        if (!response.ok) {
+                            throw new Error(
+                                data.message || 'Failed to save timetable'
+                            );
+                        }
+
+                        closeTimetableModal();
+
+                        // Reload to show the new timetable
+                        window.location.reload();
+
+                    } catch (error) {
+
+                        console.error(error);
+
+                        showMessagePopup(error.message);
+
+                        button.disabled = false;
+
+                        button.innerHTML = `
+                        <i data-lucide="save" class="w-4 h-4"></i>
+                        Save Timetable
+                    `;
+
+                        lucide.createIcons();
+                    }
+
+                });
+
+
+            //delete record
+            async function handleDelete(_id){
+                console.log(_id)
+               try {
+                 const result = await fetch(`/admin/timetalbe-delete/${_id}`, {method:'Delete'})
+                if(!result){
+                    showMessagePopup('Unable to delete')
+                    return
+                }
+                showMessagePopup('Deleted successfuly')
+                window.location.reload()
+               } catch (error) {
+                console.log(error)
+                showMessagePopup("Server error")
+               }
             }
-            alert("✅ All student ratings and comments have been saved successfully!");
-        }
+            lucide.createIcons();
 
-        // Initialize when tab is opened
-        function initRatingTab() {
-            // Optional: auto-load a default class
-            // document.getElementById("ratingClassSelect").value = "JSS2";
-            // loadStudentsForRating();
-        }
-    </script>
+        </script>
 </body>
 
 </html>

@@ -393,248 +393,6 @@
 
     </div>
 
-
-    <!-- ==========================================
-         ASSIGNMENT MODAL
-    =========================================== -->
-
-    <div
-        id="assignmentModal"
-        class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/50 p-4"
-    >
-
-        <div
-            id="modalContent"
-            class="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-white shadow-xl"
-        >
-
-            <!-- Modal Header -->
-
-            <div class="flex items-center justify-between border-b border-slate-100 px-5 py-4 sm:px-6">
-
-                <div>
-
-                    <p class="text-[10px] font-semibold uppercase tracking-wide text-blue-600">
-                        Assignment Details
-                    </p>
-
-                    <h2
-                        id="modalTitle"
-                        class="mt-1 text-base font-bold text-slate-900"
-                    >
-                        Assignment
-                    </h2>
-
-                </div>
-
-
-                <button
-                    onclick="closeAssignment()"
-                    class="flex h-8 w-8 items-center justify-center rounded-lg text-lg text-slate-400 transition hover:bg-slate-100 hover:text-slate-700"
-                >
-                    ×
-                </button>
-
-            </div>
-
-
-            <!-- Modal Body -->
-
-            <div class="space-y-5 p-5 sm:p-6">
-
-
-                <!-- Subject -->
-
-                <div class="flex flex-wrap gap-2">
-
-                    <span class="rounded-full bg-blue-50 px-3 py-1 text-[10px] font-semibold text-blue-600">
-                        Mathematics
-                    </span>
-
-                    <span class="rounded-full bg-orange-50 px-3 py-1 text-[10px] font-semibold text-orange-600">
-                        Pending
-                    </span>
-
-                </div>
-
-
-                <!-- Description -->
-
-                <div>
-
-                    <p class="text-[10px] font-semibold uppercase tracking-wide text-slate-400">
-                        Instructions
-                    </p>
-
-                    <p class="mt-2 text-sm leading-6 text-slate-600">
-                        Solve the ten quadratic equation problems provided
-                        in class. Show all working steps and make sure your
-                        answers are clearly written.
-                    </p>
-
-                </div>
-
-
-                <!-- Information -->
-
-                <div class="grid grid-cols-2 gap-4 rounded-xl bg-slate-50 p-4 sm:grid-cols-4">
-
-                    <div>
-
-                        <p class="text-[9px] uppercase tracking-wide text-slate-400">
-                            Teacher
-                        </p>
-
-                        <p class="mt-1 text-xs font-semibold text-slate-700">
-                            Mr. Johnson
-                        </p>
-
-                    </div>
-
-                    <div>
-
-                        <p class="text-[9px] uppercase tracking-wide text-slate-400">
-                            Subject
-                        </p>
-
-                        <p class="mt-1 text-xs font-semibold text-slate-700">
-                            Mathematics
-                        </p>
-
-                    </div>
-
-                    <div>
-
-                        <p class="text-[9px] uppercase tracking-wide text-slate-400">
-                            Assigned
-                        </p>
-
-                        <p class="mt-1 text-xs font-semibold text-slate-700">
-                            August 1, 2026
-                        </p>
-
-                    </div>
-
-                    <div>
-
-                        <p class="text-[9px] uppercase tracking-wide text-slate-400">
-                            Due Date
-                        </p>
-
-                        <p class="mt-1 text-xs font-semibold text-red-600">
-                            August 7, 2026
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <!-- Attachment -->
-
-                <div>
-
-                    <p class="mb-2 text-[10px] font-semibold uppercase tracking-wide text-slate-400">
-                        Attachment
-                    </p>
-
-                    <div class="flex items-center justify-between rounded-lg border border-slate-200 p-3">
-
-                        <div class="flex items-center gap-3">
-
-                            <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-red-50">
-                                📄
-                            </div>
-
-                            <div>
-
-                                <p class="text-xs font-semibold text-slate-700">
-                                    Mathematics_Assignment.pdf
-                                </p>
-
-                                <p class="mt-0.5 text-[10px] text-slate-400">
-                                    PDF • 1.2 MB
-                                </p>
-
-                            </div>
-
-                        </div>
-
-                        <button class="text-xs font-semibold text-blue-600 hover:text-blue-700">
-                            Download
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-                <!-- Submission -->
-
-                <div class="rounded-xl border border-dashed border-slate-300 p-4">
-
-                    <p class="text-xs font-bold text-slate-800">
-                        Submit Assignment
-                    </p>
-
-                    <p class="mt-1 text-[10px] leading-5 text-slate-500">
-                        Upload your completed assignment before the deadline.
-                    </p>
-
-
-                    <label
-                        class="mt-4 flex cursor-pointer flex-col items-center justify-center rounded-lg border border-slate-200 bg-slate-50 p-6 text-center transition hover:bg-slate-100"
-                    >
-
-                        <span class="text-2xl">
-                            📤
-                        </span>
-
-                        <span class="mt-2 text-xs font-semibold text-slate-700">
-                            Click to upload your file
-                        </span>
-
-                        <span class="mt-1 text-[10px] text-slate-400">
-                            PDF, DOC, DOCX or image • Max 10MB
-                        </span>
-
-                        <input
-                            type="file"
-                            class="hidden"
-                            accept=".pdf,.doc,.docx,image/*"
-                        >
-
-                    </label>
-
-                </div>
-
-            </div>
-
-
-            <!-- Modal Footer -->
-
-            <div class="flex flex-col-reverse gap-2 border-t border-slate-100 bg-slate-50 px-5 py-4 sm:flex-row sm:justify-end sm:px-6">
-
-                <button
-                    onclick="closeAssignment()"
-                    class="rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-50"
-                >
-                    Cancel
-                </button>
-
-                <button
-                    class="rounded-lg bg-[#0b2a4a] px-4 py-2.5 text-xs font-semibold text-white hover:bg-[#17619a]"
-                >
-                    Submit Assignment
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
     <!-- ==========================================
          JAVASCRIPT
     =========================================== -->
@@ -741,30 +499,34 @@
                             </p>
 
                             <p class="mt-2 max-w-2xl text-xs leading-5 text-slate-500">
-                                ${item.content}
+                                ${item.description}
                             </p>
 
                             <div class="mt-3 flex flex-wrap gap-x-5 gap-y-2">
 
                                 <span class="text-[10px] text-slate-400">
-                                    👨‍🏫 ${item.teacherName}
+                                    👨‍🏫 ${item.teacher || 'not specified'}
                                 </span>
 
-                                <span class="text-[10px] text-slate-400">
-                                    Submit before: ${item.duration}
-                                </span>
+                               <span class="text-[10px] text-slate-400">
+                                Submit before: ${new Date(item.dueDate).toLocaleDateString('en-US', {
+                                    year: 'numeric',
+                                    month: 'long',
+                                    day: 'numeric'
+                                })}
+                            </span>
 
                             </div>
                         </div>
                     </div>
 
                     <div class="shrink-0">
-                        <button
-                            onclick="openAssignment(${index})"
+                        <a
+                            href='/student/assignment/${item._id}'
                             class="w-full rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-xs font-semibold text-slate-600 transition hover:bg-slate-50 lg:w-auto"
                         >
                             View Assignment
-                        </button>
+                        </a>
                     </div>
 
                 </div>
