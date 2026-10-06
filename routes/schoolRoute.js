@@ -15,6 +15,7 @@ const News = require('../schema/news.js')
 const Subject = require('../schema/subject.js')
 const router = express.Router()
 const {schoolSection} = require('../utility/schoolSection.js')
+const puppeteer = require('puppeteer');
 
 
 
@@ -873,80 +874,217 @@ router.get('/admin/student-card', isAuthenticated, async (req, res) => {
     }
 });
 
-router.get('/admin/student-card/download', isAuthenticated, async (req, res) => {
-    try {
+router.get(
+    '/admin/student-card/download',
+    isAuthenticated,
+    async (req, res) => {
 
-        const selectedClass = req.query.class;
+        try {
 
-        const students = await StudentProfile.find({
-            schoolName: req.session.school,
-            class: selectedClass
-        }).lean();
+            const selectedClass =
+                req.query.class || 'ALL';
 
-        const schoolInfo = await School.findOne({
-            schoolName: req.session.school
-        }).lean();
+            const primary =
+                req.query.primary || '#0b2a4a';
 
-        // Render an EJS template specifically for printing
-        res.render(
-            'student-card-print',
-            {
-                student: students,
-                schoolInfo,
-                selectedClass
-            },
-            async (err, html) => {
+            const secondary =
+                req.query.secondary || '#17619a';
 
-                if (err) {
-                    console.error(err);
-                    return res.status(500).send('Unable to generate cards');
-                }
 
-                const browser = await puppeteer.launch({
-                    headless: true
-                });
+            // --------------------------------
+            // BUILD STUDENT QUERY
+            // --------------------------------
 
-                const page = await browser.newPage();
+            const query = {
+                schoolName: req.session.school
+            };
 
-                await page.setContent(html, {
-                    waitUntil: 'networkidle0'
-                });
 
-                const pdf = await page.pdf({
-                    format: 'A4',
-                    printBackground: true,
-                    margin: {
-                        top: '10mm',
-                        right: '10mm',
-                        bottom: '10mm',
-                        left: '10mm'
-                    }
-                });
-
-                await browser.close();
-
-                res.setHeader(
-                    'Content-Type',
-                    'application/pdf'
-                );
-
-                res.setHeader(
-                    'Content-Disposition',
-                    `attachment; filename="${selectedClass}-student-id-cards.pdf"`
-                );
-
-                res.send(pdf);
+            // Only filter by class if a
+            // specific class was selected
+            if (
+                selectedClass &&
+                selectedClass !== 'ALL'
+            ) {
+                query.class = selectedClass;
             }
-        );
 
-    } catch (error) {
+            // --------------------------------
+            // GET STUDENTS
+            // --------------------------------
 
-        console.error(error);
+            const students =
+                await StudentProfile
+                    .find(query)
+                    .sort({ fullname: 1 })
+                    .lean();
 
-        res.status(500).send(
-            'Failed to generate student ID cards'
-        );
+            if (students.length === 0) {
+
+                return res.status(404).send(
+                    `No students found for ${
+                        selectedClass === 'ALL'
+                            ? 'this school'
+                            : selectedClass
+                    }`
+                );
+
+            }
+
+
+            // --------------------------------
+            // GET SCHOOL INFORMATION
+            // --------------------------------
+
+            const schoolInfo =
+                await SchoolProfile.findOne({
+                    schoolName: req.session.school
+                }).lean();
+
+
+            // --------------------------------
+            // RENDER PRINT TEMPLATE
+            // --------------------------------
+
+            res.render(
+                'student-card-print',
+                {
+                    student: students,
+                    schoolInfo,
+                    selectedClass,
+
+                    // Send selected colors
+                    primary,
+                    secondary
+                },
+
+                async (err, html) => {
+
+                    if (err) {
+
+                        console.error(
+                            'EJS rendering error:',
+                            err
+                        );
+
+                        return res.status(500).send(
+                            'Unable to generate cards'
+                        );
+                    }
+
+
+                    let browser;
+
+                    try {
+
+                        browser =
+                            await puppeteer.launch({
+                                headless: true,
+                                args: [
+                                    '--no-sandbox',
+                                    '--disable-setuid-sandbox'
+                                ]
+                            });
+
+
+                        const page =
+                            await browser.newPage();
+
+
+                        await page.setContent(
+                            html,
+                            {
+                                waitUntil: 'networkidle0'
+                            }
+                        );
+
+
+                        // --------------------------------
+                        // GENERATE PDF
+                        // --------------------------------
+
+                        const pdf =
+                            await page.pdf({
+
+                                format: 'A4',
+
+                                printBackground: true,
+
+                                preferCSSPageSize: true,
+
+                                margin: {
+                                    top: '10mm',
+                                    right: '10mm',
+                                    bottom: '10mm',
+                                    left: '10mm'
+                                }
+
+                            });
+
+
+                        await browser.close();
+
+
+                        // --------------------------------
+                        // DOWNLOAD
+                        // --------------------------------
+
+                        const filename =
+                            `${
+                                selectedClass === 'ALL'
+                                    ? 'all-students'
+                                    : selectedClass.replace(/\s+/g, '-')
+                            }-student-id-cards.pdf`;
+
+
+                        res.setHeader(
+                            'Content-Type',
+                            'application/pdf'
+                        );
+
+                        res.setHeader(
+                            'Content-Disposition',
+                            `attachment; filename="${filename}"`
+                        );
+
+
+                        res.send(pdf);
+
+
+                    } catch (pdfError) {
+
+                        console.error(
+                            'Puppeteer error:',
+                            pdfError
+                        );
+
+
+                        if (browser) {
+                            await browser.close();
+                        }
+
+
+                        res.status(500).send(
+                            'Failed to generate PDF'
+                        );
+
+                    }
+
+                }
+            );
+
+        } catch (error) {
+
+            console.error(
+                'Student card download error:',
+                error
+            );
+
+            res.status(500).send(
+                'Failed to generate student ID cards'
+            );
+        }
     }
-});
+);
 
 module.exports = router;

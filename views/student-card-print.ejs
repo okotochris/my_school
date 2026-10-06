@@ -27,7 +27,7 @@
     const address   = school.address || 'School address not provided';
     const signature = (school.headTeacher && school.headTeacher.signature) || '';
 
-    const students  = Array.isArray(locals.student) ? locals.student : [];
+    const student   = Array.isArray(locals.student) ? locals.student : [];
     const cls       = locals.selectedClass || '';
     const classLabel = cls === 'ALL' ? 'All classes' : cls;
 %>
@@ -46,12 +46,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.6/JsBarcode.all.min.js"></script>
 
     <style>
-        :root {
-            --card-primary: <%= cPrimary %>;
-            --card-secondary: <%= cSecondary %>;
-            --card-tint: <%- cTint %>;
-            --card-wash: <%- cWash %>;
-        }
+          :root {
+        --card-primary: <%= primary %>;
+        --card-secondary: <%= secondary %>;
+    }
 
         body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
 
@@ -96,75 +94,14 @@
     </style>
 </head>
 
-<body class="<%= printMode ? 'bg-white' : 'bg-slate-100' %> text-slate-800 antialiased">
+<body class='bg-white text-slate-800 antialiased'>
 
-<% if (!printMode) { %>
-<!-- ===================== TOOLBAR (screen only) ===================== -->
-<header class="no-print sticky top-0 z-10 bg-white/90 backdrop-blur border-b border-slate-200">
-    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
-
-        <div>
-            <h1 class="text-base font-bold text-slate-900"><%= classLabel || 'Student ID cards' %></h1>
-            <p class="text-xs text-slate-500">
-                <% if (cls) { %>
-                    <%= students.length %> student<%= students.length === 1 ? '' : 's' %> &middot; front and back shown together
-                <% } else { %>
-                    Select a class to generate cards
-                <% } %>
-            </p>
-        </div>
-
-        <div class="flex items-center gap-4 flex-wrap">
-
-            <div class="flex items-center gap-2" role="group" aria-label="Card colour">
-                <span class="text-xs text-slate-500 mr-1">Colour</span>
-
-                <button type="button" class="swatch card-color w-7 h-7 rounded-full border-2 border-white shadow ring-1 ring-slate-300"
-                    data-primary="#0b2a4a" data-secondary="#17619a" aria-label="Blue" title="Blue"
-                    style="background:linear-gradient(135deg,#0b2a4a,#17619a)"></button>
-                <button type="button" class="swatch card-color w-7 h-7 rounded-full border-2 border-white shadow ring-1 ring-slate-300"
-                    data-primary="#14532d" data-secondary="#16a34a" aria-label="Green" title="Green"
-                    style="background:linear-gradient(135deg,#14532d,#16a34a)"></button>
-                <button type="button" class="swatch card-color w-7 h-7 rounded-full border-2 border-white shadow ring-1 ring-slate-300"
-                    data-primary="#4c1d95" data-secondary="#7c3aed" aria-label="Purple" title="Purple"
-                    style="background:linear-gradient(135deg,#4c1d95,#7c3aed)"></button>
-                <button type="button" class="swatch card-color w-7 h-7 rounded-full border-2 border-white shadow ring-1 ring-slate-300"
-                    data-primary="#7f1d1d" data-secondary="#dc2626" aria-label="Red" title="Red"
-                    style="background:linear-gradient(135deg,#7f1d1d,#dc2626)"></button>
-                <button type="button" class="swatch card-color w-7 h-7 rounded-full border-2 border-white shadow ring-1 ring-slate-300"
-                    data-primary="#7c2d12" data-secondary="#ea580c" aria-label="Orange" title="Orange"
-                    style="background:linear-gradient(135deg,#7c2d12,#ea580c)"></button>
-                <button type="button" class="swatch card-color w-7 h-7 rounded-full border-2 border-white shadow ring-1 ring-slate-300"
-                    data-primary="#134e4a" data-secondary="#0d9488" aria-label="Teal" title="Teal"
-                    style="background:linear-gradient(135deg,#134e4a,#0d9488)"></button>
-                <button type="button" class="swatch card-color w-7 h-7 rounded-full border-2 border-white shadow ring-1 ring-slate-300"
-                    data-primary="#68695b" data-secondary="#b3c6c5" aria-label="Grey" title="Grey"
-                    style="background:linear-gradient(135deg,#41413c,#b3c6c5)"></button>
-            </div>
-
-            <% if (students.length > 0) { %>
-                <button type="button" id="downloadPdf"
-                    data-class="<%= cls || 'ALL' %>"
-                    class="btn c-secondary-bg text-white text-sm font-semibold rounded-lg px-4 py-2 hover:opacity-90 transition-opacity disabled:opacity-60 disabled:cursor-wait">
-                    Download PDF
-                </button>
-                <button type="button" onclick="window.print()"
-                    class="btn bg-white text-slate-700 text-sm font-semibold rounded-lg px-4 py-2 border border-slate-300 hover:bg-slate-50 transition-colors">
-                    Print
-                </button>
-            <% } %>
-        </div>
-    </div>
-</header>
-<% } %>
-
-
-<main class="<%= printMode ? '' : 'max-w-7xl mx-auto px-4 py-8' %>">
+<main >
 
     <div class="cards-grid flex flex-wrap justify-center gap-x-10 gap-y-8">
 
-    <% if (students.length > 0) { %>
-        <% students.forEach((item) => { %>
+    <% if (student.length > 0) { %>
+        <% student.forEach((item) => { %>
 
         <div class="student-card-wrapper flex flex-col gap-3">
 
@@ -234,12 +171,12 @@
                 </div>
 
                 <!-- Signature (left) and barcode (right) -->
-                <div class="relative mt-auto px-5 pb-2.5 flex items-end justify-between gap-4">
+                 <div class="relative mt-auto px-5 pb-2.5 flex items-end justify-between gap-4">
 
                     <div class="w-[110px] shrink-0">
                         <div class="border-b border-slate-400 h-6 flex items-end justify-center">
                             <% if (school.headTeacher.signature) { %>
-                                <img src="<%= school.headTeacher.signature %>" alt="" class="max-w-full max-h-full object-contain">
+                                <img src="<%= school.headTeacher.signature ||'' %>" alt="" class="max-w-full max-h-full object-contain">
                             <% } %>
                         </div>
                         <p class="text-[8px] text-slate-500 mt-1">Authorised signature</p>
@@ -252,7 +189,7 @@
                     -->
                     <div class="barcode-slot w-[150px] h-[44px] flex items-end justify-end">
                        
-                            <img src="/images/barcode.png" alt="Barcode for <%= item.studentId %>" class="max-w-full max-h-full object-contain">
+                            <img src="/images/barcode.png"  class="max-w-full max-h-full object-contain">
                         
                     </div>
                 </div>
@@ -282,121 +219,6 @@
 
     </div>
 </main>
-
-
-<script>
-/* ================= BARCODES (screen and PDF) ================= */
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('canvas[data-barcode]').forEach(canvas => {
-        try {
-            JsBarcode(canvas, canvas.dataset.barcode, {
-                format: 'CODE128',
-                width: 2,
-                height: 56,
-                margin: 0,
-                displayValue: true,
-                fontSize: 18,
-                textMargin: 2,
-                lineColor: '#0f172a',
-                background: '#ffffff'
-            });
-        } catch (e) {
-            canvas.replaceWith(Object.assign(document.createElement('span'), {
-                textContent: canvas.dataset.barcode,
-                className: 'text-[10px] font-bold text-slate-700'
-            }));
-        }
-    });
-});
-</script>
-
-<% if (!printMode) { %>
-<script>
-/* ================= COLOUR PICKER (screen only) ================= */
-document.addEventListener('DOMContentLoaded', () => {
-    const KEY = 'studentCardColor';
-    const DEFAULT = { primary: '#0b2a4a', secondary: '#17619a' };
-    const buttons = [...document.querySelectorAll('.card-color')];
-    const root = document.documentElement.style;
-
-    function readSaved() {
-        try { return JSON.parse(localStorage.getItem(KEY)) || DEFAULT; }
-        catch { return DEFAULT; }
-    }
-
-    function applyColor({ primary, secondary }) {
-        root.setProperty('--card-primary', primary);
-        root.setProperty('--card-secondary', secondary);
-
-        const n = parseInt(secondary.slice(1), 16);
-        const [r, g, b] = [(n >> 16) & 255, (n >> 8) & 255, n & 255];
-        const tint = c => Math.round(c + (255 - c) * 0.91);
-        root.setProperty('--card-tint', `rgb(${tint(r)}, ${tint(g)}, ${tint(b)})`);
-        root.setProperty('--card-wash', `rgba(${r}, ${g}, ${b}, .04)`);
-
-        try { localStorage.setItem(KEY, JSON.stringify({ primary, secondary })); } catch {}
-
-        buttons.forEach(btn => {
-            const active = btn.dataset.primary === primary && btn.dataset.secondary === secondary;
-            btn.setAttribute('aria-pressed', active);
-            btn.classList.toggle('ring-2', active);
-            btn.classList.toggle('ring-offset-2', active);
-            btn.classList.toggle('ring-slate-700', active);
-            btn.classList.toggle('ring-1', !active);
-            btn.classList.toggle('ring-slate-300', !active);
-        });
-    }
-
-    buttons.forEach(btn => btn.addEventListener('click', () =>
-        applyColor({ primary: btn.dataset.primary, secondary: btn.dataset.secondary })));
-
-    applyColor(readSaved());
-});
-
-/* ================= PDF DOWNLOAD (server-side via Puppeteer) ================= */
-async function downloadStudentCardsPdf(className) {
-    const pdfBtn = document.getElementById('downloadPdf');
-    if (!pdfBtn || !className) return;
-
-    const css = getComputedStyle(document.documentElement);
-    const params = new URLSearchParams({
-        class: className,
-        primary: css.getPropertyValue('--card-primary').trim(),
-        secondary: css.getPropertyValue('--card-secondary').trim()
-    });
-
-    const label = pdfBtn.textContent;
-    pdfBtn.disabled = true;
-    pdfBtn.textContent = 'Generating PDF…';
-
-    try {
-        const res = await fetch('/admin/student-card/download?' + params.toString(), {
-            credentials: 'same-origin'
-        });
-        if (!res.ok) throw new Error((await res.text()) || 'Request failed');
-        const blob = await res.blob();
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `${className === 'ALL' ? 'all-students' : className.replace(/\s+/g, '-')}-student-id-cards.pdf`;
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        setTimeout(() => URL.revokeObjectURL(url), 10000);
-    } catch (err) {
-        console.error('PDF download failed:', err);
-        alert('Could not generate the PDF. Please try again.');
-    } finally {
-        pdfBtn.disabled = false;
-        pdfBtn.textContent = label;
-    }
-}
-
-document.getElementById('downloadPdf')?.addEventListener('click', (e) =>
-    downloadStudentCardsPdf(e.currentTarget.dataset.class)
-);
-</script>
-<% } %>
 
 </body>
 </html>
