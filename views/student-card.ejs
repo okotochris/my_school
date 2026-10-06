@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student ID Cards</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.6/JsBarcode.all.min.js"></script>
+
+    <style>
+        :root {
+            --card-primary: #0b2a4a;
+            --card-secondary: #17619a;
+            --card-tint: #e8f0f6;
+            --card-wash: rgba(23, 97, 154, .04);
+        }
+
+        body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
+
+        /* Everything on the cards follows the chosen colour */
+        .c-primary-text { color: var(--card-primary); }
+        .c-secondary-bg { background: var(--card-secondary); }
+        .c-border       { border-color: var(--card-secondary); }
+        .c-tint         { background: var(--card-tint); }
+
+        .c-header {
+            background:
+                radial-gradient(circle at 92% -20%, rgba(255,255,255,.22) 0 38px, transparent 39px),
+                radial-gradient(circle at 80% 130%, rgba(255,255,255,.14) 0 46px, transparent 47px),
+                linear-gradient(120deg, var(--card-primary), var(--card-secondary));
+        }
+
+        /* Faint watermark so cards feel official */
+        .c-watermark::before {
+            content: "";
+            position: absolute; inset: 0;
+            background: repeating-linear-gradient(
+                -45deg,
+                var(--card-wash) 0 1px,
+                transparent 1px 7px);
+            pointer-events: none;
+        }
+
+        .id-card { width: 350px; height: 220px; }
+
+        .swatch:focus-visible,
+        .btn:focus-visible { outline: 2px solid var(--card-secondary); outline-offset: 2px; }
+
+        @media print {
+            @page { size: A4; margin: 10mm; }
+
+            html, body {
+                background: #fff !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .no-print { display: none !important; }
+            .cards-grid { gap: 6mm !important; justify-content: flex-start !important; }
+            .student-card-wrapper { break-inside: avoid; page-break-inside: avoid; }
+            .id-card { box-shadow: none !important; border-color: #cbd5e1 !important; }
+        }
+    </style>
+</head>
+
+<%
+    const FALLBACK_AVATAR = "data:image/svg+xml;utf8," + encodeURIComponent(
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 96"><rect width="80" height="96" fill="#e2e8f0"/><circle cx="40" cy="36" r="16" fill="#94a3b8"/><path d="M8 96c2-22 18-32 32-32s30 10 32 32z" fill="#94a3b8"/></svg>'
+    );
+    const FALLBACK_LOGO = "data:image/svg+xml;utf8," + encodeURIComponent(
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><rect width="48" height="48" rx="8" fill="#e2e8f0"/><path d="M24 11 7 19l17 8 17-8zM14 25v8c0 3 5 6 10 6s10-3 10-6v-8l-10 5z" fill="#94a3b8"/></svg>'
+    );
+    const logo  = (schoolInfo && schoolInfo.image && schoolInfo.image.logo) || FALLBACK_LOGO;
+    const phone = (schoolInfo && schoolInfo.phone) || '';
+    const students = Array.isArray(student) ? student : [];
+%>
+
+<body class="bg-slate-100 text-slate-800 antialiased">
+
+<!-- ===================== TOOLBAR ===================== -->
+<header class="no-print sticky top-0 z-10 bg-white/90 backdrop-blur border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
+
+        <div>
+            <h1 class="text-base font-bold text-slate-900">
+                <%= selectedClass ? selectedClass : 'Student ID cards' %>
+            </h1>
+            <p class="text-xs text-slate-500">
+                <% if (selectedClass) { %>
+                    <%= students.length %> student<%= students.length === 1 ? '' : 's' %> &middot; front and back shown together
+                <% } else { %>
+                    Select a class to generate cards
+                <% } %>
+            </p>
+        </div>
+
+        <div class="flex items-center gap-4 flex-wrap">
+
+            <div class="flex items-center gap-2" role="group" aria-label="Card colour">
+                <span class="text-xs text-slate-500 mr-1">Colour</span>
+
+                <button type="button" class="swatch card-color w-7 h-7 rounded-full border-2 border-white shadow ring-1 ring-slate-300"
+                    data-primary="#0b2a4a" data-secondary="#17619a" aria-label="Blue" title="Blue"
+                    style="background:linear-gradient(135deg,#0b2a4a,#17619a)"></button>
+                <button type="button" class="swatch card-color w-7 h-7 rounded-full border-2 border-white shadow ring-1 ring-slate-300"
+                    data-primary="#14532d" data-secondary="#16a34a" aria-label="Green" title="Green"
+                    style="background:linear-gradient(135deg,#14532d,#16a34a)"></button>
+                <button type="button" class="swatch card-color w-7 h-7 rounded-full border-2 border-white shadow ring-1 ring-slate-300"
+                    data-primary="#4c1d95" data-secondary="#7c3aed" aria-label="Purple" title="Purple"
+                    style="background:linear-gradient(135deg,#4c1d95,#7c3aed)"></button>
+                <button type="button" class="swatch card-color w-7 h-7 rounded-full border-2 border-white shadow ring-1 ring-slate-300"
+                    data-primary="#7f1d1d" data-secondary="#dc2626" aria-label="Red" title="Red"
+                    style="background:linear-gradient(135deg,#7f1d1d,#dc2626)"></button>
+                <button type="button" class="swatch card-color w-7 h-7 rounded-full border-2 border-white shadow ring-1 ring-slate-300"
+                    data-primary="#7c2d12" data-secondary="#ea580c" aria-label="Orange" title="Orange"
+                    style="background:linear-gradient(135deg,#7c2d12,#ea580c)"></button>
+                <button type="button" class="swatch card-color w-7 h-7 rounded-full border-2 border-white shadow ring-1 ring-slate-300"
+                    data-primary="#134e4a" data-secondary="#0d9488" aria-label="Teal" title="Teal"
+                    style="background:linear-gradient(135deg,#134e4a,#0d9488)"></button>
+                <button type="button" class="swatch card-color w-7 h-7 rounded-full border-2 border-white shadow ring-1 ring-slate-300"
+                    data-primary="#68695b" data-secondary="#b3c6c5" aria-label="Grey" title="Grey"
+                    style="background:linear-gradient(135deg,#41413c,#b3c6c5)"></button>
+            </div>
+
+            <% if (students.length > 0) { %>
+                <button type="button" id="downloadPdf"
+                    class="btn c-secondary-bg text-white text-sm font-semibold rounded-lg px-4 py-2 hover:opacity-90 transition-opacity disabled:opacity-60 disabled:cursor-wait">
+                    Download PDF
+                </button>
+                <button type="button" onclick="window.print()"
+                    class="btn bg-white text-slate-700 text-sm font-semibold rounded-lg px-4 py-2 border border-slate-300 hover:bg-slate-50 transition-colors">
+                    Print
+                </button>
+            <% } %>
+        </div>
+    </div>
+</header>
+
+
+<main class="max-w-7xl mx-auto px-4 py-8">
+
+    <!-- ===================== CARDS ===================== -->
+    <div class="cards-grid flex flex-wrap justify-center gap-x-10 gap-y-8">
+
+    <% if (students.length > 0) { %>
+        <% students.forEach((item) => { %>
+
+        <div class="student-card-wrapper flex flex-col gap-3">
+
+            <!-- ============ FRONT ============ -->
+            <div class="id-card c-watermark relative bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-lg">
+
+                <div class="c-header h-[58px] px-4 flex items-center gap-3">
+                    <img src="<%= logo %>" alt="" class="w-10 h-10 rounded-lg bg-white p-1 object-contain shrink-0">
+                    <div class="min-w-0">
+                        <h3 class="text-white font-bold text-[12px] leading-tight uppercase truncate">
+                            <%= item.schoolName %>
+                        </h3>
+                        <p class="text-white/75 text-[9px] mt-0.5">Student identification card</p>
+                    </div>
+                </div>
+
+                <div class="relative flex gap-4 px-4 pt-3.5">
+
+                    <img src="<%= item.passport || FALLBACK_AVATAR %>" alt="Photo of <%= item.fullname %>"
+                        class="c-border w-[80px] h-[96px] shrink-0 rounded-xl object-cover border-2 bg-slate-100">
+
+                    <div class="min-w-0 flex-1">
+                        <h2 class="c-primary-text text-[15px] font-extrabold leading-tight mb-2.5 line-clamp-2">
+                            <%= item.fullname %>
+                        </h2>
+
+                        <dl class="grid grid-cols-[64px_1fr] gap-x-2 gap-y-1.5 text-[10px] leading-tight">
+                            <dt class="text-slate-400">Student ID</dt>
+                            <dd class="font-semibold text-slate-800 truncate"><%= item.studentId %></dd>
+
+                            <dt class="text-slate-400">Class</dt>
+                            <dd class="font-semibold text-slate-800 truncate"><%= item.class %></dd>
+
+                            <dt class="text-slate-400">Admission</dt>
+                            <dd class="font-semibold text-slate-800 truncate"><%= item.addmissionNo || 'N/A' %></dd>
+
+                            <dt class="text-slate-400">Session</dt>
+                            <dd class="font-semibold text-slate-800 truncate"><%= item.schoolsession || 'N/A' %></dd>
+                        </dl>
+                    </div>
+                </div>
+
+                <div class="c-tint absolute bottom-0 inset-x-0 h-7 px-4 flex items-center justify-between gap-3">
+                    <span class="text-[8px] text-slate-500 truncate">Property of <%= item.schoolName %></span>
+                    <span class="c-primary-text text-[9px] font-bold shrink-0"><%= item.schoolsession || '' %></span>
+                </div>
+            </div>
+
+
+            <!-- ============ BACK ============ -->
+            <div class="id-card c-watermark relative flex flex-col bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-lg">
+
+                <div class="c-header h-[40px] shrink-0 px-4 flex items-center justify-between gap-3">
+                    <p class="text-white text-[10px] font-semibold uppercase truncate"><%= item.schoolName %></p>
+                    <img src="<%= logo %>" alt="" class="w-7 h-7 rounded-md bg-white p-0.5 object-contain shrink-0">
+                </div>
+
+                <div class="relative px-5 pt-2.5">
+                    <p class="text-[10px] text-slate-500 leading-tight">This card certifies that</p>
+                    <p class="c-primary-text text-[13px] font-extrabold uppercase leading-tight mt-0.5 truncate">
+                        <%= item.fullname %>
+                    </p>
+                    <p class="text-[10px] text-slate-600 mt-0.5 leading-snug truncate">
+                        is a bona fide student of <span class="font-semibold text-slate-800"><%= item.schoolName %></span>.
+                    </p>
+
+                    <div class="c-tint c-border border-l-4 rounded-lg mt-2 px-3 py-1.5">
+                        <p class="c-primary-text text-[10px] font-bold leading-tight">If found, please return to</p>
+                        <p class="text-[10px] font-semibold text-slate-800 mt-0.5 line-clamp-2 leading-snug">
+                            <%= schoolInfo.address || 'School address not provided' %>
+                        </p>
+                        <% if (phone) { %>
+                            <p class="text-[10px] text-slate-600 leading-snug">Call <span class="font-semibold"><%= phone %></span></p>
+                        <% } %>
+                    </div>
+                </div>
+
+                <!-- Signature (left) and barcode (right) -->
+                <div class="relative mt-auto px-5 pb-2.5 flex items-end justify-between gap-4">
+
+                    <div class="w-[110px] shrink-0">
+                        
+                        <div class="border-b border-slate-400 h-6">
+                            <img src="<%= schoolInfo.headTeacher.signature ||'' %>"  class="max-w-full max-h-full object-contain">
+                        </div>
+                        <p class="text-[8px] text-slate-500 mt-1">Authorised signature</p>
+                    </div>
+
+                    <!--
+                        BARCODE SLOT (about 150 x 44 px)
+                        - If the student record has a `barcode` field (image URL or data URI), that image is used.
+                        - Otherwise a Code 128 barcode is generated from the student ID.
+                        - To use your own barcode system, replace everything inside this div with your <img>.
+                    -->
+                    <div class="barcode-slot w-[150px] h-[44px] flex items-end justify-end">
+                        <img src="/images/barcode.png" alt="Barcode " class="max-w-full max-h-full object-contain">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <% }) %>
+
+    <% } else if (selectedClass) { %>
+
+        <div class="no-print w-full text-center py-20">
+            <div class="w-16 h-16 mx-auto rounded-full bg-white shadow-sm flex items-center justify-center text-2xl mb-4">🪪</div>
+            <h3 class="font-bold text-lg text-slate-900">No students in <%= selectedClass %></h3>
+            <p class="text-sm text-slate-500 mt-1">Register students in this class, then come back to generate their cards.</p>
+        </div>
+
+    <% } else { %>
+
+        <div class="no-print w-full text-center py-20">
+            <div class="w-16 h-16 mx-auto rounded-full bg-white shadow-sm flex items-center justify-center text-2xl mb-4">🪪</div>
+            <h3 class="font-bold text-lg text-slate-900">Select a class</h3>
+            <p class="text-sm text-slate-500 mt-1">Choose a class to generate its student ID cards.</p>
+        </div>
+
+    <% } %>
+
+    </div>
+</main>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const KEY = 'studentCardColor';
+    const DEFAULT = { primary: '#0b2a4a', secondary: '#17619a' };
+    const buttons = [...document.querySelectorAll('.card-color')];
+    const root = document.documentElement.style;
+
+    function readSaved() {
+        try { return JSON.parse(localStorage.getItem(KEY)) || DEFAULT; }
+        catch { return DEFAULT; }
+    }
+
+    function applyColor({ primary, secondary }) {
+        root.setProperty('--card-primary', primary);
+        root.setProperty('--card-secondary', secondary);
+
+        // html2canvas can't read color-mix(), so compute the tints here
+        const n = parseInt(secondary.slice(1), 16);
+        const [r, g, b] = [n >> 16 & 255, n >> 8 & 255, n & 255];
+        const tint = c => Math.round(c + (255 - c) * 0.91);
+        root.setProperty('--card-tint', `rgb(${tint(r)}, ${tint(g)}, ${tint(b)})`);
+        root.setProperty('--card-wash', `rgba(${r}, ${g}, ${b}, .04)`);
+
+        try { localStorage.setItem(KEY, JSON.stringify({ primary, secondary })); } catch {}
+
+        buttons.forEach(b => {
+            const active = b.dataset.primary === primary && b.dataset.secondary === secondary;
+            b.setAttribute('aria-pressed', active);
+            b.classList.toggle('ring-2', active);
+            b.classList.toggle('ring-offset-2', active);
+            b.classList.toggle('ring-slate-700', active);
+            b.classList.toggle('ring-1', !active);
+            b.classList.toggle('ring-slate-300', !active);
+        });
+    }
+
+    buttons.forEach(b => b.addEventListener('click', () =>
+        applyColor({ primary: b.dataset.primary, secondary: b.dataset.secondary })));
+
+    applyColor(readSaved());
+
+    /* ================= BARCODES ================= */
+    document.querySelectorAll('canvas[data-barcode]').forEach(canvas => {
+        try {
+            JsBarcode(canvas, canvas.dataset.barcode, {
+                format: 'CODE128',
+                width: 2,          // drawn large, scaled down by CSS for a sharp result
+                height: 56,
+                margin: 0,
+                displayValue: true,
+                fontSize: 18,
+                textMargin: 2,
+                lineColor: '#0f172a',
+                background: '#ffffff'
+            });
+        } catch (e) {
+            canvas.replaceWith(Object.assign(document.createElement('span'), {
+                textContent: canvas.dataset.barcode,
+                className: 'text-[10px] font-bold text-slate-700'
+            }));
+        }
+    });
+
+    /* ================= PDF DOWNLOAD ================= */
+    const pdfBtn = document.getElementById('downloadPdf');
+    const FILE_NAME = <%- JSON.stringify((selectedClass || 'student') + '-id-cards').replace(/</g, '\\u003c') %>;
+
+    if (pdfBtn) pdfBtn.addEventListener('click', async () => {
+        const wrappers = [...document.querySelectorAll('.student-card-wrapper')];
+        if (!wrappers.length) return;
+
+        // CR80 card size on A4: front and back side by side, 4 students per page
+        const CARD_W = 85.6, CARD_H = 54, GAP = 6, MARGIN = 10;
+        const PER_PAGE = 4;
+        const startX = (210 - (CARD_W * 2 + GAP)) / 2;
+
+        const label = pdfBtn.textContent;
+        pdfBtn.disabled = true;
+
+        try {
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF({ unit: 'mm', format: 'a4' });
+
+            for (let i = 0; i < wrappers.length; i++) {
+                pdfBtn.textContent = `Preparing ${i + 1} of ${wrappers.length}…`;
+
+                if (i > 0 && i % PER_PAGE === 0) pdf.addPage();
+                const y = MARGIN + (i % PER_PAGE) * (CARD_H + GAP);
+
+                const cards = wrappers[i].querySelectorAll('.id-card');
+                for (let j = 0; j < cards.length; j++) {
+                    const canvas = await html2canvas(cards[j], {
+                        scale: 3,
+                        useCORS: true,
+                        backgroundColor: '#ffffff',
+                        onclone: doc => doc.querySelectorAll('.id-card').forEach(c => {
+                            c.style.boxShadow = 'none';
+                        })
+                    });
+                    pdf.addImage(
+                        canvas.toDataURL('image/jpeg', 0.92), 'JPEG',
+                        startX + j * (CARD_W + GAP), y, CARD_W, CARD_H
+                    );
+                }
+            }
+
+            pdf.save(FILE_NAME + '.pdf');
+        } catch (err) {
+            console.error(err);
+            alert('Could not create the PDF. Check your internet connection and that student photos load, then try again.');
+        } finally {
+            pdfBtn.disabled = false;
+            pdfBtn.textContent = label;
+        }
+    });
+});
+</script>
+</body>
+</html>

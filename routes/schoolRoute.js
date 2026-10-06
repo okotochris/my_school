@@ -1,5 +1,5 @@
 const express = require('express');
-const schoolPfofile = require('../schema/schoolProfile') 
+const SchoolProfile = require('../schema/schoolProfile') 
 const isAuthenticated = require('../utility/authenticated.js')
 const StudentProfile = require('../schema/studentProfile.js')
 const Teacher = require('../schema/admin.js')
@@ -19,7 +19,7 @@ const {schoolSection} = require('../utility/schoolSection.js')
 
 
 async function schoolFees(school){
-    const data  = await schoolPfofile.findOne({schoolName:school})
+    const data  = await SchoolProfile.findOne({schoolName:school})
     return data.fees;
 }
 //adimin page to loging to result upload portal
@@ -203,11 +203,13 @@ router.get("/generateid", isAuthenticated, async(req, res) => {
 
 router.get("/student-profile/:studentId", async (req, res) => {
     try {
+        const role= req.session.role
+        const fees = await schoolFees(req.session.school)
         const student = await StudentProfile.findOne({ studentId: req.params.studentId});
         if (!student) {
             return res.status(404).send("Student not found");
         }
-        res.render("student-profile", { student, school: req.session.school, title: "Student Profile" });
+        res.render("student-profile", { student, role, fees, school: req.session.school, title: "Student Profile" });
     } catch (err) {
         res.status(500).send(err.message);
     }
@@ -548,7 +550,7 @@ router.get('/admin/result-template/:template', isAuthenticated, async(req, res)=
     const resultTemplate =`resultTemplate/${req.params.template}`
     try{
         const schoolName = req.session.school
-        const school = await schoolPfofile.findOne({schoolName})
+        const school = await SchoolProfile.findOne({schoolName})
         res.render(resultTemplate, { result, student , school })
     }catch(err){
         console.log(err)
@@ -561,7 +563,7 @@ router.post('/school/result-template', isAuthenticated, async(req, res)=>{
     const { templateName } = req.body
     try{
         const schoolName = req.session.school
-        const school = await schoolPfofile.findOne({schoolName})
+        const school = await SchoolProfile.findOne({schoolName})
         if(!school){
             return res.status(404).json({message:"School not found"})
         }
@@ -832,4 +834,119 @@ router.post('/api/teacher/lesson-note', async (req, res) => {
     }
 
 });
+
+router.get('/admin/student-card', isAuthenticated, async (req, res) => {
+    try {
+        const school = req.session.school;
+
+        // Selected class from the dropdown
+        const selectedClass = req.query.class || '';
+
+        // Get all classes for this school
+        const classes = await StudentProfile.distinct('class', {
+            schoolName: school
+        });
+
+        // Build student query
+        const query = {
+            schoolName: school
+        };
+
+        // If a class was selected, filter students by that class
+        if (selectedClass) {
+            query.class = selectedClass;
+        }
+
+        const student = await StudentProfile.find(query).lean();
+        const schoolInfo = await SchoolProfile.findOne({ schoolName: school }).lean();
+        res.render('student-card', {
+            student,
+            classes,
+            selectedClass,
+            schoolInfo,
+            title: 'Student Card'
+        });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server error');
+    }
+});
+
+router.get('/admin/student-card/download', isAuthenticated, async (req, res) => {
+    try {
+
+        const selectedClass = req.query.class;
+
+        const students = await StudentProfile.find({
+            schoolName: req.session.school,
+            class: selectedClass
+        }).lean();
+
+        const schoolInfo = await School.findOne({
+            schoolName: req.session.school
+        }).lean();
+
+        // Render an EJS template specifically for printing
+        res.render(
+            'student-card-print',
+            {
+                student: students,
+                schoolInfo,
+                selectedClass
+            },
+            async (err, html) => {
+
+                if (err) {
+                    console.error(err);
+                    return res.status(500).send('Unable to generate cards');
+                }
+
+                const browser = await puppeteer.launch({
+                    headless: true
+                });
+
+                const page = await browser.newPage();
+
+                await page.setContent(html, {
+                    waitUntil: 'networkidle0'
+                });
+
+                const pdf = await page.pdf({
+                    format: 'A4',
+                    printBackground: true,
+                    margin: {
+                        top: '10mm',
+                        right: '10mm',
+                        bottom: '10mm',
+                        left: '10mm'
+                    }
+                });
+
+                await browser.close();
+
+                res.setHeader(
+                    'Content-Type',
+                    'application/pdf'
+                );
+
+                res.setHeader(
+                    'Content-Disposition',
+                    `attachment; filename="${selectedClass}-student-id-cards.pdf"`
+                );
+
+                res.send(pdf);
+            }
+        );
+
+    } catch (error) {
+
+        console.error(error);
+
+        res.status(500).send(
+            'Failed to generate student ID cards'
+        );
+    }
+});
+
 module.exports = router;

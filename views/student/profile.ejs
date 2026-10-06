@@ -232,7 +232,7 @@
                                     Phone Number
                                 </p>
 
-                                <p class="text-sm font-medium text-slate-700">
+                                <p class="parentPhone text-sm font-medium text-slate-700">
                                     
                                 </p>
 
@@ -277,7 +277,7 @@
                                     Address
                                 </p>
 
-                                <p class="text-sm font-medium text-slate-700">
+                                <p class="address text-sm font-medium text-slate-700">
                                   
                                 </p>
 
@@ -421,7 +421,7 @@
                                 Full Name
                             </p>
 
-                            <p class="text-sm font-medium text-slate-700">
+                            <p class="parentFullName text-sm font-medium text-slate-700">
                                
                             </p>
 
@@ -466,7 +466,7 @@
                                 Email Address
                             </p>
 
-                            <p class="break-all text-sm font-medium text-slate-700">
+                            <p class="parentEmail text-sm font-medium text-slate-700">
                                 
                             </p>
 
@@ -496,7 +496,7 @@
                                 Address
                             </p>
 
-                            <p class="text-sm font-medium text-slate-700">
+                            <p class="parentAddress text-sm font-medium text-slate-700">
                                 
                             </p>
 
@@ -648,12 +648,19 @@
     //document.querySelector('.schoolSection').innerText = student.session || ''
     document.querySelector('.dob').innerText = student.dob || ''
     document.querySelector('.gender').innerText = student.gender || ''
-    document.querySelector('.schoolName').innerText = student?.schoolName || ''
+    document.querySelectorAll('.schoolName').forEach((item)=>{
+        item.innerText = student?.schoolName || ''
+    })
     document.querySelector('.addmissionNo').innerText = student?.addmissionNo || ''
     document.querySelector('.email').innerText = student.email || ''
     document.querySelector('.address').innerText = student.address || ''
-
-   
+    document.querySelectorAll('.house').forEach((item)=>{
+        item.innerText = student.house || ''
+    })
+    document.querySelector('.parentFullName').innerText = student.guardian.name
+    document.querySelector('.parentEmail').innerText = student.guardian.email   
+    document.querySelector('.parentAddress').innerText = student.guardian.address  
+    document.querySelector('.parentPhone').innerText = student.guardian.phone || '' 
 </script>
 </body>
 </html>

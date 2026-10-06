@@ -299,7 +299,8 @@
                 </a>
 
              <!-- ID CARD -->
-                <a href="/admin/student-id"
+                <div
+                     onclick="openClassModal()"
                     class="card bg-white rounded-3xl shadow-sm border border-slate-200 p-7">
 
                     <div class="w-16 h-16 rounded-2xl bg-yellow-100 flex items-center justify-center">
@@ -314,7 +315,7 @@
                         Generate and print student identity cards.
                     </p>
 
-                </a>
+                </div>
 
                 
                 <!-- ATTENDANCE -->
@@ -347,4 +348,344 @@
     </div>
     </div>
     
+
+    <!-- ==========================================
+     CLASS SELECTION POPUP
+=========================================== -->
+
+<div
+    id="classSelectionModal"
+    class="fixed inset-0 z-[9999] hidden
+           bg-slate-950/60 backdrop-blur-sm
+           items-center justify-center
+           p-4"
+>
+
+    <div
+        class="w-full max-w-lg
+               bg-white rounded-3xl
+               shadow-2xl
+               overflow-hidden"
+    >
+
+        <!-- HEADER -->
+        <div
+            class="bg-gradient-to-r from-primary to-secondary
+                   px-6 py-5 text-white"
+        >
+
+            <div class="flex items-center justify-between">
+
+                <div>
+                    <h2 class="text-lg font-bold text-black">
+                        Student ID Cards
+                    </h2>
+
+                    <p class="text-blue-300 text-xs mt-1">
+                        Select a class to continue
+                    </p>
+                </div>
+
+                <button
+                    type="button"
+                    onclick="closeClassModal()"
+                    class="w-9 h-9 rounded-full
+                           bg-white/10 hover:bg-white/20
+                           flex items-center justify-center
+                           text-xl transition"
+                >
+                    &times;
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- CLASS LIST -->
+        <div class="p-5">
+
+            <div
+                class="grid grid-cols-2 sm:grid-cols-3
+                       gap-3"
+            >
+
+                <!-- ALL -->
+                <button
+                    type="button"
+                    onclick="selectCardClass('ALL')"
+                    class="class-option group
+                           rounded-xl border border-slate-200
+                           p-4 text-center
+                           hover:border-secondary
+                           hover:bg-blue-50
+                           transition"
+                >
+
+                    <div
+                        class="mx-auto mb-2
+                               w-10 h-10 rounded-full
+                               bg-blue-50
+                               flex items-center justify-center"
+                    >
+                        <span class="text-secondary font-bold">
+                            All
+                        </span>
+                    </div>
+
+                    <p class="text-sm font-semibold text-primary">
+                        All Students
+                    </p>
+
+                </button>
+
+
+                <!-- NURSERY -->
+                <button
+                    type="button"
+                    onclick="selectCardClass('Nursery 1')"
+                    class="class-option group rounded-xl border border-slate-200
+                           p-4 text-center hover:border-secondary
+                           hover:bg-blue-50 transition"
+                >
+                    <p class="text-sm font-semibold text-primary">
+                        Nursery 1
+                    </p>
+                </button>
+
+                <button
+                    type="button"
+                    onclick="selectCardClass('Nursery 2')"
+                    class="class-option group rounded-xl border border-slate-200
+                           p-4 text-center hover:border-secondary
+                           hover:bg-blue-50 transition"
+                >
+                    <p class="text-sm font-semibold text-primary">
+                        Nursery 2
+                    </p>
+                </button>
+
+                <button
+                    type="button"
+                    onclick="selectCardClass('Nursery 3')"
+                    class="class-option group rounded-xl border border-slate-200
+                           p-4 text-center hover:border-secondary
+                           hover:bg-blue-50 transition"
+                >
+                    <p class="text-sm font-semibold text-primary">
+                        Nursery 3
+                    </p>
+                </button>
+
+
+                <!-- PRIMARY -->
+                <button
+                    type="button"
+                    onclick="selectCardClass('BASIC 1')"
+                    class="class-option group rounded-xl border border-slate-200
+                           p-4 text-center hover:border-secondary
+                           hover:bg-blue-50 transition"
+                >
+                    <p class="text-sm font-semibold text-primary">
+                        BASIC 1
+                    </p>
+                </button>
+
+                <button
+                    type="button"
+                    onclick="selectCardClass('BASIC 2')"
+                    class="class-option group rounded-xl border border-slate-200
+                           p-4 text-center hover:border-secondary
+                           hover:bg-blue-50 transition"
+                >
+                    <p class="text-sm font-semibold text-primary">
+                        BASIC 2
+                    </p>
+                </button>
+
+                <button
+                    type="button"
+                    onclick="selectCardClass('BASIC 3')"
+                    class="class-option group rounded-xl border border-slate-200
+                           p-4 text-center hover:border-secondary
+                           hover:bg-blue-50 transition"
+                >
+                    <p class="text-sm font-semibold text-primary">
+                        BASIC 3
+                    </p>
+                </button>
+
+                <button
+                    type="button"
+                    onclick="selectCardClass('BASIC 4')"
+                    class="class-option group rounded-xl border border-slate-200
+                           p-4 text-center hover:border-secondary
+                           hover:bg-blue-50 transition"
+                >
+                    <p class="text-sm font-semibold text-primary">
+                        BASIC 4
+                    </p>
+                </button>
+
+                <button
+                    type="button"
+                    onclick="selectCardClass('BASIC 5')"
+                    class="class-option group rounded-xl border border-slate-200
+                           p-4 text-center hover:border-secondary
+                           hover:bg-blue-50 transition"
+                >
+                    <p class="text-sm font-semibold text-primary">
+                        BASIC 5
+                    </p>
+                </button>
+
+                <button
+                    type="button"
+                    onclick="selectCardClass('BASIC 6')"
+                    class="class-option group rounded-xl border border-slate-200
+                           p-4 text-center hover:border-secondary
+                           hover:bg-blue-50 transition"
+                >
+                    <p class="text-sm font-semibold text-primary">
+                        BASIC 6
+                    </p>
+                </button>
+
+
+                <!-- JUNIOR SECONDARY -->
+                <button
+                    type="button"
+                    onclick="selectCardClass('JSS 1')"
+                    class="class-option group rounded-xl border border-slate-200
+                           p-4 text-center hover:border-secondary
+                           hover:bg-blue-50 transition"
+                >
+                    <p class="text-sm font-semibold text-primary">
+                        JSS 1
+                    </p>
+                </button>
+
+                <button
+                    type="button"
+                    onclick="selectCardClass('JSS 2')"
+                    class="class-option group rounded-xl border border-slate-200
+                           p-4 text-center hover:border-secondary
+                           hover:bg-blue-50 transition"
+                >
+                    <p class="text-sm font-semibold text-primary">
+                        JSS 2
+                    </p>
+                </button>
+
+                <button
+                    type="button"
+                    onclick="selectCardClass('JSS 3')"
+                    class="class-option group rounded-xl border border-slate-200
+                           p-4 text-center hover:border-secondary
+                           hover:bg-blue-50 transition"
+                >
+                    <p class="text-sm font-semibold text-primary">
+                        JSS 3
+                    </p>
+                </button>
+
+
+                <!-- SENIOR SECONDARY -->
+                <button
+                    type="button"
+                    onclick="selectCardClass('SS 1')"
+                    class="class-option group rounded-xl border border-slate-200
+                           p-4 text-center hover:border-secondary
+                           hover:bg-blue-50 transition"
+                >
+                    <p class="text-sm font-semibold text-primary">
+                        SS 1
+                    </p>
+                </button>
+
+                <button
+                    type="button"
+                    onclick="selectCardClass('SS 2')"
+                    class="class-option group rounded-xl border border-slate-200
+                           p-4 text-center hover:border-secondary
+                           hover:bg-blue-50 transition"
+                >
+                    <p class="text-sm font-semibold text-primary">
+                        SS 2
+                    </p>
+                </button>
+
+                <button
+                    type="button"
+                    onclick="selectCardClass('SS 3')"
+                    class="class-option group rounded-xl border border-slate-200
+                           p-4 text-center hover:border-secondary
+                           hover:bg-blue-50 transition"
+                >
+                    <p class="text-sm font-semibold text-primary">
+                        SS 3
+                    </p>
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<script>
+
+    function openClassModal() {
+
+        const modal =
+            document.getElementById('classSelectionModal');
+
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+
+    }
+
+
+    function closeClassModal() {
+
+        const modal =
+            document.getElementById('classSelectionModal');
+
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+
+    }
+
+
+    function selectCardClass(selectedClass) {
+
+        if (selectedClass === 'ALL') {
+
+            window.location.href =
+                '/admin/student-card';
+
+            return;
+        }
+
+        window.location.href =
+            `/admin/student-card?class=${encodeURIComponent(selectedClass)}`;
+
+    }
+
+
+    // Close when clicking outside the popup
+
+    document
+        .getElementById('classSelectionModal')
+        .addEventListener('click', function (event) {
+
+            if (event.target === this) {
+                closeClassModal();
+            }
+
+        });
+
+</script>
+
 </body>

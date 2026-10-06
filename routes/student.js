@@ -6,6 +6,7 @@ const upload = require('../middleware/upload')
 const LessonNote = require('../schema/lessonNote')
 const cloudinary = require('../middleware/cloudinary')
 const Timetable = require('../schema/timeTable.js')
+const StudentProfile = require('../schema/studentProfile.js')
 const router = express.Router();
 
 router.get('/student/dashboard', (req, res) => {
@@ -360,4 +361,67 @@ router.get('/admin/timetable/:class/:school', async (req, res) => {
     }
 });
 
+//STUDENT UPDATE PROFILE
+router.patch('/student/profile-update/:_id', upload.single('passport'), async (req, res) => {
+    try {
+        const studentId = req.params._id;
+        const updateData = req.body;
+        const guardianData = {
+            name: req.body.guardianName,
+            relationship: req.body.relationship,
+            phone: req.body.guardianPhone,
+            email: req.body.guardianEmail,
+            address: req.body.guardianAddress,
+            state: req.body.guardianState,
+            country: req.body.guardianCountry,
+            lga: req.body.guardianLga
+        };
+        updateData.guardian = guardianData;
+        const emergencyContactData = {
+            name: req.body.emergencyName,
+            phone: req.body.emergencyPhone
+        };
+        updateData.emergencyContact = emergencyContactData;
+        console.log('Update Data:', updateData);
+          //GET STUDENT BY ID
+        const student = await StudentProfile.findById(studentId);
+        if (!student) {
+            return res.status(404).json({
+                success: false,
+                message: 'Student not found'
+            });
+        }
+        //SAVE URL TO CLOUDINARY
+        if (req.file) {
+            //CHECK IF STUDENT ALREADY HAS A PASSPORT IMAGE
+            if (student.publicId) {
+                //DELETE OLD IMAGE FROM CLOUDINARY
+                await cloudinary.uploader.destroy(student.publicId);
+            }
+            const result = await cloudinary.uploader.upload(req.file.path);
+            updateData.passport = result.secure_url;
+            updateData.publicId = result.public_id;
+        }
+        const studentData = await StudentProfile.findByIdAndUpdate(studentId, updateData, { new: true });
+
+        if (!studentData) {
+            return res.status(404).json({
+                success: false,
+                message: 'Student not found'
+            });
+        }
+
+        res.json({
+            success: true,
+            message: 'Profile updated successfully!',
+            student: studentData
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            success: false,
+            message: 'Unable to update profile'
+        });
+    }
+});
 module.exports = router;

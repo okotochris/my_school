@@ -89,7 +89,7 @@
 
 
                                             <!-- Form -->
-                                            <form id="studentBasicInfoForm" class="p-5 sm:p-6">
+                                            <form id="form" class="p-5 sm:p-6">
 
                                                 <!-- ==================================
                                                 PASSPORT PHOTO
@@ -97,8 +97,8 @@
 
 
                                                 <!-- ==================================
-     PASSPORT PHOTOGRAPH
-=================================== -->
+                                                    PASSPORT PHOTOGRAPH
+                                                =================================== -->
 
                                                 <div class="mb-7">
 
@@ -277,7 +277,7 @@
                                                             </label>
 
                                                             <input id="studentHouse" name="house" type="text"
-                                                                placeholder="Enter your house"
+                                                                placeholder="Enter your house name you belong to in school"
                                                                 class="w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-xs text-slate-700 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-100">
 
                                                         </div>
@@ -298,24 +298,7 @@
                                                         Make sure the information provided is accurate.
                                                     </p>
 
-
-                                                    <div class="flex gap-2">
-
-                                                        <button type="button" id="cancelStudentBasicInfo"
-                                                            class="rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-50">
-                                                            Cancel
-                                                        </button>
-
-                                                        <button type="submit"
-                                                            class="rounded-lg bg-[#0b2a4a] px-5 py-2.5 text-xs font-semibold text-white transition hover:bg-[#17619a]">
-                                                            Save Changes
-                                                        </button>
-
-                                                    </div>
-
                                                 </div>
-
-                                            </form>
 
                                         </div>
 
@@ -323,21 +306,16 @@
                                 </div>
 
 
-                            </div>
-                            <div>
-                                <!-- ======================================
-                         SETTINGS CONTENT
-                    ======================================= -->
-
-                                <div>
+                           
+                                <div class="mt-8">
 
                                     <!-- ==================================
-         GUARDIAN INFORMATION
-    =================================== -->
+                                        GUARDIAN INFORMATION
+                                    =================================== -->
 
                                     <div id="guardianInformationSection" class="settings-section">
 
-                                        <div class="rounded-xl border border-slate-200 bg-white shadow-sm">
+                                        <div class="rounded-xl border border-slate-200 bg-white shadow-sm p-5 sm:p-6">
 
 
                                             <!-- Header -->
@@ -368,12 +346,6 @@
                                                 </div>
 
                                             </div>
-
-
-                                            <!-- Form -->
-
-                                            <form id="guardianForm" class="p-5 sm:p-6">
-
 
                                                 <!-- ==================================
                                                     PRIMARY GUARDIAN
@@ -559,26 +531,154 @@
                                                                     Select State
                                                                 </option>
 
-                                                                <option value="Edo">
-                                                                    Edo
-                                                                </option>
+                                                                <option value="Abia">
+    Abia
+</option>
 
-                                                                <option value="Lagos">
-                                                                    Lagos
-                                                                </option>
+<option value="Adamawa">
+    Adamawa
+</option>
 
-                                                                <option value="Abuja">
-                                                                    Abuja
-                                                                </option>
+<option value="Akwa Ibom">
+    Akwa Ibom
+</option>
 
-                                                                <option value="Delta">
-                                                                    Delta
-                                                                </option>
+<option value="Anambra">
+    Anambra
+</option>
 
-                                                                <option value="Rivers">
-                                                                    Rivers
-                                                                </option>
+<option value="Bauchi">
+    Bauchi
+</option>
 
+<option value="Bayelsa">
+    Bayelsa
+</option>
+
+<option value="Benue">
+    Benue
+</option>
+
+<option value="Borno">
+    Borno
+</option>
+
+<option value="Cross River">
+    Cross River
+</option>
+
+<option value="Delta">
+    Delta
+</option>
+
+<option value="Ebonyi">
+    Ebonyi
+</option>
+
+<option value="Edo">
+    Edo
+</option>
+
+<option value="Ekiti">
+    Ekiti
+</option>
+
+<option value="Enugu">
+    Enugu
+</option>
+
+<option value="Gombe">
+    Gombe
+</option>
+
+<option value="Imo">
+    Imo
+</option>
+
+<option value="Jigawa">
+    Jigawa
+</option>
+
+<option value="Kaduna">
+    Kaduna
+</option>
+
+<option value="Kano">
+    Kano
+</option>
+
+<option value="Katsina">
+    Katsina
+</option>
+
+<option value="Kebbi">
+    Kebbi
+</option>
+
+<option value="Kogi">
+    Kogi
+</option>
+
+<option value="Kwara">
+    Kwara
+</option>
+
+<option value="Lagos">
+    Lagos
+</option>
+
+<option value="Nasarawa">
+    Nasarawa
+</option>
+
+<option value="Niger">
+    Niger
+</option>
+
+<option value="Ogun">
+    Ogun
+</option>
+
+<option value="Ondo">
+    Ondo
+</option>
+
+<option value="Osun">
+    Osun
+</option>
+
+<option value="Oyo">
+    Oyo
+</option>
+
+<option value="Plateau">
+    Plateau
+</option>
+
+<option value="Rivers">
+    Rivers
+</option>
+
+<option value="Sokoto">
+    Sokoto
+</option>
+
+<option value="Taraba">
+    Taraba
+</option>
+
+<option value="Yobe">
+    Yobe
+</option>
+
+<option value="Zamfara">
+    Zamfara
+</option>
+
+<!-- Federal Capital Territory -->
+<option value="FCT">
+    Abuja (FCT)
+</option>
                                                             </select>
 
                                                         </div>
@@ -588,13 +688,13 @@
 
                                                         <div>
 
-                                                            <label for="guardianLga"
+                                                            <label for="country"
                                                                 class="mb-1.5 block text-xs font-medium text-slate-600">
-                                                                Local Government Area
+                                                                Country
                                                             </label>
 
-                                                            <input id="guardianLga" name="guardianLga" type="text"
-                                                                placeholder="Enter LGA"
+                                                            <input id="country" name="country" type="text"
+                                                                placeholder="Enter Country"
                                                                 class="w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-xs text-slate-700 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100">
 
                                                         </div>
@@ -688,7 +788,9 @@
                                                             Cancel
                                                         </button>
 
-                                                        <button type="submit"
+                                                        <button 
+                                                            onclick="saveChange(event)"
+                                                            id="saveButton"
                                                             class="rounded-lg bg-[#0b2a4a] px-5 py-2.5 text-xs font-semibold text-white transition hover:bg-[#17619a]">
                                                             Save Changes
                                                         </button>
@@ -839,7 +941,7 @@
 
                         if (!file.type.startsWith('image/')) {
 
-                            alert('Please select an image file.');
+                            showMassagePopup('Please select an image file.');
 
                             this.value = '';
 
@@ -947,97 +1049,46 @@
                     emergencyPhone.value =
                         student.emergencyContact?.phone || '';
                 }
-
-
-                // ==========================================
-                // STUDENT BASIC INFORMATION FORM
-                // ==========================================
-
-                const studentBasicInfoForm =
-                    document.getElementById('studentBasicInfoForm');
-
-
-                if (studentBasicInfoForm) {
-
-                    studentBasicInfoForm.addEventListener(
-                        'submit',
-                        function (event) {
-
-                            event.preventDefault();
-
-
-                            const formData =
-                                new FormData();
-
-
-                            // Basic information
-
-                            formData.append(
-                                'fullname',
-                                studentFullname?.value.trim() || ''
-                            );
-
-                            formData.append(
-                                'dob',
-                                studentDob?.value || ''
-                            );
-
-                            formData.append(
-                                'gender',
-                                studentGender?.value || ''
-                            );
-
-                            formData.append(
-                                'email',
-                                studentEmail?.value.trim() || ''
-                            );
-
-                            formData.append(
-                                'address',
-                                studentAddress?.value.trim() || ''
-                            );
-
-                            formData.append(
-                                'house',
-                                studentHouse?.value.trim() || ''
-                            );
-
-
-                            // Passport
-
-                            if (
-                                studentPassport &&
-                                studentPassport.files.length > 0
-                            ) {
-
-                                formData.append(
-                                    'passport',
-                                    studentPassport.files[0]
-                                );
-
-                            }
-            
-                                fetch('/api/student/update-profile', {
-                                    method: 'PATCH',
-                                    body: formData
-                                })
-                                .then(response => response.json())
-                                .then(data => {
-                                    console.log(data);
-                                });
-                        
-
-                            alert(
-                                'Student information updated successfully.'
-                            );
-
-                        }
-                    );
-
-                }
-
             });
 
+            async function saveChange(e){
+                e.preventDefault();
+                 const savedStudent = localStorage.getItem('student');
+
+                if (!savedStudent) {
+                    console.log('No student found in localStorage');
+                    return;
+                }
+
+                let student = JSON.parse(savedStudent);
+                const form = document.getElementById('form');
+                document.getElementById('saveButton').disabled = true; // Disable the button to prevent multiple submissions
+                document.getElementById('saveButton').innerText = 'Saving...'; // Change button text to indicate saving
+                const formData = new FormData(form);
+
+                try {
+                    const response = await fetch(`/student/profile-update/${student._id}`, {
+                        method: 'PATCH',
+                        body: formData
+                    });
+
+                    if (response.ok) {
+                        const result = await response.json();
+                        showMessagePopup(result.message || 'Profile updated successfully!');
+                        localStorage.setItem('student', JSON.stringify(result.student));
+                    } else {
+                        const errorResult = await response.json();
+                        showMessagePopup(errorResult.message || 'Failed to update profile.');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    showMessagePopup('An error occurred while updating the profile.');
+                }finally {
+                    // Optionally, you can reset the form or perform other actions here
+                    document.getElementById('saveButton').disabled = false; // Re-enable the button
+                    document.getElementById('saveButton').innerText = 'Save Changes'; // Reset
+                }
+            }
         </script>
 
 

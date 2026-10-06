@@ -1,535 +1,906 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>Student Profile</title>
+    <meta charset="UTF-8">
+    <title>Student Profile</title>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="/styles/global.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Inter', sans-serif;
-}
-
-/* 🌈 BACKGROUND */
-body {
-    background: linear-gradient(135deg, #eef2ff, #f8fafc);
-    color: #1f2937;
-   
-}
-
-/* 📦 MAIN CONTAINER */
-.container {
-    max-width: 1000px;
-    margin: auto;
-    background: #ffffff;
-    border-radius: 16px;
-    padding: 30px;
-    box-shadow: 
-        0 10px 30px rgba(0,0,0,0.08),
-        0 2px 10px rgba(0,0,0,0.04);
-    position:relative;
-}
-
-/* 🧾 HEADINGS */
-h2 {
-    font-size: 28px;
-    margin-bottom: 25px;
-    font-weight: 600;
-}
-
-h3 {
-    margin-bottom: 15px;
-    font-weight: 500;
-}
-
-/* 🧑‍🎓 TOP SECTION */
-.top-section {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 35px;
-}
-
-.student-box {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.school-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-/* 🖼️ IMAGES */
-.passport {
-    width: 120px;
-    height: 120px;
-    border-radius: 16px;
-    object-fit: cover;
-    border: 3px solid #4f46e5;
-}
-
-.school-logo {
-    width: 90px;
-}
-
-.school-name {
-    margin-top: 8px;
-    font-size: 14px;
-    color: #6b7280;
-}
-
-/* 📄 DETAILS */
-.details p {
-    margin: 6px 0;
-    font-size: 15px;
-    color: #4b5563;
-}
-
-.details strong {
-    color: #111827;
-}
-
-/* 📊 GRID CARDS */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    margin-bottom: 30px;
-}
-
-.card {
-    background: linear-gradient(135deg, #ffffff, #f9fafb);
-    border: 1px solid #e5e7eb;
-    padding: 18px;
-    border-radius: 16px;
-    transition: 0.3s;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    border-color: #4f46e5;
-    box-shadow: 0 10px 25px rgba(79,70,229,0.15);
-}
-
-.card p {
-    margin: 8px 0;
-    font-size: 14px;
-    color: #6b7280;
-}
-
-.card strong {
-    color: #4f46e5;
-}
-
-/* 📈 CHART */
-.chart-container {
-    margin-top: 30px;
-    width: 100%;
-    background: linear-gradient(135deg, #ffffff, #f9fafb);
-    padding: 20px;
-    border-radius: 16px;
-    border: 1px solid #e5e7eb;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
-
-/* 📄 RESULTS SECTION */
-.results-section {
-    margin-top: 30px;
-}
-
-.results-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 15px;
-    margin-top: 15px;
-}
-
-/* 🧾 RESULT CARD */
-.result-card {
-    background: linear-gradient(135deg, #ffffff, #f9fafb);
-    border: 1px solid #e5e7eb;
-    padding: 18px;
-    border-radius: 16px;
-    transition: 0.3s;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-    position: relative;
-    overflow: hidden;
-}
-
-.result-card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(90deg, #4f46e5, #0ea5e9);
-}
-
-.result-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.12);
-}
-
-/* 📊 RESULT CONTENT */
-.result-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.term {
-    font-weight: 600;
-    color: #111827;
-}
-
-.session {
-    font-size: 12px;
-    color: #6b7280;
-}
-
-.avg {
-    font-size: 20px;
-    font-weight: bold;
-    color: #4f46e5;
-}
-
-/* STATUS */
-.status {
-    font-size: 11px;
-    padding: 4px 8px;
-    border-radius: 6px;
-}
-
-.pass {
-    background: rgba(34,197,94,0.15);
-    color: #16a34a;
-}
-
-.fail {
-    background: rgba(239,68,68,0.15);
-    color: #dc2626;
-}
-
-/* 🔘 BUTTON */
-.result-actions{
-    display: flex;
-    gap: 10px;
-}
-.view-btn, .del-btn {
-    width: 100%;
-    border: none;
-    padding: 10px;
-    border-radius: 10px;
-    color: #fff;
-    cursor: pointer;
-    transition: 0.3s;
-    font-weight: 500;
-    box-shadow: 0 4px 12px rgba(79,70,229,0.3);
-}
-.view-btn {
-     background: linear-gradient(135deg, #4f46e5, #0ea5e9);
-}
-.del-btn {
-    background: linear-gradient(135deg, #ef4444, #dc2626);
-}
-.view-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(79,70,229,0.4);
-}
-
-.del-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(239,68,68,0.4);
-}
-
-/* ⏳ LOADER */
-.cover {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255,255,255,0.6);
-    backdrop-filter: blur(6px);
-    z-index: 999;
-    justify-content: center;
-    align-items: center;
-}
-
-#loading {
-    width: 50px;
-    height: 50px;
-    border: 4px solid #e5e7eb;
-    border-top: 4px solid #4f46e5;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-.del-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: #fff;
-    padding: 30px;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-   
-}
-.cover-del-model {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.4);
-    z-index: 999;
-    display: none;
-    justify-content: center;
-    align-items: center;
-     z-index: 1000;
-}
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* 📱 RESPONSIVE */
-@media (max-width: 600px) {
-    .top-section {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .grid {
-        grid-template-columns: 1fr;
-    }
-    .container{
-        max-width: 100%;
-    }
-}
-</style>
-</head>
-
-<body>
-
-<div class="container">
-    <h2>🎓 Student Profile</h2>
-
-   <div class="top-section">
-
-        <!-- LEFT: STUDENT -->
-        <div class="school-box">
-            <img 
-            src="/IMAGE/<%= encodeURIComponent(student.schoolName.toLowerCase()) %>.png"
-            class="school-logo"
-            />
-            <h3 class="school-name"><%= student.schoolName %></h3>
-        </div>
-
-    <!-- RIGHT: SCHOOL -->
-    <div class="student-box">
-        <img class="passport" 
-        src="<%= student.passport || 'https://via.placeholder.com/150' %>" />
-
-        <div class="details">
-            <p><strong>Name:</strong> <%= student.fullname %></p>
-            <p><strong>ID:</strong> <%= student.studentId %></p>
-            <p><strong>Session:</strong> <%= student.schoolsession %></p>
-        </div>
-    </div>
-</div>
-
-    <div class="grid">
-        <div class="card">
-            <p><strong>Admission No:</strong> <%= student.addmissionNo || 'N/A' %></p>
-            <p><strong>Class:</strong> <%= student.class %></p>
-        </div>
-
-        <div class="card">
-            <p><strong>DOB:</strong> <%= student.dob || 'N/A' %></p>
-            <p><strong>Gender:</strong> <%= student.gender || 'N/A' %></p>
-        </div>
-    </div>
-
-    <div class="chart-container">
-        <h3>📈 Performance</h3>
-        <canvas id="performanceChart"></canvas>
-    </div>
-
-   <div class="results-section">
-    <h3>📄 Student Results</h3>
-
-    <div class="results-list"></div>
-</div>
-</div>
-<div class="cover-del-model">
-    <div class="del-modal">
-    <h2>Delete Result</h2>
-    <p>This will permanently delete the selected result.</p>
-    <div style="display:flex; gap:10px; margin-top:20px">
-        <button class="view-btn" onclick="document.querySelector('.cover-del-model').style.display = 'none'">Cancel</button>
-        <button class="del-btn" onclick="detResult()">Confirm Delete</button>
-    </div>
-</div>
-</div>
-<div class="cover">
-        <dev id="loading"></dev>
-    </div>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    getResult('<%= student.studentId %>');
-});
-
-async function getResult(studentId) {
-    try {
-        const response = await fetch(`/api/get_result?studentId=${studentId}`);
-        const data = await response.json();
-
-        resultAnalysisA(data);
-    } catch (err) {
-        console.error("Error fetching result:", err);
-    }finally {
-        document.querySelector('.cover').style.display = 'none';
-    }
-}
-let resultDetails = null;
-function resultAnalysisA(data) {
-   
-    const labels = [];
-    const scores = [];
-
-    data.forEach(res => {
-        labels.push(res.term);
-        scores.push(res.average);
-    });
-
-    const ctx = document.getElementById('performanceChart').getContext('2d');
-
-    new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels,
-            datasets: [{
-                label: 'Average Score',
-                data: scores,
-                borderColor: '#0ea5e9',
-                backgroundColor: 'rgba(14, 165, 233, 0.1)',
-                fill: true,
-                tension: 0.4
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: { labels: { color: "#1f2937" } }
-            },
-            scales: {
-                x: { ticks: { color: "#6b7280" } },
-                y: { ticks: { color: "#6b7280" }, beginAtZero: true }
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0b2a4a',
+                        secondary: '#17619a'
+                    }
+                }
             }
         }
-    });
+    </script>
+</head>
 
-    renderResults(data);
-}
+<body class="bg-slate-50 text-slate-800">
+    <%- include("./partials/header.ejs") %>
+        <div class="admin-container">
+            <%- include("./partials/navigation.ejs") %>
+                <div class="w-full mx-5 px-4 py-6">
 
-function renderResults(data) {
-    const container = document.querySelector('.results-list');
-    let html = '';
+                    <!-- =========================================
+                        PROFILE HEADER
+                    ========================================== -->
 
-    data.forEach(item => {
-        const status = item.average >= 50 ? 'pass' : 'fail';
+                    <div
+                        class="bg-gradient-to-r from-primary to-secondary rounded-2xl p-5 sm:p-7 text-white shadow-lg mb-5">
 
-        html += `
-            <div class="result-card">
-                
-                <div class="result-top">
-                    <div>
-                        <p class="term">${item.term}</p>
-                        <p class="session">${item.studentClass}</p>
-                        <p class="session">${item.section}</p>
+                        <div class="flex flex-col sm:flex-row items-center sm:items-center justify-between gap-6">
+
+                            <!-- STUDENT -->
+                            <div class="flex flex-col sm:flex-row items-center gap-5 text-center sm:text-left">
+
+                                <img class="w-28 h-28 rounded-2xl object-cover border-4 border-white/80 bg-white"
+                                    src="<%= student.passport || 'https://via.placeholder.com/150' %>"
+                                    alt="Student Passport">
+
+                                <div>
+                                    <h1 class="text-2xl sm:text-3xl font-bold">
+                                        <%= student.fullname %>
+                                    </h1>
+
+                                    <p class="text-white/80 text-sm mt-1">
+                                        Student ID: <%= student.studentId %>
+                                    </p>
+
+                                    <div class="flex flex-wrap justify-center sm:justify-start gap-2 mt-3">
+
+                                        <span class="px-3 py-1 rounded-full bg-white/15 text-xs">
+                                            <%= student.class || 'Class not set' %>
+                                        </span>
+
+                                        <span class="px-3 py-1 rounded-full bg-white/15 text-xs">
+                                            <%= student.schoolsession || 'Session not set' %>
+                                        </span>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <!-- SCHOOL -->
+                            <div class="text-center sm:text-right">
+
+                               
+
+                            </div>
+
+                        </div>
+
                     </div>
 
-                    <div class="result-stats">
-                        <p class="avg">${item.average}</p>
-                        <span class="status ${status}">
-                            ${status.toUpperCase()}
-                        </span>
+
+                    <!-- =========================================
+         QUICK INFORMATION
+    ========================================== -->
+
+                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-5">
+
+                        <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
+                            <p class="text-xs text-slate-500">Admission Number</p>
+                            <p class="font-semibold text-primary mt-1">
+                                <%= student.addmissionNo || 'N/A' %>
+                            </p>
+                        </div>
+
+                        <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
+                            <p class="text-xs text-slate-500">Class</p>
+                            <p class="font-semibold text-primary mt-1">
+                                <%= student.class || 'N/A' %>
+                            </p>
+                        </div>
+
+                        <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
+                            <p class="text-xs text-slate-500">Gender</p>
+                            <p class="font-semibold text-primary mt-1">
+                                <%= student.gender || 'N/A' %>
+                            </p>
+                        </div>
+
+                        <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
+                            <p class="text-xs text-slate-500">Date of Birth</p>
+                            <p class="font-semibold text-primary mt-1">
+                                <%= student.dob || 'N/A' %>
+                            </p>
+                        </div>
+
                     </div>
+
+
+                    <!-- =========================================
+         PERSONAL INFORMATION
+    ========================================== -->
+
+                    <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm mb-5">
+
+                        <div class="flex items-center gap-3 mb-5">
+
+                            <div class="w-1 h-6 bg-secondary rounded-full"></div>
+
+                            <h2 class="font-bold text-lg text-primary">
+                                Personal Information
+                            </h2>
+
+                        </div>
+
+
+                        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
+                            <!-- Fullname -->
+                            <div class="bg-slate-50 rounded-xl p-4">
+                                <p class="text-xs uppercase tracking-wide text-slate-500">
+                                    Full Name
+                                </p>
+                                <p class="font-semibold mt-1">
+                                    <%= student.fullname || 'N/A' %>
+                                </p>
+                            </div>
+
+
+                            <!-- Student ID -->
+                            <div class="bg-slate-50 rounded-xl p-4">
+                                <p class="text-xs uppercase tracking-wide text-slate-500">
+                                    Student ID
+                                </p>
+                                <p class="font-semibold mt-1">
+                                    <%= student.studentId || 'N/A' %>
+                                </p>
+                            </div>
+
+
+                            <!-- Admission -->
+                            <div class="bg-slate-50 rounded-xl p-4">
+                                <p class="text-xs uppercase tracking-wide text-slate-500">
+                                    Admission Number
+                                </p>
+                                <p class="font-semibold mt-1">
+                                    <%= student.addmissionNo || 'N/A' %>
+                                </p>
+                            </div>
+
+
+                            <!-- DOB -->
+                            <div class="bg-slate-50 rounded-xl p-4">
+                                <p class="text-xs uppercase tracking-wide text-slate-500">
+                                    Date of Birth
+                                </p>
+                                <p class="font-semibold mt-1">
+                                    <%= student.dob || 'N/A' %>
+                                </p>
+                            </div>
+
+
+                            <!-- Gender -->
+                            <div class="bg-slate-50 rounded-xl p-4">
+                                <p class="text-xs uppercase tracking-wide text-slate-500">
+                                    Gender
+                                </p>
+                                <p class="font-semibold mt-1">
+                                    <%= student.gender || 'N/A' %>
+                                </p>
+                            </div>
+
+
+                            <!-- School Session -->
+                            <div class="bg-slate-50 rounded-xl p-4">
+                                <p class="text-xs uppercase tracking-wide text-slate-500">
+                                    School Session
+                                </p>
+                                <p class="font-semibold mt-1">
+                                    <%= student.schoolsession || 'N/A' %>
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =========================================
+         CONTACT INFORMATION
+    ========================================== -->
+
+                    <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm mb-5">
+
+                        <div class="flex items-center gap-3 mb-5">
+
+                            <div class="w-1 h-6 bg-secondary rounded-full"></div>
+
+                            <h2 class="font-bold text-lg text-primary">
+                                Contact & Address
+                            </h2>
+
+                        </div>
+
+
+                        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
+                            <div class="bg-slate-50 rounded-xl p-4">
+                                <p class="text-xs uppercase tracking-wide text-slate-500">
+                                    Email
+                                </p>
+                                <p class="font-semibold mt-1 break-words">
+                                    <%= student.email || 'N/A' %>
+                                </p>
+                            </div>
+
+
+                            <div class="bg-slate-50 rounded-xl p-4">
+                                <p class="text-xs uppercase tracking-wide text-slate-500">
+                                    Country
+                                </p>
+                                <p class="font-semibold mt-1">
+                                    <%= student.country || 'N/A' %>
+                                </p>
+                            </div>
+
+
+                            <div class="bg-slate-50 rounded-xl p-4">
+                                <p class="text-xs uppercase tracking-wide text-slate-500">
+                                    State
+                                </p>
+                                <p class="font-semibold mt-1">
+                                    <%= student.state || 'N/A' %>
+                                </p>
+                            </div>
+
+
+                            <div class="bg-slate-50 rounded-xl p-4 sm:col-span-2">
+                                <p class="text-xs uppercase tracking-wide text-slate-500">
+                                    Address
+                                </p>
+                                <p class="font-semibold mt-1">
+                                    <%= student.address || 'N/A' %>
+                                </p>
+                            </div>
+
+
+                            <div class="bg-slate-50 rounded-xl p-4">
+                                <p class="text-xs uppercase tracking-wide text-slate-500">
+                                    House
+                                </p>
+                                <p class="font-semibold mt-1">
+                                    <%= student.house || 'N/A' %>
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =========================================
+         GUARDIAN INFORMATION
+    ========================================== -->
+
+                    <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm mb-5">
+
+                        <div class="flex items-center gap-3 mb-5">
+
+                            <div class="w-1 h-6 bg-secondary rounded-full"></div>
+
+                            <h2 class="font-bold text-lg text-primary">
+                                Guardian Information
+                            </h2>
+
+                        </div>
+
+
+                        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
+                            <div class="bg-slate-50 rounded-xl p-4">
+                                <p class="text-xs text-slate-500 uppercase">
+                                    Name
+                                </p>
+                                <p class="font-semibold mt-1">
+                                    <%= student.guardian?.name || 'N/A' %>
+                                </p>
+                            </div>
+
+
+                            <div class="bg-slate-50 rounded-xl p-4">
+                                <p class="text-xs text-slate-500 uppercase">
+                                    Relationship
+                                </p>
+                                <p class="font-semibold mt-1">
+                                    <%= student.guardian?.relationship || 'N/A' %>
+                                </p>
+                            </div>
+
+
+                            <div class="bg-slate-50 rounded-xl p-4">
+                                <p class="text-xs text-slate-500 uppercase">
+                                    Phone
+                                </p>
+                                <p class="font-semibold mt-1">
+                                    <%= student.guardian?.phone || 'N/A' %>
+                                </p>
+                            </div>
+
+
+                            <div class="bg-slate-50 rounded-xl p-4">
+                                <p class="text-xs text-slate-500 uppercase">
+                                    Email
+                                </p>
+                                <p class="font-semibold mt-1 break-words">
+                                    <%= student.guardian?.email || 'N/A' %>
+                                </p>
+                            </div>
+
+
+                            <div class="bg-slate-50 rounded-xl p-4">
+                                <p class="text-xs text-slate-500 uppercase">
+                                    State
+                                </p>
+                                <p class="font-semibold mt-1">
+                                    <%= student.guardian?.state || 'N/A' %>
+                                </p>
+                            </div>
+
+
+                            <div class="bg-slate-50 rounded-xl p-4">
+                                <p class="text-xs text-slate-500 uppercase">
+                                    LGA
+                                </p>
+                                <p class="font-semibold mt-1">
+                                    <%= student.guardian?.lga || 'N/A' %>
+                                </p>
+                            </div>
+
+
+                            <div class="bg-slate-50 rounded-xl p-4 sm:col-span-2 lg:col-span-3">
+                                <p class="text-xs text-slate-500 uppercase">
+                                    Address
+                                </p>
+                                <p class="font-semibold mt-1">
+                                    <%= student.guardian?.address || 'N/A' %>
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =========================================
+         EMERGENCY CONTACT
+    ========================================== -->
+
+                    <div class="bg-white border border-red-100 rounded-2xl p-5 shadow-sm mb-5">
+
+                        <div class="flex items-center gap-3 mb-5">
+
+                            <div class="w-1 h-6 bg-red-500 rounded-full"></div>
+
+                            <h2 class="font-bold text-lg text-red-700">
+                                Emergency Contact
+                            </h2>
+
+                        </div>
+
+
+                        <div class="grid sm:grid-cols-2 gap-4">
+
+                            <div class="bg-red-50 rounded-xl p-4">
+                                <p class="text-xs uppercase tracking-wide text-red-500">
+                                    Name
+                                </p>
+
+                                <p class="font-semibold mt-1">
+                                    <%= student.emergencyContact?.name || 'N/A' %>
+                                </p>
+                            </div>
+
+
+                            <div class="bg-red-50 rounded-xl p-4">
+                                <p class="text-xs uppercase tracking-wide text-red-500">
+                                    Phone
+                                </p>
+
+                                <p class="font-semibold mt-1">
+                                    <%= student.emergencyContact?.phone || 'N/A' %>
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =========================================
+         PERFORMANCE
+    ========================================== -->
+
+                    <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm mb-5">
+
+                        <div class="flex items-center justify-between mb-5">
+
+                            <div class="flex items-center gap-3">
+
+                                <div class="w-1 h-6 bg-secondary rounded-full"></div>
+
+                                <h2 class="font-bold text-lg text-primary">
+                                    Academic Performance
+                                </h2>
+
+                            </div>
+
+                        </div>
+
+                        <div class="h-[320px]">
+                            <canvas id="performanceChart"></canvas>
+                        </div>
+
+                    </div>
+
+
+                    <!-- =========================================
+         RESULTS
+    ========================================== -->
+
+                    <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+
+                        <div class="flex items-center gap-3 mb-5">
+
+                            <div class="w-1 h-6 bg-secondary rounded-full"></div>
+
+                            <h2 class="font-bold text-lg text-primary">
+                                Student Results
+                            </h2>
+
+                        </div>
+
+
+                        <div class="results-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        </div>
+
+                    </div>
+
                 </div>
 
-               <div class="result-actions">
-                    <button 
-                        class="view-btn"
-                        onclick="viewResult('${item.studentId}', '${item.term}', '${item.studentClass}', '${item.schoolName}')"
-                    >
-                        View  Result →
-                    </button>
-                    <button 
-                        class="del-btn"
-                        onclick="delAction('${item._id}', '${item.studentClass}')"
-                    >
-                        Delete Result X
-                    </button>
-                
+
+                <!-- =========================================
+     DELETE MODAL
+========================================== -->
+
+                <div
+                    class="cover-del-model fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden items-center justify-center px-4">
+
+                    <div class="bg-white rounded-2xl p-6 w-full max-w-md shadow-2xl">
+
+                        <h2 class="text-xl font-bold text-slate-800">
+                            Delete Result
+                        </h2>
+
+                        <p class="text-sm text-slate-500 mt-2">
+                            This will permanently delete the selected result.
+                        </p>
+
+                        <div class="flex gap-3 mt-6">
+
+                            <button onclick="document.querySelector('.cover-del-model').style.display='none'"
+                                class="flex-1 px-4 py-3 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50">
+                                Cancel
+                            </button>
+
+                            <button onclick="detResult()"
+                                class="flex-1 px-4 py-3 rounded-xl bg-red-600 text-white hover:bg-red-700">
+                                Delete
+                            </button>
+
+                        </div>
+
+                    </div>
+
                 </div>
 
-            </div>
-        `;
-    });
 
-    container.innerHTML = html;
-}
+                <!-- =========================================
+     LOADING
+========================================== -->
 
-// NAVIGATION FUNCTION
-function viewResult(studentId, term, sclass, school) {
-    window.location.href = `/view-student-result?studentId=${studentId}&term=${term}&sclass=${sclass}&school=${school}`;
-}
+                <div
+                    class="cover fixed inset-0 bg-white/60 backdrop-blur-sm z-[100] hidden items-center justify-center">
 
-//ASSIGN RESULT ID FOR DELETION AND ASK USER TO CONFIRM
-function delAction(dataId, sclass){
-    resultDetails = {dataId, sclass};
-    document.querySelector('.cover-del-model').style.display = 'block';
-}
+                    <div class="w-12 h-12 border-4 border-slate-200 border-t-secondary rounded-full animate-spin">
+                    </div>
 
-// DELETE FUNCTION
-async function detResult(){
-    if(!resultDetails) return;
-    try {
-        const res = await fetch('/api/delete_result', {
-            method: "DELETE",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(resultDetails)
-        });
-        const data = await res.json();
-        if(res.ok){
-           return window.location.reload();
-        }
-        showMessagePopup(data.msg);
-    } catch (error) {
-        showMessagePopup('server error');
-        console.error(error);
-    }
+                </div>
+        </div>
 
-}
-</script>
+
+        <script>
+
+            /* =========================================
+               LOAD RESULTS
+            ========================================== */
+
+            document.addEventListener('DOMContentLoaded', () => {
+
+                getResult('<%= student.studentId %>');
+
+            });
+
+
+            async function getResult(studentId) {
+
+                document.querySelector('.cover').style.display = 'flex';
+
+                try {
+
+                    const response =
+                        await fetch(`/api/get_result?studentId=${studentId}`);
+
+                    const data = await response.json();
+
+                    resultAnalysisA(data);
+
+                } catch (err) {
+
+                    console.error("Error fetching result:", err);
+
+                } finally {
+
+                    document.querySelector('.cover').style.display = 'none';
+
+                }
+
+            }
+
+
+            /* =========================================
+               RESULT ANALYSIS
+            ========================================== */
+
+            let resultDetails = null;
+
+            function resultAnalysisA(data) {
+
+                const labels = [];
+                const scores = [];
+
+                data.forEach(res => {
+
+                    labels.push(res.term);
+                    scores.push(res.average);
+
+                });
+
+
+                const ctx =
+                    document.getElementById('performanceChart').getContext('2d');
+
+
+                new Chart(ctx, {
+
+                    type: 'line',
+
+                    data: {
+
+                        labels,
+
+                        datasets: [{
+
+                            label: 'Average Score',
+
+                            data: scores,
+
+                            borderColor: '#17619a',
+
+                            backgroundColor: 'rgba(23, 97, 154, .10)',
+
+                            fill: true,
+
+                            tension: .4
+
+                        }]
+
+                    },
+
+                    options: {
+
+                        responsive: true,
+
+                        maintainAspectRatio: false,
+
+                        plugins: {
+
+                            legend: {
+                                labels: {
+                                    color: '#334155'
+                                }
+                            }
+
+                        },
+
+                        scales: {
+
+                            x: {
+                                ticks: {
+                                    color: '#64748b'
+                                }
+                            },
+
+                            y: {
+
+                                beginAtZero: true,
+
+                                ticks: {
+                                    color: '#64748b'
+                                }
+
+                            }
+
+                        }
+
+                    }
+
+                });
+
+
+                renderResults(data);
+
+            }
+
+
+            /* =========================================
+               RENDER RESULTS
+            ========================================== */
+
+            function renderResults(data) {
+
+                const container =
+                    document.querySelector('.results-list');
+
+                let html = '';
+
+
+                if (!data || data.length === 0) {
+
+                    container.innerHTML = `
+                <div class="col-span-full text-center py-10">
+
+                    <p class="text-slate-500">
+                        No results available yet.
+                    </p>
+
+                </div>
+            `;
+
+                    return;
+
+                }
+
+
+                data.forEach(item => {
+
+                    const status =
+                        item.average >= 50 ? 'pass' : 'fail';
+
+
+                    html += `
+
+                <div class="relative bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-md transition overflow-hidden">
+
+                    <div class="absolute top-0 left-0 right-0 h-1
+                        bg-gradient-to-r from-primary to-secondary">
+                    </div>
+
+
+                    <div class="flex justify-between gap-4 mb-5">
+
+                        <div>
+
+                            <p class="font-bold text-primary">
+                                ${item.term}
+                            </p>
+
+                            <p class="text-xs text-slate-500 mt-1">
+                                ${item.studentClass || ''}
+                            </p>
+
+                            <p class="text-xs text-slate-500 mt-1">
+                                ${item.section || ''}
+                            </p>
+
+                        </div>
+
+
+                        <div class="text-right">
+
+                            <p class="text-2xl font-bold text-secondary">
+                                ${item.average}
+                            </p>
+
+                            <span class="
+                                inline-block
+                                mt-1
+                                px-2 py-1
+                                rounded-full
+                                text-[10px]
+                                font-bold
+                                ${status === 'pass'
+                            ? 'bg-green-100 text-green-700'
+                            : 'bg-red-100 text-red-700'}
+                            ">
+                                ${status.toUpperCase()}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="flex gap-2">
+
+                        <button
+                            class="
+                                flex-1
+                                px-3 py-2.5
+                                rounded-xl
+                                bg-primary
+                                text-white
+                                text-sm
+                                font-medium
+                                hover:bg-secondary
+                                transition
+                            "
+                            onclick="viewResult(
+                                '${item.studentId}',
+                                '${item.term}',
+                                '${item.studentClass}',
+                                '${item.schoolName}'
+                            )"
+                        >
+                            View Result
+                        </button>
+
+
+                        <button
+                            class="
+                                px-3 py-2.5
+                                rounded-xl
+                                bg-red-50
+                                text-red-600
+                                text-sm
+                                font-medium
+                                hover:bg-red-100
+                                transition
+                            "
+                            onclick="delAction(
+                                '${item._id}',
+                                '${item.studentClass}'
+                            )"
+                        >
+                            Delete
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `;
+
+                });
+
+
+                container.innerHTML = html;
+
+            }
+
+
+            /* =========================================
+               VIEW RESULT
+            ========================================== */
+
+            function viewResult(studentId, term, sclass, school) {
+
+                window.location.href =
+                    `/view-student-result?studentId=${studentId}&term=${term}&sclass=${sclass}&school=${school}`;
+
+            }
+
+
+            /* =========================================
+               DELETE ACTION
+            ========================================== */
+
+            function delAction(dataId, sclass) {
+
+                resultDetails = {
+                    dataId,
+                    sclass
+                };
+
+                const modal =
+                    document.querySelector('.cover-del-model');
+
+                modal.style.display = 'flex';
+
+            }
+
+
+            /* =========================================
+               DELETE RESULT
+            ========================================== */
+
+            async function detResult() {
+
+                if (!resultDetails) return;
+
+
+                try {
+
+                    const res =
+                        await fetch('/api/delete_result', {
+
+                            method: "DELETE",
+
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+
+                            body: JSON.stringify(resultDetails)
+
+                        });
+
+
+                    const data = await res.json();
+
+
+                    if (res.ok) {
+
+                        window.location.reload();
+
+                        return;
+
+                    }
+
+
+                    if (typeof showMessagePopup === 'function') {
+
+                        showMessagePopup(data.msg);
+
+                    } else {
+
+                        alert(data.msg);
+
+                    }
+
+
+                } catch (error) {
+
+                    console.error(error);
+
+                    if (typeof showMessagePopup === 'function') {
+
+                        showMessagePopup('Server error');
+
+                    } else {
+
+                        alert('Server error');
+
+                    }
+
+                }
+
+            }
+
+        </script>
 
 </body>
+
 </html>

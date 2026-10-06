@@ -14,11 +14,9 @@
 
         <%- include('./partials/navigation') %>
 
-
         <!-- ==========================================
              MAIN
         =========================================== -->
-
         <main class="lg:ml-64">
 
             <!-- ==========================================
@@ -149,7 +147,8 @@
     <!-- ==========================================
          PRINT STYLES
     =========================================== -->
-
+    //lucid-react script
+    <script src="https://unpkg.com/lucide@latest/dist/lucide.js"></script>
     <style>
 
         @media print {
@@ -192,7 +191,10 @@
 
     </style>
 <script>
-    (async function getTimetable(){
+    document.addEventListener('DOMContentLoaded', () => {
+        getTimetable()
+    })
+    async function getTimetable(){
         const saveStudent = localStorage.getItem('student')
         const student = JSON.parse(saveStudent)
         try {
@@ -205,9 +207,10 @@
            render(timetable, student.class)
             
         } catch (error) {
-            showMessagePopup('Something went wrong')
+            
+            console.log(error)
         }
-    })()
+    }
     function render(timetable, studentClass){
         document.getElementById('timetable-header').innerHTML = `
                  <div class="w-full grid grid-cols-2 sm:grid-cols-5 gap-4 mb-6">

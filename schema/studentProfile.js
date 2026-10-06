@@ -34,7 +34,9 @@ const blogschema = new Schema({
     passport: {
         type: String,
     },
-
+    publicId: {
+        type: String,
+    },
     gender:{
         type:String
     },
@@ -50,7 +52,9 @@ const blogschema = new Schema({
 
     house:String,
 
+    country:String,
 
+    state:String,
     // ==========================================
     // GUARDIAN INFORMATION
     // ==========================================
@@ -90,6 +94,7 @@ const blogschema = new Schema({
             type: String,
             default: ''
         }
+
     },
 
 
