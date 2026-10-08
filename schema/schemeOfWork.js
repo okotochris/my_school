@@ -9,25 +9,25 @@ const schemeOfWorkSchema = new Schema({
 
     teacherId: {
         type: String,
-        required: true
+       
     },
 
     teacherName: {
         type: String,
-        required: true
+       
     },
 
     session: {
         type: String,
-        required: true
+       
     },
 
     term: {
         type: String,
-        required: true
+        
     },
 
-    class: {
+    studentClass: {
         type: String,
         required: true
     },
@@ -41,7 +41,7 @@ const schemeOfWorkSchema = new Schema({
         {
             week: {
                 type: Number,
-                required: true
+                
             },
 
             topic: {

@@ -10,13 +10,12 @@ const StudentProfile = require('../schema/studentProfile.js')
 const router = express.Router();
 
 router.get('/student/dashboard', (req, res) => {
-    const announcement = News.find().sort({createdAt:-1})
-    .limit(3)
+   
     res.render('student/dashboard', {
         title: 'Student dashboard',
-        announcement
     });
 });
+
 
 router.get('/student/profile', (req, res) => {
     res.render('student/profile', {
@@ -215,7 +214,6 @@ router.get('/student/lesson-note', (req, res)=>{
     res.render('student/lesson-note', {title:'Lesson Note'})
 })
 router.get('/student/lesson-notes', async (req, res) => {
-    console.log(req.query)
     try {
 
         const { school, class: studentClass } = req.query;
@@ -311,7 +309,6 @@ router.get('/student/announcement-all/:schoolName', async (req, res) => {
     try {
 
         const { schoolName } = req.params;
-        console.log('School Name:', schoolName);
         if (!schoolName) {
             return res.status(401).json({
                 message: 'Student not authenticated'
@@ -324,7 +321,6 @@ router.get('/student/announcement-all/:schoolName', async (req, res) => {
         .sort({ publishedAt: -1 })
         .lean();
 
-        console.log('Announcements:', announcements);
         res.json({
             announcements
         });
@@ -382,7 +378,6 @@ router.patch('/student/profile-update/:_id', upload.single('passport'), async (r
             phone: req.body.emergencyPhone
         };
         updateData.emergencyContact = emergencyContactData;
-        console.log('Update Data:', updateData);
           //GET STUDENT BY ID
         const student = await StudentProfile.findById(studentId);
         if (!student) {

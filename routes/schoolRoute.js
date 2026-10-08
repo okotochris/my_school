@@ -713,8 +713,61 @@ router.get('/admin/get-subject/:studentClass', async(req, res)=>{
 router.get('/admin/scheme-of-work', isAuthenticated, async(req, res)=>{
     const role= req.session.role
     const fees = await schoolFees(req.session.school)
-    res.render('scheme-of-work', {fees, role, school: req.session.school, title:'Scheme of work'})
+    const schemeOFWork = await SchemeOfWork.find({schoolName:req.session.school}).sort({updatedAt:-1})
+    res.render('scheme-of-work', {fees, role, school: req.session.school, schemeOFWork, title:'Scheme of work'})
 })
+//save scheme of work
+router.post('/admin/scheme-of-work', async(req, res)=>{
+    try{
+        const {session, term, studentClass, subject, week, topic, subTopic, learningObjectives, lessonContent, teachingActivities, evaluation, assignment} = req.body
+      
+        // Check if a scheme of work already exists for the given parameters
+        const existingScheme = await SchemeOfWork.findOne({
+            schoolName: req.session.school,
+            session,
+            term,
+            studentClass,
+            subject,
+            week
+        });
+
+        if (existingScheme) {
+            return res.status(409).json({
+                success: false,
+                message: `A scheme of work for ${subject}, ${studentClass}, Week ${week} already exists.`
+            });
+        }
+
+        // Create scheme of work
+        const schemeOfWork = new SchemeOfWork({
+            schoolName: req.session.school,
+            session,
+            term,
+            studentClass,
+            subject,
+            week,
+            topic,
+            subTopic: subTopic || '',
+            learningObjectives: learningObjectives || '',
+            lessonContent: lessonContent || '',
+            teachingActivities: teachingActivities || '',
+            evaluation: evaluation || '',
+            assignment: assignment || ''
+        });
+
+        await schemeOfWork.save();
+
+        res.status(200).json({
+            message: 'Scheme of work added successfully'
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({
+            message: 'Server error'
+        });
+    }
+});
+
 router.get('/admin/loan', isAuthenticated, async(req, res)=>{
     const role= req.session.role
     const fees = await schoolFees(req.session.school)
