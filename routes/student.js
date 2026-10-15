@@ -7,6 +7,7 @@ const LessonNote = require('../schema/lessonNote')
 const cloudinary = require('../middleware/cloudinary')
 const Timetable = require('../schema/timeTable.js')
 const StudentProfile = require('../schema/studentProfile.js')
+const SchemeOfWork = require('../schema/schemeOfWork.js')
 const router = express.Router();
 
 router.get('/student/dashboard', (req, res) => {
@@ -419,4 +420,31 @@ router.patch('/student/profile-update/:_id', upload.single('passport'), async (r
         });
     }
 });
+//SCHEME OF WORK
+router.get('/student/scheme-of-work', (req, res)=>{
+    res.render('student/scheme-of-work', {title:'Scheme of work'})
+})
+router.get('/student/scheme-of-work/:id', async (req, res) => {
+        try {
+            const schemeOfWork = await SchemeOfWork.findOne({
+                _id: req.params.id,
+                schoolName: req.session.school
+            }).lean();
+
+            if (!schemeOfWork) {
+                return res.status(404).send('Scheme of Work not found');
+            }
+
+            res.render('student/scheme-of-work-detail', {
+                schemeOfWork,
+                title: 'Scheme of Work Details'
+            });
+
+        } catch (error) {
+            console.error('Scheme detail error:', error);
+            res.status(500).send('Unable to load Scheme of Work');
+        }
+    }
+);
+
 module.exports = router;
