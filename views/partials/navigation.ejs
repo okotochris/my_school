@@ -193,8 +193,8 @@ lesson-note
         const meta = {
           schoolName,
           amount: amountInNumber,
-          staffName: headTeacher.name,
-          refId: `${headTeacher.name}${Date.now()}`
+          staffName: headTeacher.name || "School Admin",
+          refId: `${headTeacher.name || "School Admin"}${Date.now()}`
         }
         FlutterwaveCheckout({
           public_key: "FLWPUBK-f8514622db2e398152c1a94f24a478a5-X",
@@ -205,7 +205,7 @@ lesson-note
 
           customer: {
             email: schoolEmail,
-            name: headTeacher.name,
+            name: headTeacher.name || "School Admin",
           },
 
           callback: function updateDashboard() {
