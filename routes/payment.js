@@ -24,7 +24,7 @@ router.post("/api/payment-callback", async (req, res) => {
     await PaymentHistory.create({
       schoolName:req.body.schoolName,
       amount:req.body.fees,
-      staffName:req.body.headTeacher.name,
+      staffName:req.body.headTeacher?.name || "School Admin",
       email:req.body.schoolEmail
     })
     req.session.fees = 0
