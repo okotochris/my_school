@@ -149,15 +149,15 @@
             <!-- Details -->
             <dl class="relative px-5 mt-2.5 text-[9.5px] leading-tight">
                 <div class="flex justify-between gap-2 py-1 border-b border-slate-200">
-                    <dt class="text-slate-400">Student ID</dt>
+                    <dt class="text-slate-700">Student ID</dt>
                     <dd class="font-semibold text-slate-800 truncate"><%= item.studentId %></dd>
                 </div>
                 <div class="flex justify-between gap-2 py-1 border-b border-slate-200">
-                    <dt class="text-slate-400">Admission no.</dt>
+                    <dt class="text-slate-700">Admission no.</dt>
                     <dd class="font-semibold text-slate-800 truncate"><%= item.addmissionNo || 'N/A' %></dd>
                 </div>
                 <div class="flex justify-between gap-2 py-1">
-                    <dt class="text-slate-400">Session</dt>
+                    <dt class="text-slate-700">Session</dt>
                     <dd class="font-semibold text-slate-800 truncate"><%= item.schoolsession || 'N/A' %></dd>
                 </div>
             </dl>
@@ -171,7 +171,7 @@
         <% }) %>
 
         <!-- ============ BACK (one shared card, no student details) ============ -->
-        <div data-file="school-back" class="id-card c-watermark relative flex flex-col bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-lg">
+        <div data-file="school-back" class="id-card c-watermark relative flex flex-col bg-white  overflow-hidden border border-slate-200 shadow-lg">
 
             <div class="c-header relative h-[64px] shrink-0 px-4 pt-4 flex items-start justify-center gap-2">
                
@@ -179,25 +179,26 @@
                 <p class="text-white text-[9.5px] font-semibold uppercase leading-tight line-clamp-2 mt-1.5"><%= schoolName %></p>
             </div>
 
-            <div class="relative px-5 pt-5 text-center">
+            <div class="relative px-5 pt-2 text-center">
                 <p class="text-[9px] text-slate-500 leading-tight">This card is the property of</p>
-                <p class="c-primary-text text-[12.5px] font-extrabold uppercase leading-tight mt-1 line-clamp-2"><%= schoolName %></p>
-                <p class="text-[9px] text-slate-600 mt-2 leading-snug">
+                <p class="c-primary-text text-[12.5px] font-extrabold uppercase leading-tight line-clamp-2"><%= schoolName %></p>
+                <p class="text-[9px] text-slate-600 leading-snug">
                     The holder is a bona fide student of this school.
                 </p>
             </div>
 
-            <div class="c-tint c-border border-l-4 rounded-lg mx-4 mt-4 px-3 py-2 relative">
+            <div class="c-tint c-border border-l-4 rounded-lg mx-4 mt-1 px-3 py-2 relative">
                 <p class="c-primary-text text-[9.5px] font-bold leading-tight">If found, please return to</p>
                 <p class="text-[9px] font-semibold text-slate-800 mt-0.5 line-clamp-3 leading-snug"><%= address %></p>
                 <% if (phone) { %>
                     <p class="text-[9px] text-slate-600 leading-snug mt-0.5">Call <span class="font-semibold"><%= phone %></span></p>
                 <% } %>
             </div>
-
             <p class="relative px-5 text-slate-700 text-[8px] mt-3 text-center leading-snug">Visit <b>www.myschoolresult.com/login</b> to view your profile</p>
-
             <div class="relative mt-auto px-5 pb-5 flex flex-col items-center">
+                <div class="barcode-slot w-37.5 h-10 flex items-center justify-center">
+                        <img src='https://myschoolresult.com/images/barcode.png' alt="" class="max-w-full max-h-full object-contain">
+                    </div>
                 <div class="w-[130px]">
                     <div class="border-b border-slate-400 h-8 flex items-end justify-center">
                         <% if (signature) { %>
