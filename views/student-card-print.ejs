@@ -11,7 +11,7 @@
     const [sr, sg, sb] = [(n >> 16) & 255, (n >> 8) & 255, n & 255];
     const mixWhite = (c) => Math.round(c + (255 - c) * 0.91);
     const cTint = `rgb(${mixWhite(sr)}, ${mixWhite(sg)}, ${mixWhite(sb)})`;
-    const cWash = `rgba(${sr}, ${sg}, ${sb}, .04)`;
+    const cWash = `rgba(${sr}, ${sg}, ${sb}, .05)`;
 
     /* ---------- Data ---------- */
     const FALLBACK_AVATAR = "data:image/svg+xml;utf8," + encodeURIComponent(
@@ -30,8 +30,17 @@
     const students  = Array.isArray(locals.student) ? locals.student : [];
     const cls       = locals.selectedClass || '';
     const classLabel = cls === 'ALL' ? 'All classes' : cls;
-%>
+    const schoolName = school.schoolName || (students[0] && students[0].schoolName) || '';
 
+    // Section label shown on the front of the card
+    const sectionOf = (c) => {
+        const k = String(c || '').replace(/[0-9]/g, '').trim();
+        if (k === 'JSS') return 'Junior';
+        if (k === 'SS') return 'Senior';
+        if (k === 'BASIC') return 'Basic';
+        return 'Nursery';
+    };
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,29 +53,30 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.6/JsBarcode.all.min.js"></script>
 
     <style>
-  :root {
+        :root {
             --card-primary: <%= cPrimary %>;
             --card-secondary: <%= cSecondary %>;
             --card-tint: <%- cTint %>;
             --card-wash: <%- cWash %>;
         }
 
-
         body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
 
         .c-primary-text { color: var(--card-primary); }
         .c-secondary-bg { background: var(--card-secondary); }
+        .c-primary-bg   { background: var(--card-primary); }
         .c-border       { border-color: var(--card-secondary); }
         .c-tint         { background: var(--card-tint); }
 
+        /* Header with a curved lower edge */
         .c-header {
             background:
-                radial-gradient(circle at 92% -20%, rgba(255,255,255,.22) 0 38px, transparent 39px),
-                radial-gradient(circle at 80% 130%, rgba(255,255,255,.14) 0 46px, transparent 47px),
-                linear-gradient(120deg, var(--card-primary), var(--card-secondary));
+                radial-gradient(circle at 88% 8%, rgba(255,255,255,.20) 0 34px, transparent 35px),
+                radial-gradient(circle at 6% 92%, rgba(255,255,255,.12) 0 44px, transparent 45px),
+                linear-gradient(160deg, var(--card-primary), var(--card-secondary));
+            border-radius: 0 0 50% 50% / 0 0 28px 28px;
         }
 
         .c-watermark::before {
@@ -76,7 +86,9 @@
             pointer-events: none;
         }
 
-        .id-card { width: 350px; height: 220px; }
+        /* Portrait CR80-style card */
+        .id-card { width: 220px; height: 350px; 
+            <% if (locals.exportMode !== 'png') { %>zoom: 0.93;<% } %> } /* 0.93 x (220 x 350 px) = 54 x 86 mm, the CR80 portrait size */
 
         .swatch:focus-visible,
         .btn:focus-visible { outline: 2px solid var(--card-secondary); outline-offset: 2px; }
@@ -91,142 +103,119 @@
         @media print {
             html, body { background: #fff !important; }
             .no-print { display: none !important; }
-            .cards-grid { gap: 6mm !important; justify-content: flex-start !important; }
-            .student-card-wrapper { break-inside: avoid; page-break-inside: avoid; }
-            .id-card { box-shadow: none !important; border-color: #cbd5e1 !important; }
         }
+
+        /* Print layout: fronts in a wrapping grid, one shared back at the end */
+        .cards-grid { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 6mm; }
+        .id-card { break-inside: avoid; page-break-inside: avoid; box-shadow: none !important; border-color: #cbd5e1 !important; }
     </style>
 </head>
 
-<body class='bg-white text-slate-800 antialiased'>
+<body class="bg-white text-slate-800 antialiased">
 
-<main >
+<main>
+    <div class="cards-grid">
 
-    <div class="cards-grid flex flex-wrap justify-center gap-x-10 gap-y-8">
+    <% if (students.length > 0) { %>
 
-    <% if (student.length > 0) { %>
-        <% student.forEach((item) => { %>
+        <!-- ============ FRONTS (one per student) ============ -->
+        <% students.forEach((item, idx) => { %>
 
-        <div class="student-card-wrapper flex flex-col gap-3">
+        <!-- ============ FRONT ============ -->
+        <div data-file="<%= String(idx + 1).padStart(3, '0') %>-<%= String(item.studentId || 'card').replace(/[^a-z0-9_-]/gi, '-') %>-front" class="id-card c-watermark relative flex flex-col bg-white overflow-hidden border border-slate-200 shadow-lg">
 
-            <!-- ============ FRONT ============ -->
-            <div class="id-card c-watermark relative bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-lg">
-
-                <div class="c-header h-[58px] px-4 flex items-center gap-3">
-                    <img src="<%= logo %>" alt="" class="w-10 h-10 rounded-lg bg-white p-1 object-contain shrink-0">
-                    <div class="min-w-0">
-                        <h3 class="text-white font-bold text-[12px] leading-tight uppercase"><%= item.schoolName %></h3>
-                        <p class="text-white/75 text-[9px] mt-0.5">Student identification card</p>
-                    </div>
-                </div>
-
-                <div class="relative flex gap-4 px-4 pt-3.5">
-                    <img src="<%= item.passport || FALLBACK_AVATAR %>" alt="Photo of <%= item.fullname %>"
-                        class="c-border w-[80px] h-[96px] shrink-0 rounded-xl object-cover border-2 bg-slate-100">
-
-                    <div class="min-w-0 flex-1">
-                        <h2 class="c-primary-text text-[15px] font-extrabold leading-tight mb-2.5 line-clamp-2"><%= item.fullname %></h2>
-
-                        <dl class="grid grid-cols-[64px_1fr] gap-x-2 gap-y-1.5 text-[10px] leading-tight">
-                            <dt class="text-slate-400">Student ID</dt>
-                            <dd class="font-semibold text-slate-800 truncate"><%= item.studentId %></dd>
-
-                            <dt class="text-slate-400">Class</dt>
-                            <% const className = item.class.replace(/[0-9]/g, '').trim();
-
-                                if (className === 'JSS') { %>
-                                        <dd class="font-semibold text-slate-800 truncate">JUNIOR</dd>
-                                    <% } else if (className === 'SS') { %>
-                                        <dd class="font-semibold text-slate-800 truncate">SENIOR</dd>
-                                    <% } else if (className === 'BASIC') { %>
-                                        <dd class="font-semibold text-slate-800 truncate">BASIC</dd>
-                                    <% } else { %>
-                                        <dd class="font-semibold text-slate-800 truncate">NURSERY</dd>
-                                    <% } %>
-
-                            <dt class="text-slate-400">Admission</dt>
-                            <dd class="font-semibold text-slate-800 truncate"><%= item.addmissionNo || 'N/A' %></dd>
-
-                            <dt class="text-slate-400">Session</dt>
-                            <dd class="font-semibold text-slate-800 truncate"><%= item.schoolsession || 'N/A' %></dd>
-                        </dl>
-                    </div>
-                </div>
-
-                <div class="c-tint absolute bottom-0 inset-x-0 h-7 px-4 flex items-center justify-between gap-3">
-                    <span class="text-[8px] text-slate-900 truncate">Visit <b>www.myschoolresult.com </b> to download your result</span>
-                    <span class="c-primary-text text-[9px] font-bold shrink-0"><%= item.schoolsession || '' %></span>
-                </div>
+            <!-- Header: lanyard slot, logo, school name -->
+            <div class="c-header relative h-[112px] shrink-0 px-4 pt-2 flex flex-col items-center text-center">
+              
+                <img src="<%= logo %>" alt="" class="w-9 h-9 rounded-lg bg-white p-1 object-contain shrink-0">
+                <h3 class="text-white font-bold text-[10.5px] leading-tight mt-1.5 line-clamp-2 uppercase"><%= item.schoolName %></h3>
+                <p class="text-white/75 text-[8px] mt-0.5">Student identification card</p>
             </div>
 
-
-            <!-- ============ BACK ============ -->
-            <div class="id-card c-watermark relative flex flex-col bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-lg">
-
-                <div class="c-header h-[40px] shrink-0 px-4 flex items-center justify-between gap-3">
-                    <p class="text-white text-[10px] font-semibold uppercase truncate"><%= item.schoolName %></p>
-                    <img src="<%= logo %>" alt="" class="w-7 h-7 rounded-md bg-white p-0.5 object-contain shrink-0">
-                </div>
-
-                <div class="relative px-5 pt-1">
-                    <p class="text-[10px] text-slate-500 leading-tight">
-                        This card certifies that
-                        <span class="c-primary-text text-[13px] font-extrabold uppercase leading-tight mt-0.5 truncate"><%= item.fullname %> </span>
-                    </p>
-                    <p class="text-[10px] text-slate-600 mt-0.5 leading-snug truncate">
-                        is a bona fide student of <span class="font-semibold text-slate-800"><%= item.schoolName %></span>.
-                    </p>
-
-                    <div class="c-tint c-border border-l-4 rounded-lg mt-2 px-3 py-1.5">
-                        <p class="c-primary-text text-[10px] font-bold leading-tight">If found, please return to</p>
-                        <p class="text-[10px] font-semibold text-slate-800 mt-0.5 line-clamp-2 leading-snug"><%= address %></p>
-                        <% if (phone) { %>
-                            <p class="text-[10px] text-slate-600 leading-snug">Call: <span class="font-semibold"><%= phone %></span></p>
-                        <% } %>
-                    </div>
-                </div>
-                  <p class="px-5 text-slate-700 text-[9px] mt-0.5">Visit <b>www.myschoolresult.com/login</b> to view your profile</p>
-                <!-- Signature (left) and barcode (right) -->
-                 <div class="relative mt-auto px-5 pb-2.5 flex items-end justify-between gap-4">
-
-                    <div class="w-[110px] shrink-0">
-                        <div class="border-b border-slate-400 h-6 flex items-end justify-center">
-                            <% if (school.headTeacher.signature) { %>
-                                <img src="<%= school.headTeacher.signature ||'' %>" alt="" class="max-w-full max-h-full object-contain">
-                            <% } %>
-                        </div>
-                        <p class="text-[8px] text-slate-500 mt-1">Authorised signature</p>
-                    </div>
-
-                    <!--
-                        BARCODE SLOT (about 150 x 44 px)
-                        1. item.barcode (image URL or data URI) if the student has one
-                        2. otherwise a Code 128 barcode generated from the student ID
-                    -->
-                    <div class="barcode-slot w-37.5 h-11 flex items-end justify-end">
-                            <img src="https://myschoolresult.com/images/barcode.png"  class="max-w-full max-h-full object-contain"> 
-                    </div>
-                </div>
+            <!-- Photo overlaps the curved header -->
+            <div class="relative -mt-4 flex justify-center shrink-0">
+                <img src="<%= item.passport || FALLBACK_AVATAR %>" alt="Photo of <%= item.fullname %>"
+                    class="c-border w-[84px] h-[100px] rounded-xl object-cover border-[3px] bg-slate-100 shadow-md ring-4 ring-white">
             </div>
 
+            <!-- Name and section -->
+            <div class="relative px-4 mt-2.5 text-center shrink-0">
+                <h2 class="c-primary-text text-[14px] font-extrabold leading-tight line-clamp-2"><%= item.fullname %></h2>
+                <span class="c-secondary-bg inline-block mt-1.5 text-white text-[9px] font-semibold rounded-full px-3 py-0.5">
+                    <%= sectionOf(item.class) %> section
+                </span>
+            </div>
+
+            <!-- Details -->
+            <dl class="relative px-5 mt-2.5 text-[9.5px] leading-tight">
+                <div class="flex justify-between gap-2 py-1 border-b border-slate-200">
+                    <dt class="text-slate-400">Student ID</dt>
+                    <dd class="font-semibold text-slate-800 truncate"><%= item.studentId %></dd>
+                </div>
+                <div class="flex justify-between gap-2 py-1 border-b border-slate-200">
+                    <dt class="text-slate-400">Admission no.</dt>
+                    <dd class="font-semibold text-slate-800 truncate"><%= item.addmissionNo || 'N/A' %></dd>
+                </div>
+                <div class="flex justify-between gap-2 py-1">
+                    <dt class="text-slate-400">Session</dt>
+                    <dd class="font-semibold text-slate-800 truncate"><%= item.schoolsession || 'N/A' %></dd>
+                </div>
+            </dl>
+
+            <!-- Footer -->
+            <div class="c-tint relative mt-auto h-8 px-3 flex items-center justify-center text-center">
+                <span class="text-[7.5px] text-slate-900 leading-tight">Visit <b>www.myschoolresult.com</b> to download your result</span>
+            </div>
         </div>
 
         <% }) %>
 
-    <% } else if (cls) { %>
+        <!-- ============ BACK (one shared card, no student details) ============ -->
+        <div data-file="school-back" class="id-card c-watermark relative flex flex-col bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-lg">
 
-        <div class="no-print w-full text-center py-20">
-            <div class="w-16 h-16 mx-auto rounded-full bg-white shadow-sm flex items-center justify-center text-2xl mb-4">🪪</div>
-            <h3 class="font-bold text-lg text-slate-900">No students in <%= classLabel %></h3>
-            <p class="text-sm text-slate-500 mt-1">Register students in this class, then come back to generate their cards.</p>
+            <div class="c-header relative h-[64px] shrink-0 px-4 pt-4 flex items-start justify-center gap-2">
+               
+                <img src="<%= logo %>" alt="" class="w-6 h-6 rounded-md bg-white p-0.5 object-contain shrink-0 mt-1.5">
+                <p class="text-white text-[9.5px] font-semibold uppercase leading-tight line-clamp-2 mt-1.5"><%= schoolName %></p>
+            </div>
+
+            <div class="relative px-5 pt-5 text-center">
+                <p class="text-[9px] text-slate-500 leading-tight">This card is the property of</p>
+                <p class="c-primary-text text-[12.5px] font-extrabold uppercase leading-tight mt-1 line-clamp-2"><%= schoolName %></p>
+                <p class="text-[9px] text-slate-600 mt-2 leading-snug">
+                    The holder is a bona fide student of this school.
+                </p>
+            </div>
+
+            <div class="c-tint c-border border-l-4 rounded-lg mx-4 mt-4 px-3 py-2 relative">
+                <p class="c-primary-text text-[9.5px] font-bold leading-tight">If found, please return to</p>
+                <p class="text-[9px] font-semibold text-slate-800 mt-0.5 line-clamp-3 leading-snug"><%= address %></p>
+                <% if (phone) { %>
+                    <p class="text-[9px] text-slate-600 leading-snug mt-0.5">Call <span class="font-semibold"><%= phone %></span></p>
+                <% } %>
+            </div>
+
+            <p class="relative px-5 text-slate-700 text-[8px] mt-3 text-center leading-snug">Visit <b>www.myschoolresult.com/login</b> to view your profile</p>
+
+            <div class="relative mt-auto px-5 pb-5 flex flex-col items-center">
+                <div class="w-[130px]">
+                    <div class="border-b border-slate-400 h-8 flex items-end justify-center">
+                        <% if (signature) { %>
+                            <img src="<%= signature %>" alt="" class="max-w-full max-h-full object-contain">
+                        <% } %>
+                    </div>
+                    <p class="text-[8px] text-slate-500 mt-1 text-center">Authorised signature</p>
+                </div>
+            </div>
         </div>
 
     <% } else { %>
 
         <div class="no-print w-full text-center py-20">
-            <div class="w-16 h-16 mx-auto rounded-full bg-white shadow-sm flex items-center justify-center text-2xl mb-4">🪪</div>
-            <h3 class="font-bold text-lg text-slate-900">Select a class</h3>
-            <p class="text-sm text-slate-500 mt-1">Choose a class to generate its student ID cards.</p>
+            <h3 class="font-bold text-lg text-slate-900"><%= cls ? 'No students in ' + classLabel : 'Select a class' %></h3>
+            <p class="text-sm text-slate-500 mt-1">
+                <%= cls ? 'Register students in this class, then come back to generate their cards.' : 'Choose a class to generate its student ID cards.' %>
+            </p>
         </div>
 
     <% } %>

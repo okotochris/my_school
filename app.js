@@ -23,6 +23,7 @@ const checkResultRoute = require('./routes/checkresult.js')
 const paymentRoute = require('./routes/payment.js')
 const resultGuide = require('./routes/resultCheckGuide.js')
 const downloadResult = require('./routes/downloadResult.js')
+const pdfDownloadRoute = require('./routes/pdfDownloadRoute.js')
 
 const app = express();
 
@@ -110,11 +111,6 @@ app.get('/about', (req, res)=>{
   res.render('about')
 })
 
-//adimin page to loging to result upload portal
-app.get("/admin", isAuthenticated, (req, res) => {
-   const role= req.session.role
-  res.render("admin", { school: req.session.school, fees: req.session.fees, role, title:"Upload Result"});
-});
 
 
 // saving student ID and passport
@@ -206,6 +202,7 @@ app.use(resultUpload)
 app.use(studentRoute)
 app.use(checkResultRoute)
 app.use(downloadResult)
+app.use(pdfDownloadRoute)
 app.use(exam)
 
 app.use((req, res) => {
