@@ -134,9 +134,7 @@ router.patch('/myschool/reset-password', async (req, res) => {
 
 });
 
-router.patch(
-    '/admin/school-settings',
-
+router.patch('/admin/school-settings',
     upload.fields([
         { name: 'logo', maxCount: 1 },
         { name: 'headTeacherSign', maxCount: 1 }
