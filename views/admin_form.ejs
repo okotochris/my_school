@@ -134,15 +134,17 @@
                 const res = await fetch(`/api/school-name/${itemName}/${inputField}`)
             
             if(!res.ok){
+                throw  Error('somthing went wrong')
                 return;
             }
             const {message, response} = await res.json()
-            if(response){
+            console.log(message, response)
+            if(!response){
                 return document.getElementById('respond').innerHTML += `<li>${message} has already been registerd</li>`
             }
             return document.getElementById('respond').innerText = ''
            }catch(err){
-
+            console.log(err)
            }
            
         }

@@ -135,13 +135,13 @@ router.get("/logout", (req, res) => {
 router.post('/student/login', async (req, res) => {
 
     const { studentId, firstName } = req.body;
-
+  
     try {
 
        const student = await StudentProfile.findOne({
-          studentId: studentId,
+          studentId: studentId.trim(),
           fullname: {
-              $regex: firstName,
+              $regex: firstName.trim(),
               $options: "i"
           }
       });
@@ -151,7 +151,7 @@ router.post('/student/login', async (req, res) => {
                 message: "Invalid Student ID or First Name"
             });
         }
-
+      
         req.session.studentId = student.studentId;
         req.session.student = student;
 

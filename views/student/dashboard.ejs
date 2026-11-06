@@ -11,25 +11,11 @@
         NAVIGATION
     =========================================== -->
             <%- include('./partials/navigation') %>
-
-
-                <!-- ==========================================
-         MAIN
-    =========================================== -->
-
                 <main class="lg:ml-64">
-                    <%- include('./partials/header') %>
+                   
+                        <section class="mx-auto max-w-[1300px] p-4 sm:p-6 lg:p-8">
+                              <%- include('./partials/header') %>
 
-                        <!-- ==========================================
-             CONTENT
-        =========================================== -->
-
-                        <section class="mx-auto max-w-[1000px] p-4 sm:p-6 lg:p-8">
-
-
-                            <!-- ==========================================
-                 WELCOME CARD
-            =========================================== -->
 
                             <div
                                 class="mb-6 overflow-hidden rounded-2xl bg-gradient-to-br from-[#0b2a4a] to-[#17619a] p-6 text-white shadow-sm sm:p-8">
@@ -224,7 +210,7 @@
         <script>
 
             const student = JSON.parse(localStorage.getItem('student'))
-            console.log(student)
+   
             getAnnoucement(student)
             document.querySelectorAll('.fullname').forEach(item => {
                 item.innerText = student.fullname
@@ -301,7 +287,7 @@
 
         const result = await response.json();
         const data = result.announcements
-        console.log('this is the data', result);
+
 
         if (data && data.length > 0) {
             // Display only the first 3 announcements
