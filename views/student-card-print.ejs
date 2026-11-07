@@ -139,7 +139,7 @@
             </div>
 
             <!-- Name and section -->
-            <div class="relative px-4 mt-2.5 text-center shrink-0">
+            <div class="relative px-4 mt-2 text-center shrink-0">
                 <h2 class="c-primary-text text-[14px] font-extrabold leading-tight line-clamp-2"><%= item.fullname %></h2>
                 <span class="c-secondary-bg inline-block mt-1.5 text-white text-[9px] font-semibold rounded-full px-3 py-0.5">
                     <%= sectionOf(item.class) %> section
@@ -147,7 +147,7 @@
             </div>
 
             <!-- Details -->
-            <dl class="relative px-5 mt-2.5 text-[9.5px] leading-tight">
+            <dl class="relative px-5 mt-2 text-[9.5px] leading-tight">
                 <div class="flex justify-between gap-2 py-1 border-b border-slate-200">
                     <dt class="text-slate-700">Student ID</dt>
                     <dd class="font-semibold text-slate-800 truncate"><%= item.studentId %></dd>
@@ -164,7 +164,7 @@
 
             <!-- Footer -->
             <div class="c-tint relative mt-auto h-8 px-3 flex items-center justify-center text-center">
-                <span class="text-[7.5px] text-slate-900 leading-tight">Visit <b>www.myschoolresult.com</b> to download your result</span>
+                <span class="text-[8px] text-slate-900 leading-tight">Visit <b>www.myschoolresult.com</b> to download your result</span>
             </div>
         </div>
 
@@ -174,7 +174,7 @@
         <div data-file="school-back" class="id-card c-watermark relative flex flex-col bg-white  overflow-hidden border border-slate-200 shadow-lg">
 
             <div class="c-header relative h-[64px] shrink-0 px-4 pt-4 flex items-start justify-center gap-2">
-               
+              
                 <img src="<%= logo %>" alt="" class="w-6 h-6 rounded-md bg-white p-0.5 object-contain shrink-0 mt-1.5">
                 <p class="text-white text-[9.5px] font-semibold uppercase leading-tight line-clamp-2 mt-1.5"><%= schoolName %></p>
             </div>
@@ -182,7 +182,7 @@
             <div class="relative px-5 pt-2 text-center">
                 <p class="text-[9px] text-slate-500 leading-tight">This card is the property of</p>
                 <p class="c-primary-text text-[12.5px] font-extrabold uppercase leading-tight line-clamp-2"><%= schoolName %></p>
-                <p class="text-[9px] text-slate-600 leading-snug">
+                <p class="text-[9px] text-slate-600  leading-snug">
                     The holder is a bona fide student of this school.
                 </p>
             </div>
@@ -194,11 +194,30 @@
                     <p class="text-[9px] text-slate-600 leading-snug mt-0.5">Call <span class="font-semibold"><%= phone %></span></p>
                 <% } %>
             </div>
-            <p class="relative px-5 text-slate-700 text-[8px] mt-3 text-center leading-snug">Visit <b>www.myschoolresult.com/login</b> to view your profile</p>
+
+            <div class="mt-1 px-3.5  flex items-center justify-between gap-2">
+                <!-- Portal Information -->
+                <div class="flex-1">
+                    <p class="text-slate-500 text-[8px] font-medium leading-snug">
+                        Visit our student portal
+                    </p>
+
+                    <p class="text-slate-500 text-[7.5px] leading-snug mt-0.5">
+                        to view your profile and update your info
+                    </p>
+                    
+                </div>
+
+                <!-- Larger Barcode -->
+             
+                 <img src="https://myschoolresult.com/images/barcode.png" alt="Student barcode" class=" w-[60px] h-[60px object-contain">
+         
+
+            </div>
             <div class="relative mt-auto px-5 pb-5 flex flex-col items-center">
-                <div class="barcode-slot w-37.5 h-10 flex items-center justify-center">
-                        <img src='https://myschoolresult.com/images/barcode.png' alt="" class="max-w-full max-h-full object-contain">
-                    </div>
+                 <p class="text-[9px] font-extrabold leading-snug mt-0.5">
+                        www.myschoolresult.com/login
+                    </p>
                 <div class="w-[130px]">
                     <div class="border-b border-slate-400 h-8 flex items-end justify-center">
                         <% if (signature) { %>
@@ -209,6 +228,7 @@
                 </div>
             </div>
         </div>
+
 
     <% } else { %>
 
