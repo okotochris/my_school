@@ -15,6 +15,7 @@ const News = require('../schema/news.js')
 const Subject = require('../schema/subject.js')
 const router = express.Router()
 const {schoolSection} = require('../utility/schoolSection.js')
+const StudentResult = require('../schema/studentResult.js')
 const puppeteer = require('puppeteer');
 
 
@@ -547,12 +548,12 @@ router.get('/select-result-template', isAuthenticated, async(req, res)=>{
 })
 
 router.get('/admin/result-template/:template', isAuthenticated, async(req, res)=>{
-    const { result, student } = require('../utility/resultData.js')
+    const { results, student } = require('../utility/resultData.js')
     const resultTemplate =`resultTemplate/${req.params.template}`
     try{
         const schoolName = req.session.school
         const school = await SchoolProfile.findOne({schoolName})
-        res.render(resultTemplate, { result, student , school })
+        res.render(resultTemplate, { results, student , school, sclass:results[0].sclass })
     }catch(err){
         console.log(err)
         res.status(500).json({message:"server error"})
@@ -927,7 +928,42 @@ router.get('/admin/student-card', isAuthenticated, async (req, res) => {
     }
 });
 
+router.get('/admin/print-results', async (req, res) => {
+  try {
+    const school = req.session.school;
+    const fees = await schoolFees(school);
+    const role = req.session.role;
 
+
+    // Get available sessions and terms
+    const availableResults = await StudentResult.find({
+      schoolId: school._id
+    }).distinct('section');
+
+    const academicSessions = availableResults;
+    const {schoolClasses} = require('../utility/schoolSection.js')
+    const terms = ['FIRST TERM', 'SECOND TERM', 'THIRD TERM'];
+
+    let results = [];
+
+   
+    res.render('print-results', {
+      school,
+      schoolClasses,
+      role,
+      fees,
+      academicSessions,
+      terms,
+      title: 'Print result',
+      
+     
+    });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Unable to load the print results page.');
+  }
+});
 //delete
 router.delete('/admin/delete-scheme-of-work/:id', async(req, res)=>{
     try{

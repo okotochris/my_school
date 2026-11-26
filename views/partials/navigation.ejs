@@ -1,245 +1,363 @@
-<!-- Overlay for mobile -->
-<script src="https://unpkg.com/lucide@latest"></script>
+
+<!-- Libraries -->
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
 <script src="/js/menu.js"></script>
+
 <div id="navOverlay" class="nav-overlay" onclick="toggleNav()"></div>
 
 <nav class="navigation" id="sideNav">
-  <div class="nav-scroll">
-    <div class="nav-header">
-      <h3>Quick Links</h3>
-      <span class="nav-close" onclick="toggleNav()">×</span>
+  <div class="nav-scroll bg-white">
+
+    <!-- Header -->
+    <div class="relative overflow-hidden bg-gradient-to-br from-[#096CCE] via-blue-700 to-indigo-800 px-5 py-6 text-white">
+      <div class="absolute -right-8 -top-10 h-32 w-32 rounded-full bg-white/10"></div>
+      <div class="absolute -bottom-12 right-16 h-28 w-28 rounded-full bg-white/10"></div>
+
+      <div class="relative flex items-center justify-between">
+        <div>
+          <div class="mb-2 flex items-center gap-2">
+            <i data-lucide="graduation-cap" class="h-6 w-6"></i>
+            <span class="text-xs font-semibold uppercase tracking-[2px] text-blue-100">MySchoolResult</span>
+          </div>
+          <h3 class="text-xl font-bold">Quick Menu</h3>
+          <p class="mt-1 text-xs text-blue-100">Manage your school with ease</p>
+        </div>
+
+        <button onclick="toggleNav()" class="rounded-xl bg-white/15 p-2 transition hover:bg-white/25">
+          <i data-lucide="x" class="h-5 w-5"></i>
+        </button>
+      </div>
     </div>
 
-    <ul class="nav-list">
-      <li><a href="/"><span class="icon">🏫</span> Check Result</a></li>
-      <li><a href="/admin"><span class="icon">📤</span> Upload Result</a></li>
-      <li><a href="/studentgrade"><span class="icon">📘</span> Student Grade</a></li>
-      <li><a href="/studentid"><span class="icon">🎫</span> Get Student ID</a></li>
-      <li><a href="/generateid"><span class="icon">🧾</span> Register Student</a></li>
-      <li><a href="/admin/attendance"><span class="icon">📝</span> Attendance</a></li>
-      <li><a href="/admin/assignment"><span class="icon">📤</span>Assignment</a></li>
-       <li><a href="/admin/announcement"><span class="icon">🔔</span>Announcement</a></li>
-      <li><a href="/admin/lesson-note"><span class="icon">📔</span>Lesson Note</a></li>
-      <li><a href="/admin/exam-settings"><span class="icon">🖊️</span> Set exam</a></li>
-      <li><a href="/admin/upload-question"><span class="icon">📤</span>Upload questions</a></li>
-      <% if(role=='admin' ){ %>
-        <li><a href="/blacklist"><span class="icon">🚫</span> Blacklist</a></li>
-        <li><a href="/staffmanagement"><span class="icon">👩‍🏫</span> Staff Management</a></li>
-        <li><a href="/admin/school-management"><span class="icon">🏫</span> School Management</a></li>
-        <%} %>
-    </ul>
+    <div class="px-4 py-5">
 
-  <!-- Make Update -->
-    <div class="mt-5">
+      <!-- Main Navigation -->
+      <p class="mb-3 px-2 text-[10px] font-bold uppercase tracking-[1.5px] text-slate-400">
+        Main Menu
+      </p>
 
-      <button
-        type="button"
-        onclick="toggleUpdate()"
-        class="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-medium text-slate-600 transition hover:bg-slate-50"
-      >
-
-        <span class="flex items-center gap-3">
-
-          <span
-            class="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-50 text-slate-500"
-          >
-            <i data-lucide="refresh-cw" class="h-[18px] w-[18px]"></i>
-          </span>
-
-          <span>Make Update</span>
-
-        </span>
-
-        <i
-          data-lucide="chevron-down"
-          id="updateArrow"
-          class="h-4 w-4 text-slate-400 transition-transform"
-        ></i>
-
-      </button>
-
-
-      <ul
-        id="updateMenu"
-        class="mt-1 hidden space-y-1 border-l border-slate-200 ml-7 pl-2"
-      >
+      <ul class="space-y-1.5">
 
         <li>
-          <a
-            href="/update"
-            class="flex items-center gap-2 rounded-lg px-3 py-2 text-xs text-slate-500 transition hover:bg-blue-50 hover:text-blue-600"
-          >
-            <i data-lucide="user-pen" class="h-4 w-4"></i>
-            Update Student Info
+          <a href="/" class="menu-link group">
+            <span class="menu-icon bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white">
+              <i data-lucide="school"></i>
+            </span>
+            <span>Check Result</span>
+            <i data-lucide="chevron-right" class="menu-arrow"></i>
           </a>
         </li>
 
-        
-       
-
-
         <li>
-          <a
-            href="/update-result"
-            class="flex items-center gap-2 rounded-lg px-3 py-2 text-xs text-slate-500 transition hover:bg-blue-50 hover:text-blue-600"
-          >
-            <i data-lucide="chart-column" class="h-4 w-4"></i>
-            Update Result
+          <a href="/admin" class="menu-link group">
+            <span class="menu-icon bg-emerald-50 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white">
+              <i data-lucide="upload"></i>
+            </span>
+            <span>Upload Result</span>
+            <i data-lucide="chevron-right" class="menu-arrow"></i>
           </a>
         </li>
+
+        <li>
+          <a href="/admin/print-results" class="menu-link group">
+            <span class="menu-icon bg-orange-50 text-orange-600 group-hover:bg-orange-500 group-hover:text-white">
+              <i data-lucide="printer"></i>
+            </span>
+            <span>Print Result</span>
+            <span class="ml-auto rounded-full bg-orange-100 px-2 py-1 text-[9px] font-bold text-orange-700">NEW</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="/studentgrade" class="menu-link group">
+            <span class="menu-icon bg-violet-50 text-violet-600 group-hover:bg-violet-600 group-hover:text-white">
+              <i data-lucide="book-open"></i>
+            </span>
+            <span>Student Grade</span>
+            <i data-lucide="chevron-right" class="menu-arrow"></i>
+          </a>
+        </li>
+
+        <li>
+          <a href="/studentid" class="menu-link group">
+            <span class="menu-icon bg-pink-50 text-pink-600 group-hover:bg-pink-600 group-hover:text-white">
+              <i data-lucide="ticket"></i>
+            </span>
+            <span>Get Student ID</span>
+            <i data-lucide="chevron-right" class="menu-arrow"></i>
+          </a>
+        </li>
+
+        <li>
+          <a href="/generateid" class="menu-link group">
+            <span class="menu-icon bg-cyan-50 text-cyan-600 group-hover:bg-cyan-600 group-hover:text-white">
+              <i data-lucide="user-plus"></i>
+            </span>
+            <span>Register Student</span>
+            <i data-lucide="chevron-right" class="menu-arrow"></i>
+          </a>
+        </li>
+
+        <li>
+          <a href="/admin/attendance" class="menu-link group">
+            <span class="menu-icon bg-amber-50 text-amber-600 group-hover:bg-amber-500 group-hover:text-white">
+              <i data-lucide="clipboard-check"></i>
+            </span>
+            <span>Attendance</span>
+            <i data-lucide="chevron-right" class="menu-arrow"></i>
+          </a>
+        </li>
+
+        <li>
+          <a href="/admin/assignment" class="menu-link group">
+            <span class="menu-icon bg-indigo-50 text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white">
+              <i data-lucide="file-pen-line"></i>
+            </span>
+            <span>Assignment</span>
+            <i data-lucide="chevron-right" class="menu-arrow"></i>
+          </a>
+        </li>
+
+        <li>
+          <a href="/admin/announcement" class="menu-link group">
+            <span class="menu-icon bg-rose-50 text-rose-600 group-hover:bg-rose-600 group-hover:text-white">
+              <i data-lucide="bell"></i>
+            </span>
+            <span>Announcement</span>
+            <i data-lucide="chevron-right" class="menu-arrow"></i>
+          </a>
+        </li>
+
+        <li>
+          <a href="/admin/lesson-note" class="menu-link group">
+            <span class="menu-icon bg-teal-50 text-teal-600 group-hover:bg-teal-600 group-hover:text-white">
+              <i data-lucide="notebook-pen"></i>
+            </span>
+            <span>Lesson Note</span>
+            <i data-lucide="chevron-right" class="menu-arrow"></i>
+          </a>
+        </li>
+
+        <li>
+          <a href="/admin/exam-settings" class="menu-link group">
+            <span class="menu-icon bg-purple-50 text-purple-600 group-hover:bg-purple-600 group-hover:text-white">
+              <i data-lucide="file-edit"></i>
+            </span>
+            <span>Set Exam</span>
+            <i data-lucide="chevron-right" class="menu-arrow"></i>
+          </a>
+        </li>
+
+        <li>
+          <a href="/admin/upload-question" class="menu-link group">
+            <span class="menu-icon bg-sky-50 text-sky-600 group-hover:bg-sky-600 group-hover:text-white">
+              <i data-lucide="cloud-upload"></i>
+            </span>
+            <span>Upload Questions</span>
+            <i data-lucide="chevron-right" class="menu-arrow"></i>
+          </a>
+        </li>
+
+        <% if(role == 'admin') { %>
+
+          <li class="!mt-5 border-t border-slate-100 pt-4">
+            <p class="mb-3 px-2 text-[10px] font-bold uppercase tracking-[1.5px] text-slate-400">
+              Administration
+            </p>
+          </li>
+
+          <li>
+            <a href="/blacklist" class="menu-link group">
+              <span class="menu-icon bg-red-50 text-red-600 group-hover:bg-red-600 group-hover:text-white">
+                <i data-lucide="ban"></i>
+              </span>
+              <span>Blacklist</span>
+              <i data-lucide="chevron-right" class="menu-arrow"></i>
+            </a>
+          </li>
+
+          <li>
+            <a href="/staffmanagement" class="menu-link group">
+              <span class="menu-icon bg-fuchsia-50 text-fuchsia-600 group-hover:bg-fuchsia-600 group-hover:text-white">
+                <i data-lucide="users"></i>
+              </span>
+              <span>Staff Management</span>
+              <i data-lucide="chevron-right" class="menu-arrow"></i>
+            </a>
+          </li>
+
+          <li>
+            <a href="/admin/school-management" class="menu-link group">
+              <span class="menu-icon bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white">
+                <i data-lucide="building-2"></i>
+              </span>
+              <span>School Management</span>
+              <i data-lucide="chevron-right" class="menu-arrow"></i>
+            </a>
+          </li>
+
+        <% } %>
 
       </ul>
 
-    </div>
+      <!-- Updates -->
+      <div class="mt-6 rounded-2xl border border-slate-100 bg-slate-50/80 p-2">
 
-
-    <!-- Payment -->
-    <div
-      class="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-4"
-    >
-
-      <div class="mb-3 flex items-center justify-between">
-
-        <div class="flex items-center gap-2">
-
-          <div
-            class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-100 text-blue-600"
-          >
-            <i data-lucide="credit-card" class="h-4 w-4"></i>
-          </div>
-
-          <span class="text-xs font-semibold text-slate-600">
-            Fees
+        <button
+          type="button"
+          onclick="toggleUpdate()"
+          class="flex w-full items-center justify-between rounded-xl px-2 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-white"
+        >
+          <span class="flex items-center gap-3">
+            <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-100 text-blue-600">
+              <i data-lucide="refresh-cw" class="h-[18px] w-[18px]"></i>
+            </span>
+            Make Update
           </span>
 
+          <i data-lucide="chevron-down" id="updateArrow" class="h-4 w-4 text-slate-400 transition-transform"></i>
+        </button>
+
+        <ul id="updateMenu" class="hidden space-y-1 border-l-2 border-blue-200 ml-6 pl-3 py-2">
+
+          <li>
+            <a href="/update" class="flex items-center gap-2 rounded-lg px-3 py-2 text-xs font-medium text-slate-600 transition hover:bg-blue-100 hover:text-blue-700">
+              <i data-lucide="user-pen" class="h-4 w-4"></i>
+              Update Student Info
+            </a>
+          </li>
+
+          <li>
+            <a href="/update-result" class="flex items-center gap-2 rounded-lg px-3 py-2 text-xs font-medium text-slate-600 transition hover:bg-blue-100 hover:text-blue-700">
+              <i data-lucide="chart-column" class="h-4 w-4"></i>
+              Update Result
+            </a>
+          </li>
+
+        </ul>
+      </div>
+
+      <!-- Payment Card -->
+      <div class="relative mt-6 overflow-hidden rounded-2xl bg-gradient-to-br from-[#096CCE] via-blue-700 to-indigo-800 p-4 text-white shadow-lg shadow-blue-200/60">
+
+        <div class="absolute -right-7 -top-8 h-28 w-28 rounded-full border-[14px] border-white/10"></div>
+        <div class="absolute -bottom-10 right-16 h-24 w-24 rounded-full bg-white/10"></div>
+
+        <div class="relative">
+
+          <div class="mb-4 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-white/15">
+                <i data-lucide="wallet" class="h-5 w-5"></i>
+              </span>
+              <div>
+                <p class="text-sm font-bold">School Fees</p>
+                <p class="text-[10px] text-blue-100">Account payment</p>
+              </div>
+            </div>
+
+            <span class="rounded-full bg-orange-400/20 px-2.5 py-1 text-[9px] font-bold uppercase tracking-wide text-orange-100">
+              Payment
+            </span>
+          </div>
+
+          <p class="mb-1 text-[10px] font-medium text-blue-100">Outstanding balance</p>
+
+          <div class="mb-4 text-3xl font-extrabold tracking-tight">
+            ₦<span id="fee"><%= fees.toLocaleString() %></span>
+          </div>
+
+          <button
+            type="button"
+            onclick="makePayment()"
+            id="button"
+            class="flex w-full items-center justify-center gap-2 rounded-xl bg-white px-4 py-3 text-sm font-bold text-blue-700 shadow-sm transition hover:bg-blue-50 active:scale-[0.98]"
+          >
+            <i data-lucide="credit-card" class="h-4 w-4"></i>
+            <span>Make Payment</span>
+          </button>
+
         </div>
+      </div>
 
-        <span
-          class="rounded-full bg-orange-100 px-2 py-1 text-[9px] font-semibold text-orange-600"
+      <!-- Logout -->
+      <div class="mt-6 border-t border-slate-100 pt-4">
+
+        <a
+          href="/logout"
+          onclick="clearStorage()"
+          class="group flex w-full items-center gap-3 rounded-xl border border-red-100 bg-red-50/70 px-3 py-3 text-sm font-semibold text-red-600 transition hover:border-red-200 hover:bg-red-100"
         >
-          PAYMENT
-        </span>
+
+          <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-white text-red-500 shadow-sm">
+            <i data-lucide="log-out" class="h-[18px] w-[18px]"></i>
+          </span>
+
+          <span>Logout</span>
+
+          <i data-lucide="chevron-right" class="ml-auto h-4 w-4 text-red-300 transition group-hover:translate-x-1 group-hover:text-red-500"></i>
+
+        </a>
 
       </div>
 
-
-      <div class="mb-3 text-2xl font-bold tracking-tight text-slate-900">
-        ₦<span id="fee"><%= fees.toLocaleString() %></span>
-      </div>
-
-
-      <button
-        type="button"
-        onclick="makePayment()"
-        id="button"
-        class="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 hover:shadow-md active:scale-[0.98]"
-      >
-        <i data-lucide="wallet" class="h-4 w-4"></i>
-        <span>Make Payment</span>
-      </button>
-
     </div>
+  </div>
+</nav>
 
+<style>
+  .menu-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 9px 10px;
+    border-radius: 12px;
+    color: #475569;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all .2s ease;
+  }
 
-    <!-- Logout -->
-    <div class="mt-auto pt-4">
+  .menu-link:hover {
+    background: #eff6ff;
+    color: #096CCE;
+    transform: translateX(2px);
+  }
 
-      <a
-        href="/logout"
-        onclick="clearStorage()"
-        class="group flex w-full items-center gap-3 rounded-xl border border-transparent px-3 py-2.5 text-sm font-semibold text-red-600 transition hover:border-red-100 hover:bg-red-50"
-      >
+  .menu-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    border-radius: 11px;
+    transition: all .2s ease;
+  }
 
-        <span
-          class="flex h-9 w-9 items-center justify-center rounded-lg bg-red-50 text-red-500 transition group-hover:bg-red-100"
-        >
-          <i data-lucide="log-out" class="h-[18px] w-[18px]"></i>
-        </span>
+  .menu-icon svg {
+    width: 18px;
+    height: 18px;
+    stroke-width: 2;
+  }
 
-        <span>Logout</span>
+  .menu-arrow {
+    width: 14px;
+    height: 14px;
+    margin-left: auto;
+    color: #cbd5e1;
+    transition: all .2s ease;
+  }
 
-        <i
-          data-lucide="chevron-right"
-          class="ml-auto h-4 w-4 text-red-300 transition group-hover:translate-x-1 group-hover:text-red-500"
-        ></i>
+  .menu-link:hover .menu-arrow {
+    color: #096CCE;
+    transform: translateX(2px);
+  }
+</style>
 
-      </a>
-
-    </div>
-
-    <script src="https://checkout.flutterwave.com/v3.js"></script>
-
-    <script>
-      (()=>{
-          lucide.createIcons();
-      })()
-
-      const buttonId = document.getElementById('button')
-      async function makePayment() {
-        buttonId.innerText = "Loading.."
-        const res = await fetch('/payment/schoolinfo')
-        if (!res.ok) {
-          buttonId.innerText = "Make Payment"
-          return;
-        }
-        const schoolDetails = await res.json()
-        const {  schoolEmail,  schoolName, headTeacher,  fees } = schoolDetails;
-        if (fees < 70) {
-          buttonId.innerText = "Make Payment"
-          return
-        }
-        const amountInNumber = Number(fees);
-        const meta = {
-          schoolName,
-          amount: amountInNumber,
-          staffName: headTeacher?.name || "School Admin",
-          refId: `${schoolName || "School Admin"}${Date.now()}`
-        }
-        FlutterwaveCheckout({
-          public_key: "FLWPUBK-f8514622db2e398152c1a94f24a478a5-X",
-          tx_ref: "SCHL-" + Date.now(), // better unique ref
-          amount: amountInNumber,      // use dynamic amount
-          currency: "NGN",
-          payment_options: "card,ussd,banktransfer",
-
-          customer: {
-            email: schoolEmail,
-            name: headTeacher?.name || "School Admin",
-          },
-
-          callback: function updateDashboard() {
-            schoolDetails.meta = meta
-            
-          buttonId.innerText = "Loading.."
-           try{
-            fetch("/api/payment-callback", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(schoolDetails)
-            })
-              .then(res => res.json())
-              .then(result => {
-                document.getElementById('fee').innerText = 0;
-                 alert("Payment successful!");
-              });
-           }catch(err){
-            console.log(err)
-            alert("Payment was received, but we could not update the dashboard.");
-           }finally{
-             buttonId.innerText = "Make Payment"
-           }
-          },
-
-          onclose: function () {
-            console.log("Payment closed");
-          }
-        });
-      }
-      
-    </script>
-
-<script src="https://unpkg.com/lucide@latest"></script>
+<!-- Flutterwave -->
+<script src="https://checkout.flutterwave.com/v3.js"></script>
 
 <script>
   lucide.createIcons();
@@ -251,8 +369,84 @@
     menu.classList.toggle("hidden");
     arrow.classList.toggle("rotate-180");
   }
-</script>
- 
 
-  </div>
-</nav>
+  const buttonId = document.getElementById('button');
+
+  async function makePayment() {
+    buttonId.innerText = "Loading..";
+    buttonId.disabled = true;
+
+    try {
+      const res = await fetch('/payment/schoolinfo');
+
+      if (!res.ok) throw new Error("Unable to retrieve school payment details");
+
+      const schoolDetails = await res.json();
+      const { schoolEmail, schoolName, headTeacher, fees } = schoolDetails;
+
+      if (Number(fees) < 70) {
+        alert("No payment is currently required.");
+        return;
+      }
+
+      const amountInNumber = Number(fees);
+
+      const meta = {
+        schoolName,
+        amount: amountInNumber,
+        staffName: headTeacher?.name || "School Admin",
+        refId: `${schoolName || "School Admin"}${Date.now()}`
+      };
+
+      FlutterwaveCheckout({
+        public_key: "FLWPUBK-f8514622db2e398152c1a94f24a478a5-X",
+        tx_ref: "SCHL-" + Date.now(),
+        amount: amountInNumber,
+        currency: "NGN",
+        payment_options: "card,ussd,banktransfer",
+
+        customer: {
+          email: schoolEmail,
+          name: headTeacher?.name || "School Admin"
+        },
+
+        callback: async function () {
+          try {
+            schoolDetails.meta = meta;
+
+            const response = await fetch("/api/payment-callback", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(schoolDetails)
+            });
+
+            if (!response.ok) throw new Error("Unable to update payment status");
+
+            await response.json();
+
+            document.getElementById('fee').innerText = "0";
+            alert("Payment successful!");
+
+          } catch (err) {
+            console.error(err);
+            alert("Payment was received, but we could not update the dashboard.");
+          } finally {
+            buttonId.disabled = false;
+            buttonId.innerText = "Make Payment";
+          }
+        },
+
+        onclose: function () {
+          buttonId.disabled = false;
+          buttonId.innerText = "Make Payment";
+        }
+      });
+
+    } catch (err) {
+      console.error(err);
+      alert("Unable to process payment. Please try again.");
+      buttonId.disabled = false;
+      buttonId.innerText = "Make Payment";
+    }
+  }
+</script>

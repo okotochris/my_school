@@ -27,11 +27,11 @@ router.post("/result", async (req, res) => {
       res.render("blacklistfile", { blackListStudent });
       return
     }
-      let student = await StudentProfile.findOne({ studentId: id });
-      name = StudentProfile.fullname;
+    let student = await StudentProfile.findOne({ studentId: id });
+    name = StudentProfile.fullname;
     //UPDATED RESULT LOGIC
-    const result = await StudentResult.findOne({ studentId: id, studentClass: clas, term })
-    if(result){
+    const results = await StudentResult.find({ studentId: id, studentClass: clas, term })
+    if(results){
       //check if school has made payment
        let schoolName = student.schoolName.toLowerCase().toLocaleLowerCase().trim();
 
@@ -42,7 +42,7 @@ router.post("/result", async (req, res) => {
         }
       //CREATE SCHOOL TEMPLATE
       const resultTemplate = `resultTemplate/${ school.resultTemplate}`;
-      return  res.render(resultTemplate, { result, student, school });
+      return  res.render(resultTemplate, { results, student, school, sclass:clas });
      
     }
 
@@ -142,17 +142,92 @@ async function isOutStandingPayment(school){
 }
 
 //view student result from student profile page
-router.get('/view-student-result', async(req, res)=>{
-    const {term, sclass, school, studentId} = req.query
-    console.log(req.session.school)
-    const result = await StudentResult.findOne({studentId, studentClass: sclass, term, schoolName: school})
-    const student = await StudentProfile.findOne({studentId})
 
-    const schoolData = await schoolPfofile.findOne({schoolName : school})
-    //CREATE SCHOOL TEMPLATE
+router.get('/view-student-result', async (req, res) => {
+  try {
+    const { term, sclass, school: querySchool, studentId, session } = req.query;
+    
+    // Determine the school
+    const schoolName = session
+      ? req.session.school
+      : querySchool;
+
+    if (!schoolName) {
+      return res.status(400).send('School information is missing.');
+    }
+
+    // Get school profile
+    const schoolData = await schoolPfofile.findOne({
+      schoolName
+    }).lean();
+
+    if (!schoolData) {
+      return res.status(404).send('School not found.');
+    }
+
     const resultTemplate = `resultTemplate/${schoolData.resultTemplate}`;
-    return  res.render(resultTemplate, { result, student, school:schoolData });
 
+    // ADMIN: Bulk result printing
+    if (session) {
+      const filter = {
+        section: session,
+        schoolName: {
+          $regex: schoolName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'),
+          $options: 'i'
+        }
+      };
+
+      if (term) filter.term = term;
+      if (sclass) filter.studentClass = sclass;
+
+      const results = await StudentResult.find(filter)
+        .sort({ fullname: 1 })
+        .lean();
+
+      if (!results.length) {
+        return res.status(404).send('No results found for the selected criteria.');
+      }
+
+      return res.render(resultTemplate, {
+        results,
+        sclass,
+        school: schoolData
+      });
+    }
+
+    // INDIVIDUAL STUDENT RESULT
+    if (!studentId || !sclass || !term) {
+      return res.status(400).send('Student ID, class and term are required.');
+    }
+
+    const [result, student] = await Promise.all([
+      StudentResult.findOne({
+        studentId,
+        studentClass: sclass,
+        term,
+        schoolName
+      }).lean(),
+
+      StudentProfile.findOne({
+        studentId
+      }).lean()
+    ]);
+
+    if (!result) {
+      return res.status(404).send('Student result not found.');
+    }
+
+    return res.render(resultTemplate, {
+      results: [result],
+      student,
+      sclass,
+      school: schoolData
+    });
+
+  } catch (error) {
+    console.error('View student result error:', error);
+    return res.status(500).send('Unable to load student result.');
+  }
 });
 
 router.delete('/api/delete_result', async(req, res)=>{

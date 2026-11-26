@@ -1,3 +1,39 @@
+<%
+  const resultList = Array.isArray(results)
+    ? results
+    : (results ? [results] : []);
+  const isBulk = resultList.length > 1;
+  const firstResult = resultList[0];
+
+  const session = firstResult?.section || '';
+  const term = firstResult?.term || '';
+  const schoolName = firstResult?.schoolName || '';
+
+  const params = new URLSearchParams({
+    session,
+    term,
+    schoolName,
+    sclass: sclass 
+  }).toString();
+
+  const pdfUrl = `/results/pdf?${params}`;
+  const imageUrl = `/results/image?${params}`;
+
+  const safe = (value, fallback = '—') =>
+    value !== undefined && value !== null && value !== ''
+      ? value
+      : fallback;
+
+  const overall = (avg) => {
+    avg = Number(avg) || 0;
+    if (avg >= 80) return ['A', 'EXCELLENT'];
+    if (avg >= 70) return ['B', 'VERY GOOD'];
+    if (avg >= 60) return ['C', 'GOOD'];
+    if (avg >= 50) return ['D', 'FAIR'];
+    if (avg >= 40) return ['E', 'PASS'];
+    return ['F', 'FAILED'];
+  };
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +41,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Academic Report - Greenfield International School</title>
+    <title>Academic Report - <%= school.schoolName %></title>
 
     <link rel="stylesheet" href="/styles/results/template-3.css">
 
@@ -22,519 +58,328 @@
     </style>
 </head>
 
-
 <body>
 
+    <!-- DOWNLOAD CONTROLS -->
+    <% if (resultList.length > 0) { %>
+        <div class="no-print download-toolbar">
+            <a href="<%= pdfUrl %>" class="download-btn pdf-btn">Download PDF</a>
+
+            <% if (!isBulk) { %>
+                <a href="<%= imageUrl %>" class="download-btn image-btn">Download Image</a>
+            <% } %>
+
+            <button onclick="window.print()" class="download-btn print-btn">Print</button>
+        </div>
+    <% } else { %>
+        <div class="empty-state">
+            <h2>No result available</h2>
+            <p>There are no results to display.</p>
+        </div>
+    <% } %>
+
+<% resultList.forEach((result) => {
+     const student = result.student || result;
+     const [gradeLetter, gradeWord] = overall(result.average);
+     const days = (Number(result.present) || 0) + (Number(result.absent) || 0);
+     const createdDate = result.createdAt
+       ? new Date(result.createdAt).toLocaleDateString('en-GB')
+       : '';
+%>
+
 <div class="result-sheet">
-<div class="no-print flex justify-center gap-2 p-4 print:hidden">
 
-    <a
-        href="/result/<%= result._id %>/pdf"
-        class="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-700"
-    >
-        Download PDF
-    </a>
-
-    <a
-        href="/result/<%= result._id %>/image"
-        class="rounded-lg bg-teal-600 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-700"
-    >
-        Download Image
-    </a>
-
-    <button
-        onclick="window.print()"
-        class="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50"
-    >
-        Print
-    </button>
-
-</div>
-
-    <!-- =====================================================
-         SCHOOL HEADER
-    ====================================================== -->
-
+    <!-- SCHOOL HEADER -->
     <header class="school-header">
 
         <div class="header-top">
 
             <div class="logo">
-                <img
-                    src="<%= school.image.logo %>"
-                    alt="<%= school.schoolName %> Logo"
-                >
+                <% if (school.image?.logo) { %>
+                    <img src="<%= school.image.logo %>" alt="<%= school.schoolName %> Logo">
+                <% } %>
             </div>
-
 
             <div class="school-information">
 
-                <div class="school-name">
-                    <%= school.schoolName %>
-                </div>
+                <div class="school-name"><%= school.schoolName %></div>
 
                 <div class="school-motto">
                     <%= school.motto || 'Excellence • Discipline • Integrity' %>
                 </div>
 
-                <div class="school-address">
-                    <%= school.address %>
-                </div>
+                <% if (school.address) { %>
+                    <div class="school-address"><%= school.address %></div>
+                <% } %>
 
                 <div class="school-contact">
-                    Tel: <%= school.phone %> &nbsp; | &nbsp;
-                    <%= school.schoolEmail %>
+                    <% if (school.phone) { %>Tel: <%= school.phone %><% } %>
+                    <% if (school.phone && school.schoolEmail) { %> &nbsp;|&nbsp; <% } %>
+                    <% if (school.schoolEmail) { %><%= school.schoolEmail %><% } %>
                 </div>
 
             </div>
 
         </div>
-
 
         <div class="header-line"></div>
     </header>
 
-    <!-- =====================================================
-         STUDENT INFORMATION
-    ====================================================== -->
-
+    <!-- STUDENT INFORMATION -->
     <section class="student-information">
 
         <div class="photo-box">
-
-            <img
-               src="<%= student.passport %>" alt="Student Photo"
-            >
-
+            <% if (student.passport) { %>
+                <img src="<%= student.passport %>" alt="Student Photo">
+            <% } %>
         </div>
-
 
         <div class="student-details">
 
-            <div class="student-full-name">
-                <%= student.fullname %>
-            </div>
-
+            <div class="student-full-name"><%= safe(student.fullname) %></div>
 
             <div class="details-row">
-
                 <div>
                     <span>STUDENT ID</span>
-                    <strong><%= student.studentId %></strong>
+                    <strong><%= safe(student.studentId) %></strong>
                 </div>
-
                 <div>
                     <span>CLASS</span>
-                      <strong><%= result.studentClass %></strong>
+                    <strong><%= safe(result.studentClass) %></strong>
                 </div>
-
                 <div>
                     <span>GENDER</span>
-                    <strong><%= student.gender %></strong>
+                    <strong><%= safe(student.gender) %></strong>
                 </div>
-
             </div>
-
 
             <div class="details-row">
-
                 <div>
                     <span>DATE OF BIRTH</span>
-                    <strong><%= student.dob %></strong>
+                    <strong><%= safe(student.dob) %></strong>
                 </div>
-
                 <div>
                     <span>HOUSE</span>
-                    <strong><%= student.house %></strong>
+                    <strong><%= safe(student.house) %></strong>
                 </div>
-
                 <div>
                     <span>TERM</span>
-                    <strong><%= result.term %></strong>
+                    <strong><%= safe(result.term) %></strong>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- MAIN CONTENT: TABLE ON THE LEFT, DETAILS ON THE RIGHT -->
+    <div class="main-content">
+
+        <!-- LEFT: RESULT TABLE -->
+        <section class="academic-record">
+
+            <div class="section-title">
+                <span>01</span>
+                <h2>ACADEMIC PERFORMANCE</h2>
+            </div>
+
+            <table class="academic-table">
+                <thead>
+                    <tr>
+                        <th class="no">NO.</th>
+                        <th class="subject">SUBJECT</th>
+                        <th>1ST</th>
+                        <th>2ND</th>
+                        <th>CA</th>
+                        <th>EXAM</th>
+                        <th>TOTAL</th>
+                        <th>GRADE</th>
+                        <th class="remark">REMARK</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <% (result.subjects || []).forEach((subject, index) => { %>
+                        <tr>
+                            <td><%= index + 1 %></td>
+                            <td class="subject"><%= safe(subject.subjectName) %></td>
+                            <td><%= safe(subject.firstTest, 0) %></td>
+                            <td><%= safe(subject.secondTest, 0) %></td>
+                            <td><%= safe(subject.cca, 0) %></td>
+                            <td><%= safe(subject.exam, 0) %></td>
+                            <td class="total"><%= safe(subject.total, 0) %></td>
+                            <td>
+                                <strong class="grade-<%= String(subject.grade || '').toLowerCase().charAt(0) %>">
+                                    <%= safe(subject.grade) %>
+                                </strong>
+                            </td>
+                            <td><%= safe(subject.remark) %></td>
+                        </tr>
+                    <% }) %>
+
+                    <% if (!result.subjects || result.subjects.length === 0) { %>
+                        <tr>
+                            <td colspan="9" class="empty-table">No subjects available.</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+
+        </section>
+
+        <!-- RIGHT: SUMMARY, ATTENDANCE, COMMENTS -->
+        <aside class="result-sidebar">
+
+            <!-- PERFORMANCE SUMMARY -->
+            <section class="performance-summary">
+
+                <div class="summary-heading">PERFORMANCE SUMMARY</div>
+
+                <div class="summary-content">
+
+                    <div class="summary-item">
+                        <span>TOTAL MARKS</span>
+                        <strong><%= safe(result.score_obtain, 0) %></strong>
+                        <small>OUT OF <%= safe(result.score_obtainable, 0) %></small>
+                    </div>
+
+                    <div class="summary-item">
+                        <span>AVERAGE SCORE</span>
+                        <strong><%= safe(result.average, 0) %></strong>
+                    </div>
+
+                    <div class="summary-item">
+                        <span>SUBJECTS DONE</span>
+                        <strong><%= safe(result.No_subj, (result.subjects || []).length) %></strong>
+                    </div>
+
+                    <div class="summary-item">
+                        <span>OVERALL GRADE</span>
+                        <strong><%= gradeLetter %></strong>
+                        <small><%= gradeWord %></small>
+                    </div>
+
                 </div>
 
+            </section>
+
+            <!-- ATTENDANCE -->
+            <section class="attendance-section">
+
+                <div class="section-title">
+                    <span>02</span>
+                    <h2>ATTENDANCE RECORD</h2>
+                </div>
+
+                <div class="attendance-content">
+
+                    <div class="attendance-stat">
+                        <span>SCHOOL DAYS</span>
+                        <strong><%= days %></strong>
+                    </div>
+
+                    <div class="attendance-stat">
+                        <span>PRESENT</span>
+                        <strong><%= safe(result.present, 0) %></strong>
+                    </div>
+
+                    <div class="attendance-stat">
+                        <span>ABSENT</span>
+                        <strong><%= safe(result.absent, 0) %></strong>
+                    </div>
+
+                    <div class="attendance-stat">
+                        <span>RATE</span>
+                        <strong><%= days > 0 ? (((Number(result.present) || 0) / days) * 100).toFixed(1) : 0 %>%</strong>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- COMMENTS -->
+            <div class="comment-box">
+                <div class="comment-title">CLASS TEACHER'S COMMENT</div>
+                <p><%= safe(result.tReport, 'No comment available.') %></p>
             </div>
 
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         RESULT TABLE
-    ====================================================== -->
-
-    <section class="academic-record">
-
-        <div class="section-title">
-
-            <span>01</span>
-
-            <h2>ACADEMIC PERFORMANCE</h2>
-
-        </div>
-
-
-        <table class="academic-table">
-
-            <thead>
-
-                <tr>
-
-                    <th>NO.</th>
-
-                    <th class="subject">
-                        SUBJECT
-                    </th>
-
-                    <th>1st Test<br>
-                        <!-- <small>20</small> -->
-                    </th>
-
-                    <th>2nd Test
-                        <!-- <br><small>20</small> -->
-                    </th>
-                    <th>
-                        CA
-                        <!-- <br><small>40</small> -->
-                    </th>
-                    <th>EXAM
-                        <!-- <br><small>60</small> -->
-                    </th>
-
-                    <th>TOTAL<br><small>100</small></th>
-
-                    <th>GRADE</th>
-
-                    <th>REMARK</th>
-
-                </tr>
-
-            </thead>
-
-
-            <tbody>
-
-               
-               <% result.subjects.forEach((subject, index) => { %>
-                     <tr>
-
-                    <td><%= index + 1 %></td>
-
-                    <td class="subject">
-                        <%= subject.subjectName %>
-                    </td>
-
-                    <td><%= subject.firstTest %></td>
-                    <td><%= subject.secondTest %></td>
-                    <td><%= subject.cca %></td>
-                    <td><%= subject.exam %></td>
-                    <td>
-                        <%= subject.total %>
-                    </td>
-
-                    <td>
-                        <strong class="grade-a"><%= subject.grade %></strong>
-                    </td>
-
-                    <td><%= subject.remark %></td>
-
-                </tr>
-                <% }) %>
-
-
-            </tbody>
-
-        </table>
-
-    </section>
-
-
-    <!-- =====================================================
-         PERFORMANCE SUMMARY
-    ====================================================== -->
-
-    <section class="performance-summary">
-
-        <div class="summary-heading">
-           <%= result.Treport %>
-        </div>
-
-
-        <div class="summary-content">
-
-            <div class="summary-item">
-
-                <span>TOTAL MARKS</span>
-
-                <strong><%= result.score_obtain %></strong>
-
-                <small>OUT OF <%= result.score_obtainable %></small>
-
+            <div class="comment-box">
+                <div class="comment-title">HEAD TEACHER'S COMMENT</div>
+                <p><%= safe(result.Treport, 'No comment available.') %></p>
             </div>
 
+        </aside>
 
-            <div class="summary-item">
+    </div>
 
-                <span>AVERAGE SCORE</span>
-
-                <strong><%= result.average %></strong>
-
-               
-
-            </div>
-
-
-            <div class="summary-item">
-
-                <span>TOTAL SUBJECTS DONE</span>
-
-                <strong><%= result.No_subj %></strong>
-            </div>
-
-
-            <div class="summary-item">
-
-                <span>OVERALL GRADE</span>
-
-                 <% if (result.average >= 80) { %>
-
-                    <strong>A</strong>
-                    <small>EXCELLENT</small>
-
-                <% } else if (result.average >= 70) { %>
-
-                    <strong>B</strong>
-                    <small>VERY GOOD</small>
-
-                <% } else if (result.average >= 60) { %>
-
-                    <strong>C</strong>
-                    <small>GOOD</small>
-
-                <% } else if (result.average >= 50) { %>
-
-                    <strong>D</strong>
-                    <small>FAIR</small>
-
-                <% } else if (result.average >= 40) { %>
-
-                    <strong>E</strong>
-                    <small>PASS</small>
-
-                <% } else { %>
-
-                    <strong>F</strong>
-                    <small>FAILED</small>
-
-                <% } %>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         ATTENDANCE
-    ====================================================== -->
-
-    <section class="attendance-section">
-
-        <div class="section-title">
-
-            <span>02</span>
-
-            <h2>ATTENDANCE RECORD</h2>
-
-        </div>
-
-
-        <div class="attendance-content">
-
-            <div class="attendance-stat">
-
-                <span>TOTAL SCHOOL DAYS</span>
-
-                <strong><%= result.present + result.absent %></strong>
-
-            </div>
-
-
-            <div class="attendance-stat">
-
-                <span>DAYS PRESENT</span>
-
-                <strong><%= result.present %></strong>
-
-            </div>
-
-
-            <div class="attendance-stat">
-
-                <span>DAYS ABSENT</span>
-
-                <strong><%= result.absent %></strong>
-
-            </div>
-
-
-            <div class="attendance-stat">
-
-                <span>ATTENDANCE RATE</span>
-
-                <strong>
-                     <%= (result.present + result.absent) > 0
-                            ? ((result.present / (result.present + result.absent)) * 100).toFixed(1)
-                            : 0
-                        %>%
-                </strong>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- =====================================================
-         COMMENTS
-    ====================================================== -->
-
-    <section class="comments-section">
-
-        <div class="comment-box">
-
-            <div class="comment-title">
-                CLASS TEACHER'S COMMENT
-            </div>
-
-            <p>
-                <%= result.tReport %>
-            </p>
-
-        </div>
-
-
-        <div class="comment-box">
-
-            <div class="comment-title">
-                HEAD TEACHER'S COMMENT
-            </div>
-
-            <p>
-                <%= result.Treport %>
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         GRADING SCALE
-    ====================================================== -->
-
+    <!-- GRADING SCALE -->
     <section class="grading-section">
 
-        <div class="grading-title">
-            GRADING SYSTEM
-        </div>
-
+        <div class="grading-title">GRADING SYSTEM</div>
 
         <div class="grading-grid">
-
-            <div>
-                <strong>A</strong>
-                <span>80 - 100</span>
-                <small>Excellent</small>
-            </div>
-
-            <div>
-                <strong>B</strong>
-                <span>70 - 79</span>
-                <small>Very Good</small>
-            </div>
-
-            <div>
-                <strong>C</strong>
-                <span>60 - 69</span>
-                <small>Good</small>
-            </div>
-
-            <div>
-                <strong>D</strong>
-                <span>50 - 59</span>
-                <small>Fair</small>
-            </div>
-
-            <div>
-                <strong>E</strong>
-                <span>40 - 49</span>
-                <small>Pass</small>
-            </div>
-
-            <div>
-                <strong>F</strong>
-                <span>0 - 39</span>
-                <small>Fail</small>
-            </div>
-
+            <div><strong>A</strong><span>80 - 100</span><small>Excellent</small></div>
+            <div><strong>B</strong><span>70 - 79</span><small>Very Good</small></div>
+            <div><strong>C</strong><span>60 - 69</span><small>Good</small></div>
+            <div><strong>D</strong><span>50 - 59</span><small>Fair</small></div>
+            <div><strong>E</strong><span>40 - 49</span><small>Pass</small></div>
+            <div><strong>F</strong><span>0 - 39</span><small>Fail</small></div>
         </div>
 
     </section>
 
-
-    <!-- =====================================================
-         SIGNATURES
-    ====================================================== -->
-
+    <!-- SIGNATURES -->
     <section class="signatures">
 
         <div class="signature">
-
             <div class="signature-space"></div>
-
             <div class="signature-line"></div>
-
             <strong>Class Teacher</strong>
-
-            <span>    Date: <%= new Date(result.createdAt).toLocaleDateString('en-GB') %></span>
-
+            <span>Date: <%= createdDate %></span>
         </div>
 
-
         <div class="signature">
-
             <div class="signature-space"></div>
-
             <div class="signature-line"></div>
-
             <strong>Head Teacher / Principal</strong>
-
-            <span>    Date: <%= new Date(result.createdAt).toLocaleDateString('en-GB') %></span>
-
+            <span>Date: <%= createdDate %></span>
         </div>
 
-
         <div class="signature">
-
             <div class="signature-space"></div>
-
             <div class="signature-line"></div>
-
             <strong>Parent / Guardian</strong>
-
             <span>________________</span>
-
         </div>
 
     </section>
 
-<script src="https://cdn.tailwindcss.com"></script>
-
-
 </div>
+
+<% }) %>
+
+<!-- Scale the A4 sheet down on small screens (same layout as laptop) -->
+<script>
+  (function () {
+    var PAGE_WIDTH = 794; // A4 width (210mm) in CSS px
+
+    function fit() {
+      var available = document.documentElement.clientWidth - 16;
+      var scale = available < PAGE_WIDTH ? available / PAGE_WIDTH : 1;
+      document.querySelectorAll('.result-sheet').forEach(function (page) {
+        page.style.zoom = scale === 1 ? '' : scale;
+      });
+    }
+
+    fit();
+    window.addEventListener('resize', fit);
+    window.addEventListener('orientationchange', fit);
+    window.addEventListener('beforeprint', function () {
+      document.querySelectorAll('.result-sheet').forEach(function (p) { p.style.zoom = ''; });
+    });
+    window.addEventListener('afterprint', fit);
+  })();
+</script>
 
 </body>
 </html>

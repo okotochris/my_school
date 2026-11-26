@@ -9,29 +9,77 @@ body {
 }
 
 body {
+    padding: 15px 8px;
     background: #e9eef3;
     color: var(--dark);
     font-family: Arial, Helvetica, sans-serif;
     font-size: 12px;
 }
 
+/* =====================================================
+   DOWNLOAD TOOLBAR
+===================================================== */
+
+.download-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin: 0 auto 15px;
+    padding: 6px;
+}
+
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 9px 16px;
+    border: 0;
+    border-radius: 8px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.pdf-btn { background: #0f172a; }
+.image-btn { background: #0d9488; }
+
+.print-btn {
+    border: 1px solid #cbd5e1;
+    background: #fff;
+    color: #334155;
+}
+
+.empty-state {
+    max-width: 450px;
+    margin: 70px auto;
+    padding: 30px;
+    background: #fff;
+    text-align: center;
+}
 
 /* =====================================================
-   MAIN A4 CONTAINER
+   MAIN A4 CONTAINER (210mm x 297mm)
 ===================================================== */
 
 .result-container {
     width: 210mm;
     min-height: 297mm;
-
-    margin: 20px auto;
-    padding: 12mm;
-
+    margin: 0 auto 20px;
+    padding: 10mm;
     background: #ffffff;
-
-    transform-origin: top center;
+    box-shadow: 0 4px 20px rgba(15, 23, 42, .08);
+    page-break-after: always;
+    break-after: page;
 }
 
+.result-container:last-of-type {
+    page-break-after: auto;
+    break-after: auto;
+}
 
 /* =====================================================
    HEADER
@@ -40,16 +88,11 @@ body {
 .top-header {
     display: grid;
     grid-template-columns: 85px 1fr 120px;
-
     align-items: center;
-
     min-height: 105px;
-
     padding: 15px;
-
     background: var(--primary);
     color: white;
-
     border-bottom: 5px solid var(--accent);
 }
 
@@ -61,68 +104,57 @@ body {
 .school-logo {
     width: 70px;
     height: 70px;
-
-    background: white;
-
-    border-radius: 50%;
-
     padding: 5px;
-
     display: flex;
     align-items: center;
     justify-content: center;
+    background: white;
+    border-radius: 50%;
 }
 
 .school-logo img {
     width: 100%;
     height: 100%;
-
     object-fit: contain;
-
     border-radius: 50%;
 }
 
 .school-heading {
+    padding: 0 8px;
     text-align: center;
 }
 
 .school-heading h1 {
     margin: 0;
-
     font-size: 22px;
     letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 .school-motto {
     margin: 5px 0;
-
     color: var(--accent);
-
-    font-size: 12px;
-
+    font-size: 14px;
+    font-style: italic;
     font-weight: bold;
 }
 
 .school-address,
 .school-contact {
     margin: 3px 0;
-
-    font-size: 9px;
-
-    opacity: .9;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.35;
+    opacity: .95;
 }
 
 .session-box {
     display: flex;
     flex-direction: column;
-
     align-items: center;
     justify-content: center;
-
     height: 70px;
-
     border-left: 1px solid rgba(255, 255, 255, .4);
-
     text-align: center;
 }
 
@@ -138,60 +170,9 @@ body {
 
 .session-box small {
     color: var(--accent);
-
     font-size: 9px;
-
     font-weight: bold;
 }
-
-
-/* =====================================================
-   REPORT TITLE
-===================================================== */
-
-.report-title {
-    display: flex;
-
-    align-items: center;
-    justify-content: space-between;
-
-    margin: 18px 0 12px;
-
-    padding-bottom: 10px;
-
-    border-bottom: 2px solid var(--border);
-}
-
-.small-title {
-    color: var(--secondary);
-
-    font-size: 8px;
-
-    font-weight: bold;
-
-    letter-spacing: 1px;
-}
-
-.report-title h2 {
-    margin: 3px 0 0;
-
-    color: var(--primary);
-
-    font-size: 17px;
-}
-
-.term-badge {
-    padding: 8px 14px;
-
-    background: var(--accent);
-
-    color: var(--primary);
-
-    font-size: 10px;
-
-    font-weight: bold;
-}
-
 
 /* =====================================================
    STUDENT PROFILE
@@ -199,66 +180,48 @@ body {
 
 .student-profile {
     display: grid;
-
     grid-template-columns: 85px 1fr 120px;
-
     gap: 15px;
-
     align-items: center;
-
+    margin-top: 12px;
     padding: 12px;
-
     background: var(--light);
-
     border: 1px solid var(--border);
-
     border-left: 5px solid var(--secondary);
 }
 
 .student-photo {
     width: 75px;
     height: 85px;
-
-    background: white;
-
     padding: 3px;
-
+    background: white;
     border: 1px solid var(--border);
 }
 
 .student-photo img {
     width: 100%;
     height: 100%;
-
     object-fit: cover;
 }
 
 .student-name span,
 .details-grid span {
     display: block;
-
     margin-bottom: 3px;
-
     color: #718096;
-
     font-size: 8px;
-
     text-transform: uppercase;
 }
 
 .student-name h2 {
     margin: 0 0 10px;
-
     color: var(--primary);
-
     font-size: 17px;
 }
 
 .details-grid {
     display: grid;
-
     grid-template-columns: 1fr 1fr;
-
     gap: 8px 20px;
 }
 
@@ -266,118 +229,73 @@ body {
     font-size: 11px;
 }
 
-.performance-card {
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-    justify-content: center;
-
-    height: 85px;
-
-    background: var(--primary);
-
-    color: white;
-
-    text-align: center;
-}
-
-.performance-card span {
-    font-size: 8px;
-
-    opacity: .8;
-}
-
-.performance-card strong {
-    margin: 3px 0;
-
-    color: var(--accent);
-
-    font-size: 26px;
-}
-
-.performance-card sup {
-    font-size: 12px;
-}
-
-.performance-card small {
-    font-size: 7px;
-
-    opacity: .8;
-}
-
-
 /* =====================================================
-   ACADEMIC SECTION
+   MAIN CONTENT: TABLE LEFT, SIDEBAR RIGHT
 ===================================================== */
 
-.academic-section {
-    margin-top: 15px;
+.main-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr);
+    gap: 12px;
+    align-items: start;
+    margin-top: 12px;
 }
+
+.academic-section,
+.result-sidebar {
+    min-width: 0;
+}
+
+.result-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* =====================================================
+   ACADEMIC TABLE
+===================================================== */
 
 .section-heading {
     display: flex;
-
     align-items: center;
     justify-content: space-between;
-
     padding: 8px 10px;
-
     background: var(--secondary);
-
     color: white;
 }
 
 .section-heading h3 {
     margin: 0;
-
     font-size: 11px;
 }
 
 .section-heading span {
     font-size: 8px;
-
     opacity: .85;
 }
 
-
-/* =====================================================
-   RESULT TABLE
-===================================================== */
-
 .result-table {
     width: 100%;
-
     border-collapse: collapse;
-
     table-layout: fixed;
 }
 
 .result-table th {
-    padding: 7px 4px;
-
+    padding: 7px 2px;
     background: #e7edf3;
-
     color: var(--primary);
-
     border: 1px solid var(--border);
-
     font-size: 8px;
-
     text-align: center;
-
-    white-space: nowrap;
 }
 
 .result-table td {
-    padding: 6px 4px;
-
+    padding: 6px 2px;
     border: 1px solid var(--border);
-
     font-size: 9px;
-
     text-align: center;
+    overflow-wrap: anywhere;
 }
 
 .result-table tbody tr:nth-child(even) {
@@ -385,104 +303,91 @@ body {
 }
 
 .result-table .number {
-    width: 30px;
+    width: 22px;
 }
 
 .result-table .subject-column {
-    width: 145px;
-
+    width: 26%;
     text-align: left;
+    padding-left: 5px;
+}
+
+.result-table .remark-column {
+    width: 16%;
 }
 
 .subject-name {
+    padding-left: 5px !important;
     text-align: left !important;
-
     font-weight: 600;
 }
 
 .total-score {
     font-weight: bold;
-
     color: var(--primary);
 }
 
 .grade {
     display: inline-flex;
-
     align-items: center;
     justify-content: center;
-
-    width: 22px;
-    height: 22px;
-
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
-
+    background: #eef1f4;
+    color: #374151;
     font-size: 8px;
-
     font-weight: bold;
 }
 
-.grade-a {
-    background: #d9f2e6;
-    color: #17663a;
-}
+.grade-a { background: #d9f2e6; color: #17663a; }
+.grade-b { background: #e1edf8; color: #205b8c; }
+.grade-c { background: #fff1cc; color: #8a6415; }
+.grade-d { background: #ffe6d1; color: #9a4a10; }
+.grade-e,
+.grade-f { background: #fde0e0; color: #9b1c1c; }
 
-.grade-b {
-    background: #e1edf8;
-    color: #205b8c;
+.empty-table {
+    padding: 15px !important;
+    color: #718096;
 }
-
-.grade-c {
-    background: #fff1cc;
-    color: #8a6415;
-}
-
 
 /* =====================================================
-   SUMMARY
+   SUMMARY (SIDEBAR)
 ===================================================== */
 
 .summary-section {
     display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+}
 
-    grid-template-columns: repeat(4, 1fr);
-
-    gap: 8px;
-
-    margin-top: 15px;
+.summary-wide {
+    grid-column: 1 / -1;
 }
 
 .summary-card {
-    padding: 10px;
-
+    padding: 8px;
     background: var(--light);
-
     border: 1px solid var(--border);
-
     text-align: center;
 }
 
 .summary-card span {
     display: block;
-
     color: #718096;
-
     font-size: 8px;
 }
 
 .summary-card strong {
     display: block;
-
-    margin: 5px 0;
-
+    margin: 4px 0;
     color: var(--primary);
-
-    font-size: 19px;
+    font-size: 18px;
 }
 
 .summary-card small {
     color: #718096;
-
     font-size: 7px;
 }
 
@@ -499,20 +404,9 @@ body {
     color: var(--accent);
 }
 
-
 /* =====================================================
    ATTENDANCE / CONDUCT
 ===================================================== */
-
-.lower-grid {
-    display: grid;
-
-    grid-template-columns: 1fr 1fr;
-
-    gap: 12px;
-
-    margin-top: 15px;
-}
 
 .information-card {
     border: 1px solid var(--border);
@@ -520,60 +414,44 @@ body {
 
 .card-title {
     padding: 7px 10px;
-
     background: var(--primary);
-
     color: white;
-
     font-size: 9px;
-
     font-weight: bold;
 }
 
 .attendance-grid {
     display: grid;
-
     grid-template-columns: 1fr 1fr;
-
     gap: 1px;
-
     background: var(--border);
 }
 
 .attendance-grid div {
-    padding: 9px;
-
+    padding: 8px 4px;
     background: white;
-
     text-align: center;
 }
 
 .attendance-grid span {
     display: block;
-
     color: #718096;
-
-    font-size: 7px;
+    font-size: 8px;
 }
 
 .attendance-grid strong {
     display: block;
-
-    margin-top: 4px;
-
+    margin-top: 3px;
     color: var(--primary);
-
     font-size: 12px;
 }
 
 .conduct-list div {
     display: flex;
-
     align-items: center;
     justify-content: space-between;
-
+    gap: 6px;
     padding: 7px 10px;
-
     border-bottom: 1px solid var(--border);
 }
 
@@ -587,24 +465,13 @@ body {
 
 .conduct-list strong {
     color: var(--secondary);
-
     font-size: 8px;
+    text-align: right;
 }
-
 
 /* =====================================================
-   COMMENTS
+   COMMENTS (SIDEBAR)
 ===================================================== */
-
-.comments-section {
-    display: grid;
-
-    grid-template-columns: 1fr 1fr;
-
-    gap: 12px;
-
-    margin-top: 15px;
-}
 
 .comment {
     border: 1px solid var(--border);
@@ -612,70 +479,51 @@ body {
 
 .comment-heading {
     padding: 7px 10px;
-
     background: var(--secondary);
-
     color: white;
-
     font-size: 8px;
-
     font-weight: bold;
 }
 
 .comment p {
-    min-height: 55px;
-
+    min-height: 45px;
     margin: 0;
-
-    padding: 10px;
-
+    padding: 8px 10px;
     color: #374151;
-
-    font-size: 8px;
-
-    line-height: 1.5;
+    font-size: 9px;
+    line-height: 1.45;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
 }
-
 
 /* =====================================================
    GRADING SCALE
 ===================================================== */
 
 .grading-section {
-    margin-top: 15px;
-
+    margin-top: 12px;
     border: 1px solid var(--border);
 }
 
 .grading-title {
     padding: 7px 10px;
-
     background: var(--primary);
-
     color: white;
-
     font-size: 8px;
-
     font-weight: bold;
 }
 
 .grading-items {
     display: grid;
-
     grid-template-columns: repeat(6, 1fr);
 }
 
 .grading-items div {
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
-
     padding: 7px 3px;
-
     border-right: 1px solid var(--border);
-
     text-align: center;
 }
 
@@ -685,24 +533,19 @@ body {
 
 .grading-items strong {
     color: var(--primary);
-
     font-size: 12px;
 }
 
 .grading-items span {
     margin-top: 2px;
-
-    font-size: 7px;
+    font-size: 8px;
 }
 
 .grading-items small {
     margin-top: 2px;
-
     color: #718096;
-
-    font-size: 6px;
+    font-size: 7px;
 }
-
 
 /* =====================================================
    SIGNATURES
@@ -710,12 +553,9 @@ body {
 
 .signature-section {
     display: grid;
-
     grid-template-columns: repeat(3, 1fr);
-
     gap: 40px;
-
-    margin-top: 30px;
+    margin-top: 25px;
 }
 
 .signature {
@@ -724,21 +564,16 @@ body {
 
 .signature-space {
     height: 30px;
-
     display: flex;
-
     align-items: flex-end;
-
     justify-content: center;
 }
 
 .signature-space img {
     max-width: 80px;
     max-height: 28px;
-
     width: auto;
     height: auto;
-
     object-fit: contain;
 }
 
@@ -748,140 +583,41 @@ body {
 
 .signature strong {
     display: block;
-
     margin-top: 5px;
-
     font-size: 8px;
 }
 
 .signature span {
     display: block;
-
     margin-top: 3px;
-
     color: #718096;
-
     font-size: 7px;
 }
 
-
 /* =====================================================
-   FOOTER
+   SMALL SCREENS
+   The A4 sheet keeps its exact laptop layout. A small
+   script in the template scales it down with `zoom`.
 ===================================================== */
 
-.footer {
-    display: flex;
-
-    justify-content: space-between;
-
-    margin-top: 20px;
-
-    padding-top: 8px;
-
-    border-top: 2px solid var(--primary);
-
-    color: #718096;
-
-    font-size: 7px;
-}
-
-.footer strong {
-    color: var(--primary);
-}
-
-
-/* =====================================================
-   SCREEN RESPONSIVENESS
-   KEEP EXACT SAME LAYOUT
-===================================================== */
-
-/*
-   IMPORTANT:
-   We do NOT change the grids, flex directions,
-   table widths, session box, comments, etc.
-
-   The complete A4 document is scaled down instead.
-*/
-
-
-/* Small laptops / tablets */
-@media screen and (max-width: 950px) {
-
+@media screen and (max-width: 840px) {
     body {
-        background: #ffffff;
-
-        overflow-x: hidden;
+        padding: 10px 8px;
     }
 
     .result-container {
-        /*
-         * 90% scale
-         */
-        transform: scale(0.90);
-
-        margin-top: 10px;
-        margin-bottom: -30px;
+        margin-bottom: 15px;
     }
 }
-
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media screen and (max-width: 700px) {
-
-    body {
-        background: #ffffff;
-
-        overflow-x: hidden;
-    }
-
-    .result-container {
-
-        /*
-         * A4 width is approximately 793.7px.
-         *
-         * Example:
-         * 390px phone
-         *
-         * 390 / 793.7 = 0.491
-         *
-         * So the entire result becomes approximately
-         * 49% of its original size.
-         */
-
-        transform: scale(
-            calc(100vw / 793.7px)
-        );
-
-        transform-origin: top left;
-
-        margin: 0;
-    }
-}
-
-
-/* =====================================================
-   VERY SMALL MOBILE
-===================================================== */
-
-@media screen and (max-width: 400px) {
-
-    .result-container {
-
-        transform: scale(
-            calc(100vw / 793.7px)
-        );
-
-        transform-origin: top left;
-    }
-}
-
 
 /* =====================================================
    PRINT / PDF
 ===================================================== */
+
+@page {
+    size: A4 portrait;
+    margin: 0;
+}
 
 @media print {
 
@@ -889,57 +625,39 @@ body {
     body {
         margin: 0;
         padding: 0;
-
         background: white;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
     }
 
-    .result-container {
-
-        width: 210mm;
-
-        min-height: 297mm;
-
-        margin: 0;
-
-        padding: 10mm;
-
-        transform: none;
-    }
-
-    /*
-       Prevent individual sections from being
-       split across pages.
-    */
-
-    .result-table tr {
-        page-break-inside: avoid;
-    }
-
-    .comment,
-    .information-card,
-    .student-profile,
-    .summary-card {
-        page-break-inside: avoid;
-    }
-
-    /*
-       Hide buttons and controls during printing.
-    */
-
-    .print-hidden,
-    .print\:hidden,
     .no-print {
         display: none !important;
     }
-}
 
+    .result-container {
+        width: 210mm;
+        min-height: 0;
+        margin: 0;
+        padding: 10mm;
+        box-shadow: none;
+        zoom: 1 !important;
+        page-break-after: always;
+        break-after: page;
+    }
 
-/* =====================================================
-   A4 PAGE
-===================================================== */
+    .result-container:last-of-type {
+        page-break-after: auto;
+        break-after: auto;
+    }
 
-@page {
-    size: A4;
-
-    margin: 0;
+    .result-table tr,
+    .information-card,
+    .comment,
+    .student-profile,
+    .summary-card,
+    .signature-section,
+    .grading-section {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
 }

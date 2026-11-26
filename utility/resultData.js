@@ -1,5 +1,6 @@
 
-const result = {
+const results = [
+    {
     
     _id : '6a7e5bee2db69d02875296c3',
     fullname : "CHRISTIAN OKOTOAZA",
@@ -15,20 +16,20 @@ const result = {
             firstTest : 9,
             secondTest : 10,
             cca: 10,
-            exam: 50,
-            total: 79,
-            grade: "A",
-            remark: "Very Good",
+            exam: 60,
+            total: 89,
+            grade: "A+",
+            remark: "Excellent",
         },
         {
             subjectName : "English Language",
             firstTest : 9,
             secondTest : 10,
             cca: 10,
-            exam: 50,
-            total: 79,
-            grade: "A",
-            remark: "Very Good",
+            exam: 40,
+            total: 69,
+            grade: "B",
+            remark: "Good",
         },
         {
             subjectName : "Baisic Science",
@@ -121,16 +122,17 @@ const result = {
         tReport: "Excellent Performance. Keep It Up",
         createdAt:'2026-08-14T00:06:06.684+00:00',
         updatedAt:'2026-08-14T00:06:06.684+00:00',
-}
-const student = {
-    fullname : "Khrystal Technology",
-    studentId : "ZXY1016AVF",
+   
     addmissionNo : "005",
     dob : "2009-01-01",
-    class : "JSS 3",
+    
     gender : "Male",
     house : "Golden",
     passport : "https://res.cloudinary.com/quizup/image/upload/v1774964708/passports/batypge4ctryd9kbvnoa.jpg",
-    schoolName :"Khrystal tech",
+
 }
-module.exports = { result, student };
+]
+const student = {
+ 
+}
+module.exports = { results, student };
