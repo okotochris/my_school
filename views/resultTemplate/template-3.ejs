@@ -60,23 +60,41 @@
 
 <body>
 
-    <!-- DOWNLOAD CONTROLS -->
-    <% if (resultList.length > 0) { %>
-        <div class="no-print download-toolbar">
-            <a href="<%= pdfUrl %>" class="download-btn pdf-btn">Download PDF</a>
+ 
+  <!-- DOWNLOAD CONTROLS -->
+  <% if (resultList.length > 0) { %>
+    <div class="no-print download-toolbar">
+      <div class="download-info">
+        <strong><%= isBulk ? 'Class Results' : 'Student Result' %></strong>
+        <span>
+          <%= isBulk ? `${resultList.length} student results` : safe(firstResult.fullname) %>
+        </span>
+      </div>
 
-            <% if (!isBulk) { %>
-                <a href="<%= imageUrl %>" class="download-btn image-btn">Download Image</a>
-            <% } %>
+      <div class="download-actions">
+        <a href="<%= pdfUrl %>" class="download-btn pdf-btn">
+          <span>↓</span> Download PDF
+        </a>
 
-            <button onclick="window.print()" class="download-btn print-btn">Print</button>
-        </div>
-    <% } else { %>
-        <div class="empty-state">
-            <h2>No result available</h2>
-            <p>There are no results to display.</p>
-        </div>
-    <% } %>
+        <% if (!isBulk) { %>
+          <a href="<%= imageUrl %>" class="download-btn image-btn">
+            <span>↓</span> Download Image
+          </a>
+        <% } %>
+
+        <button onclick="window.print()" class="download-btn print-btn">
+          Print Result
+        </button>
+      </div>
+    </div>
+  <% } %>
+
+  <% if (resultList.length === 0) { %>
+    <div class="empty-state">
+      <h2>No result available</h2>
+      <p>There are no results to display.</p>
+    </div>
+  <% } %>
 
 <% resultList.forEach((result) => {
      const student = result.student || result;
@@ -141,7 +159,7 @@
             <div class="details-row">
                 <div>
                     <span>STUDENT ID</span>
-                    <strong><%= safe(student.studentId) %></strong>
+                    <strong><%= safe(result.studentId) %></strong>
                 </div>
                 <div>
                     <span>CLASS</span>
@@ -149,18 +167,18 @@
                 </div>
                 <div>
                     <span>GENDER</span>
-                    <strong><%= safe(student.gender) %></strong>
+                    <strong><%= safe(result.gender) %></strong>
                 </div>
             </div>
 
             <div class="details-row">
                 <div>
                     <span>DATE OF BIRTH</span>
-                    <strong><%= safe(student.dob) %></strong>
+                    <strong><%= safe(result.dob) %></strong>
                 </div>
                 <div>
                     <span>HOUSE</span>
-                    <strong><%= safe(student.house) %></strong>
+                    <strong><%= safe(result.house) %></strong>
                 </div>
                 <div>
                     <span>TERM</span>

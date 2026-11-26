@@ -21,12 +21,17 @@ body {
 ===================================================== */
 
 .download-toolbar {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px;
-    margin: 0 auto 15px;
-    padding: 6px;
+  max-width: 210mm;
+  margin: 0 auto 15px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  background: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: 9px;
 }
 
 .download-btn {
@@ -112,10 +117,6 @@ body {
     border-radius: 50%;
 }
 
-.school-information {
-    flex: 1;
-    text-align: center;
-}
 
 .school-name {
     color: var(--primary);

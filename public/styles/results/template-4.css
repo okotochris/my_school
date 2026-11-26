@@ -1,4 +1,3 @@
-
 * {
     box-sizing: border-box;
 }
@@ -10,37 +9,83 @@ body {
 }
 
 body {
+    padding: 15px 8px;
     background: #ececf3;
     color: var(--text);
-
     font-family: Arial, Helvetica, sans-serif;
-
     font-size: 11px;
 }
 
+/* =====================================================
+   DOWNLOAD TOOLBAR
+===================================================== */
+
+.download-toolbar {
+  max-width: 210mm;
+  margin: 0 auto 15px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  background: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: 9px;
+}
+
+
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 9px 16px;
+    border: 0;
+    border-radius: 8px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.pdf-btn { background: #0f172a; }
+.image-btn { background: #0d9488; }
+
+.print-btn {
+    border: 1px solid #cbd5e1;
+    background: #fff;
+    color: #334155;
+}
+
+.empty-state {
+    max-width: 450px;
+    margin: 70px auto;
+    padding: 30px;
+    background: #fff;
+    text-align: center;
+}
 
 /* =====================================================
-   PAGE
+   PAGE (A4: 210mm x 297mm)
 ===================================================== */
 
 .result-page {
     width: 210mm;
     min-height: 297mm;
-
-    margin: 20px auto;
-
-    padding: 11mm;
-
+    margin: 0 auto 20px;
+    padding: 10mm;
     background: white;
-
-    /*
-        Keep the original desktop layout.
-        On smaller screens the entire page
-        will be scaled down.
-    */
-    transform-origin: top center;
+    box-shadow: 0 4px 20px rgba(15, 23, 42, .08);
+    page-break-after: always;
+    break-after: page;
 }
 
+.result-page:last-of-type {
+    page-break-after: auto;
+    break-after: auto;
+}
 
 /* =====================================================
    SCHOOL HEADER
@@ -48,175 +93,93 @@ body {
 
 .school-header {
     display: flex;
-
     align-items: center;
     justify-content: space-between;
-
+    gap: 12px;
     padding-bottom: 12px;
-
     border-bottom: 3px solid var(--primary);
 }
 
 .school-brand {
     display: flex;
-
     align-items: center;
-
     flex: 1;
+    min-width: 0;
 }
 
 .logo-wrapper {
     width: 78px;
     height: 78px;
-
     flex-shrink: 0;
-
     margin-right: 18px;
-
     padding: 5px;
-
     border: 2px solid var(--accent);
-
     border-radius: 50%;
 }
 
 .logo-wrapper img {
     width: 100%;
     height: 100%;
-
     object-fit: contain;
-
     border-radius: 50%;
 }
 
 .school-info {
     flex: 1;
-
     min-width: 0;
 }
 
 .school-info h1 {
     margin: 0;
-
     color: var(--primary);
-
     font-size: 21px;
-
     letter-spacing: .6px;
-
-    /*
-        Prevent the school name from
-        changing the desktop layout.
-    */
-    white-space: nowrap;
+    line-height: 1.2;
+    text-transform: uppercase;
 }
 
 .motto {
     margin: 4px 0;
-
     color: var(--accent);
-
-    font-size: 12px;
-
+    font-size: 14px;
+    font-style: italic;
     font-weight: bold;
 }
 
 .address,
 .contact {
-    margin: 2px 0;
-
+    margin: 3px 0;
     color: var(--muted);
-
-    font-size: 11px;
+    font-size: 12.5px;
+    font-weight: 600;
+    line-height: 1.35;
 }
 
 .academic-badge {
     width: 90px;
-
     flex-shrink: 0;
-
     padding: 10px;
-
     background: var(--primary);
-
     color: white;
-
     text-align: center;
 }
 
 .academic-badge span {
     display: block;
-
     font-size: 7px;
-
     letter-spacing: 1px;
 }
 
 .academic-badge strong {
     display: block;
-
     margin: 3px 0;
-
     color: var(--accent);
-
     font-size: 13px;
 }
 
 .academic-badge small {
-    font-size: 7px;
-}
-
-
-/* =====================================================
-   TERM BAR
-===================================================== */
-
-.term-bar {
-    display: grid;
-
-    grid-template-columns: repeat(4, 1fr);
-
-    margin-top: 10px;
-
-    background: var(--light);
-
-    border: 1px solid var(--border);
-}
-
-.term-bar div {
-    padding: 7px;
-
-    border-right: 1px solid var(--border);
-
-    text-align: center;
-
-    min-width: 0;
-}
-
-.term-bar div:last-child {
-    border-right: none;
-}
-
-.term-bar span {
-    display: block;
-
-    margin-bottom: 3px;
-
-    color: var(--muted);
-
-    font-size: 6px;
-
-    font-weight: bold;
-}
-
-.term-bar strong {
-    color: var(--primary);
-
     font-size: 8px;
-
-    white-space: nowrap;
 }
-
 
 /* =====================================================
    STUDENT CARD
@@ -224,37 +187,26 @@ body {
 
 .student-card {
     display: grid;
-
     grid-template-columns: 75px 1fr 100px;
-
     gap: 15px;
-
     align-items: center;
-
     margin-top: 12px;
-
     padding: 10px;
-
     border: 1px solid var(--border);
-
     background: white;
 }
 
 .student-photo {
     width: 70px;
     height: 82px;
-
     padding: 3px;
-
     border: 1px solid var(--border);
-
     background: var(--light);
 }
 
 .student-photo img {
     width: 100%;
     height: 100%;
-
     object-fit: cover;
 }
 
@@ -264,60 +216,42 @@ body {
 
 .student-main .label {
     color: var(--muted);
-
     font-size: 7px;
-
     font-weight: bold;
 }
 
 .student-main h2 {
     margin: 3px 0 9px;
-
     color: var(--primary);
-
     font-size: 15px;
-
-    white-space: nowrap;
 }
 
 .student-meta {
     display: grid;
-
     grid-template-columns: repeat(4, 1fr);
-
     gap: 10px;
 }
 
 .student-meta span {
     display: block;
-
     margin-bottom: 3px;
-
     color: var(--muted);
-
-    font-size: 6px;
+    font-size: 7px;
 }
 
 .student-meta strong {
-    font-size: 8px;
-
-    white-space: nowrap;
+    font-size: 9px;
+    overflow-wrap: anywhere;
 }
 
 .student-summary {
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
     justify-content: center;
-
     height: 80px;
-
     background: var(--primary);
-
     color: white;
-
     text-align: center;
 }
 
@@ -327,85 +261,81 @@ body {
 
 .student-summary strong {
     margin: 3px 0;
-
     color: var(--accent);
-
     font-size: 20px;
 }
 
 .student-summary small {
-    font-size: 6px;
+    font-size: 7px;
 }
 
+/* =====================================================
+   MAIN CONTENT: TABLE LEFT, SIDEBAR RIGHT
+===================================================== */
+
+.main-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr);
+    gap: 12px;
+    align-items: start;
+    margin-top: 12px;
+}
+
+.result-section,
+.result-sidebar {
+    min-width: 0;
+}
+
+.result-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
 
 /* =====================================================
-   RESULT TITLE
+   RESULT TITLE + TABLE
 ===================================================== */
 
 .result-title {
     display: flex;
-
     align-items: center;
     justify-content: space-between;
-
-    margin-top: 16px;
-
     padding: 8px 10px;
-
     background: var(--primary);
-
     color: white;
 }
 
 .result-title span {
     font-size: 7px;
-
     letter-spacing: 1px;
 }
 
 .result-title h2 {
     margin: 0;
-
     color: var(--accent);
-
     font-size: 10px;
 }
 
-
-/* =====================================================
-   RESULT TABLE
-===================================================== */
-
 .result-table {
     width: 100%;
-
     border-collapse: collapse;
-
     table-layout: fixed;
 }
 
 .result-table th {
-    padding: 7px 4px;
-
+    padding: 7px 2px;
     background: #eeeef7;
-
     border: 1px solid var(--border);
-
     color: var(--primary);
-
-    font-size: 7px;
-
-    white-space: nowrap;
+    font-size: 7.5px;
 }
 
 .result-table td {
-    padding: 6px 4px;
-
+    padding: 6px 2px;
     border: 1px solid var(--border);
-
-    font-size: 8px;
-
+    font-size: 8.5px;
     text-align: center;
+    overflow-wrap: anywhere;
 }
 
 .result-table tbody tr:nth-child(even) {
@@ -413,104 +343,97 @@ body {
 }
 
 .result-table .sn {
-    width: 30px;
+    width: 24px;
 }
 
 .result-table .subject {
-    width: 155px;
-
+    width: 27%;
+    padding-left: 5px;
     text-align: left;
-
-    font-weight: 600;
-
-    white-space: nowrap;
 }
 
-.result-table .total {
-    color: var(--primary);
+.result-table .remark {
+    width: 16%;
+}
 
+.result-table td.subject-name {
+    padding-left: 5px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.result-table td.total-score {
+    color: var(--primary);
     font-weight: bold;
+}
+
+.empty-table {
+    padding: 15px !important;
+    color: var(--muted);
 }
 
 .grade {
     display: inline-flex;
-
     align-items: center;
     justify-content: center;
-
-    width: 21px;
-    height: 21px;
-
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
-
+    background: #eeeeee;
+    color: #3f3f46;
     font-size: 8px;
-
     font-weight: bold;
 }
 
-.grade.a {
-    background: #e4f5eb;
-
-    color: #166534;
-}
-
-.grade.b {
-    background: #e8edff;
-
-    color: #3730a3;
-}
-
+.grade-a { background: #e4f5eb; color: #166534; }
+.grade-b { background: #e8edff; color: #3730a3; }
+.grade-c { background: #fff4d6; color: #8a6415; }
+.grade-d { background: #ffe9d6; color: #9a4a10; }
+.grade-e,
+.grade-f { background: #fde0e0; color: #9b1c1c; }
 
 /* =====================================================
-   SUMMARY
+   SUMMARY (SIDEBAR)
 ===================================================== */
 
 .summary-grid {
     display: grid;
-
-    grid-template-columns: repeat(4, 1fr);
-
-    margin-top: 12px;
-
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     border: 1px solid var(--border);
 }
 
 .summary-box {
-    padding: 9px;
-
+    padding: 9px 4px;
     border-right: 1px solid var(--border);
-
+    border-bottom: 1px solid var(--border);
     text-align: center;
 }
 
-.summary-box:last-child {
+.summary-box:nth-child(2n) {
     border-right: none;
+}
+
+.summary-box:nth-child(n+3) {
+    border-bottom: none;
 }
 
 .summary-box span {
     display: block;
-
     color: var(--muted);
-
-    font-size: 6px;
-
+    font-size: 7px;
     font-weight: bold;
 }
 
 .summary-box strong {
     display: block;
-
     margin: 4px 0;
-
     color: var(--primary);
-
     font-size: 17px;
 }
 
 .summary-box small {
     color: var(--muted);
-
-    font-size: 6px;
+    font-size: 6.5px;
 }
 
 .summary-box.featured {
@@ -526,86 +449,62 @@ body {
     color: var(--accent);
 }
 
-
 /* =====================================================
-   TWO COLUMN PANELS
+   PANELS (ATTENDANCE / DEVELOPMENT)
 ===================================================== */
-
-.two-column {
-    display: grid;
-
-    grid-template-columns: 1fr 1fr;
-
-    gap: 12px;
-
-    margin-top: 12px;
-}
 
 .panel {
     border: 1px solid var(--border);
-
     min-width: 0;
 }
 
 .panel-heading {
     padding: 7px 9px;
-
     background: var(--secondary);
-
     color: white;
-
-    font-size: 7px;
-
+    font-size: 7.5px;
     font-weight: bold;
 }
 
 .attendance {
     display: grid;
-
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .attendance div {
-    padding: 8px 3px;
-
-    border-right: 1px solid var(--border);
-
-    text-align: center;
-
     min-width: 0;
+    padding: 8px 3px;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    text-align: center;
 }
 
-.attendance div:last-child {
+.attendance div:nth-child(2n) {
     border-right: none;
+}
+
+.attendance div:nth-child(n+3) {
+    border-bottom: none;
 }
 
 .attendance span {
     display: block;
-
     color: var(--muted);
-
-    font-size: 6px;
-
-    white-space: nowrap;
+    font-size: 7px;
 }
 
 .attendance strong {
     display: block;
-
     margin-top: 4px;
-
     color: var(--primary);
-
-    font-size: 11px;
+    font-size: 12px;
 }
 
 .development div {
     display: flex;
-
     justify-content: space-between;
-
+    gap: 6px;
     padding: 6px 9px;
-
     border-bottom: 1px solid var(--border);
 }
 
@@ -614,66 +513,42 @@ body {
 }
 
 .development span {
-    font-size: 7px;
-
-    white-space: nowrap;
+    font-size: 8px;
 }
 
 .development strong {
     color: var(--secondary);
-
-    font-size: 7px;
-
-    white-space: nowrap;
+    font-size: 8px;
+    text-align: right;
 }
-
 
 /* =====================================================
-   COMMENTS
+   COMMENTS (SIDEBAR)
 ===================================================== */
-
-.comments {
-    display: grid;
-
-    grid-template-columns: 1fr 1fr;
-
-    gap: 12px;
-
-    margin-top: 12px;
-}
 
 .comment {
     border: 1px solid var(--border);
-
     min-width: 0;
 }
 
 .comment-label {
-    padding: 7px 9px;
-
+    padding: 6px 9px;
     background: var(--primary);
-
     color: white;
-
-    font-size: 7px;
-
+    font-size: 7.5px;
     font-weight: bold;
 }
 
 .comment p {
-    min-height: 55px;
-
+    min-height: 40px;
     margin: 0;
-
-    padding: 8px;
-
+    padding: 8px 9px;
     color: #3f3f46;
-
-    font-size: 7px;
-
-    line-height: 1.5;
+    font-size: 9px;
+    line-height: 1.45;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
 }
-
 
 /* =====================================================
    GRADING
@@ -681,42 +556,30 @@ body {
 
 .grading {
     margin-top: 12px;
-
     border: 1px solid var(--border);
 }
 
 .grading-heading {
     padding: 7px 9px;
-
     background: var(--secondary);
-
     color: white;
-
-    font-size: 7px;
-
+    font-size: 7.5px;
     font-weight: bold;
 }
 
 .grading-list {
     display: grid;
-
     grid-template-columns: repeat(6, 1fr);
 }
 
 .grading-list div {
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
-
-    padding: 6px;
-
-    border-right: 1px solid var(--border);
-
-    text-align: center;
-
     min-width: 0;
+    padding: 6px;
+    border-right: 1px solid var(--border);
+    text-align: center;
 }
 
 .grading-list div:last-child {
@@ -725,24 +588,19 @@ body {
 
 .grading-list strong {
     color: var(--primary);
-
-    font-size: 11px;
+    font-size: 12px;
 }
 
 .grading-list span {
     margin-top: 2px;
-
-    font-size: 6px;
+    font-size: 8px;
 }
 
 .grading-list small {
     margin-top: 2px;
-
     color: var(--muted);
-
-    font-size: 5px;
+    font-size: 7px;
 }
-
 
 /* =====================================================
    SIGNATURES
@@ -750,11 +608,8 @@ body {
 
 .signature-section {
     display: grid;
-
     grid-template-columns: repeat(3, 1fr);
-
     gap: 35px;
-
     margin-top: 25px;
 }
 
@@ -772,254 +627,81 @@ body {
 
 .signature strong {
     display: block;
-
     margin-top: 4px;
-
-    font-size: 7px;
+    font-size: 8px;
 }
 
 .signature span {
     display: block;
-
     margin-top: 3px;
-
     color: var(--muted);
-
-    font-size: 6px;
+    font-size: 7px;
 }
 
-
 /* =====================================================
-   FOOTER
+   SMALL SCREENS
+   The A4 sheet keeps its exact laptop layout. A small
+   script in the template scales it down with `zoom`.
 ===================================================== */
 
-.footer {
-    display: flex;
-
-    justify-content: space-between;
-
-    margin-top: 16px;
-
-    padding-top: 7px;
-
-    border-top: 2px solid var(--primary);
-
-    color: var(--muted);
-
-    font-size: 5.5px;
-}
-
-.footer span:first-child {
-    color: var(--primary);
-
-    font-weight: bold;
-}
-
-
-/* =====================================================
-   RESPONSIVE SCALING
-   DO NOT CHANGE THE LAYOUT
-===================================================== */
-
-/*
-    IMPORTANT:
-
-    The desktop layout remains the source of truth.
-
-    On smaller screens we DO NOT:
-
-    - hide the academic badge
-    - stack the school header
-    - change the term bar from 4 columns
-    - move the student summary below the student card
-    - change the student metadata
-    - make the result table scroll
-    - change summary from 4 columns to 2
-    - stack the two panels
-    - stack comments
-    - change grading from 6 columns
-    - rearrange signatures
-
-    The complete result simply becomes smaller.
-*/
-
-
-/* =====================================================
-   TABLET / SMALL LAPTOP
-===================================================== */
-
-@media screen and (max-width: 1000px) {
-
+@media screen and (max-width: 840px) {
     body {
-        background: white;
-
-        overflow-x: hidden;
+        padding: 10px 8px;
     }
 
     .result-page {
-
-        /*
-            Keep the original A4 width.
-        */
-        width: 210mm;
-
-        max-width: none;
-
-        /*
-            Slightly scale the complete
-            result sheet.
-        */
-        transform: scale(0.90);
-
-        transform-origin: top center;
-
-        margin-top: 10px;
-
-        /*
-            Compensate for scaled height.
-        */
-        margin-bottom: -80px;
+        margin-bottom: 15px;
     }
 }
-
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media screen and (max-width: 700px) {
-
-    body {
-        background: white;
-
-        overflow-x: hidden;
-    }
-
-    .result-page {
-
-        /*
-            Keep the original A4 document.
-        */
-        width: 210mm;
-
-        max-width: none;
-
-        /*
-            Scale the entire result to fit
-            the phone width.
-
-            A4 width ≈ 793.7px.
-
-            Example:
-
-            390px phone
-            390 / 793.7
-            ≈ 0.49
-
-            Therefore the whole result
-            becomes approximately 49% of
-            its original size.
-        */
-        transform: scale(
-            calc(100vw / 793.7px)
-        );
-
-        transform-origin: top left;
-
-        margin: 0;
-    }
-}
-
-
-/* =====================================================
-   VERY SMALL PHONES
-===================================================== */
-
-@media screen and (max-width: 400px) {
-
-    .result-page {
-
-        width: 210mm;
-
-        transform: scale(
-            calc(100vw / 793.7px)
-        );
-
-        transform-origin: top left;
-    }
-}
-
 
 /* =====================================================
    PRINT / PDF
 ===================================================== */
+
+@page {
+    size: A4 portrait;
+    margin: 0;
+}
 
 @media print {
 
     html,
     body {
         margin: 0;
-
         padding: 0;
-
         background: white;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .no-print {
+        display: none !important;
     }
 
     .result-page {
-
-        /*
-            Remove all screen scaling.
-        */
-        transform: none;
-
-        transform-origin: initial;
-
         width: 210mm;
-
-        min-height: 297mm;
-
+        min-height: 0;
         margin: 0;
-
         padding: 10mm;
+        box-shadow: none;
+        zoom: 1 !important;
+        page-break-after: always;
+        break-after: page;
     }
 
-
-    /* ---------------------------------------------
-       PREVENT UNNECESSARY PAGE BREAKS
-    --------------------------------------------- */
-
-    .result-table tr {
-        page-break-inside: avoid;
+    .result-page:last-of-type {
+        page-break-after: auto;
+        break-after: auto;
     }
 
+    .result-table tr,
     .student-card,
-    .summary-box,
+    .summary-grid,
     .panel,
     .comment,
-    .grading {
+    .grading,
+    .signature-section {
+        break-inside: avoid;
         page-break-inside: avoid;
     }
-
-
-    /* ---------------------------------------------
-       HIDE ACTION BUTTONS
-    --------------------------------------------- */
-
-    .no-print,
-    .result-actions,
-    .print-hidden,
-    .print\:hidden {
-        display: none !important;
-    }
-}
-
-
-/* =====================================================
-   A4 PAGE
-===================================================== */
-
-@page {
-    size: A4;
-
-    margin: 0;
 }

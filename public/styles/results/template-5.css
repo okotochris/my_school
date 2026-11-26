@@ -9,28 +9,82 @@ body {
 }
 
 body {
+    padding: 15px 8px;
     background: #e9eef2;
     color: var(--text);
     font-family: Arial, Helvetica, sans-serif;
     font-size: 11px;
 }
 
+/* =====================================================
+   DOWNLOAD TOOLBAR
+===================================================== */
+
+.download-toolbar {
+  max-width: 210mm;
+  margin: 0 auto 15px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  background: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: 9px;
+}
+
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 9px 16px;
+    border: 0;
+    border-radius: 8px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.pdf-btn { background: #0f172a; }
+.image-btn { background: #0d9488; }
+
+.print-btn {
+    border: 1px solid #cbd5e1;
+    background: #fff;
+    color: #334155;
+}
+
+.empty-state {
+    max-width: 450px;
+    margin: 70px auto;
+    padding: 30px;
+    background: #fff;
+    text-align: center;
+}
 
 /* =====================================================
-   MAIN PAGE
+   MAIN PAGE (A4: 210mm x 297mm)
 ===================================================== */
 
 .result-page {
     width: 210mm;
     min-height: 297mm;
-
-    margin: 20px auto;
-
+    margin: 0 auto 20px;
     padding: 10mm;
-
     background: white;
+    box-shadow: 0 4px 20px rgba(15, 23, 42, .08);
+    page-break-after: always;
+    break-after: page;
 }
 
+.result-page:last-of-type {
+    page-break-after: auto;
+    break-after: auto;
+}
 
 /* =====================================================
    HEADER
@@ -38,219 +92,102 @@ body {
 
 .top-header {
     position: relative;
-
     display: flex;
-
     align-items: center;
-
-    min-height: 70px;
-
+    min-height: 90px;
     padding: 12px 15px;
-
     border: 1px solid var(--border);
-
     background: #ffffff;
-
     overflow: hidden;
 }
 
 .header-accent {
     position: absolute;
-
     top: 0;
     left: 0;
-
     width: 7px;
     height: 100%;
-
     background: var(--secondary);
 }
 
 .school-logo {
-    width: 70px;
-    height: 70px;
-
+    width: 74px;
+    height: 74px;
     flex-shrink: 0;
-
     margin-left: 8px;
     margin-right: 16px;
-
     padding: 5px;
-
     border: 2px solid var(--accent);
-
     border-radius: 50%;
 }
 
 .school-logo img {
     width: 100%;
     height: 100%;
-
     object-fit: contain;
-
     border-radius: 50%;
 }
 
 .school-details {
     flex: 1;
-
     min-width: 0;
-
-    overflow: hidden;
 }
 
 .school-details h1 {
     margin: 0;
-
     color: var(--primary);
-
     font-size: 20px;
-
     font-weight: 800;
-
     letter-spacing: .5px;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
+    line-height: 1.2;
+    text-transform: uppercase;
 }
 
 .motto {
     margin: 4px 0;
-
     color: var(--secondary);
-
-    font-size: 8px;
-
+    font-size: 14px;
+    font-style: italic;
     font-weight: bold;
-
-    letter-spacing: .6px;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
 }
 
 .address,
 .contact {
-    margin: 2px 0;
-
+    margin: 3px 0;
     color: var(--muted);
-
-    font-size: 7px;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
+    font-size: 12.5px;
+    font-weight: 600;
+    line-height: 1.35;
 }
 
 .report-tag {
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
     justify-content: center;
-
     width: 85px;
     height: 70px;
-
     flex-shrink: 0;
-
     margin-left: 10px;
-
     background: var(--primary);
-
     color: white;
-
     text-align: center;
 }
 
 .report-tag span {
-    font-size: 6px;
-
+    font-size: 7px;
     letter-spacing: 1px;
 }
 
 .report-tag strong {
     margin: 3px 0;
-
     color: var(--accent);
-
     font-size: 13px;
 }
 
 .report-tag small {
-    font-size: 6px;
-}
-
-
-/* =====================================================
-   SESSION BAR
-===================================================== */
-
-.session-bar {
-    display: grid;
-
-    grid-template-columns: repeat(4, 1fr);
-
-    margin-top: 9px;
-
-    border: 1px solid var(--border);
-
-    background: var(--light);
-
-    overflow: hidden;
-}
-
-.session-bar div {
-    min-width: 0;
-
-    padding: 8px;
-
-    border-right: 1px solid var(--border);
-
-    text-align: center;
-}
-
-.session-bar div:last-child {
-    border-right: none;
-}
-
-.session-bar span {
-    display: block;
-
-    margin-bottom: 3px;
-
-    color: var(--muted);
-
-    font-size: 6px;
-
-    font-weight: bold;
-
-    white-space: nowrap;
-}
-
-.session-bar strong {
-    display: block;
-
-    color: var(--primary);
-
     font-size: 8px;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
 }
-
 
 /* =====================================================
    STUDENT PROFILE
@@ -258,82 +195,50 @@ body {
 
 .student-profile {
     display: grid;
-
     grid-template-columns: 70px 1fr 100px;
-
     gap: 14px;
-
     align-items: center;
-
     margin-top: 11px;
-
     padding: 10px;
-
     border: 1px solid var(--border);
-
     background: white;
-
-    overflow: hidden;
 }
 
 .photo-container {
     width: 65px;
     height: 78px;
-
-    flex-shrink: 0;
-
     padding: 3px;
-
     background: var(--light);
-
     border: 1px solid var(--border);
 }
 
 .photo-container img {
     width: 100%;
     height: 100%;
-
     object-fit: cover;
 }
 
 .profile-details {
     min-width: 0;
-
-    overflow: hidden;
 }
 
 .profile-label {
     color: var(--muted);
-
-    font-size: 6px;
-
+    font-size: 7px;
     font-weight: bold;
-
     letter-spacing: .6px;
 }
 
 .profile-details h2 {
     margin: 3px 0 8px;
-
     color: var(--primary);
-
     font-size: 15px;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
 }
 
 .profile-grid {
     display: grid;
-
     grid-template-columns: repeat(4, 1fr);
-
     gap: 10px;
-
-    min-width: 0;
 }
 
 .profile-grid div {
@@ -342,71 +247,61 @@ body {
 
 .profile-grid span {
     display: block;
-
     margin-bottom: 3px;
-
     color: var(--muted);
-
-    font-size: 6px;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
+    font-size: 7px;
 }
 
 .profile-grid strong {
     display: block;
-
-    font-size: 7.5px;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
+    font-size: 9px;
+    overflow-wrap: anywhere;
 }
 
 .academic-score {
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
     justify-content: center;
-
     height: 75px;
-
-    flex-shrink: 0;
-
     background: var(--secondary);
-
     color: white;
-
     text-align: center;
-}
-
-.academic-score span {
-    font-size: 6px;
-
-    font-weight: bold;
 }
 
 .academic-score strong {
     margin: 4px 0;
-
     color: white;
-
-    font-size: 19px;
+    font-size: 22px;
 }
 
 .academic-score small {
     color: #d9f3f7;
-
-    font-size: 6px;
+    font-size: 7px;
 }
 
+/* =====================================================
+   MAIN CONTENT: TABLE LEFT, SIDEBAR RIGHT
+===================================================== */
+
+.main-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr);
+    gap: 12px;
+    align-items: start;
+    margin-top: 12px;
+}
+
+.academic-section,
+.result-sidebar {
+    min-width: 0;
+}
+
+.result-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
 
 /* =====================================================
    SECTION HEADER
@@ -414,39 +309,23 @@ body {
 
 .section-header {
     display: flex;
-
     align-items: center;
-
-    margin-top: 14px;
-
     padding: 7px 9px;
-
     background: var(--primary);
-
     color: white;
-
-    overflow: hidden;
 }
 
 .section-number {
     display: flex;
-
     align-items: center;
     justify-content: center;
-
     width: 22px;
     height: 22px;
-
     flex-shrink: 0;
-
     margin-right: 8px;
-
     background: var(--accent);
-
     color: var(--primary);
-
-    font-size: 7px;
-
+    font-size: 8px;
     font-weight: bold;
 }
 
@@ -456,81 +335,43 @@ body {
 
 .section-header span {
     display: block;
-
     color: #cbd5e1;
-
-    font-size: 5.5px;
-
+    font-size: 6.5px;
     letter-spacing: .8px;
-
-    white-space: nowrap;
 }
 
 .section-header h2 {
     margin: 2px 0 0;
-
-    font-size: 9px;
-
+    font-size: 10px;
     letter-spacing: .3px;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
 }
-
 
 /* =====================================================
    RESULT TABLE
 ===================================================== */
 
-.result-table-wrapper {
-    width: 100%;
-
-    overflow: hidden;
-}
-
 .result-table {
     width: 100%;
-
     border-collapse: collapse;
-
     table-layout: fixed;
 }
 
 .result-table th {
-    padding: 7px 4px;
-
+    padding: 7px 2px;
     background: #eef2f5;
-
     border: 1px solid var(--border);
-
     color: var(--primary);
-
-    font-size: 6.5px;
-
+    font-size: 7.5px;
     text-align: center;
-
-    white-space: nowrap;
 }
 
 .result-table td {
-    padding: 6px 4px;
-
+    padding: 6px 2px;
     border: 1px solid var(--border);
-
     color: #334155;
-
-    font-size: 7.5px;
-
+    font-size: 8.5px;
     text-align: center;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
-
-    white-space: nowrap;
+    overflow-wrap: anywhere;
 }
 
 .result-table tbody tr:nth-child(even) {
@@ -538,203 +379,149 @@ body {
 }
 
 .result-table .number {
-    width: 28px;
+    width: 24px;
 }
 
 .result-table .subject {
-    width: 155px;
-
+    width: 27%;
+    padding-left: 5px;
     text-align: left;
+}
 
+.result-table .remark {
+    width: 16%;
+}
+
+.result-table td.subject-name {
+    padding-left: 5px;
+    text-align: left;
     font-weight: 600;
 }
 
-.result-table .total {
+.result-table td.total-score {
     color: var(--primary);
-
     font-weight: bold;
+}
+
+.empty-table {
+    padding: 15px !important;
+    color: var(--muted);
 }
 
 .grade {
     display: inline-flex;
-
     align-items: center;
     justify-content: center;
-
-    width: 21px;
-    height: 21px;
-
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
-
-    font-size: 7px;
-
+    background: #eef1f4;
+    color: #334155;
+    font-size: 8px;
     font-weight: bold;
 }
 
-.grade-a {
-    background: #dcfce7;
-
-    color: #166534;
-}
-
-.grade-b {
-    background: #dbeafe;
-
-    color: #1e40af;
-}
-
+.grade-a { background: #dcfce7; color: #166534; }
+.grade-b { background: #dbeafe; color: #1e40af; }
+.grade-c { background: #fef3c7; color: #92400e; }
+.grade-d { background: #ffedd5; color: #9a3412; }
+.grade-e,
+.grade-f { background: #fee2e2; color: #991b1b; }
 
 /* =====================================================
-   PERFORMANCE CARDS
+   PERFORMANCE CARDS (SIDEBAR)
 ===================================================== */
 
 .performance-cards {
     display: grid;
-
-    grid-template-columns: repeat(4, 1fr);
-
-    gap: 8px;
-
-    margin-top: 10px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
 }
 
 .performance-card {
     display: flex;
-
     align-items: center;
-
     min-width: 0;
-
-    min-height: 40px;
-
-    padding: 7px;
-
+    padding: 6px;
     border: 1px solid var(--border);
-
     background: var(--light);
-
-    overflow: hidden;
 }
 
 .card-icon {
     display: flex;
-
     align-items: center;
     justify-content: center;
-
-    width: 27px;
-    height: 27px;
-
+    width: 22px;
+    height: 22px;
     flex-shrink: 0;
-
-    margin-right: 7px;
-
+    margin-right: 6px;
     background: var(--primary);
-
     color: var(--accent);
-
-    font-size: 11px;
-
+    font-size: 10px;
     font-weight: bold;
 }
 
-.performance-card > div {
+.performance-card > div:last-child {
     min-width: 0;
 }
 
 .performance-card span {
     display: block;
-
     color: var(--muted);
-
-    font-size: 5.5px;
-
+    font-size: 6.5px;
     font-weight: bold;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
 }
 
 .performance-card strong {
     display: block;
-
     margin: 2px 0;
-
     color: var(--primary);
-
-    font-size: 12px;
-
-    white-space: nowrap;
+    font-size: 14px;
 }
 
 .performance-card small {
     color: var(--muted);
-
-    font-size: 5px;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
+    font-size: 6.5px;
 }
 
-
 /* =====================================================
-   ATTENDANCE
+   ATTENDANCE (SIDEBAR)
 ===================================================== */
 
 .attendance-grid {
     display: grid;
-
-    grid-template-columns: repeat(4, 1fr);
-
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     border: 1px solid var(--border);
-
-    border-top: none;
 }
 
 .attendance-item {
     min-width: 0;
-
-    padding: 8px;
-
+    padding: 8px 3px;
     border-right: 1px solid var(--border);
-
+    border-bottom: 1px solid var(--border);
     text-align: center;
 }
 
-.attendance-item:last-child {
+.attendance-item:nth-child(2n) {
     border-right: none;
+}
+
+.attendance-item:nth-child(n+3) {
+    border-bottom: none;
 }
 
 .attendance-item span {
     display: block;
-
     color: var(--muted);
-
-    font-size: 5.5px;
-
+    font-size: 6.5px;
     font-weight: bold;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
 }
 
 .attendance-item strong {
     display: block;
-
     margin-top: 4px;
-
     color: var(--primary);
-
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .attendance-item.highlight {
@@ -745,186 +532,109 @@ body {
     color: var(--secondary);
 }
 
-
 /* =====================================================
-   DEVELOPMENT
+   DEVELOPMENT (SIDEBAR)
 ===================================================== */
 
 .development-grid {
-    display: grid;
-
-    grid-template-columns: repeat(3, 1fr);
-
     border: 1px solid var(--border);
-
-    border-top: none;
 }
 
 .development-item {
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
-
-    min-width: 0;
-
-    padding: 7px 9px;
-
-    border-right: 1px solid var(--border);
-
+    gap: 6px;
+    padding: 6px 9px;
     border-bottom: 1px solid var(--border);
-
-    gap: 5px;
 }
 
-.development-item:nth-child(3n) {
-    border-right: none;
-}
-
-.development-item:nth-last-child(-n + 3) {
+.development-item:last-child {
     border-bottom: none;
 }
 
 .development-item span {
     min-width: 0;
-
     color: #475569;
-
-    font-size: 7px;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
+    font-size: 8px;
 }
 
 .development-item strong {
     flex-shrink: 0;
-
     color: var(--secondary);
-
-    font-size: 6.5px;
-
-    white-space: nowrap;
+    font-size: 8px;
+    text-align: right;
 }
-
 
 /* =====================================================
-   COMMENTS
+   COMMENTS (SIDEBAR)
 ===================================================== */
-
-.comment-section {
-    display: grid;
-
-    grid-template-columns: 1fr 1fr;
-
-    gap: 10px;
-
-    margin-top: 12px;
-}
 
 .comment-card {
     min-width: 0;
-
     border: 1px solid var(--border);
-
-    overflow: hidden;
 }
 
 .comment-header {
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
-
-    gap: 10px;
-
-    padding: 7px 9px;
-
+    gap: 8px;
+    padding: 6px 9px;
     background: var(--primary);
-
     color: white;
 }
 
 .comment-header span {
-    font-size: 5.5px;
-
-    white-space: nowrap;
+    font-size: 6.5px;
 }
 
 .comment-header strong {
     color: var(--accent);
-
-    font-size: 6px;
-
-    white-space: nowrap;
+    font-size: 7px;
 }
 
 .comment-card p {
-    min-height: 20px;
-
+    min-height: 40px;
     margin: 0;
-
-    padding: 8px;
-
+    padding: 8px 9px;
     color: #475569;
-
-    font-size: 7px;
-
-    line-height: 1.5;
-
-    overflow-wrap: break-word;
+    font-size: 9px;
+    line-height: 1.45;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
 }
-
 
 /* =====================================================
    GRADING
 ===================================================== */
 
 .grading-section {
-    margin-top: 10px;
-
+    margin-top: 12px;
     border: 1px solid var(--border);
-
-    overflow: hidden;
 }
 
 .grading-title {
     padding: 6px 9px;
-
     background: var(--secondary);
-
     color: white;
-
-    font-size: 6px;
-
+    font-size: 7.5px;
     font-weight: bold;
 }
 
 .grading-items {
     display: grid;
-
     grid-template-columns: repeat(6, 1fr);
 }
 
 .grading-items div {
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
-
     justify-content: center;
-
     min-width: 0;
-
     padding: 6px 2px;
-
     border-right: 1px solid var(--border);
-
     text-align: center;
 }
 
@@ -934,42 +644,20 @@ body {
 
 .grading-items strong {
     color: var(--primary);
-
-    font-size: 10px;
+    font-size: 12px;
 }
 
 .grading-items span {
     margin-top: 2px;
-
     color: var(--text);
-
-    font-size: 5.5px;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
-
-    max-width: 100%;
+    font-size: 8px;
 }
 
 .grading-items small {
     margin-top: 2px;
-
     color: var(--muted);
-
-    font-size: 4.5px;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
-
-    max-width: 100%;
+    font-size: 7px;
 }
-
 
 /* =====================================================
    SIGNATURES
@@ -977,29 +665,18 @@ body {
 
 .signatures {
     display: grid;
-
     grid-template-columns: repeat(3, 1fr);
-
     gap: 35px;
-
-    margin-top: 23px;
+    margin-top: 25px;
 }
 
 .signature {
     min-width: 0;
-
     text-align: center;
 }
 
 .signature-space {
-    height: 17px;
-}
-
-.signature-space img {
-    max-width: 80px;
-    max-height: 28px;
-
-    object-fit: contain;
+    height: 20px;
 }
 
 .signature-line {
@@ -1008,609 +685,71 @@ body {
 
 .signature strong {
     display: block;
-
     margin-top: 4px;
-
-    font-size: 6.5px;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
+    font-size: 8px;
 }
 
 .signature span {
     display: block;
-
     margin-top: 2px;
-
     color: var(--muted);
-
-    font-size: 5.5px;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
+    font-size: 7px;
 }
-
 
 /* =====================================================
-   FOOTER
+   SMALL SCREENS
+   The A4 sheet keeps its exact laptop layout. A small
+   script in the template scales it down with `zoom`.
 ===================================================== */
 
-.footer {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 10px;
-
-    margin-top: 13px;
-
-    padding-top: 6px;
-
-    border-top: 2px solid var(--primary);
-
-    color: var(--muted);
-
-    font-size: 5px;
-}
-
-.footer div {
-    min-width: 0;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
-}
-
-.footer div:first-child {
-    color: var(--primary);
-
-    font-weight: bold;
-}
-
-
-/* =====================================================
-   SMALL SCREEN
-   KEEP LAPTOP / DESKTOP STRUCTURE
-===================================================== */
-
-@media screen and (max-width: 700px) {
-
-    html,
+@media screen and (max-width: 840px) {
     body {
-        width: 100%;
-
-        overflow-x: hidden;
-    }
-
-    body {
-        background: white;
-
-        font-size: 7px;
+        padding: 10px 8px;
     }
 
     .result-page {
-        width: 100%;
-
-        min-width: 0;
-        min-height: auto;
-
-        margin: 0;
-
-        padding: 5px;
-    }
-
-
-    /* =========================
-       HEADER
-    ========================= */
-
-    .top-header {
-        min-height: 65px;
-
-        padding: 7px 8px;
-    }
-
-    .header-accent {
-        width: 4px;
-    }
-
-    .school-logo {
-        width: 48px;
-        height: 48px;
-
-        margin-left: 5px;
-        margin-right: 8px;
-
-        padding: 3px;
-    }
-
-    .school-details h1 {
-        font-size: clamp(9px, 3.5vw, 16px);
-
-        letter-spacing: .2px;
-    }
-
-    .motto {
-        margin: 2px 0;
-
-        font-size: clamp(4px, 1.7vw, 7px);
-
-        letter-spacing: .2px;
-    }
-
-    .address,
-    .contact {
-        margin: 1px 0;
-
-        font-size: clamp(3.5px, 1.4vw, 6px);
-    }
-
-    .report-tag {
-        width: 55px;
-        height: 48px;
-
-        margin-left: 5px;
-    }
-
-    .report-tag span {
-        font-size: 4px;
-    }
-
-    .report-tag strong {
-        margin: 2px 0;
-
-        font-size: 8px;
-    }
-
-    .report-tag small {
-        font-size: 4px;
-    }
-
-
-    /* =========================
-       SESSION
-    ========================= */
-
-    .session-bar {
-        margin-top: 5px;
-    }
-
-    .session-bar div {
-        padding: 5px 3px;
-    }
-
-    .session-bar span {
-        margin-bottom: 2px;
-
-        font-size: clamp(3px, 1.3vw, 5px);
-    }
-
-    .session-bar strong {
-        font-size: clamp(4px, 1.5vw, 7px);
-    }
-
-
-    /* =========================
-       STUDENT PROFILE
-    ========================= */
-
-    .student-profile {
-        grid-template-columns: 50px 1fr 65px;
-
-        gap: 7px;
-
-        margin-top: 6px;
-
-        padding: 6px;
-    }
-
-    .photo-container {
-        width: 46px;
-        height: 58px;
-
-        padding: 2px;
-    }
-
-    .profile-label {
-        font-size: clamp(3.5px, 1.2vw, 5px);
-    }
-
-    .profile-details h2 {
-        margin: 2px 0 5px;
-
-        font-size: clamp(7px, 2.5vw, 12px);
-    }
-
-    .profile-grid {
-        gap: 5px;
-    }
-
-    .profile-grid span {
-        margin-bottom: 2px;
-
-        font-size: clamp(3px, 1.1vw, 5px);
-    }
-
-    .profile-grid strong {
-        font-size: clamp(3.5px, 1.3vw, 6px);
-    }
-
-    .academic-score {
-        height: 58px;
-    }
-
-    .academic-score span {
-        font-size: 4px;
-    }
-
-    .academic-score strong {
-        margin: 2px 0;
-
-        font-size: 13px;
-    }
-
-    .academic-score small {
-        font-size: 4px;
-    }
-
-
-    /* =========================
-       SECTION HEADER
-    ========================= */
-
-    .section-header {
-        margin-top: 7px;
-
-        padding: 4px 5px;
-    }
-
-    .section-number {
-        width: 16px;
-        height: 16px;
-
-        margin-right: 5px;
-
-        font-size: 5px;
-    }
-
-    .section-header span {
-        font-size: 3.5px;
-    }
-
-    .section-header h2 {
-        margin-top: 1px;
-
-        font-size: 6px;
-    }
-
-
-    /* =========================
-       RESULT TABLE
-    ========================= */
-
-    .result-table th {
-        padding: 4px 2px;
-
-        font-size: clamp(3px, 1.15vw, 5px);
-    }
-
-    .result-table td {
-        padding: 4px 2px;
-
-        font-size: clamp(3.5px, 1.2vw, 6px);
-    }
-
-    .result-table .number {
-        width: 20px;
-    }
-
-    .result-table .subject {
-        width: 100px;
-    }
-
-    .grade {
-        width: 16px;
-        height: 16px;
-
-        font-size: 5px;
-    }
-
-
-    /* =========================
-       PERFORMANCE
-    ========================= */
-
-    .performance-cards {
-        gap: 4px;
-
-        margin-top: 5px;
-    }
-
-    .performance-card {
-        min-height: 35px;
-
-        padding: 4px;
-    }
-
-    .card-icon {
-        width: 18px;
-        height: 18px;
-
-        margin-right: 4px;
-
-        font-size: 7px;
-    }
-
-    .performance-card span {
-        font-size: 3.5px;
-    }
-
-    .performance-card strong {
-        margin: 1px 0;
-
-        font-size: 7px;
-    }
-
-    .performance-card small {
-        font-size: 3px;
-    }
-
-
-    /* =========================
-       ATTENDANCE
-    ========================= */
-
-    .attendance-item {
-        padding: 5px 2px;
-    }
-
-    .attendance-item span {
-        font-size: 3.5px;
-    }
-
-    .attendance-item strong {
-        margin-top: 2px;
-
-        font-size: 9px;
-    }
-
-
-    /* =========================
-       DEVELOPMENT
-    ========================= */
-
-    .development-item {
-        padding: 4px 5px;
-
-        gap: 3px;
-    }
-
-    .development-item span {
-        font-size: 5px;
-    }
-
-    .development-item strong {
-        font-size: 4.5px;
-    }
-
-
-    /* =========================
-       COMMENTS
-    ========================= */
-
-    .comment-section {
-        gap: 5px;
-
-        margin-top: 6px;
-    }
-
-    .comment-header {
-        padding: 4px 5px;
-
-        gap: 4px;
-    }
-
-    .comment-header span {
-        font-size: 3.5px;
-    }
-
-    .comment-header strong {
-        font-size: 4px;
-    }
-
-    .comment-card p {
-        min-height: 38px;
-
-        padding: 5px;
-
-        font-size: 4.5px;
-
-        line-height: 1.4;
-    }
-
-
-    /* =========================
-       GRADING
-    ========================= */
-
-    .grading-section {
-        margin-top: 5px;
-    }
-
-    .grading-title {
-        padding: 4px 5px;
-
-        font-size: 4px;
-    }
-
-    .grading-items div {
-        padding: 4px 1px;
-    }
-
-    .grading-items strong {
-        font-size: 7px;
-    }
-
-    .grading-items span {
-        font-size: 3.5px;
-    }
-
-    .grading-items small {
-        font-size: 3px;
-    }
-
-
-    /* =========================
-       SIGNATURES
-    ========================= */
-
-    .signatures {
-        gap: 12px;
-
-        margin-top: 12px;
-    }
-
-    .signature-space {
-        height: 12px;
-    }
-
-    .signature-space img {
-        max-width: 50px;
-        max-height: 18px;
-    }
-
-    .signature strong {
-        margin-top: 2px;
-
-        font-size: 4.5px;
-    }
-
-    .signature span {
-        margin-top: 1px;
-
-        font-size: 3.5px;
-    }
-
-
-    /* =========================
-       FOOTER
-    ========================= */
-
-    .footer {
-        gap: 5px;
-
-        margin-top: 7px;
-
-        padding-top: 4px;
-
-        font-size: 3.5px;
+        margin-bottom: 15px;
     }
 }
 
-
 /* =====================================================
-   VERY SMALL PHONES
-   FURTHER REDUCE TEXT ONLY
+   PRINT / PDF
 ===================================================== */
 
-@media screen and (max-width: 400px) {
-
-    .result-page {
-        padding: 3px;
-    }
-
-    .top-header {
-        padding: 5px;
-    }
-
-    .school-logo {
-        width: 40px;
-        height: 40px;
-
-        margin-right: 6px;
-    }
-
-    .report-tag {
-        width: 48px;
-        height: 42px;
-    }
-
-    .student-profile {
-        grid-template-columns: 42px 1fr 55px;
-
-        gap: 5px;
-
-        padding: 5px;
-    }
-
-    .photo-container {
-        width: 39px;
-        height: 50px;
-    }
-
-    .academic-score {
-        height: 50px;
-    }
-
-    .profile-grid {
-        gap: 3px;
-    }
-
-    .result-table th,
-    .result-table td {
-        padding: 3px 1px;
-    }
-
-    .performance-card {
-        padding: 3px;
-    }
-
-    .card-icon {
-        width: 15px;
-        height: 15px;
-
-        margin-right: 3px;
-    }
+@page {
+    size: A4 portrait;
+    margin: 0;
 }
-
-
-/* =====================================================
-   PRINT / PUPPETEER
-===================================================== */
 
 @media print {
 
     html,
     body {
-        width: 100%;
-
         margin: 0;
-
         padding: 0;
-
         background: white;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .no-print {
+        display: none !important;
     }
 
     .result-page {
         width: 210mm;
-
-        min-height: 297mm;
-
+        min-height: 0;
         margin: 0;
-
         padding: 10mm;
+        box-shadow: none;
+        zoom: 1 !important;
+        page-break-after: always;
+        break-after: page;
+    }
 
-        background: white;
+    .result-page:last-of-type {
+        page-break-after: auto;
+        break-after: auto;
     }
 
     .result-table tr,
@@ -1620,23 +759,8 @@ body {
     .development-section,
     .comment-card,
     .grading-section,
-    .signature {
+    .signatures {
+        break-inside: avoid;
         page-break-inside: avoid;
     }
-
-    .result-actions,
-    .no-print {
-        display: none !important;
-    }
-}
-
-
-/* =====================================================
-   A4
-===================================================== */
-
-@page {
-    size: A4;
-
-    margin: 0;
 }
