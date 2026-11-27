@@ -1,0 +1,705 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --violet: #4c1d95;
+    --violet-mid: #6d28d9;
+    --violet-soft: #f3effd;
+    --coral: #f43f5e;
+    --ink: #1e1b2e;
+    --muted: #6b7280;
+    --line: #e6e0f3;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    padding: 15px 8px;
+    background: #e9e6f2;
+    color: var(--ink);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+}
+
+/* =====================================================
+   DOWNLOAD TOOLBAR
+===================================================== */
+
+.download-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin: 0 auto 15px;
+    padding: 6px;
+}
+
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 9px 16px;
+    border: 0;
+    border-radius: 999px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.pdf-btn { background: var(--violet); }
+.image-btn { background: var(--coral); }
+
+.print-btn {
+    border: 1px solid #cbd5e1;
+    background: #fff;
+    color: #334155;
+}
+
+.empty-state {
+    max-width: 450px;
+    margin: 70px auto;
+    padding: 30px;
+    background: #fff;
+    text-align: center;
+}
+
+/* =====================================================
+   PAGE (A4: 210mm x 297mm)
+===================================================== */
+
+.result-page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto 20px;
+    padding: 0 0 10mm;
+    background: #fff;
+    box-shadow: 0 4px 20px rgba(30, 27, 46, .15);
+    page-break-after: always;
+    break-after: page;
+}
+
+.result-page:last-of-type {
+    page-break-after: auto;
+    break-after: auto;
+}
+
+.result-page > section,
+.result-page > .main-content {
+    margin-left: 10mm;
+    margin-right: 10mm;
+}
+
+/* =====================================================
+   HEADER (CURVED BOTTOM)
+===================================================== */
+
+.school-header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 20px 10mm 52px;
+    background: linear-gradient(120deg, var(--violet) 0%, var(--violet-mid) 100%);
+    border-radius: 0 0 50% 50% / 0 0 34px 34px;
+    color: #fff;
+}
+
+.header-logo {
+    width: 86px;
+    height: 86px;
+    flex-shrink: 0;
+    padding: 5px;
+    border-radius: 50%;
+    background: #fff;
+    border: 3px solid var(--coral);
+}
+
+.header-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+}
+
+.header-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.header-text h1 {
+    margin: 0;
+    font-family: "Trebuchet MS", Verdana, Arial, sans-serif;
+    font-size: 23px;
+    letter-spacing: .8px;
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+
+.header-text p {
+    margin: 3px 0;
+    color: #ede9fe;
+    font-size: 12.5px;
+    font-weight: 600;
+    line-height: 1.35;
+}
+
+.header-text .motto {
+    margin: 4px 0;
+    color: #fda4af;
+    font-size: 14px;
+    font-style: italic;
+    font-weight: bold;
+}
+
+/* =====================================================
+   STUDENT CARD (OVERLAPS HEADER)
+===================================================== */
+
+.profile {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 82px minmax(0, 1fr);
+    gap: 18px;
+    align-items: center;
+    margin-top: -34px;
+    padding: 14px 18px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(76, 29, 149, .15);
+}
+
+.profile-photo {
+    width: 78px;
+    height: 94px;
+    overflow: hidden;
+    border-radius: 14px;
+    background: var(--violet-soft);
+    border: 3px solid var(--violet-soft);
+}
+
+.profile-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-main {
+    min-width: 0;
+}
+
+.pill {
+    display: inline-block;
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: var(--violet-soft);
+    color: var(--violet);
+    font-size: 8px;
+    font-weight: bold;
+    letter-spacing: .8px;
+}
+
+.profile-main h2 {
+    margin: 6px 0 9px;
+    color: var(--violet);
+    font-family: "Trebuchet MS", Verdana, Arial, sans-serif;
+    font-size: 19px;
+}
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.profile-grid span {
+    display: block;
+    margin-bottom: 2px;
+    color: var(--muted);
+    font-size: 8px;
+    text-transform: uppercase;
+}
+
+.profile-grid strong {
+    display: block;
+    font-size: 11px;
+    overflow-wrap: anywhere;
+}
+
+/* =====================================================
+   STAT CHIPS
+===================================================== */
+
+.chips {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.chip {
+    padding: 9px 6px;
+    border-radius: 14px;
+    color: #fff;
+    text-align: center;
+}
+
+.chip span {
+    display: block;
+    font-size: 8px;
+    font-weight: bold;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    opacity: .9;
+}
+
+.chip strong {
+    display: block;
+    margin: 4px 0 1px;
+    font-family: "Trebuchet MS", Verdana, Arial, sans-serif;
+    font-size: 21px;
+}
+
+.chip small {
+    font-size: 8.5px;
+    opacity: .85;
+}
+
+.chip-1 { background: linear-gradient(135deg, #4c1d95, #6d28d9); }
+.chip-2 { background: linear-gradient(135deg, #6d28d9, #8b5cf6); }
+.chip-3 { background: linear-gradient(135deg, #be123c, #f43f5e); }
+.chip-4 { background: linear-gradient(135deg, #f43f5e, #fb7185); }
+
+/* =====================================================
+   MAIN: TABLE LEFT, SIDEBAR RIGHT
+===================================================== */
+
+.main-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr);
+    gap: 14px;
+    align-items: start;
+    margin-top: 14px;
+}
+
+.academic,
+.sidebar {
+    min-width: 0;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.block-title,
+.card-title {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin: 0;
+    font-family: "Trebuchet MS", Verdana, Arial, sans-serif;
+}
+
+.block-title i,
+.card-title i {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--coral);
+    color: #fff;
+    font-size: 9px;
+    font-style: normal;
+    font-weight: bold;
+}
+
+.block-title {
+    margin-bottom: 7px;
+    color: var(--violet);
+    font-size: 13px;
+}
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+.result-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: fixed;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+}
+
+.result-table th {
+    padding: 8px 2px;
+    background: var(--violet);
+    color: #fff;
+    font-size: 8px;
+    letter-spacing: .3px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.result-table td {
+    padding: 6px 2px;
+    border-bottom: 1px solid var(--line);
+    font-size: 9px;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+
+.result-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.result-table tbody tr:nth-child(even) {
+    background: var(--violet-soft);
+}
+
+.result-table .no {
+    width: 22px;
+}
+
+.result-table th.subject {
+    width: 27%;
+    padding-left: 7px;
+    text-align: left;
+}
+
+.result-table th.remark {
+    width: 16%;
+}
+
+.result-table td.subject-name {
+    padding-left: 7px;
+    text-align: left;
+    font-weight: bold;
+}
+
+.result-table td.total {
+    color: var(--violet);
+    font-weight: bold;
+}
+
+.empty-table {
+    padding: 15px !important;
+    color: var(--muted);
+}
+
+.grade {
+    display: inline-block;
+    min-width: 20px;
+    padding: 3px 5px;
+    border-radius: 999px;
+    background: #e5e7eb;
+    color: #374151;
+    font-size: 8.5px;
+    font-weight: bold;
+}
+
+.grade-a { background: #dcfce7; color: #166534; }
+.grade-b { background: #dbeafe; color: #1e40af; }
+.grade-c { background: #fef3c7; color: #92400e; }
+.grade-d { background: #ffedd5; color: #9a3412; }
+.grade-e,
+.grade-f { background: #ffe4e6; color: #9f1239; }
+
+/* =====================================================
+   SIDEBAR CARDS
+===================================================== */
+
+.card {
+    min-width: 0;
+    padding: 9px 10px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+}
+
+.card-title {
+    margin-bottom: 7px;
+    color: var(--violet);
+    font-size: 11px;
+}
+
+.attendance-numbers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    text-align: center;
+}
+
+.attendance-numbers strong {
+    display: block;
+    color: var(--violet);
+    font-size: 15px;
+}
+
+.attendance-numbers span {
+    color: var(--muted);
+    font-size: 8px;
+}
+
+.bar {
+    height: 8px;
+    margin-top: 8px;
+    border-radius: 999px;
+    background: var(--violet-soft);
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--violet-mid), var(--coral));
+}
+
+.bar-label {
+    margin-top: 3px;
+    color: var(--muted);
+    font-size: 8.5px;
+    text-align: right;
+}
+
+.conduct-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.conduct-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 4px 3px 8px;
+    border-radius: 999px;
+    background: var(--violet-soft);
+    font-size: 8.5px;
+}
+
+.conduct-chip span {
+    color: #4b5563;
+}
+
+.conduct-chip strong {
+    padding: 2px 7px;
+    border-radius: 999px;
+    background: var(--violet);
+    color: #fff;
+    font-size: 8.5px;
+}
+
+.muted {
+    margin: 0;
+    color: var(--muted);
+    font-size: 9px;
+}
+
+.comment {
+    position: relative;
+    min-height: 40px;
+    margin: 0;
+    padding: 2px 0 0 14px;
+    border-left: 3px solid var(--coral);
+    color: #374151;
+    font-size: 9.5px;
+    font-style: italic;
+    line-height: 1.45;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+/* =====================================================
+   PROMOTION STRIP
+===================================================== */
+
+.strip {
+    display: flex;
+    margin-top: 14px;
+    overflow: hidden;
+    border-radius: 14px;
+    background: var(--violet);
+    color: #fff;
+}
+
+.strip div {
+    flex: 1;
+    padding: 10px 12px;
+    border-right: 1px solid rgba(255, 255, 255, .25);
+    text-align: center;
+}
+
+.strip div:last-child {
+    border-right: none;
+}
+
+.strip span {
+    display: block;
+    color: #fda4af;
+    font-size: 8px;
+    letter-spacing: .6px;
+    text-transform: uppercase;
+}
+
+.strip strong {
+    display: block;
+    margin-top: 3px;
+    font-size: 12px;
+}
+
+/* =====================================================
+   GRADING SCALE
+===================================================== */
+
+.scale {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.scale-cell {
+    padding: 6px 2px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.scale-cell strong {
+    display: block;
+    font-family: "Trebuchet MS", Verdana, Arial, sans-serif;
+    font-size: 13px;
+}
+
+.scale-cell span {
+    display: block;
+    font-size: 8px;
+    font-weight: bold;
+}
+
+.scale-cell em {
+    display: block;
+    font-size: 7.5px;
+    font-style: normal;
+    opacity: .8;
+}
+
+.s-a { background: #dcfce7; color: #166534; }
+.s-b { background: #dbeafe; color: #1e40af; }
+.s-c { background: #fef3c7; color: #92400e; }
+.s-d { background: #ffedd5; color: #9a3412; }
+.s-e { background: #fee2e2; color: #991b1b; }
+.s-f { background: #ffe4e6; color: #9f1239; }
+
+/* =====================================================
+   SIGNATURES
+===================================================== */
+
+.signatures {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-top: 26px;
+}
+
+.signature {
+    text-align: center;
+}
+
+.signature-space {
+    height: 22px;
+}
+
+.signature-line {
+    border-top: 1.5px dashed var(--violet);
+}
+
+.signature strong {
+    display: block;
+    margin-top: 4px;
+    font-size: 9px;
+}
+
+/* =====================================================
+   SMALL SCREENS
+   The A4 sheet keeps its exact laptop layout. A small
+   script in the template scales it down with `zoom`.
+===================================================== */
+
+@media screen and (max-width: 840px) {
+    body {
+        padding: 10px 8px;
+    }
+
+    .result-page {
+        margin-bottom: 15px;
+    }
+}
+
+/* =====================================================
+   PRINT / PDF
+===================================================== */
+
+@page {
+    size: A4 portrait;
+    margin: 0;
+}
+
+@media print {
+
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        background: #fff !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+    .result-page {
+        width: 210mm;
+        min-height: 0;
+        margin: 0;
+        box-shadow: none;
+        zoom: 1 !important;
+        page-break-after: always;
+        break-after: page;
+    }
+
+    .result-page:last-of-type {
+        page-break-after: auto;
+        break-after: auto;
+    }
+
+    .result-table tr,
+    .profile,
+    .chip,
+    .card,
+    .strip,
+    .scale,
+    .signatures {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    .result-table thead {
+        display: table-header-group;
+    }
+}

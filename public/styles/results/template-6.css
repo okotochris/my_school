@@ -1,4 +1,3 @@
-
 * {
     box-sizing: border-box;
 }
@@ -10,34 +9,82 @@ body {
 }
 
 body {
+    padding: 15px 8px;
     background: #e5e7eb;
-
     color: #1f2937;
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    font-size: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
 }
 
+/* =====================================================
+   DOWNLOAD TOOLBAR
+===================================================== */
+
+.download-toolbar {
+  max-width: 210mm;
+  margin: 0 auto 15px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  background: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: 9px;
+}
+
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 9px 16px;
+    border: 0;
+    border-radius: 8px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.pdf-btn { background: #0f172a; }
+.image-btn { background: #0d9488; }
+
+.print-btn {
+    border: 1px solid #cbd5e1;
+    background: #fff;
+    color: #334155;
+}
+
+.empty-state {
+    max-width: 450px;
+    margin: 70px auto;
+    padding: 30px;
+    background: #fff;
+    text-align: center;
+}
 
 /* =====================================================
-   REPORT SHEET
+   REPORT SHEET (A4: 210mm x 297mm)
 ===================================================== */
 
 .report-sheet {
     width: 210mm;
     min-height: 297mm;
-
-    margin: 20px auto;
-
-    padding: 9mm;
-
+    margin: 0 auto 20px;
+    padding: 10mm;
     background: #ffffff;
+    box-shadow: 0 4px 20px rgba(15, 23, 42, .08);
+    page-break-after: always;
+    break-after: page;
 }
 
+.report-sheet:last-of-type {
+    page-break-after: auto;
+    break-after: auto;
+}
 
 /* =====================================================
    SCHOOL HEADER
@@ -45,104 +92,64 @@ body {
 
 .school-header {
     border: 1px solid #cbd5e1;
-
     overflow: hidden;
 }
 
 .header-top {
     display: flex;
-
     align-items: center;
-
     padding: 15px;
-
     text-align: center;
-
-    overflow: hidden;
 }
 
 .school-logo {
-    width: 72px;
-    height: 72px;
-
+    width: 76px;
+    height: 76px;
     flex-shrink: 0;
-
     margin-right: 18px;
-
     padding: 4px;
-
     border: 2px solid #334155;
-
     border-radius: 50%;
 }
 
 .school-logo img {
     width: 100%;
     height: 100%;
-
     object-fit: contain;
-
     border-radius: 50%;
 }
 
 .school-info {
     flex: 1;
-
     min-width: 0;
-
-    overflow: hidden;
 }
 
 .school-info h1 {
     margin: 0;
-
     color: #1e293b;
-
     font-size: 22px;
-
     font-weight: 800;
-
     letter-spacing: 1px;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
+    line-height: 1.2;
+    text-transform: uppercase;
 }
 
 .school-info p {
-    margin: 0px 0;
-
+    margin: 3px 0;
     color: #64748b;
-
-    font-size: 12px;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
+    font-size: 12.5px;
+    font-weight: 600;
+    line-height: 1.35;
 }
 
 .school-info .motto {
-    margin: 0px 0;
-
+    margin: 4px 0;
     color: #0f766e;
-
-    font-size: 12px;
-
+    font-size: 14px;
+    font-style: italic;
     font-weight: bold;
-
-    letter-spacing: .7px;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
+    letter-spacing: .5px;
 }
-
 
 /* =====================================================
    REPORT TITLE
@@ -150,52 +157,29 @@ body {
 
 .report-title {
     padding: 9px;
-
     background: #1e293b;
-
     color: white;
-
     text-align: center;
-
-    overflow: hidden;
 }
 
 .report-title span {
     color: #fbbf24;
-
     font-size: 10px;
-
     font-weight: bold;
-
     letter-spacing: 1.5px;
-
-    white-space: nowrap;
 }
 
 .report-title h2 {
     margin: 3px 0;
-
-    font-size: 11px;
-
+    font-size: 12px;
     letter-spacing: .4px;
-
-    white-space: nowrap;
 }
 
 .report-title p {
     margin: 0;
-
     color: #cbd5e1;
-
-    font-size: 8px;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
+    font-size: 9px;
 }
-
 
 /* =====================================================
    STUDENT INFORMATION
@@ -203,61 +187,40 @@ body {
 
 .student-section {
     display: grid;
-
     grid-template-columns: 75px minmax(0, 1fr);
-
     gap: 12px;
-
     margin-top: 11px;
-
     padding: 10px;
-
     border: 1px solid #cbd5e1;
-
-    overflow: hidden;
 }
 
 .student-photo {
     width: 70px;
     height: 82px;
-
     padding: 3px;
-
     border: 1px solid #94a3b8;
-
     background: #f8fafc;
-
     overflow: hidden;
 }
 
 .student-photo img {
     width: 100%;
     height: 100%;
-
     object-fit: cover;
 }
 
 .student-information {
     display: flex;
-
     flex-direction: column;
-
     justify-content: center;
-
     min-width: 0;
-
-    overflow: hidden;
 }
 
 .info-row {
     display: grid;
-
-    grid-template-columns:
-        repeat(4, minmax(0, 1fr));
-
-    border-bottom: 1px solid #e2e8f0;
-
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     min-width: 0;
+    border-bottom: 1px solid #e2e8f0;
 }
 
 .info-row:first-child {
@@ -270,14 +233,9 @@ body {
 
 .info-item {
     min-width: 0;
-
     min-height: 25px;
-
     padding: 6px 8px;
-
     border-right: 1px solid #e2e8f0;
-
-    overflow: hidden;
 }
 
 .info-item:last-child {
@@ -286,168 +244,69 @@ body {
 
 .info-item span {
     display: block;
-
     margin-bottom: 3px;
-
     color: #64748b;
-
     font-size: 8px;
-
     font-weight: bold;
-
     letter-spacing: .4px;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
 }
 
 .info-item strong {
     display: block;
-
     color: #1e293b;
-
     font-size: 12px;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
+    overflow-wrap: anywhere;
 }
-
 
 /* =====================================================
-   SECTION TITLE
+   MAIN CONTENT: TABLE LEFT, SIDEBAR RIGHT
 ===================================================== */
 
-.section-title {
+.main-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr);
+    gap: 12px;
+    align-items: start;
+    margin-top: 12px;
+}
+
+.result-section,
+.result-sidebar {
+    min-width: 0;
+}
+
+.result-sidebar {
     display: flex;
-
-    align-items: center;
-
-    margin-top: 13px;
-
-    padding: 7px 9px;
-
-    background: #f1f5f9;
-
-    border-left: 4px solid #0f766e;
-
-    overflow: hidden;
+    flex-direction: column;
+    gap: 8px;
 }
-
-.section-title > span {
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    width: 22px;
-    height: 22px;
-
-    flex-shrink: 0;
-
-    margin-right: 8px;
-
-    background: #0f766e;
-
-    color: white;
-
-    font-size: 7px;
-
-    font-weight: bold;
-}
-
-.section-title small {
-    display: block;
-
-    color: #64748b;
-
-    font-size: 8px;
-
-    font-weight: bold;
-
-    letter-spacing: .8px;
-
-    white-space: nowrap;
-}
-
-.section-title h3 {
-    margin: 2px 0 0;
-
-    color: #1e293b;
-
-    font-size: 9px;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
-}
-
 
 /* =====================================================
    RESULT TABLE
 ===================================================== */
 
-.result-section {
-    width: 100%;
-
-    overflow: hidden;
-}
-
 .result-table {
     width: 100%;
-
     border-collapse: collapse;
-
     table-layout: fixed;
 }
 
 .result-table th {
-    padding: 6px 3px;
-
+    padding: 7px 2px;
     background: #334155;
-
     border: 1px solid #475569;
-
     color: white;
-
-    font-size: 6px;
-
+    font-size: 7.5px;
     text-align: center;
-
-    white-space: nowrap;
-}
-
-.result-table th small {
-    color: #cbd5e1;
-
-    font-size: 4.5px;
-
-    white-space: nowrap;
 }
 
 .result-table td {
-    padding: 6px 3px;
-
+    padding: 6px 2px;
     border: 1px solid #cbd5e1;
-
     color: #475569;
-
-    font-size: 10px;
-
+    font-size: 8.5px;
     text-align: center;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
+    overflow-wrap: anywhere;
 }
 
 .result-table tbody tr:nth-child(even) {
@@ -455,228 +314,154 @@ body {
 }
 
 .result-table .sn {
-    width: 27px;
+    width: 26px;
 }
 
 .result-table .subject {
-    width: 150px;
-
+    width: 27%;
+    padding-left: 5px;
     text-align: left;
+}
 
+.result-table .remark {
+    width: 16%;
+}
+
+.result-table td.subject-name {
+    padding-left: 5px;
+    text-align: left;
     font-weight: 600;
 }
 
-.result-table .total {
+.result-table td.total-score {
     color: #0f766e;
-
     font-weight: bold;
+}
+
+.empty-table {
+    padding: 15px !important;
+    color: #64748b;
 }
 
 .grade {
     display: inline-flex;
-
     align-items: center;
     justify-content: center;
-
-    width: 22px;
-    height: 22px;
-
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
-
-    font-size: 7px;
-
+    background: #e2e8f0;
+    color: #334155;
+    font-size: 8px;
     font-weight: bold;
 }
 
-.grade.excellent {
-    background: #ccfbf1;
-
-    color: #115e59;
-}
-
-.grade.very-good {
-    background: #dbeafe;
-
-    color: #1e40af;
-}
-
+.grade-a { background: #ccfbf1; color: #115e59; }
+.grade-b { background: #dbeafe; color: #1e40af; }
+.grade-c { background: #fef3c7; color: #92400e; }
+.grade-d { background: #ffedd5; color: #9a3412; }
+.grade-e,
+.grade-f { background: #fee2e2; color: #991b1b; }
 
 /* =====================================================
-   SUMMARY
+   SUMMARY (SIDEBAR)
 ===================================================== */
 
 .summary-section {
     display: grid;
-
-    grid-template-columns:
-        repeat(4, minmax(0, 1fr));
-
-    gap: 7px;
-
-    margin-top: 9px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
 }
 
 .summary-box {
     min-width: 0;
-
-    padding: 8px;
-
+    padding: 8px 4px;
     border: 1px solid #cbd5e1;
-
     background: #f8fafc;
-
     text-align: center;
-
-    overflow: hidden;
 }
 
 .summary-box span {
     display: block;
-
     color: #64748b;
-
-    font-size: 5.5px;
-
+    font-size: 7px;
     font-weight: bold;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
 }
 
 .summary-box strong {
     display: block;
-
     margin: 3px 0;
-
     color: #0f766e;
-
-    font-size: 15px;
-
-    white-space: nowrap;
+    font-size: 16px;
 }
 
 .summary-box small {
     color: #64748b;
-
-    font-size: 5px;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
+    font-size: 6.5px;
 }
-
 
 /* =====================================================
-   TWO COLUMN PANELS
+   PANELS (ATTENDANCE / CONDUCT)
 ===================================================== */
-
-.two-column {
-    display: grid;
-
-    grid-template-columns:
-        minmax(0, 1fr)
-        minmax(0, 1fr);
-
-    gap: 9px;
-
-    margin-top: 10px;
-}
 
 .panel {
     min-width: 0;
-
     border: 1px solid #cbd5e1;
-
     overflow: hidden;
 }
 
 .panel-heading {
     padding: 7px 9px;
-
     background: #334155;
-
     color: white;
-
-    font-size: 6px;
-
+    font-size: 7.5px;
     font-weight: bold;
-
     letter-spacing: .4px;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
 }
 
 .attendance-content {
     display: grid;
-
-    grid-template-columns:
-        repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .attendance-content div {
     min-width: 0;
-
     padding: 8px 3px;
-
     border-right: 1px solid #e2e8f0;
-
+    border-bottom: 1px solid #e2e8f0;
     text-align: center;
 }
 
-.attendance-content div:last-child {
+.attendance-content div:nth-child(2n) {
     border-right: none;
+}
+
+.attendance-content div:nth-child(n+3) {
+    border-bottom: none;
 }
 
 .attendance-content span {
     display: block;
-
     color: #64748b;
-
-    font-size: 5px;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
+    font-size: 7px;
 }
 
 .attendance-content strong {
     display: block;
-
     margin-top: 3px;
-
     color: #0f766e;
-
-    font-size: 12px;
-
-    white-space: nowrap;
+    font-size: 13px;
 }
 
 .conduct-list {
     padding: 4px 9px;
-
-    overflow: hidden;
 }
 
 .conduct-list div {
     display: flex;
-
     justify-content: space-between;
-
     gap: 8px;
-
     padding: 5px 0;
-
     border-bottom: 1px solid #e2e8f0;
 }
 
@@ -686,116 +471,68 @@ body {
 
 .conduct-list span {
     min-width: 0;
-
     color: #475569;
-
-    font-size: 6.5px;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
+    font-size: 8px;
 }
 
 .conduct-list strong {
     flex-shrink: 0;
-
     color: #0f766e;
-
-    font-size: 6px;
-
-    white-space: nowrap;
+    font-size: 8px;
+    text-align: right;
 }
-
 
 /* =====================================================
-   COMMENTS
+   COMMENTS (SIDEBAR)
 ===================================================== */
-
-.comments-section {
-    display: grid;
-
-    grid-template-columns:
-        minmax(0, 1fr)
-        minmax(0, 1fr);
-
-    gap: 9px;
-
-    margin-top: 10px;
-}
 
 .comment-box {
     min-width: 0;
-
     border: 1px solid #cbd5e1;
-
     overflow: hidden;
 }
 
 .comment-box p {
-    min-height: 20px;
-
+    min-height: 40px;
     margin: 0;
-
-    padding: 8px;
-
+    padding: 8px 9px;
     color: #475569;
-
-    font-size: 8px;
-
-    line-height: 1.55;
-
-    overflow-wrap: break-word;
+    font-size: 9px;
+    line-height: 1.45;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
 }
-
 
 /* =====================================================
    GRADING
 ===================================================== */
 
 .grading-section {
-    margin-top: 10px;
-
+    margin-top: 12px;
     border: 1px solid #cbd5e1;
-
     overflow: hidden;
 }
 
 .grading-heading {
     padding: 6px 9px;
-
     background: #0f766e;
-
     color: white;
-
-    font-size: 6px;
-
+    font-size: 7.5px;
     font-weight: bold;
-
-    white-space: nowrap;
 }
 
 .grading-table {
     display: grid;
-
-    grid-template-columns:
-        repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(6, minmax(0, 1fr));
 }
 
 .grading-table div {
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
-
     min-width: 0;
-
     padding: 6px 2px;
-
     border-right: 1px solid #e2e8f0;
-
     text-align: center;
 }
 
@@ -805,44 +542,20 @@ body {
 
 .grading-table strong {
     color: #1e293b;
-
-    font-size: 10px;
-
-    white-space: nowrap;
+    font-size: 12px;
 }
 
 .grading-table span {
     margin-top: 2px;
-
     color: #475569;
-
-    font-size: 5px;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
-
-    max-width: 100%;
+    font-size: 8px;
 }
 
 .grading-table small {
     margin-top: 2px;
-
     color: #64748b;
-
-    font-size: 4.5px;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
-
-    max-width: 100%;
+    font-size: 7px;
 }
-
 
 /* =====================================================
    SIGNATURES
@@ -850,25 +563,18 @@ body {
 
 .signature-section {
     display: grid;
-
-    grid-template-columns:
-        repeat(3, minmax(0, 1fr));
-
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 35px;
-
-    margin-top: 22px;
+    margin-top: 25px;
 }
 
 .signature {
     min-width: 0;
-
     text-align: center;
-
-    overflow: hidden;
 }
 
 .signature-space {
-    height: 18px;
+    height: 20px;
 }
 
 .signature-line {
@@ -877,636 +583,92 @@ body {
 
 .signature strong {
     display: block;
-
     margin-top: 4px;
-
     color: #1e293b;
-
-    font-size: 6.5px;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
+    font-size: 8px;
 }
 
 .signature span {
     display: block;
-
     margin-top: 2px;
-
     color: #64748b;
-
-    font-size: 5px;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
+    font-size: 7px;
 }
-
 
 /* =====================================================
-   FOOTER
+   SMALL SCREENS
+   The A4 sheet keeps its exact laptop layout. A small
+   script in the template scales it down with `zoom`.
 ===================================================== */
 
-.report-footer {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 10px;
-
-    margin-top: 13px;
-
-    padding-top: 6px;
-
-    border-top: 2px solid #334155;
-
-    color: #64748b;
-
-    font-size: 5px;
-}
-
-.report-footer span {
-    min-width: 0;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
-}
-
-.report-footer span:first-child {
-    color: #1e293b;
-
-    font-weight: bold;
-}
-
-
-/* =====================================================
-   ACTION BUTTONS
-===================================================== */
-
-.result-actions {
-    display: flex;
-
-    justify-content: center;
-
-    gap: 10px;
-
-    margin: 20px auto;
-}
-
-
-/* =====================================================
-   MOBILE
-   SAME DESIGN — JUST SCALED DOWN
-===================================================== */
-
-@media screen and (max-width: 700px) {
-
-    html,
+@media screen and (max-width: 840px) {
     body {
-        width: 100%;
-
-        overflow-x: hidden;
-    }
-
-    body {
-        background: white;
-
-        font-size: 7px;
+        padding: 10px 8px;
     }
 
     .report-sheet {
-        width: 100%;
-
-        min-width: 0;
-
-        min-height: auto;
-
-        margin: 0;
-
-        padding: 5px;
-    }
-
-
-    /* =========================
-       SCHOOL HEADER
-    ========================= */
-
-    .header-top {
-        padding: 10px;
-
-        min-height: 58px;
-    }
-
-    .school-logo {
-        width: 52px;
-        height: 52px;
-
-        margin-right: 9px;
-
-        padding: 3px;
-
-        border-width: 1.5px;
-    }
-
-    .school-info h1 {
-        font-size: clamp(10px, 4vw, 16px);
-
-        letter-spacing: .3px;
-    }
-
-    .school-info p {
-        margin: 2px 0;
-
-        font-size: clamp(3.5px, 1.5vw, 5.5px);
-    }
-
-    .school-info .motto {
-        margin: 3px 0;
-
-        font-size: clamp(4px, 1.7vw, 6px);
-
-        letter-spacing: .3px;
-    }
-
-
-    /* =========================
-       REPORT TITLE
-    ========================= */
-
-    .report-title {
-        padding: 6px;
-    }
-
-    .report-title span {
-        font-size: clamp(3.5px, 1.4vw, 5px);
-
-        letter-spacing: .8px;
-    }
-
-    .report-title h2 {
-        margin: 2px 0;
-
-        font-size: clamp(7px, 2.8vw, 9px);
-    }
-
-    .report-title p {
-        font-size: clamp(3.5px, 1.4vw, 5px);
-    }
-
-
-    /* =========================
-       STUDENT INFORMATION
-    ========================= */
-
-    .student-section {
-        grid-template-columns: 55px minmax(0, 1fr);
-
-        gap: 7px;
-
-        margin-top: 6px;
-
-        padding: 6px;
-    }
-
-    .student-photo {
-        width: 50px;
-        height: 62px;
-
-        padding: 2px;
-    }
-
-    .info-row {
-        grid-template-columns:
-            repeat(4, minmax(0, 1fr));
-    }
-
-    .info-row:first-child {
-        grid-template-columns: 2fr 1fr;
-    }
-
-    .info-item {
-        min-height: 20px;
-
-        padding: 4px 5px;
-    }
-
-    .info-item span {
-        margin-bottom: 2px;
-
-        font-size: clamp(3px, 1.1vw, 4.5px);
-
-        letter-spacing: .2px;
-    }
-
-    .info-item strong {
-        font-size: clamp(3.5px, 1.3vw, 6px);
-    }
-
-
-    /* =========================
-       SECTION TITLE
-    ========================= */
-
-    .section-title {
-        margin-top: 7px;
-
-        padding: 4px 5px;
-
-        border-left-width: 3px;
-    }
-
-    .section-title > span {
-        width: 17px;
-        height: 17px;
-
-        margin-right: 5px;
-
-        font-size: 5px;
-    }
-
-    .section-title small {
-        font-size: clamp(3px, 1.1vw, 4px);
-
-        letter-spacing: .4px;
-    }
-
-    .section-title h3 {
-        margin-top: 1px;
-
-        font-size: clamp(5px, 1.8vw, 7px);
-    }
-
-
-    /* =========================
-       RESULT TABLE
-    ========================= */
-
-    .result-table th {
-        padding: 4px 2px;
-
-        font-size: clamp(3px, 1.1vw, 5px);
-    }
-
-    .result-table th small {
-        font-size: clamp(2.5px, .9vw, 4px);
-    }
-
-    .result-table td {
-        padding: 4px 2px;
-
-        font-size: clamp(3.5px, 1.2vw, 6px);
-    }
-
-    .result-table .sn {
-        width: 20px;
-    }
-
-    .result-table .subject {
-        width: 100px;
-    }
-
-    .grade {
-        width: 17px;
-        height: 17px;
-
-        font-size: 5px;
-    }
-
-
-    /* =========================
-       SUMMARY
-    ========================= */
-
-    .summary-section {
-        gap: 4px;
-
-        margin-top: 5px;
-    }
-
-    .summary-box {
-        padding: 5px;
-    }
-
-    .summary-box span {
-        font-size: clamp(8px, 3vw, 12px);
-    }
-
-    .summary-box strong {
-        margin: 2px 0;
-
-        font-size: clamp(8px, 3vw, 12px);
-    }
-
-    .summary-box small {
-        font-size: clamp(2.8px, 1vw, 4px);
-    }
-
-
-    /* =========================
-       TWO COLUMN PANELS
-    ========================= */
-
-    .two-column {
-        gap: 5px;
-
-        margin-top: 6px;
-    }
-
-    .panel-heading {
-        padding: 4px 5px;
-
-        font-size: clamp(3px, 1.1vw, 5px);
-    }
-
-    .attendance-content div {
-        padding: 5px 2px;
-    }
-
-    .attendance-content span {
-        font-size: clamp(2.8px, 1vw, 4px);
-    }
-
-    .attendance-content strong {
-        margin-top: 2px;
-
-        font-size: clamp(7px, 2.8vw, 10px);
-    }
-
-    .conduct-list {
-        padding: 2px 5px;
-    }
-
-    .conduct-list div {
-        gap: 4px;
-
-        padding: 3px 0;
-    }
-
-    .conduct-list span {
-        font-size: clamp(3.5px, 1.1vw, 5px);
-    }
-
-    .conduct-list strong {
-        font-size: clamp(3px, 1vw, 4.5px);
-    }
-
-
-    /* =========================
-       COMMENTS
-    ========================= */
-
-    .comments-section {
-        gap: 5px;
-
-        margin-top: 6px;
-    }
-
-    .comment-box p {
-        min-height: 30px;
-
-        padding: 5px;
-
-        font-size: clamp(3.5px, 1.15vw, 5.5px);
-
-        line-height: 1.45;
-    }
-
-
-    /* =========================
-       GRADING
-    ========================= */
-
-    .grading-section {
-        margin-top: 6px;
-    }
-
-    .grading-heading {
-        padding: 4px 5px;
-
-        font-size: clamp(3px, 1.1vw, 5px);
-    }
-
-    .grading-table div {
-        padding: 4px 1px;
-    }
-
-    .grading-table strong {
-        font-size: clamp(6px, 2vw, 8px);
-    }
-
-    .grading-table span {
-        font-size: clamp(2.8px, 1vw, 4px);
-    }
-
-    .grading-table small {
-        font-size: clamp(2.5px, .9vw, 3.5px);
-    }
-
-
-    /* =========================
-       SIGNATURES
-    ========================= */
-
-    .signature-section {
-        gap: 12px;
-
-        margin-top: 13px;
-    }
-
-    .signature-space {
-        height: 12px;
-    }
-
-    .signature strong {
-        margin-top: 2px;
-
-        font-size: clamp(3.5px, 1.1vw, 5px);
-    }
-
-    .signature span {
-        margin-top: 1px;
-
-        font-size: clamp(3px, .9vw, 4px);
-    }
-
-
-    /* =========================
-       FOOTER
-    ========================= */
-
-    .report-footer {
-        gap: 5px;
-
-        margin-top: 7px;
-
-        padding-top: 4px;
-
-        font-size: clamp(2.8px, .9vw, 4px);
+        margin-bottom: 15px;
     }
 }
 
-
 /* =====================================================
-   VERY SMALL PHONES
+   PRINT / PDF
 ===================================================== */
 
-@media screen and (max-width: 400px) {
-
-    .report-sheet {
-        padding: 3px;
-    }
-
-    .header-top {
-        padding: 7px;
-    }
-
-    .school-logo {
-        width: 43px;
-        height: 43px;
-
-        margin-right: 7px;
-    }
-
-    .student-section {
-        grid-template-columns: 46px minmax(0, 1fr);
-
-        gap: 5px;
-
-        padding: 5px;
-    }
-
-    .student-photo {
-        width: 42px;
-        height: 53px;
-    }
-
-    .info-item {
-        padding: 3px 4px;
-    }
-
-    .result-table th,
-    .result-table td {
-        padding: 3px 1px;
-    }
-
-    .grade {
-        width: 15px;
-        height: 15px;
-
-        font-size: 4px;
-    }
-
-    .summary-section {
-        gap: 3px;
-    }
-
-    .summary-box {
-        padding: 4px;
-    }
-
-    .two-column {
-        gap: 3px;
-    }
-
-    .comments-section {
-        gap: 3px;
-    }
-
-    .signature-section {
-        gap: 8px;
-    }
+@page {
+    size: A4 portrait;
+    margin: 0;
 }
-
-
-/* =====================================================
-   PRINT / PUPPETEER
-===================================================== */
 
 @media print {
 
     html,
     body {
-        width: 100%;
-
         margin: 0;
-
         padding: 0;
-
         background: white !important;
-
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
     }
 
-    body {
-        overflow: visible;
-    }
-
-    .report-sheet {
-        width: 210mm;
-
-        min-height: 297mm;
-
-        margin: 0;
-
-        padding: 9mm;
-
-        background: white;
-
-        box-shadow: none;
-    }
-
-    .result-actions,
     .no-print {
         display: none !important;
     }
 
+    .report-sheet {
+        width: 210mm;
+        min-height: 0;
+        margin: 0;
+        padding: 10mm;
+        box-shadow: none;
+        zoom: 1 !important;
+        page-break-after: always;
+        break-after: page;
+    }
+
+    .report-sheet:last-of-type {
+        page-break-after: auto;
+        break-after: auto;
+    }
+
     .school-header,
     .student-section,
-    .summary-section,
     .summary-box,
-    .two-column,
     .panel,
-    .comments-section,
     .comment-box,
     .grading-section,
     .signature-section,
     .signature {
         break-inside: avoid;
-
         page-break-inside: avoid;
     }
 
-    .result-table {
-        page-break-inside: auto;
-    }
-
     .result-table tr {
+        break-inside: avoid;
         page-break-inside: avoid;
     }
 
     .result-table thead {
         display: table-header-group;
     }
-}
-
-
-/* =====================================================
-   A4 PAGE
-===================================================== */
-
-@page {
-    size: A4;
-
-    margin: 0;
 }

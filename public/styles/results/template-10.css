@@ -1,251 +1,613 @@
-
 * {
+    box-sizing: border-box;
+}
+
+html,
+body {
     margin: 0;
     padding: 0;
-    text-decoration: none;
-  }
-  /* Base styles */
-  /* Base styles */
-  .t_container {
-    width: 720px; /* Set a maximum width for laptop view */
-    margin: auto;
-    padding: 10px;
-    box-sizing: border-box;
-    
-  }
-  @media screen and (max-width:700px){
-    .t_container {
-        width:100%
-    }
-  }
-  .t_container {
-    border: solid 1px grey;
-    position: relative;
-    background: rgb(20, 32, 209);
-    box-sizing: border-box; /* Ensure padding does not increase element width */
-  }
-  
-  
-  
-  .logo{
-    height: 100px;
-    width: 100px;
-    background-size: contain;
-  }
-  .avatar{
-    height: 100px;
-    width: 110px;
-    background:url('/IMAGE/avatar.png');
-    background-size: cover;
-    display:flex;
-    align-items:end;
-    justify-content: center;
-    background-repeat: no-repeat;
-  }
-  .avatar p{
-    background:red;
-    color:white;
-    font-weight: bold;
-  }
-  table {
-    margin-bottom: 20px;
-    border-collapse: collapse;
-  }
-  body{
-    width:100%
-  }
-   th, td {
-    border: solid 1px black;
-    padding:2px 0px 2px 5px;
-  
-  }
-  th, td{
-    height: 13px;
-  }
-  
-  
-  .top_info {
-    height:30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center; /* Center items vertically */
-    margin-bottom: 20px;
-    padding: 2px;
-    border: solid 2px black;
-    flex-wrap: nowrap; /* Prevent wrapping */
-    white-space: nowrap; /* Prevent text from wrapping */
-  }
-  
-  .style {
-    background: white;
-    border: solid 1px black;
-    border-radius: 20px;
-    padding: 5px;
-  }
-  
-  .school_details {
-    text-align: center;
-    margin-bottom: 10px;
-    display:flex;
-    justify-content: space-around;
-  }
-  
-  .school_details h1 {
-    color: #003399;
-    font-size: 37px;
-    font-family: 'Futura Md BT';
-  }
-  
-  .school_details p {
-    font-size: 14px;
-    font-family: arial;
-    font-weight: bold;
-  }
-  
-  
-  .reportSheet {
-    height: 40px;
-    width: 600px;
-    background: white;
-    display: flex;
-    justify-content: center;
-    border: solid 2px black;
+}
+
+body {
+    padding: 15px 8px;
+    background: #e5e9f2;
+    color: #111827;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+}
+
+/* =====================================================
+   DOWNLOAD TOOLBAR
+===================================================== */
+.download-toolbar {
+  max-width: 210mm;
+  margin: 0 auto 15px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  background: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: 9px;
+}
+
+.download-btn {
+    display: inline-flex;
     align-items: center;
-    border-radius: 10px;
-    margin: 0 auto;
-  }
-  
-  .reportSheet div {
-    height: 35px;
-    width: 550px;
-    background: black;
-    color: white;
-    text-align: center;
-    display: flex;
     justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-  }
-  
-  .table_design {
-    display: flex;
-    flex-wrap: nowrap;
-    width: 100%;
-    justify-content: space-between;
-  }
-  
-  .table {
-    width: 480px; /* Adjusted width to fit better */
-    font-size: 14px;
-    height: auto;
-  }
-  
-  .class_info {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 200px; /* Adjusted width to fit better */
-    font-size: 12px;
-  }
-  
-  .class_info div {
-    border-bottom: solid 1px black;
-  }
-  
-  .class_info h3 {
-    color: red;
-  }
-  
-  .grade {
-    font-size: 14px;
-  }
-  
-  /* styling the average score of student performance in the footer */
-  .score_container {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    text-align: center;
-    border: 3px solid blue;
-    width: 100%; /* Set to 100% width to avoid overflow */
-    height: 70px;
-    box-sizing: border-box; /* Ensure padding does not increase element width */
-  }
-  
-  .score_container div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50px;
-  }
-  
-  .student_score h5 {
-    color: blue;
-  }
-  
-  .student_score div {
-    display: flex;
-    border: 2px solid black;
-    padding: 1px;
-    border-radius: 10px;
-    margin: 2px;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-  }
-  
-  .download-link {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #3498db;
+    padding: 9px 16px;
+    border: 0;
+    border-radius: 8px;
     color: #fff;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
     text-decoration: none;
     cursor: pointer;
-    margin: 20px auto;
-  }
-  
-  @media print {
-    header, .download {
-      display: none;
-    }
-  }
-  
-  .teacherReport h3 {
-    margin: 8px 0;
-  }
-  
-  .teacherReport span {
-    color: red;
-  }
-  
-  
-  button{
-    background:black;
-    color:white;
-    font-size:20px;
-  }
-  button:hover{
-    color:rgb(212, 206, 206);
-  }
+}
 
-  .extraInfo{
+.pdf-btn { background: #0f172a; }
+.image-btn { background: #0d9488; }
+
+.print-btn {
+    border: 1px solid #cbd5e1;
+    background: #fff;
+    color: #334155;
+}
+
+.empty-state {
+    max-width: 450px;
+    margin: 70px auto;
+    padding: 30px;
+    background: #fff;
+    text-align: center;
+}
+
+/* =====================================================
+   PAGE (A4: 210mm x 297mm) - BLUE FRAME + WHITE CARD
+===================================================== */
+
+.t_container {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto 20px;
+    padding: 8mm;
+    background: linear-gradient(160deg, #1e3a8a 0%, #1d4ed8 100%);
+    box-shadow: 0 4px 20px rgba(15, 23, 42, .15);
+    page-break-after: always;
+    break-after: page;
+}
+
+.t_container:last-of-type {
+    page-break-after: auto;
+    break-after: auto;
+}
+
+.style {
+    min-height: calc(297mm - 16mm);
+    padding: 14px;
+    background: #ffffff;
+    border-radius: 16px;
+}
+
+/* =====================================================
+   SCHOOL HEADER
+===================================================== */
+
+.school_details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid #1e3a8a;
+}
+
+.logo-box {
+    width: 92px;
+    height: 92px;
+    flex-shrink: 0;
+    padding: 4px;
+    border: 2px solid #1e3a8a;
+    border-radius: 50%;
+}
+
+.logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+}
+
+.school_text {
+    flex: 1;
+    min-width: 0;
+    text-align: center;
+}
+
+.school_text h1 {
+    margin: 0;
+    color: #1e3a8a;
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: .6px;
+    line-height: 1.2;
+}
+
+.school_text p {
+    margin: 3px 0;
+    color: #374151;
+    font-size: 12.5px;
+    font-weight: 600;
+    line-height: 1.35;
+}
+
+.school_text .motto {
+    margin: 4px 0;
+    color: #b91c1c;
+    font-size: 14px;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.avatar {
+    position: relative;
+    width: 92px;
+    height: 104px;
+    flex-shrink: 0;
+    overflow: hidden;
+    border: 2px solid #1e3a8a;
+    border-radius: 10px;
+    background: #eef2ff;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar p {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    padding: 3px 2px;
+    background: #b91c1c;
+    color: #fff;
+    font-size: 9px;
+    font-weight: bold;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+
+/* =====================================================
+   REPORT TITLE
+===================================================== */
+
+.reportSheet {
+    margin: 12px 0;
+    padding: 3px;
+    border: 2px solid #111827;
+    border-radius: 12px;
+}
+
+.reportSheet div {
+    padding: 8px;
+    background: #111827;
+    border-radius: 9px;
+    color: #fff;
+    text-align: center;
+}
+
+.reportSheet h3 {
+    margin: 0;
+    font-size: 12px;
+    letter-spacing: .8px;
+}
+
+/* =====================================================
+   STUDENT INFO BAR
+===================================================== */
+
+.top_info {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 12px;
+    padding: 9px 12px;
+    border: 1px solid #c7d2fe;
+    border-radius: 8px;
+    background: #eef2ff;
+}
+
+.top_info p {
+    margin: 0;
+    color: #4b5563;
+    font-size: 11px;
+}
+
+.top_info b {
+    color: #1e3a8a;
+    font-size: 12px;
+    overflow-wrap: anywhere;
+}
+
+/* =====================================================
+   TABLE (LEFT) + SKILLS (RIGHT)
+===================================================== */
+
+.table_design {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.table {
+    flex: 1;
+    min-width: 0;
+}
+
+.class_info {
+    width: 215px;
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
-    font-size: 16px;
-    justify-content:space-around;
-    margin:10px auto;
-  }
-  .extraInfo p{
-    padding:3px 0px;
-  }
-  .extraInfo b{
-    color:rgb(200, 4, 4);
-  }
-  .extraInfo div{
-    display:flex;
-    justify-content:space-around;
-    border-bottom: 2px solid black;
-    margin-bottom: 10px;
-  }
+    gap: 8px;
+}
 
-  
+table {
+    border-collapse: collapse;
+}
+
+.result-table,
+.skills-table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.result-table th,
+.result-table td,
+.skills-table th,
+.skills-table td {
+    border: 1px solid #9ca3af;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+
+.result-table th {
+    padding: 7px 2px;
+    background: #1e3a8a;
+    border-color: #1e3a8a;
+    color: #fff;
+    font-size: 9px;
+}
+
+.result-table td {
+    padding: 6px 2px;
+    font-size: 9.5px;
+}
+
+.result-table tbody tr:nth-child(even) {
+    background: #f3f4f9;
+}
+
+.result-table .subject-col {
+    width: 30%;
+    padding-left: 6px;
+    text-align: left;
+}
+
+.result-table td.subject-name {
+    padding-left: 6px;
+    text-align: left;
+    font-weight: bold;
+}
+
+.result-table td.total-score {
+    color: #1e3a8a;
+    font-weight: bold;
+}
+
+.empty-table {
+    padding: 15px !important;
+    color: #6b7280;
+}
+
+.grade-pill {
+    display: inline-block;
+    min-width: 22px;
+    padding: 2px 4px;
+    border-radius: 10px;
+    background: #e5e7eb;
+    color: #1f2937;
+    font-size: 9px;
+    font-weight: bold;
+}
+
+.grade-a { background: #dcfce7; color: #166534; }
+.grade-b { background: #dbeafe; color: #1e40af; }
+.grade-c { background: #fef3c7; color: #92400e; }
+.grade-d { background: #ffedd5; color: #9a3412; }
+.grade-e,
+.grade-f { background: #fee2e2; color: #991b1b; }
+
+/* ---------- Right column ---------- */
+
+.info-block {
+    border: 1px solid #9ca3af;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.skills-table th {
+    padding: 5px 0;
+    background: #1e3a8a;
+    border-color: #1e3a8a;
+    color: #fff;
+    font-size: 8.5px;
+}
+
+.skills-table th.skill-title {
+    padding-left: 5px;
+    text-align: left;
+    font-size: 9px;
+}
+
+.skills-table td {
+    padding: 3px 0;
+    font-size: 8.5px;
+    color: #166534;
+    font-weight: bold;
+}
+
+.skills-table .skill-name {
+    width: 45%;
+    padding-left: 5px;
+    text-align: left;
+    color: #111827;
+    font-weight: normal;
+}
+
+.skills-table tbody tr:nth-child(even) {
+    background: #f3f4f9;
+}
+
+.info-block h4 {
+    margin: 0;
+    padding: 5px 7px;
+    background: #1e3a8a;
+    color: #fff;
+    font-size: 8.5px;
+    letter-spacing: .4px;
+}
+
+.info-block p {
+    margin: 0;
+    padding: 3px 7px;
+    border-top: 1px solid #e5e7eb;
+    color: #374151;
+    font-size: 8.5px;
+    line-height: 1.3;
+}
+
+.info-block p b {
+    display: inline-block;
+    min-width: 40px;
+    color: #1e3a8a;
+}
+
+.keys p b {
+    min-width: 12px;
+}
+
+/* =====================================================
+   PERFORMANCE ANALYSIS
+===================================================== */
+
+.section-title {
+    margin: 14px 0 6px;
+    padding: 6px 10px;
+    border-left: 4px solid #b91c1c;
+    background: #f3f4f9;
+    color: #1e3a8a;
+    font-size: 11px;
+    letter-spacing: .5px;
+}
+
+.score_container {
+    padding: 8px;
+    border: 2px solid #1e3a8a;
+    border-radius: 10px;
+}
+
+.student_score {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.student_score div {
+    padding: 6px 4px;
+    border: 1.5px solid #111827;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.student_score h5 {
+    margin: 0;
+    color: #1e3a8a;
+    font-size: 8.5px;
+    letter-spacing: .3px;
+}
+
+.student_score h4 {
+    margin: 4px 0 0;
+    color: #111827;
+    font-size: 16px;
+}
+
+/* =====================================================
+   EXTRA INFO
+===================================================== */
+
+.extraInfo {
+    margin-top: 12px;
+}
+
+.extra-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.extra-row.two {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.extra-row.two p {
+    margin: 0;
+    padding: 7px 8px;
+    border: 1px solid #c7d2fe;
+    border-radius: 8px;
+    background: #eef2ff;
+    color: #4b5563;
+    font-size: 9px;
+}
+
+.extra-row.two p b {
+    display: block;
+    margin-top: 2px;
+    color: #b91c1c;
+    font-size: 12px;
+    overflow-wrap: anywhere;
+}
+
+.remark-box {
+    min-width: 0;
+    border: 1px solid #9ca3af;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.remark-box h6 {
+    margin: 0;
+    padding: 5px 9px;
+    background: #1e3a8a;
+    color: #fff;
+    font-size: 8.5px;
+    letter-spacing: .4px;
+}
+
+.remark-box p {
+    min-height: 44px;
+    margin: 0;
+    padding: 8px 9px;
+    color: #374151;
+    font-size: 10px;
+    line-height: 1.45;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.sign-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 50px;
+    margin-top: 28px;
+}
+
+.sign-box {
+    text-align: center;
+}
+
+.sign-line {
+    border-top: 1px solid #111827;
+}
+
+.sign-box span {
+    display: block;
+    margin-top: 4px;
+    color: #374151;
+    font-size: 9px;
+    font-weight: bold;
+}
+
+/* =====================================================
+   SMALL SCREENS
+   The A4 sheet keeps its exact laptop layout. A small
+   script in the template scales it down with `zoom`.
+===================================================== */
+
+@media screen and (max-width: 840px) {
+    body {
+        padding: 10px 8px;
+    }
+
+    .t_container {
+        margin-bottom: 15px;
+    }
+}
+
+/* =====================================================
+   PRINT / PDF
+===================================================== */
+
+@page {
+    size: A4 portrait;
+    margin: 0;
+}
+
+@media print {
+
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        background: #fff !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+    .t_container {
+        width: 210mm;
+        min-height: 0;
+        margin: 0;
+        padding: 8mm;
+        box-shadow: none;
+        zoom: 1 !important;
+        page-break-after: always;
+        break-after: page;
+    }
+
+    .t_container:last-of-type {
+        page-break-after: auto;
+        break-after: auto;
+    }
+
+    .style {
+        min-height: 0;
+    }
+
+    .result-table tr,
+    .info-block,
+    .score_container,
+    .remark-box,
+    .sign-row {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    .result-table thead {
+        display: table-header-group;
+    }
+}

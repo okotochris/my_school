@@ -1,40 +1,61 @@
+<%
+  const resultList = Array.isArray(results)
+    ? results
+    : (results ? [results] : []);
+  const isBulk = resultList.length > 1;
+  const firstResult = resultList[0];
 
+  const session = firstResult?.section || '';
+  const term = firstResult?.term || '';
+  const schoolName = firstResult?.schoolName || '';
+
+  const params = new URLSearchParams({
+    session,
+    term,
+    schoolName,
+    sclass: sclass 
+  }).toString();
+
+  const pdfUrl = `/results/pdf?${params}`;
+  const imageUrl = `/results/image?${params}`;
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>result | <%= student.fullname %> </title>
+    <title>result | <%= isBulk ? (firstResult?.studentClass || 'Class') + ' results' : (firstResult?.fullname || '') %> </title>
     <link rel="stylesheet" href="/styles/results/template-9.css">
     <script src="https://cdn.tailwindcss.com"></script>
 
 	<style>
 		.passport{
-			
-			background: url('<%= student.passport %>');
 			background-repeat: no-repeat;
 			background-size:cover;
 			background-position: center;
-    
-		}		
+		}
+		#resultContainer{ page-break-after: always; break-after: page; }
+		#resultContainer:last-of-type{ page-break-after: auto; break-after: auto; }
 	</style>
 </head>
 	<body>
 		<div class="no-print flex justify-center gap-2 p-4 print:hidden">
 
 			<a
-				href="/result/<%= result._id %>/pdf"
+				href="<%= pdfUrl %>"
 				class="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-700"
 			>
 				Download PDF
 			</a>
 
+			<% if (!isBulk) { %>
 			<a
-				href="/result/<%= result._id %>/image"
+				href="<%= imageUrl %>"
 				class="rounded-lg bg-teal-600 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-700"
 			>
 				Download Image
 			</a>
+			<% } %>
 
 			<button
 				onclick="window.print()"
@@ -44,6 +65,9 @@
 			</button>
 
 		</div>
+
+		
+		<% resultList.forEach((result) => { %>
 		<div id="resultContainer">
 			<div class="school">
     <div class="logo">
@@ -67,15 +91,15 @@
         </div>
     </div>
 
-    <div class="passport"></div>
+    <div class="passport" style="background-image: url('<%= result.passport %>');"></div>
 </div>
 			
 			
 			<div class="sudent-info">
-				<div><%= result.class %> <%=student.house %>, <%= result.term %> RESULT <%= result.section %> ACADEMIC SESSION</div>
-				<p>NAME OF PUPIL : <u><span><%= student.fullname.toUpperCase() %></span></u> SEX: <span><u><%= student.gender %></u></span> D.O.B: <span><u><%= student.dob %></u></span></p>
+				<div><%= result.class %> <%= result.house %>, <%= result.term %> RESULT <%= result.section %> ACADEMIC SESSION</div>
+				<p>NAME OF PUPIL : <u><span><%= result.fullname.toUpperCase() %></span></u> SEX: <span><u><%= result.gender %></u></span> D.O.B: <span><u><%= result.dob %></u></span></p>
 				<P>TOTAL MARKS SCORE: <span><u> <%= result.score_obtain %></u></span> OUT OF: <span><u><%= result.score_obtainable %></u></span> AVERAGE: <span><u><%= result.average %></u></span> CLASS: <span><u><%= result.studentClass.toUpperCase() %></u></span></P>
-				<P>STUDENT ID: <span><u><%= student.studentId %></u></span> ADMISSION NO.: <span><u><%= student.addmissionNo %></u></span> NO. OF TIMES PRESENT: <span><u><%= result.present %></u></span> NO OF TIMES ABSENT: <span><u><%= result.absent %></u></span></P>
+				<P>STUDENT ID: <span><u><%= result.studentId %></u></span> ADMISSION NO.: <span><u><%= result.addmissionNo %></u></span> NO. OF TIMES PRESENT: <span><u><%= result.present %></u></span> NO OF TIMES ABSENT: <span><u><%= result.absent %></u></span></P>
 			</div>
 			
 			<div class="result">
@@ -341,7 +365,8 @@
 					</div>
 				</div>
 			</div>
-		</div>		
+		</div>
+		<% }) %>
 	</body>
 
 </html>

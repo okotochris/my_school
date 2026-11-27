@@ -1,0 +1,360 @@
+<%
+  const resultList = Array.isArray(results)
+    ? results
+    : (results ? [results] : []);
+  const isBulk = resultList.length > 1;
+  const firstResult = resultList[0];
+
+  const session = firstResult?.section || '';
+  const term = firstResult?.term || '';
+  const schoolName = firstResult?.schoolName || '';
+
+  const params = new URLSearchParams({
+    session,
+    term,
+    schoolName,
+    sclass: sclass 
+  }).toString();
+
+  const pdfUrl = `/results/pdf?${params}`;
+  const imageUrl = `/results/image?${params}`;
+
+  const safe = (value, fallback = '—') =>
+    value !== undefined && value !== null && value !== ''
+      ? value
+      : fallback;
+
+  const overall = (avg) => {
+    avg = Number(avg) || 0;
+    if (avg >= 80) return ['A', 'Excellent'];
+    if (avg >= 70) return ['B', 'Very Good'];
+    if (avg >= 60) return ['C', 'Good'];
+    if (avg >= 50) return ['D', 'Fair'];
+    if (avg >= 40) return ['E', 'Pass'];
+    return ['F', 'Fail'];
+  };
+
+  // Conduct chips: only the ones that have a value are shown
+  const conductFields = [
+    ['attitude', 'Attitude'],
+    ['neatness', 'Neatness'],
+    ['punctuality', 'Punctuality'],
+    ['participation', 'Participation'],
+    ['cooperation', 'Cooperation'],
+    ['teamwork', 'Teamwork'],
+    ['respect', 'Respect'],
+    ['relationship', 'Relationships'],
+    ['responsibility', 'Responsibility'],
+    ['leadership', 'Leadership']
+  ];
+%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Result - <%= school.schoolName %></title>
+    <link rel="stylesheet" href="/styles/results/template-12.css">
+</head>
+
+<body>
+
+    <!-- DOWNLOAD CONTROLS -->
+    <% if (resultList.length > 0) { %>
+        <div class="no-print download-toolbar">
+            <a href="<%= pdfUrl %>" class="download-btn pdf-btn">Download PDF</a>
+
+            <% if (!isBulk) { %>
+                <a href="<%= imageUrl %>" class="download-btn image-btn">Download Image</a>
+            <% } %>
+
+            <button onclick="window.print()" class="download-btn print-btn">Print</button>
+        </div>
+    <% } else { %>
+        <div class="empty-state">
+            <h2>No result available</h2>
+            <p>There are no results to display.</p>
+        </div>
+    <% } %>
+
+<% resultList.forEach((result) => {
+     const [gradeLetter, gradeWord] = overall(result.average);
+     const days = (Number(result.present) || 0) + (Number(result.absent) || 0);
+     const rate = days > 0 ? ((Number(result.present) || 0) / days) * 100 : 0;
+     const schoolEmail = school.schoolEmail || school.email;
+     const nextTerm = result.nextTerm || result.nextterm;
+     const conduct = conductFields.filter(f => result[f[0]] !== undefined && result[f[0]] !== null && result[f[0]] !== '');
+%>
+
+<div class="result-page">
+
+    <!-- HEADER -->
+    <header class="school-header">
+
+        <div class="header-logo">
+            <% if (school.image?.logo) { %>
+                <img src="<%= school.image.logo %>" alt="School Logo">
+            <% } %>
+        </div>
+
+        <div class="header-text">
+            <h1><%= school.schoolName %></h1>
+
+            <% if (school.motto) { %>
+                <p class="motto"><%= school.motto %></p>
+            <% } %>
+
+            <% if (school.address) { %>
+                <p class="address"><%= school.address %></p>
+            <% } %>
+
+            <p class="contact">
+                <% if (school.phone) { %>Tel: <%= school.phone %><% } %>
+                <% if (school.phone && schoolEmail) { %> &nbsp;&bull;&nbsp; <% } %>
+                <% if (schoolEmail) { %><%= schoolEmail %><% } %>
+            </p>
+        </div>
+
+    </header>
+
+    <!-- STUDENT CARD (OVERLAPS HEADER) -->
+    <section class="profile">
+
+        <div class="profile-photo">
+            <% if (result.passport) { %>
+                <img src="<%= result.passport %>" alt="Student Photo">
+            <% } %>
+        </div>
+
+        <div class="profile-main">
+            <span class="pill">STUDENT REPORT &middot; <%= safe(result.term) %> &middot; <%= safe(result.section) %></span>
+            <h2><%= safe(result.fullname) %></h2>
+
+            <div class="profile-grid">
+                <div>
+                    <span>Student ID</span>
+                    <strong><%= safe(result.studentId) %></strong>
+                </div>
+                <div>
+                    <span>Class</span>
+                    <strong><%= safe(result.studentClass) %></strong>
+                </div>
+                <div>
+                    <span>Gender</span>
+                    <strong><%= safe(result.gender) %></strong>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- STAT CHIPS -->
+    <section class="chips">
+        <div class="chip chip-1">
+            <span>Score Obtained</span>
+            <strong><%= safe(result.score_obtain, 0) %></strong>
+            <small>of <%= safe(result.score_obtainable, 0) %></small>
+        </div>
+        <div class="chip chip-2">
+            <span>Average</span>
+            <strong><%= safe(result.average, 0) %>%</strong>
+            <small>overall score</small>
+        </div>
+        <div class="chip chip-3">
+            <span>Subjects</span>
+            <strong><%= safe(result.No_subj, (result.subjects || []).length) %></strong>
+            <small>offered</small>
+        </div>
+        <div class="chip chip-4">
+            <span>Overall Grade</span>
+            <strong><%= gradeLetter %></strong>
+            <small><%= gradeWord %></small>
+        </div>
+    </section>
+
+    <!-- MAIN: TABLE ON THE LEFT, DETAILS ON THE RIGHT -->
+    <div class="main-content">
+
+        <!-- LEFT: TABLE -->
+        <section class="academic">
+
+            <h3 class="block-title"><i>1</i> Academic Performance</h3>
+
+            <table class="result-table">
+                <thead>
+                    <tr>
+                        <th class="no">#</th>
+                        <th class="subject">Subject</th>
+                        <th>1st</th>
+                        <th>2nd</th>
+                        <th>CA</th>
+                        <th>Exam</th>
+                        <th>Total</th>
+                        <th>Grade</th>
+                        <th class="remark">Remark</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <% (result.subjects || []).forEach((subject, i) => { %>
+                        <tr>
+                            <td><%= i + 1 %></td>
+                            <td class="subject-name"><%= safe(subject.subjectName) %></td>
+                            <td><%= safe(subject.firstTest, 0) %></td>
+                            <td><%= safe(subject.secondTest, 0) %></td>
+                            <td><%= safe(subject.cca, 0) %></td>
+                            <td><%= safe(subject.exam, 0) %></td>
+                            <td class="total"><%= safe(subject.total, 0) %></td>
+                            <td>
+                                <span class="grade grade-<%= String(subject.grade || '').toLowerCase().charAt(0) %>">
+                                    <%= safe(subject.grade) %>
+                                </span>
+                            </td>
+                            <td><%= safe(subject.remark) %></td>
+                        </tr>
+                    <% }) %>
+
+                    <% if (!result.subjects || result.subjects.length === 0) { %>
+                        <tr>
+                            <td colspan="9" class="empty-table">No subjects available.</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+
+        </section>
+
+        <!-- RIGHT: SIDEBAR -->
+        <aside class="sidebar">
+
+            <!-- ATTENDANCE -->
+            <section class="card">
+                <h3 class="card-title"><i>2</i> Attendance</h3>
+                <div class="attendance-numbers">
+                    <div>
+                        <strong><%= days %></strong>
+                        <span>School days</span>
+                    </div>
+                    <div>
+                        <strong><%= safe(result.present, 0) %></strong>
+                        <span>Present</span>
+                    </div>
+                    <div>
+                        <strong><%= safe(result.absent, 0) %></strong>
+                        <span>Absent</span>
+                    </div>
+                </div>
+                <div class="bar">
+                    <div class="bar-fill" style="width: <%= rate.toFixed(1) %>%"></div>
+                </div>
+                <div class="bar-label"><%= rate.toFixed(1) %>% attendance</div>
+            </section>
+
+            <!-- CONDUCT -->
+            <section class="card">
+                <h3 class="card-title"><i>3</i> Conduct</h3>
+                <% if (conduct.length > 0) { %>
+                    <div class="conduct-chips">
+                        <% conduct.forEach(f => { %>
+                            <div class="conduct-chip">
+                                <span><%= f[1] %></span>
+                                <strong><%= result[f[0]] %></strong>
+                            </div>
+                        <% }) %>
+                    </div>
+                <% } else { %>
+                    <p class="muted">No conduct record.</p>
+                <% } %>
+            </section>
+
+            <!-- COMMENTS -->
+            <section class="card">
+                <h3 class="card-title"><i>4</i> Class Teacher</h3>
+                <p class="comment"><%= safe(result.tReport, 'No comment available.') %></p>
+            </section>
+
+            <section class="card">
+                <h3 class="card-title"><i>5</i> Head Teacher</h3>
+                <p class="comment"><%= safe(result.Treport, 'No comment available.') %></p>
+            </section>
+
+        </aside>
+
+    </div>
+
+    <!-- PROMOTION STRIP -->
+    <section class="strip">
+        <div>
+            <span>Promoted To</span>
+            <strong><%= safe(result.promote) %></strong>
+        </div>
+        <div>
+            <span>Next Term Begins</span>
+            <strong><%= safe(nextTerm) %></strong>
+        </div>
+        <% if (result.fees) { %>
+            <div>
+                <span>Outstanding Fees</span>
+                <strong><%= result.fees %></strong>
+            </div>
+        <% } %>
+    </section>
+
+    <!-- GRADING SCALE -->
+    <section class="scale">
+        <div class="scale-cell s-a"><strong>A</strong><span>80 - 100</span><em>Excellent</em></div>
+        <div class="scale-cell s-b"><strong>B</strong><span>70 - 79</span><em>Very Good</em></div>
+        <div class="scale-cell s-c"><strong>C</strong><span>60 - 69</span><em>Good</em></div>
+        <div class="scale-cell s-d"><strong>D</strong><span>50 - 59</span><em>Fair</em></div>
+        <div class="scale-cell s-e"><strong>E</strong><span>40 - 49</span><em>Pass</em></div>
+        <div class="scale-cell s-f"><strong>F</strong><span>0 - 39</span><em>Fail</em></div>
+    </section>
+
+    <!-- SIGNATURES -->
+    <section class="signatures">
+        <div class="signature">
+            <div class="signature-space"></div>
+            <div class="signature-line"></div>
+            <strong>Class Teacher</strong>
+        </div>
+        <div class="signature">
+            <div class="signature-space"></div>
+            <div class="signature-line"></div>
+            <strong>Head Teacher</strong>
+        </div>
+        <div class="signature">
+            <div class="signature-space"></div>
+            <div class="signature-line"></div>
+            <strong>Parent / Guardian</strong>
+        </div>
+    </section>
+
+</div>
+
+<% }) %>
+
+<!-- Scale the A4 sheet down on small screens (same layout as laptop) -->
+<script>
+  (function () {
+    var PAGE_WIDTH = 794; // A4 width (210mm) in CSS px
+
+    function fit() {
+      var available = document.documentElement.clientWidth - 16;
+      var scale = available < PAGE_WIDTH ? available / PAGE_WIDTH : 1;
+      document.querySelectorAll('.result-page').forEach(function (page) {
+        page.style.zoom = scale === 1 ? '' : scale;
+      });
+    }
+
+    fit();
+    window.addEventListener('resize', fit);
+    window.addEventListener('orientationchange', fit);
+    window.addEventListener('beforeprint', function () {
+      document.querySelectorAll('.result-page').forEach(function (p) { p.style.zoom = ''; });
+    });
+    window.addEventListener('afterprint', fit);
+  })();
+</script>
+
+</body>
+</html>
